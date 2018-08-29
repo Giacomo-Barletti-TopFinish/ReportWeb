@@ -147,6 +147,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImpostazioniController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PVDController.cs" />
     <Compile Include="Controllers\TVController.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Global.asax.cs">
@@ -232,6 +233,7 @@
     <Content Include="Views\Menu\LeftMenu.cshtml" />
     <Content Include="Views\Impostazioni\AbilitaMenu.cshtml" />
     <Content Include="Views\Impostazioni\GetMenuUtentePartial.cshtml" />
+    <Content Include="Views\PVD\Consuntivo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

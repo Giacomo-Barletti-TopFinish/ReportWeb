@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "PVD Consuntivo";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>PVD Consuntivo</h2>
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <div class="row">
+                <div class="col-md-2">
+
+                    <div style="padding-top:23px" class="col-md-12">
+                        <label>Macchina</label>
+                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                    </div>
+
+                </div>
+                <div class="col-md-2 text-center">
+
+                    <label>Finitura</label>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Cod.</label>
+                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        </div>
+                        <div class="col-sm-8">
+                            <label>Descrizione</label>
+                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-center">
+
+                    <label>Ciclo</label>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Tipo</label>
+                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Inizio</label>
+                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Fine</label>
+                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div style="padding-top:23px" class="col-md-12">
+                        <label>Quantità</label>
+                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div style="padding-top:23px" class="col-md-12">
+                        <label>Clienti</label>
+                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div style="padding-top:23px" class="col-md-12">
+                        <label>Articolo</label>
+                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div style="padding-top:23px" class="col-md-12">
+                        <label>Impegno ciclo(%)</label>
+                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
