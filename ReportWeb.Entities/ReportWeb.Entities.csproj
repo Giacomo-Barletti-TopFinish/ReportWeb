@@ -47,6 +47,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="PVDDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PVDDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ReportDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -63,6 +68,17 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PVDDS.xsc">
+      <DependentUpon>PVDDS.xsd</DependentUpon>
+    </None>
+    <None Include="PVDDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PVDDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PVDDS.xss">
+      <DependentUpon>PVDDS.xsd</DependentUpon>
     </None>
     <None Include="ReportDS.xsc">
       <DependentUpon>ReportDS.xsd</DependentUpon>
