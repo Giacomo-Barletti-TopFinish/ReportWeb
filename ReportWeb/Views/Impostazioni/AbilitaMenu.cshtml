@@ -1,0 +1,101 @@
+﻿@using ReportWeb.Models
+
+@{
+    ViewBag.Title = "Abilita Menu";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Abilita Menu</h2>
+    <div class="row">
+        <div class="col-sm-1">
+            <input type="button" onclick="SelezionaTutto()" class="btn btn-primary" value="Seleziona tutto" />
+
+        </div>
+        <div class="col-sm-1">
+            <input type="button" onclick="Salva();" class="btn btn-primary" value="Salva" />
+
+        </div>
+    </div>
+    <div class="col-md-2">
+        @Html.Label("Selezionare un utente", new { @class = "input-sm" })
+        @Html.DropDownList("ddlUtente", new SelectList(ViewData["ListaUtenti"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+    </div>
+    <div id="divMenu"></div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $("#ddlUtente").change(function ()
+        {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+
+            var url = '@Url.Action("GetMenuUtente", "Impostazioni")';
+            $.ajax({
+                url: url,
+                data: { UIDUSER: selectedValue },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    $('#divMenu').html(data).show();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+        });
+    });
+    function SelezionaTutto()
+    {
+        $('.RWCHK').each(function ()
+        {
+            $(this).attr('checked', 'checked');
+        });
+    }
+
+    function Salva()
+    {
+        var utente = $('#ddlUtente').val();
+        if (utente == null || utente == '')
+        {
+            AlertPopup('Selezionare un utente');
+            return;
+        }
+       
+        var checkboxes = $('.RWCHK');
+        var idmenu = [];
+        debugger;
+        for (i = 0; i < checkboxes.length; i++)
+        {
+            var checkbox = $(checkboxes[i]).prop('checked');
+            var idm = $(checkboxes[i]).attr('data-IDMENU');
+            if (checkbox)
+                idmenu.push(idm);
+        }
+
+    //    var menuJSON = JSON.stringify(idmenu); 
+        var url = '@Url.Action("SalvaMenuUtente", "Impostazioni")';
+        $.ajax({
+            url: url,
+            data: { UIDUSER: utente, idMenu: idmenu },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                AlertPopup('Dati salvati');
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

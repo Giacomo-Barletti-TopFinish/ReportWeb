@@ -1,0 +1,77 @@
+﻿@using ReportWeb.Models
+@model QuadrantiModel
+<!DOCTYPE html>
+@Html.Hidden("hfReparto", (string)ViewData["Reparto"])
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Report Web</title>
+</head>
+<body class="body-content">
+    <div class="row">
+        <div class="col-sm-1">
+            <a href="@Url.Action("Index","TV")">
+                <img width="75%" height="75%" src="~/Content/Image/logo_MP_240X200 maggio 2018.png" />
+            </a>
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-1">
+            <img width="75%" height="75%" src="~/Content/Image/logo_TF_240X200 maggio 2018.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6" style="border-top:6px solid ;border-left:6px solid;border-right:3px solid;border-bottom:3px solid;height:300px;padding:0px">
+            <table width="100%">
+                <tr class="scaduti" >
+                    <td width="80%"><h1>Scaduti</h1></td>
+                    <td width="20%"><h1>@Model.Scaduti</h1></td>
+                </tr>
+                <tr class="inscadenza">
+                    <td><h1 >In scadenza</h1></td>
+                    <td><h1 >@Model.InScadenza</h1></td>
+                </tr>
+                <tr>
+                    <td><h1>Da prendere in carico</h1></td>
+                    <td><h1>@Model.DaPrendereInCarico</h1></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-6" style="border-top:6px solid ;border-right:6px solid;border-left:3px solid;border-bottom:3px solid;height:300px">
+            <h1>Q2</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6" style="border-top:3px solid ;border-left:6px solid;border-right:3px solid;border-bottom:6px solid;height:300px">
+            <h1>Q3</h1>
+        </div>
+        <div class="col-lg-6" style="border-top:3px solid ;border-left:3px solid;border-right:6px solid;border-bottom:6px solid;height:300px">
+            <h1>Q4</h1>
+        </div>
+    </div>
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function ()
+    {
+        var timeout = 1000 *  @ViewData["TimeoutChangePage"];
+        setTimeout(function ()
+        {
+            changePage();
+        }, timeout);
+
+    })
+
+    function changePage()
+    {
+        var reparto = $('#hfReparto').val();
+        window.location.href = "@Url.Action("Reparto", "TV")"+"/?Reparto="+reparto;
+    }
+
+</script>

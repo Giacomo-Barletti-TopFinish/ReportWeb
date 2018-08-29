@@ -1,0 +1,50 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Errore";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheda prodotto calzature</title>
+    <link href="~/Content/Site-1.0.4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.min.css">
+    <script src="~/Scripts/External/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/External/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/External/bootstrap.min.js"></script>
+    <script src="~/Scripts/External/jquery-ui-1.12.1.min.js"></script>
+</head>
+<body class="skin-blue content-wrapper spcBody">
+    <section class="content">
+        <div class="list-header clearfix">
+            <H1></H1>
+        </div>
+        <div>
+            <div class="alert alert-error">
+                <p style="display:inline"><b>Errore inatteso. Si prega di inviare via mail le seguenti informazioni all&rsquo;indirizzo:</b>&nbsp;&nbsp;</p><a href="mailto:HelpDeskSTC@it.gucci.com">HelpDeskSTC@it.gucci.com.</a>
+            </div>
+            @if (Model != null)
+            {
+                <div class="col-md-12">
+                    <p style="font-size:14pt">
+                        <b>DateTime:</b> @DateTime.Now <br />
+                        <b>Error type:</b> Server <br />
+                        <b>Controller:</b> @Model.ControllerName<br />
+                        <b>Action:</b> @Model.ActionName<br />
+                        <b>Exception:</b> @Model.Exception.Message<br />
+                        <b>Source:</b> @Model.Exception.Source<br />
+                        @if (Model.Exception.InnerException != null)
+                {
+                            <b>Inner Exception:</b> @Model.Exception.InnerException.Message<br />
+                        }
+                    </p>
+                </div>
+            }
+        </div>
+    </section>
+</body>
+</html>

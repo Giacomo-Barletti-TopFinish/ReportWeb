@@ -1,0 +1,109 @@
+﻿body {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+table th {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+table td {
+    font-size: 12px;
+}
+
+.scrollContainer {
+    height: 650px;
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+.scrollContent {
+    background: #eee;
+}
+
+.scaduti {
+    color: black;
+    background-color: lightcoral;
+    font-weight: bold;
+}
+
+.inscadenza {
+    color: black;
+    background-color: orange;
+    font-weight: bold;
+}
+
+.ordinari {
+    color: black;
+    background-color: lightgreen;
+    font-weight: bold;
+}
+
+.login-box,
+.register-box {
+    width: 360px;
+    margin: 7% auto;
+}
+
+@media (max-width: 768px) {
+    .login-box,
+    .register-box {
+        width: 90%;
+        margin-top: 20px;
+    }
+}
+
+.login-box-body,
+.register-box-body {
+    background: #fff;
+    padding: 20px;
+    border-top: 0;
+    color: #666;
+}
+
+    .login-box-body .form-control-feedback,
+    .register-box-body .form-control-feedback {
+        color: #777;
+    }
+
+.login-box-msg,
+.register-box-msg {
+    margin: 0;
+    text-align: center;
+    padding: 0 20px 20px 20px;
+}
+
+ .main-header .navbar {
+        -webkit-transition: margin-left 0.3s ease-in-out;
+        -o-transition: margin-left 0.3s ease-in-out;
+        transition: margin-left 0.3s ease-in-out;
+        margin-bottom: 0;
+        margin-left: 200px;
+        border: none;
+        min-height: 50px;
+        border-radius: 0;
+        color: #ffffff;
+        background-color: #3c8dbc;
+    }

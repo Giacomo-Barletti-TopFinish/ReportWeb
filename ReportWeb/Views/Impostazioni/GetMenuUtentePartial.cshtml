@@ -1,0 +1,40 @@
+﻿@using ReportWeb.Models
+@model  List<MenuModel>
+
+<div>
+    <table class="table table-condensed">
+
+        @foreach (MenuModel m in Model)
+            {
+            <tr>
+                @if (m.Abilitato)
+                {
+                    <td width="15px"><input type="checkbox" class="RWCHK" data-IDMENU="@m.IdMenu" checked></td>
+                }
+                else
+                {
+                    <td width="15px"><input type="checkbox" data-IDMENU="@m.IdMenu" class="RWCHK"></td>
+                }
+                <td width="120px">@m.Etichetta</td>
+                <td width="120px"></td>
+                <td></td>
+            </tr>
+            foreach (MenuModel figlio in m.MenuFiglio)
+            {
+                <tr>
+                    @if (figlio.Abilitato)
+                    {
+                        <td width="15px"><input type="checkbox" class="RWCHK" data-IDMENU="@figlio.IdMenu" checked></td>
+                    }
+                    else
+                    {
+                        <td width="15px"><input type="checkbox" data-IDMENU="@figlio.IdMenu" class="RWCHK"></td>
+                    }
+                    <td width="120px"></td>
+                    <td width="120px">@figlio.Etichetta</td>
+                    <td></td>
+                </tr>
+            }
+        }
+    </table>
+</div>

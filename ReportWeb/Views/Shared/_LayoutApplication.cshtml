@@ -1,0 +1,107 @@
+﻿@using System.Globalization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/Content/select2.min.css" />
+    <link rel="stylesheet" href="~/Content/Site-1.0.4.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/SpcMenu-1.0.0.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-switch.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.min.css" type="text/css" />
+    <script src="~/Scripts/External/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/External/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/External/moment.min.js"></script>
+    <script src="~/Scripts/External/bootstrap.min.js"></script>
+    <script src="~/Scripts/External/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/External/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/External/jquery.ui.touch-punch.min.js"></script>
+    <script src="~/Scripts/External/app.min.js"></script>
+    <script src="~/Scripts/External/select2.full.min.js"></script>
+    <script src="~/Scripts/External/js.cookie.js"></script>
+    <script src="~/Scripts/Menu.js"></script>
+    <script src="~/Scripts/RWCommon-1.2.9.js"></script>
+    <script src="~/Scripts/External/loadingoverlay.js"></script>
+    <script src="~/Scripts/External/bootstrap-switch.js"></script>
+    <script src="~/Scripts/External/jquery.imgcheckbox.js"></script>
+    <!-- nanogallery2 -->
+    <link href="~/Content/nanogallery/nanogallery2.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="~/Scripts/External/jquery.nanogallery2.min.js"></script>
+
+
+  
+
+    <script>
+        var paginaModificata = false;
+        var EnableWaitCursorOnAjaxCallCounter = 0;
+        $(function ()
+        {
+
+            var body = document.getElementsByTagName('body')[0];
+            if (Boolean(sessionStorage.getItem('sidebar-toggle-expanded')))
+            {
+                body.className = 'hold-transition skin-blue sidebar-mini';
+            }
+            else
+            {
+                body.className = body.className + ' sidebar-collapse';
+            }
+
+            $.ui.dialog.prototype._allowInteraction = function (e)
+            {
+                return !!$(e.target).closest('.ui-dialog, .ui-datepicker, .select2-dropdown').length;
+            };
+
+            $('.sidebar-toggle').click(function (event)
+            {
+                event.preventDefault();
+                if (Boolean(sessionStorage.getItem('sidebar-toggle-expanded')))
+                {
+                    sessionStorage.setItem('sidebar-toggle-expanded', '');
+                } else
+                {
+                    sessionStorage.setItem('sidebar-toggle-expanded', '1');
+                }
+            });
+
+        });
+
+
+    </script>
+    @RenderSection("scriptSection", false)
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+    @Html.Hidden("hfSessionID", ViewData["SessionId"])
+    <div class="wrapper">
+        <header class="main-header">
+            <a href='@Url.Action("Index","Home")' class="logo logo-lg">
+                <span class="logo-mini"><b>R.W</b></span>
+                <span class="logo-lg">Report Web</span>            </a>
+            <nav class="navbar navbar-static-top">
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <i class="glyphicon glyphicon-menu-hamburger"></i>
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            @Html.Action("LeftMenu", "Menu")
+        </aside>
+
+        <div id="contentwrapper" class="content-wrapper spcBody">
+            <section class="content">
+                <div>
+                    @RenderBody()
+                </div>
+                <div id="divInfoAggiuntive"></div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

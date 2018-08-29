@@ -1,0 +1,140 @@
+﻿@using ReportWeb.Models
+@model List<ODLApertiModel>
+<!DOCTYPE html>
+@Html.Hidden("hfReparto", (string)ViewData["Reparto"])
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Report Web</title>
+</head>
+<body class="body-content">
+    <div class="row">
+        <div class="col-sm-1">
+            <a href="@Url.Action("Index","TV")">
+                <img width="75%" height="75%" src="~/Content/Image/logo_MP_240X200 maggio 2018.png" />
+            </a>
+        </div>
+        <div class="col-sm-2">
+            <h2> @Html.Label((string)ViewData["Titolo"])</h2>
+        </div>
+        <div class="col-sm-3">
+            <h2 class="scaduti"> @Html.Label((string)ViewData["qtaAlta"])</h2>
+        </div>
+        <div class="col-sm-3">
+            <h2 class="inscadenza"> @Html.Label((string)ViewData["qtaMedia"])</h2>
+        </div>
+        <div class="col-sm-2">
+            <h2 class="ordinari"> @Html.Label((string)ViewData["qtaBassa"])</h2>
+        </div>
+        <div class="col-sm-1">
+            <img width="75%" height="75%" src="~/Content/Image/logo_TF_240X200 maggio 2018.png" />
+        </div>
+    </div>
+    <div class="scrollContainer">
+        <div class="scrollContent">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="5%">AZIENDA</th>
+                        <th width="6%">DATA FINE</th>
+                        <th width="6%">DATA INIZIO</th>
+                        <th width="6%">FASE</th>
+                        <th width="14%">ARTICOLO</th>
+                        <th width="14%">WIP</th>
+                        <th width="6%">QTA</th>
+                        <th width="6%">QTA TERM</th>
+                        <th width="10%">SEGNALATORE</th>
+                        <th width="8%">ODL</th>
+                        <th width="8%">COMMESSA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ODLApertiModel elemento in Model)
+                    {
+                        string stile = "ordinari";
+                        switch (elemento.Priority)
+                        {
+                            case (int)WebReport.Common.Priorità.Alta:
+                                stile = "scaduti";
+                                break;
+                            case (int)WebReport.Common.Priorità.Media:
+                                stile = "inscadenza";
+                                break;
+                        }
+                        <tr class="@stile">
+                            <td>@elemento.Azienda</td>
+                            <td>@elemento.DataFine.Value.ToShortDateString()</td>
+                            <td>@elemento.DataCreazione.Value.ToShortDateString()</td>
+                            <td>@elemento.Fase</td>
+                            <td>@elemento.Articolo</td>
+                            <td>@elemento.Wip</td>
+                            <td>@elemento.QtaTotale</td>
+                            <td>@elemento.QtaDaTerminare</td>
+                            <td>@elemento.Segnalatore</td>
+                            <td>@elemento.ODL</td>
+                            <td>@elemento.Commessa</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function ()
+    {
+        if ($('.scrollContent').height() > $('.scrollContainer').height())
+        {
+            setTimeout(function ()
+            {
+                down();
+            }, 3000);
+        }
+        var timeout = 1000 *  @ViewData["TimeoutChangePage"];
+        setTimeout(function ()
+        {
+            changePage();
+        }, timeout);
+
+    })
+
+    function changePage()
+    {
+        var reparto = $('#hfReparto').val();
+        window.location.href = "@Url.Action("Quadranti", "TV")"+"/?Reparto="+reparto;
+    }
+
+    function animateContent(direction)
+    {
+        var animationOffset = $('.scrollContainer').height() - $('.scrollContent').height();
+        var attesa = Math.abs( animationOffset / 40);
+        attesa = attesa * 1000;
+        if (direction == 'up')
+        {
+            animationOffset = 0;
+        }
+
+        console.log("animationOffset:" + animationOffset + " attesa:" + attesa);
+        $('.scrollContent').animate({ "marginTop": (animationOffset) + "px" }, { duration: attesa, complete: function () { repeat(direction) } });
+    }
+
+    function up()
+    {
+        animateContent("up")
+    }
+    function down()
+    {
+        animateContent("down")
+    }
+    function repeat(direction)
+    {
+        if (direction == 'up')
+            down();
+        else
+            up();
+    }
+
+</script>

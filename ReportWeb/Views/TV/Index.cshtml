@@ -1,0 +1,42 @@
+﻿@using WebReport.Common
+@{
+    ViewBag.Title = "Home Page";
+}
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div>
+
+            <div class="navbar-collapse collapse">
+                <h3 style="color:white">TV</h3>
+                <table>
+                <tr>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Stampaggio), "Reparto", "TV", new { Reparto = Reparti.Stampaggio }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Pressofusione), "Reparto", "TV", new { Reparto = Reparti.Pressofusione }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Tranciatura), "Reparto", "TV", new { Reparto = Reparti.Tranciatura }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Floccatura), "Reparto", "TV", new { Reparto = Reparti.Floccatura }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Tornitura), "Reparto", "TV", new { Reparto = Reparti.Tornitura }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Piegafilo), "Reparto", "TV", new { Reparto = Reparti.Piegafilo }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.PVD), "Reparto", "TV", new { Reparto = Reparti.PVD }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Vibratura), "Reparto", "TV", new { Reparto = Reparti.Vibratura }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Legatura), "Reparto", "TV", new { Reparto = Reparti.Legatura }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.GalvanicaAuto), "Reparto", "TV", new { Reparto = Reparti.GalvanicaAuto }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Slegatura), "Reparto", "TV", new { Reparto = Reparti.Slegatura }, null)</td>
+                </tr>
+                <tr>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Pulimentatura), "Reparto", "TV", new { Reparto = Reparti.Pulimentatura }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Riprese), "Reparto", "TV", new { Reparto = Reparti.Riprese }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Verniciatura), "Reparto", "TV", new { Reparto = Reparti.Verniciatura }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.ControlloQualitaPost1), "Reparto", "TV", new { Reparto = Reparti.ControlloQualitaPost1 }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.ControlloQualitaPost2), "Reparto", "TV", new { Reparto = Reparti.ControlloQualitaPost2 }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Modelleria), "Reparto", "TV", new { Reparto = Reparti.Modelleria }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Montaggio), "Reparto", "TV", new { Reparto = Reparti.Montaggio }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.ControlloCollaudo), "Reparto", "TV", new { Reparto = Reparti.ControlloCollaudo }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Magazzino), "Reparto", "TV", new { Reparto = Reparti.Magazzino }, null)</td>
+                    <td width="8%">@Html.ActionLink(Reparti.LeggiEtichetta(Reparti.Confezionamento), "Reparto", "TV", new { Reparto = Reparti.Confezionamento }, null)</td>
+                    <td>    </td>
+                </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>

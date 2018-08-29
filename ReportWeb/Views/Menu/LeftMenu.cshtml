@@ -1,0 +1,35 @@
+﻿@using ReportWeb.Models
+@model List<MenuModel>
+
+
+<section class="sidebar">
+    <ul class="sidebar-menu">
+        <li class="header">Menu principale</li>
+        @foreach (MenuModel menu in Model)
+        {
+            if (menu.Abilitato)
+            {
+                <li class="treeview">
+                    <a href="#">
+                        <i class="@menu.Font"></i> <span>@menu.Etichetta</span>
+                        <span class="pull-right-container">
+                            <i class="glyphicon glyphicon-menu-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @foreach (MenuModel figlio in menu.MenuFiglio)
+                        {
+                            if (figlio.Abilitato)
+                            {
+                                <li><a onclick="@figlio.OnClick" href="@figlio.HRef"><i class="@figlio.Font"></i>@figlio.Etichetta</a></li>
+                            }
+                        }
+                    </ul>
+                </li>
+
+            }
+        }
+
+
+    </ul>
+</section>

@@ -1,0 +1,74 @@
+﻿@model ReportWeb.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheda prodotto calzature</title>
+    <link href="~/Content/Site_1.0.2.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body class="hold-transition login-page">
+    <div id="login">
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { id = "LoginForm", @class = "hold-transition login-page" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3"><img src="~/Content/Image/logo_MP_240X200 maggio 2018.png" /></div>
+                <div class="col-sm-3"><img src="~/Content/Image/logo_TF_240X200 maggio 2018.png" /></div>
+            </div>
+            <div class="login-box">
+                <div class="login-logo">
+                    <label style="font-size:25px "><b style="font-weight:500">ReportWeb</b></label>
+                </div>
+                <div class="box box-primary">
+                    <div class="login-box-body ">
+                        @Html.ValidationSummary("", new { @class = "myvalidation" })
+                        <div class="form-group has-feedback">
+                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                            @Html.TextBoxFor(x => x.UserId, new { placeholder = "Utente", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.UserId)
+
+                        </div>
+                        <div class="form-group has-feedback">
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                            @Html.PasswordFor(x => x.Password, new { placeholder = "Password", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Password)
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-8">
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-xs-4">
+                                <button onclick="login(this)" class="btn btn-primary btn-block">Accedi</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script language="javascript" type="text/javascript">
+                function login(sender)
+                {
+                    $(sender).prop("disabled", true);
+
+                    $("#LoginForm").submit();
+                }
+            </script>
+        }
+    </div>
+
+</body>
+</html>
