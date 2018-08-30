@@ -1,4 +1,4 @@
-﻿
+﻿@using ReportWeb.Models
 @{
     ViewBag.Title = "PVD Consuntivo";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
@@ -8,14 +8,25 @@
     <div class="box">
         <div class="box-body form-group-sm">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
 
                     <div style="padding-top:23px" class="col-md-12">
                         <label>Macchina</label>
-                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        @Html.DropDownList("ddlMacchine", new SelectList(ViewData["macchine"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
                     </div>
 
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+
+                    <div style="padding-top:23px" class="col-md-12">
+                        <label>Giorno</label>
+                        <input id="txtGiorno" type="date" name="txtGiorno">
+                    </div>
+
+                </div>
+
                 <div class="col-md-2 text-center">
 
                     <label>Finitura</label>
@@ -23,11 +34,11 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <label>Cod.</label>
-                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                            @Html.TextBox("txtCodiceFinitura", "", new { @maxlength = "5", @class = "form-control input-sm  text-uppercase", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
                         </div>
                         <div class="col-sm-8">
                             <label>Descrizione</label>
-                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                            @Html.TextBox("txtFinitura", "", new { @maxlength = "50", @class = "form-control input-sm  text-uppercase"})
                         </div>
                     </div>
                 </div>
@@ -38,47 +49,279 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <label>Tipo</label>
-                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                            @Html.TextBox("txtTipo", "", new { @maxlength = "30", @class = "form-control input-sm  text-uppercase", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
                         </div>
                         <div class="col-sm-4">
                             <label>Inizio</label>
-                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                            <input id="txtInizio" type="time" name="txtInizio">
                         </div>
                         <div class="col-sm-4">
                             <label>Fine</label>
-                            @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                            <input id="txtFine" type="time" name="txtFine">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div style="padding-top:23px" class="col-md-12">
                         <label>Quantità</label>
-                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        @Html.TextBox("txtQuantita", "", new { @maxlength = "8", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div style="padding-top:23px" class="col-md-12">
                         <label>Clienti</label>
-                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        @Html.TextBox("txtClienti", "", new { @maxlength = "50", @class = "form-control input-sm  text-uppercase" })
                     </div>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <div style="padding-top:23px" class="col-md-12">
                         <label>Articolo</label>
-                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        @Html.TextBox("txtArticolo", "", new { @maxlength = "50", @class = "form-control input-sm  text-uppercase" })
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <div style="padding-top:23px" class="col-md-12">
                         <label>Impegno ciclo(%)</label>
-                        @Html.TextBox("txtCodiceDefinitivo", "", new { @maxlength = "6", @class = "form-control input-sm spcSearchField text-uppercase articolo-modificato disabilitaVersione", @onkeypress = "return FilterAlphaNumericInput(event,this)" })
+                        <input id="txtImpegno" class="form-control input-sm " type="number" name="txtImpegno" min="1" max="100">
+                        @*@Html.TextBox("txtImpegno", "", new { @maxlength = "3", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,3,0)" })*@
                     </div>
                 </div>
 
             </div>
         </div>
-
     </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input type="button" onclick="Salva();" class="btn btn-primary" value="Inserisci informazioni" />
 
+        </div>
+    </div>
+    <label class="text-red input-sm" id="lblMessage"></label>
 </div>
+<div class="col-sm-12">
+    <div id="divGrigliaMacchina"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $("#ddlMacchine").change(function ()
+        {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            if (selectedValue != '')
+                GetGrigliaMacchina(selectedValue);
+        });
+    });
+
+    function GetGrigliaMacchina(IDRESOURCEF)
+    {
+        var url = '@Url.Action("GetGrigliaMacchine", "PVD")';
+        $.ajax({
+            url: url,
+            data: { IDRESOURCEF: IDRESOURCEF },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGrigliaMacchina').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function Salva()
+    {
+        debugger;
+        var esegui = true;
+        var messaggio = '';
+        var macchina = $('#ddlMacchine').val();
+        if (macchina == null || macchina == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Selezionare un macchina" + "</br>";
+            esegui = false;
+        }
+
+        var codiceFinitura = $('#txtCodiceFinitura').val();
+        //if (codiceFinitura == null || codiceFinitura == '')
+        //{
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Codice finitura" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        //    esegui = false;
+        //}
+
+        var giorno = $('#txtGiorno').val();
+        if (giorno == null || giorno == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Giorno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var Finitura = $('#txtFinitura').val();
+        if (Finitura == null || Finitura == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Finitura" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var Tipo = $('#txtTipo').val();
+        //if (Tipo == null || Tipo == '')
+        //{
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Tipo ciclo" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        //    esegui = false;
+        //}
+
+        var Inizio = $('#txtInizio').val();
+        if (Inizio == null || Inizio == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Inizio ciclo" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var Fine = $('#txtFine').val();
+        if (Fine == null || Fine == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Fine ciclo" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var Quantita = $('#txtQuantita').val();
+        //if (Quantita == null || Quantita == '')
+        //{
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Quantità" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        //    esegui = false;
+        //}
+        if (Quantita == '') Quantita = 0;
+
+        var Clienti = $('#txtClienti').val();
+        //if (Clienti == null || Clienti == '')
+        //{
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Clienti" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        //    esegui = false;
+        //}
+
+        var Articolo = $('#txtArticolo').val();
+        //if (Articolo == null || Articolo == '')
+        //{
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Articolo" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        //    esegui = false;
+        //}
+
+        var Impegno = $('#txtImpegno').val();
+        //if (Impegno == null || Impegno == '')
+        //{
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Impegno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Impegno" + " " + "DEVE ESSERE COMPRESO TRA 1 E 100" + "</br>";
+        //    esegui = false;
+        //}
+        //if (Impegno <1|| Impegno >100)
+        //{
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Impegno" + " " + "DEVE ESSERE COMPRESO TRA 1 E 100" + "</br>";
+        //    esegui = false;
+        //}
+        if (Impegno == '') Impegno = 0;
+        if (!VerificaInizioFine(Inizio, Fine))
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "L'inizio deve essere antecedente alla fine" + "</br>";
+            esegui = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+
+        var url = '@Url.Action("SalvaConsuntivo", "PVD")';
+        $.ajax({
+            url: url,
+            data: {
+                IDRESOURCEF: macchina,
+                FinituraCodice: codiceFinitura,
+                FinituraDescrizione: Finitura,
+                Tipo: Tipo,
+                Giorno: giorno,
+                Inizio: Inizio,
+                Fine: Fine,
+                Quantita: Quantita,
+                Clienti: Clienti,
+                Articolo: Articolo,
+                Impegno: Impegno
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGrigliaMacchina').html(data).show();
+                CancellaInput();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function VerificaInizioFine(inizio, fine)
+    {
+        var inizioArray = inizio.split(':');
+        var fineArray = fine.split(':');
+
+        if (inizioArray[0] > fineArray[0])
+        {
+            return false;
+        }
+        if (inizioArray[0] == fineArray[0])
+        {
+            if (inizioArray[1] >= fineArray[1])
+                return false;
+        }
+        return true;
+    }
+
+    function CancellaInput()
+    {
+        $('#txtCodiceFinitura').val('');
+        $('#txtGiorno').val('');
+        $('#txtFinitura').val('');
+        $('#txtTipo').val('');
+        $('#txtInizio').val('');
+        $('#txtFine').val('');
+        $('#txtQuantita').val('');
+        $('#txtClienti').val('');
+        $('#txtArticolo').val('');
+        $('#txtImpegno').val('');
+    }
+
+    function CancellaConsuntivo(idConsuntivo)
+    {
+        debugger;
+        var IDRESOURCEF = $('#ddlMacchine').val();
+        var url = '@Url.Action("CancellaConsuntivo", "PVD")';
+        $.ajax({
+            url: url,
+            data: { IdConsuntivo: idConsuntivo, IDRESOURCEF: IDRESOURCEF },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGrigliaMacchina').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

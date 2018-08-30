@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MetalPlus.Kernel.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MetalPlus.Kernel\MetalPlus.Kernel.Data\bin\Release\MetalPlus.Kernel.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\MetalPlus.Kernel\Lib\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
@@ -50,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PVD\PVDAdapter.cs" />
+    <Compile Include="PVD\PVDBusiness.cs" />
     <Compile Include="ReportWebAdapter.cs" />
     <Compile Include="ReportWebAdapterBase.cs" />
     <Compile Include="ReportWebBusiness.cs" />
@@ -58,6 +56,10 @@
     <Compile Include="SecurityBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MetalPlus.Kernel.Data\MetalPlus.Kernel.Data.csproj">
+      <Project>{207d81f0-c3e9-43ef-8e77-a007d433a78c}</Project>
+      <Name>MetalPlus.Kernel.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReportWeb.Entities\ReportWeb.Entities.csproj">
       <Project>{36ad9360-e57d-4406-8600-8d4922d79a89}</Project>
       <Name>ReportWeb.Entities</Name>

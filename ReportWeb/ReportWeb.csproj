@@ -48,7 +48,6 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MetalPlus.Kernel.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -234,6 +233,7 @@
     <Content Include="Views\Impostazioni\AbilitaMenu.cshtml" />
     <Content Include="Views\Impostazioni\GetMenuUtentePartial.cshtml" />
     <Content Include="Views\PVD\Consuntivo.cshtml" />
+    <Content Include="Views\PVD\GetGrigliaMacchinePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +245,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MetalPlus.Kernel.Data\MetalPlus.Kernel.Data.csproj">
+      <Project>{207d81f0-c3e9-43ef-8e77-a007d433a78c}</Project>
+      <Name>MetalPlus.Kernel.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReportWeb.Business\ReportWeb.BLL.csproj">
       <Project>{d2e9d4e7-59d4-46c5-8273-32b36f17f49f}</Project>
       <Name>ReportWeb.BLL</Name>

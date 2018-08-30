@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{712FD937-E2EC-4F78-B20A-F39EFB1D5E60}</ProjectGuid>
+    <ProjectGuid>{207D81F0-C3E9-43EF-8E77-A007D433A78C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReportWeb.Models</RootNamespace>
-    <AssemblyName>ReportWeb.Models</AssemblyName>
+    <RootNamespace>MetalPlus.Kernel.Data</RootNamespace>
+    <AssemblyName>MetalPlus.Kernel.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,14 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoginModel.cs" />
-    <Compile Include="MenuModel.cs" />
-    <Compile Include="ODLApertiModel.cs" />
+    <Compile Include="Core\AdapterBase.cs" />
+    <Compile Include="Core\BusinessBase.cs" />
+    <Compile Include="Core\ColumnMapAttribute.cs" />
+    <Compile Include="Core\ContextManager.cs" />
+    <Compile Include="Core\DaoExtensor.cs" />
+    <Compile Include="Core\DataContextAttribute.cs" />
+    <Compile Include="Core\Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PVDConsuntivoModel.cs" />
-    <Compile Include="QuadrantiModel.cs" />
-    <Compile Include="RWListItem.cs" />
-    <Compile Include="TokenModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

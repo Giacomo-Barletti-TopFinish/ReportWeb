@@ -1,0 +1,80 @@
+﻿@using ReportWeb.Models
+@model List<PVDConsuntivoModel>
+    <div class="box box-primary box-solid">
+
+    <table class="table table-condensed">
+        <tr>
+            <th width="10%">
+                <label>Giorno</label>                
+            </th>
+            <th width="10%">
+                <label>Cod. Finitura</label>
+            </th>
+            <th width="10%">
+                <label>Finitura</label>
+            </th>
+            <th width="10%">
+                <label>Tipo ciclo</label>
+            </th>
+            <th width="10%">
+                <label>Inizio</label>
+            </th>
+            <th width="10%">
+                <label>Fine</label>
+            </th>
+            <th width="10%">
+                <label>Quanità</label>
+            </th>
+            <th width="10%">
+                <label>Clienti</label>
+            </th>
+            <th width="10%">
+                <label>Articolo</label>
+            </th>
+            <th width="10%">
+                <label>Impegno (%)</label>
+            </th>
+            <th></th>
+        </tr>
+        <tboby>
+            @foreach (PVDConsuntivoModel c in Model)
+            {
+                <tr>
+                    <th>
+                        @c.Giorno.ToShortDateString()
+                    </th>
+                    <th>
+                        @c.FinituraCodice
+                    </th>
+                    <th>
+                        @c.FinituraDescrizione
+                    </th>
+                    <th>
+                        @c.TipoCiclo
+                    </th>
+                    <th>
+                        @c.Inizio
+                    </th>
+                    <th>
+                        @c.Fine
+                    </th>
+                    <th>
+                        @c.Quantita
+                    </th>
+                    <th>
+                        @c.Clienti
+                    </th>
+                    <th>
+                        @c.Articolo
+                    </th>
+                    <th>
+                        @c.Impegno
+                    </th>
+                    <th>
+                        <a onclick="CancellaConsuntivo(@c.IdConsuntivo)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                    </th>
+                </tr>
+            }
+        </tboby>
+    </table>
+</div>
