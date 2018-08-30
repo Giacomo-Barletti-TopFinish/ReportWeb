@@ -234,6 +234,8 @@
     <Content Include="Views\Impostazioni\GetMenuUtentePartial.cshtml" />
     <Content Include="Views\PVD\Consuntivo.cshtml" />
     <Content Include="Views\PVD\GetGrigliaMacchinePartial.cshtml" />
+    <Content Include="Views\PVD\Report.cshtml" />
+    <Content Include="Views\PVD\GrigliaReportPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,91 @@
+﻿@using ReportWeb.Models
+@{
+    ViewBag.Title = "PVD Report";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>PVD Report</h2>
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <div class="row">
+                <div style="padding-top:23px" class="col-md-1">
+                    <label>Anno</label>
+                    @Html.DropDownList("ddlAnno", new SelectList(ViewData["anni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+                </div>
+                <div style="padding-top:23px" class="col-md-1">
+                    <label>Settimana</label>
+                    @Html.DropDownList("ddlSettimane", new SelectList(ViewData["settimane"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" />
+
+        </div>
+    </div>
+</div>
+<label class="text-red input-sm" id="lblMessage"></label>
+<div class="col-sm-12">
+    <div id="divGrigliaMacchina"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+
+    });
+
+
+    function Trova()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var settimana = $('#ddlSettimane').val();
+        if (settimana == null || settimana == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Selezionare una settimana" + "</br>";
+            esegui = false;
+        }
+
+        var anno = $('#ddlAnno').val();
+        if (anno == null || anno == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Selezionare un anno" + "</br>";
+            esegui = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+
+        var url = '@Url.Action("TrovaConsuntivo", "PVD")';
+        $.ajax({
+            url: url,
+            data: {
+                Anno: anno,
+                Settimana: settimana
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGrigliaMacchina').html(data).show();
+                CancellaInput();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+
+</script>

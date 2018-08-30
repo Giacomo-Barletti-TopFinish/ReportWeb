@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeHelper.cs" />
     <Compile Include="Priorità.cs" />
     <Compile Include="Reparti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

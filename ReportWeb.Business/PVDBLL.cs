@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebReport.Common;
 
 namespace ReportWeb.Business
 {
@@ -45,14 +46,14 @@ namespace ReportWeb.Business
                 model.Giorno = m.GIORNO;
                 model.IDRESOURCEF = m.IDRESOURCEF;
                 model.Macchina = m.MACCHINA;
-                model.FinituraCodice = m.IsFINITURA_CODNull()?string.Empty:m.FINITURA_COD;
-                model.FinituraDescrizione = m.IsFINITURA_DESCNull()?string.Empty:m.FINITURA_DESC;
-                model.TipoCiclo = m.IsTIPONull()?string.Empty:m.TIPO;
+                model.FinituraCodice = m.IsFINITURA_CODNull() ? string.Empty : m.FINITURA_COD;
+                model.FinituraDescrizione = m.IsFINITURA_DESCNull() ? string.Empty : m.FINITURA_DESC;
+                model.TipoCiclo = m.IsTIPONull() ? string.Empty : m.TIPO;
                 model.Inizio = m.INIZIO;
                 model.Fine = m.FINE;
                 model.Quantita = (int)m.QUANTITA;
-                model.Clienti = m.IsCLIENTINull()?string.Empty:m.CLIENTI;
-                model.Articolo = m.IsARTICOLONull()?string.Empty:m.ARTICOLO;
+                model.Clienti = m.IsCLIENTINull() ? string.Empty : m.CLIENTI;
+                model.Articolo = m.IsARTICOLONull() ? string.Empty : m.ARTICOLO;
                 model.Impegno = (int)m.IMPEGNO;
                 model.IdConsuntivo = (int)m.IDCONSUNTIVO;
                 consuntivo.Add(model);
@@ -76,6 +77,38 @@ namespace ReportWeb.Business
                 bPDV.SalvaConsuntivo(IDRESOURCEF, FinituraCodice, FinituraDescrizione, Tipo, Giorno, Inizio, Fine, Quantita, Clienti, Articolo, Impegno, UIDUSER);
             }
 
+        }
+
+        public List<PVDConsuntivoModel> EstraiConsutivo(DateTime dataInizio, DateTime dataFine)
+        {
+            List<PVDConsuntivoModel> consuntivo = new List<PVDConsuntivoModel>();
+
+            PVDDS ds = new PVDDS();
+            using (PVDBusiness bPDV = new PVDBusiness())
+            {
+                bPDV.FillRW_PVD_CONSUNTIVO(ds);
+            }
+
+            foreach (PVDDS.RW_PVD_CONSUNTIVORow m in ds.RW_PVD_CONSUNTIVO.Where(X => X.GIORNO >= dataInizio && X.GIORNO <= dataFine))
+            {
+                PVDConsuntivoModel model = new PVDConsuntivoModel();
+
+                model.Giorno = m.GIORNO;
+                model.IDRESOURCEF = m.IDRESOURCEF;
+                model.Macchina = m.MACCHINA;
+                model.FinituraCodice = m.IsFINITURA_CODNull() ? string.Empty : m.FINITURA_COD;
+                model.FinituraDescrizione = m.IsFINITURA_DESCNull() ? string.Empty : m.FINITURA_DESC;
+                model.TipoCiclo = m.IsTIPONull() ? string.Empty : m.TIPO;
+                model.Inizio = m.INIZIO;
+                model.Fine = m.FINE;
+                model.Quantita = (int)m.QUANTITA;
+                model.Clienti = m.IsCLIENTINull() ? string.Empty : m.CLIENTI;
+                model.Articolo = m.IsARTICOLONull() ? string.Empty : m.ARTICOLO;
+                model.Impegno = (int)m.IMPEGNO;
+                model.IdConsuntivo = (int)m.IDCONSUNTIVO;
+                consuntivo.Add(model);
+            }
+            return consuntivo;
         }
     }
 }

@@ -2,9 +2,11 @@
 using ReportWeb.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebReport.Common;
 
 namespace ReportWeb.Controllers
 {
@@ -23,8 +25,8 @@ namespace ReportWeb.Controllers
         public ActionResult GetGrigliaMacchine(string IDRESOURCEF)
         {
             PVDBLL bll = new PVDBLL();
-            List<PVDConsuntivoModel> consunetivo = bll.EstraiConsutivoMacchina(IDRESOURCEF);
-            return PartialView("GetGrigliaMacchinePartial", consunetivo);
+            List<PVDConsuntivoModel> consuntivo = bll.EstraiConsutivoMacchina(IDRESOURCEF);
+            return PartialView("GetGrigliaMacchinePartial", consuntivo);
         }
 
         public ActionResult CancellaConsuntivo(int IdConsuntivo, string IDRESOURCEF)
@@ -41,6 +43,39 @@ namespace ReportWeb.Controllers
             bll.SalvaConsuntivo(IDRESOURCEF, FinituraCodice, FinituraDescrizione, Tipo, Giorno, Inizio, Fine, Quantita, Clienti, Articolo, Impegno, ConnectedUser);
             List<PVDConsuntivoModel> consunetivo = bll.EstraiConsutivoMacchina(IDRESOURCEF);
             return PartialView("GetGrigliaMacchinePartial", consunetivo);
+        }
+
+        public ActionResult Report()
+        {
+
+            List<RWListItem> settimane = new List<RWListItem>();
+            settimane.Add(new RWListItem(string.Empty, string.Empty));
+            for (int i = 1; i <= 52; i++)
+                settimane.Add(new RWListItem(i.ToString(), i.ToString()));
+
+            List<RWListItem> Anni = new List<RWListItem>();
+            Anni.Add(new RWListItem(string.Empty, string.Empty));
+            Anni.Add(new RWListItem("2018", "2018"));
+            Anni.Add(new RWListItem("2019", "2019"));
+            Anni.Add(new RWListItem("2020", "2020"));
+            Anni.Add(new RWListItem("2020", "2020"));
+            PVDBLL bll = new PVDBLL();
+            List<RWListItem> macchine = bll.CreaListaMacchine();
+            macchine.Insert(0, new RWListItem(string.Empty, string.Empty));
+            ViewData.Add("settimane", settimane);
+            ViewData.Add("anni", Anni);
+            return View();
+        }
+
+        public ActionResult TrovaConsuntivo(int Anno, int Settimana)
+        {
+            PVDBLL bll = new PVDBLL();
+            DateTime dataInizioSettimana = DateTimeHelper.PrimoGiornoSettimana(Anno, Settimana);
+            DateTime dataFine = dataInizioSettimana.AddDays(7);
+            List<PVDConsuntivoModel> consuntivo = bll.EstraiConsutivo(dataInizioSettimana, dataFine);
+            ViewData.Add("dataInizio", dataInizioSettimana.ToShortDateString());
+            ViewData.Add("dataFine", dataFine.ToShortDateString());
+            return PartialView("GrigliaReportPartial", consuntivo);
         }
     }
 }
