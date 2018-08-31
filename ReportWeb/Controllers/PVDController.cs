@@ -73,10 +73,10 @@ namespace ReportWeb.Controllers
             PVDBLL bll = new PVDBLL();
             DateTime dataInizioSettimana = DateTimeHelper.PrimoGiornoSettimana(Anno, Settimana);
             DateTime dataFine = dataInizioSettimana.AddDays(7);
-            List<PVDConsuntivoModel> consuntivo = bll.EstraiConsutivo(dataInizioSettimana, dataFine,Macchina);
+            PVDReportModel report = bll.EstraiConsutivo(dataInizioSettimana, dataFine,Macchina);
             ViewData.Add("dataInizio", dataInizioSettimana.ToShortDateString());
             ViewData.Add("dataFine", dataFine.ToShortDateString());
-            return PartialView("GrigliaReportPartial", consuntivo);
+            return PartialView("GrigliaReportPartial", report);
         }
     }
 }

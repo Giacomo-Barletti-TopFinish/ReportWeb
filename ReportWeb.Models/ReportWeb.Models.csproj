@@ -46,6 +46,7 @@
     <Compile Include="ODLApertiModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PVDConsuntivoModel.cs" />
+    <Compile Include="PVDReportModel.cs" />
     <Compile Include="QuadrantiModel.cs" />
     <Compile Include="RWListItem.cs" />
     <Compile Include="TokenModel.cs" />

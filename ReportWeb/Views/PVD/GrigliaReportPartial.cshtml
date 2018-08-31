@@ -1,6 +1,6 @@
 ﻿
 @using ReportWeb.Models
-@model List<PVDConsuntivoModel>
+@model PVDReportModel
 <div class="box box-primary box-solid">
     <div class="row">
         <div class="col-sm-1"><label>Data inizio: </label>@ViewData["dataInizio"].ToString() </div>
@@ -47,7 +47,7 @@
             </th>
         </tr>
         <tboby>
-            @foreach (PVDConsuntivoModel c in Model)
+            @foreach (PVDConsuntivoModel c in Model.Cosuntivo)
             {
                 <tr>
                     <th>
@@ -89,5 +89,46 @@
                 </tr>
             }
         </tboby>
+    </table>
+    <table class="table table-condensed text-red text-bold">
+        <tr>
+            <th width="6%">
+                <label>TOTALI</label>
+            </th>
+            <th width="10%">
+                
+            </th>
+            <th width="6%">
+                <label></label>
+            </th>
+            <th width="10%">
+                <label></label>
+            </th>
+            <th width="6%">
+                <label> </label>
+            </th>
+            <th width="5%">
+                <label></label>
+            </th>
+            <th width="5%">
+                <label></label>
+            </th>
+            <th width="5%">
+                <label>@Model.DurataTotale</label>
+            </th>
+            <th width="5%">
+                <label></label>
+            </th>
+            <th width="10%">
+                <label></label>
+            </th>
+            <th width="10%">
+                <label></label>
+            </th>
+            <th width="10%">
+                <label></label>
+            </th>
+        </tr>
+        
     </table>
 </div>

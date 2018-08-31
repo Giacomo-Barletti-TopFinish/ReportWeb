@@ -78,15 +78,14 @@ namespace ReportWeb.Business
             }
 
         }
-        private string CalcolaDurata(string inizio, string fine)
+        private TimeSpan CalcolaDurata(string inizio, string fine)
         {
             DateTime startTime = Convert.ToDateTime(inizio);
             DateTime endtime = Convert.ToDateTime(fine);
-            TimeSpan duration = startTime - endtime;
-            return duration.ToString(@"hh\:mm");
+            return endtime - startTime;
         }
 
-        public List<PVDConsuntivoModel> EstraiConsutivo(DateTime dataInizio, DateTime dataFine, string Macchina)
+        public PVDReportModel EstraiConsutivo(DateTime dataInizio, DateTime dataFine, string Macchina)
         {
             List<PVDConsuntivoModel> consuntivo = new List<PVDConsuntivoModel>();
 
@@ -100,11 +99,12 @@ namespace ReportWeb.Business
 
             if (!string.IsNullOrEmpty(Macchina))
                 elementiTrovati = elementiTrovati.Where(x => x.IDRESOURCEF == Macchina).ToList();
-
+            TimeSpan durataTotale = new TimeSpan();
             foreach (PVDDS.RW_PVD_CONSUNTIVORow m in elementiTrovati)
             {
                 PVDConsuntivoModel model = new PVDConsuntivoModel();
-
+                TimeSpan durata = CalcolaDurata(m.INIZIO, m.FINE);
+                durataTotale = durataTotale.Add(durata);
                 model.Giorno = m.GIORNO;
                 model.IDRESOURCEF = m.IDRESOURCEF;
                 model.Macchina = m.MACCHINA;
@@ -118,10 +118,13 @@ namespace ReportWeb.Business
                 model.Articolo = m.IsARTICOLONull() ? string.Empty : m.ARTICOLO;
                 model.Impegno = (int)m.IMPEGNO;
                 model.IdConsuntivo = (int)m.IDCONSUNTIVO;
-                model.Durata = CalcolaDurata(m.INIZIO, m.FINE);
+                model.Durata = durata.ToString(@"hh\:mm");
                 consuntivo.Add(model);
             }
-            return consuntivo;
+            PVDReportModel report = new PVDReportModel();
+            report.Cosuntivo = consuntivo;
+            report.DurataTotale = durataTotale.ToString(@"hh\:mm");
+            return report;
         }
     }
 }
