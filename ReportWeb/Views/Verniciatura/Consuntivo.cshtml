@@ -1,0 +1,167 @@
+﻿@using ReportWeb.Models
+@{
+    ViewBag.Title = "Verniciatura Consuntivo";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>Verniciatura Consuntivo</h2>
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <div class="row">
+                <div class="col-md-2">
+
+                    <div style="padding-top:23px" class="col-md-12">
+                        <label>Giorno</label>
+                        <input id="txtGiorno" type="date" name="txtGiorno">
+                    </div>
+
+                </div>
+                <div class="col-md-2">
+
+                    <div style="padding-top:23px" class="col-md-12">
+                        <label>Numero pezzi manuale</label>
+                        <input id="txtQuantitaManuale" type="number" name="txtQuantitaManuale"  min="1" max="100000">
+                    </div>
+
+                </div>
+                <div class="col-md-2">
+
+                    <div style="padding-top:23px" class="col-md-12">
+                        <label>Barre</label>
+                        <input id="txtBarre" type="number" name="txtBarre" min="1" max="100000">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input type="button" onclick="Salva();" class="btn btn-primary" value="Inserisci informazioni" />
+
+        </div>
+    </div>
+    <label class="text-red input-sm" id="lblMessage"></label>
+</div>
+<div class="col-sm-12">
+    <div id="divGriglia"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        var url = '@Url.Action("GetGriglia", "Verniciatura")';
+        $.ajax({
+            url: url,
+            data: { },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGriglia').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    });
+
+
+    function Salva()
+    {
+
+        var esegui = true;
+        var messaggio = '';
+        var giorno = $('#txtGiorno').val();
+        if (giorno == null || giorno == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Giorno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var quantitaManuale = $('#txtQuantitaManuale').val();
+        var barre = $('#txtQuantitaManuale').val();
+
+        if (quantitaManuale == '') quantitaManuale = 0;
+        if (barre == '') barre = 0;
+
+
+        if (barre == 0 && quantitaManuale==0)
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Quantità manuale o barre devve essere valorizzata" + "</br>";
+            esegui = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+
+        var url = '@Url.Action("SalvaConsuntivo", "Verniciatura")';
+        $.ajax({
+            url: url,
+            data: {
+                Giorno: giorno,
+                QuantitaManuale: quantitaManuale,
+                Barre: barre
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGriglia').html(data).show();
+                CancellaInput();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function CancellaInput()
+    {
+        $('#txtCodiceFinitura').val('');
+        $('#txtQuantitaManuale').val('');
+        $('#txtBarre').val('');
+    }
+
+    var idConsuntivoDaCancellare = -1;
+    function CancellaConsuntivo(idConsuntivo)
+    {
+        idConsuntivoDaCancellare = idConsuntivo;
+        ConfirmPopup('Eliminare la riga selezionata ?', EseguiCancellaArticolo);
+    }
+
+    function EseguiCancellaArticolo()
+    {
+        var url = '@Url.Action("CancellaConsuntivo", "Verniciatura")';
+        $.ajax({
+            url: url,
+            data: { IdConsuntivo: idConsuntivoDaCancellare },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGriglia').html(data).show();
+                idConsuntivoDaCancellare = -1;
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+
+    }
+</script>

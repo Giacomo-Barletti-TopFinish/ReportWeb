@@ -93,6 +93,8 @@ namespace ReportWeb.Controllers
                 case "Impostazioni":
                 case "Menu":
                 case "PVD":
+                case "Galvanica":
+                case "Verniciatura":
                     HttpCookie coockie = filterContext.RequestContext.HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
                     if (coockie == null)
                         filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });

@@ -1,0 +1,43 @@
+﻿@using ReportWeb.Models
+@model List<VerniciaturaConsuntivoModel>
+<div class="col-sm-6">
+
+    <div class="box box-primary box-solid">
+
+        <table class="table table-condensed">
+            <tr>
+                <th width="30%">
+                    <label>Giorno</label>
+                </th>
+                <th width="30%">
+                    <label>Quantità manuale</label>
+                </th>
+                <th width="30%">
+                    <label>Barre</label>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tboby>
+                @foreach (VerniciaturaConsuntivoModel c in Model)
+            {
+                    <tr>
+                        <td>
+                            @c.Giorno.ToShortDateString()
+                        </td>
+                        <td>
+                            @c.QuantitaManuale
+                        </td>
+                        <td>
+                            @c.Barre
+                        </td>
+                        <td>
+                            <a onclick="CancellaConsuntivo(@c.IdConsuntivo)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </tboby>
+        </table>
+    </div>
+</div>

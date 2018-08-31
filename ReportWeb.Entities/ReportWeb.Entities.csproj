@@ -41,6 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GalvanicaDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GalvanicaDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -62,9 +67,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SecurityDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="VerniciaturaDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VerniciaturaDS.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="GalvanicaDS.xsc">
+      <DependentUpon>GalvanicaDS.xsd</DependentUpon>
+    </None>
+    <None Include="GalvanicaDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GalvanicaDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="GalvanicaDS.xss">
+      <DependentUpon>GalvanicaDS.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -101,6 +122,17 @@
     </None>
     <None Include="SecurityDS.xss">
       <DependentUpon>SecurityDS.xsd</DependentUpon>
+    </None>
+    <None Include="VerniciaturaDS.xsc">
+      <DependentUpon>VerniciaturaDS.xsd</DependentUpon>
+    </None>
+    <None Include="VerniciaturaDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VerniciaturaDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="VerniciaturaDS.xss">
+      <DependentUpon>VerniciaturaDS.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -95,7 +95,7 @@ namespace ReportWeb.Business
                 bPDV.FillRW_PVD_CONSUNTIVO(ds);
             }
 
-            List<PVDDS.RW_PVD_CONSUNTIVORow> elementiTrovati = ds.RW_PVD_CONSUNTIVO.Where(X => X.GIORNO >= dataInizio && X.GIORNO <= dataFine).ToList();
+            List<PVDDS.RW_PVD_CONSUNTIVORow> elementiTrovati = ds.RW_PVD_CONSUNTIVO.Where(X => X.GIORNO >= dataInizio && X.GIORNO < dataFine).ToList();
 
             if (!string.IsNullOrEmpty(Macchina))
                 elementiTrovati = elementiTrovati.Where(x => x.IDRESOURCEF == Macchina).ToList();

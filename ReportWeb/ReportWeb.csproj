@@ -143,11 +143,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
+    <Compile Include="Controllers\GalvanicaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImpostazioniController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PVDController.cs" />
     <Compile Include="Controllers\TVController.cs" />
+    <Compile Include="Controllers\VerniciaturaController.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -398,6 +400,12 @@
     <Content Include="Views\PVD\GetGrigliaMacchinePartial.cshtml" />
     <Content Include="Views\PVD\Report.cshtml" />
     <Content Include="Views\PVD\GrigliaReportPartial.cshtml" />
+    <Content Include="Views\Verniciatura\Consuntivo.cshtml" />
+    <Content Include="Views\Verniciatura\Report.cshtml" />
+    <Content Include="Views\Galvanica\Consuntivo.cshtml" />
+    <Content Include="Views\Galvanica\Report.cshtml" />
+    <Content Include="Views\Verniciatura\GetGrigliaPartial.cshtml" />
+    <Content Include="Views\Verniciatura\GrigliaReportPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

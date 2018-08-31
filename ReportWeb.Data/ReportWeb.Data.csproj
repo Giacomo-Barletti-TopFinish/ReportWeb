@@ -54,6 +54,8 @@
     <Compile Include="ReportWebBusinessBase.cs" />
     <Compile Include="SecurityAdapter.cs" />
     <Compile Include="SecurityBusiness.cs" />
+    <Compile Include="Verniciatura\VerniciaturaAdapter.cs" />
+    <Compile Include="Verniciatura\VerniciaturaBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MetalPlus.Kernel.Data\MetalPlus.Kernel.Data.csproj">
