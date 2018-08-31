@@ -1,4 +1,5 @@
 ﻿using MetalPlus.Kernel.Data.Core;
+using ReportWeb.Common.Helpers;
 using ReportWeb.Entities;
 using System;
 using System.Collections.Generic;
@@ -38,8 +39,11 @@ namespace ReportWeb.Data.PVD
         [DataContext(true)]
         public void SalvaConsuntivo(string IDRESOURCEF, string FinituraCodice, string FinituraDescrizione, string Tipo, string Giorno, string Inizio, string Fine, int Quantita, string Clienti, string Articolo, int Impegno, string UIDUSER)
         {
+            LogManagerHelper.WriteMessage("Salva consuntivo PVDBUSINESS");
             PVDAdapter a = new PVDAdapter(DbConnection, DbTransaction);
+            LogManagerHelper.WriteMessage("Salva consuntivo PVDBUSINESS dopo PVDAdapter");
             a.SalvaConsuntivo(IDRESOURCEF, FinituraCodice, FinituraDescrizione, Tipo, Giorno, Inizio, Fine, Quantita, Clienti, Articolo, Impegno, UIDUSER);
+            LogManagerHelper.WriteMessage("Salva consuntivo PVDBUSINESS dopo a.SalvaConsuntivo");
         }
 
     }

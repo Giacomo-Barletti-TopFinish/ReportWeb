@@ -98,14 +98,21 @@ namespace ReportWeb.Controllers
                         filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
                     else
                     {
-                        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(coockie.Value);
-                        string token = ticket.Name;
-                        TokenModel tokenModel = SecurityBLL.GetTokenModel(token);
-                        if (tokenModel == null)
+                        try
+                        {
+                            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(coockie.Value);
+                            string token = ticket.Name;
+                            TokenModel tokenModel = SecurityBLL.GetTokenModel(token);
+                            if (tokenModel == null)
+                                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
+                            if (tokenModel.IpAddress != ClientIPAddress)
+                                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
+                            ConnectedUser = tokenModel.User;
+                        }
+                        catch
+                        {
                             filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
-                        if (tokenModel.IpAddress != ClientIPAddress)
-                            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
-                        ConnectedUser = tokenModel.User;
+                        }
                     }
                     break;
             }

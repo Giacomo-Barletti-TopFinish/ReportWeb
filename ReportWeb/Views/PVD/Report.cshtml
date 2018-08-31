@@ -16,6 +16,10 @@
                     <label>Settimana</label>
                     @Html.DropDownList("ddlSettimane", new SelectList(ViewData["settimane"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
                 </div>
+                <div style="padding-top:23px" class="col-md-1">
+                    <label>Macchina</label>
+                    @Html.DropDownList("ddlMacchina", new SelectList(ViewData["macchine"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+                </div>
             </div>
         </div>
     </div>
@@ -63,13 +67,15 @@
             return;
         }
 
+        var macchina = $('#ddlMacchina').val();
 
         var url = '@Url.Action("TrovaConsuntivo", "PVD")';
         $.ajax({
             url: url,
             data: {
                 Anno: anno,
-                Settimana: settimana
+                Settimana: settimana,
+                Macchina: macchina
             },
             cache: false,
             type: "POST",

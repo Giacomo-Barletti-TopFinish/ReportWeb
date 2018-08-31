@@ -11,6 +11,13 @@ namespace ReportWeb.Controllers
 {
     public class AccountController : ControllerBase
     {
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
+
         [HttpGet]
         public ActionResult Login()
         {

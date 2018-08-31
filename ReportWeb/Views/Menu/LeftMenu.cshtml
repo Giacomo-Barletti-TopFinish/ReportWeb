@@ -21,7 +21,7 @@
                         {
                             if (figlio.Abilitato)
                             {
-                                <li><a onclick="@figlio.OnClick" href="@figlio.HRef"><i class="@figlio.Font"></i>@figlio.Etichetta</a></li>
+                                <li><a onclick="@figlio.OnClick" href="@Url.Content("~/"+figlio.HRef)"><i class="@figlio.Font"></i>@figlio.Etichetta</a></li>
                             }
                         }
                     </ul>
@@ -33,3 +33,10 @@
 
     </ul>
 </section>
+<script language="javascript" type="text/javascript">
+    function OpenTV()
+    {
+        var url = '@Url.Action("Index", "TV")';
+        window.open(url);
+    }
+</script>

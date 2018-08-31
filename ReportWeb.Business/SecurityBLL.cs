@@ -104,7 +104,7 @@ namespace ReportWeb.BLL
         private MenuModel CreaMenu(SecurityDS ds, decimal idMenu, List<int> idMenuAbilitati)
         {
             SecurityDS.RW_MENURow row = ds.RW_MENU.Where(x => x.IDMENU == idMenu).FirstOrDefault();
-
+            
             MenuModel padre = new MenuModel();
             padre.IdMenu = (int)row.IDMENU;
             padre.Azione = row.AZIONE == 1 ? true : false;

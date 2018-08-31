@@ -73,6 +73,16 @@
         });
 
 
+        function AskLogout()
+        {
+            ConfirmPopup('Uscire dall\'applicazione ?', EseguiLogout);
+        }
+
+        function EseguiLogout()
+        {
+            window.location.href = "@Url.Action("LogOut", "Account")";
+        }
+
     </script>
     @RenderSection("scriptSection", false)
 </head>
@@ -88,6 +98,18 @@
                     <i class="glyphicon glyphicon-menu-hamburger"></i>
                     <span class="sr-only">Toggle navigation</span>
                 </a>
+                <div id="divMenuWrench" class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a title="Logout" onclick="AskLogout();">
+                                <i class="fa fa-sign-out fa-lg" aria-hidden="true" style="padding-right:5px">
+                                   
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </nav>
         </header>
         <aside class="main-sidebar">

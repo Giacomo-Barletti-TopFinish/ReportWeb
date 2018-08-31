@@ -50,6 +50,10 @@
       <Project>{207d81f0-c3e9-43ef-8e77-a007d433a78c}</Project>
       <Name>MetalPlus.Kernel.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReportWeb.Common\ReportWeb.Common.csproj">
+      <Project>{4a7c19e0-6664-45c2-8999-a5e0896fe111}</Project>
+      <Name>ReportWeb.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReportWeb.Data\ReportWeb.Data.csproj">
       <Project>{076e0620-4082-4ce0-9547-b5477bae3137}</Project>
       <Name>ReportWeb.Data</Name>
@@ -61,10 +65,6 @@
     <ProjectReference Include="..\ReportWeb.Models\ReportWeb.Models.csproj">
       <Project>{712fd937-e2ec-4f78-b20a-f39efb1d5e60}</Project>
       <Name>ReportWeb.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebReport.Common\WebReport.Common.csproj">
-      <Project>{69f3f7dd-776f-4717-9f1a-555e8d468b79}</Project>
-      <Name>WebReport.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

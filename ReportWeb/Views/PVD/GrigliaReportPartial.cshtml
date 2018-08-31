@@ -3,34 +3,37 @@
 @model List<PVDConsuntivoModel>
 <div class="box box-primary box-solid">
     <div class="row">
-        <div class="col-sm-1"><label>Data inizio:</label>@ViewData["dataInizio"].ToString() </div>
+        <div class="col-sm-1"><label>Data inizio: </label>@ViewData["dataInizio"].ToString() </div>
         <div class="col-sm-1"></div>
-        <div class="col-sm-1"><label>Data fine:</label>@ViewData["dataFine"].ToString() </div>
+        <div class="col-sm-1"><label>Data fine: </label>@ViewData["dataFine"].ToString() </div>
     </div>
     <table class="table table-condensed">
         <tr>
-            <th width="10%">
+            <th width="6%">
                 <label>Giorno</label>
             </th>
             <th width="10%">
                 Macchina
             </th>
-            <th width="10%">
+            <th width="6%">
                 <label>Cod. Finitura</label>
             </th>
             <th width="10%">
                 <label>Finitura</label>
             </th>
-            <th width="10%">
+            <th width="6%">
                 <label>Tipo ciclo</label>
             </th>
-            <th width="10%">
+            <th width="5%">
                 <label>Inizio</label>
             </th>
-            <th width="10%">
+            <th width="5%">
                 <label>Fine</label>
             </th>
-            <th width="10%">
+            <th width="5%">
+                <label>Durata</label>
+            </th>
+            <th width="5%">
                 <label>Quanità</label>
             </th>
             <th width="10%">
@@ -67,6 +70,9 @@
                     </th>
                     <th>
                         @c.Fine
+                    </th>
+                    <th>
+                        @c.Durata
                     </th>
                     <th>
                         @c.Quantita

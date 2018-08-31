@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebReport.Common;
+using ReportWeb.Common;
 
 namespace ReportWeb.Business
 {
@@ -78,8 +78,15 @@ namespace ReportWeb.Business
             }
 
         }
+        private string CalcolaDurata(string inizio, string fine)
+        {
+            DateTime startTime = Convert.ToDateTime(inizio);
+            DateTime endtime = Convert.ToDateTime(fine);
+            TimeSpan duration = startTime - endtime;
+            return duration.ToString(@"hh\:mm");
+        }
 
-        public List<PVDConsuntivoModel> EstraiConsutivo(DateTime dataInizio, DateTime dataFine)
+        public List<PVDConsuntivoModel> EstraiConsutivo(DateTime dataInizio, DateTime dataFine, string Macchina)
         {
             List<PVDConsuntivoModel> consuntivo = new List<PVDConsuntivoModel>();
 
@@ -89,7 +96,12 @@ namespace ReportWeb.Business
                 bPDV.FillRW_PVD_CONSUNTIVO(ds);
             }
 
-            foreach (PVDDS.RW_PVD_CONSUNTIVORow m in ds.RW_PVD_CONSUNTIVO.Where(X => X.GIORNO >= dataInizio && X.GIORNO <= dataFine))
+            List<PVDDS.RW_PVD_CONSUNTIVORow> elementiTrovati = ds.RW_PVD_CONSUNTIVO.Where(X => X.GIORNO >= dataInizio && X.GIORNO <= dataFine).ToList();
+
+            if (!string.IsNullOrEmpty(Macchina))
+                elementiTrovati = elementiTrovati.Where(x => x.IDRESOURCEF == Macchina).ToList();
+
+            foreach (PVDDS.RW_PVD_CONSUNTIVORow m in elementiTrovati)
             {
                 PVDConsuntivoModel model = new PVDConsuntivoModel();
 
@@ -106,6 +118,7 @@ namespace ReportWeb.Business
                 model.Articolo = m.IsARTICOLONull() ? string.Empty : m.ARTICOLO;
                 model.Impegno = (int)m.IMPEGNO;
                 model.IdConsuntivo = (int)m.IDCONSUNTIVO;
+                model.Durata = CalcolaDurata(m.INIZIO, m.FINE);
                 consuntivo.Add(model);
             }
             return consuntivo;

@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebReport.Common;
+using ReportWeb.Common.Helpers;
 
 namespace ReportWeb.Controllers
 {
@@ -64,15 +64,16 @@ namespace ReportWeb.Controllers
             macchine.Insert(0, new RWListItem(string.Empty, string.Empty));
             ViewData.Add("settimane", settimane);
             ViewData.Add("anni", Anni);
+            ViewData.Add("macchine", macchine);
             return View();
         }
 
-        public ActionResult TrovaConsuntivo(int Anno, int Settimana)
+        public ActionResult TrovaConsuntivo(int Anno, int Settimana, string Macchina)
         {
             PVDBLL bll = new PVDBLL();
             DateTime dataInizioSettimana = DateTimeHelper.PrimoGiornoSettimana(Anno, Settimana);
             DateTime dataFine = dataInizioSettimana.AddDays(7);
-            List<PVDConsuntivoModel> consuntivo = bll.EstraiConsutivo(dataInizioSettimana, dataFine);
+            List<PVDConsuntivoModel> consuntivo = bll.EstraiConsutivo(dataInizioSettimana, dataFine,Macchina);
             ViewData.Add("dataInizio", dataInizioSettimana.ToShortDateString());
             ViewData.Add("dataFine", dataFine.ToShortDateString());
             return PartialView("GrigliaReportPartial", consuntivo);

@@ -161,17 +161,69 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-switch.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\checkbox.png" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Image\logo_MP_240X200 maggio 2018.png" />
     <Content Include="Content\Image\logo_TF_240X200 maggio 2018.png" />
     <Content Include="Content\ionicons.min.css" />
     <Content Include="Content\Menu.css" />
     <Content Include="Content\nanogallery2.min.css" />
+    <Content Include="Content\nanogallery\font\ngy2_icon_font.svg" />
+    <Content Include="Content\nanogallery\loading.gif" />
+    <Content Include="Content\nanogallery\nanogallery2.min.css" />
+    <Content Include="Content\nanogallery\nanogallery2.woff.min.css" />
+    <Content Include="Content\nanogallery\nanogallery2_logo.png" />
     <Content Include="Content\select2.min.css" />
     <Content Include="Content\Site-1.0.4.css" />
     <Content Include="Content\SpcMenu-1.0.0.css" />
+    <Content Include="Content\start.png" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -187,12 +239,122 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\reset-text.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\nanogallery\font\ngy2_icon_font.eot" />
+    <Content Include="Content\nanogallery\font\ngy2_icon_font.ttf" />
+    <Content Include="Content\nanogallery\font\ngy2_icon_font.woff" />
+    <Content Include="Content\nanogallery\font\ngy2_icon_font.woff2" />
+    <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <Content Include="fonts\SourceSansPro-Black.ttf" />
+    <Content Include="fonts\SourceSansPro-BlackItalic.ttf" />
+    <Content Include="fonts\SourceSansPro-Bold.ttf" />
+    <Content Include="fonts\SourceSansPro-BoldItalic.ttf" />
+    <Content Include="fonts\SourceSansPro-ExtraLight.ttf" />
+    <Content Include="fonts\SourceSansPro-ExtraLightItalic.ttf" />
+    <Content Include="fonts\SourceSansPro-Italic.ttf" />
+    <Content Include="fonts\SourceSansPro-Light.ttf" />
+    <Content Include="fonts\SourceSansPro-LightItalic.ttf" />
+    <Content Include="fonts\SourceSansPro-Regular.ttf" />
+    <Content Include="fonts\SourceSansPro-Semibold.ttf" />
+    <Content Include="fonts\SourceSansPro-SemiboldItalic.ttf" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\External\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\External\app.min.js" />
+    <Content Include="Scripts\External\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\External\bootstrap-switch.js" />
+    <Content Include="Scripts\External\bootstrap.min.js" />
+    <Content Include="Scripts\External\jquery-3.1.1.js" />
+    <Content Include="Scripts\External\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\External\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\External\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\External\jquery.imgcheckbox.js" />
+    <Content Include="Scripts\External\jquery.nanogallery2.min.js" />
+    <Content Include="Scripts\External\jquery.ui.touch-punch.min.js" />
+    <Content Include="Scripts\External\js.cookie.js" />
+    <Content Include="Scripts\External\loadingoverlay.js" />
+    <Content Include="Scripts\External\modernizr-2.6.2.js" />
+    <Content Include="Scripts\External\moment-with-locales.min.js" />
+    <Content Include="Scripts\External\moment.min.js" />
+    <Content Include="Scripts\External\select2.full.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -255,6 +417,10 @@
       <Project>{d2e9d4e7-59d4-46c5-8273-32b36f17f49f}</Project>
       <Name>ReportWeb.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReportWeb.Common\ReportWeb.Common.csproj">
+      <Project>{4a7c19e0-6664-45c2-8999-a5e0896fe111}</Project>
+      <Name>ReportWeb.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReportWeb.Data\ReportWeb.Data.csproj">
       <Project>{076E0620-4082-4CE0-9547-B5477BAE3137}</Project>
       <Name>ReportWeb.Data</Name>
@@ -262,10 +428,6 @@
     <ProjectReference Include="..\ReportWeb.Models\ReportWeb.Models.csproj">
       <Project>{712fd937-e2ec-4f78-b20a-f39efb1d5e60}</Project>
       <Name>ReportWeb.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebReport.Common\WebReport.Common.csproj">
-      <Project>{69f3f7dd-776f-4717-9f1a-555e8d468b79}</Project>
-      <Name>WebReport.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

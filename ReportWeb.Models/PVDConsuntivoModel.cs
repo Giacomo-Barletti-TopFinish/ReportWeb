@@ -21,5 +21,6 @@ namespace ReportWeb.Models
         public string Articolo { get; set; }
         public int Impegno { get; set; }
         public int IdConsuntivo{ get; set; }
+        public string Durata{ get; set; }
     }
 }
