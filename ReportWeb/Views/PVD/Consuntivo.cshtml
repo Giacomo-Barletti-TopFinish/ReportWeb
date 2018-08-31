@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-sm-8">
                             <label>Descrizione</label>
-                            @Html.TextBox("txtFinitura", "", new { @maxlength = "50", @class = "form-control input-sm  text-uppercase"})
+                            @Html.TextBox("txtFinitura", "", new { @maxlength = "50", @class = "form-control input-sm  text-uppercase" })
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
 
     function Salva()
     {
-        debugger;
+        
         var esegui = true;
         var messaggio = '';
         var macchina = $('#ddlMacchine').val();
@@ -301,20 +301,26 @@
         $('#txtArticolo').val('');
         $('#txtImpegno').val('');
     }
-
+    var idConsuntivoDaCancellare = -1;
     function CancellaConsuntivo(idConsuntivo)
     {
-        debugger;
+        idConsuntivoDaCancellare = idConsuntivo;
+        ConfirmPopup('Eliminare la presente scheda prodotto?', EseguiCancellaArticolo);
+    }
+
+    function EseguiCancellaArticolo()
+    {
         var IDRESOURCEF = $('#ddlMacchine').val();
         var url = '@Url.Action("CancellaConsuntivo", "PVD")';
         $.ajax({
             url: url,
-            data: { IdConsuntivo: idConsuntivo, IDRESOURCEF: IDRESOURCEF },
+            data: { IdConsuntivo: idConsuntivoDaCancellare, IDRESOURCEF: IDRESOURCEF },
             cache: false,
             type: "POST",
             success: function (data)
             {
                 $('#divGrigliaMacchina').html(data).show();
+                idConsuntivoDaCancellare = -1;
             },
             error: function (response)
             {
@@ -323,5 +329,6 @@
                 document.close();
             }
         });
+
     }
 </script>
