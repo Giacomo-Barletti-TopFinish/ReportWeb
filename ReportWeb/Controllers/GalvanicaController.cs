@@ -11,11 +11,13 @@ namespace ReportWeb.Controllers
         // GET: Galvanica
         public ActionResult Consuntivo()
         {
+            VerificaAbilitazioneUtente(10);
             return View();
         }
 
         public ActionResult Report()
         {
+            VerificaAbilitazioneUtente(11);
             return View();
         }
     }
