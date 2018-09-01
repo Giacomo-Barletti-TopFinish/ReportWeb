@@ -24,6 +24,10 @@ namespace ReportWeb.Entities {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class GalvanicaDS : global::System.Data.DataSet {
         
+        private RW_GALV_CONSUNTIVODataTable tableRW_GALV_CONSUNTIVO;
+        
+        private RW_GALV_FERMIDataTable tableRW_GALV_FERMI;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -52,6 +56,12 @@ namespace ReportWeb.Entities {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+                if ((ds.Tables["RW_GALV_CONSUNTIVO"] != null)) {
+                    base.Tables.Add(new RW_GALV_CONSUNTIVODataTable(ds.Tables["RW_GALV_CONSUNTIVO"]));
+                }
+                if ((ds.Tables["RW_GALV_FERMI"] != null)) {
+                    base.Tables.Add(new RW_GALV_FERMIDataTable(ds.Tables["RW_GALV_FERMI"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -68,6 +78,26 @@ namespace ReportWeb.Entities {
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             this.Relations.CollectionChanged += schemaChangedHandler;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public RW_GALV_CONSUNTIVODataTable RW_GALV_CONSUNTIVO {
+            get {
+                return this.tableRW_GALV_CONSUNTIVO;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public RW_GALV_FERMIDataTable RW_GALV_FERMI {
+            get {
+                return this.tableRW_GALV_FERMI;
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -137,6 +167,12 @@ namespace ReportWeb.Entities {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
+                if ((ds.Tables["RW_GALV_CONSUNTIVO"] != null)) {
+                    base.Tables.Add(new RW_GALV_CONSUNTIVODataTable(ds.Tables["RW_GALV_CONSUNTIVO"]));
+                }
+                if ((ds.Tables["RW_GALV_FERMI"] != null)) {
+                    base.Tables.Add(new RW_GALV_FERMIDataTable(ds.Tables["RW_GALV_FERMI"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -170,6 +206,18 @@ namespace ReportWeb.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
+            this.tableRW_GALV_CONSUNTIVO = ((RW_GALV_CONSUNTIVODataTable)(base.Tables["RW_GALV_CONSUNTIVO"]));
+            if ((initTable == true)) {
+                if ((this.tableRW_GALV_CONSUNTIVO != null)) {
+                    this.tableRW_GALV_CONSUNTIVO.InitVars();
+                }
+            }
+            this.tableRW_GALV_FERMI = ((RW_GALV_FERMIDataTable)(base.Tables["RW_GALV_FERMI"]));
+            if ((initTable == true)) {
+                if ((this.tableRW_GALV_FERMI != null)) {
+                    this.tableRW_GALV_FERMI.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -180,6 +228,30 @@ namespace ReportWeb.Entities {
             this.Namespace = "http://tempuri.org/GalvanicaDS.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
+            this.tableRW_GALV_CONSUNTIVO = new RW_GALV_CONSUNTIVODataTable();
+            base.Tables.Add(this.tableRW_GALV_CONSUNTIVO);
+            this.tableRW_GALV_FERMI = new RW_GALV_FERMIDataTable();
+            base.Tables.Add(this.tableRW_GALV_FERMI);
+            global::System.Data.ForeignKeyConstraint fkc;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_RW_GALV_CONSUNTIVO_RW_GALV_FERMI", new global::System.Data.DataColumn[] {
+                        this.tableRW_GALV_CONSUNTIVO.IDCONSUNTIVOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableRW_GALV_FERMI.IDCONSUNTIVOColumn});
+            this.tableRW_GALV_FERMI.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeRW_GALV_CONSUNTIVO() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeRW_GALV_FERMI() {
+            return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -235,6 +307,1057 @@ namespace ReportWeb.Entities {
             }
             xs.Add(dsSchema);
             return type;
+        }
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void RW_GALV_CONSUNTIVORowChangeEventHandler(object sender, RW_GALV_CONSUNTIVORowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void RW_GALV_FERMIRowChangeEventHandler(object sender, RW_GALV_FERMIRowChangeEvent e);
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class RW_GALV_CONSUNTIVODataTable : global::System.Data.TypedTableBase<RW_GALV_CONSUNTIVORow> {
+            
+            private global::System.Data.DataColumn columnIDCONSUNTIVO;
+            
+            private global::System.Data.DataColumn columnINIZIO_TURNO;
+            
+            private global::System.Data.DataColumn columnFINE_TURNO;
+            
+            private global::System.Data.DataColumn columnBARRE;
+            
+            private global::System.Data.DataColumn columnDATA_INSERIMENTO;
+            
+            private global::System.Data.DataColumn columnUIDUSER;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_CONSUNTIVODataTable() {
+                this.TableName = "RW_GALV_CONSUNTIVO";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal RW_GALV_CONSUNTIVODataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected RW_GALV_CONSUNTIVODataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDCONSUNTIVOColumn {
+                get {
+                    return this.columnIDCONSUNTIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn INIZIO_TURNOColumn {
+                get {
+                    return this.columnINIZIO_TURNO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FINE_TURNOColumn {
+                get {
+                    return this.columnFINE_TURNO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BARREColumn {
+                get {
+                    return this.columnBARRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATA_INSERIMENTOColumn {
+                get {
+                    return this.columnDATA_INSERIMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UIDUSERColumn {
+                get {
+                    return this.columnUIDUSER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_CONSUNTIVORow this[int index] {
+                get {
+                    return ((RW_GALV_CONSUNTIVORow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_GALV_CONSUNTIVORowChangeEventHandler RW_GALV_CONSUNTIVORowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_GALV_CONSUNTIVORowChangeEventHandler RW_GALV_CONSUNTIVORowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_GALV_CONSUNTIVORowChangeEventHandler RW_GALV_CONSUNTIVORowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_GALV_CONSUNTIVORowChangeEventHandler RW_GALV_CONSUNTIVORowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddRW_GALV_CONSUNTIVORow(RW_GALV_CONSUNTIVORow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_CONSUNTIVORow AddRW_GALV_CONSUNTIVORow(decimal IDCONSUNTIVO, System.DateTime INIZIO_TURNO, System.DateTime FINE_TURNO, decimal BARRE, System.DateTime DATA_INSERIMENTO, string UIDUSER) {
+                RW_GALV_CONSUNTIVORow rowRW_GALV_CONSUNTIVORow = ((RW_GALV_CONSUNTIVORow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDCONSUNTIVO,
+                        INIZIO_TURNO,
+                        FINE_TURNO,
+                        BARRE,
+                        DATA_INSERIMENTO,
+                        UIDUSER};
+                rowRW_GALV_CONSUNTIVORow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRW_GALV_CONSUNTIVORow);
+                return rowRW_GALV_CONSUNTIVORow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_CONSUNTIVORow FindByIDCONSUNTIVO(decimal IDCONSUNTIVO) {
+                return ((RW_GALV_CONSUNTIVORow)(this.Rows.Find(new object[] {
+                            IDCONSUNTIVO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                RW_GALV_CONSUNTIVODataTable cln = ((RW_GALV_CONSUNTIVODataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new RW_GALV_CONSUNTIVODataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnIDCONSUNTIVO = base.Columns["IDCONSUNTIVO"];
+                this.columnINIZIO_TURNO = base.Columns["INIZIO_TURNO"];
+                this.columnFINE_TURNO = base.Columns["FINE_TURNO"];
+                this.columnBARRE = base.Columns["BARRE"];
+                this.columnDATA_INSERIMENTO = base.Columns["DATA_INSERIMENTO"];
+                this.columnUIDUSER = base.Columns["UIDUSER"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnIDCONSUNTIVO = new global::System.Data.DataColumn("IDCONSUNTIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDCONSUNTIVO);
+                this.columnINIZIO_TURNO = new global::System.Data.DataColumn("INIZIO_TURNO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnINIZIO_TURNO);
+                this.columnFINE_TURNO = new global::System.Data.DataColumn("FINE_TURNO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFINE_TURNO);
+                this.columnBARRE = new global::System.Data.DataColumn("BARRE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBARRE);
+                this.columnDATA_INSERIMENTO = new global::System.Data.DataColumn("DATA_INSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_INSERIMENTO);
+                this.columnUIDUSER = new global::System.Data.DataColumn("UIDUSER", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUIDUSER);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnIDCONSUNTIVO}, true));
+                this.columnIDCONSUNTIVO.AllowDBNull = false;
+                this.columnIDCONSUNTIVO.Unique = true;
+                this.columnUIDUSER.MaxLength = 254;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_CONSUNTIVORow NewRW_GALV_CONSUNTIVORow() {
+                return ((RW_GALV_CONSUNTIVORow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new RW_GALV_CONSUNTIVORow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(RW_GALV_CONSUNTIVORow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.RW_GALV_CONSUNTIVORowChanged != null)) {
+                    this.RW_GALV_CONSUNTIVORowChanged(this, new RW_GALV_CONSUNTIVORowChangeEvent(((RW_GALV_CONSUNTIVORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.RW_GALV_CONSUNTIVORowChanging != null)) {
+                    this.RW_GALV_CONSUNTIVORowChanging(this, new RW_GALV_CONSUNTIVORowChangeEvent(((RW_GALV_CONSUNTIVORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.RW_GALV_CONSUNTIVORowDeleted != null)) {
+                    this.RW_GALV_CONSUNTIVORowDeleted(this, new RW_GALV_CONSUNTIVORowChangeEvent(((RW_GALV_CONSUNTIVORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.RW_GALV_CONSUNTIVORowDeleting != null)) {
+                    this.RW_GALV_CONSUNTIVORowDeleting(this, new RW_GALV_CONSUNTIVORowChangeEvent(((RW_GALV_CONSUNTIVORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveRW_GALV_CONSUNTIVORow(RW_GALV_CONSUNTIVORow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                GalvanicaDS ds = new GalvanicaDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "RW_GALV_CONSUNTIVODataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class RW_GALV_FERMIDataTable : global::System.Data.TypedTableBase<RW_GALV_FERMIRow> {
+            
+            private global::System.Data.DataColumn columnIDFERMO;
+            
+            private global::System.Data.DataColumn columnIDCONSUNTIVO;
+            
+            private global::System.Data.DataColumn columnORA;
+            
+            private global::System.Data.DataColumn columnDURATA;
+            
+            private global::System.Data.DataColumn columnMOTIVO;
+            
+            private global::System.Data.DataColumn columnDATA_INSERIMENTO;
+            
+            private global::System.Data.DataColumn columnUIDUSER;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_FERMIDataTable() {
+                this.TableName = "RW_GALV_FERMI";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal RW_GALV_FERMIDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected RW_GALV_FERMIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDFERMOColumn {
+                get {
+                    return this.columnIDFERMO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDCONSUNTIVOColumn {
+                get {
+                    return this.columnIDCONSUNTIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ORAColumn {
+                get {
+                    return this.columnORA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DURATAColumn {
+                get {
+                    return this.columnDURATA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MOTIVOColumn {
+                get {
+                    return this.columnMOTIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATA_INSERIMENTOColumn {
+                get {
+                    return this.columnDATA_INSERIMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UIDUSERColumn {
+                get {
+                    return this.columnUIDUSER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_FERMIRow this[int index] {
+                get {
+                    return ((RW_GALV_FERMIRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_GALV_FERMIRowChangeEventHandler RW_GALV_FERMIRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_GALV_FERMIRowChangeEventHandler RW_GALV_FERMIRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_GALV_FERMIRowChangeEventHandler RW_GALV_FERMIRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_GALV_FERMIRowChangeEventHandler RW_GALV_FERMIRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddRW_GALV_FERMIRow(RW_GALV_FERMIRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_FERMIRow AddRW_GALV_FERMIRow(decimal IDFERMO, decimal IDCONSUNTIVO, string ORA, string DURATA, string MOTIVO, System.DateTime DATA_INSERIMENTO, string UIDUSER) {
+                RW_GALV_FERMIRow rowRW_GALV_FERMIRow = ((RW_GALV_FERMIRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDFERMO,
+                        IDCONSUNTIVO,
+                        ORA,
+                        DURATA,
+                        MOTIVO,
+                        DATA_INSERIMENTO,
+                        UIDUSER};
+                rowRW_GALV_FERMIRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRW_GALV_FERMIRow);
+                return rowRW_GALV_FERMIRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                RW_GALV_FERMIDataTable cln = ((RW_GALV_FERMIDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new RW_GALV_FERMIDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnIDFERMO = base.Columns["IDFERMO"];
+                this.columnIDCONSUNTIVO = base.Columns["IDCONSUNTIVO"];
+                this.columnORA = base.Columns["ORA"];
+                this.columnDURATA = base.Columns["DURATA"];
+                this.columnMOTIVO = base.Columns["MOTIVO"];
+                this.columnDATA_INSERIMENTO = base.Columns["DATA_INSERIMENTO"];
+                this.columnUIDUSER = base.Columns["UIDUSER"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnIDFERMO = new global::System.Data.DataColumn("IDFERMO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDFERMO);
+                this.columnIDCONSUNTIVO = new global::System.Data.DataColumn("IDCONSUNTIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDCONSUNTIVO);
+                this.columnORA = new global::System.Data.DataColumn("ORA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORA);
+                this.columnDURATA = new global::System.Data.DataColumn("DURATA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDURATA);
+                this.columnMOTIVO = new global::System.Data.DataColumn("MOTIVO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMOTIVO);
+                this.columnDATA_INSERIMENTO = new global::System.Data.DataColumn("DATA_INSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_INSERIMENTO);
+                this.columnUIDUSER = new global::System.Data.DataColumn("UIDUSER", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUIDUSER);
+                this.columnIDFERMO.AllowDBNull = false;
+                this.columnIDCONSUNTIVO.AllowDBNull = false;
+                this.columnORA.AllowDBNull = false;
+                this.columnORA.MaxLength = 8;
+                this.columnDURATA.AllowDBNull = false;
+                this.columnDURATA.MaxLength = 2;
+                this.columnMOTIVO.MaxLength = 50;
+                this.columnUIDUSER.MaxLength = 254;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_FERMIRow NewRW_GALV_FERMIRow() {
+                return ((RW_GALV_FERMIRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new RW_GALV_FERMIRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(RW_GALV_FERMIRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.RW_GALV_FERMIRowChanged != null)) {
+                    this.RW_GALV_FERMIRowChanged(this, new RW_GALV_FERMIRowChangeEvent(((RW_GALV_FERMIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.RW_GALV_FERMIRowChanging != null)) {
+                    this.RW_GALV_FERMIRowChanging(this, new RW_GALV_FERMIRowChangeEvent(((RW_GALV_FERMIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.RW_GALV_FERMIRowDeleted != null)) {
+                    this.RW_GALV_FERMIRowDeleted(this, new RW_GALV_FERMIRowChangeEvent(((RW_GALV_FERMIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.RW_GALV_FERMIRowDeleting != null)) {
+                    this.RW_GALV_FERMIRowDeleting(this, new RW_GALV_FERMIRowChangeEvent(((RW_GALV_FERMIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveRW_GALV_FERMIRow(RW_GALV_FERMIRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                GalvanicaDS ds = new GalvanicaDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "RW_GALV_FERMIDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class RW_GALV_CONSUNTIVORow : global::System.Data.DataRow {
+            
+            private RW_GALV_CONSUNTIVODataTable tableRW_GALV_CONSUNTIVO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal RW_GALV_CONSUNTIVORow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableRW_GALV_CONSUNTIVO = ((RW_GALV_CONSUNTIVODataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IDCONSUNTIVO {
+                get {
+                    return ((decimal)(this[this.tableRW_GALV_CONSUNTIVO.IDCONSUNTIVOColumn]));
+                }
+                set {
+                    this[this.tableRW_GALV_CONSUNTIVO.IDCONSUNTIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime INIZIO_TURNO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableRW_GALV_CONSUNTIVO.INIZIO_TURNOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'INIZIO_TURNO\' in table \'RW_GALV_CONSUNTIVO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_GALV_CONSUNTIVO.INIZIO_TURNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime FINE_TURNO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableRW_GALV_CONSUNTIVO.FINE_TURNOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FINE_TURNO\' in table \'RW_GALV_CONSUNTIVO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_GALV_CONSUNTIVO.FINE_TURNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal BARRE {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_GALV_CONSUNTIVO.BARREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BARRE\' in table \'RW_GALV_CONSUNTIVO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_GALV_CONSUNTIVO.BARREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATA_INSERIMENTO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableRW_GALV_CONSUNTIVO.DATA_INSERIMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATA_INSERIMENTO\' in table \'RW_GALV_CONSUNTIVO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_GALV_CONSUNTIVO.DATA_INSERIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UIDUSER {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_GALV_CONSUNTIVO.UIDUSERColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UIDUSER\' in table \'RW_GALV_CONSUNTIVO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_GALV_CONSUNTIVO.UIDUSERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsINIZIO_TURNONull() {
+                return this.IsNull(this.tableRW_GALV_CONSUNTIVO.INIZIO_TURNOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetINIZIO_TURNONull() {
+                this[this.tableRW_GALV_CONSUNTIVO.INIZIO_TURNOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFINE_TURNONull() {
+                return this.IsNull(this.tableRW_GALV_CONSUNTIVO.FINE_TURNOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFINE_TURNONull() {
+                this[this.tableRW_GALV_CONSUNTIVO.FINE_TURNOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBARRENull() {
+                return this.IsNull(this.tableRW_GALV_CONSUNTIVO.BARREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBARRENull() {
+                this[this.tableRW_GALV_CONSUNTIVO.BARREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDATA_INSERIMENTONull() {
+                return this.IsNull(this.tableRW_GALV_CONSUNTIVO.DATA_INSERIMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDATA_INSERIMENTONull() {
+                this[this.tableRW_GALV_CONSUNTIVO.DATA_INSERIMENTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUIDUSERNull() {
+                return this.IsNull(this.tableRW_GALV_CONSUNTIVO.UIDUSERColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUIDUSERNull() {
+                this[this.tableRW_GALV_CONSUNTIVO.UIDUSERColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class RW_GALV_FERMIRow : global::System.Data.DataRow {
+            
+            private RW_GALV_FERMIDataTable tableRW_GALV_FERMI;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal RW_GALV_FERMIRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableRW_GALV_FERMI = ((RW_GALV_FERMIDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IDFERMO {
+                get {
+                    return ((decimal)(this[this.tableRW_GALV_FERMI.IDFERMOColumn]));
+                }
+                set {
+                    this[this.tableRW_GALV_FERMI.IDFERMOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IDCONSUNTIVO {
+                get {
+                    return ((decimal)(this[this.tableRW_GALV_FERMI.IDCONSUNTIVOColumn]));
+                }
+                set {
+                    this[this.tableRW_GALV_FERMI.IDCONSUNTIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ORA {
+                get {
+                    return ((string)(this[this.tableRW_GALV_FERMI.ORAColumn]));
+                }
+                set {
+                    this[this.tableRW_GALV_FERMI.ORAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DURATA {
+                get {
+                    return ((string)(this[this.tableRW_GALV_FERMI.DURATAColumn]));
+                }
+                set {
+                    this[this.tableRW_GALV_FERMI.DURATAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MOTIVO {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_GALV_FERMI.MOTIVOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MOTIVO\' in table \'RW_GALV_FERMI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_GALV_FERMI.MOTIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATA_INSERIMENTO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableRW_GALV_FERMI.DATA_INSERIMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATA_INSERIMENTO\' in table \'RW_GALV_FERMI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_GALV_FERMI.DATA_INSERIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UIDUSER {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_GALV_FERMI.UIDUSERColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UIDUSER\' in table \'RW_GALV_FERMI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_GALV_FERMI.UIDUSERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsMOTIVONull() {
+                return this.IsNull(this.tableRW_GALV_FERMI.MOTIVOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetMOTIVONull() {
+                this[this.tableRW_GALV_FERMI.MOTIVOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDATA_INSERIMENTONull() {
+                return this.IsNull(this.tableRW_GALV_FERMI.DATA_INSERIMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDATA_INSERIMENTONull() {
+                this[this.tableRW_GALV_FERMI.DATA_INSERIMENTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUIDUSERNull() {
+                return this.IsNull(this.tableRW_GALV_FERMI.UIDUSERColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUIDUSERNull() {
+                this[this.tableRW_GALV_FERMI.UIDUSERColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class RW_GALV_CONSUNTIVORowChangeEvent : global::System.EventArgs {
+            
+            private RW_GALV_CONSUNTIVORow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_CONSUNTIVORowChangeEvent(RW_GALV_CONSUNTIVORow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_CONSUNTIVORow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class RW_GALV_FERMIRowChangeEvent : global::System.EventArgs {
+            
+            private RW_GALV_FERMIRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_FERMIRowChangeEvent(RW_GALV_FERMIRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_GALV_FERMIRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
         }
     }
 }

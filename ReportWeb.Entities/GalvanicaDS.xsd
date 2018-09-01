@@ -1,16 +1,83 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
-<xs:schema id="GalvanicaDS" 
-                  targetNamespace="http://tempuri.org/GalvanicaDS.xsd"
-                  elementFormDefault="qualified"
-                  attributeFormDefault="qualified"
-                  xmlns="http://tempuri.org/GalvanicaDS.xsd"
-                  xmlns:mstns="http://tempuri.org/GalvanicaDS.xsd"
-                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                  xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
-                  xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
-    <xs:element name="GalvanicaDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true">
-        <xs:complexType>
-            <xs:choice minOccurs="0" maxOccurs="unbounded"></xs:choice>
-        </xs:complexType>
-    </xs:element>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GalvanicaDS" targetNamespace="http://tempuri.org/GalvanicaDS.xsd" xmlns:mstns="http://tempuri.org/GalvanicaDS.xsd" xmlns="http://tempuri.org/GalvanicaDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.ReportWeb.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="GalvanicaDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="GalvanicaDS" msprop:Generator_UserDSName="GalvanicaDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RW_GALV_CONSUNTIVO" msprop:Generator_TableClassName="RW_GALV_CONSUNTIVODataTable" msprop:Generator_TableVarName="tableRW_GALV_CONSUNTIVO" msprop:Generator_TablePropName="RW_GALV_CONSUNTIVO" msprop:Generator_RowDeletingName="RW_GALV_CONSUNTIVORowDeleting" msprop:Generator_RowChangingName="RW_GALV_CONSUNTIVORowChanging" msprop:Generator_RowEvHandlerName="RW_GALV_CONSUNTIVORowChangeEventHandler" msprop:Generator_RowDeletedName="RW_GALV_CONSUNTIVORowDeleted" msprop:Generator_UserTableName="RW_GALV_CONSUNTIVO" msprop:Generator_RowChangedName="RW_GALV_CONSUNTIVORowChanged" msprop:Generator_RowEvArgName="RW_GALV_CONSUNTIVORowChangeEvent" msprop:Generator_RowClassName="RW_GALV_CONSUNTIVORow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDCONSUNTIVO" msprop:Generator_ColumnVarNameInTable="columnIDCONSUNTIVO" msprop:Generator_ColumnPropNameInRow="IDCONSUNTIVO" msprop:Generator_ColumnPropNameInTable="IDCONSUNTIVOColumn" msprop:Generator_UserColumnName="IDCONSUNTIVO" type="xs:decimal" />
+              <xs:element name="INIZIO_TURNO" msprop:Generator_ColumnVarNameInTable="columnINIZIO_TURNO" msprop:Generator_ColumnPropNameInRow="INIZIO_TURNO" msprop:Generator_ColumnPropNameInTable="INIZIO_TURNOColumn" msprop:Generator_UserColumnName="INIZIO_TURNO" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="FINE_TURNO" msprop:Generator_ColumnVarNameInTable="columnFINE_TURNO" msprop:Generator_ColumnPropNameInRow="FINE_TURNO" msprop:Generator_ColumnPropNameInTable="FINE_TURNOColumn" msprop:Generator_UserColumnName="FINE_TURNO" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BARRE" msprop:Generator_ColumnVarNameInTable="columnBARRE" msprop:Generator_ColumnPropNameInRow="BARRE" msprop:Generator_ColumnPropNameInTable="BARREColumn" msprop:Generator_UserColumnName="BARRE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DATA_INSERIMENTO" msprop:Generator_ColumnVarNameInTable="columnDATA_INSERIMENTO" msprop:Generator_ColumnPropNameInRow="DATA_INSERIMENTO" msprop:Generator_ColumnPropNameInTable="DATA_INSERIMENTOColumn" msprop:Generator_UserColumnName="DATA_INSERIMENTO" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UIDUSER" msprop:Generator_ColumnVarNameInTable="columnUIDUSER" msprop:Generator_ColumnPropNameInRow="UIDUSER" msprop:Generator_ColumnPropNameInTable="UIDUSERColumn" msprop:Generator_UserColumnName="UIDUSER" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="254" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RW_GALV_FERMI" msprop:Generator_TableClassName="RW_GALV_FERMIDataTable" msprop:Generator_TableVarName="tableRW_GALV_FERMI" msprop:Generator_TablePropName="RW_GALV_FERMI" msprop:Generator_RowDeletingName="RW_GALV_FERMIRowDeleting" msprop:Generator_RowChangingName="RW_GALV_FERMIRowChanging" msprop:Generator_RowEvHandlerName="RW_GALV_FERMIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_GALV_FERMIRowDeleted" msprop:Generator_UserTableName="RW_GALV_FERMI" msprop:Generator_RowChangedName="RW_GALV_FERMIRowChanged" msprop:Generator_RowEvArgName="RW_GALV_FERMIRowChangeEvent" msprop:Generator_RowClassName="RW_GALV_FERMIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDFERMO" msprop:Generator_ColumnVarNameInTable="columnIDFERMO" msprop:Generator_ColumnPropNameInRow="IDFERMO" msprop:Generator_ColumnPropNameInTable="IDFERMOColumn" msprop:Generator_UserColumnName="IDFERMO" type="xs:decimal" />
+              <xs:element name="IDCONSUNTIVO" msprop:Generator_ColumnVarNameInTable="columnIDCONSUNTIVO" msprop:Generator_ColumnPropNameInRow="IDCONSUNTIVO" msprop:Generator_ColumnPropNameInTable="IDCONSUNTIVOColumn" msprop:Generator_UserColumnName="IDCONSUNTIVO" type="xs:decimal" />
+              <xs:element name="ORA" msprop:Generator_ColumnVarNameInTable="columnORA" msprop:Generator_ColumnPropNameInRow="ORA" msprop:Generator_ColumnPropNameInTable="ORAColumn" msprop:Generator_UserColumnName="ORA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DURATA" msprop:Generator_ColumnVarNameInTable="columnDURATA" msprop:Generator_ColumnPropNameInRow="DURATA" msprop:Generator_ColumnPropNameInTable="DURATAColumn" msprop:Generator_UserColumnName="DURATA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MOTIVO" msprop:Generator_ColumnVarNameInTable="columnMOTIVO" msprop:Generator_ColumnPropNameInRow="MOTIVO" msprop:Generator_ColumnPropNameInTable="MOTIVOColumn" msprop:Generator_UserColumnName="MOTIVO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATA_INSERIMENTO" msprop:Generator_ColumnVarNameInTable="columnDATA_INSERIMENTO" msprop:Generator_ColumnPropNameInRow="DATA_INSERIMENTO" msprop:Generator_ColumnPropNameInTable="DATA_INSERIMENTOColumn" msprop:Generator_UserColumnName="DATA_INSERIMENTO" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UIDUSER" msprop:Generator_ColumnVarNameInTable="columnUIDUSER" msprop:Generator_ColumnPropNameInRow="UIDUSER" msprop:Generator_ColumnPropNameInTable="UIDUSERColumn" msprop:Generator_UserColumnName="UIDUSER" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="254" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:RW_GALV_CONSUNTIVO" />
+      <xs:field xpath="mstns:IDCONSUNTIVO" />
+    </xs:unique>
+    <xs:keyref name="FK_RW_GALV_CONSUNTIVO_RW_GALV_FERMI" refer="Constraint1" msdata:ConstraintOnly="true" msdata:DeleteRule="None">
+      <xs:selector xpath=".//mstns:RW_GALV_FERMI" />
+      <xs:field xpath="mstns:IDCONSUNTIVO" />
+    </xs:keyref>
+  </xs:element>
 </xs:schema>
