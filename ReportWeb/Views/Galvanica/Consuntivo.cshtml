@@ -78,12 +78,16 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
+        var iso = new Date().toISOString();
+        iso = iso.split('T')[0] + 'T00:00'
+        $('#dtInizio').val(iso);
+        $('#dtFine').val(iso);
         $('#tblFermoGalvanica').on('click', 'a', function ()
         {
             $(this).closest('tr').remove();
         })
 
-        var url = '@Url.Action("GetGriglia", "Verniciatura")';
+        var url = '@Url.Action("GetGriglia", "Galvanica")';
         $.ajax({
             url: url,
             data: {},
@@ -105,7 +109,6 @@
 
     function AggiungiFermo()
     {
-        paginaModificata = true;
         var tipoFermo = $("#ddlTipoFermo").find("option:selected").text();
         var IDTipoFermo = $("#ddlTipoFermo").val();
         var OraFermo = $("#txtOraFermo").val();
@@ -144,11 +147,16 @@
         tr += '<input type="hidden" value = ' + IDTipoFermo + ' class="hdIDTipoFermo" />';
         tr += '<td width="15%">' + tipoFermo + '</td>';
         tr += '<td width="15%">' + OraFermo + '</td>';
-        tr += '<td width="15%" align="center">' + Durata + '</td>';
-        tr += '<td width="50%" align="center">' + Motivo + '</td>';
+        tr += '<td width="15%">' + Durata + '</td>';
+        tr += '<td width="50%">' + Motivo + '</td>';
         tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
         tr += '<\tr>';
         $('#tblFermoGalvanica').prepend(tr);
+
+        $("#ddlTipoFermo").val('');
+        $("#txtOraFermo").val('');
+        $("#txtDurata").val('');
+        $("#txtMotivo").val('');
 
     }
 
@@ -157,23 +165,24 @@
 
         var esegui = true;
         var messaggio = '';
-        var giorno = $('#txtGiorno').val();
-        if (giorno == null || giorno == '')
+        var dtInizio = $('#dtInizio').val();
+        if (dtInizio == null || dtInizio == '')
         {
-            messaggio += MESSAGGIO_PUNTINO + " " + "Giorno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            messaggio += MESSAGGIO_PUNTINO + " " + "Inizio turno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
             esegui = false;
         }
 
-        var quantitaManuale = $('#txtQuantitaManuale').val();
-        var barre = $('#txtQuantitaManuale').val();
-
-        if (quantitaManuale == '') quantitaManuale = 0;
-        if (barre == '') barre = 0;
-
-
-        if (barre == 0 && quantitaManuale == 0)
+        var dtFine = $('#dtFine').val();
+        if (dtFine == null || dtFine == '')
         {
-            messaggio += MESSAGGIO_PUNTINO + " " + "Quantità manuale o barre devve essere valorizzata" + "</br>";
+            messaggio += MESSAGGIO_PUNTINO + " " + "Fine turno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+        var barre = $('#txtBarre').val();
+
+        if (barre == null || barre == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Barre" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
             esegui = false;
         }
 
@@ -183,14 +192,16 @@
             return;
         }
 
+        var fermi = JSON.stringify(getFermi());
 
-        var url = '@Url.Action("SalvaConsuntivo", "Verniciatura")';
+        var url = '@Url.Action("SalvaConsuntivo", "Galvanica")';
         $.ajax({
             url: url,
             data: {
-                Giorno: giorno,
-                QuantitaManuale: quantitaManuale,
-                Barre: barre
+                Inizio: dtInizio,
+                Fine: dtFine,
+                Barre: barre,
+                Fermi: fermi
             },
             cache: false,
             type: "POST",
@@ -208,11 +219,41 @@
         });
     }
 
+    function getFermi()
+    {
+        var data = [];
+        var trs = $('#tblFermoGalvanica >tbody >tr');
+        for (i = 0; i < trs.length; i++)
+        {
+            var tr = trs[i];
+            var tipoFermo = $(".hdIDTipoFermo", tr).val();
+
+            var tdOraFermo = $(tr).find('td')[1];
+            var OraFermo = $(tdOraFermo).text().trim();
+
+            var tdDurata = $(tr).find('td')[2];
+            var Durata = $(tdDurata).text().trim();
+
+            var tdMotivo = $(tr).find('td')[3];
+            var Motivo = $(tdMotivo).text().trim();
+
+            var fermo = {
+                'Tipo': tipoFermo, 'Ora': OraFermo, 'Durata': Durata, 'Motivo': Motivo
+            };
+            data.push(fermo);
+        }
+        return data;
+    }
     function CancellaInput()
     {
-        $('#txtCodiceFinitura').val('');
-        $('#txtQuantitaManuale').val('');
+        $('#dtInizio').val('');
+        $('#dtFine').val('');
         $('#txtBarre').val('');
+        $('#ddlTipoFermo').val('');
+        $('#txtOraFermo').val('');
+        $('#txtDurata').val('');
+        $('#txtMotivo').val('');
+        $('#tblFermoGalvanica tbody tr').remove();
     }
 
     var idConsuntivoDaCancellare = -1;
@@ -224,7 +265,7 @@
 
     function EseguiCancellaArticolo()
     {
-        var url = '@Url.Action("CancellaConsuntivo", "Verniciatura")';
+        var url = '@Url.Action("CancellaConsuntivo", "Galvanica")';
         $.ajax({
             url: url,
             data: { IdConsuntivo: idConsuntivoDaCancellare },
@@ -244,4 +285,5 @@
         });
 
     }
+
 </script>

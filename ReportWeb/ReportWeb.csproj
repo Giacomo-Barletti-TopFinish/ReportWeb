@@ -406,6 +406,8 @@
     <Content Include="Views\Galvanica\Report.cshtml" />
     <Content Include="Views\Verniciatura\GetGrigliaPartial.cshtml" />
     <Content Include="Views\Verniciatura\GrigliaReportPartial.cshtml" />
+    <Content Include="Views\Galvanica\GetGrigliaPartial.cshtml" />
+    <Content Include="Views\Galvanica\GrigliaReportPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

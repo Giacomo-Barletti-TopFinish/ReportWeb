@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\JSonSerializer.cs" />
     <Compile Include="Helpers\LogManagerHelper.cs" />
     <Compile Include="Priorità.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

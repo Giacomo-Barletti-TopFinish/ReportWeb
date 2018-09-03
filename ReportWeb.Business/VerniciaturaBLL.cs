@@ -84,7 +84,7 @@ namespace ReportWeb.Business
                 barreTotali += model.Barre;
             }
             VerniciaturaReportModel report = new VerniciaturaReportModel();
-            report.Cosuntivo = consuntivo;
+            report.Consuntivo = consuntivo;
             report.BarreTotali = barreTotali.ToString();
             report.QuantitaManualeTotale = quantitaTotale.ToString();
 

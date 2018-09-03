@@ -62,7 +62,6 @@ namespace ReportWeb.Data
         public void SalvaConsuntivo(string IDRESOURCEF, string FinituraCodice, string FinituraDescrizione, string Tipo, string Giorno, string Inizio, string Fine, int Quantita, string Clienti,
             string Articolo, int Impegno, string UIDUSER)
         {
-            LogManagerHelper.WriteMessage("Salva consuntivo PVDADAPTER");
 
             string insert = @"INSERT INTO RW_PVD_CONSUNTIVO (IDRESOURCEF,FINITURA_COD,FINITURA_DESC,TIPO,GIORNO,INIZIO, FINE, QUANTITA, CLIENTI, ARTICOLO, IMPEGNO, DATA_INSERIMENTO,UIDUSER) VALUES
                                             ($P<IDRESOURCEF>,$P<FinituraCodice>,$P<FinituraDescrizione>,$P<Tipo>,$P<GIORNO>,$P<Inizio>, $P<Fine>,$P<Quantita>, $P<Clienti>, $P<Articolo>,$P<Impegno>,$P<NOW>,$P<UIDUSER>)";
@@ -82,12 +81,9 @@ namespace ReportWeb.Data
             ps.AddParam("UIDUSER", DbType.String, UIDUSER);
             ps.AddParam("GIORNO", DbType.DateTime, giorno);
 
-            LogManagerHelper.WriteMessage("Salva consuntivo PVDADAPTER PRIMA DI USING");
             using (DbCommand cmd = BuildCommand(insert, ps))
             {
-                LogManagerHelper.WriteMessage("Salva consuntivo PVDADAPTER PRIMA DI EXECUTE");
                 cmd.ExecuteNonQuery();
-                LogManagerHelper.WriteMessage("Salva consuntivo PVDADAPTER DOPO EXECUTE");
             }
         }
 

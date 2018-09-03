@@ -174,5 +174,16 @@ namespace ReportWeb.Data
             sb.Append(string.Format(") as X(id_sp,sortorder) on x.id_sp={0}.ID_SP", nomeTabellaIdsp));
             return sb.ToString();
         }
+
+        public long GetID()
+        {
+            string select = @" SELECT RW_SEQUENCE.NEXTVAL FROM DUAL";
+            using (IDbCommand da = BuildCommand(select))
+            {
+                long lnNextVal = Convert.ToInt64(da.ExecuteScalar());
+                return lnNextVal;
+            }
+        }
+
     }
 }

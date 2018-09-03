@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Galvanica\GalvanicaAdapter.cs" />
+    <Compile Include="Galvanica\GalvanicaBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PVD\PVDAdapter.cs" />
     <Compile Include="PVD\PVDBusiness.cs" />

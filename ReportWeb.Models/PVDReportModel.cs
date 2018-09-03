@@ -8,7 +8,7 @@ namespace ReportWeb.Models
 {
     public class PVDReportModel
     {
-        public List<PVDConsuntivoModel> Cosuntivo { get; set; }
+        public List<PVDConsuntivoModel> Consuntivo { get; set; }
         public string DurataTotale { get; set; }
     }
 }

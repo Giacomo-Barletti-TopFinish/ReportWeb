@@ -1,0 +1,121 @@
+﻿
+@using ReportWeb.Models
+@model GalvanicaReportModel
+<div class="box box-primary box-solid">
+    <div class="row">
+        <div class="col-sm-1"><label>Data inizio: </label>@ViewData["dataInizio"].ToString() </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"><label>Data fine: </label>@ViewData["dataFine"].ToString() </div>
+    </div>
+    <table class="table table-condensed">
+        <tr>
+            <th width="5%">
+                <label>Giorno</label>
+            </th>
+            <th width="6%">
+                <label>Inizio turno</label>
+            </th>
+            <th width="6%">
+                <label>Fine turno</label>
+            </th>
+            <th width="5%">
+                <label>Barre</label>
+            </th>
+            <th width="5%">
+                <label>Durata</label>
+            </th>
+            <th width="5%">
+                <label>Fermo totale</label>
+            </th>
+            <th width="5%">
+                <label>Durata effettiva</label>
+            </th>
+            <th width="5%">
+                <label>Barre/h</label>
+            </th>
+            <th width="5%">
+                <label>min/barre</label>
+            </th>
+            <th>Fermi in galvanica</th>
+        </tr>
+        <tboby>
+            @foreach (GalvanicaConsuntivoModel c in Model.Consuntivo)
+            {
+                <tr valign="top">
+                    <td>
+                        @c.InizioTurno.ToShortDateString()
+                    </td>
+                    <td>
+                        @c.InizioTurno.ToString("dd/MM/yyyy HH:mm")
+                    </td>
+                    <td>
+                        @c.FineTurno.ToString("dd/MM/yyyy HH:mm")
+                    </td>
+                    <td>
+                        @c.Barre
+                    </td>
+                    <td>
+                        @c.Durata.ToString(@"hh\:mm")
+                    </td>
+                    <td>
+                        @c.FermoTotale.ToString(@"hh\:mm")
+                    </td>
+                    <td>
+                        @c.DurataEffettiva.ToString(@"hh\:mm")
+                    </td>
+                    <td>
+                        @c.BarreHH
+                    </td>
+                    <td>
+                        @c.MinBarre
+                    </td>
+                    <td>
+                        @if (c.Fermi.Count > 0)
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="15%"><label>Fermo</label></th>
+                                        <th width="10%"><label>Ora</label></th>
+                                        <th width="10%"><label>Durata</label></th>
+                                        <th><label>Motivo</label></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (FermoModel f in c.Fermi)
+                                    {
+                                        <tr>
+                                            <td>@f.Tipo</td>
+                                            <td>@f.Ora</td>
+                                            <td>@f.Durata</td>
+                                            <td>@f.Motivo</td>
+                                        </tr>
+                                    }
+                                    <tr class="text-red text-bold">
+                                        <td>TOTALE</td>
+                                        <td></td>
+                                        <td>@c.FermoTotale.ToString(@"hh\:mm")</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        }
+                    </td>
+                </tr>
+            }
+            <tr class="text-red text-bold">
+                <td><h4>TOTALI</h4></td>
+                <td></td>
+                <td></td>
+                <td><h4>@Model.BarreTotali</h4></td>
+                <td><h4>@Model.TempoTotale.ToString(@"hh\:mm")</h4></td>
+                <td><h4>@Model.FermoTotale.ToString(@"hh\:mm")</h4></td>
+                <td><h4>@Model.DurataEffettiva.ToString(@"hh\:mm")</h4></td>
+                <td><h4>@Model.BarreHH</h4></td>
+                <td><h4>@Model.MinBarre</h4></td>
+                <td></td>
+            </tr>
+        </tboby>
+    </table>
+</div>

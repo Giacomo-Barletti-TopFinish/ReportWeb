@@ -461,7 +461,7 @@ namespace MetalPlus.Kernel.Data.Core
         protected string ResolveTablePlaceholders(string input, string prefix, string suffix)
         {
             string output = string.Empty;
-            Regex reg = new Regex(@"\$T\{[0-9A-Z_\sa-z]+\}");
+            Regex reg = new Regex(@"\$T(\{|\<)[0-9A-Z_a-z]+(\}|\>)");
             MatchCollection matches = reg.Matches(input);
             int cursor = 0;
             foreach (Match m in matches)

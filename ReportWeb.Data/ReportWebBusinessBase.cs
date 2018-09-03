@@ -46,5 +46,12 @@ namespace ReportWeb.Data
         {
             SetAbort();
         }
+
+        [DataContext]
+        public long GetID()
+        {
+            ReportWebAdapterBase a = new ReportWebAdapterBase(DbConnection, DbTransaction);
+            return a.GetID();
+        }
     }
 }

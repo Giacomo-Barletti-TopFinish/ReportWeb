@@ -8,7 +8,7 @@ namespace ReportWeb.Models
 {
     public class VerniciaturaReportModel
     {
-        public List<VerniciaturaConsuntivoModel> Cosuntivo { get; set; }
+        public List<VerniciaturaConsuntivoModel> Consuntivo { get; set; }
         public string QuantitaManualeTotale { get; set; }
         public string BarreTotali { get; set; }
     }

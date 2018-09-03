@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReportWeb.Common;
+using ReportWeb.Common.Helpers;
 
 namespace ReportWeb.Business
 {
@@ -78,12 +79,7 @@ namespace ReportWeb.Business
             }
 
         }
-        private TimeSpan CalcolaDurata(string inizio, string fine)
-        {
-            DateTime startTime = Convert.ToDateTime(inizio);
-            DateTime endtime = Convert.ToDateTime(fine);
-            return endtime - startTime;
-        }
+       
 
         public PVDReportModel EstraiConsutivo(DateTime dataInizio, DateTime dataFine, string Macchina)
         {
@@ -103,7 +99,7 @@ namespace ReportWeb.Business
             foreach (PVDDS.RW_PVD_CONSUNTIVORow m in elementiTrovati)
             {
                 PVDConsuntivoModel model = new PVDConsuntivoModel();
-                TimeSpan durata = CalcolaDurata(m.INIZIO, m.FINE);
+                TimeSpan durata = DateTimeHelper.CalcolaDurata(m.INIZIO, m.FINE);
                 durataTotale = durataTotale.Add(durata);
                 model.Giorno = m.GIORNO;
                 model.IDRESOURCEF = m.IDRESOURCEF;
@@ -122,7 +118,7 @@ namespace ReportWeb.Business
                 consuntivo.Add(model);
             }
             PVDReportModel report = new PVDReportModel();
-            report.Cosuntivo = consuntivo;
+            report.Consuntivo = consuntivo;
             report.DurataTotale = durataTotale.ToString(@"hh\:mm");
             return report;
         }
