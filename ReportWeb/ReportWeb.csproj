@@ -141,6 +141,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ALEController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\GalvanicaController.cs" />
@@ -408,6 +409,12 @@
     <Content Include="Views\Verniciatura\GrigliaReportPartial.cshtml" />
     <Content Include="Views\Galvanica\GetGrigliaPartial.cshtml" />
     <Content Include="Views\Galvanica\GrigliaReportPartial.cshtml" />
+    <Content Include="Views\ALE\Inserimento.cshtml" />
+    <Content Include="Views\ALE\Addebito.cshtml" />
+    <Content Include="Views\ALE\Valorizzazione.cshtml" />
+    <Content Include="Views\ALE\Conferma.cshtml" />
+    <Content Include="Views\ALE\Fatturazione.cshtml" />
+    <Content Include="Views\ALE\CaricaSchedaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

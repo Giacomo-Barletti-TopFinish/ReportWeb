@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ALE\ALEAdapter.cs" />
+    <Compile Include="ALE\ALEBusiness.cs" />
     <Compile Include="Galvanica\GalvanicaAdapter.cs" />
     <Compile Include="Galvanica\GalvanicaBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

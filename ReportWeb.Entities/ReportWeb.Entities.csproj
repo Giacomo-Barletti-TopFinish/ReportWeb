@@ -41,6 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ALEDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ALEDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GalvanicaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -74,6 +79,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ALEDS.xsc">
+      <DependentUpon>ALEDS.xsd</DependentUpon>
+    </None>
+    <None Include="ALEDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ALEDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ALEDS.xss">
+      <DependentUpon>ALEDS.xsd</DependentUpon>
+    </None>
     <None Include="app.config" />
     <None Include="GalvanicaDS.xsc">
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>

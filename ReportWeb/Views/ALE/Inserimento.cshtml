@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "ALE Inserimento";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Addebito Lavoranti Esterni - Inserimento</h2>
+
+    <div class="col-sm-1">
+        <label>Barcode</label>
+        <input type="text" id="txtBarcode" />
+    </div>
+    <div id="divScheda"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $("#txtBarcode").focus();
+        $("#txtBarcode").change(function ()
+        {
+            var barcode = $(this).val();
+            if(barcode!='' )
+            {
+                $(this).val('');
+                $(this).focus();
+
+                CaricaScheda(barcode);
+            }
+        });
+    });
+
+    function CaricaScheda(barcode)
+    {
+        var url = '@Url.Action("CaricaScheda", "ALE")';
+        $.ajax({
+            url: url,
+            data: { Barcode: barcode },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divScheda').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

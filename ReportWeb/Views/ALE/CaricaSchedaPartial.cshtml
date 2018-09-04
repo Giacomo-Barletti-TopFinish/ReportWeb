@@ -1,0 +1,14 @@
+﻿@using ReportWeb.Models.ALE
+
+@model InserimentoModel
+
+@if (Model.NonTrovato)
+{
+    <label class="text-red text-bold"> Barcode non trovato</label>
+}
+else
+{
+    <div class="col-md-12 text-center"><h2>SCHEDA CONTROLO QUALITA'</h2></div>
+    <hr />
+
+}
