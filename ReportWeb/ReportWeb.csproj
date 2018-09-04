@@ -182,7 +182,7 @@
     <Content Include="Content\nanogallery\nanogallery2.woff.min.css" />
     <Content Include="Content\nanogallery\nanogallery2_logo.png" />
     <Content Include="Content\select2.min.css" />
-    <Content Include="Content\Site-1.0.4.css" />
+    <Content Include="Content\Site-1.0.5.css" />
     <Content Include="Content\SpcMenu-1.0.0.css" />
     <Content Include="Content\start.png" />
     <Content Include="Content\themes\base\accordion.css" />

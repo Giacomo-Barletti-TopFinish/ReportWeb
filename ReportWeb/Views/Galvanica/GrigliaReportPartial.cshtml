@@ -12,20 +12,20 @@
             <th width="5%">
                 <label>Giorno</label>
             </th>
-            <th width="6%">
+            <th width="8%">
                 <label>Inizio turno</label>
             </th>
-            <th width="6%">
+            <th width="8%">
                 <label>Fine turno</label>
             </th>
-            <th width="5%">
+            <th width="4%">
                 <label>Barre</label>
             </th>
             <th width="5%">
                 <label>Durata</label>
             </th>
             <th width="5%">
-                <label>Fermo totale</label>
+                <label>Fermo<br /> totale</label>
             </th>
             <th width="5%">
                 <label>Durata effettiva</label>
@@ -37,6 +37,7 @@
                 <label>min/barre</label>
             </th>
             <th>Fermi in galvanica</th>
+            <th>Operatore</th>
         </tr>
         <tboby>
             @foreach (GalvanicaConsuntivoModel c in Model.Consuntivo)
@@ -102,6 +103,7 @@
 
                         }
                     </td>
+                    <td>@c.UIDUSER</td>
                 </tr>
             }
             <tr class="text-red text-bold">
@@ -114,6 +116,7 @@
                 <td><h4>@Model.DurataEffettiva.ToString(@"hh\:mm")</h4></td>
                 <td><h4>@Model.BarreHH</h4></td>
                 <td><h4>@Model.MinBarre</h4></td>
+                <td></td>
                 <td></td>
             </tr>
         </tboby>

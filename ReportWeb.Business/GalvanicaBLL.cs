@@ -81,7 +81,7 @@ namespace ReportWeb.Business
             model.FineTurno = m.FINE_TURNO;
             model.InizioTurno = m.INIZIO_TURNO;
             model.IdConsuntivo = (int)m.IDCONSUNTIVO;
-
+            model.UIDUSER = m.UIDUSER;
             model.Durata = DateTimeHelper.CalcolaDurata(m.INIZIO_TURNO, m.FINE_TURNO);
 
             model.Fermi = new List<FermoModel>();

@@ -18,6 +18,7 @@ namespace ReportWeb.Models
         public TimeSpan DurataEffettiva { get; set; }
         public decimal BarreHH{ get; set; }
         public decimal MinBarre { get; set; }
+        public string UIDUSER { get; set; }
     }
 
     public class FermoModel
