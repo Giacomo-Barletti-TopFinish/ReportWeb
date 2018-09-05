@@ -107,6 +107,9 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
+        var iso = new Date().toISOString();
+        iso = iso.split('T')[0];// + 'T00:00'
+        $('#txtGiorno').val(iso);
         $("#ddlMacchine").change(function ()
         {
             var selectedText = $(this).find("option:selected").text();

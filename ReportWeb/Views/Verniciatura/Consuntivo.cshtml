@@ -20,7 +20,7 @@
 
                     <div style="padding-top:23px" class="col-md-12">
                         <label>Numero pezzi manuale</label>
-                        <input id="txtQuantitaManuale" type="number" name="txtQuantitaManuale"  min="1" max="100000">
+                        <input id="txtQuantitaManuale" type="number" name="txtQuantitaManuale"  min="0" max="100000">
                     </div>
 
                 </div>
@@ -28,7 +28,7 @@
 
                     <div style="padding-top:23px" class="col-md-12">
                         <label>Barre</label>
-                        <input id="txtBarre" type="number" name="txtBarre" min="1" max="100000">
+                        <input id="txtBarre" type="number" name="txtBarre" min="0" max="100000">
                     </div>
 
                 </div>
@@ -52,6 +52,9 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
+        var iso = new Date().toISOString();
+        iso = iso.split('T')[0];//+ 'T00:00'
+        $('#txtGiorno').val(iso);
         var url = '@Url.Action("GetGriglia", "Verniciatura")';
         $.ajax({
             url: url,
@@ -85,7 +88,7 @@
         }
 
         var quantitaManuale = $('#txtQuantitaManuale').val();
-        var barre = $('#txtQuantitaManuale').val();
+        var barre = $('#txtBarre').val();
 
         if (quantitaManuale == '') quantitaManuale = 0;
         if (barre == '') barre = 0;
