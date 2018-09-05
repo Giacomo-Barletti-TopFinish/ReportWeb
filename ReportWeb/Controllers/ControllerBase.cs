@@ -80,6 +80,13 @@ namespace ReportWeb.Controllers
             }
         }
 
+        protected string RvlImageSite
+        {
+            get
+            {
+                return Settings.Default.RvlImageSite;
+            }
+        }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             string actionName = filterContext.ActionDescriptor.ActionName;

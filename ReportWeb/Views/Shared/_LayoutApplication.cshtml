@@ -87,7 +87,6 @@
     @RenderSection("scriptSection", false)
 </head>
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
-    @Html.Hidden("hfSessionID", ViewData["SessionId"])
     <div class="wrapper">
         <header class="main-header">
             <a href='@Url.Action("Index","Home")' class="logo logo-lg">

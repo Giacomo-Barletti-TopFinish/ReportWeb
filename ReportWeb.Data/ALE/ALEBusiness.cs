@@ -63,5 +63,33 @@ namespace ReportWeb.Data.ALE
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillCLIFO(ds);
         }
+
+        [DataContext]
+        public void FillUSR_PRD_FLUSSO_MOVFASI(ALEDS ds, string IDCHECKQT)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_FLUSSO_MOVFASI(ds, IDCHECKQT);
+        }
+
+        [DataContext]
+        public void FillUSR_PRD_MOVFASI(ALEDS ds, string IDCHECKQT)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_MOVFASI(ds, IDCHECKQT);
+        }
+
+        [DataContext]
+        public void FillMAGAZZ(ALEDS ds, string IDMAGAZZ)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillMAGAZZ(ds, IDMAGAZZ);
+        }
+
+        [DataContext]
+        public void FillUSR_PDM_FILES(ALEDS ds, string IDMAGAZZ)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+        }
     }
 }

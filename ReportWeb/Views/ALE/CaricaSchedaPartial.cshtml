@@ -9,6 +9,60 @@
 else
 {
     <div class="col-md-12 text-center"><h2>SCHEDA CONTROLO QUALITA'</h2></div>
-    <hr />
+
+    @Html.Hidden("hdBarcode",@Model.Barcode)
+    @Html.Hidden("hdIDCHECKQT", @Model.IDCHECKQT)
+
+    <div class="row">
+        <div class="col-sm-3">
+            <img id="articleImg" style="max-height:130px; max-width:100%; display: block; margin: auto;" src="@Model.ImageUrl">
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-1"><label>N° Doc</label></div>
+                <div class="col-sm-4">@Model.NumeroDocumento</div>
+                <div class="col-sm-1"><label>Del</label></div>
+                <div class="col-sm-4">@Model.DataDocumento</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1"><label>Reparto</label></div>
+                <div class="col-sm-4">@Model.Reparto</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1"><label>Barcode</label></div>
+                <div class="col-sm-4">@Model.Barcode</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1"><label>Quantità</label></div>
+                <div class="col-sm-4">
+                    @Model.Quantita
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"><label>Modello</label></div>
+        <div class="col-sm-2">@Model.Modello</div>
+        <div class="col-sm-8">@Model.ModelloDescrizione</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"><label>ODL</label></div>
+        <div class="col-sm-2">@Model.ODL</div>
+        <div class="col-sm-1"><label>Del</label></div>
+        <div class="col-sm-1">@Model.DataODL</div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1"><label>Commessa</label></div>
+        <div class="col-sm-2">@Model.Commessa</div>
+        <div class="col-sm-1"><label>Del</label></div>
+        <div class="col-sm-1">@Model.DataCommessa</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"><label>Difetto</label></div>
+        <div class="col-sm-2">@Model.TipoDifetto</div>
+        <div class="col-sm-6">@Model.Difetto</div>
+        <div class="col-sm-1"><label>Quantita difettosa</label></div>
+        <div class="col-sm-1">@Model.QuantitaDifforme</div>
+    </div>
 
 }

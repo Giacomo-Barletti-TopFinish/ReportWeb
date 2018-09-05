@@ -108,5 +108,75 @@ namespace ReportWeb.Data
                 da.Fill(ds.CLIFO);
             }
         }
+
+        public void FillUSR_PRD_MOVFASI(ALEDS ds, string IDCHECKQT)
+        {
+            string select = @"SELECT CQ.IDCHECKQT,MF.* FROM DITTA1.USR_PRD_MOVFASI MF
+                                INNER JOIN DITTA1.USR_PRD_FLUSSO_MOVFASI FMF ON   FMF.IDPRDMOVFASE= MF.IDPRDMOVFASE
+                                INNER JOIN DITTA1.USR_CHECKQ_T CQ ON CQ.IDORIGINE_RIL = FMF.IDFLUSSOMOVFASE 
+                                WHERE   CQ.ORIGINE_RIL  = 2 AND CQ.IDCHECKQT = $P{IDCHECKQT1} 
+                                UNION ALL
+                                SELECT CQ.IDCHECKQT,MF.* FROM DITTA2.USR_PRD_MOVFASI MF
+                                INNER JOIN DITTA2.USR_PRD_FLUSSO_MOVFASI FMF ON   FMF.IDPRDMOVFASE= MF.IDPRDMOVFASE
+                                INNER JOIN DITTA2.USR_CHECKQ_T CQ ON CQ.IDORIGINE_RIL = FMF.IDFLUSSOMOVFASE 
+                                WHERE   CQ.ORIGINE_RIL  = 2 AND CQ.IDCHECKQT = $P{IDCHECKQT2}  ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDCHECKQT1", DbType.String, IDCHECKQT);
+            ps.AddParam("IDCHECKQT2", DbType.String, IDCHECKQT);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_MOVFASI);
+            }
+        }
+
+        public void FillUSR_PRD_FLUSSO_MOVFASI(ALEDS ds, string IDCHECKQT)
+        {
+            string select = @"  SELECT CQ.IDCHECKQT,FMF.* FROM ditta1.USR_PRD_FLUSSO_MOVFASI FMF
+                                INNER JOIN ditta1.usr_checkq_t CQ ON CQ.IDORIGINE_RIL = FMF.IDFLUSSOMOVFASE 
+                                WHERE   CQ.ORIGINE_RIL  = 2 AND CQ.IDDOCCHECKQ = '1' AND CQ.IDCHECKQT = $P{IDCHECKQT1} 
+                                UNION ALL
+                                SELECT CQ.IDCHECKQT,FMF.* FROM ditta2.USR_PRD_FLUSSO_MOVFASI FMF
+                                INNER JOIN ditta2.usr_checkq_t CQ ON CQ.IDORIGINE_RIL = FMF.IDFLUSSOMOVFASE 
+                                WHERE   CQ.ORIGINE_RIL  = 2 AND CQ.IDDOCCHECKQ = '1' AND CQ.IDCHECKQT = $P{IDCHECKQT1} ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDCHECKQT1", DbType.String, IDCHECKQT);
+            ps.AddParam("IDCHECKQT2", DbType.String, IDCHECKQT);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_FLUSSO_MOVFASI);
+            }
+        }
+
+        public void FillMAGAZZ(ALEDS ds, string IDMAGAZZ)
+        {
+            string select = @"  SELECT * FROM GRUPPO.MAGAZZ WHERE IDMAGAZZ = $P{IDMAGAZZ}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDMAGAZZ", DbType.String, IDMAGAZZ);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.MAGAZZ);
+            }
+        }
+
+        public void FillUSR_PDM_FILES(ALEDS ds, string IDMAGAZZ)
+        {
+            string select = @"  select FI.*, IM.IDMAGAZZ from gruppo.USR_PDM_FILES FI
+            INNER JOIN GRUPPO.USR_PDM_IMG_MAGAZZ IM ON IM.IDPDMFILE = FI.IDPDMFILE
+            where IM.idmagazz = $P{IDMAGAZZ}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDMAGAZZ", DbType.String, IDMAGAZZ);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PDM_FILES);
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace ReportWeb.Business
 {
     public class ALEBLL
     {
-        public InserimentoModel CaricaScheda(string Barcode)
+        public InserimentoModel CaricaScheda(string Barcode, string RvlImageSite)
         {
             InserimentoModel model = new InserimentoModel();
             ALEDS ds = new ALEDS();
@@ -26,8 +26,6 @@ namespace ReportWeb.Business
                 }
 
                 ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.BARCODE == Barcode).FirstOrDefault();
-                ALEDS.USR_CHECKQ_DRow CHECKQ_D = ds.USR_CHECKQ_D.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
-                ALEDS.USR_CHECKQ_CRow CHECKQ_C = ds.USR_CHECKQ_C.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
 
                 bALE.FillUSR_CHECKQ_D(ds, CHECKQ_T.IDCHECKQT);
                 bALE.FillUSR_CHECKQ_C(ds, CHECKQ_T.IDCHECKQT);
@@ -35,11 +33,18 @@ namespace ReportWeb.Business
                 bALE.FillUSR_ANA_DIFETTI(ds);
                 bALE.FillTABCAUMGT(ds);
                 bALE.FillCLIFO(ds);
+                bALE.FillUSR_PRD_FLUSSO_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
+                bALE.FillUSR_PRD_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
+                ALEDS.USR_CHECKQ_DRow CHECKQ_D = ds.USR_CHECKQ_D.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
+                ALEDS.USR_CHECKQ_CRow CHECKQ_C = ds.USR_CHECKQ_C.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
 
                 model.NonTrovato = false;
                 model.IDCHECKQT = CHECKQ_T.IDCHECKQT;
+                model.Barcode = CHECKQ_T.BARCODE;
+                model.NumeroDocumento = CHECKQ_T.NUMCHECKQT;
+                model.DataDocumento = CHECKQ_T.DATACHECKQT.ToString("dd MMM yyyy");
                 model.Quantita = CHECKQ_T.IsQTANull() ? 0 : CHECKQ_T.QTA;
-                model.QuantitaDifforme = CHECKQ_D == null ? 0 : (CHECKQ_D.IsQTAGRP_DIFNull() ? 0 : CHECKQ_D.QTAGRP_DIF);
+                model.QuantitaDifforme = CHECKQ_C == null ? 0 : (CHECKQ_C.IsQTA_DIFNull() ? 0 : CHECKQ_C.QTA_DIF);
 
                 ALEDS.CLIFORow reparto = ds.CLIFO.Where(x => x.CODICE == CHECKQ_T.CODICECLIFO_RIL).FirstOrDefault();
                 if (reparto != null)
@@ -49,15 +54,39 @@ namespace ReportWeb.Business
 
                 model.Difetto = string.Empty;
                 model.TipoDifetto = string.Empty;
+                if (CHECKQ_C != null)
+                {
+                    ALEDS.USR_ANA_DIFETTIRow difetto = ds.USR_ANA_DIFETTI.Where(x => x.IDDIFETTO == CHECKQ_C.IDDIFETTO).FirstOrDefault();
+                    ALEDS.USR_TAB_TIPODIFETTIRow tipoDifetto = ds.USR_TAB_TIPODIFETTI.Where(x => x.IDTIPODIFETTO == difetto.IDTIPODIFETTO).FirstOrDefault();
+                    model.TipoDifetto = tipoDifetto.DESTIPODIFETTO;
+                    model.Difetto = difetto.DESDIFETTO;
+                }
 
-                ALEDS.USR_ANA_DIFETTIRow difetto = ds.USR_ANA_DIFETTI.Where(x => x.IDDIFETTO == CHECKQ_C.IDDIFETTO).FirstOrDefault();
-                ALEDS.USR_TAB_TIPODIFETTIRow tipoDifetto = ds.USR_TAB_TIPODIFETTI.Where(x => x.IDTIPODIFETTO == difetto.IDTIPODIFETTO).FirstOrDefault();
+                bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
+                ALEDS.MAGAZZRow modello = ds.MAGAZZ.Where(x => x.IDMAGAZZ == CHECKQ_T.IDMAGAZZ).FirstOrDefault();
+                model.Modello = modello.MODELLO;
+                model.ModelloDescrizione = modello.DESMAGAZZ;
 
-                model.TipoDifetto = tipoDifetto.DESTIPODIFETTO;
-                model.Difetto = difetto.DESDIFETTO;
+                ALEDS.USR_PRD_MOVFASIRow MovFase = ds.USR_PRD_MOVFASI.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
+                if (MovFase != null)
+                {
+                    model.ODL = MovFase.IsNUMMOVFASENull() ? string.Empty : MovFase.NUMMOVFASE;
+                    model.DataODL = MovFase.IsDATAMOVFASENull() ? string.Empty : MovFase.DATAMOVFASE.ToShortDateString();
+                    model.Commessa = MovFase.IsRIFERIMENTO_INFRANull() ? string.Empty : MovFase.RIFERIMENTO_INFRA;
+                    model.DataCommessa = MovFase.IsDATARIF_INFRANull() ? string.Empty : MovFase.DATARIF_INFRA.ToShortDateString();
+                }
 
+                bALE.FillUSR_PDM_FILES(ds, CHECKQ_T.IDMAGAZZ);
+                ALEDS.USR_PDM_FILESRow immagine = ds.USR_PDM_FILES.Where(x => x.IDMAGAZZ == CHECKQ_T.IDMAGAZZ).FirstOrDefault();
+                if(immagine!=null)
+                {
+
+                    model.ImageUrl = RvlImageSite + immagine.NOMEFILE;
+                }
+
+                model.LavorantiEsterni = new List<RWListItem>();
                 int aux;
-                foreach (ALEDS.CLIFORow fornitore in ds.CLIFO.Where(x => int.TryParse(x.CODICE, out aux)))
+                foreach (ALEDS.CLIFORow fornitore in ds.CLIFO.Where(x => !x.IsCODICENull() && !x.IsRAGIONESOCNull() && int.TryParse(x.CODICE, out aux)))
                     model.LavorantiEsterni.Add(new RWListItem(fornitore.RAGIONESOC, fornitore.CODICE));
 
 

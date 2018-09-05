@@ -8,5 +8,8 @@
     <Setting Name="ShortTimeoutChangePage" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">60</Value>
     </Setting>
+    <Setting Name="RvlImageSite" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://srv-webservices/rvlimmagini/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -40,5 +40,14 @@ namespace ReportWeb.Properties {
                 return ((int)(this["ShortTimeoutChangePage"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://srv-webservices/rvlimmagini/")]
+        public string RvlImageSite {
+            get {
+                return ((string)(this["RvlImageSite"]));
+            }
+        }
     }
 }
