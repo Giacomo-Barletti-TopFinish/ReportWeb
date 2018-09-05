@@ -78,13 +78,15 @@ namespace ReportWeb.Business
 
                 bALE.FillUSR_PDM_FILES(ds, CHECKQ_T.IDMAGAZZ);
                 ALEDS.USR_PDM_FILESRow immagine = ds.USR_PDM_FILES.Where(x => x.IDMAGAZZ == CHECKQ_T.IDMAGAZZ).FirstOrDefault();
-                if(immagine!=null)
+                if (immagine != null)
                 {
 
                     model.ImageUrl = RvlImageSite + immagine.NOMEFILE;
                 }
 
                 model.LavorantiEsterni = new List<RWListItem>();
+                model.LavorantiEsterni.Add(new RWListItem(string.Empty, string.Empty));
+
                 int aux;
                 foreach (ALEDS.CLIFORow fornitore in ds.CLIFO.Where(x => !x.IsCODICENull() && !x.IsRAGIONESOCNull() && int.TryParse(x.CODICE, out aux)))
                     model.LavorantiEsterni.Add(new RWListItem(fornitore.RAGIONESOC, fornitore.CODICE));
@@ -93,5 +95,6 @@ namespace ReportWeb.Business
                 return model;
             }
         }
+
     }
 }

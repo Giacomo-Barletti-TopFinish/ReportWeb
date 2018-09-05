@@ -25,7 +25,7 @@
         $("#txtBarcode").change(function ()
         {
             var barcode = $(this).val();
-            if(barcode!='' )
+            if (barcode != '')
             {
                 $(this).val('');
                 $(this).focus();
@@ -54,5 +54,11 @@
                 document.close();
             }
         });
+    }
+
+    function Annulla()
+    {
+        $('#divScheda').html('').show();
+        $('#txtBarcode').focus();
     }
 </script>
