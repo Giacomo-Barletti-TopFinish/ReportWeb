@@ -8,7 +8,7 @@ namespace ReportWeb.Models.ALE
 {
     public class InserimentoModel
     {
-        public bool NonTrovato { get; set; }
+        public int EsitoRicerca { get; set; }
 
         public string IDCHECKQT { get; set; }
         public string Barcode { get; set; }

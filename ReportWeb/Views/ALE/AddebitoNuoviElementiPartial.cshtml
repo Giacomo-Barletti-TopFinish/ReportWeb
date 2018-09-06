@@ -1,0 +1,190 @@
+﻿@using ReportWeb.Models.ALE
+@model AddebitiModel
+
+<div class="col-sm-12">
+    <table class="table table-condensed" id="tblInseriti">
+        <thead>
+            <tr>
+                <th width="2%"></th>
+                <th>
+                    <table width="100%">
+                        <tr>
+                            <th width="10%"><label>Modello</label></th>
+                            <th width="18%"><label>Descrizione</label></th>
+                            <th width="6%"><label>Tipo difetto</label></th>
+                            <th width="12%"><label>Difetto</label></th>
+                            <th width="14%"><label>Lavorante</label></th>
+                            <th width="6%"><label>Qta Difetti</label></th>
+                            <th width="6%"><label>Qta Inseriti</label></th>
+                            <th width="7%"><label>Qta Addebito</label></th>
+                            <th width="18%"><label>Nota addebito</label></th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AddebitoModel a in Model.Addebiti)
+            {
+                <tr valign="top">
+
+                    <td><input type="checkbox" class="chkRWALE" /></td>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td width="10%">@a.Modello</td>
+                                <td width="18%">@a.ModelloDescrizione</td>
+                                <td width="6%">@a.TipoDifetto</td>
+                                <td width="12%">@a.Difetto</td>
+                                <td width="14%">@a.LavoranteDescrizione</td>
+                                <td width="6%">@a.QuantitaDifettosi</td>
+                                <td width="6%">@a.QuantitaInseriti</td>
+                                <td width="7%">@Html.TextBox("txtQuantita", a.QuantitaInseriti, new { @maxlength = "8", @class = "form-control input-sm rwqta", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })</td>
+                                <td width="18%">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm rwtxt", @style = "height: 21px;" })</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="9">
+                                    @a.Nota
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <input type="hidden" value="@a.LavoranteCodice" class="hdLavoranteCodice" />
+                    <input type="hidden" value="@a.IdAleDettaglio" class="hdIdAleDettaglio" />
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+        <input type="button" onclick="SelezionaTutto();" class="btn-primary" value="Seleziona tutto" />
+    </div>
+    <div class="col-sm-1">
+        <input type="button" onclick="DeselezionaTutto();" class="btn-primary" value="Deseleziona tutto" />
+    </div>
+    <div class="col-sm-2">
+        <label>Lavorante esterno</label>
+    </div>
+    <div class="col-sm-2">
+        @Html.DropDownList("ddlLavoranti", new SelectList(Model.LavorantiEsterni, "Value", "Text"), new { @class = "form-control input-sm select2", @style = "height: 21px;" })
+    </div>
+    <div class="col-sm-1">
+        <label>Nota gruppo</label>
+    </div>
+    <div class="col-sm-4">
+        @Html.TextBox("txtNotaGruppo", "", new { @maxlength = "100", @class = "form-control input-sm ", @style = "height: 21px;" })
+    </div>
+    <div class="col-sm-1">
+        <input type="button" onclick="Addebita();" class="btn-primary" value="Addebita" />
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $('#ddlLavoranti').select2();
+    });
+
+    function SelezionaTutto()
+    {
+        $('.chkRWALE').each(function ()
+        {
+            $(this).attr('checked', true);
+        });
+    }
+
+    function DeselezionaTutto()
+    {
+        $('.chkRWALE').each(function ()
+        {
+            $(this).attr('checked', false);
+        });
+    }
+
+    function Addebita()
+    {
+        var addebiti = [];
+        $('.chkRWALE').each(function ()
+        {
+
+            var checked = $(this).prop('checked');
+            if (checked)
+            {
+                var trCheckbox = $(this).closest('tr');
+                var IdAleDettaglio = $(".hdIdAleDettaglio", trCheckbox).val();
+                var qta = $(".rwqta", trCheckbox).val();
+                var nota = $(".rwtxt", trCheckbox).val();
+
+                var addebito = {
+                    'IdAleDettaglio': IdAleDettaglio, 'Qta': qta, 'Nota': nota
+                };
+                addebiti.push(addebito);
+            }
+        });
+
+        var esito = true;
+        var messaggio = '';
+        if (addebiti.length == 0)
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "selezionare almeno un addebito" + "</br>";
+            esito = false;
+        }
+
+        var totale = 0;
+        for (var i = 0; i < addebiti.length; i++)
+        {
+            var qta = addebiti[i].Qta;
+            if (qta == '')
+            {
+                $('#.lblMessage').val("Ci sono addebiti senza quantità");
+                return;
+            }
+            else
+                totale = totale + parseInt(qta);
+        }
+        if (esito && totale == 0)
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "le quantità degli addebiti sono tutte zero" + "</br>";
+            esito = false;
+        }
+
+        var lavorante = $('#ddlLavoranti').val();
+        if (lavorante == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il lavorante esterno a cui addebitare le lavorazioni" + "</br>";
+            esito = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+
+        if (!esito)
+            return;
+
+        var txtNotaGruppo = $('#txtNotaGruppo').val();
+        var addebitiJson = JSON.stringify(addebiti);
+
+        var url = '@Url.Action("Addebita", "ALE")';
+        $.ajax({
+            url: url,
+            data: { NotaGruppo: txtNotaGruppo, Lavorante: lavorante, Addebiti: addebitiJson },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CaricaAddebitoNuoviElementiPartial();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+</script>

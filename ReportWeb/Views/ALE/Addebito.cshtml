@@ -1,8 +1,48 @@
-﻿
+﻿@using ReportWeb.Models.ALE
 @{
-    ViewBag.Title = "Addebito";
+    ViewBag.Title = "ALE Addebito";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
-<h2>Addebito</h2>
+<div class="content-top">
+    <h2>Addebito Lavoranti Esterni - Addebito</h2>
 
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <h3>Nuovi addebiti inseriti</h3>
+            <div id="divSchedeInserite">
+                <label class="text-red input-sm" id="lblMessage"></label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        CaricaAddebitoNuoviElementiPartial();
+    });
+
+    function CaricaAddebitoNuoviElementiPartial()
+    {
+
+        var url = '@Url.Action("CaricaAddebitoNuoviElementiPartial", "ALE")';
+        $.ajax({
+            url: url,
+            data: { },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divSchedeInserite').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

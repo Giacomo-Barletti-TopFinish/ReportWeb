@@ -1,7 +1,9 @@
-﻿using ReportWeb.Data.ALE;
+﻿using ReportWeb.Common.Helpers;
+using ReportWeb.Data.ALE;
 using ReportWeb.Entities;
 using ReportWeb.Models;
 using ReportWeb.Models.ALE;
+using ReportWeb.Models.JSON;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +20,16 @@ namespace ReportWeb.Business
             ALEDS ds = new ALEDS();
             using (ALEBusiness bALE = new ALEBusiness())
             {
+                if (VerificaBarcodeCaricato(Barcode))
+                {
+                    model.EsitoRicerca = 0;
+                    return model;
+                }
+
                 bALE.FillUSR_CHECKQ_T(ds, Barcode);
                 if (!ds.USR_CHECKQ_T.Any(x => x.BARCODE == Barcode))
                 {
-                    model.NonTrovato = true;
+                    model.EsitoRicerca = 1;
                     return model;
                 }
 
@@ -38,7 +46,7 @@ namespace ReportWeb.Business
                 ALEDS.USR_CHECKQ_DRow CHECKQ_D = ds.USR_CHECKQ_D.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
                 ALEDS.USR_CHECKQ_CRow CHECKQ_C = ds.USR_CHECKQ_C.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
 
-                model.NonTrovato = false;
+                model.EsitoRicerca = 2;
                 model.IDCHECKQT = CHECKQ_T.IDCHECKQT;
                 model.Barcode = CHECKQ_T.BARCODE;
                 model.NumeroDocumento = CHECKQ_T.NUMCHECKQT;
@@ -85,13 +93,7 @@ namespace ReportWeb.Business
                     model.ImageUrl = RvlImageSite + immagine.NOMEFILE;
                 }
 
-                model.LavorantiEsterni = new List<RWListItem>();
-                model.LavorantiEsterni.Add(new RWListItem(string.Empty, string.Empty));
-
-                int aux;
-                foreach (ALEDS.CLIFORow fornitore in ds.CLIFO.Where(x => !x.IsCODICENull() && !x.IsRAGIONESOCNull() && !x.IsTIPONull() && x.TIPO == "F" && int.TryParse(x.CODICE, out aux)))
-                    model.LavorantiEsterni.Add(new RWListItem(fornitore.RAGIONESOC.Trim(), fornitore.CODICE.Trim()));
-
+                model.LavorantiEsterni = creaListaLavorantiEsterni(ds);
 
                 return model;
             }
@@ -129,5 +131,121 @@ namespace ReportWeb.Business
             }
         }
 
+        private List<RWListItem> creaListaLavorantiEsterni(ALEDS ds)
+        {
+            List<RWListItem> LavorantiEsterni = new List<RWListItem>();
+            LavorantiEsterni.Add(new RWListItem(string.Empty, string.Empty));
+
+            int aux;
+            foreach (ALEDS.CLIFORow fornitore in ds.CLIFO.Where(x => !x.IsCODICENull() && !x.IsRAGIONESOCNull() && !x.IsTIPONull() && x.TIPO == "F" && int.TryParse(x.CODICE, out aux)))
+                LavorantiEsterni.Add(new RWListItem(fornitore.RAGIONESOC.Trim(), fornitore.CODICE.Trim()));
+            return LavorantiEsterni;
+        }
+
+        public AddebitiModel LeggiSchedeDaAddebitare()
+        {
+            AddebitiModel model = new AddebitiModel();
+            model.Addebiti = new List<AddebitoModel>();
+            model.LavorantiEsterni = new List<RWListItem>();
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.INSERITO);
+                bALE.FillCLIFO(ds);
+                bALE.FillUSR_TAB_TIPODIFETTI(ds);
+                bALE.FillUSR_ANA_DIFETTI(ds);
+
+                foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO)
+                {
+                    AddebitoModel m = new AddebitoModel();
+                    m.IdAleDettaglio = riga.IDALEDETTAGLIO;
+                    m.IdAleGruppo = riga.IsIDALEGRUPPONull() ? -1 : riga.IDALEGRUPPO;
+                    m.QuantitaDifettosi = riga.QUANTITADIFETTOSI;
+                    m.QuantitaInseriti = riga.QUANTITAINSERITA;
+                    m.QuantitaAddebitata = riga.IsQUANTITAADDEBITATANull() ? 0 : riga.QUANTITAADDEBITATA;
+                    m.Nota = riga.IsNOTANull() ? string.Empty : riga.NOTA;
+                    m.NotaAddebito = riga.IsNOTAADDEBITONull() ? string.Empty : riga.NOTAADDEBITO;
+                    m.LavoranteCodice = riga.LAVORANTE.Trim();
+                    m.LavoranteDescrizione = string.Empty;
+                    ALEDS.CLIFORow lavorante = ds.CLIFO.Where(x => x.CODICE.Trim() == m.LavoranteCodice).FirstOrDefault();
+                    if (lavorante != null)
+                    {
+                        m.LavoranteDescrizione = lavorante.IsRAGIONESOCNull() ? string.Empty : lavorante.RAGIONESOC;
+                    }
+
+                    bALE.FillUSR_CHECKQ_T(ds, riga.BARCODE);
+                    ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
+                    bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
+                    ALEDS.MAGAZZRow modello = ds.MAGAZZ.Where(x => x.IDMAGAZZ == CHECKQ_T.IDMAGAZZ).FirstOrDefault();
+                    m.Modello = modello.MODELLO;
+                    m.ModelloDescrizione = modello.DESMAGAZZ;
+
+                    bALE.FillUSR_CHECKQ_C(ds, CHECKQ_T.IDCHECKQT);
+                    ALEDS.USR_CHECKQ_CRow CHECKQ_C = ds.USR_CHECKQ_C.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
+
+                    m.Difetto = string.Empty;
+                    m.TipoDifetto = string.Empty;
+                    if (CHECKQ_C != null)
+                    {
+                        ALEDS.USR_ANA_DIFETTIRow difetto = ds.USR_ANA_DIFETTI.Where(x => x.IDDIFETTO == CHECKQ_C.IDDIFETTO).FirstOrDefault();
+                        ALEDS.USR_TAB_TIPODIFETTIRow tipoDifetto = ds.USR_TAB_TIPODIFETTI.Where(x => x.IDTIPODIFETTO == difetto.IDTIPODIFETTO).FirstOrDefault();
+                        m.TipoDifetto = tipoDifetto.DESTIPODIFETTO;
+                        m.Difetto = difetto.DESDIFETTO;
+                    }
+                    model.Addebiti.Add(m);
+                }
+
+                model.LavorantiEsterni = creaListaLavorantiEsterni(ds);
+
+            }
+            return model;
+        }
+
+        public bool VerificaBarcodeCaricato(string Barcode)
+        {
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_DETTAGLIOByBarcode(ds, Barcode);
+                return ds.RW_ALE_DETTAGLIO.Any(x => x.BARCODE == Barcode);
+            }
+        }
+
+        public void Addebita(string NotaGruppo,string Lavorante, string AddebitiJson, string UIDUSER)
+        {
+            ALEAddebitiJsonModel[] addebiti = JSonSerializer.Deserialize<ALEAddebitiJsonModel[]>(AddebitiJson);
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                try
+                {
+                    ALEDS ds = new ALEDS();
+                    bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.INSERITO);
+
+                    int IDGRUPPO = bALE.CreaGruppo(NotaGruppo, Lavorante.Trim(), UIDUSER);
+
+                    foreach (ALEAddebitiJsonModel addebitoJ in addebiti)
+                    {
+                        ALEDS.RW_ALE_DETTAGLIORow dettaglio = ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEDETTAGLIO == addebitoJ.IdAleDettaglio).FirstOrDefault();
+                        if (dettaglio != null)
+                        {
+                            dettaglio.IDALEGRUPPO = IDGRUPPO;
+                            dettaglio.QUANTITAADDEBITATA = addebitoJ.Quantita;
+                            dettaglio.NOTAADDEBITO = addebitoJ.Nota;
+                            dettaglio.STATO = ALEStatoDettaglio.ADDEBITATO;
+                        }
+                    }
+
+                    bALE.UpdateRW_ALE_DETTAGLIO(ds);
+
+                }
+                catch
+                {
+                    bALE.Rollback();
+                    throw;
+                }
+            }
+        }
     }
 }

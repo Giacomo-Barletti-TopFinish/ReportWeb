@@ -65,6 +65,13 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext]
+        public void FillCLIFO(ALEDS ds, string Codice)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillCLIFO(ds, Codice);
+        }
+
+        [DataContext]
         public void FillUSR_PRD_FLUSSO_MOVFASI(ALEDS ds, string IDCHECKQT)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
@@ -96,7 +103,7 @@ namespace ReportWeb.Data.ALE
         public void SalvaInserimento(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
-            a.SalvaInserimento(Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
+            a.InsertRW_ALE_DETTAGLIO(Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
         }
 
         [DataContext]
@@ -105,5 +112,28 @@ namespace ReportWeb.Data.ALE
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillRW_ALE_DETTAGLIO(ds, STATO);
         }
+
+        [DataContext]
+        public void FillRW_ALE_DETTAGLIOByBarcode(ALEDS ds, string Barcode)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_DETTAGLIOByBarcode(ds, Barcode);
+        }
+        [DataContext(true)]
+        public int CreaGruppo(string NotaAddebito, string Lavorante, string UIDUSER)
+        {
+            Int32 id = (int)GetID();
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.InsertRW_ALE_GRUPPO(id, NotaAddebito, Lavorante, UIDUSER);
+            return id;
+        }
+
+        [DataContext(true)]
+        public void UpdateRW_ALE_DETTAGLIO(ALEDS ds)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.UpdateALEDSTable(ds.RW_ALE_DETTAGLIO.TableName,ds);
+        }
+
     }
 }

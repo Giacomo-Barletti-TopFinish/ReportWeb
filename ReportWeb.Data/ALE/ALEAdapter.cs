@@ -103,7 +103,7 @@ namespace ReportWeb.Data
             ParamSet ps = new ParamSet();
             ps.AddParam("STATO", DbType.String, STATO);
 
-            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.RW_ALE_DETTAGLIO);
             }
@@ -116,6 +116,19 @@ namespace ReportWeb.Data
 
 
             using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.CLIFO);
+            }
+        }
+
+        public void FillCLIFO(ALEDS ds, string codice)
+        {
+            string select = @"SELECT * FROM GRUPPO.CLIFO WHERE CODICE = $P{CODICE}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("CODICE", DbType.String, codice);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.CLIFO);
             }
@@ -191,7 +204,7 @@ namespace ReportWeb.Data
             }
         }
 
-        public void SalvaInserimento(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        public void InsertRW_ALE_DETTAGLIO(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
         {
 
             string insert = @"INSERT INTO RW_ALE_DETTAGLIO (BARCODE,IDCHECKQT,QUANTITADIFETTOSI,QUANTITAINSERITA,NOTA,LAVORANTE, STATO, DATA_INSERIMENTO,UIDUSER) VALUES
@@ -213,5 +226,51 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillRW_ALE_DETTAGLIOByBarcode(ALEDS ds, string Barcode)
+        {
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE BARCODE = $P{BARCODE}";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE", DbType.String, Barcode);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.RW_ALE_DETTAGLIO);
+            }
+        }
+
+        public void InsertRW_ALE_GRUPPO(int IDALEGRUPPO, string NotaAddebito, string Lavorante, string UIDUSER)
+        {
+
+            string insert = @"INSERT INTO RW_ALE_GRUPPO (IDALEGRUPPO,NOTAADDEBITO,LAVORANTE,APERTO, DATA_INSERIMENTO,UIDUSER) VALUES
+                                            ($P<IDALEGRUPPO>,$P<NOTAADDEBITO>,$P<LAVORANTE>,$P<APERTO>,$P<NOW>,$P<UIDUSER>)";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDALEGRUPPO", DbType.Int32, IDALEGRUPPO);
+            ps.AddParam("NOTAADDEBITO", DbType.String, NotaAddebito);
+            ps.AddParam("LAVORANTE", DbType.String, Lavorante);
+            ps.AddParam("APERTO", DbType.String, 0);
+            ps.AddParam("NOW", DbType.DateTime, DateTime.Now);
+            ps.AddParam("UIDUSER", DbType.String, UIDUSER);
+
+            using (DbCommand cmd = BuildCommand(insert, ps))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void UpdateALEDSTable(string tablename, ALEDS ds)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                a.ContinueUpdateOnError = false;
+                DataTable dt = ds.Tables[tablename];
+                DbCommandBuilder cmd = BuildCommandBuilder(a);
+                a.UpdateCommand = cmd.GetUpdateCommand();
+                a.DeleteCommand = cmd.GetDeleteCommand();
+                a.InsertCommand = cmd.GetInsertCommand();
+                a.Update(dt);
+            }
+        }
     }
 }

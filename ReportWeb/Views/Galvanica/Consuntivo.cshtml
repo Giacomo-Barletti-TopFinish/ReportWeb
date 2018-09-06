@@ -186,6 +186,13 @@
             esegui = false;
         }
 
+        if (dtFine <= dtInizio)
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Inizio turno deve essere prima di fine turno" + "</br>";
+            esegui = false;
+        }
+
+
         $('#lblMessage').html(messaggio);
         if (!esegui)
         {

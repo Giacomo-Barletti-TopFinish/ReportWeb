@@ -42,10 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ALE\AddebitoModel.cs" />
     <Compile Include="ALE\ALEStatoRichiesta.cs" />
     <Compile Include="ALE\InserimentoModel.cs" />
     <Compile Include="GalvanicaConsuntivoModel.cs" />
     <Compile Include="GalvanicaReportModel.cs" />
+    <Compile Include="JSON\ALEAddebitiJsonModel.cs" />
     <Compile Include="JSON\FermiJsonModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="MenuModel.cs" />

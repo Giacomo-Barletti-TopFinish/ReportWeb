@@ -415,6 +415,7 @@
     <Content Include="Views\ALE\Conferma.cshtml" />
     <Content Include="Views\ALE\Fatturazione.cshtml" />
     <Content Include="Views\ALE\CaricaSchedaPartial.cshtml" />
+    <Content Include="Views\ALE\AddebitoNuoviElementiPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

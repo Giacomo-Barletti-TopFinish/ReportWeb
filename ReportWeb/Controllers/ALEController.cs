@@ -19,6 +19,8 @@ namespace ReportWeb.Controllers
         public ActionResult Addebito()
         {
             VerificaAbilitazioneUtenteConUscita(17);
+
+           
             return View();
         }
         public ActionResult Valorizzazione()
@@ -51,6 +53,21 @@ namespace ReportWeb.Controllers
             ALEBLL bll = new ALEBLL();
             bll.SalvaInserimento(Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, ConnectedUser);
 
+            return null;
+        }
+
+        public ActionResult CaricaAddebitoNuoviElementiPartial()
+        {
+            ALEBLL bAle = new ALEBLL();
+            AddebitiModel model = bAle.LeggiSchedeDaAddebitare();
+
+            return PartialView("AddebitoNuoviElementiPartial", model);
+        }
+
+        public ActionResult Addebita(string NotaGruppo, string Lavorante, string Addebiti)
+        {
+            ALEBLL bll = new ALEBLL();
+            bll.Addebita(NotaGruppo, Lavorante, Addebiti, ConnectedUser);
             return null;
         }
     }
