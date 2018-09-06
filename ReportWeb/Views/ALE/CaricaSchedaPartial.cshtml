@@ -12,6 +12,7 @@ else
 
     @Html.Hidden("hdBarcode", @Model.Barcode)
     @Html.Hidden("hdIDCHECKQT", @Model.IDCHECKQT)
+    @Html.Hidden("hdQtaDifettosa", @Model.QuantitaDifforme)
 
     <div class="row">
         <div class="col-sm-3">
@@ -68,13 +69,17 @@ else
         <div class="box-body form-group-sm">
             <div class="col-sm-12 row">
                 <div class="col-sm-1"><label>Quantità</label>@Html.TextBox("txtQuantita", "", new { @maxlength = "8", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })</div>
-                <div class="col-sm-3"><label>Lavorante esterno</label>@Html.DropDownList("ddlLavoranti", new SelectList(Model.LavorantiEsterni, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+                <div class="col-sm-3">
+                    <label>Lavorante esterno</label>
+                    @Html.DropDownListFor(model => model.RepartoCodice, new SelectList(Model.LavorantiEsterni, "Value", "Text", Model.RepartoCodice), new { @class = "form-control input-sm select2", @id = "ddlLavoranti" })
+                </div>
                 <div class="col-sm-7"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
             </div>
             <div class="col-sm-12 row">
                 <input type="button" onclick="Salva();" class="btn btn-primary" value="Inserisci" />
                 <input type="button" onclick="Annulla();" class="btn btn-primary" value="Annulla" />
             </div>
+            <label class="text-red input-sm" id="lblMessage"></label>
         </div>
     </div>
 }
@@ -82,7 +87,11 @@ else
 <script language="javascript" type="text/javascript">
     $(function ()
     {
+        
         $('#ddlLavoranti').select2();
+        $('#ddlLavoranti').val('@Model.RepartoCodice');
+        $('#txtQuantita').val('@Model.QuantitaDifforme');
+
     });
-  
+
 </script>

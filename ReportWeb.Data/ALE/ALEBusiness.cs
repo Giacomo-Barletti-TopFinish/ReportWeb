@@ -91,5 +91,12 @@ namespace ReportWeb.Data.ALE
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillUSR_PDM_FILES(ds, IDMAGAZZ);
         }
+
+        [DataContext(true)]
+        public void SalvaInserimento(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.SalvaInserimento(Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
+        }
     }
 }

@@ -45,5 +45,13 @@ namespace ReportWeb.Controllers
 
             return PartialView("CaricaSchedaPartial", model);
         }
+
+        public ActionResult SalvaInserimento(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota)
+        {
+            ALEBLL bll = new ALEBLL();
+            bll.SalvaInserimento(Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, ConnectedUser);
+
+            return null;
+        }
     }
 }

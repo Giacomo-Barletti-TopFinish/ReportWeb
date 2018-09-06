@@ -16,6 +16,7 @@ namespace ReportWeb.Models.ALE
         public string NumeroDocumento { get; set; }
         public string DataDocumento { get; set; }
         public string Reparto { get; set; }
+        public string RepartoCodice { get; set; }
         public string Modello { get; set; }
         public string ModelloDescrizione { get; set; }
         public decimal Quantita { get; set; }

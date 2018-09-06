@@ -46,6 +46,7 @@ namespace ReportWeb.Business
                 model.Quantita = CHECKQ_T.IsQTANull() ? 0 : CHECKQ_T.QTA;
                 model.QuantitaDifforme = CHECKQ_C == null ? 0 : (CHECKQ_C.IsQTA_DIFNull() ? 0 : CHECKQ_C.QTA_DIF);
 
+                model.RepartoCodice = CHECKQ_T.IsCODICECLIFO_RILNull() ? string.Empty : CHECKQ_T.CODICECLIFO_RIL.Trim();
                 ALEDS.CLIFORow reparto = ds.CLIFO.Where(x => x.CODICE == CHECKQ_T.CODICECLIFO_RIL).FirstOrDefault();
                 if (reparto != null)
                     model.Reparto = reparto.RAGIONESOC;
@@ -88,11 +89,18 @@ namespace ReportWeb.Business
                 model.LavorantiEsterni.Add(new RWListItem(string.Empty, string.Empty));
 
                 int aux;
-                foreach (ALEDS.CLIFORow fornitore in ds.CLIFO.Where(x => !x.IsCODICENull() && !x.IsRAGIONESOCNull() && int.TryParse(x.CODICE, out aux)))
-                    model.LavorantiEsterni.Add(new RWListItem(fornitore.RAGIONESOC, fornitore.CODICE));
+                foreach (ALEDS.CLIFORow fornitore in ds.CLIFO.Where(x => !x.IsCODICENull() && !x.IsRAGIONESOCNull() && !x.IsTIPONull() && x.TIPO == "F" && int.TryParse(x.CODICE, out aux)))
+                    model.LavorantiEsterni.Add(new RWListItem(fornitore.RAGIONESOC.Trim(), fornitore.CODICE.Trim()));
 
 
                 return model;
+            }
+        }
+        public void SalvaInserimento(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        {
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                bALE.SalvaInserimento(Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
             }
         }
 

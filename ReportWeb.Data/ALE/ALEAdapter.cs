@@ -1,5 +1,6 @@
 ﻿using ReportWeb.Common.Helpers;
 using ReportWeb.Entities;
+using ReportWeb.Models.ALE;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -178,5 +179,28 @@ namespace ReportWeb.Data
                 da.Fill(ds.USR_PDM_FILES);
             }
         }
+
+        public void SalvaInserimento(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        {
+
+            string insert = @"INSERT INTO RW_ALE_DETTAGLIO (BARCODE,IDCHECKQT,QUANTITADIFETTOSI,QUANTITAINSERITA,NOTA,LAVORANTE, STATO, DATA_INSERIMENTO,UIDUSER) VALUES
+                                            ($P<BARCODE>,$P<IDCHECKQT>,$P<QUANTITADIFETTOSI>,$P<QUANTITAINSERITA>,$P<NOTA>,$P<LAVORANTE>, $P<STATO>,$P<NOW>,$P<UIDUSER>)";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE", DbType.String, Barcode);
+            ps.AddParam("IDCHECKQT", DbType.String, IDCHECKQT);
+            ps.AddParam("QUANTITADIFETTOSI", DbType.Int32, Difettosi);
+            ps.AddParam("QUANTITAINSERITA", DbType.Int32, Inseriti);
+            ps.AddParam("NOTA", DbType.String, Nota);
+            ps.AddParam("LAVORANTE", DbType.String, Lavorante);
+            ps.AddParam("STATO", DbType.String, ALEStatoDettaglio.INSERITO);
+            ps.AddParam("NOW", DbType.DateTime, DateTime.Now);
+            ps.AddParam("UIDUSER", DbType.String, UIDUSER);
+
+            using (DbCommand cmd = BuildCommand(insert, ps))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
     }
 }

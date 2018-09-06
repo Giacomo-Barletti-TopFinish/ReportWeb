@@ -20,10 +20,10 @@
 
 <script language="javascript" type="text/javascript">
     $(function ()
-    {
+    {        
         $("#txtBarcode").focus();
         $("#txtBarcode").change(function ()
-        {
+        {            
             var barcode = $(this).val();
             if (barcode != '')
             {
@@ -59,6 +59,68 @@
     function Annulla()
     {
         $('#divScheda').html('').show();
+        $('#txtBarcode').focus();
+    }
+
+    function Salva()
+    {
+        
+        var barcode = $('#hdBarcode').val();
+        var IDCHECKQT = $('#hdIDCHECKQT').val();
+        var difettosi =$('#hdQtaDifettosa').val();
+        var inseriti = $('#txtQuantita').val();
+        var lavorante = $('#ddlLavoranti').val();
+        var nota = $('#txtNota').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if(inseriti =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Quantità" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if(inseriti =='0' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Quantità non può essere 0" + "</br>";
+        }
+
+        if(lavorante =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Lavorante esterno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+        var url = '@Url.Action("SalvaInserimento", "ALE")';
+        $.ajax({
+            url: url,
+            data: {
+                Barcode: barcode,
+                IDCHECKQT:IDCHECKQT,
+                Difettosi:difettosi,
+                Inseriti:inseriti,
+                Lavorante:lavorante,
+                Nota:nota
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                var label = '<label class="text-red input-sm" id="lblMessage">DATI INSERITI</label>';
+                $('#divScheda').html(label).show();
+                $('#txtBarcode').focus();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
         $('#txtBarcode').focus();
     }
 </script>
