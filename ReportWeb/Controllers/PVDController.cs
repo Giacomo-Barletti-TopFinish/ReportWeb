@@ -15,7 +15,7 @@ namespace ReportWeb.Controllers
         // GET: PVD
         public ActionResult Consuntivo()
         {
-            VerificaAbilitazioneUtente(5);
+            VerificaAbilitazioneUtenteConUscita(5);
 
             PVDBLL bll = new PVDBLL();
             List<RWListItem> macchine = bll.CreaListaMacchine();
@@ -49,7 +49,7 @@ namespace ReportWeb.Controllers
 
         public ActionResult Report()
         {
-            VerificaAbilitazioneUtente(6);
+            VerificaAbilitazioneUtenteConUscita(6);
 
             List<RWListItem> settimane = new List<RWListItem>();
             settimane.Add(new RWListItem(string.Empty, string.Empty));

@@ -96,11 +96,36 @@ namespace ReportWeb.Business
                 return model;
             }
         }
+
         public void SalvaInserimento(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
         {
             using (ALEBusiness bALE = new ALEBusiness())
             {
                 bALE.SalvaInserimento(Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
+            }
+        }
+
+        public int ContaSchede(string Stato)
+        {
+            using (ALEBusiness bAle = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bAle.FillRW_ALE_DETTAGLIO(ds, Stato);
+
+                switch (Stato)
+                {
+                    case ALEStatoDettaglio.INSERITO:
+                        return ds.RW_ALE_DETTAGLIO.Count();
+
+                    case ALEStatoDettaglio.VALORIZZATO:
+                    case ALEStatoDettaglio.APPROVATO:
+                    case ALEStatoDettaglio.ADDEBITATO:
+                        decimal[] gruppi = ds.RW_ALE_DETTAGLIO.Where(x => !x.IsIDALEGRUPPONull()).Select(x => x.IDALEGRUPPO).Distinct().ToArray();
+                        return gruppi.Length;
+                    default:
+                        return 0;
+                }
+
             }
         }
 

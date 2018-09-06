@@ -128,13 +128,19 @@ namespace ReportWeb.Controllers
             }
         }
 
-        protected void VerificaAbilitazioneUtente(int IDMENU)
+        protected void VerificaAbilitazioneUtenteConUscita(int IDMENU)
         {
             SecurityBLL sec = new SecurityBLL();
             if (!sec.VerificaAbilitazioneUtente(IDMENU, ConnectedUser))
             {
                 RedirectToAction("LogOut", "Account");
             }
+        }
+
+        protected bool VerificaAbilitazioneUtente(int IDMENU)
+        {
+            SecurityBLL sec = new SecurityBLL();
+            return sec.VerificaAbilitazioneUtente(IDMENU, ConnectedUser);
         }
     }
 }

@@ -15,14 +15,14 @@ namespace ReportWeb.Controllers
         // GET: Verniciatura
         public ActionResult Consuntivo()
         {
-            VerificaAbilitazioneUtente(13);
+            VerificaAbilitazioneUtenteConUscita(13);
 
             return View();
         }
 
         public ActionResult Report()
         {
-            VerificaAbilitazioneUtente(14);
+            VerificaAbilitazioneUtenteConUscita(14);
 
             List<RWListItem> settimane = new List<RWListItem>();
             settimane.Add(new RWListItem(string.Empty, string.Empty));

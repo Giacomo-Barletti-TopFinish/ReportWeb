@@ -98,5 +98,12 @@ namespace ReportWeb.Data.ALE
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.SalvaInserimento(Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
         }
+
+        [DataContext]
+        public void FillRW_ALE_DETTAGLIO(ALEDS ds, string STATO)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_DETTAGLIO(ds, STATO);
+        }
     }
 }

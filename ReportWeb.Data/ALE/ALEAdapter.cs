@@ -91,13 +91,24 @@ namespace ReportWeb.Data
         public void FillTABCAUMGT(ALEDS ds)
         {
             string select = @"SELECT * FROM GRUPPO.TABCAUMGT";
-
-
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.TABCAUMGT);
             }
         }
+
+        public void FillRW_ALE_DETTAGLIO(ALEDS ds, string STATO)
+        {
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE STATO = $P{STATO}";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("STATO", DbType.String, STATO);
+
+            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            {
+                da.Fill(ds.RW_ALE_DETTAGLIO);
+            }
+        }
+
 
         public void FillCLIFO(ALEDS ds)
         {

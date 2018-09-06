@@ -13,27 +13,27 @@ namespace ReportWeb.Controllers
         // GET: ALE
         public ActionResult Inserimento()
         {
-            VerificaAbilitazioneUtente(16);
+            VerificaAbilitazioneUtenteConUscita(16);
             return View();
         }
         public ActionResult Addebito()
         {
-            VerificaAbilitazioneUtente(17);
+            VerificaAbilitazioneUtenteConUscita(17);
             return View();
         }
         public ActionResult Valorizzazione()
         {
-            VerificaAbilitazioneUtente(18);
+            VerificaAbilitazioneUtenteConUscita(18);
             return View();
         }
         public ActionResult Conferma()
         {
-            VerificaAbilitazioneUtente(19);
+            VerificaAbilitazioneUtenteConUscita(19);
             return View();
         }
         public ActionResult Fatturazione()
         {
-            VerificaAbilitazioneUtente(20);
+            VerificaAbilitazioneUtenteConUscita(20);
             return View();
         }
 

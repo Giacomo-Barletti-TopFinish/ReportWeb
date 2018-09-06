@@ -13,7 +13,7 @@ namespace ReportWeb.Controllers
         // GET: Impostazioni
         public ActionResult AbilitaMenu()
         {
-            VerificaAbilitazioneUtente(8);
+            VerificaAbilitazioneUtenteConUscita(8);
 
             SecurityBLL sec = new SecurityBLL();
             List<RWListItem> utenti = sec.FillUtenti();

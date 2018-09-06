@@ -21,7 +21,7 @@ namespace ReportWeb.Controllers
             tipoFermo.Add(new RWListItem("Guasto", "Guasto"));
 
             ViewData.Add("tipoFermo", tipoFermo);
-            VerificaAbilitazioneUtente(10);
+            VerificaAbilitazioneUtenteConUscita(10);
             return View();
         }
 
@@ -35,7 +35,7 @@ namespace ReportWeb.Controllers
 
         public ActionResult Report()
         {
-            VerificaAbilitazioneUtente(11);
+            VerificaAbilitazioneUtenteConUscita(11);
 
             List<RWListItem> settimane = new List<RWListItem>();
             settimane.Add(new RWListItem(string.Empty, string.Empty));
