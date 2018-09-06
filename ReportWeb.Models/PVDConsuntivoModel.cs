@@ -19,7 +19,7 @@ namespace ReportWeb.Models
         public int Quantita{ get; set; }
         public string Clienti { get; set; }
         public string Articolo { get; set; }
-        public int Impegno { get; set; }
+        public string Impegno { get; set; }
         public int IdConsuntivo{ get; set; }
         public string Durata{ get; set; }
     }

@@ -60,7 +60,7 @@ namespace ReportWeb.Data
         }
 
         public void SalvaConsuntivo(string IDRESOURCEF, string FinituraCodice, string FinituraDescrizione, string Tipo, string Giorno, string Inizio, string Fine, int Quantita, string Clienti,
-            string Articolo, int Impegno, string UIDUSER)
+            string Articolo, string Impegno, string UIDUSER)
         {
 
             string insert = @"INSERT INTO RW_PVD_CONSUNTIVO (IDRESOURCEF,FINITURA_COD,FINITURA_DESC,TIPO,GIORNO,INIZIO, FINE, QUANTITA, CLIENTI, ARTICOLO, IMPEGNO, DATA_INSERIMENTO,UIDUSER) VALUES
@@ -76,7 +76,7 @@ namespace ReportWeb.Data
             ps.AddParam("Quantita", DbType.Int32, Quantita);
             ps.AddParam("Clienti", DbType.String, Clienti.ToUpper());
             ps.AddParam("Articolo", DbType.String, Articolo.ToUpper());
-            ps.AddParam("Impegno", DbType.Int32, Impegno);
+            ps.AddParam("Impegno", DbType.String, Impegno);
             ps.AddParam("NOW", DbType.DateTime, DateTime.Now);
             ps.AddParam("UIDUSER", DbType.String, UIDUSER);
             ps.AddParam("GIORNO", DbType.DateTime, giorno);

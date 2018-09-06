@@ -1064,7 +1064,7 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RW_PVD_CONSUNTIVORow AddRW_PVD_CONSUNTIVORow(decimal IDCONSUNTIVO, string IDRESOURCEF, string FINITURA_COD, string FINITURA_DESC, string TIPO, System.DateTime GIORNO, string INIZIO, string FINE, decimal QUANTITA, string CLIENTI, string ARTICOLO, decimal IMPEGNO, System.DateTime DATA_INSERIMENTO, string UIDUSER, string MACCHINA) {
+            public RW_PVD_CONSUNTIVORow AddRW_PVD_CONSUNTIVORow(decimal IDCONSUNTIVO, string IDRESOURCEF, string FINITURA_COD, string FINITURA_DESC, string TIPO, System.DateTime GIORNO, string INIZIO, string FINE, decimal QUANTITA, string CLIENTI, string ARTICOLO, string IMPEGNO, System.DateTime DATA_INSERIMENTO, string UIDUSER, string MACCHINA) {
                 RW_PVD_CONSUNTIVORow rowRW_PVD_CONSUNTIVORow = ((RW_PVD_CONSUNTIVORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDCONSUNTIVO,
@@ -1146,7 +1146,7 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnCLIENTI);
                 this.columnARTICOLO = new global::System.Data.DataColumn("ARTICOLO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnARTICOLO);
-                this.columnIMPEGNO = new global::System.Data.DataColumn("IMPEGNO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnIMPEGNO = new global::System.Data.DataColumn("IMPEGNO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIMPEGNO);
                 this.columnDATA_INSERIMENTO = new global::System.Data.DataColumn("DATA_INSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATA_INSERIMENTO);
@@ -1163,6 +1163,7 @@ namespace ReportWeb.Entities {
                 this.columnFINE.MaxLength = 8;
                 this.columnCLIENTI.MaxLength = 50;
                 this.columnARTICOLO.MaxLength = 50;
+                this.columnIMPEGNO.MaxLength = 20;
                 this.columnUIDUSER.MaxLength = 254;
             }
             
@@ -1860,10 +1861,10 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal IMPEGNO {
+            public string IMPEGNO {
                 get {
                     try {
-                        return ((decimal)(this[this.tableRW_PVD_CONSUNTIVO.IMPEGNOColumn]));
+                        return ((string)(this[this.tableRW_PVD_CONSUNTIVO.IMPEGNOColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'IMPEGNO\' in table \'RW_PVD_CONSUNTIVO\' is DBNull.", e);

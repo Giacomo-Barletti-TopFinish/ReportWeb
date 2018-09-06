@@ -39,7 +39,7 @@ namespace ReportWeb.Controllers
             return PartialView("GetGrigliaMacchinePartial", consunetivo);
         }
 
-        public ActionResult SalvaConsuntivo(string IDRESOURCEF, string FinituraCodice, string FinituraDescrizione, string Tipo, string Giorno, string Inizio, string Fine, int Quantita, string Clienti, string Articolo, int Impegno)
+        public ActionResult SalvaConsuntivo(string IDRESOURCEF, string FinituraCodice, string FinituraDescrizione, string Tipo, string Giorno, string Inizio, string Fine, int Quantita, string Clienti, string Articolo, string Impegno)
         {
             PVDBLL bll = new PVDBLL();
             bll.SalvaConsuntivo(IDRESOURCEF, FinituraCodice, FinituraDescrizione, Tipo, Giorno, Inizio, Fine, Quantita, Clienti, Articolo, Impegno, ConnectedUser);

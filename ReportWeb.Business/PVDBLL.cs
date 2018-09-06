@@ -55,7 +55,7 @@ namespace ReportWeb.Business
                 model.Quantita = (int)m.QUANTITA;
                 model.Clienti = m.IsCLIENTINull() ? string.Empty : m.CLIENTI;
                 model.Articolo = m.IsARTICOLONull() ? string.Empty : m.ARTICOLO;
-                model.Impegno = (int)m.IMPEGNO;
+                model.Impegno = m.IMPEGNO;
                 model.IdConsuntivo = (int)m.IDCONSUNTIVO;
                 consuntivo.Add(model);
             }
@@ -70,7 +70,7 @@ namespace ReportWeb.Business
             }
         }
 
-        public void SalvaConsuntivo(string IDRESOURCEF, string FinituraCodice, string FinituraDescrizione, string Tipo, string Giorno, string Inizio, string Fine, int Quantita, string Clienti, string Articolo, int Impegno, string UIDUSER)
+        public void SalvaConsuntivo(string IDRESOURCEF, string FinituraCodice, string FinituraDescrizione, string Tipo, string Giorno, string Inizio, string Fine, int Quantita, string Clienti, string Articolo, string Impegno, string UIDUSER)
         {
             DateTime giorno = DateTime.Parse(Giorno);
             using (PVDBusiness bPDV = new PVDBusiness())
@@ -112,7 +112,7 @@ namespace ReportWeb.Business
                 model.Quantita = (int)m.QUANTITA;
                 model.Clienti = m.IsCLIENTINull() ? string.Empty : m.CLIENTI;
                 model.Articolo = m.IsARTICOLONull() ? string.Empty : m.ARTICOLO;
-                model.Impegno = (int)m.IMPEGNO;
+                model.Impegno = m.IMPEGNO;
                 model.IdConsuntivo = (int)m.IDCONSUNTIVO;
                 model.Durata = durata.ToString(@"hh\:mm");
                 consuntivo.Add(model);
