@@ -25,7 +25,7 @@
                     <td>
                         @if (a.AddebitoAnnulabile)
                         {
-                            <input type="button" onclick="AnnullaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Annulla" />
+                            <input type="button" onclick="ValorizzaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Valorizza" />
                         }
                     </td>
                 </tr>
@@ -54,17 +54,22 @@
                                         <th style="font-size:12px">
                                             Valore
                                         </th>
+                                        <th style="font-size:12px">
+                                            Nota
+                                        </th>
                                     </tr>
                                 </thead>
                                 @foreach (AddebitoModel dettaglio in a.Dettagli)
                                 {
-                                    <tr>
+                                    <tr class="RWTRDettaglio">
+                                        <input type="hidden" class="hdIdAleDettaglio" value="@dettaglio.IdAleDettaglio" />
                                         <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
                                         <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
                                         <td style="font-size:12px">@dettaglio.LavoranteDescrizione</td>
                                         <td style="font-size:12px">@dettaglio.QuantitaAddebitata</td>
-                                        <td style="font-size:12px">@Html.TextBox("txtQuantita", "", new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
+                                        <td style="font-size:12px">@Html.TextBox("txtPrezzo", "", new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
                                         <td style="font-size:12px"><input readonly type="text" class="RWValore" /></td>
+                                        <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
                                     </tr>
                                     if (!string.IsNullOrEmpty(dettaglio.Nota))
                                     {
@@ -80,8 +85,9 @@
                                     }
                                 }
                                 <tr class="RWTotali">
+                                    <td><label>Nota di gruppo</label></td>
+                                    <td colspan="3">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNotaGruppo", @style = "height: 21px;" })</td>
                                     <td class="text-red">TOTALE</td>
-                                    <td colspan="4"></td>
                                     <td class="text-red"><input readonly type="text" id="RWTotale" /></td>
                                 </tr>
                             </table>
@@ -99,9 +105,8 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
-
         $(".RWPrezzo").change(function ()
-        {            
+        {
             var trPrezzo = $(this).closest('tr');
             var tds = trPrezzo.find('td');
             var quantita = $(tds[3]).text();
@@ -116,7 +121,6 @@
 
     function CalcolaTotale()
     {
-        debugger;
         var totale = 0;
         var valori = $('.RWValore');
         for (var i = 0; i < valori.length; i++)
@@ -148,7 +152,62 @@
         }
     }
 
+    function ValorizzaGruppo(sender, IDALEGRUPPO)
+    {
+        
+        var divGruppoName = "#Dettaglio_" + IDALEGRUPPO;
+        var divGruppo = $(divGruppoName);
 
+        var trDettaglio = $(".RWTRDettaglio", divGruppo);
+        var dettagli = [];
+        var notaGruppo = $(".RWNotaGruppo", divGruppo);
+
+        var esito = true;
+        var messaggio = '';
+        for (var i = 0 ; i < trDettaglio.length; i++)
+        {
+            var idDettaglio = $(".hdIdAleDettaglio", trDettaglio[i]);
+            var idd = $(idDettaglio).val();
+
+            var prezzo = $(".RWPrezzo", trDettaglio[i]);
+            var p = $(prezzo).val();
+
+            if (p == '')
+            {
+                esito = false;
+                messaggio = messaggio + "Riga "+(i+1)+" ci prezzo non valorizzato <BR \>"
+            }
+            var nota = $(".RWNota", trDettaglio[i]);
+            var n = $(nota).val();
+
+            var dettaglio = { 'IdAleDettaglio': idd, 'Prezzo': p, 'Nota': n };
+            dettagli.push(dettaglio);
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito)
+            return;
+
+        var dettagliJson = JSON.stringify(dettagli);
+
+        var url = '@Url.Action("Valorizza", "ALE")';
+        $.ajax({
+            url: url,
+            data: { IDALEGRUPPO: IDALEGRUPPO, Dettagli: dettagliJson, Nota: notaGruppo.val() },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CaricaGruppiDaValorizzare();
+                CaricaGruppiValorizzati();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
 
 </script>
-

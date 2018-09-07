@@ -153,5 +153,12 @@ namespace ReportWeb.Data.ALE
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillRW_ALE_GRUPPO(ds, Aperto);
         }
+
+        [DataContext]
+        public void FillRW_ALE_DETTAGLIO(ALEDS ds, decimal IDALEGRUPPO)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_DETTAGLIO(ds, IDALEGRUPPO);
+        }
     }
 }

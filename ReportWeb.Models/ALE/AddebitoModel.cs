@@ -23,7 +23,6 @@ namespace ReportWeb.Models.ALE
         public string Difetto { get; set; }
         public string Commessa { get; set; }
         public string DataCommessa { get; set; }
-
     }
 
     public class AddebitiModel

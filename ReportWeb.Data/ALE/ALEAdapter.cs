@@ -109,6 +109,17 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillRW_ALE_DETTAGLIO(ALEDS ds, decimal IDALEGRUPPO)
+        {
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE IDALEGRUPPO = $P{IDALEGRUPPO}";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDALEGRUPPO", DbType.Decimal, IDALEGRUPPO);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.RW_ALE_DETTAGLIO);
+            }
+        }
 
         public void FillCLIFO(ALEDS ds)
         {

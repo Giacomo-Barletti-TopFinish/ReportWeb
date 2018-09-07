@@ -75,7 +75,7 @@ namespace ReportWeb.Controllers
         {
             ALEBLL bll = new ALEBLL();
             List<GruppoModel> model = bll.LeggiGruppiAddebito();
-            List<GruppoModel> altri = bll.LeggiAltriGruppi();
+            List<GruppoModel> altri = bll.LeggiAltriGruppiNonAddebito();
             model.AddRange(altri);
             return PartialView("AddebitoGruppiPartial", model);
         }
@@ -98,10 +98,24 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaGruppiValorizzati()
         {
             ALEBLL bll = new ALEBLL();
-            List<GruppoModel> model = bll.LeggiGruppiAddebito();
-            return PartialView("AddebitoGruppiPartial", model);
-          //  return PartialView("GruppiValorizzatiPartial");
+            List<GruppoValorizzatoModel> model = bll.LeggiGruppiValorizzati();
+            List<GruppoValorizzatoModel> altri = bll.LeggiAltriGruppiNonValorizzati();
+            model.AddRange(altri);
+            return PartialView("GruppiValorizzatiPartial", model);
         }
 
+        public ActionResult Valorizza(string IDALEGRUPPO, string Dettagli, string Nota)
+        {
+            ALEBLL bll = new ALEBLL();
+            bll.Valorizza( IDALEGRUPPO,  Dettagli,Nota,  ConnectedUser);
+            return null;
+        }
+
+        public ActionResult AnnullaValorizzazione(string IDALEGRUPPO)
+        {
+            ALEBLL bll = new ALEBLL();
+            bll.AnnullaValorizzazione(IDALEGRUPPO,ConnectedUser);
+            return null;
+        }
     }
 }

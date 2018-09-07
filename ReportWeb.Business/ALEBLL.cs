@@ -284,7 +284,7 @@ namespace ReportWeb.Business
                     }
 
                     ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == IDALEGRUPPO).FirstOrDefault();
-                    if(gruppo!=null)
+                    if (gruppo != null)
                         gruppo.Delete();
 
                     bALE.UpdateRW_ALE_DETTAGLIO(ds);
@@ -393,7 +393,7 @@ namespace ReportWeb.Business
             return model;
         }
 
-        public List<GruppoModel> LeggiAltriGruppi()
+        public List<GruppoModel> LeggiAltriGruppiNonAddebito()
         {
             List<GruppoModel> model = new List<GruppoModel>();
 
@@ -411,7 +411,7 @@ namespace ReportWeb.Business
                 bALE.FillUSR_ANA_DIFETTI(ds);
                 foreach (ALEDS.RW_ALE_GRUPPORow gruppo in ds.RW_ALE_GRUPPO)
                 {
-                    if(ds.RW_ALE_DETTAGLIO.Any(x=>x.IDALEGRUPPO==gruppo.IDALEGRUPPO))
+                    if (ds.RW_ALE_DETTAGLIO.Any(x => x.IDALEGRUPPO == gruppo.IDALEGRUPPO))
                     {
                         GruppoModel grModel = new GruppoModel();
                         grModel.IDALEGRUPPO = gruppo.IDALEGRUPPO;
@@ -444,5 +444,182 @@ namespace ReportWeb.Business
 
             return model;
         }
+
+        public void Valorizza(string IDALEGRUPPO, string Dettagli, string NotaGruppo, string UIDUSER)
+        {
+            ALEValorizzaJson[] Valorizzati = JSonSerializer.Deserialize<ALEValorizzaJson[]>(Dettagli);
+            decimal idAleAgruppo = decimal.Parse(IDALEGRUPPO);
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                long idGruppo = long.Parse(IDALEGRUPPO);
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_DETTAGLIO(ds, idAleAgruppo);
+                bALE.FillRW_ALE_GRUPPO(ds, new List<long>(new long[] { idGruppo }));
+
+                foreach (ALEValorizzaJson val in Valorizzati)
+                {
+                    ALEDS.RW_ALE_DETTAGLIORow dettaglio = ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEDETTAGLIO == val.IdAleDettaglio).FirstOrDefault();
+                    if (dettaglio != null)
+                    {
+                        dettaglio.PREZZO = val.Prezzo;
+                        dettaglio.STATO = ALEStatoDettaglio.VALORIZZATO;
+                        dettaglio.UIDUSER = UIDUSER;
+                        dettaglio.NOTAVALORIZZAZIONE = val.Nota;
+                    }
+                }
+                ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == idGruppo).FirstOrDefault();
+                if (gruppo != null)
+                {
+                    gruppo.NOTAVALORIZZAZIONE = NotaGruppo;
+                }
+                bALE.UpdateRW_ALE_DETTAGLIO(ds);
+                bALE.UpdateRW_ALE_GRUPPO(ds);
+            }
+        }
+
+        public void AnnullaValorizzazione(string IDALEGRUPPO, string UIDUSER)
+        {
+            decimal idAleAgruppo = decimal.Parse(IDALEGRUPPO);
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                long idGruppo = long.Parse(IDALEGRUPPO);
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_DETTAGLIO(ds, idAleAgruppo);
+                bALE.FillRW_ALE_GRUPPO(ds, new List<long>(new long[] { idGruppo }));
+
+                foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == idGruppo))
+                {
+                    dettaglio.SetPREZZONull();
+                    dettaglio.STATO = ALEStatoDettaglio.ADDEBITATO;
+                    dettaglio.UIDUSER = UIDUSER;
+                    dettaglio.SetNOTAVALORIZZAZIONENull();
+                }
+                ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == idGruppo).FirstOrDefault();
+                if (gruppo != null)
+                {
+                    gruppo.SetNOTAVALORIZZAZIONENull();
+                }
+                bALE.UpdateRW_ALE_DETTAGLIO(ds);
+                bALE.UpdateRW_ALE_GRUPPO(ds);
+            }
+        }
+
+        public List<GruppoValorizzatoModel> LeggiGruppiValorizzati()
+        {
+            List<GruppoValorizzatoModel> model = new List<GruppoValorizzatoModel>();
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.VALORIZZATO);
+
+                List<long> IDALEGRUPPO = ds.RW_ALE_DETTAGLIO.Select(x => (long)x.IDALEGRUPPO).Distinct().ToList();
+                bALE.FillRW_ALE_GRUPPO(ds, IDALEGRUPPO);
+                bALE.FillCLIFO(ds);
+                bALE.FillUSR_TAB_TIPODIFETTI(ds);
+                bALE.FillUSR_ANA_DIFETTI(ds);
+                foreach (ALEDS.RW_ALE_GRUPPORow gruppo in ds.RW_ALE_GRUPPO)
+                {
+                    GruppoValorizzatoModel grModel = new GruppoValorizzatoModel();
+                    grModel.IDALEGRUPPO = gruppo.IDALEGRUPPO;
+                    grModel.Aperto = (gruppo.APERTO == "0");
+                    grModel.Dettagli = new List<ValorizzatoModel>();
+
+                    grModel.LavoranteCodice = gruppo.LAVORANTE.Trim();
+                    grModel.LavoranteDescrizione = string.Empty;
+                    grModel.ValorizzazioneAnnullabile = true;
+                    ALEDS.CLIFORow lavorante = ds.CLIFO.Where(x => x.CODICE.Trim() == grModel.LavoranteCodice).FirstOrDefault();
+                    if (lavorante != null)
+                        grModel.LavoranteDescrizione = lavorante.IsRAGIONESOCNull() ? string.Empty : lavorante.RAGIONESOC.Trim();
+
+                    grModel.NotaValorizzazione = gruppo.IsNOTAVALORIZZAZIONENull() ? string.Empty : gruppo.NOTAVALORIZZAZIONE;
+
+                    foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == gruppo.IDALEGRUPPO))
+                    {
+                        bALE.FillUSR_CHECKQ_C(ds, riga.IDCHECKQT);
+                        bALE.FillUSR_CHECKQ_T(ds, riga.BARCODE);
+                        ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
+                        bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
+                        bALE.FillUSR_PRD_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
+                        AddebitoModel am = CreaAddebitoModel(ds, riga, CHECKQ_T);
+                        ValorizzatoModel m = new ValorizzatoModel()
+                        {
+                            Commessa = am.Commessa,
+                            DataCommessa = am.DataCommessa,
+                            Difetto = am.Difetto,
+                            IdAleDettaglio = am.IdAleDettaglio,
+                            IdAleGruppo = am.IdAleGruppo,
+                            LavoranteCodice = am.LavoranteCodice,
+                            LavoranteDescrizione = am.LavoranteDescrizione,
+                            Modello = am.Modello,
+                            ModelloDescrizione = am.ModelloDescrizione,
+                            Nota = am.Nota,
+                            NotaAddebito = am.NotaAddebito,
+                            QuantitaAddebitata = am.QuantitaAddebitata,
+                            QuantitaDifettosi = am.QuantitaDifettosi,
+                            QuantitaInseriti = am.QuantitaInseriti,
+                            TipoDifetto = am.TipoDifetto
+                        };
+                        m.NotaValorizzazione = riga.IsNOTAVALORIZZAZIONENull() ? string.Empty : riga.NOTAVALORIZZAZIONE;
+                        m.Prezzo = riga.IsPREZZONull() ? 0 : riga.PREZZO;
+                        grModel.Dettagli.Add(m);
+                    }
+                    model.Add(grModel);
+                }
+            }
+
+            return model;
+        }
+
+        public List<GruppoValorizzatoModel> LeggiAltriGruppiNonValorizzati()
+        {
+            List<GruppoValorizzatoModel> model = new List<GruppoValorizzatoModel>();
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.APPROVATO);
+                bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.FATTURATO);
+
+                List<long> IDALEGRUPPO = ds.RW_ALE_DETTAGLIO.Select(x => (long)x.IDALEGRUPPO).Distinct().ToList();
+                bALE.FillRW_ALE_GRUPPO(ds, IDALEGRUPPO);
+                bALE.FillCLIFO(ds);
+                bALE.FillUSR_TAB_TIPODIFETTI(ds);
+                bALE.FillUSR_ANA_DIFETTI(ds);
+                foreach (ALEDS.RW_ALE_GRUPPORow gruppo in ds.RW_ALE_GRUPPO)
+                {
+                    GruppoValorizzatoModel grModel = new GruppoValorizzatoModel();
+                    grModel.IDALEGRUPPO = gruppo.IDALEGRUPPO;
+                    grModel.Aperto = (gruppo.APERTO == "0");
+                    grModel.Dettagli = new List<ValorizzatoModel>();
+
+                    grModel.LavoranteCodice = gruppo.LAVORANTE.Trim();
+                    grModel.LavoranteDescrizione = string.Empty;
+                    grModel.ValorizzazioneAnnullabile = false;
+                    ALEDS.CLIFORow lavorante = ds.CLIFO.Where(x => x.CODICE.Trim() == grModel.LavoranteCodice).FirstOrDefault();
+                    if (lavorante != null)
+                        grModel.LavoranteDescrizione = lavorante.IsRAGIONESOCNull() ? string.Empty : lavorante.RAGIONESOC.Trim();
+
+                    grModel.NotaValorizzazione = gruppo.IsNOTAVALORIZZAZIONENull() ? string.Empty : gruppo.NOTAVALORIZZAZIONE;
+
+                    foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == gruppo.IDALEGRUPPO))
+                    {
+                        bALE.FillUSR_CHECKQ_C(ds, riga.IDCHECKQT);
+                        bALE.FillUSR_CHECKQ_T(ds, riga.BARCODE);
+                        ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
+                        bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
+                        bALE.FillUSR_PRD_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
+                        ValorizzatoModel m = (ValorizzatoModel)CreaAddebitoModel(ds, riga, CHECKQ_T);
+                        m.NotaValorizzazione = riga.IsNOTAVALORIZZAZIONENull() ? string.Empty : riga.NOTAVALORIZZAZIONE;
+                        m.Prezzo = riga.IsPREZZONull() ? 0 : riga.PREZZO;
+                        grModel.Dettagli.Add(m);
+                    }
+                    model.Add(grModel);
+                }
+            }
+
+            return model;
+        }
+
     }
 }

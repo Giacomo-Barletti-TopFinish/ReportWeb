@@ -46,9 +46,11 @@
     <Compile Include="ALE\ALEStatoRichiesta.cs" />
     <Compile Include="ALE\GruppiModel.cs" />
     <Compile Include="ALE\InserimentoModel.cs" />
+    <Compile Include="ALE\ValorizzatoModel.cs" />
     <Compile Include="GalvanicaConsuntivoModel.cs" />
     <Compile Include="GalvanicaReportModel.cs" />
     <Compile Include="JSON\ALEAddebitiJsonModel.cs" />
+    <Compile Include="JSON\ALEValorizzaJson.cs" />
     <Compile Include="JSON\FermiJsonModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="MenuModel.cs" />
