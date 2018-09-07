@@ -45,8 +45,10 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td colspan="9">
+                                <td colspan="2">
+                                    @string.Format("Commessa: {0} del {1}", @a.Commessa, @a.DataCommessa)
+                                </td>
+                                <td colspan="8">
                                     @a.Nota
                                 </td>
                             </tr>
@@ -106,85 +108,6 @@
         });
     }
 
-    function Addebita()
-    {
-        var addebiti = [];
-        $('.chkRWALE').each(function ()
-        {
 
-            var checked = $(this).prop('checked');
-            if (checked)
-            {
-                var trCheckbox = $(this).closest('tr');
-                var IdAleDettaglio = $(".hdIdAleDettaglio", trCheckbox).val();
-                var qta = $(".rwqta", trCheckbox).val();
-                var nota = $(".rwtxt", trCheckbox).val();
-
-                var addebito = {
-                    'IdAleDettaglio': IdAleDettaglio, 'Qta': qta, 'Nota': nota
-                };
-                addebiti.push(addebito);
-            }
-        });
-
-        var esito = true;
-        var messaggio = '';
-        if (addebiti.length == 0)
-        {
-            messaggio += MESSAGGIO_PUNTINO + " " + "selezionare almeno un addebito" + "</br>";
-            esito = false;
-        }
-
-        var totale = 0;
-        for (var i = 0; i < addebiti.length; i++)
-        {
-            var qta = addebiti[i].Qta;
-            if (qta == '')
-            {
-                $('#.lblMessage').val("Ci sono addebiti senza quantità");
-                return;
-            }
-            else
-                totale = totale + parseInt(qta);
-        }
-        if (esito && totale == 0)
-        {
-            messaggio += MESSAGGIO_PUNTINO + " " + "le quantità degli addebiti sono tutte zero" + "</br>";
-            esito = false;
-        }
-
-        var lavorante = $('#ddlLavoranti').val();
-        if (lavorante == '')
-        {
-            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il lavorante esterno a cui addebitare le lavorazioni" + "</br>";
-            esito = false;
-        }
-
-        $('#lblMessage').html(messaggio);
-
-        if (!esito)
-            return;
-
-        var txtNotaGruppo = $('#txtNotaGruppo').val();
-        var addebitiJson = JSON.stringify(addebiti);
-
-        var url = '@Url.Action("Addebita", "ALE")';
-        $.ajax({
-            url: url,
-            data: { NotaGruppo: txtNotaGruppo, Lavorante: lavorante, Addebiti: addebitiJson },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                CaricaAddebitoNuoviElementiPartial();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-    }
 
 </script>

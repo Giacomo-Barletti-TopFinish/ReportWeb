@@ -272,5 +272,36 @@ namespace ReportWeb.Data
                 a.Update(dt);
             }
         }
+
+        public void FillRW_ALE_GRUPPO(ALEDS ds, List<long> IDALEGRUPPO)
+        {
+            if (IDALEGRUPPO.Count > 0)
+            {
+                string result = ConvertToStringForInCondition(IDALEGRUPPO);
+                string select = @"SELECT * FROM RW_ALE_GRUPPO WHERE IDALEGRUPPO in ({0})";
+                select = string.Format(CultureInfo.InvariantCulture, select, result);
+
+                using (DbDataAdapter da = BuildDataAdapter(select))
+                {
+                    da.Fill(ds.RW_ALE_GRUPPO);
+                }
+
+            }
+        }
+
+        public void FillRW_ALE_GRUPPO(ALEDS ds, bool Aperto)
+        {
+            string select = @"SELECT * FROM RW_ALE_GRUPPO WHERE APERTO= $P{APERTO}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("APERTO", DbType.String, Aperto ? "1" : "0");
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.RW_ALE_GRUPPO);
+            }
+
+        }
+
     }
 }

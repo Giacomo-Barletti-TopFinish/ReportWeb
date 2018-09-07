@@ -1,4 +1,5 @@
 ﻿using MetalPlus.Kernel.Data.Core;
+using ReportWeb.Common.Helpers;
 using ReportWeb.Entities;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,8 @@ namespace ReportWeb.Data.Galvanica
 
         {
             GalvanicaAdapter a = new GalvanicaAdapter(DbConnection, DbTransaction);
+            LogManagerHelper.WriteMessage(string.Format("connessione: {0}", DbConnection.ConnectionString));
+
             a.SalvaFermo(IdConsuntivo, Tipo, Ora, Durata, Motivo, UIDUSER);
         }
 

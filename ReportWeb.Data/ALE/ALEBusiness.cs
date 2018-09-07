@@ -132,8 +132,26 @@ namespace ReportWeb.Data.ALE
         public void UpdateRW_ALE_DETTAGLIO(ALEDS ds)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
-            a.UpdateALEDSTable(ds.RW_ALE_DETTAGLIO.TableName,ds);
+            a.UpdateALEDSTable(ds.RW_ALE_DETTAGLIO.TableName, ds);
         }
 
+        [DataContext]
+        public void FillRW_ALE_GRUPPO(ALEDS ds, List<long> IDALEGRUPPO)
+        {
+            ALEAdapter a = new Data.ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_GRUPPO(ds, IDALEGRUPPO);
+        }
+        [DataContext(true)]
+        public void UpdateRW_ALE_GRUPPO(ALEDS ds)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.UpdateALEDSTable(ds.RW_ALE_GRUPPO.TableName, ds);
+        }
+        [DataContext]
+        public void FillRW_ALE_GRUPPO(ALEDS ds, bool Aperto)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_GRUPPO(ds, Aperto);
+        }
     }
 }

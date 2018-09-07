@@ -1,4 +1,5 @@
-﻿using ReportWeb.Entities;
+﻿using ReportWeb.Common.Helpers;
+using ReportWeb.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -101,10 +102,13 @@ namespace ReportWeb.Data.Galvanica
             ps.AddParam("MOTIVO", DbType.String, Motivo);
             ps.AddParam("DATA_INSERIMENTO", DbType.DateTime, DateTime.Now);
             ps.AddParam("UIDUSER", DbType.String, UIDUSER);
+            LogManagerHelper.WriteMessage(string.Format("Salva fermo: IDCONSUNTIVO {0}", IdConsuntivo));
 
             using (DbCommand cmd = BuildCommand(insert, ps))
             {
+                LogManagerHelper.WriteMessage(string.Format("Salva fermo prima"));
                 cmd.ExecuteNonQuery();
+                LogManagerHelper.WriteMessage(string.Format("Salva fermo dopo"));
             }
         }
     }

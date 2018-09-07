@@ -158,41 +158,12 @@ namespace ReportWeb.Business
 
                 foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO)
                 {
-                    AddebitoModel m = new AddebitoModel();
-                    m.IdAleDettaglio = riga.IDALEDETTAGLIO;
-                    m.IdAleGruppo = riga.IsIDALEGRUPPONull() ? -1 : riga.IDALEGRUPPO;
-                    m.QuantitaDifettosi = riga.QUANTITADIFETTOSI;
-                    m.QuantitaInseriti = riga.QUANTITAINSERITA;
-                    m.QuantitaAddebitata = riga.IsQUANTITAADDEBITATANull() ? 0 : riga.QUANTITAADDEBITATA;
-                    m.Nota = riga.IsNOTANull() ? string.Empty : riga.NOTA;
-                    m.NotaAddebito = riga.IsNOTAADDEBITONull() ? string.Empty : riga.NOTAADDEBITO;
-                    m.LavoranteCodice = riga.LAVORANTE.Trim();
-                    m.LavoranteDescrizione = string.Empty;
-                    ALEDS.CLIFORow lavorante = ds.CLIFO.Where(x => x.CODICE.Trim() == m.LavoranteCodice).FirstOrDefault();
-                    if (lavorante != null)
-                    {
-                        m.LavoranteDescrizione = lavorante.IsRAGIONESOCNull() ? string.Empty : lavorante.RAGIONESOC;
-                    }
-
+                    bALE.FillUSR_CHECKQ_C(ds, riga.IDCHECKQT);
                     bALE.FillUSR_CHECKQ_T(ds, riga.BARCODE);
                     ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
                     bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
-                    ALEDS.MAGAZZRow modello = ds.MAGAZZ.Where(x => x.IDMAGAZZ == CHECKQ_T.IDMAGAZZ).FirstOrDefault();
-                    m.Modello = modello.MODELLO;
-                    m.ModelloDescrizione = modello.DESMAGAZZ;
-
-                    bALE.FillUSR_CHECKQ_C(ds, CHECKQ_T.IDCHECKQT);
-                    ALEDS.USR_CHECKQ_CRow CHECKQ_C = ds.USR_CHECKQ_C.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
-
-                    m.Difetto = string.Empty;
-                    m.TipoDifetto = string.Empty;
-                    if (CHECKQ_C != null)
-                    {
-                        ALEDS.USR_ANA_DIFETTIRow difetto = ds.USR_ANA_DIFETTI.Where(x => x.IDDIFETTO == CHECKQ_C.IDDIFETTO).FirstOrDefault();
-                        ALEDS.USR_TAB_TIPODIFETTIRow tipoDifetto = ds.USR_TAB_TIPODIFETTI.Where(x => x.IDTIPODIFETTO == difetto.IDTIPODIFETTO).FirstOrDefault();
-                        m.TipoDifetto = tipoDifetto.DESTIPODIFETTO;
-                        m.Difetto = difetto.DESDIFETTO;
-                    }
+                    bALE.FillUSR_PRD_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
+                    AddebitoModel m = CreaAddebitoModel(ds, riga, CHECKQ_T);
                     model.Addebiti.Add(m);
                 }
 
@@ -200,6 +171,49 @@ namespace ReportWeb.Business
 
             }
             return model;
+        }
+
+        private AddebitoModel CreaAddebitoModel(ALEDS ds, ALEDS.RW_ALE_DETTAGLIORow riga, ALEDS.USR_CHECKQ_TRow CHECKQ_T)
+        {
+            AddebitoModel m = new AddebitoModel();
+            m.IdAleDettaglio = riga.IDALEDETTAGLIO;
+            m.IdAleGruppo = riga.IsIDALEGRUPPONull() ? -1 : riga.IDALEGRUPPO;
+            m.QuantitaDifettosi = riga.QUANTITADIFETTOSI;
+            m.QuantitaInseriti = riga.QUANTITAINSERITA;
+            m.QuantitaAddebitata = riga.IsQUANTITAADDEBITATANull() ? 0 : riga.QUANTITAADDEBITATA;
+            m.Nota = riga.IsNOTANull() ? string.Empty : riga.NOTA;
+            m.NotaAddebito = riga.IsNOTAADDEBITONull() ? string.Empty : riga.NOTAADDEBITO;
+            m.LavoranteCodice = riga.LAVORANTE.Trim();
+            m.LavoranteDescrizione = string.Empty;
+            ALEDS.CLIFORow lavorante = ds.CLIFO.Where(x => x.CODICE.Trim() == m.LavoranteCodice).FirstOrDefault();
+            if (lavorante != null)
+            {
+                m.LavoranteDescrizione = lavorante.IsRAGIONESOCNull() ? string.Empty : lavorante.RAGIONESOC;
+            }
+
+            ALEDS.MAGAZZRow modello = ds.MAGAZZ.Where(x => x.IDMAGAZZ == CHECKQ_T.IDMAGAZZ).FirstOrDefault();
+            m.Modello = modello.MODELLO;
+            m.ModelloDescrizione = modello.DESMAGAZZ;
+
+            ALEDS.USR_CHECKQ_CRow CHECKQ_C = ds.USR_CHECKQ_C.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
+
+            m.Difetto = string.Empty;
+            m.TipoDifetto = string.Empty;
+            if (CHECKQ_C != null)
+            {
+                ALEDS.USR_ANA_DIFETTIRow difetto = ds.USR_ANA_DIFETTI.Where(x => x.IDDIFETTO == CHECKQ_C.IDDIFETTO).FirstOrDefault();
+                ALEDS.USR_TAB_TIPODIFETTIRow tipoDifetto = ds.USR_TAB_TIPODIFETTI.Where(x => x.IDTIPODIFETTO == difetto.IDTIPODIFETTO).FirstOrDefault();
+                m.TipoDifetto = tipoDifetto.DESTIPODIFETTO;
+                m.Difetto = difetto.DESDIFETTO;
+            }
+
+            ALEDS.USR_PRD_MOVFASIRow MovFase = ds.USR_PRD_MOVFASI.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
+            if (MovFase != null)
+            {
+                m.Commessa = MovFase.IsRIFERIMENTO_INFRANull() ? string.Empty : MovFase.RIFERIMENTO_INFRA;
+                m.DataCommessa = MovFase.IsDATARIF_INFRANull() ? string.Empty : MovFase.DATARIF_INFRA.ToShortDateString();
+            }
+            return m;
         }
 
         public bool VerificaBarcodeCaricato(string Barcode)
@@ -212,7 +226,7 @@ namespace ReportWeb.Business
             }
         }
 
-        public void Addebita(string NotaGruppo,string Lavorante, string AddebitiJson, string UIDUSER)
+        public void Addebita(string NotaGruppo, string Lavorante, string AddebitiJson, string UIDUSER)
         {
             ALEAddebitiJsonModel[] addebiti = JSonSerializer.Deserialize<ALEAddebitiJsonModel[]>(AddebitiJson);
 
@@ -246,6 +260,142 @@ namespace ReportWeb.Business
                     throw;
                 }
             }
+        }
+
+        public void AnnullaAddebita(int IDALEGRUPPO)
+        {
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                try
+                {
+                    ALEDS ds = new ALEDS();
+                    bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.ADDEBITATO);
+                    bALE.FillRW_ALE_GRUPPO(ds, new List<long>(new long[] { IDALEGRUPPO }));
+
+
+
+                    foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == IDALEGRUPPO))
+                    {
+                        dettaglio.SetIDALEGRUPPONull();
+                        dettaglio.SetQUANTITAADDEBITATANull();
+                        dettaglio.SetNOTAADDEBITONull();
+                        dettaglio.STATO = ALEStatoDettaglio.INSERITO;
+                    }
+
+                    ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == IDALEGRUPPO).FirstOrDefault();
+                    if(gruppo!=null)
+                        gruppo.Delete();
+
+                    bALE.UpdateRW_ALE_DETTAGLIO(ds);
+                    bALE.UpdateRW_ALE_GRUPPO(ds);
+
+                }
+                catch
+                {
+                    bALE.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        public List<GruppoModel> LeggiGruppiAddebito()
+        {
+            List<GruppoModel> model = new List<GruppoModel>();
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.ADDEBITATO);
+
+                List<long> IDALEGRUPPO = ds.RW_ALE_DETTAGLIO.Select(x => (long)x.IDALEGRUPPO).Distinct().ToList();
+                bALE.FillRW_ALE_GRUPPO(ds, IDALEGRUPPO);
+                bALE.FillCLIFO(ds);
+                bALE.FillUSR_TAB_TIPODIFETTI(ds);
+                bALE.FillUSR_ANA_DIFETTI(ds);
+                foreach (ALEDS.RW_ALE_GRUPPORow gruppo in ds.RW_ALE_GRUPPO)
+                {
+                    GruppoModel grModel = new GruppoModel();
+                    grModel.IDALEGRUPPO = gruppo.IDALEGRUPPO;
+                    grModel.Aperto = (gruppo.APERTO == "0");
+                    grModel.Dettagli = new List<AddebitoModel>();
+
+                    grModel.LavoranteCodice = gruppo.LAVORANTE.Trim();
+                    grModel.LavoranteDescrizione = string.Empty;
+                    grModel.AddebitoAnnulabile = true;
+                    ALEDS.CLIFORow lavorante = ds.CLIFO.Where(x => x.CODICE.Trim() == grModel.LavoranteCodice).FirstOrDefault();
+                    if (lavorante != null)
+                        grModel.LavoranteDescrizione = lavorante.IsRAGIONESOCNull() ? string.Empty : lavorante.RAGIONESOC.Trim();
+
+                    grModel.NotaAddebito = gruppo.IsNOTAADDEBITONull() ? string.Empty : gruppo.NOTAADDEBITO;
+
+                    foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == gruppo.IDALEGRUPPO))
+                    {
+                        bALE.FillUSR_CHECKQ_C(ds, riga.IDCHECKQT);
+                        bALE.FillUSR_CHECKQ_T(ds, riga.BARCODE);
+                        ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
+                        bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
+                        bALE.FillUSR_PRD_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
+                        AddebitoModel m = CreaAddebitoModel(ds, riga, CHECKQ_T);
+                        grModel.Dettagli.Add(m);
+                    }
+                    model.Add(grModel);
+                }
+            }
+
+            return model;
+        }
+
+        public List<GruppoModel> LeggiAltriGruppi()
+        {
+            List<GruppoModel> model = new List<GruppoModel>();
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_GRUPPO(ds, true);
+
+                bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.ADDEBITATO);
+                bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.VALORIZZATO);
+                bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.APPROVATO);
+
+                bALE.FillCLIFO(ds);
+                bALE.FillUSR_TAB_TIPODIFETTI(ds);
+                bALE.FillUSR_ANA_DIFETTI(ds);
+                foreach (ALEDS.RW_ALE_GRUPPORow gruppo in ds.RW_ALE_GRUPPO)
+                {
+                    if(ds.RW_ALE_DETTAGLIO.Any(x=>x.IDALEGRUPPO==gruppo.IDALEGRUPPO))
+                    {
+                        GruppoModel grModel = new GruppoModel();
+                        grModel.IDALEGRUPPO = gruppo.IDALEGRUPPO;
+                        grModel.Aperto = (gruppo.APERTO == "0");
+                        grModel.Dettagli = new List<AddebitoModel>();
+
+                        grModel.LavoranteCodice = gruppo.LAVORANTE.Trim();
+                        grModel.LavoranteDescrizione = string.Empty;
+                        grModel.AddebitoAnnulabile = false;
+                        ALEDS.CLIFORow lavorante = ds.CLIFO.Where(x => x.CODICE.Trim() == grModel.LavoranteCodice).FirstOrDefault();
+                        if (lavorante != null)
+                            grModel.LavoranteDescrizione = lavorante.IsRAGIONESOCNull() ? string.Empty : lavorante.RAGIONESOC.Trim();
+
+                        grModel.NotaAddebito = gruppo.IsNOTAADDEBITONull() ? string.Empty : gruppo.NOTAADDEBITO;
+
+                        foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == gruppo.IDALEGRUPPO))
+                        {
+                            bALE.FillUSR_CHECKQ_C(ds, riga.IDCHECKQT);
+                            bALE.FillUSR_CHECKQ_T(ds, riga.BARCODE);
+                            ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
+                            bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
+                            bALE.FillUSR_PRD_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
+                            AddebitoModel m = CreaAddebitoModel(ds, riga, CHECKQ_T);
+                            grModel.Dettagli.Add(m);
+                        }
+                        model.Add(grModel);
+                    }
+                }
+            }
+
+            return model;
         }
     }
 }

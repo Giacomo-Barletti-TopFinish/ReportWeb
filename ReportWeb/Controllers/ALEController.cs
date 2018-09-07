@@ -70,5 +70,22 @@ namespace ReportWeb.Controllers
             bll.Addebita(NotaGruppo, Lavorante, Addebiti, ConnectedUser);
             return null;
         }
+
+        public ActionResult CaricaAddebitoGruppiPartial()
+        {
+            ALEBLL bll = new ALEBLL();
+            List<GruppoModel> model = bll.LeggiGruppiAddebito();
+            List<GruppoModel> altri = bll.LeggiAltriGruppi();
+            model.AddRange(altri);
+            return PartialView("AddebitoGruppiPartial", model);
+        }
+
+        public ActionResult AnnullaAddebito(int IDALEGRUPPO)
+        {
+            ALEBLL bll = new ALEBLL();
+            bll.AnnullaAddebita(IDALEGRUPPO);
+            return null;
+        }
+
     }
 }

@@ -22,11 +22,21 @@ namespace ReportWeb.Business
                 try
                 {
                     long idConsuntivo = bGalvanica.GetID();
-
+                    LogManagerHelper.WriteMessage(string.Format("Inizio",Inizio));
+                    LogManagerHelper.WriteMessage(string.Format("Fine", Fine));
+                    LogManagerHelper.WriteMessage(string.Format("Barre", Barre));
+                    LogManagerHelper.WriteMessage(string.Format("Fermi", Fermi));
+                    LogManagerHelper.WriteMessage(string.Format("UIDUSER", UIDUSER));
                     bGalvanica.SalvaConsuntivo(idConsuntivo, Inizio, Fine, Barre, UIDUSER);
-
+                    LogManagerHelper.WriteMessage("SalvaConsuntivo finito");
                     foreach (FermiJsonModel f in fermiJson)
+                    {
+                        LogManagerHelper.WriteMessage(string.Format("tipo: {0}",f.Tipo));
+                        LogManagerHelper.WriteMessage(string.Format("ora: {0}", f.Ora));
+                        LogManagerHelper.WriteMessage(string.Format("durata: {0}", f.Durata));
+                        LogManagerHelper.WriteMessage(string.Format("motivo: {0}", f.Motivo));
                         bGalvanica.SalvaFermo(idConsuntivo, f.Tipo, f.Ora, f.Durata, f.Motivo, UIDUSER);
+                    }
                 }
                 catch
                 {
