@@ -87,5 +87,21 @@ namespace ReportWeb.Controllers
             return null;
         }
 
+        public ActionResult CaricaGruppiDaValorizzare()
+        {
+            ALEBLL bll = new ALEBLL();
+            List<GruppoModel> model = bll.LeggiGruppiAddebito();
+            return PartialView("GruppiDaValorizzarePartial", model);
+        }
+
+
+        public ActionResult CaricaGruppiValorizzati()
+        {
+            ALEBLL bll = new ALEBLL();
+            List<GruppoModel> model = bll.LeggiGruppiAddebito();
+            return PartialView("AddebitoGruppiPartial", model);
+          //  return PartialView("GruppiValorizzatiPartial");
+        }
+
     }
 }

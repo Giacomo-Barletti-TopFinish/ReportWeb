@@ -1,0 +1,154 @@
+﻿
+@using ReportWeb.Models.ALE
+@model List<GruppoModel>
+
+<div class="col-sm-12">
+    <table class="table table-condensed" id="tblGruppi">
+        <thead>
+            <tr>
+                <th width="5%"><label>ID</label></th>
+                <th width="10%"><label>Lavorante</label></th>
+                <th width="75%"><label>Nota</label></th>
+                <th width="5%"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (GruppoModel a in Model)
+            {
+                <tr valign="top">
+                    <td>@a.IDALEGRUPPO</td>
+                    <td>@a.LavoranteDescrizione</td>
+                    <td>@a.NotaAddebito</td>
+                    <input type="hidden" value="@a.IDALEGRUPPO" class="hdIDALEGRUPPO" />
+                    <td width="10%"><input type="button" onclick="MostraDettaglioGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
+                    <td>
+                        @if (a.AddebitoAnnulabile)
+                        {
+                            <input type="button" onclick="AnnullaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Annulla" />
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <div id="Dettaglio_@a.IDALEGRUPPO" style="display:none">
+                            <table width="100%" class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="font-size:12px">
+                                            Modello
+                                        </th>
+                                        <th style="font-size:12px">
+                                            Difetto
+                                        </th>
+                                        <th style="font-size:12px">
+                                            Lavorante
+                                        </th>
+                                        <th style="font-size:12px">
+                                            Quantita
+                                        </th>
+                                        <th style="font-size:12px">
+                                            Prezzo
+                                        </th>
+                                        <th style="font-size:12px">
+                                            Valore
+                                        </th>
+                                    </tr>
+                                </thead>
+                                @foreach (AddebitoModel dettaglio in a.Dettagli)
+                                {
+                                    <tr>
+                                        <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
+                                        <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
+                                        <td style="font-size:12px">@dettaglio.LavoranteDescrizione</td>
+                                        <td style="font-size:12px">@dettaglio.QuantitaAddebitata</td>
+                                        <td style="font-size:12px">@Html.TextBox("txtQuantita", "", new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
+                                        <td style="font-size:12px"><input readonly type="text" class="RWValore" /></td>
+                                    </tr>
+                                    if (!string.IsNullOrEmpty(dettaglio.Nota))
+                                    {
+                                        <tr>
+                                            <td style="font-size:12px" colspan="6">@string.Format("Nota inserimento: {0}", dettaglio.Nota)</td>
+                                        </tr>
+                                    }
+                                    if (!string.IsNullOrEmpty(dettaglio.NotaAddebito))
+                                    {
+                                        <tr>
+                                            <td style="font-size:12px" colspan="6">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
+                                        </tr>
+                                    }
+                                }
+                                <tr class="RWTotali">
+                                    <td class="text-red">TOTALE</td>
+                                    <td colspan="4"></td>
+                                    <td class="text-red"><input readonly type="text" id="RWTotale" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+
+        $(".RWPrezzo").change(function ()
+        {            
+            var trPrezzo = $(this).closest('tr');
+            var tds = trPrezzo.find('td');
+            var quantita = $(tds[3]).text();
+            prezzo = $(this).val();
+            var prezzoValue = parseFloat(prezzo);
+            var valore = prezzoValue * quantita;
+
+            $(".RWValore", trPrezzo).val(valore.toFixed(2));
+            CalcolaTotale();
+        });
+    });
+
+    function CalcolaTotale()
+    {
+        debugger;
+        var totale = 0;
+        var valori = $('.RWValore');
+        for (var i = 0; i < valori.length; i++)
+        {
+            var valore = $(valori[i]).val();
+            if (valore != '')
+                totale = totale + parseFloat(valore);
+        }
+
+        $('#RWTotale').val(totale.toFixed(2));
+    }
+
+    function MostraDettaglioGruppo(sender, IDALEGRUPPO)
+    {
+        var title = $(sender).attr("value");
+
+        if (title == "Dettaglio")
+        {
+            var divName = "#Dettaglio_" + IDALEGRUPPO;
+            $(divName).show();
+            $(sender).attr("value", "Chiudi");
+        }
+
+        if (title == "Chiudi")
+        {
+            var divName = "#Dettaglio_" + IDALEGRUPPO;
+            $(divName).hide();
+            $(sender).attr("value", "Dettaglio");
+        }
+    }
+
+
+
+</script>
+

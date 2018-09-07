@@ -346,6 +346,53 @@ namespace ReportWeb.Business
             return model;
         }
 
+        public List<GruppoModel> LeggiGruppiDaValorizzare()
+        {
+            List<GruppoModel> model = new List<GruppoModel>();
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.ADDEBITATO);
+
+                List<long> IDALEGRUPPO = ds.RW_ALE_DETTAGLIO.Select(x => (long)x.IDALEGRUPPO).Distinct().ToList();
+                bALE.FillRW_ALE_GRUPPO(ds, IDALEGRUPPO);
+                bALE.FillCLIFO(ds);
+                bALE.FillUSR_TAB_TIPODIFETTI(ds);
+                bALE.FillUSR_ANA_DIFETTI(ds);
+                foreach (ALEDS.RW_ALE_GRUPPORow gruppo in ds.RW_ALE_GRUPPO)
+                {
+                    GruppoModel grModel = new GruppoModel();
+                    grModel.IDALEGRUPPO = gruppo.IDALEGRUPPO;
+                    grModel.Aperto = (gruppo.APERTO == "0");
+                    grModel.Dettagli = new List<AddebitoModel>();
+
+                    grModel.LavoranteCodice = gruppo.LAVORANTE.Trim();
+                    grModel.LavoranteDescrizione = string.Empty;
+                    grModel.AddebitoAnnulabile = true;
+                    ALEDS.CLIFORow lavorante = ds.CLIFO.Where(x => x.CODICE.Trim() == grModel.LavoranteCodice).FirstOrDefault();
+                    if (lavorante != null)
+                        grModel.LavoranteDescrizione = lavorante.IsRAGIONESOCNull() ? string.Empty : lavorante.RAGIONESOC.Trim();
+
+                    grModel.NotaAddebito = gruppo.IsNOTAADDEBITONull() ? string.Empty : gruppo.NOTAADDEBITO;
+
+                    foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == gruppo.IDALEGRUPPO))
+                    {
+                        bALE.FillUSR_CHECKQ_C(ds, riga.IDCHECKQT);
+                        bALE.FillUSR_CHECKQ_T(ds, riga.BARCODE);
+                        ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
+                        bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
+                        bALE.FillUSR_PRD_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
+                        AddebitoModel m = CreaAddebitoModel(ds, riga, CHECKQ_T);
+                        grModel.Dettagli.Add(m);
+                    }
+                    model.Add(grModel);
+                }
+            }
+
+            return model;
+        }
+
         public List<GruppoModel> LeggiAltriGruppi()
         {
             List<GruppoModel> model = new List<GruppoModel>();
