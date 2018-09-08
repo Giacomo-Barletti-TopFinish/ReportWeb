@@ -525,7 +525,7 @@ namespace ReportWeb.Business
                 bALE.FillRW_ALE_DETTAGLIO(ds, idAleAgruppo);
                 bALE.FillRW_ALE_GRUPPO(ds, new List<long>(new long[] { idGruppo }));
 
-                foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEDETTAGLIO == idAleAgruppo))
+                foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == idAleAgruppo))
                 {
                     dettaglio.SetPREZZO_APPROVATONull();
                     dettaglio.STATO = ALEStatoDettaglio.VALORIZZATO;

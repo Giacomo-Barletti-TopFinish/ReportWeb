@@ -32,7 +32,7 @@
                 <tr>
                     <td></td>
                     <td colspan="2">
-                        <div id="DettaglioVal_@a.IDALEGRUPPO" style="display:none">
+                        <div id="Dettaglio_@a.IDALEGRUPPO" style="display:none">
                             <table width="100%" class="table">
                                 <thead>
                                     <tr>
@@ -157,16 +157,16 @@
     {
         var title = $(sender).attr("value");
 
+        var divName = "#Dettaglio_" + IDALEGRUPPO;
+
         if (title == "Dettaglio")
         {
-            var divName = "#DettaglioVal_" + IDALEGRUPPO;
             $(divName).show();
             $(sender).attr("value", "Chiudi");
         }
 
         if (title == "Chiudi")
         {
-            var divName = "#DettaglioVal_" + IDALEGRUPPO;
             $(divName).hide();
             $(sender).attr("value", "Dettaglio");
         }
@@ -174,7 +174,7 @@
 
    function ApprovaGruppo(sender, IDALEGRUPPO)
     {
-
+       debugger;
         var divGruppoName = "#Dettaglio_" + IDALEGRUPPO;
         var divGruppo = $(divGruppoName);
 
