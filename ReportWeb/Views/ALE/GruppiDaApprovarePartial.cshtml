@@ -1,6 +1,6 @@
 ﻿
 @using ReportWeb.Models.ALE
-@model List<GruppoModel>
+@model List<GruppoValorizzatoModel>
 
 <div class="col-sm-12">
     <table class="table table-condensed" id="tblGruppi">
@@ -14,73 +14,87 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (GruppoModel a in Model)
+            @foreach (GruppoValorizzatoModel a in Model)
             {
                 <tr valign="top">
                     <td>@a.IDALEGRUPPO</td>
                     <td>@a.LavoranteDescrizione</td>
-                    <td>@a.NotaAddebito</td>
+                    <td>@a.NotaValorizzazione</td>
                     <input type="hidden" value="@a.IDALEGRUPPO" class="hdIDALEGRUPPO" />
-                    <td width="10%"><input type="button" onclick="MostraDettaglioGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
+                    <td width="10%"><input type="button" onclick="MostraDettaglioValGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
                     <td>
-                        @if (a.AddebitoAnnulabile)
+                        @if (a.ValorizzazioneAnnullabile)
                         {
-                            <input type="button" onclick="ValorizzaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Valorizza" />
+                            <input type="button" onclick="ApprovaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Approva" />
                         }
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td colspan="2">
-                        <div id="Dettaglio_@a.IDALEGRUPPO" style="display:none">
+                        <div id="DettaglioVal_@a.IDALEGRUPPO" style="display:none">
                             <table width="100%" class="table">
                                 <thead>
                                     <tr>
-                                        <th style="font-size:12px">
+                                        <th style="font-size:11px">
                                             Modello
                                         </th>
-                                        <th style="font-size:12px">
+                                        <th style="font-size:11px">
                                             Difetto
                                         </th>
-                                        <th style="font-size:12px">
+                                        <th style="font-size:11px">
                                             Lavorante
                                         </th>
-                                        <th style="font-size:12px">
-                                            Quantita
+                                        <th style="font-size:11px">
+                                            Qta.Add
                                         </th>
-                                        <th style="font-size:12px">
+                                        <th style="font-size:11px">
                                             Prezzo
                                         </th>
-                                        <th style="font-size:12px">
+                                        <th style="font-size:11px">
                                             Valore
                                         </th>
-                                        <th style="font-size:12px">
+                                        <th style="font-size:11px">
+                                            Nuovo prezzo
+                                        </th>
+                                        <th style="font-size:11px">
+                                            Valore
+                                        </th>
+                                        <th style="font-size:11px">
                                             Nota
                                         </th>
                                     </tr>
                                 </thead>
-                                @foreach (AddebitoModel dettaglio in a.Dettagli)
+                                @foreach (ValorizzatoModel dettaglio in a.Dettagli)
                                 {
                                     <tr class="RWTRDettaglio">
                                         <input type="hidden" class="hdIdAleDettaglio" value="@dettaglio.IdAleDettaglio" />
-                                        <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
-                                        <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
-                                        <td style="font-size:12px">@dettaglio.LavoranteDescrizione</td>
-                                        <td style="font-size:12px">@dettaglio.QuantitaAddebitata</td>
-                                        <td style="font-size:12px">@Html.TextBox("txtPrezzo", "", new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
-                                        <td style="font-size:12px"><input readonly type="text" class="RWValore" /></td>
+                                        <td style="font-size:11px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
+                                        <td style="font-size:11px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
+                                        <td style="font-size:11px">@dettaglio.LavoranteDescrizione</td>
+                                        <td style="font-size:11px">@dettaglio.QuantitaAddebitata</td>
+                                        <td style="font-size:11px">@dettaglio.Prezzo</td>
+                                        <td style="font-size:11px" class="RWValoreAttribuito">@(dettaglio.Prezzo * dettaglio.QuantitaAddebitata)</td>
+                                        <td style="font-size:12px">@Html.TextBox("txtPrezzo", dettaglio.Prezzo, new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
+                                        <td style="font-size:12px"><input readonly type="text" class="RWValore" value="@(dettaglio.Prezzo*dettaglio.QuantitaAddebitata)"/></td>
                                         <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
                                     </tr>
                                     if (!string.IsNullOrEmpty(dettaglio.Nota))
                                     {
                                         <tr>
-                                            <td style="font-size:12px" colspan="6">@string.Format("Nota inserimento: {0}", dettaglio.Nota)</td>
+                                            <td style="font-size:11px" colspan="6">@string.Format("Nota inserimento: {0}", dettaglio.Nota)</td>
                                         </tr>
                                     }
                                     if (!string.IsNullOrEmpty(dettaglio.NotaAddebito))
                                     {
                                         <tr>
-                                            <td style="font-size:12px" colspan="6">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
+                                            <td style="font-size:11px" colspan="6">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
+                                        </tr>
+                                    }
+                                    if (!string.IsNullOrEmpty(dettaglio.NotaValorizzazione))
+                                    {
+                                        <tr>
+                                            <td style="font-size:11px" colspan="6">@string.Format("Nota addebito: {0}", dettaglio.NotaValorizzazione)</td>
                                         </tr>
                                     }
                                 }
@@ -88,7 +102,9 @@
                                     <td><label>Nota di gruppo</label></td>
                                     <td colspan="3">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNotaGruppo", @style = "height: 21px;" })</td>
                                     <td class="text-red">TOTALE</td>
-                                    <td class="text-red"><input readonly type="text" id="RWTotale" /></td>
+                                    <td class="text-red"><input readonly type="text" id="RWTotaleAtribuito" value="@a.ValoreTotale.ToString()" /></td>
+                                    <td ></td>
+                                    <td class="text-red"><input readonly type="text" id="RWTotale" value="@a.ValoreTotale.ToString()"/></td>
                                 </tr>
                             </table>
                         </div>
@@ -119,6 +135,7 @@
         });
     });
 
+
     function CalcolaTotale(trPrezzo)
     {
         var table = $(trPrezzo).parent();
@@ -136,28 +153,28 @@
         $(tdTotale).val(totale.toFixed(2));
     }
 
-    function MostraDettaglioGruppo(sender, IDALEGRUPPO)
+    function MostraDettaglioValGruppo(sender, IDALEGRUPPO)
     {
         var title = $(sender).attr("value");
 
         if (title == "Dettaglio")
         {
-            var divName = "#Dettaglio_" + IDALEGRUPPO;
+            var divName = "#DettaglioVal_" + IDALEGRUPPO;
             $(divName).show();
             $(sender).attr("value", "Chiudi");
         }
 
         if (title == "Chiudi")
         {
-            var divName = "#Dettaglio_" + IDALEGRUPPO;
+            var divName = "#DettaglioVal_" + IDALEGRUPPO;
             $(divName).hide();
             $(sender).attr("value", "Dettaglio");
         }
     }
 
-    function ValorizzaGruppo(sender, IDALEGRUPPO)
+   function ApprovaGruppo(sender, IDALEGRUPPO)
     {
-        
+
         var divGruppoName = "#Dettaglio_" + IDALEGRUPPO;
         var divGruppo = $(divGruppoName);
 
@@ -165,8 +182,6 @@
         var dettagli = [];
         var notaGruppo = $(".RWNotaGruppo", divGruppo);
 
-        var esito = true;
-        var messaggio = '';
         for (var i = 0 ; i < trDettaglio.length; i++)
         {
             var idDettaglio = $(".hdIdAleDettaglio", trDettaglio[i]);
@@ -175,11 +190,6 @@
             var prezzo = $(".RWPrezzo", trDettaglio[i]);
             var p = $(prezzo).val();
 
-            if (p == '')
-            {
-                esito = false;
-                messaggio = messaggio + "Riga "+(i+1)+" ci prezzo non valorizzato <BR \>"
-            }
             var nota = $(".RWNota", trDettaglio[i]);
             var n = $(nota).val();
 
@@ -187,13 +197,9 @@
             dettagli.push(dettaglio);
         }
 
-        $('#lblMessage').html(messaggio);
-        if (!esito)
-            return;
-
         var dettagliJson = JSON.stringify(dettagli);
 
-        var url = '@Url.Action("Valorizza", "ALE")';
+        var url = '@Url.Action("ApprovaGruppo", "ALE")';
         $.ajax({
             url: url,
             data: { IDALEGRUPPO: IDALEGRUPPO, Dettagli: dettagliJson, Nota: notaGruppo.val() },
@@ -201,8 +207,8 @@
             type: "POST",
             success: function (data)
             {
-                CaricaGruppiDaValorizzare();
-                CaricaGruppiValorizzati();
+                CaricaGruppiDaApprovare();
+                CaricaGruppiApprovati();
             },
             error: function (response)
             {

@@ -23,7 +23,7 @@
     <Shape ID="DesignTable:USR_PRD_MOVFASI" ZOrder="3" X="1016" Y="753" Height="304" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
     <Shape ID="DesignTable:USR_PRD_FLUSSO_MOVFASI" ZOrder="4" X="792" Y="1056" Height="304" Width="230" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
     <Shape ID="DesignTable:RW_ALE_GRUPPO" ZOrder="2" X="537" Y="1083" Height="200" Width="168" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="196" />
-    <Shape ID="DesignTable:RW_ALE_DETTAGLIO" ZOrder="1" X="241" Y="1012" Height="304" Width="185" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
+    <Shape ID="DesignTable:RW_ALE_DETTAGLIO" ZOrder="1" X="175" Y="1002" Height="304" Width="185" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="301" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

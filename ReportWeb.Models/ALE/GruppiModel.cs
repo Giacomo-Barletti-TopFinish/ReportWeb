@@ -27,7 +27,20 @@ namespace ReportWeb.Models.ALE
         public bool Aperto { get; set; }
         public decimal IDALEGRUPPO { get; set; }
         public bool ValorizzazioneAnnullabile { get; set; }
+        public decimal ValoreTotale{ get; set; }
+    }
 
+    public class GruppoApprovatoModel
+    {
+        public List<ApprovatoModel> Dettagli { get; set; }
+        public string NotaApprovazione { get; set; }
+        public string LavoranteCodice { get; set; }
+        public string LavoranteDescrizione { get; set; }
+        public bool Aperto { get; set; }
+        public decimal IDALEGRUPPO { get; set; }
+        public bool ValorizzazioneAnnullabile { get; set; }
+        public decimal ValoreTotale { get; set; }
+        public decimal ValoreApprovatoTotale { get; set; }
     }
 
 }

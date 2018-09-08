@@ -1,8 +1,79 @@
-﻿
+﻿@using ReportWeb.Models.ALE
 @{
-    ViewBag.Title = "Conferma";
+    ViewBag.Title = "ALE Approvazione";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
-<h2>Conferma</h2>
+<div class="content-top">
+    <h2>Addebito Lavoranti Esterni - Approvazione</h2>
 
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <h3>Nuovi gruppi da approvare</h3>
+            <div id="divGruppiDaApprovare">
+            </div>
+            <label class="text-red input-sm" id="lblMessage"></label>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <h3>Gruppi approvati</h3>
+            <div id="divGruppiApprovati">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        CaricaGruppiDaApprovare();
+        CaricaGruppiApprovati();
+    });
+
+    function CaricaGruppiDaApprovare()
+    {
+
+        var url = '@Url.Action("CaricaGruppiDaApprovare", "ALE")';
+        $.ajax({
+            url: url,
+            data: { },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGruppiDaApprovare').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function CaricaGruppiApprovati()
+    {
+        var url = '@Url.Action("CaricaGruppiApprovati", "ALE")';
+        $.ajax({
+            url: url,
+            data: {},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGruppiApprovati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+</script>

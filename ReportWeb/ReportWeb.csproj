@@ -419,6 +419,8 @@
     <Content Include="Views\ALE\AddebitoGruppiPartial.cshtml" />
     <Content Include="Views\ALE\GruppiDaValorizzarePartial.cshtml" />
     <Content Include="Views\ALE\GruppiValorizzatiPartial.cshtml" />
+    <Content Include="Views\ALE\GruppiDaApprovarePartial.cshtml" />
+    <Content Include="Views\ALE\GruppiApprovatiPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

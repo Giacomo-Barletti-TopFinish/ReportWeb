@@ -14,7 +14,7 @@ namespace ReportWeb.Models.JSON
         public decimal IdAleDettaglio { get; set; }
 
         [DataMember(Name = "Prezzo")]
-        public decimal Prezzo{ get; set; }
+        public decimal? Prezzo{ get; set; }
 
         [DataMember(Name = "Nota")]
         public string Nota { get; set; }

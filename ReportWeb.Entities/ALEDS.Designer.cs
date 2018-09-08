@@ -14217,6 +14217,8 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnPREZZO;
             
+            private global::System.Data.DataColumn columnPREZZO_APPROVATO;
+            
             private global::System.Data.DataColumn columnLAVORANTE;
             
             private global::System.Data.DataColumn columnSTATO;
@@ -14372,6 +14374,14 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PREZZO_APPROVATOColumn {
+                get {
+                    return this.columnPREZZO_APPROVATO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn LAVORANTEColumn {
                 get {
                     return this.columnLAVORANTE;
@@ -14454,6 +14464,7 @@ namespace ReportWeb.Entities {
                         string NOTAAPPROVAZIONE, 
                         string NOTAFATTURAZIONE, 
                         decimal PREZZO, 
+                        decimal PREZZO_APPROVATO, 
                         string LAVORANTE, 
                         string STATO, 
                         System.DateTime DATA_INSERIMENTO, 
@@ -14474,6 +14485,7 @@ namespace ReportWeb.Entities {
                         NOTAAPPROVAZIONE,
                         NOTAFATTURAZIONE,
                         PREZZO,
+                        PREZZO_APPROVATO,
                         LAVORANTE,
                         STATO,
                         DATA_INSERIMENTO,
@@ -14521,6 +14533,7 @@ namespace ReportWeb.Entities {
                 this.columnNOTAAPPROVAZIONE = base.Columns["NOTAAPPROVAZIONE"];
                 this.columnNOTAFATTURAZIONE = base.Columns["NOTAFATTURAZIONE"];
                 this.columnPREZZO = base.Columns["PREZZO"];
+                this.columnPREZZO_APPROVATO = base.Columns["PREZZO_APPROVATO"];
                 this.columnLAVORANTE = base.Columns["LAVORANTE"];
                 this.columnSTATO = base.Columns["STATO"];
                 this.columnDATA_INSERIMENTO = base.Columns["DATA_INSERIMENTO"];
@@ -14558,6 +14571,8 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnNOTAFATTURAZIONE);
                 this.columnPREZZO = new global::System.Data.DataColumn("PREZZO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPREZZO);
+                this.columnPREZZO_APPROVATO = new global::System.Data.DataColumn("PREZZO_APPROVATO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPREZZO_APPROVATO);
                 this.columnLAVORANTE = new global::System.Data.DataColumn("LAVORANTE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLAVORANTE);
                 this.columnSTATO = new global::System.Data.DataColumn("STATO", typeof(string), null, global::System.Data.MappingType.Element);
@@ -28033,6 +28048,22 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal PREZZO_APPROVATO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_ALE_DETTAGLIO.PREZZO_APPROVATOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PREZZO_APPROVATO\' in table \'RW_ALE_DETTAGLIO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_DETTAGLIO.PREZZO_APPROVATOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string LAVORANTE {
                 get {
                     return ((string)(this[this.tableRW_ALE_DETTAGLIO.LAVORANTEColumn]));
@@ -28181,6 +28212,18 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPREZZONull() {
                 this[this.tableRW_ALE_DETTAGLIO.PREZZOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPREZZO_APPROVATONull() {
+                return this.IsNull(this.tableRW_ALE_DETTAGLIO.PREZZO_APPROVATOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPREZZO_APPROVATONull() {
+                this[this.tableRW_ALE_DETTAGLIO.PREZZO_APPROVATOColumn] = global::System.Convert.DBNull;
             }
         }
         
