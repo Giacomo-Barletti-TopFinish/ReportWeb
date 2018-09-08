@@ -146,5 +146,33 @@ namespace ReportWeb.Controllers
             bll.AnnullaApprovazione(IDALEGRUPPO, ConnectedUser);
             return null;
         }
+
+        public ActionResult CaricaGruppiFatturati()
+        {
+            ALEBLL bll = new ALEBLL();
+            List<GruppoFatturatoModel> model = bll.LeggiGruppiFatturati();
+            return PartialView("GruppiFatturatiPartial", model);
+        }
+
+
+        public ActionResult CaricaGruppiDaFatturare()
+        {
+            ALEBLL bll = new ALEBLL();
+            List<GruppoApprovatoModel> model = bll.LeggiGruppiApprovati();
+            return PartialView("GruppiDaFatturarePartial", model);
+        }
+
+        public ActionResult FatturaGruppo(string IDALEGRUPPO, string Dettagli, string Nota)
+        {
+            ALEBLL bll = new ALEBLL();
+            bll.FatturaGruppo(IDALEGRUPPO, Dettagli, Nota, ConnectedUser);
+            return null;
+        }
+        public ActionResult AnnullaFatturazione(string IDALEGRUPPO)
+        {
+            ALEBLL bll = new ALEBLL();
+            bll.AnnullaFatturaGruppo(IDALEGRUPPO, ConnectedUser);
+            return null;
+        }
     }
 }

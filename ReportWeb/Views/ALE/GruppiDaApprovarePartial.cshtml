@@ -23,10 +23,7 @@
                     <input type="hidden" value="@a.IDALEGRUPPO" class="hdIDALEGRUPPO" />
                     <td width="10%"><input type="button" onclick="MostraDettaglioValGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
                     <td>
-                        @if (a.ValorizzazioneAnnullabile)
-                        {
-                            <input type="button" onclick="ApprovaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Approva" />
-                        }
+                        <input type="button" onclick="ApprovaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Approva" />
                     </td>
                 </tr>
                 <tr>
@@ -76,7 +73,7 @@
                                         <td style="font-size:11px">@dettaglio.Prezzo</td>
                                         <td style="font-size:11px" class="RWValoreAttribuito">@(dettaglio.Prezzo * dettaglio.QuantitaAddebitata)</td>
                                         <td style="font-size:12px">@Html.TextBox("txtPrezzo", dettaglio.Prezzo, new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
-                                        <td style="font-size:12px"><input readonly type="text" class="RWValore" value="@(dettaglio.Prezzo*dettaglio.QuantitaAddebitata)"/></td>
+                                        <td style="font-size:12px"><input readonly type="text" class="RWValore" value="@(dettaglio.Prezzo*dettaglio.QuantitaAddebitata)" /></td>
                                         <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
                                     </tr>
                                     if (!string.IsNullOrEmpty(dettaglio.Nota))
@@ -103,8 +100,8 @@
                                     <td colspan="3">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNotaGruppo", @style = "height: 21px;" })</td>
                                     <td class="text-red">TOTALE</td>
                                     <td class="text-red"><input readonly type="text" id="RWTotaleAtribuito" value="@a.ValoreTotale.ToString()" /></td>
-                                    <td ></td>
-                                    <td class="text-red"><input readonly type="text" id="RWTotale" value="@a.ValoreTotale.ToString()"/></td>
+                                    <td></td>
+                                    <td class="text-red"><input readonly type="text" id="RWTotale" value="@a.ValoreTotale.ToString()" /></td>
                                 </tr>
                             </table>
                         </div>
@@ -172,9 +169,9 @@
         }
     }
 
-   function ApprovaGruppo(sender, IDALEGRUPPO)
+    function ApprovaGruppo(sender, IDALEGRUPPO)
     {
-       debugger;
+        debugger;
         var divGruppoName = "#Dettaglio_" + IDALEGRUPPO;
         var divGruppo = $(divGruppoName);
 

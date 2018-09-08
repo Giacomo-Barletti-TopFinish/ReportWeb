@@ -38,9 +38,20 @@ namespace ReportWeb.Models.ALE
         public string LavoranteDescrizione { get; set; }
         public bool Aperto { get; set; }
         public decimal IDALEGRUPPO { get; set; }
-        public bool ValorizzazioneAnnullabile { get; set; }
+        public bool ApprovazioneAnnullabile { get; set; }
         public decimal ValoreTotale { get; set; }
         public decimal ValoreApprovatoTotale { get; set; }
     }
 
+    public class GruppoFatturatoModel
+    {
+        public List<FatturatoModel> Dettagli { get; set; }
+        public string NotaFatturazione { get; set; }
+        public string LavoranteCodice { get; set; }
+        public string LavoranteDescrizione { get; set; }
+        public bool Aperto { get; set; }
+        public decimal IDALEGRUPPO { get; set; }
+        public bool FatturazioneAnnullabile { get; set; }
+        public decimal ValoreApprovatoTotale { get; set; }
+    }
 }

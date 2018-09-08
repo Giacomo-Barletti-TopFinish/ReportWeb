@@ -22,17 +22,12 @@
                     <td>@a.NotaApprovazione</td>
                     <input type="hidden" value="@a.IDALEGRUPPO" class="hdIDALEGRUPPO" />
                     <td width="10%"><input type="button" onclick="MostraDettaglioValGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
-                    <td>
-                        @if (a.ApprovazioneAnnullabile)
-                        {
-                            <input type="button" onclick="AnnullaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Annulla" />
-                        }
-                    </td>
+                    <td>    <input type="button" onclick="FatturaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Fattura" /></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td colspan="2">
-                        <div id="DettaglioVal_@a.IDALEGRUPPO" style="display:none">
+                        <div id="Dettaglio_@a.IDALEGRUPPO" style="display:none">
                             <table width="100%" class="table">
                                 <thead>
                                     <tr>
@@ -55,24 +50,21 @@
                                             Valore
                                         </th>
                                         <th style="font-size:11px">
-                                            Prezzo approvato
-                                        </th>
-                                        <th style="font-size:11px">
-                                            Valore approvato
+                                            Nota
                                         </th>
                                     </tr>
                                 </thead>
                                 @foreach (ApprovatoModel dettaglio in a.Dettagli)
                                 {
-                                    <tr>
+                                    <tr class="RWTRDettaglio">
+                                        <input type="hidden" class="hdIdAleDettaglio" value="@dettaglio.IdAleDettaglio" />
                                         <td style="font-size:11px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
                                         <td style="font-size:11px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
                                         <td style="font-size:11px">@dettaglio.LavoranteDescrizione</td>
                                         <td style="font-size:11px">@dettaglio.QuantitaAddebitata</td>
-                                        <td style="font-size:11px">@dettaglio.Prezzo</td>
-                                        <td style="font-size:11px">@(dettaglio.Prezzo * dettaglio.QuantitaAddebitata)</td>
                                         <td style="font-size:11px">@dettaglio.PrezzoApprovato</td>
-                                        <td style="font-size:11px">@(dettaglio.PrezzoApprovato * dettaglio.QuantitaAddebitata)</td>
+                                        <td style="font-size:11px" class="RWValoreAttribuito">@(dettaglio.Prezzo * dettaglio.QuantitaAddebitata)</td>
+                                        <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
                                     </tr>
                                     if (!string.IsNullOrEmpty(dettaglio.Nota))
                                     {
@@ -89,16 +81,22 @@
                                     if (!string.IsNullOrEmpty(dettaglio.NotaValorizzazione))
                                     {
                                         <tr>
-                                            <td style="font-size:11px" colspan="6">@string.Format("Nota addebito: {0}", dettaglio.NotaValorizzazione)</td>
+                                            <td style="font-size:11px" colspan="6">@string.Format("Nota valorizzazione: {0}", dettaglio.NotaValorizzazione)</td>
                                         </tr>
                                     }
                                     if (!string.IsNullOrEmpty(dettaglio.NotaApprovazione))
                                     {
                                         <tr>
-                                            <td style="font-size:11px" colspan="6">@string.Format("Nota addebito: {0}", dettaglio.NotaApprovazione)</td>
+                                            <td style="font-size:11px" colspan="6">@string.Format("Nota approvazione: {0}", dettaglio.NotaValorizzazione)</td>
                                         </tr>
                                     }
                                 }
+                                <tr class="RWTotali">
+                                    <td><label>Dati fatturazione</label></td>
+                                    <td colspan="3">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNotaGruppo", @style = "height: 21px;" })</td>
+                                    <td class="text-red">TOTALE</td>
+                                    <td class="text-red"><input readonly type="text" id="RWTotaleAtribuito" value="@a.ValoreTotale.ToString()" /></td>
+                                </tr>
                             </table>
                         </div>
                     </td>
@@ -114,39 +112,69 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
+        
     });
 
     function MostraDettaglioValGruppo(sender, IDALEGRUPPO)
     {
         var title = $(sender).attr("value");
 
+        var divName = "#Dettaglio_" + IDALEGRUPPO;
+
         if (title == "Dettaglio")
         {
-            var divName = "#DettaglioVal_" + IDALEGRUPPO;
             $(divName).show();
             $(sender).attr("value", "Chiudi");
         }
 
         if (title == "Chiudi")
         {
-            var divName = "#DettaglioVal_" + IDALEGRUPPO;
             $(divName).hide();
             $(sender).attr("value", "Dettaglio");
         }
     }
 
-    function AnnullaGruppo(sender, IDALEGRUPPO)
+    function FatturaGruppo(sender, IDALEGRUPPO)
     {
-        var url = '@Url.Action("AnnullaApprovazione", "ALE")';
+        debugger;
+        var divGruppoName = "#Dettaglio_" + IDALEGRUPPO;
+        var divGruppo = $(divGruppoName);
+
+        var trDettaglio = $(".RWTRDettaglio", divGruppo);
+        var dettagli = [];
+        var notaGruppo = $(".RWNotaGruppo", divGruppo);
+
+        if (notaGruppo.val() == '')
+        {
+            $('#lblMessage').html("Inserire i dati di fatturazione");
+            return;
+        }
+        for (var i = 0 ; i < trDettaglio.length; i++)
+        {
+            var idDettaglio = $(".hdIdAleDettaglio", trDettaglio[i]);
+            var idd = $(idDettaglio).val();
+
+            var p = -1;
+
+            var nota = $(".RWNota", trDettaglio[i]);
+            var n = $(nota).val();
+
+            var dettaglio = { 'IdAleDettaglio': idd, 'Prezzo': p, 'Nota': n };
+            dettagli.push(dettaglio);
+        }
+
+        var dettagliJson = JSON.stringify(dettagli);
+
+        var url = '@Url.Action("FatturaGruppo", "ALE")';
         $.ajax({
             url: url,
-            data: { IDALEGRUPPO: IDALEGRUPPO },
+            data: { IDALEGRUPPO: IDALEGRUPPO, Dettagli: dettagliJson, Nota: notaGruppo.val() },
             cache: false,
             type: "POST",
             success: function (data)
             {
-                CaricaGruppiDaApprovare();
-                CaricaGruppiApprovati();
+                CaricaGruppiDaFatturare();
+                CaricaGruppiFatturati();
             },
             error: function (response)
             {

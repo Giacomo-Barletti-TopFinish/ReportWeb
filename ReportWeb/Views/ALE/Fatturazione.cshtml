@@ -1,8 +1,79 @@
-﻿
+﻿@using ReportWeb.Models.ALE
 @{
-    ViewBag.Title = "Fatturazione";
+    ViewBag.Title = "ALE Fatturazione";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
-<h2>Fatturazione</h2>
+<div class="content-top">
+    <h2>Addebito Lavoranti Esterni - Fatturazione</h2>
 
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <h3>Nuovi gruppi da fatturare</h3>
+            <div id="divGruppiDaFatturare">
+            </div>
+            <label class="text-red input-sm" id="lblMessage"></label>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <h3>Gruppi fatturati</h3>
+            <div id="divGruppiFatturati">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        CaricaGruppiDaFatturare();
+        CaricaGruppiFatturati();
+    });
+
+    function CaricaGruppiDaFatturare()
+    {
+
+        var url = '@Url.Action("CaricaGruppiDaFatturare", "ALE")';
+        $.ajax({
+            url: url,
+            data: { },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGruppiDaFatturare').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function CaricaGruppiFatturati()
+    {
+        var url = '@Url.Action("CaricaGruppiFatturati", "ALE")';
+        $.ajax({
+            url: url,
+            data: {},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGruppiFatturati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+</script>
