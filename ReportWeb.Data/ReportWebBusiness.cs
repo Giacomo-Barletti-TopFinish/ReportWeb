@@ -1,11 +1,11 @@
-﻿using MetalPlus.Kernel.Data.Core;
-using ReportWeb.Entities;
+﻿using ReportWeb.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReportWeb.Common;
+using ReportWeb.Data.Core;
 
 namespace ReportWeb.Data
 {

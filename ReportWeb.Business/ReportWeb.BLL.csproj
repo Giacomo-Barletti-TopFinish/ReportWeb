@@ -49,10 +49,6 @@
     <Compile Include="VerniciaturaBLL.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MetalPlus.Kernel.Data\MetalPlus.Kernel.Data.csproj">
-      <Project>{207d81f0-c3e9-43ef-8e77-a007d433a78c}</Project>
-      <Name>MetalPlus.Kernel.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ReportWeb.Common\ReportWeb.Common.csproj">
       <Project>{4a7c19e0-6664-45c2-8999-a5e0896fe111}</Project>
       <Name>ReportWeb.Common</Name>

@@ -434,10 +434,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MetalPlus.Kernel.Data\MetalPlus.Kernel.Data.csproj">
-      <Project>{207d81f0-c3e9-43ef-8e77-a007d433a78c}</Project>
-      <Name>MetalPlus.Kernel.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ReportWeb.Business\ReportWeb.BLL.csproj">
       <Project>{d2e9d4e7-59d4-46c5-8273-32b36f17f49f}</Project>
       <Name>ReportWeb.BLL</Name>

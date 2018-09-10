@@ -1,5 +1,5 @@
-﻿using MetalPlus.Kernel.Data.Core;
-using Oracle.ManagedDataAccess.Client;
+﻿using Oracle.ManagedDataAccess.Client;
+using ReportWeb.Data.Core;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

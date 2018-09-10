@@ -190,7 +190,6 @@ namespace ReportWeb.Business
             {
                 m.LavoranteDescrizione = lavorante.IsRAGIONESOCNull() ? string.Empty : lavorante.RAGIONESOC;
             }
-
             ALEDS.MAGAZZRow modello = ds.MAGAZZ.Where(x => x.IDMAGAZZ == CHECKQ_T.IDMAGAZZ).FirstOrDefault();
             m.Modello = modello.MODELLO;
             m.ModelloDescrizione = modello.DESMAGAZZ;

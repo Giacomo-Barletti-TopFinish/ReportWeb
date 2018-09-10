@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace MetalPlus.Kernel.Data.Core
+namespace ReportWeb.Data.Core
 {
     public class AdapterBase
     {

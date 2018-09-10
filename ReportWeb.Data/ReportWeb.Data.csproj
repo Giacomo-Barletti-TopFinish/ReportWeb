@@ -23,7 +23,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -47,6 +47,13 @@
   <ItemGroup>
     <Compile Include="ALE\ALEAdapter.cs" />
     <Compile Include="ALE\ALEBusiness.cs" />
+    <Compile Include="Core\AdapterBase.cs" />
+    <Compile Include="Core\BusinessBase.cs" />
+    <Compile Include="Core\ColumnMapAttribute.cs" />
+    <Compile Include="Core\ContextManager.cs" />
+    <Compile Include="Core\DaoExtensor.cs" />
+    <Compile Include="Core\DataContextAttribute.cs" />
+    <Compile Include="Core\Exceptions.cs" />
     <Compile Include="Galvanica\GalvanicaAdapter.cs" />
     <Compile Include="Galvanica\GalvanicaBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,10 +69,6 @@
     <Compile Include="Verniciatura\VerniciaturaBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MetalPlus.Kernel.Data\MetalPlus.Kernel.Data.csproj">
-      <Project>{207d81f0-c3e9-43ef-8e77-a007d433a78c}</Project>
-      <Name>MetalPlus.Kernel.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ReportWeb.Common\ReportWeb.Common.csproj">
       <Project>{4a7c19e0-6664-45c2-8999-a5e0896fe111}</Project>
       <Name>ReportWeb.Common</Name>
@@ -79,6 +82,7 @@
       <Name>ReportWeb.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

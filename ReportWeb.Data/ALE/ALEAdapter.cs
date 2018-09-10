@@ -102,7 +102,6 @@ namespace ReportWeb.Data
             string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE STATO = $P{STATO}";
             ParamSet ps = new ParamSet();
             ps.AddParam("STATO", DbType.String, STATO);
-
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.RW_ALE_DETTAGLIO);

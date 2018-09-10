@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MetalPlus.Kernel.Data.Core
+namespace ReportWeb.Data.Core
 {
     public abstract class BusinessBase : IDisposable
     {

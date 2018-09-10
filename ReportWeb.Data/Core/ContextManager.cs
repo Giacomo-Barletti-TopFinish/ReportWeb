@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MetalPlus.Kernel.Data.Core
+namespace ReportWeb.Data.Core
 {
     internal class ContextManager
     {

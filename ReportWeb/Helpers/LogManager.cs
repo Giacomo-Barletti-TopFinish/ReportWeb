@@ -24,6 +24,13 @@ namespace ReportWeb.Helpers
             _logger.Fatal("------------------------------- ECCEZIONE ---------------------------------------------");
             _logger.Fatal(string.Format("CONTROLLER:{0}    ACTION:{1}",Controller,Method));
             _logger.Fatal(ApplicationName, ex);
+            Exception innerException = ex.InnerException;
+            while(innerException != null)
+            {
+                _logger.Fatal("INNER EXCEPTION");
+                _logger.Fatal(ApplicationName, innerException);
+                innerException = innerException.InnerException;
+            }
         }
 
         public static void WriteException(ExceptionContext ex, string userName)

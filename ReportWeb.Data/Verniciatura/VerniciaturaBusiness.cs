@@ -1,4 +1,4 @@
-﻿using MetalPlus.Kernel.Data.Core;
+﻿using ReportWeb.Data.Core;
 using ReportWeb.Entities;
 using System;
 using System.Collections.Generic;

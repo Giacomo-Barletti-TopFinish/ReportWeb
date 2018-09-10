@@ -1,5 +1,5 @@
-﻿using MetalPlus.Kernel.Data.Core;
-using ReportWeb.Common.Helpers;
+﻿using ReportWeb.Common.Helpers;
+using ReportWeb.Data.Core;
 using ReportWeb.Entities;
 using System;
 using System.Collections.Generic;
@@ -110,6 +110,7 @@ namespace ReportWeb.Data.ALE
         public void FillRW_ALE_DETTAGLIO(ALEDS ds, string STATO)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+
             a.FillRW_ALE_DETTAGLIO(ds, STATO);
         }
 
