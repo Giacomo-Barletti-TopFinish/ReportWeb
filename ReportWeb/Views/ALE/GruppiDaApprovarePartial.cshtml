@@ -21,7 +21,7 @@
                     <td>@a.LavoranteDescrizione</td>
                     <td>@a.NotaValorizzazione</td>
                     <input type="hidden" value="@a.IDALEGRUPPO" class="hdIDALEGRUPPO" />
-                    <td width="10%"><input type="button" onclick="MostraDettaglioValGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
+                    <td width="10%"><input type="button" onclick="MostraDettaglioGruppoDaApprovare(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
                     <td>
                         <input type="button" onclick="ApprovaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Approva" />
                     </td>
@@ -150,8 +150,9 @@
         $(tdTotale).val(totale.toFixed(2));
     }
 
-    function MostraDettaglioValGruppo(sender, IDALEGRUPPO)
+    function MostraDettaglioGruppoDaApprovare(sender, IDALEGRUPPO)
     {
+        debugger;
         var title = $(sender).attr("value");
 
         var divName = "#Dettaglio_" + IDALEGRUPPO;

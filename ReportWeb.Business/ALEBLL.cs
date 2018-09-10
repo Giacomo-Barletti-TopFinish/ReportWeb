@@ -675,12 +675,31 @@ namespace ReportWeb.Business
                         ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
                         bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
                         bALE.FillUSR_PRD_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
-                        ValorizzatoModel m = (ValorizzatoModel)CreaAddebitoModel(ds, riga, CHECKQ_T);
+                        AddebitoModel am = CreaAddebitoModel(ds, riga, CHECKQ_T);
+                        ValorizzatoModel m = new ValorizzatoModel()
+                        { 
+                           Commessa=am.Commessa,
+                           DataCommessa=am.DataCommessa,
+                           Difetto=am.Difetto,
+                           IdAleDettaglio = am.IdAleDettaglio,
+                           IdAleGruppo=am.IdAleGruppo,
+                           LavoranteCodice=am.LavoranteCodice,
+                           LavoranteDescrizione=am.LavoranteDescrizione,
+                           Modello=am.Modello,
+                           ModelloDescrizione=am.ModelloDescrizione,
+                           Nota=am.Nota,
+                           NotaAddebito=am.NotaAddebito,
+                           QuantitaAddebitata=am.QuantitaAddebitata,
+                           QuantitaDifettosi=am.QuantitaDifettosi,
+                           QuantitaInseriti=am.QuantitaInseriti,
+                           TipoDifetto=am.TipoDifetto
+                        };
                         m.NotaValorizzazione = riga.IsNOTAVALORIZZAZIONENull() ? string.Empty : riga.NOTAVALORIZZAZIONE;
                         m.Prezzo = riga.IsPREZZONull() ? 0 : riga.PREZZO;
                         grModel.ValoreTotale += m.Prezzo * m.QuantitaAddebitata;
 
                         grModel.Dettagli.Add(m);
+
                     }
                     model.Add(grModel);
                 }
@@ -793,7 +812,7 @@ namespace ReportWeb.Business
             }
         }
 
-        public void AnnullaFatturaGruppo(string IDALEGRUPPO,string UIDUSER)
+        public void AnnullaFatturaGruppo(string IDALEGRUPPO, string UIDUSER)
         {
             decimal idAleAgruppo = decimal.Parse(IDALEGRUPPO);
             using (ALEBusiness bALE = new ALEBusiness())
@@ -805,9 +824,9 @@ namespace ReportWeb.Business
 
                 foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == idGruppo))
                 {
-                        dettaglio.STATO = ALEStatoDettaglio.APPROVATO;
-                        dettaglio.UIDUSER = UIDUSER;
-                        dettaglio.SetNOTAFATTURAZIONENull();
+                    dettaglio.STATO = ALEStatoDettaglio.APPROVATO;
+                    dettaglio.UIDUSER = UIDUSER;
+                    dettaglio.SetNOTAFATTURAZIONENull();
                 }
                 ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == idGruppo).FirstOrDefault();
                 if (gruppo != null)
