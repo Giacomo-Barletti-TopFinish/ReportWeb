@@ -79,7 +79,7 @@ namespace ReportWeb.Business
             }
 
         }
-       
+
 
         public PVDReportModel EstraiConsutivo(DateTime dataInizio, DateTime dataFine, string Macchina)
         {
@@ -119,7 +119,7 @@ namespace ReportWeb.Business
             }
             PVDReportModel report = new PVDReportModel();
             report.Consuntivo = consuntivo;
-            report.DurataTotale = durataTotale.ToString(@"hh\:mm");
+            report.DurataTotale = DateTimeHelper.ToHoursMin(durataTotale);
             return report;
         }
     }

@@ -62,5 +62,10 @@ namespace ReportWeb.Common.Helpers
         {
             return fine - inizio;
         }
+
+        public static string ToHoursMin(TimeSpan ts)
+        {
+            return string.Format("{0:00}:{1:00}",(int)ts.TotalHours, ts.Minutes);
+        }
     }
 }

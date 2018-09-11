@@ -1,5 +1,7 @@
 ﻿
 @using ReportWeb.Models
+@using ReportWeb.Common.Helpers
+
 @model GalvanicaReportModel
 <div class="box box-primary box-solid">
     <div class="row">
@@ -111,9 +113,9 @@
                 <td></td>
                 <td></td>
                 <td><h4>@Model.BarreTotali</h4></td>
-                <td><h4>@Model.TempoTotale.ToString(@"hh\:mm")</h4></td>
-                <td><h4>@Model.FermoTotale.ToString(@"hh\:mm")</h4></td>
-                <td><h4>@Model.DurataEffettiva.ToString(@"hh\:mm")</h4></td>
+                <td><h4>@DateTimeHelper.ToHoursMin( Model.TempoTotale)</h4></td>
+                <td><h4>@DateTimeHelper.ToHoursMin( Model.FermoTotale)</h4></td>
+                <td><h4>@DateTimeHelper.ToHoursMin(Model.DurataEffettiva)</h4></td>
                 <td><h4>@Model.BarreHH</h4></td>
                 <td><h4>@Model.MinBarre</h4></td>
                 <td></td>
