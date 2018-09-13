@@ -1,0 +1,165 @@
+﻿@using ReportWeb.Models.ALE
+@model AddebitiModel
+
+
+@if (Model.Addebiti.Count == 0)
+{
+    <div class="col-sm-12">
+        <h3 class="text-red">Non ci sono schede da addebitare</h3>
+    </div>
+}
+else
+{
+    <div class="col-sm-12">
+        <table class="table table-hover" id="tblInseriti">
+            <thead>
+                <tr>
+                    <th width="2%"></th>
+                    <th>
+                        <table class="table table-condensed" width="100%">
+                            <tr>
+                                <th width="10%"><label>Modello</label></th>
+                                <th width="18%"><label>Descrizione</label></th>
+                                <th width="6%"><label>Tipo difetto</label></th>
+                                <th width="12%"><label>Difetto</label></th>
+                                <th width="14%"><label>Lavorante</label></th>
+                                <th width="6%"><label>Qta Difetti</label></th>
+                                <th width="6%"><label>Qta Inseriti</label></th>
+                                <th width="7%"><label>Qta Addebito</label></th>
+                                <th width="18%"><label>Nota addebito</label></th>
+                                <th></th>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (AddebitoModel a in Model.Addebiti.OrderBy(x => x.Modello).ThenBy(x => x.LavoranteDescrizione))
+                {
+                    <tr>
+
+                        <td>
+                            <div class="RWDivImg" style="width:75px; height:75px; background-color:white; white-space: nowrap; text-align: center;">
+                                <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
+                                <a>
+                                    @if (!string.IsNullOrEmpty(a.UrlImage))
+                                    {
+                                        <img src="@Url.Content(a.UrlImage)" onclick="onClickImageArticoloLocale(null,@a.IdAleDettaglio,this);" data-index="@a.IdAleDettaglio" style="max-height:75px; max-width:75px; vertical-align: middle; margin-left: -4px; padding:4px" alt="Image" />
+                                    }
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <table class="table table-condensed" width="100%">
+                                <tr>
+                                    <td style="font-size:12px" width="10%">@a.Modello</td>
+                                    <td style="font-size:12px" width="18%">@a.ModelloDescrizione</td>
+                                    <td style="font-size:12px" width="6%">@a.TipoDifetto</td>
+                                    <td style="font-size:12px" width="12%">@a.Difetto</td>
+                                    <td style="font-size:12px" width="14%">@a.LavoranteDescrizione</td>
+                                    <td style="font-size:12px" width="6%">@a.QuantitaDifettosi</td>
+                                    <td style="font-size:12px" width="6%">@a.QuantitaInseriti</td>
+                                    <td style="font-size:12px" width="7%">@Html.TextBox("txtQuantita", a.QuantitaInseriti, new { @maxlength = "8", @class = "form-control input-sm rwqta", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })</td>
+                                    <td style="font-size:12px" width="18%">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm rwtxt", @style = "height: 21px;" })</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @a.Azienda
+                                    </td>
+                                    <td colspan="2">
+                                        @string.Format("Commessa: {0} del {1}", @a.Commessa, @a.DataCommessa)
+                                    </td>
+                                    <td colspan="7">
+                                        @a.NotaInserimento
+                                    </td>
+                                </tr>
+                            </table>
+                            <hr />
+                        </td>
+                        <input type="hidden" value="@a.LavoranteCodice" class="hdLavoranteCodice" />
+                        <input type="hidden" value="@a.IdAleDettaglio" class="hdIdAleDettaglio" />
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-1">
+            <input type="button" onclick="SelezionaTutto();" class="btn-primary" value="Seleziona tutto" />
+        </div>
+        <div class="col-sm-1">
+            <input type="button" onclick="DeselezionaTutto();" class="btn-primary" value="Deseleziona tutto" />
+        </div>
+        <div class="col-sm-2 text-right">
+            <label>Lavorante esterno</label>
+        </div>
+        <div class="col-sm-2">
+            @Html.DropDownList("ddlLavoranti", new SelectList(Model.LavorantiEsterni, "Value", "Text"), new { @class = "form-control input-sm select2", @style = "height: 21px;" })
+        </div>
+        <div class="col-sm-1 text-right">
+            <label>Nota gruppo</label>
+        </div>
+        <div class="col-sm-3">
+            @Html.TextBox("txtNotaGruppo", "", new { @maxlength = "100", @class = "form-control input-sm ", @style = "height: 21px;" })
+        </div>
+        <div class="col-sm-1">
+            <input type="button" onclick="Addebita();" class="btn-primary" value="Addebita" />
+        </div>
+        <div class="col-sm-1">
+            <input type="button" onclick="NonAddebitare();" class="btn-primary" value="Non addebitare" />
+        </div>
+    </div>
+}
+
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $('img').imgCheckbox(
+           {
+               "checkMarkImage": "data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQ0Mi41MzMgNDQyLjUzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDQyLjUzMyA0NDIuNTMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTQzNC41MzksOTguNDk5bC0zOC44MjgtMzguODI4Yy01LjMyNC01LjMyOC0xMS43OTktNy45OTMtMTkuNDEtNy45OTNjLTcuNjE4LDAtMTQuMDkzLDIuNjY1LTE5LjQxNyw3Ljk5M0wxNjkuNTksMjQ3LjI0OCAgIGwtODMuOTM5LTg0LjIyNWMtNS4zMy01LjMzLTExLjgwMS03Ljk5Mi0xOS40MTItNy45OTJjLTcuNjE2LDAtMTQuMDg3LDIuNjYyLTE5LjQxNyw3Ljk5Mkw3Ljk5NCwyMDEuODUyICAgQzIuNjY0LDIwNy4xODEsMCwyMTMuNjU0LDAsMjIxLjI2OWMwLDcuNjA5LDIuNjY0LDE0LjA4OCw3Ljk5NCwxOS40MTZsMTAzLjM1MSwxMDMuMzQ5bDM4LjgzMSwzOC44MjggICBjNS4zMjcsNS4zMzIsMTEuOCw3Ljk5NCwxOS40MTQsNy45OTRjNy42MTEsMCwxNC4wODQtMi42NjksMTkuNDE0LTcuOTk0bDM4LjgzLTM4LjgyOEw0MzQuNTM5LDEzNy4zMyAgIGM1LjMyNS01LjMzLDcuOTk0LTExLjgwMiw3Ljk5NC0xOS40MTdDNDQyLjUzNywxMTAuMzAyLDQzOS44NjQsMTAzLjgyOSw0MzQuNTM5LDk4LjQ5OXoiIGZpbGw9IiMzMmNkMzIiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K",
+               "checkMarkSize": "24px",
+               "checkMarkPosition": "top-right"
+           });
+
+        $('span').click(function ()
+        {
+            $(this).children('img').toggleClass("RWImgSel");
+        });
+        $('#ddlLavoranti').select2();
+    });
+
+    function SelezionaTutto()
+    {
+        $('.RWDivImg').each(function ()
+        {
+            var div = $(this);
+            var img = $(this).children()[1];
+            var span = $(img).children()[0];
+            img = $('img', div)[0];
+
+            $(span).addClass("imgChked");
+            $(img).addClass("RWImgSel");
+        });
+    }
+
+    function DeselezionaTutto()
+    {
+        $('.RWDivImg').each(function ()
+        {
+            var div = $(this);
+            var img = $(this).children()[1];
+            var span = $(img).children()[0];
+            img = $('img', div)[0];
+
+            $(span).removeClass("imgChked");
+            $(img).removeClass("RWImgSel");
+        });
+    }
+
+
+
+</script>

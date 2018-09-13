@@ -15,5 +15,6 @@ namespace ReportWeb.Models.ALE
         public const string FATTURATO = "FATTURATO";
         public const string BLOCCATO = "BLOCCATO";
         public const string RIFIUTATO = "RIFIUTATO";
+        public const string NONADDEBITATO = "NON ADDEBITATO";
     }
 }

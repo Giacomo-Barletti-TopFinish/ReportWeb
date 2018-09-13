@@ -415,14 +415,15 @@
     <Content Include="Views\ALE\Conferma.cshtml" />
     <Content Include="Views\ALE\Fatturazione.cshtml" />
     <Content Include="Views\ALE\CaricaSchedaPartial.cshtml" />
-    <Content Include="Views\ALE\AddebitoNuoviElementiPartial.cshtml" />
-    <Content Include="Views\ALE\AddebitoGruppiPartial.cshtml" />
+    <Content Include="Views\ALE\CaricaNuoviElementiDaAddebitarePartial.cshtml" />
+    <Content Include="Views\ALE\GruppiAddebitatiPartial.cshtml" />
     <Content Include="Views\ALE\GruppiDaValorizzarePartial.cshtml" />
     <Content Include="Views\ALE\GruppiValorizzatiPartial.cshtml" />
     <Content Include="Views\ALE\GruppiDaApprovarePartial.cshtml" />
     <Content Include="Views\ALE\GruppiApprovatiPartial.cshtml" />
     <Content Include="Views\ALE\GruppiDaFatturarePartial.cshtml" />
     <Content Include="Views\ALE\GruppiFatturatiPartial.cshtml" />
+    <Content Include="Views\ALE\CaricaSchedeNonAddebitatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

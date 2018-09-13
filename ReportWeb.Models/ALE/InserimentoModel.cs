@@ -12,6 +12,7 @@ namespace ReportWeb.Models.ALE
 
         public string IDCHECKQT { get; set; }
         public string Barcode { get; set; }
+        public string Azienda { get; set; }
 
         public string NumeroDocumento { get; set; }
         public string DataDocumento { get; set; }

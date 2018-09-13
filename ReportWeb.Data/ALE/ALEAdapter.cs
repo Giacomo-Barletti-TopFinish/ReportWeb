@@ -20,15 +20,32 @@ namespace ReportWeb.Data
 
         public void FillUSR_CHECKQ_T(ALEDS ds, string Barcode)
         {
-            string select = @"SELECT * FROM DITTA1.USR_CHECKQ_T WHERE BARCODE = $P{BARCODE1}
+            string select = @"SELECT CT.*, 'METAL-PLUS' AS AZIENDA FROM DITTA1.USR_CHECKQ_T CT WHERE BARCODE = $P{BARCODE1}
                                 UNION ALL
-                              SELECT * FROM DITTA2.USR_CHECKQ_T WHERE BARCODE = $P{BARCODE2}";
+                              SELECT CT.*, 'TOP FINISH' AS AZIENDA FROM DITTA2.USR_CHECKQ_T CT WHERE BARCODE = $P{BARCODE2}";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("BARCODE1", DbType.String, Barcode);
             ps.AddParam("BARCODE2", DbType.String, Barcode);
 
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_CHECKQ_T);
+            }
+        }
+
+        public void FillUSR_CHECKQ_T(ALEDS ds, List<string> IDCHECKQT)
+        {
+            if (IDCHECKQT.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDCHECKQT);
+            string select = @"SELECT CT.*,'METAL-PLUS' AS AZIENDA FROM DITTA1.USR_CHECKQ_T CT WHERE IDCHECKQT IN ({0})
+                                UNION ALL
+                              SELECT CT.*,'TOP FINISH' AS AZIENDA FROM DITTA2.USR_CHECKQ_T CT WHERE IDCHECKQT IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.USR_CHECKQ_T);
             }
@@ -61,6 +78,24 @@ namespace ReportWeb.Data
             ps.AddParam("IDCHECKQT2", DbType.String, IDCHECKQT);
 
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_CHECKQ_C);
+            }
+        }
+
+        public void FillUSR_CHECKQ_C(ALEDS ds, List<string> IDCHECKQT)
+        {
+
+            if (IDCHECKQT.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDCHECKQT);
+            string select = @"SELECT * FROM DITTA1.USR_CHECKQ_C WHERE IDCHECKQT IN ({0})
+                                UNION ALL
+                              SELECT * FROM DITTA2.USR_CHECKQ_C WHERE IDCHECKQT IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.USR_CHECKQ_C);
             }
@@ -120,6 +155,34 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillRW_ALE_DETTAGLIO(ALEDS ds, List<decimal> IDALEGRUPPO)
+        {
+
+            if (IDALEGRUPPO.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDALEGRUPPO);
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE IDALEGRUPPO IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_ALE_DETTAGLIO);
+            }
+        }
+
+        public void FillRW_ALE_DETTAGLIOByPK(ALEDS ds, decimal IdAleDettaglio)
+        {
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE IDALEDETTAGLIO = $P{IDALEDETTAGLIO}";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDALEDETTAGLIO", DbType.Decimal, IdAleDettaglio);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.RW_ALE_DETTAGLIO);
+            }
+        }
+
         public void FillCLIFO(ALEDS ds)
         {
             string select = @"SELECT * FROM GRUPPO.CLIFO";
@@ -166,6 +229,31 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillUSR_PRD_MOVFASI(ALEDS ds, List<string> IDCHECKQT)
+        {
+
+            if (IDCHECKQT.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDCHECKQT);
+            string select = @"SELECT CQ.IDCHECKQT,MF.* FROM DITTA1.USR_PRD_MOVFASI MF
+                                INNER JOIN DITTA1.USR_PRD_FLUSSO_MOVFASI FMF ON   FMF.IDPRDMOVFASE= MF.IDPRDMOVFASE
+                                INNER JOIN DITTA1.USR_CHECKQ_T CQ ON CQ.IDORIGINE_RIL = FMF.IDFLUSSOMOVFASE 
+                                WHERE   CQ.ORIGINE_RIL  = 2 AND CQ.IDCHECKQT IN ({0}) 
+                                UNION ALL
+                                SELECT CQ.IDCHECKQT,MF.* FROM DITTA2.USR_PRD_MOVFASI MF
+                                INNER JOIN DITTA2.USR_PRD_FLUSSO_MOVFASI FMF ON   FMF.IDPRDMOVFASE= MF.IDPRDMOVFASE
+                                INNER JOIN DITTA2.USR_CHECKQ_T CQ ON CQ.IDORIGINE_RIL = FMF.IDFLUSSOMOVFASE 
+                                WHERE   CQ.ORIGINE_RIL  = 2 AND CQ.IDCHECKQT IN ({0})  ";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PRD_MOVFASI);
+            }
+
+        }
+
         public void FillUSR_PRD_FLUSSO_MOVFASI(ALEDS ds, string IDCHECKQT)
         {
             string select = @"  SELECT CQ.IDCHECKQT,FMF.* FROM ditta1.USR_PRD_FLUSSO_MOVFASI FMF
@@ -199,6 +287,36 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillMAGAZZ(ALEDS ds, List<string> IDMAGAZZ)
+        {
+            if (IDMAGAZZ.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDMAGAZZ);
+            string select = @"  SELECT * FROM GRUPPO.MAGAZZ WHERE IDMAGAZZ IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.MAGAZZ);
+            }
+        }
+
+        public void FillRW_ALE_DETT_COSTO(ALEDS ds, List<decimal> IDALEDETTAGLIO)
+        {
+            if (IDALEDETTAGLIO.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDALEDETTAGLIO);
+            string select = @"  SELECT * FROM RW_ALE_DETT_COSTO WHERE IDALEDETTAGLIO IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_ALE_DETT_COSTO);
+            }
+        }
+
         public void FillUSR_PDM_FILES(ALEDS ds, string IDMAGAZZ)
         {
             string select = @"  select FI.*, IM.IDMAGAZZ from gruppo.USR_PDM_FILES FI
@@ -214,12 +332,31 @@ namespace ReportWeb.Data
             }
         }
 
-        public void InsertRW_ALE_DETTAGLIO(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        public void FillUSR_PDM_FILES(ALEDS ds, List<string> IDMAGAZZ)
+        {
+            if (IDMAGAZZ.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDMAGAZZ);
+            string select = @"  select FI.*, IM.IDMAGAZZ from gruppo.USR_PDM_FILES FI
+                                INNER JOIN GRUPPO.USR_PDM_IMG_MAGAZZ IM ON IM.IDPDMFILE = FI.IDPDMFILE
+                                where IM.idmagazz IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PDM_FILES);
+            }
+
+        }
+
+        public void InsertRW_ALE_DETTAGLIO(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
         {
 
-            string insert = @"INSERT INTO RW_ALE_DETTAGLIO (BARCODE,IDCHECKQT,QUANTITADIFETTOSI,QUANTITAINSERITA,NOTA,LAVORANTE, STATO, DATA_INSERIMENTO,UIDUSER) VALUES
-                                            ($P<BARCODE>,$P<IDCHECKQT>,$P<QUANTITADIFETTOSI>,$P<QUANTITAINSERITA>,$P<NOTA>,$P<LAVORANTE>, $P<STATO>,$P<NOW>,$P<UIDUSER>)";
+            string insert = @"INSERT INTO RW_ALE_DETTAGLIO (AZIENDA,BARCODE,IDCHECKQT,QUANTITADIFETTOSI,QUANTITAINSERITA,NOTAINSERIMENTO,LAVORANTE, STATO, DATA_INSERIMENTO,UIDUSER_INSERIMENTO) VALUES
+                                            ($P<AZIENDA>,$P<BARCODE>,$P<IDCHECKQT>,$P<QUANTITADIFETTOSI>,$P<QUANTITAINSERITA>,$P<NOTA>,$P<LAVORANTE>, $P<STATO>,$P<NOW>,$P<UIDUSER>)";
             ParamSet ps = new ParamSet();
+            ps.AddParam("AZIENDA", DbType.String, Azienda);
             ps.AddParam("BARCODE", DbType.String, Barcode);
             ps.AddParam("IDCHECKQT", DbType.String, IDCHECKQT);
             ps.AddParam("QUANTITADIFETTOSI", DbType.Int32, Difettosi);
@@ -248,24 +385,27 @@ namespace ReportWeb.Data
             }
         }
 
-        public void InsertRW_ALE_GRUPPO(int IDALEGRUPPO, string NotaAddebito, string Lavorante, string UIDUSER)
+        public void InsertRW_ALE_GRUPPO(int IDALEGRUPPO, string NotaAddebito, string lavorante, string UIDUSER)
         {
 
-            string insert = @"INSERT INTO RW_ALE_GRUPPO (IDALEGRUPPO,NOTAADDEBITO,LAVORANTE,APERTO, DATA_INSERIMENTO,UIDUSER) VALUES
-                                            ($P<IDALEGRUPPO>,$P<NOTAADDEBITO>,$P<LAVORANTE>,$P<APERTO>,$P<NOW>,$P<UIDUSER>)";
+            string insert = @"INSERT INTO RW_ALE_GRUPPO (IDALEGRUPPO,NOTA_ADDEBITO,APERTO, DATA_ADDEBITO,LAVORANTE,UIDUSER,UIDUSER_ADDEBITO,DATA_CREAZIONE) VALUES
+                                            ($P<IDALEGRUPPO>,$P<NOTA_ADDEBITO>,$P<APERTO>,$P<NOW>,$P<LAVORANTE>,$P<UIDUSER>,$P<UIDUSER_ADDEBITO>,$P<DATA_CREAZIONE>)";
             ParamSet ps = new ParamSet();
             ps.AddParam("IDALEGRUPPO", DbType.Int32, IDALEGRUPPO);
-            ps.AddParam("NOTAADDEBITO", DbType.String, NotaAddebito);
-            ps.AddParam("LAVORANTE", DbType.String, Lavorante);
+            ps.AddParam("NOTA_ADDEBITO", DbType.String, NotaAddebito);
             ps.AddParam("APERTO", DbType.String, 0);
             ps.AddParam("NOW", DbType.DateTime, DateTime.Now);
             ps.AddParam("UIDUSER", DbType.String, UIDUSER);
+            ps.AddParam("UIDUSER_ADDEBITO", DbType.String, UIDUSER);
+            ps.AddParam("DATA_CREAZIONE", DbType.DateTime, DateTime.Now);
+            ps.AddParam("LAVORANTE", DbType.String, lavorante);
 
             using (DbCommand cmd = BuildCommand(insert, ps))
             {
                 cmd.ExecuteNonQuery();
             }
         }
+
 
         public void UpdateALEDSTable(string tablename, ALEDS ds)
         {
@@ -283,7 +423,7 @@ namespace ReportWeb.Data
             }
         }
 
-        public void FillRW_ALE_GRUPPO(ALEDS ds, List<long> IDALEGRUPPO)
+        public void FillRW_ALE_GRUPPO(ALEDS ds, List<decimal> IDALEGRUPPO)
         {
             if (IDALEGRUPPO.Count > 0)
             {
@@ -295,7 +435,19 @@ namespace ReportWeb.Data
                 {
                     da.Fill(ds.RW_ALE_GRUPPO);
                 }
+            }
+        }
 
+        public void FillRW_ALE_GRUPPO(ALEDS ds, decimal IDALEGRUPPO)
+        {
+            string select = @"SELECT * FROM RW_ALE_GRUPPO WHERE IDALEGRUPPO = $P{IDALEGRUPPO}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDALEGRUPPO", DbType.Decimal, IDALEGRUPPO);
+
+            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            {
+                da.Fill(ds.RW_ALE_GRUPPO);
             }
         }
 

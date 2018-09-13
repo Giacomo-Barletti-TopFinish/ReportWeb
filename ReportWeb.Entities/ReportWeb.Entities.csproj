@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ALEDS.cs">
+      <DependentUpon>ALEDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ALEDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

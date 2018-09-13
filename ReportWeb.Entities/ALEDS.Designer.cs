@@ -56,6 +56,8 @@ namespace ReportWeb.Entities {
         
         private USR_PRD_FLUSSO_MOVFASIDataTable tableUSR_PRD_FLUSSO_MOVFASI;
         
+        private RW_ALE_DETT_COSTODataTable tableRW_ALE_DETT_COSTO;
+        
         private RW_ALE_GRUPPODataTable tableRW_ALE_GRUPPO;
         
         private RW_ALE_DETTAGLIODataTable tableRW_ALE_DETTAGLIO;
@@ -135,6 +137,9 @@ namespace ReportWeb.Entities {
                 }
                 if ((ds.Tables["USR_PRD_FLUSSO_MOVFASI"] != null)) {
                     base.Tables.Add(new USR_PRD_FLUSSO_MOVFASIDataTable(ds.Tables["USR_PRD_FLUSSO_MOVFASI"]));
+                }
+                if ((ds.Tables["RW_ALE_DETT_COSTO"] != null)) {
+                    base.Tables.Add(new RW_ALE_DETT_COSTODataTable(ds.Tables["RW_ALE_DETT_COSTO"]));
                 }
                 if ((ds.Tables["RW_ALE_GRUPPO"] != null)) {
                     base.Tables.Add(new RW_ALE_GRUPPODataTable(ds.Tables["RW_ALE_GRUPPO"]));
@@ -324,6 +329,16 @@ namespace ReportWeb.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public RW_ALE_DETT_COSTODataTable RW_ALE_DETT_COSTO {
+            get {
+                return this.tableRW_ALE_DETT_COSTO;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public RW_ALE_GRUPPODataTable RW_ALE_GRUPPO {
             get {
                 return this.tableRW_ALE_GRUPPO;
@@ -454,6 +469,9 @@ namespace ReportWeb.Entities {
                 }
                 if ((ds.Tables["USR_PRD_FLUSSO_MOVFASI"] != null)) {
                     base.Tables.Add(new USR_PRD_FLUSSO_MOVFASIDataTable(ds.Tables["USR_PRD_FLUSSO_MOVFASI"]));
+                }
+                if ((ds.Tables["RW_ALE_DETT_COSTO"] != null)) {
+                    base.Tables.Add(new RW_ALE_DETT_COSTODataTable(ds.Tables["RW_ALE_DETT_COSTO"]));
                 }
                 if ((ds.Tables["RW_ALE_GRUPPO"] != null)) {
                     base.Tables.Add(new RW_ALE_GRUPPODataTable(ds.Tables["RW_ALE_GRUPPO"]));
@@ -590,6 +608,12 @@ namespace ReportWeb.Entities {
                     this.tableUSR_PRD_FLUSSO_MOVFASI.InitVars();
                 }
             }
+            this.tableRW_ALE_DETT_COSTO = ((RW_ALE_DETT_COSTODataTable)(base.Tables["RW_ALE_DETT_COSTO"]));
+            if ((initTable == true)) {
+                if ((this.tableRW_ALE_DETT_COSTO != null)) {
+                    this.tableRW_ALE_DETT_COSTO.InitVars();
+                }
+            }
             this.tableRW_ALE_GRUPPO = ((RW_ALE_GRUPPODataTable)(base.Tables["RW_ALE_GRUPPO"]));
             if ((initTable == true)) {
                 if ((this.tableRW_ALE_GRUPPO != null)) {
@@ -644,10 +668,20 @@ namespace ReportWeb.Entities {
             base.Tables.Add(this.tableUSR_PRD_MOVFASI);
             this.tableUSR_PRD_FLUSSO_MOVFASI = new USR_PRD_FLUSSO_MOVFASIDataTable();
             base.Tables.Add(this.tableUSR_PRD_FLUSSO_MOVFASI);
+            this.tableRW_ALE_DETT_COSTO = new RW_ALE_DETT_COSTODataTable();
+            base.Tables.Add(this.tableRW_ALE_DETT_COSTO);
             this.tableRW_ALE_GRUPPO = new RW_ALE_GRUPPODataTable();
             base.Tables.Add(this.tableRW_ALE_GRUPPO);
             this.tableRW_ALE_DETTAGLIO = new RW_ALE_DETTAGLIODataTable();
             base.Tables.Add(this.tableRW_ALE_DETTAGLIO);
+            global::System.Data.ForeignKeyConstraint fkc;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_RW_ALE_DETTAGLIO_RW_ALE_DETT_COSTO", new global::System.Data.DataColumn[] {
+                        this.tableRW_ALE_DETTAGLIO.IDALEDETTAGLIOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableRW_ALE_DETT_COSTO.IDALEDETTAGLIOColumn});
+            this.tableRW_ALE_DETT_COSTO.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -743,6 +777,12 @@ namespace ReportWeb.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeUSR_PRD_FLUSSO_MOVFASI() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeRW_ALE_DETT_COSTO() {
             return false;
         }
         
@@ -862,6 +902,9 @@ namespace ReportWeb.Entities {
         public delegate void USR_PRD_FLUSSO_MOVFASIRowChangeEventHandler(object sender, USR_PRD_FLUSSO_MOVFASIRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void RW_ALE_DETT_COSTORowChangeEventHandler(object sender, RW_ALE_DETT_COSTORowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void RW_ALE_GRUPPORowChangeEventHandler(object sender, RW_ALE_GRUPPORowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -951,6 +994,8 @@ namespace ReportWeb.Entities {
             private global::System.Data.DataColumn columnSEGNALATORE;
             
             private global::System.Data.DataColumn columnIDSTAGIONE;
+            
+            private global::System.Data.DataColumn columnAZIENDA;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1299,6 +1344,14 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AZIENDAColumn {
+                get {
+                    return this.columnAZIENDA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1373,7 +1426,8 @@ namespace ReportWeb.Entities {
                         decimal QTASBY, 
                         decimal QTADANXT, 
                         string SEGNALATORE, 
-                        string IDSTAGIONE) {
+                        string IDSTAGIONE, 
+                        string AZIENDA) {
                 USR_CHECKQ_TRow rowUSR_CHECKQ_TRow = ((USR_CHECKQ_TRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDCHECKQT,
@@ -1414,7 +1468,8 @@ namespace ReportWeb.Entities {
                         QTASBY,
                         QTADANXT,
                         SEGNALATORE,
-                        IDSTAGIONE};
+                        IDSTAGIONE,
+                        AZIENDA};
                 rowUSR_CHECKQ_TRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSR_CHECKQ_TRow);
                 return rowUSR_CHECKQ_TRow;
@@ -1483,6 +1538,7 @@ namespace ReportWeb.Entities {
                 this.columnQTADANXT = base.Columns["QTADANXT"];
                 this.columnSEGNALATORE = base.Columns["SEGNALATORE"];
                 this.columnIDSTAGIONE = base.Columns["IDSTAGIONE"];
+                this.columnAZIENDA = base.Columns["AZIENDA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1566,6 +1622,8 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnSEGNALATORE);
                 this.columnIDSTAGIONE = new global::System.Data.DataColumn("IDSTAGIONE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDSTAGIONE);
+                this.columnAZIENDA = new global::System.Data.DataColumn("AZIENDA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAZIENDA);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDCHECKQT}, true));
                 this.columnIDCHECKQT.AllowDBNull = false;
@@ -13806,23 +13864,373 @@ namespace ReportWeb.Entities {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class RW_ALE_DETT_COSTODataTable : global::System.Data.TypedTableBase<RW_ALE_DETT_COSTORow> {
+            
+            private global::System.Data.DataColumn columnIDALEDETCOSTO;
+            
+            private global::System.Data.DataColumn columnIDALEDETTAGLIO;
+            
+            private global::System.Data.DataColumn columnFASE;
+            
+            private global::System.Data.DataColumn columnCOSTO;
+            
+            private global::System.Data.DataColumn columnDATA_INSERIMENTO;
+            
+            private global::System.Data.DataColumn columnUIDUSER;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_ALE_DETT_COSTODataTable() {
+                this.TableName = "RW_ALE_DETT_COSTO";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal RW_ALE_DETT_COSTODataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected RW_ALE_DETT_COSTODataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDALEDETCOSTOColumn {
+                get {
+                    return this.columnIDALEDETCOSTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDALEDETTAGLIOColumn {
+                get {
+                    return this.columnIDALEDETTAGLIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FASEColumn {
+                get {
+                    return this.columnFASE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn COSTOColumn {
+                get {
+                    return this.columnCOSTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATA_INSERIMENTOColumn {
+                get {
+                    return this.columnDATA_INSERIMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UIDUSERColumn {
+                get {
+                    return this.columnUIDUSER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_ALE_DETT_COSTORow this[int index] {
+                get {
+                    return ((RW_ALE_DETT_COSTORow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_ALE_DETT_COSTORowChangeEventHandler RW_ALE_DETT_COSTORowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_ALE_DETT_COSTORowChangeEventHandler RW_ALE_DETT_COSTORowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_ALE_DETT_COSTORowChangeEventHandler RW_ALE_DETT_COSTORowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event RW_ALE_DETT_COSTORowChangeEventHandler RW_ALE_DETT_COSTORowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddRW_ALE_DETT_COSTORow(RW_ALE_DETT_COSTORow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_ALE_DETT_COSTORow AddRW_ALE_DETT_COSTORow(decimal IDALEDETCOSTO, decimal IDALEDETTAGLIO, string FASE, decimal COSTO, System.DateTime DATA_INSERIMENTO, string UIDUSER) {
+                RW_ALE_DETT_COSTORow rowRW_ALE_DETT_COSTORow = ((RW_ALE_DETT_COSTORow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDALEDETCOSTO,
+                        IDALEDETTAGLIO,
+                        FASE,
+                        COSTO,
+                        DATA_INSERIMENTO,
+                        UIDUSER};
+                rowRW_ALE_DETT_COSTORow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRW_ALE_DETT_COSTORow);
+                return rowRW_ALE_DETT_COSTORow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_ALE_DETT_COSTORow FindByIDALEDETCOSTO(decimal IDALEDETCOSTO) {
+                return ((RW_ALE_DETT_COSTORow)(this.Rows.Find(new object[] {
+                            IDALEDETCOSTO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                RW_ALE_DETT_COSTODataTable cln = ((RW_ALE_DETT_COSTODataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new RW_ALE_DETT_COSTODataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnIDALEDETCOSTO = base.Columns["IDALEDETCOSTO"];
+                this.columnIDALEDETTAGLIO = base.Columns["IDALEDETTAGLIO"];
+                this.columnFASE = base.Columns["FASE"];
+                this.columnCOSTO = base.Columns["COSTO"];
+                this.columnDATA_INSERIMENTO = base.Columns["DATA_INSERIMENTO"];
+                this.columnUIDUSER = base.Columns["UIDUSER"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnIDALEDETCOSTO = new global::System.Data.DataColumn("IDALEDETCOSTO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDALEDETCOSTO);
+                this.columnIDALEDETTAGLIO = new global::System.Data.DataColumn("IDALEDETTAGLIO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDALEDETTAGLIO);
+                this.columnFASE = new global::System.Data.DataColumn("FASE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFASE);
+                this.columnCOSTO = new global::System.Data.DataColumn("COSTO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOSTO);
+                this.columnDATA_INSERIMENTO = new global::System.Data.DataColumn("DATA_INSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_INSERIMENTO);
+                this.columnUIDUSER = new global::System.Data.DataColumn("UIDUSER", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUIDUSER);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnIDALEDETCOSTO}, true));
+                this.columnIDALEDETCOSTO.AllowDBNull = false;
+                this.columnIDALEDETCOSTO.Unique = true;
+                this.columnFASE.AllowDBNull = false;
+                this.columnFASE.MaxLength = 50;
+                this.columnCOSTO.AllowDBNull = false;
+                this.columnDATA_INSERIMENTO.AllowDBNull = false;
+                this.columnUIDUSER.AllowDBNull = false;
+                this.columnUIDUSER.MaxLength = 254;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_ALE_DETT_COSTORow NewRW_ALE_DETT_COSTORow() {
+                return ((RW_ALE_DETT_COSTORow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new RW_ALE_DETT_COSTORow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(RW_ALE_DETT_COSTORow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.RW_ALE_DETT_COSTORowChanged != null)) {
+                    this.RW_ALE_DETT_COSTORowChanged(this, new RW_ALE_DETT_COSTORowChangeEvent(((RW_ALE_DETT_COSTORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.RW_ALE_DETT_COSTORowChanging != null)) {
+                    this.RW_ALE_DETT_COSTORowChanging(this, new RW_ALE_DETT_COSTORowChangeEvent(((RW_ALE_DETT_COSTORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.RW_ALE_DETT_COSTORowDeleted != null)) {
+                    this.RW_ALE_DETT_COSTORowDeleted(this, new RW_ALE_DETT_COSTORowChangeEvent(((RW_ALE_DETT_COSTORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.RW_ALE_DETT_COSTORowDeleting != null)) {
+                    this.RW_ALE_DETT_COSTORowDeleting(this, new RW_ALE_DETT_COSTORowChangeEvent(((RW_ALE_DETT_COSTORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveRW_ALE_DETT_COSTORow(RW_ALE_DETT_COSTORow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ALEDS ds = new ALEDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "RW_ALE_DETT_COSTODataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class RW_ALE_GRUPPODataTable : global::System.Data.TypedTableBase<RW_ALE_GRUPPORow> {
             
             private global::System.Data.DataColumn columnIDALEGRUPPO;
             
-            private global::System.Data.DataColumn columnNOTAADDEBITO;
+            private global::System.Data.DataColumn columnNOTA_ADDEBITO;
             
-            private global::System.Data.DataColumn columnNOTAVALORIZZAZIONE;
+            private global::System.Data.DataColumn columnNOTA_VALORIZZAZIONE;
             
-            private global::System.Data.DataColumn columnNOTAAPPROVAZIONE;
+            private global::System.Data.DataColumn columnNOTA_APPROVAZIONE;
             
-            private global::System.Data.DataColumn columnNOTAFATTURAZIONE;
+            private global::System.Data.DataColumn columnNOTA_FATTURAZIONE;
             
             private global::System.Data.DataColumn columnLAVORANTE;
             
             private global::System.Data.DataColumn columnAPERTO;
             
-            private global::System.Data.DataColumn columnDATA_INSERIMENTO;
+            private global::System.Data.DataColumn columnDATA_VALORIZZAZIONE;
+            
+            private global::System.Data.DataColumn columnDATA_APPROVAZIONE;
+            
+            private global::System.Data.DataColumn columnDATA_ADDEBITO;
+            
+            private global::System.Data.DataColumn columnDATA_FATTURAZIONE;
+            
+            private global::System.Data.DataColumn columnUIDUSER_VALORIZZAZIONE;
+            
+            private global::System.Data.DataColumn columnUIDUSER_APPROVAZIONE;
+            
+            private global::System.Data.DataColumn columnUIDUSER_ADDEBITO;
+            
+            private global::System.Data.DataColumn columnUIDUSER_FATTURAZIONE;
+            
+            private global::System.Data.DataColumn columnDATA_CREAZIONE;
             
             private global::System.Data.DataColumn columnUIDUSER;
             
@@ -13869,33 +14277,33 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NOTAADDEBITOColumn {
+            public global::System.Data.DataColumn NOTA_ADDEBITOColumn {
                 get {
-                    return this.columnNOTAADDEBITO;
+                    return this.columnNOTA_ADDEBITO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NOTAVALORIZZAZIONEColumn {
+            public global::System.Data.DataColumn NOTA_VALORIZZAZIONEColumn {
                 get {
-                    return this.columnNOTAVALORIZZAZIONE;
+                    return this.columnNOTA_VALORIZZAZIONE;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NOTAAPPROVAZIONEColumn {
+            public global::System.Data.DataColumn NOTA_APPROVAZIONEColumn {
                 get {
-                    return this.columnNOTAAPPROVAZIONE;
+                    return this.columnNOTA_APPROVAZIONE;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NOTAFATTURAZIONEColumn {
+            public global::System.Data.DataColumn NOTA_FATTURAZIONEColumn {
                 get {
-                    return this.columnNOTAFATTURAZIONE;
+                    return this.columnNOTA_FATTURAZIONE;
                 }
             }
             
@@ -13917,9 +14325,73 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DATA_INSERIMENTOColumn {
+            public global::System.Data.DataColumn DATA_VALORIZZAZIONEColumn {
                 get {
-                    return this.columnDATA_INSERIMENTO;
+                    return this.columnDATA_VALORIZZAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATA_APPROVAZIONEColumn {
+                get {
+                    return this.columnDATA_APPROVAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATA_ADDEBITOColumn {
+                get {
+                    return this.columnDATA_ADDEBITO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATA_FATTURAZIONEColumn {
+                get {
+                    return this.columnDATA_FATTURAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UIDUSER_VALORIZZAZIONEColumn {
+                get {
+                    return this.columnUIDUSER_VALORIZZAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UIDUSER_APPROVAZIONEColumn {
+                get {
+                    return this.columnUIDUSER_APPROVAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UIDUSER_ADDEBITOColumn {
+                get {
+                    return this.columnUIDUSER_ADDEBITO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UIDUSER_FATTURAZIONEColumn {
+                get {
+                    return this.columnUIDUSER_FATTURAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATA_CREAZIONEColumn {
+                get {
+                    return this.columnDATA_CREAZIONE;
                 }
             }
             
@@ -13968,17 +14440,42 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RW_ALE_GRUPPORow AddRW_ALE_GRUPPORow(decimal IDALEGRUPPO, string NOTAADDEBITO, string NOTAVALORIZZAZIONE, string NOTAAPPROVAZIONE, string NOTAFATTURAZIONE, string LAVORANTE, string APERTO, System.DateTime DATA_INSERIMENTO, string UIDUSER) {
+            public RW_ALE_GRUPPORow AddRW_ALE_GRUPPORow(
+                        decimal IDALEGRUPPO, 
+                        string NOTA_ADDEBITO, 
+                        string NOTA_VALORIZZAZIONE, 
+                        string NOTA_APPROVAZIONE, 
+                        string NOTA_FATTURAZIONE, 
+                        string LAVORANTE, 
+                        string APERTO, 
+                        System.DateTime DATA_VALORIZZAZIONE, 
+                        System.DateTime DATA_APPROVAZIONE, 
+                        System.DateTime DATA_ADDEBITO, 
+                        System.DateTime DATA_FATTURAZIONE, 
+                        string UIDUSER_VALORIZZAZIONE, 
+                        string UIDUSER_APPROVAZIONE, 
+                        string UIDUSER_ADDEBITO, 
+                        string UIDUSER_FATTURAZIONE, 
+                        System.DateTime DATA_CREAZIONE, 
+                        string UIDUSER) {
                 RW_ALE_GRUPPORow rowRW_ALE_GRUPPORow = ((RW_ALE_GRUPPORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDALEGRUPPO,
-                        NOTAADDEBITO,
-                        NOTAVALORIZZAZIONE,
-                        NOTAAPPROVAZIONE,
-                        NOTAFATTURAZIONE,
+                        NOTA_ADDEBITO,
+                        NOTA_VALORIZZAZIONE,
+                        NOTA_APPROVAZIONE,
+                        NOTA_FATTURAZIONE,
                         LAVORANTE,
                         APERTO,
-                        DATA_INSERIMENTO,
+                        DATA_VALORIZZAZIONE,
+                        DATA_APPROVAZIONE,
+                        DATA_ADDEBITO,
+                        DATA_FATTURAZIONE,
+                        UIDUSER_VALORIZZAZIONE,
+                        UIDUSER_APPROVAZIONE,
+                        UIDUSER_ADDEBITO,
+                        UIDUSER_FATTURAZIONE,
+                        DATA_CREAZIONE,
                         UIDUSER};
                 rowRW_ALE_GRUPPORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRW_ALE_GRUPPORow);
@@ -14010,13 +14507,21 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnIDALEGRUPPO = base.Columns["IDALEGRUPPO"];
-                this.columnNOTAADDEBITO = base.Columns["NOTAADDEBITO"];
-                this.columnNOTAVALORIZZAZIONE = base.Columns["NOTAVALORIZZAZIONE"];
-                this.columnNOTAAPPROVAZIONE = base.Columns["NOTAAPPROVAZIONE"];
-                this.columnNOTAFATTURAZIONE = base.Columns["NOTAFATTURAZIONE"];
+                this.columnNOTA_ADDEBITO = base.Columns["NOTA_ADDEBITO"];
+                this.columnNOTA_VALORIZZAZIONE = base.Columns["NOTA_VALORIZZAZIONE"];
+                this.columnNOTA_APPROVAZIONE = base.Columns["NOTA_APPROVAZIONE"];
+                this.columnNOTA_FATTURAZIONE = base.Columns["NOTA_FATTURAZIONE"];
                 this.columnLAVORANTE = base.Columns["LAVORANTE"];
                 this.columnAPERTO = base.Columns["APERTO"];
-                this.columnDATA_INSERIMENTO = base.Columns["DATA_INSERIMENTO"];
+                this.columnDATA_VALORIZZAZIONE = base.Columns["DATA_VALORIZZAZIONE"];
+                this.columnDATA_APPROVAZIONE = base.Columns["DATA_APPROVAZIONE"];
+                this.columnDATA_ADDEBITO = base.Columns["DATA_ADDEBITO"];
+                this.columnDATA_FATTURAZIONE = base.Columns["DATA_FATTURAZIONE"];
+                this.columnUIDUSER_VALORIZZAZIONE = base.Columns["UIDUSER_VALORIZZAZIONE"];
+                this.columnUIDUSER_APPROVAZIONE = base.Columns["UIDUSER_APPROVAZIONE"];
+                this.columnUIDUSER_ADDEBITO = base.Columns["UIDUSER_ADDEBITO"];
+                this.columnUIDUSER_FATTURAZIONE = base.Columns["UIDUSER_FATTURAZIONE"];
+                this.columnDATA_CREAZIONE = base.Columns["DATA_CREAZIONE"];
                 this.columnUIDUSER = base.Columns["UIDUSER"];
             }
             
@@ -14025,35 +14530,56 @@ namespace ReportWeb.Entities {
             private void InitClass() {
                 this.columnIDALEGRUPPO = new global::System.Data.DataColumn("IDALEGRUPPO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDALEGRUPPO);
-                this.columnNOTAADDEBITO = new global::System.Data.DataColumn("NOTAADDEBITO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNOTAADDEBITO);
-                this.columnNOTAVALORIZZAZIONE = new global::System.Data.DataColumn("NOTAVALORIZZAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNOTAVALORIZZAZIONE);
-                this.columnNOTAAPPROVAZIONE = new global::System.Data.DataColumn("NOTAAPPROVAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNOTAAPPROVAZIONE);
-                this.columnNOTAFATTURAZIONE = new global::System.Data.DataColumn("NOTAFATTURAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNOTAFATTURAZIONE);
+                this.columnNOTA_ADDEBITO = new global::System.Data.DataColumn("NOTA_ADDEBITO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNOTA_ADDEBITO);
+                this.columnNOTA_VALORIZZAZIONE = new global::System.Data.DataColumn("NOTA_VALORIZZAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNOTA_VALORIZZAZIONE);
+                this.columnNOTA_APPROVAZIONE = new global::System.Data.DataColumn("NOTA_APPROVAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNOTA_APPROVAZIONE);
+                this.columnNOTA_FATTURAZIONE = new global::System.Data.DataColumn("NOTA_FATTURAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNOTA_FATTURAZIONE);
                 this.columnLAVORANTE = new global::System.Data.DataColumn("LAVORANTE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLAVORANTE);
                 this.columnAPERTO = new global::System.Data.DataColumn("APERTO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAPERTO);
-                this.columnDATA_INSERIMENTO = new global::System.Data.DataColumn("DATA_INSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDATA_INSERIMENTO);
+                this.columnDATA_VALORIZZAZIONE = new global::System.Data.DataColumn("DATA_VALORIZZAZIONE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_VALORIZZAZIONE);
+                this.columnDATA_APPROVAZIONE = new global::System.Data.DataColumn("DATA_APPROVAZIONE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_APPROVAZIONE);
+                this.columnDATA_ADDEBITO = new global::System.Data.DataColumn("DATA_ADDEBITO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_ADDEBITO);
+                this.columnDATA_FATTURAZIONE = new global::System.Data.DataColumn("DATA_FATTURAZIONE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_FATTURAZIONE);
+                this.columnUIDUSER_VALORIZZAZIONE = new global::System.Data.DataColumn("UIDUSER_VALORIZZAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUIDUSER_VALORIZZAZIONE);
+                this.columnUIDUSER_APPROVAZIONE = new global::System.Data.DataColumn("UIDUSER_APPROVAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUIDUSER_APPROVAZIONE);
+                this.columnUIDUSER_ADDEBITO = new global::System.Data.DataColumn("UIDUSER_ADDEBITO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUIDUSER_ADDEBITO);
+                this.columnUIDUSER_FATTURAZIONE = new global::System.Data.DataColumn("UIDUSER_FATTURAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUIDUSER_FATTURAZIONE);
+                this.columnDATA_CREAZIONE = new global::System.Data.DataColumn("DATA_CREAZIONE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_CREAZIONE);
                 this.columnUIDUSER = new global::System.Data.DataColumn("UIDUSER", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUIDUSER);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDALEGRUPPO}, true));
                 this.columnIDALEGRUPPO.AllowDBNull = false;
                 this.columnIDALEGRUPPO.Unique = true;
-                this.columnNOTAADDEBITO.MaxLength = 100;
-                this.columnNOTAVALORIZZAZIONE.MaxLength = 100;
-                this.columnNOTAAPPROVAZIONE.MaxLength = 100;
-                this.columnNOTAFATTURAZIONE.MaxLength = 100;
+                this.columnNOTA_ADDEBITO.MaxLength = 100;
+                this.columnNOTA_VALORIZZAZIONE.MaxLength = 100;
+                this.columnNOTA_APPROVAZIONE.MaxLength = 100;
+                this.columnNOTA_FATTURAZIONE.MaxLength = 100;
                 this.columnLAVORANTE.AllowDBNull = false;
                 this.columnLAVORANTE.MaxLength = 10;
                 this.columnAPERTO.AllowDBNull = false;
                 this.columnAPERTO.MaxLength = 1;
-                this.columnDATA_INSERIMENTO.AllowDBNull = false;
+                this.columnUIDUSER_VALORIZZAZIONE.MaxLength = 254;
+                this.columnUIDUSER_APPROVAZIONE.MaxLength = 254;
+                this.columnUIDUSER_ADDEBITO.AllowDBNull = false;
+                this.columnUIDUSER_ADDEBITO.MaxLength = 254;
+                this.columnUIDUSER_FATTURAZIONE.MaxLength = 254;
+                this.columnDATA_CREAZIONE.AllowDBNull = false;
                 this.columnUIDUSER.AllowDBNull = false;
                 this.columnUIDUSER.MaxLength = 254;
             }
@@ -14191,6 +14717,8 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnIDALEDETTAGLIO;
             
+            private global::System.Data.DataColumn columnAZIENDA;
+            
             private global::System.Data.DataColumn columnBARCODE;
             
             private global::System.Data.DataColumn columnIDCHECKQT;
@@ -14203,9 +14731,7 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnQUANTITAADDEBITATA;
             
-            private global::System.Data.DataColumn columnQUANTITAAPPROVATA;
-            
-            private global::System.Data.DataColumn columnNOTA;
+            private global::System.Data.DataColumn columnNOTAINSERIMENTO;
             
             private global::System.Data.DataColumn columnNOTAADDEBITO;
             
@@ -14213,9 +14739,9 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnNOTAAPPROVAZIONE;
             
-            private global::System.Data.DataColumn columnNOTAFATTURAZIONE;
-            
             private global::System.Data.DataColumn columnPREZZO;
+            
+            private global::System.Data.DataColumn columnVALORE;
             
             private global::System.Data.DataColumn columnPREZZO_APPROVATO;
             
@@ -14225,7 +14751,11 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnDATA_INSERIMENTO;
             
-            private global::System.Data.DataColumn columnUIDUSER;
+            private global::System.Data.DataColumn columnUIDUSER_INSERIMENTO;
+            
+            private global::System.Data.DataColumn columnUIDUSER_NONADDEBITO;
+            
+            private global::System.Data.DataColumn columnDATA_NONADDEBITO;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -14265,6 +14795,14 @@ namespace ReportWeb.Entities {
             public global::System.Data.DataColumn IDALEDETTAGLIOColumn {
                 get {
                     return this.columnIDALEDETTAGLIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AZIENDAColumn {
+                get {
+                    return this.columnAZIENDA;
                 }
             }
             
@@ -14318,17 +14856,9 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn QUANTITAAPPROVATAColumn {
+            public global::System.Data.DataColumn NOTAINSERIMENTOColumn {
                 get {
-                    return this.columnQUANTITAAPPROVATA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NOTAColumn {
-                get {
-                    return this.columnNOTA;
+                    return this.columnNOTAINSERIMENTO;
                 }
             }
             
@@ -14358,17 +14888,17 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NOTAFATTURAZIONEColumn {
+            public global::System.Data.DataColumn PREZZOColumn {
                 get {
-                    return this.columnNOTAFATTURAZIONE;
+                    return this.columnPREZZO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PREZZOColumn {
+            public global::System.Data.DataColumn VALOREColumn {
                 get {
-                    return this.columnPREZZO;
+                    return this.columnVALORE;
                 }
             }
             
@@ -14406,9 +14936,25 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn UIDUSERColumn {
+            public global::System.Data.DataColumn UIDUSER_INSERIMENTOColumn {
                 get {
-                    return this.columnUIDUSER;
+                    return this.columnUIDUSER_INSERIMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UIDUSER_NONADDEBITOColumn {
+                get {
+                    return this.columnUIDUSER_NONADDEBITO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATA_NONADDEBITOColumn {
+                get {
+                    return this.columnDATA_NONADDEBITO;
                 }
             }
             
@@ -14451,45 +14997,49 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public RW_ALE_DETTAGLIORow AddRW_ALE_DETTAGLIORow(
                         decimal IDALEDETTAGLIO, 
+                        string AZIENDA, 
                         string BARCODE, 
                         string IDCHECKQT, 
                         decimal IDALEGRUPPO, 
                         decimal QUANTITADIFETTOSI, 
                         decimal QUANTITAINSERITA, 
                         decimal QUANTITAADDEBITATA, 
-                        decimal QUANTITAAPPROVATA, 
-                        string NOTA, 
+                        string NOTAINSERIMENTO, 
                         string NOTAADDEBITO, 
                         string NOTAVALORIZZAZIONE, 
                         string NOTAAPPROVAZIONE, 
-                        string NOTAFATTURAZIONE, 
                         decimal PREZZO, 
+                        decimal VALORE, 
                         decimal PREZZO_APPROVATO, 
                         string LAVORANTE, 
                         string STATO, 
                         System.DateTime DATA_INSERIMENTO, 
-                        string UIDUSER) {
+                        string UIDUSER_INSERIMENTO, 
+                        string UIDUSER_NONADDEBITO, 
+                        System.DateTime DATA_NONADDEBITO) {
                 RW_ALE_DETTAGLIORow rowRW_ALE_DETTAGLIORow = ((RW_ALE_DETTAGLIORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDALEDETTAGLIO,
+                        AZIENDA,
                         BARCODE,
                         IDCHECKQT,
                         IDALEGRUPPO,
                         QUANTITADIFETTOSI,
                         QUANTITAINSERITA,
                         QUANTITAADDEBITATA,
-                        QUANTITAAPPROVATA,
-                        NOTA,
+                        NOTAINSERIMENTO,
                         NOTAADDEBITO,
                         NOTAVALORIZZAZIONE,
                         NOTAAPPROVAZIONE,
-                        NOTAFATTURAZIONE,
                         PREZZO,
+                        VALORE,
                         PREZZO_APPROVATO,
                         LAVORANTE,
                         STATO,
                         DATA_INSERIMENTO,
-                        UIDUSER};
+                        UIDUSER_INSERIMENTO,
+                        UIDUSER_NONADDEBITO,
+                        DATA_NONADDEBITO};
                 rowRW_ALE_DETTAGLIORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRW_ALE_DETTAGLIORow);
                 return rowRW_ALE_DETTAGLIORow;
@@ -14520,24 +15070,26 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnIDALEDETTAGLIO = base.Columns["IDALEDETTAGLIO"];
+                this.columnAZIENDA = base.Columns["AZIENDA"];
                 this.columnBARCODE = base.Columns["BARCODE"];
                 this.columnIDCHECKQT = base.Columns["IDCHECKQT"];
                 this.columnIDALEGRUPPO = base.Columns["IDALEGRUPPO"];
                 this.columnQUANTITADIFETTOSI = base.Columns["QUANTITADIFETTOSI"];
                 this.columnQUANTITAINSERITA = base.Columns["QUANTITAINSERITA"];
                 this.columnQUANTITAADDEBITATA = base.Columns["QUANTITAADDEBITATA"];
-                this.columnQUANTITAAPPROVATA = base.Columns["QUANTITAAPPROVATA"];
-                this.columnNOTA = base.Columns["NOTA"];
+                this.columnNOTAINSERIMENTO = base.Columns["NOTAINSERIMENTO"];
                 this.columnNOTAADDEBITO = base.Columns["NOTAADDEBITO"];
                 this.columnNOTAVALORIZZAZIONE = base.Columns["NOTAVALORIZZAZIONE"];
                 this.columnNOTAAPPROVAZIONE = base.Columns["NOTAAPPROVAZIONE"];
-                this.columnNOTAFATTURAZIONE = base.Columns["NOTAFATTURAZIONE"];
                 this.columnPREZZO = base.Columns["PREZZO"];
+                this.columnVALORE = base.Columns["VALORE"];
                 this.columnPREZZO_APPROVATO = base.Columns["PREZZO_APPROVATO"];
                 this.columnLAVORANTE = base.Columns["LAVORANTE"];
                 this.columnSTATO = base.Columns["STATO"];
                 this.columnDATA_INSERIMENTO = base.Columns["DATA_INSERIMENTO"];
-                this.columnUIDUSER = base.Columns["UIDUSER"];
+                this.columnUIDUSER_INSERIMENTO = base.Columns["UIDUSER_INSERIMENTO"];
+                this.columnUIDUSER_NONADDEBITO = base.Columns["UIDUSER_NONADDEBITO"];
+                this.columnDATA_NONADDEBITO = base.Columns["DATA_NONADDEBITO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14545,6 +15097,8 @@ namespace ReportWeb.Entities {
             private void InitClass() {
                 this.columnIDALEDETTAGLIO = new global::System.Data.DataColumn("IDALEDETTAGLIO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDALEDETTAGLIO);
+                this.columnAZIENDA = new global::System.Data.DataColumn("AZIENDA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAZIENDA);
                 this.columnBARCODE = new global::System.Data.DataColumn("BARCODE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBARCODE);
                 this.columnIDCHECKQT = new global::System.Data.DataColumn("IDCHECKQT", typeof(string), null, global::System.Data.MappingType.Element);
@@ -14557,20 +15111,18 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnQUANTITAINSERITA);
                 this.columnQUANTITAADDEBITATA = new global::System.Data.DataColumn("QUANTITAADDEBITATA", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQUANTITAADDEBITATA);
-                this.columnQUANTITAAPPROVATA = new global::System.Data.DataColumn("QUANTITAAPPROVATA", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQUANTITAAPPROVATA);
-                this.columnNOTA = new global::System.Data.DataColumn("NOTA", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNOTA);
+                this.columnNOTAINSERIMENTO = new global::System.Data.DataColumn("NOTAINSERIMENTO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNOTAINSERIMENTO);
                 this.columnNOTAADDEBITO = new global::System.Data.DataColumn("NOTAADDEBITO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNOTAADDEBITO);
                 this.columnNOTAVALORIZZAZIONE = new global::System.Data.DataColumn("NOTAVALORIZZAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNOTAVALORIZZAZIONE);
                 this.columnNOTAAPPROVAZIONE = new global::System.Data.DataColumn("NOTAAPPROVAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNOTAAPPROVAZIONE);
-                this.columnNOTAFATTURAZIONE = new global::System.Data.DataColumn("NOTAFATTURAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNOTAFATTURAZIONE);
                 this.columnPREZZO = new global::System.Data.DataColumn("PREZZO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPREZZO);
+                this.columnVALORE = new global::System.Data.DataColumn("VALORE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVALORE);
                 this.columnPREZZO_APPROVATO = new global::System.Data.DataColumn("PREZZO_APPROVATO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPREZZO_APPROVATO);
                 this.columnLAVORANTE = new global::System.Data.DataColumn("LAVORANTE", typeof(string), null, global::System.Data.MappingType.Element);
@@ -14579,30 +15131,36 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnSTATO);
                 this.columnDATA_INSERIMENTO = new global::System.Data.DataColumn("DATA_INSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATA_INSERIMENTO);
-                this.columnUIDUSER = new global::System.Data.DataColumn("UIDUSER", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUIDUSER);
+                this.columnUIDUSER_INSERIMENTO = new global::System.Data.DataColumn("UIDUSER_INSERIMENTO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUIDUSER_INSERIMENTO);
+                this.columnUIDUSER_NONADDEBITO = new global::System.Data.DataColumn("UIDUSER_NONADDEBITO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUIDUSER_NONADDEBITO);
+                this.columnDATA_NONADDEBITO = new global::System.Data.DataColumn("DATA_NONADDEBITO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATA_NONADDEBITO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDALEDETTAGLIO}, true));
                 this.columnIDALEDETTAGLIO.AllowDBNull = false;
                 this.columnIDALEDETTAGLIO.Unique = true;
+                this.columnAZIENDA.AllowDBNull = false;
+                this.columnAZIENDA.MaxLength = 20;
                 this.columnBARCODE.AllowDBNull = false;
                 this.columnBARCODE.MaxLength = 13;
                 this.columnIDCHECKQT.AllowDBNull = false;
                 this.columnIDCHECKQT.MaxLength = 25;
                 this.columnQUANTITADIFETTOSI.AllowDBNull = false;
                 this.columnQUANTITAINSERITA.AllowDBNull = false;
-                this.columnNOTA.MaxLength = 100;
+                this.columnNOTAINSERIMENTO.MaxLength = 100;
                 this.columnNOTAADDEBITO.MaxLength = 100;
                 this.columnNOTAVALORIZZAZIONE.MaxLength = 100;
                 this.columnNOTAAPPROVAZIONE.MaxLength = 100;
-                this.columnNOTAFATTURAZIONE.MaxLength = 100;
                 this.columnLAVORANTE.AllowDBNull = false;
                 this.columnLAVORANTE.MaxLength = 10;
                 this.columnSTATO.AllowDBNull = false;
                 this.columnSTATO.MaxLength = 20;
                 this.columnDATA_INSERIMENTO.AllowDBNull = false;
-                this.columnUIDUSER.AllowDBNull = false;
-                this.columnUIDUSER.MaxLength = 254;
+                this.columnUIDUSER_INSERIMENTO.AllowDBNull = false;
+                this.columnUIDUSER_INSERIMENTO.MaxLength = 254;
+                this.columnUIDUSER_NONADDEBITO.MaxLength = 254;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15339,6 +15897,22 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string AZIENDA {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_CHECKQ_T.AZIENDAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AZIENDA\' in table \'USR_CHECKQ_T\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_CHECKQ_T.AZIENDAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDATACHECKQTNull() {
                 return this.IsNull(this.tableUSR_CHECKQ_T.DATACHECKQTColumn);
             }
@@ -15731,6 +16305,18 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetIDSTAGIONENull() {
                 this[this.tableUSR_CHECKQ_T.IDSTAGIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAZIENDANull() {
+                return this.IsNull(this.tableUSR_CHECKQ_T.AZIENDAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAZIENDANull() {
+                this[this.tableUSR_CHECKQ_T.AZIENDAColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -27654,6 +28240,104 @@ namespace ReportWeb.Entities {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
+        public partial class RW_ALE_DETT_COSTORow : global::System.Data.DataRow {
+            
+            private RW_ALE_DETT_COSTODataTable tableRW_ALE_DETT_COSTO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal RW_ALE_DETT_COSTORow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableRW_ALE_DETT_COSTO = ((RW_ALE_DETT_COSTODataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IDALEDETCOSTO {
+                get {
+                    return ((decimal)(this[this.tableRW_ALE_DETT_COSTO.IDALEDETCOSTOColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_DETT_COSTO.IDALEDETCOSTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IDALEDETTAGLIO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_ALE_DETT_COSTO.IDALEDETTAGLIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDALEDETTAGLIO\' in table \'RW_ALE_DETT_COSTO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_DETT_COSTO.IDALEDETTAGLIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FASE {
+                get {
+                    return ((string)(this[this.tableRW_ALE_DETT_COSTO.FASEColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_DETT_COSTO.FASEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal COSTO {
+                get {
+                    return ((decimal)(this[this.tableRW_ALE_DETT_COSTO.COSTOColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_DETT_COSTO.COSTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATA_INSERIMENTO {
+                get {
+                    return ((global::System.DateTime)(this[this.tableRW_ALE_DETT_COSTO.DATA_INSERIMENTOColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_DETT_COSTO.DATA_INSERIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UIDUSER {
+                get {
+                    return ((string)(this[this.tableRW_ALE_DETT_COSTO.UIDUSERColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_DETT_COSTO.UIDUSERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIDALEDETTAGLIONull() {
+                return this.IsNull(this.tableRW_ALE_DETT_COSTO.IDALEDETTAGLIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIDALEDETTAGLIONull() {
+                this[this.tableRW_ALE_DETT_COSTO.IDALEDETTAGLIOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
         public partial class RW_ALE_GRUPPORow : global::System.Data.DataRow {
             
             private RW_ALE_GRUPPODataTable tableRW_ALE_GRUPPO;
@@ -27678,65 +28362,65 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NOTAADDEBITO {
+            public string NOTA_ADDEBITO {
                 get {
                     try {
-                        return ((string)(this[this.tableRW_ALE_GRUPPO.NOTAADDEBITOColumn]));
+                        return ((string)(this[this.tableRW_ALE_GRUPPO.NOTA_ADDEBITOColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NOTAADDEBITO\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'NOTA_ADDEBITO\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRW_ALE_GRUPPO.NOTAADDEBITOColumn] = value;
+                    this[this.tableRW_ALE_GRUPPO.NOTA_ADDEBITOColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NOTAVALORIZZAZIONE {
+            public string NOTA_VALORIZZAZIONE {
                 get {
                     try {
-                        return ((string)(this[this.tableRW_ALE_GRUPPO.NOTAVALORIZZAZIONEColumn]));
+                        return ((string)(this[this.tableRW_ALE_GRUPPO.NOTA_VALORIZZAZIONEColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NOTAVALORIZZAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'NOTA_VALORIZZAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRW_ALE_GRUPPO.NOTAVALORIZZAZIONEColumn] = value;
+                    this[this.tableRW_ALE_GRUPPO.NOTA_VALORIZZAZIONEColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NOTAAPPROVAZIONE {
+            public string NOTA_APPROVAZIONE {
                 get {
                     try {
-                        return ((string)(this[this.tableRW_ALE_GRUPPO.NOTAAPPROVAZIONEColumn]));
+                        return ((string)(this[this.tableRW_ALE_GRUPPO.NOTA_APPROVAZIONEColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NOTAAPPROVAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'NOTA_APPROVAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRW_ALE_GRUPPO.NOTAAPPROVAZIONEColumn] = value;
+                    this[this.tableRW_ALE_GRUPPO.NOTA_APPROVAZIONEColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NOTAFATTURAZIONE {
+            public string NOTA_FATTURAZIONE {
                 get {
                     try {
-                        return ((string)(this[this.tableRW_ALE_GRUPPO.NOTAFATTURAZIONEColumn]));
+                        return ((string)(this[this.tableRW_ALE_GRUPPO.NOTA_FATTURAZIONEColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NOTAFATTURAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'NOTA_FATTURAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRW_ALE_GRUPPO.NOTAFATTURAZIONEColumn] = value;
+                    this[this.tableRW_ALE_GRUPPO.NOTA_FATTURAZIONEColumn] = value;
                 }
             }
             
@@ -27764,12 +28448,136 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime DATA_INSERIMENTO {
+            public System.DateTime DATA_VALORIZZAZIONE {
                 get {
-                    return ((global::System.DateTime)(this[this.tableRW_ALE_GRUPPO.DATA_INSERIMENTOColumn]));
+                    try {
+                        return ((global::System.DateTime)(this[this.tableRW_ALE_GRUPPO.DATA_VALORIZZAZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATA_VALORIZZAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableRW_ALE_GRUPPO.DATA_INSERIMENTOColumn] = value;
+                    this[this.tableRW_ALE_GRUPPO.DATA_VALORIZZAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATA_APPROVAZIONE {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableRW_ALE_GRUPPO.DATA_APPROVAZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATA_APPROVAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_GRUPPO.DATA_APPROVAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATA_ADDEBITO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableRW_ALE_GRUPPO.DATA_ADDEBITOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATA_ADDEBITO\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_GRUPPO.DATA_ADDEBITOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATA_FATTURAZIONE {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableRW_ALE_GRUPPO.DATA_FATTURAZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATA_FATTURAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_GRUPPO.DATA_FATTURAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UIDUSER_VALORIZZAZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_GRUPPO.UIDUSER_VALORIZZAZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UIDUSER_VALORIZZAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_GRUPPO.UIDUSER_VALORIZZAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UIDUSER_APPROVAZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_GRUPPO.UIDUSER_APPROVAZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UIDUSER_APPROVAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_GRUPPO.UIDUSER_APPROVAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UIDUSER_ADDEBITO {
+                get {
+                    return ((string)(this[this.tableRW_ALE_GRUPPO.UIDUSER_ADDEBITOColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_GRUPPO.UIDUSER_ADDEBITOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UIDUSER_FATTURAZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_GRUPPO.UIDUSER_FATTURAZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UIDUSER_FATTURAZIONE\' in table \'RW_ALE_GRUPPO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_GRUPPO.UIDUSER_FATTURAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATA_CREAZIONE {
+                get {
+                    return ((global::System.DateTime)(this[this.tableRW_ALE_GRUPPO.DATA_CREAZIONEColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_GRUPPO.DATA_CREAZIONEColumn] = value;
                 }
             }
             
@@ -27786,50 +28594,134 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNOTAADDEBITONull() {
-                return this.IsNull(this.tableRW_ALE_GRUPPO.NOTAADDEBITOColumn);
+            public bool IsNOTA_ADDEBITONull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.NOTA_ADDEBITOColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNOTAADDEBITONull() {
-                this[this.tableRW_ALE_GRUPPO.NOTAADDEBITOColumn] = global::System.Convert.DBNull;
+            public void SetNOTA_ADDEBITONull() {
+                this[this.tableRW_ALE_GRUPPO.NOTA_ADDEBITOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNOTAVALORIZZAZIONENull() {
-                return this.IsNull(this.tableRW_ALE_GRUPPO.NOTAVALORIZZAZIONEColumn);
+            public bool IsNOTA_VALORIZZAZIONENull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.NOTA_VALORIZZAZIONEColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNOTAVALORIZZAZIONENull() {
-                this[this.tableRW_ALE_GRUPPO.NOTAVALORIZZAZIONEColumn] = global::System.Convert.DBNull;
+            public void SetNOTA_VALORIZZAZIONENull() {
+                this[this.tableRW_ALE_GRUPPO.NOTA_VALORIZZAZIONEColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNOTAAPPROVAZIONENull() {
-                return this.IsNull(this.tableRW_ALE_GRUPPO.NOTAAPPROVAZIONEColumn);
+            public bool IsNOTA_APPROVAZIONENull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.NOTA_APPROVAZIONEColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNOTAAPPROVAZIONENull() {
-                this[this.tableRW_ALE_GRUPPO.NOTAAPPROVAZIONEColumn] = global::System.Convert.DBNull;
+            public void SetNOTA_APPROVAZIONENull() {
+                this[this.tableRW_ALE_GRUPPO.NOTA_APPROVAZIONEColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNOTAFATTURAZIONENull() {
-                return this.IsNull(this.tableRW_ALE_GRUPPO.NOTAFATTURAZIONEColumn);
+            public bool IsNOTA_FATTURAZIONENull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.NOTA_FATTURAZIONEColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNOTAFATTURAZIONENull() {
-                this[this.tableRW_ALE_GRUPPO.NOTAFATTURAZIONEColumn] = global::System.Convert.DBNull;
+            public void SetNOTA_FATTURAZIONENull() {
+                this[this.tableRW_ALE_GRUPPO.NOTA_FATTURAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDATA_VALORIZZAZIONENull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.DATA_VALORIZZAZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDATA_VALORIZZAZIONENull() {
+                this[this.tableRW_ALE_GRUPPO.DATA_VALORIZZAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDATA_APPROVAZIONENull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.DATA_APPROVAZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDATA_APPROVAZIONENull() {
+                this[this.tableRW_ALE_GRUPPO.DATA_APPROVAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDATA_ADDEBITONull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.DATA_ADDEBITOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDATA_ADDEBITONull() {
+                this[this.tableRW_ALE_GRUPPO.DATA_ADDEBITOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDATA_FATTURAZIONENull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.DATA_FATTURAZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDATA_FATTURAZIONENull() {
+                this[this.tableRW_ALE_GRUPPO.DATA_FATTURAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUIDUSER_VALORIZZAZIONENull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.UIDUSER_VALORIZZAZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUIDUSER_VALORIZZAZIONENull() {
+                this[this.tableRW_ALE_GRUPPO.UIDUSER_VALORIZZAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUIDUSER_APPROVAZIONENull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.UIDUSER_APPROVAZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUIDUSER_APPROVAZIONENull() {
+                this[this.tableRW_ALE_GRUPPO.UIDUSER_APPROVAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUIDUSER_FATTURAZIONENull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.UIDUSER_FATTURAZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUIDUSER_FATTURAZIONENull() {
+                this[this.tableRW_ALE_GRUPPO.UIDUSER_FATTURAZIONEColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -27855,6 +28747,17 @@ namespace ReportWeb.Entities {
                 }
                 set {
                     this[this.tableRW_ALE_DETTAGLIO.IDALEDETTAGLIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string AZIENDA {
+                get {
+                    return ((string)(this[this.tableRW_ALE_DETTAGLIO.AZIENDAColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_DETTAGLIO.AZIENDAColumn] = value;
                 }
             }
             
@@ -27936,33 +28839,17 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal QUANTITAAPPROVATA {
+            public string NOTAINSERIMENTO {
                 get {
                     try {
-                        return ((decimal)(this[this.tableRW_ALE_DETTAGLIO.QUANTITAAPPROVATAColumn]));
+                        return ((string)(this[this.tableRW_ALE_DETTAGLIO.NOTAINSERIMENTOColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'QUANTITAAPPROVATA\' in table \'RW_ALE_DETTAGLIO\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'NOTAINSERIMENTO\' in table \'RW_ALE_DETTAGLIO\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRW_ALE_DETTAGLIO.QUANTITAAPPROVATAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NOTA {
-                get {
-                    try {
-                        return ((string)(this[this.tableRW_ALE_DETTAGLIO.NOTAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NOTA\' in table \'RW_ALE_DETTAGLIO\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableRW_ALE_DETTAGLIO.NOTAColumn] = value;
+                    this[this.tableRW_ALE_DETTAGLIO.NOTAINSERIMENTOColumn] = value;
                 }
             }
             
@@ -28016,22 +28903,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NOTAFATTURAZIONE {
-                get {
-                    try {
-                        return ((string)(this[this.tableRW_ALE_DETTAGLIO.NOTAFATTURAZIONEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NOTAFATTURAZIONE\' in table \'RW_ALE_DETTAGLIO\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableRW_ALE_DETTAGLIO.NOTAFATTURAZIONEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal PREZZO {
                 get {
                     try {
@@ -28043,6 +28914,22 @@ namespace ReportWeb.Entities {
                 }
                 set {
                     this[this.tableRW_ALE_DETTAGLIO.PREZZOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal VALORE {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_ALE_DETTAGLIO.VALOREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'VALORE\' in table \'RW_ALE_DETTAGLIO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_DETTAGLIO.VALOREColumn] = value;
                 }
             }
             
@@ -28097,12 +28984,45 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string UIDUSER {
+            public string UIDUSER_INSERIMENTO {
                 get {
-                    return ((string)(this[this.tableRW_ALE_DETTAGLIO.UIDUSERColumn]));
+                    return ((string)(this[this.tableRW_ALE_DETTAGLIO.UIDUSER_INSERIMENTOColumn]));
                 }
                 set {
-                    this[this.tableRW_ALE_DETTAGLIO.UIDUSERColumn] = value;
+                    this[this.tableRW_ALE_DETTAGLIO.UIDUSER_INSERIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UIDUSER_NONADDEBITO {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_DETTAGLIO.UIDUSER_NONADDEBITOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UIDUSER_NONADDEBITO\' in table \'RW_ALE_DETTAGLIO\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_DETTAGLIO.UIDUSER_NONADDEBITOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATA_NONADDEBITO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableRW_ALE_DETTAGLIO.DATA_NONADDEBITOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATA_NONADDEBITO\' in table \'RW_ALE_DETTAGLIO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_DETTAGLIO.DATA_NONADDEBITOColumn] = value;
                 }
             }
             
@@ -28132,26 +29052,14 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsQUANTITAAPPROVATANull() {
-                return this.IsNull(this.tableRW_ALE_DETTAGLIO.QUANTITAAPPROVATAColumn);
+            public bool IsNOTAINSERIMENTONull() {
+                return this.IsNull(this.tableRW_ALE_DETTAGLIO.NOTAINSERIMENTOColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetQUANTITAAPPROVATANull() {
-                this[this.tableRW_ALE_DETTAGLIO.QUANTITAAPPROVATAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNOTANull() {
-                return this.IsNull(this.tableRW_ALE_DETTAGLIO.NOTAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNOTANull() {
-                this[this.tableRW_ALE_DETTAGLIO.NOTAColumn] = global::System.Convert.DBNull;
+            public void SetNOTAINSERIMENTONull() {
+                this[this.tableRW_ALE_DETTAGLIO.NOTAINSERIMENTOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -28192,18 +29100,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNOTAFATTURAZIONENull() {
-                return this.IsNull(this.tableRW_ALE_DETTAGLIO.NOTAFATTURAZIONEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNOTAFATTURAZIONENull() {
-                this[this.tableRW_ALE_DETTAGLIO.NOTAFATTURAZIONEColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPREZZONull() {
                 return this.IsNull(this.tableRW_ALE_DETTAGLIO.PREZZOColumn);
             }
@@ -28216,6 +29112,18 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsVALORENull() {
+                return this.IsNull(this.tableRW_ALE_DETTAGLIO.VALOREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetVALORENull() {
+                this[this.tableRW_ALE_DETTAGLIO.VALOREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPREZZO_APPROVATONull() {
                 return this.IsNull(this.tableRW_ALE_DETTAGLIO.PREZZO_APPROVATOColumn);
             }
@@ -28224,6 +29132,30 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPREZZO_APPROVATONull() {
                 this[this.tableRW_ALE_DETTAGLIO.PREZZO_APPROVATOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUIDUSER_NONADDEBITONull() {
+                return this.IsNull(this.tableRW_ALE_DETTAGLIO.UIDUSER_NONADDEBITOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUIDUSER_NONADDEBITONull() {
+                this[this.tableRW_ALE_DETTAGLIO.UIDUSER_NONADDEBITOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDATA_NONADDEBITONull() {
+                return this.IsNull(this.tableRW_ALE_DETTAGLIO.DATA_NONADDEBITOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDATA_NONADDEBITONull() {
+                this[this.tableRW_ALE_DETTAGLIO.DATA_NONADDEBITOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -28757,6 +29689,40 @@ namespace ReportWeb.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public USR_PRD_FLUSSO_MOVFASIRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class RW_ALE_DETT_COSTORowChangeEvent : global::System.EventArgs {
+            
+            private RW_ALE_DETT_COSTORow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_ALE_DETT_COSTORowChangeEvent(RW_ALE_DETT_COSTORow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RW_ALE_DETT_COSTORow Row {
                 get {
                     return this.eventRow;
                 }

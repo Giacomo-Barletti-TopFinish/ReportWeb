@@ -7,39 +7,65 @@
 <div class="content-top">
     <h2>Addebito Lavoranti Esterni - Addebito</h2>
 
-    <div class="box">
+</div>
+<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:750px">
+    <div class="box" id="sectionDatiGenerali">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Nuove schede da addebitare</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseDatiGenerali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <!-- /.box-header -->
         <div class="box-body form-group-sm">
-            <h3>Nuovi addebiti inseriti</h3>
             <div id="divSchedeInserite">
             </div>
             <label class="text-red input-sm" id="lblMessage"></label>
         </div>
     </div>
-    <div class="box">
-        <div class="box-body form-group-sm">
-            <h3>Gruppi addebiti</h3>
+    <div class="box box-primary" id="sectionTaglio">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Gruppi addebitati</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseTaglio" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
             <div id="divGruppi">
+
+            </div>
+        </div>
+    </div>
+    <div class="box box-primary" id="sectionTaglio">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Schede non addebitate</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseTaglio" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="divNonAddebitate">
 
             </div>
         </div>
     </div>
 </div>
 
-
 <script language="javascript" type="text/javascript">
     $(function ()
     {
-        CaricaAddebitoNuoviElementiPartial();
-        CaricaGruppiAddebitoPartial();
+        CaricaNuoviElementiDaAddebitare();
+        CaricaGruppiAddebitatiPartial();
+        CaricaSchedeNonAddebitatePartial();
     });
 
-    function CaricaAddebitoNuoviElementiPartial()
+    function CaricaNuoviElementiDaAddebitare()
     {
 
-        var url = '@Url.Action("CaricaAddebitoNuoviElementiPartial", "ALE")';
+        var url = '@Url.Action("CaricaNuoviElementiDaAddebitare", "ALE")';
         $.ajax({
             url: url,
-            data: { },
+            data: {},
             cache: false,
             type: "POST",
             success: function (data)
@@ -55,9 +81,9 @@
         });
     }
 
-    function CaricaGruppiAddebitoPartial()
+    function CaricaGruppiAddebitatiPartial()
     {
-        var url = '@Url.Action("CaricaAddebitoGruppiPartial", "ALE")';
+        var url = '@Url.Action("CaricaGruppiAddebitatiPartial", "ALE")';
         $.ajax({
             url: url,
             data: {},
@@ -76,25 +102,42 @@
         });
     }
 
+    function CaricaSchedeNonAddebitatePartial()
+    {
+        var url = '@Url.Action("CaricaSchedeNonAddebitate", "ALE")';
+        $.ajax({
+            url: url,
+            data: {},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divNonAddebitate').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
     function Addebita()
     {
+
         var addebiti = [];
-        $('.chkRWALE').each(function ()
+        $('.imgChked').each(function ()
         {
+            var trCheckbox = $(this).closest('tr');
+            var IdAleDettaglio = $(".hdIdAleDettaglio", trCheckbox).val();
+            var qta = $(".rwqta", trCheckbox).val();
+            var nota = $(".rwtxt", trCheckbox).val();
 
-            var checked = $(this).prop('checked');
-            if (checked)
-            {
-                var trCheckbox = $(this).closest('tr');
-                var IdAleDettaglio = $(".hdIdAleDettaglio", trCheckbox).val();
-                var qta = $(".rwqta", trCheckbox).val();
-                var nota = $(".rwtxt", trCheckbox).val();
-
-                var addebito = {
-                    'IdAleDettaglio': IdAleDettaglio, 'Qta': qta, 'Nota': nota
-                };
-                addebiti.push(addebito);
-            }
+            var addebito = {
+                'IdAleDettaglio': IdAleDettaglio, 'Qta': qta, 'Nota': nota
+            };
+            addebiti.push(addebito);
         });
 
         var esito = true;
@@ -146,8 +189,62 @@
             type: "POST",
             success: function (data)
             {
-                CaricaAddebitoNuoviElementiPartial();
-                CaricaGruppiAddebitoPartial();
+                CaricaNuoviElementiDaAddebitare();
+                CaricaGruppiAddebitatiPartial();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function NonAddebitare()
+    {
+
+        var addebiti = [];
+        $('.imgChked').each(function ()
+        {
+            
+            var trCheckbox = $(this).closest('tr');
+            var IdAleDettaglio = $(".hdIdAleDettaglio", trCheckbox).val();
+            var qta = $(".rwqta", trCheckbox).val();
+            var nota = $(".rwtxt", trCheckbox).val();
+
+            var addebito = {
+                'IdAleDettaglio': IdAleDettaglio, 'Qta': qta, 'Nota': nota
+            };
+            addebiti.push(addebito);
+        });
+
+        var esito = true;
+        var messaggio = '';
+        if (addebiti.length == 0)
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "selezionare almeno un addebito" + "</br>";
+            esito = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+
+        if (!esito)
+            return;
+
+        var txtNotaGruppo = $('#txtNotaGruppo').val();
+        var addebitiJson = JSON.stringify(addebiti);
+
+        var url = '@Url.Action("NonAddebitare", "ALE")';
+        $.ajax({
+            url: url,
+            data: { NotaGruppo: txtNotaGruppo, Addebiti: addebitiJson },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CaricaNuoviElementiDaAddebitare();
+                CaricaSchedeNonAddebitatePartial();
             },
             error: function (response)
             {

@@ -71,6 +71,7 @@
         var inseriti = $('#txtQuantita').val();
         var lavorante = $('#ddlLavoranti').val();
         var nota = $('#txtNota').val();
+        var azienda = $('#hdAzienda').val();
 
         var esito = true;
         var messaggio = '';
@@ -99,6 +100,7 @@
         $.ajax({
             url: url,
             data: {
+                Azienda:azienda,
                 Barcode: barcode,
                 IDCHECKQT:IDCHECKQT,
                 Difettosi:difettosi,

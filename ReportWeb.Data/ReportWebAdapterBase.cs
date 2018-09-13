@@ -112,6 +112,19 @@ namespace ReportWeb.Data
             return result;
         }
 
+        protected string ConvertToStringForInCondition(List<decimal> idElement)
+        {
+            List<decimal> items = idElement.Distinct().ToList();
+            string result = string.Empty;
+            for (int i = 0; i < items.Count; i++)
+            {
+                result += items[i].ToString();
+                if (i != items.Count - 1)
+                    result += ",";
+            }
+            return result;
+        }
+
         protected string ConvertToStringForInCondition(List<long?> idElement)
         {
             List<long?> items = idElement.Distinct().ToList();

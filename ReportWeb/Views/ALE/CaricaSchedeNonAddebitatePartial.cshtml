@@ -1,0 +1,108 @@
+﻿@using ReportWeb.Models.ALE
+@model AddebitiModel
+
+@if (Model.Addebiti.Count == 0)
+{
+    <div class="col-sm-12">
+        <h4 class="text-red">Non ci sono schede non addebitate</h4>
+    </div>
+}
+else
+{
+    <div class="col-sm-12">
+        <table class="table table-hover" id="tblInseriti">
+            <thead>
+                <tr>
+                    <th width="2%"></th>
+                    <th>
+                        <table class="table table-condensed" width="100%">
+                            <tr>
+                                <th width="10%"><label>Azienda</label></th>
+                                <th width="10%"><label>Modello</label></th>
+                                <th width="18%"><label>Descrizione</label></th>
+                                <th width="6%"><label>Tipo difetto</label></th>
+                                <th width="14%"><label>Difetto</label></th>
+                                <th width="14%"><label>Lavorante</label></th>
+                                <th width="6%"><label>Qta Difetti</label></th>
+                                <th width="6%"><label>Qta Inseriti</label></th>
+                                <th width="12%">Utente</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (AddebitoModel a in Model.Addebiti.OrderBy(x => x.Modello).ThenBy(x => x.LavoranteDescrizione))
+                {
+                    <tr>
+
+                        <td>
+                            <div class="RWDivImg" style="width:75px; height:75px; background-color:white; white-space: nowrap; text-align: center;">
+                                <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
+                                <a>
+                                    @if (!string.IsNullOrEmpty(a.UrlImage))
+                                    {
+                                        <img src="@Url.Content(a.UrlImage)" onclick="onClickImageArticoloLocale(null,@a.IdAleDettaglio,this);" data-index="@a.IdAleDettaglio" style="max-height:75px; max-width:75px; vertical-align: middle; margin-left: -4px; padding:4px" alt="Image" />
+                                    }
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <table class="table table-condensed" width="100%">
+                                <tr>
+                                    <td style="font-size:12px" width="10%">@a.Azienda</td>
+                                    <td style="font-size:12px" width="10%">@a.Modello</td>
+                                    <td style="font-size:12px" width="18%">@a.ModelloDescrizione</td>
+                                    <td style="font-size:12px" width="6%">@a.TipoDifetto</td>
+                                    <td style="font-size:12px" width="14%">@a.Difetto</td>
+                                    <td style="font-size:12px" width="14%">@a.LavoranteDescrizione</td>
+                                    <td style="font-size:12px" width="6%">@a.QuantitaDifettosi</td>
+                                    <td style="font-size:12px" width="6%">@a.QuantitaInseriti</td>
+                                    <td style="font-size:12px" width="12%">@a.UidUserNonAddebito</td>
+                                    <td><input type="button" onclick="ReinserisciDaAddebitare(@a.IdAleDettaglio);" class="btn-primary" value="Annulla" /></td>
+                                </tr>
+                            </table>
+                            <hr />
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+
+
+    });
+
+    function ReinserisciDaAddebitare(IdAleDettaglio)
+    {
+        var url = '@Url.Action("ReinserisciDaAddebitare", "ALE")';
+        $.ajax({
+            url: url,
+            data: { IdAleDettaglio: IdAleDettaglio },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CaricaNuoviElementiDaAddebitare();
+                CaricaSchedeNonAddebitatePartial();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+</script>
+

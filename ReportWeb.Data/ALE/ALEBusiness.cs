@@ -23,10 +23,24 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext]
+        public void FillUSR_CHECKQ_T(ALEDS ds, List<string> IDCHECKQT)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillUSR_CHECKQ_T(ds, IDCHECKQT);
+        }
+
+        [DataContext]
         public void FillUSR_CHECKQ_D(ALEDS ds, string IDCHECKQT)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillUSR_CHECKQ_D(ds, IDCHECKQT);
+        }
+
+        [DataContext]
+        public void FillUSR_CHECKQ_C(ALEDS ds, List<string> IDCHECKQT)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillUSR_CHECKQ_C(ds, IDCHECKQT);
         }
 
         [DataContext]
@@ -79,7 +93,21 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext]
+        public void FillRW_ALE_DETT_COSTO(ALEDS ds, List<decimal> IDALEDETTAGLIO)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_DETT_COSTO(ds, IDALEDETTAGLIO);
+        }
+
+        [DataContext]
         public void FillUSR_PRD_MOVFASI(ALEDS ds, string IDCHECKQT)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_MOVFASI(ds, IDCHECKQT);
+        }
+
+        [DataContext]
+        public void FillUSR_PRD_MOVFASI(ALEDS ds, List<string> IDCHECKQT)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillUSR_PRD_MOVFASI(ds, IDCHECKQT);
@@ -93,17 +121,31 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext]
+        public void FillMAGAZZ(ALEDS ds, List<string> IDMAGAZZ)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillMAGAZZ(ds, IDMAGAZZ);
+        }
+
+        [DataContext]
         public void FillUSR_PDM_FILES(ALEDS ds, string IDMAGAZZ)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillUSR_PDM_FILES(ds, IDMAGAZZ);
         }
 
-        [DataContext(true)]
-        public void SalvaInserimento(string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        [DataContext]
+        public void FillUSR_PDM_FILES(ALEDS ds, List<string> IDMAGAZZ)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
-            a.InsertRW_ALE_DETTAGLIO(Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
+            a.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+        }
+
+        [DataContext(true)]
+        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.InsertRW_ALE_DETTAGLIO(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
         }
 
         [DataContext]
@@ -137,11 +179,19 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext]
-        public void FillRW_ALE_GRUPPO(ALEDS ds, List<long> IDALEGRUPPO)
+        public void FillRW_ALE_GRUPPO(ALEDS ds, List<decimal> IDALEGRUPPO)
         {
             ALEAdapter a = new Data.ALEAdapter(DbConnection, DbTransaction);
             a.FillRW_ALE_GRUPPO(ds, IDALEGRUPPO);
         }
+
+        [DataContext]
+        public void FillRW_ALE_GRUPPO(ALEDS ds, decimal IDALEGRUPPO)
+        {
+            ALEAdapter a = new Data.ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_GRUPPO(ds, IDALEGRUPPO);
+        }
+
         [DataContext(true)]
         public void UpdateRW_ALE_GRUPPO(ALEDS ds)
         {
@@ -160,6 +210,20 @@ namespace ReportWeb.Data.ALE
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillRW_ALE_DETTAGLIO(ds, IDALEGRUPPO);
+        }
+
+        [DataContext]
+        public void FillRW_ALE_DETTAGLIO(ALEDS ds, List<decimal> IDALEGRUPPO)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_DETTAGLIO(ds, IDALEGRUPPO);
+        }
+
+        [DataContext]
+        public void FillRW_ALE_DETTAGLIOByPK(ALEDS ds, decimal IdAleDettaglio)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_DETTAGLIOByPK(ds, IdAleDettaglio);
         }
     }
 }
