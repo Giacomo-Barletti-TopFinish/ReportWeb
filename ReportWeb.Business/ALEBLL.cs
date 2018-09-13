@@ -184,9 +184,13 @@ namespace ReportWeb.Business
                 List<string> IDMAGAZZ = ds.USR_CHECKQ_T.Select(x => x.IDMAGAZZ).ToList();
                 bALE.FillMAGAZZ(ds, IDMAGAZZ);
                 bALE.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+                bALE.FillTABFAS(ds);
 
                 List<decimal> IDALEDETTAGLIO = ds.RW_ALE_DETTAGLIO.Select(x => x.IDALEDETTAGLIO).ToList();
                 bALE.FillRW_ALE_DETT_COSTO(ds, IDALEDETTAGLIO);
+
+                List<string> IDPRDMOVFASE = ds.USR_PRD_MOVFASI.Select(x => x.IDPRDMOVFASE).Distinct().ToList();
+                bALE.FillUSR_PRD_FASI(ds, IDPRDMOVFASE);
 
                 foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO)
                 {
@@ -221,11 +225,13 @@ namespace ReportWeb.Business
                 List<string> IDMAGAZZ = ds.USR_CHECKQ_T.Select(x => x.IDMAGAZZ).ToList();
                 bALE.FillMAGAZZ(ds, IDMAGAZZ);
                 bALE.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+                bALE.FillTABFAS(ds);
 
                 List<decimal> IDALEDETTAGLIO = ds.RW_ALE_DETTAGLIO.Select(x => x.IDALEDETTAGLIO).ToList();
                 bALE.FillRW_ALE_DETT_COSTO(ds, IDALEDETTAGLIO);
 
-
+                List<string> IDPRDMOVFASE = ds.USR_PRD_MOVFASI.Select(x => x.IDPRDMOVFASE).Distinct().ToList();
+                bALE.FillUSR_PRD_FASI(ds, IDPRDMOVFASE);
 
                 foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO.Where(x => x.DATA_NONADDEBITO > DateTime.Today.AddDays(-10)))
                 {
@@ -313,6 +319,26 @@ namespace ReportWeb.Business
                 };
                 m.Costi.Add(cm);
             }
+
+            m.ListaFasi = new List<string>();
+            string IDPRDFASE = MovFase.IDPRDFASE;
+            ALEDS.USR_PRD_FASIRow fase = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == IDPRDFASE).FirstOrDefault();
+            ALEDS.USR_PRD_FASIRow figlia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == fase.IDPRDFASE).FirstOrDefault();
+            while (figlia != null)
+            {
+                string descrizioneFase = string.Empty;
+                if (!figlia.IsIDTABFASNull())
+                {
+                    ALEDS.TABFASRow tf = ds.TABFAS.Where(x => x.IDTABFAS == figlia.IDTABFAS).FirstOrDefault();
+                    if (tf != null)
+                    {
+                        descrizioneFase = tf.CODICEFASE;
+                    }
+                }
+                m.ListaFasi.Add(descrizioneFase);
+                figlia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == figlia.IDPRDFASE).FirstOrDefault();
+            }
+
             return m;
         }
 
@@ -435,7 +461,7 @@ namespace ReportWeb.Business
                 {
                     ALEDS ds = new ALEDS();
                     bALE.FillRW_ALE_GRUPPO(ds, IDALEGRUPPO);
-                    bALE.FillRW_ALE_DETTAGLIO(ds,IDALEGRUPPO);
+                    bALE.FillRW_ALE_DETTAGLIO(ds, IDALEGRUPPO);
 
                     foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == IDALEGRUPPO))
                     {
@@ -481,9 +507,13 @@ namespace ReportWeb.Business
                 List<string> IDMAGAZZ = ds.USR_CHECKQ_T.Select(x => x.IDMAGAZZ).ToList();
                 bALE.FillMAGAZZ(ds, IDMAGAZZ);
                 bALE.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+                bALE.FillTABFAS(ds);
 
                 List<decimal> IDALEDETTAGLIO = ds.RW_ALE_DETTAGLIO.Select(x => x.IDALEDETTAGLIO).ToList();
                 bALE.FillRW_ALE_DETT_COSTO(ds, IDALEDETTAGLIO);
+
+                List<string> IDPRDMOVFASE = ds.USR_PRD_MOVFASI.Select(x => x.IDPRDMOVFASE).Distinct().ToList();
+                bALE.FillUSR_PRD_FASI(ds, IDPRDMOVFASE);
 
                 List<decimal> idGruppoAddebitati = ds.RW_ALE_DETTAGLIO.Where(x => x.STATO == ALEStatoDettaglio.ADDEBITATO).Select(x => x.IDALEGRUPPO).Distinct().ToList();
 
@@ -524,6 +554,10 @@ namespace ReportWeb.Business
                 List<string> IDMAGAZZ = ds.USR_CHECKQ_T.Select(x => x.IDMAGAZZ).ToList();
                 bALE.FillMAGAZZ(ds, IDMAGAZZ);
                 bALE.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+                bALE.FillTABFAS(ds);
+
+                List<string> IDPRDMOVFASE = ds.USR_PRD_MOVFASI.Select(x => x.IDPRDMOVFASE).Distinct().ToList();
+                bALE.FillUSR_PRD_FASI(ds, IDPRDMOVFASE);
 
                 List<decimal> IDALEDETTAGLIO = ds.RW_ALE_DETTAGLIO.Select(x => x.IDALEDETTAGLIO).ToList();
                 bALE.FillRW_ALE_DETT_COSTO(ds, IDALEDETTAGLIO);

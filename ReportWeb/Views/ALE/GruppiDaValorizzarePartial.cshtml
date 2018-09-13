@@ -62,7 +62,7 @@
                                 </thead>
                                 @foreach (AddebitoModel dettaglio in a.Dettagli)
                                 {
-                                    <tr class="RWTRDettaglio">
+                                    <tr class="RWTRDettaglio" valign="top">
                                         <input type="hidden" class="hdIdAleDettaglio" value="@dettaglio.IdAleDettaglio" />
                                         <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
                                         <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>

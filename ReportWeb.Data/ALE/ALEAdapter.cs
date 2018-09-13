@@ -465,5 +465,48 @@ namespace ReportWeb.Data
 
         }
 
+        public void FillTABFAS(ALEDS ds)
+        {
+            string select = @"SELECT * FROM GRUPPO.TABFAS ";
+
+           
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.TABFAS);
+            }
+        }
+
+        public void FillUSR_PRD_FASI(ALEDS ds, List<string> IDPRDMOVFASE)
+        {
+            if (IDPRDMOVFASE.Count > 0)
+            {
+                string result = ConvertToStringForInCondition(IDPRDMOVFASE);
+                string select = @"SELECT FFS.*  
+                                    FROM DITTA1.USR_PRD_FASI FFS 
+                                    WHERE FFS.IDLANCIOD IN (
+                                        SELECT DISTINCT IDLANCIOD 
+                                            FROM DITTA1.USR_PRD_FASI F
+                                            INNER JOIN DITTA1.USR_PRD_MOVFASI MF ON MF.IDPRDFASE = F.IDPRDFASE
+                                            WHERE MF.IDPRDMOVFASE IN ({0}))
+                                UNION ALL
+
+                                 SELECT FFS.*  
+                                    FROM DITTA2.USR_PRD_FASI FFS 
+                                    WHERE FFS.IDLANCIOD IN (
+                                        SELECT DISTINCT IDLANCIOD 
+                                            FROM DITTA2.USR_PRD_FASI F
+                                            INNER JOIN DITTA2.USR_PRD_MOVFASI MF ON MF.IDPRDFASE = F.IDPRDFASE
+                                            WHERE MF.IDPRDMOVFASE IN ({0})) ";
+
+                select = string.Format(CultureInfo.InvariantCulture, select, result);
+
+                using (DbDataAdapter da = BuildDataAdapter(select))
+                {
+                    da.Fill(ds.USR_PRD_FASI);
+                }
+            }
+        }
+
+
     }
 }

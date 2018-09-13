@@ -53,6 +53,8 @@ namespace ReportWeb.Models.ALE
         public string UrlImage { get; set; }
 
         public List<CostiAddebitiModel> Costi { get; set; }
+
+        public List<string> ListaFasi { get; set; }
     }
 
 

@@ -225,5 +225,19 @@ namespace ReportWeb.Data.ALE
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillRW_ALE_DETTAGLIOByPK(ds, IdAleDettaglio);
         }
+
+        [DataContext]
+        public void FillTABFAS(ALEDS ds)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillTABFAS(ds);
+        }
+
+        [DataContext]
+        public void FillUSR_PRD_FASI(ALEDS ds, List<string> IDPRDMOVFASE)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_FASI(ds, IDPRDMOVFASE);
+        }
     }
 }

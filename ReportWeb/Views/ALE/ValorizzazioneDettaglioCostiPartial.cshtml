@@ -10,9 +10,19 @@
     </tbody>
 </table>
 
-<div id="divValidSpCalz" class="overflow70">
+<div id="divValidSpCalz" class="overflow96">
     <table id="tblFaseCosto_@Model.IdAleDettaglio" class="table table-hover RWtblFaseCosto">
-        <tbody></tbody>
+        <tbody>
+            @foreach (string fase in Model.ListaFasi)
+            {
+                <tr>
+                    <input type="hidden" value='@Model.IdAleDettaglio' class="hdidAleDet" />
+                    <td width="45%" style="font-size:12px">@fase</td>
+                    <td width="45%" style="font-size:12px">0</td>
+                    <td width="10%" style="font-size:12px"><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
 
@@ -43,7 +53,7 @@
 
     function AggiungiCosto(IdAleDettaglio, sender)
     {
-        
+
         var nomeTabella = '#tblFaseCosto_' + IdAleDettaglio;
         var nomeFase = '#txtFase_' + IdAleDettaglio;
         var nomeCosto = '#txtCostoFase_' + IdAleDettaglio;
@@ -60,8 +70,8 @@
         txtCosto.val('');
 
         aggiornaTotale(IdAleDettaglio);
-        
-       
+
+
     }
 
     function aggiornaTotale(IdAleDettaglio)
