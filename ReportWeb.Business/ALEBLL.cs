@@ -125,7 +125,6 @@ namespace ReportWeb.Business
         {
             using (ALEBusiness bALE = new ALEBusiness())
             {
-
                 bALE.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
             }
         }
@@ -736,6 +735,7 @@ namespace ReportWeb.Business
                 bALE.UpdateRW_ALE_GRUPPO(ds);
             }
         }
+
         public void AnnullaValorizzazione(string IDALEGRUPPO, string UIDUSER)
         {
             decimal idAleAgruppo = decimal.Parse(IDALEGRUPPO);

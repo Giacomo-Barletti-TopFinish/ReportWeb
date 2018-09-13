@@ -114,7 +114,7 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaGruppiDaValorizzare()
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            List<GruppoModel> model = bll.LeggiGruppiAddebitati();
+            List<GruppoModel> model = bll.LeggiGruppi(ALEStatoDettaglio.ADDEBITATO);
             return PartialView("GruppiDaValorizzarePartial", model);
         }
 

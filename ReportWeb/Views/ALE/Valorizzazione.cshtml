@@ -6,31 +6,42 @@
 
 <div class="content-top">
     <h2>Addebito Lavoranti Esterni - Valorizzazione</h2>
+</div>
 
-    <div class="box">
+<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:750px">
+    <div class="box" id="sectionDatiGenerali">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Nuovi gruppi da valorizzare</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseDatiGenerali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <!-- /.box-header -->
         <div class="box-body form-group-sm">
-            <h3>Nuovi gruppi da valorizzare</h3>
             <div id="divGruppiDaValorizzare">
             </div>
             <label class="text-red input-sm" id="lblMessage"></label>
         </div>
     </div>
-    <div class="box">
-        <div class="box-body form-group-sm">
-            <h3>Gruppi valorizzati</h3>
+    <div class="box box-primary" id="sectionTaglio">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Gruppi valorizzati</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseTaglio" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
             <div id="divGruppiValorizzati">
 
             </div>
         </div>
     </div>
 </div>
-
-
 <script language="javascript" type="text/javascript">
     $(function ()
     {
         CaricaGruppiDaValorizzare();
-        CaricaGruppiValorizzati();
+     //   CaricaGruppiValorizzati();
     });
 
     function CaricaGruppiDaValorizzare()

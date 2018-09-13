@@ -424,6 +424,7 @@
     <Content Include="Views\ALE\GruppiDaFatturarePartial.cshtml" />
     <Content Include="Views\ALE\GruppiFatturatiPartial.cshtml" />
     <Content Include="Views\ALE\CaricaSchedeNonAddebitatePartial.cshtml" />
+    <Content Include="Views\ALE\ValorizzazioneDettaglioCostiPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
