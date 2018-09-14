@@ -86,13 +86,14 @@
                                             <td style="font-size:12px" colspan="8">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
                                         </tr>
                                     }
+                                    <tr><td colspan="9"><hr /></td></tr>
                                 }
                                 <tr class="RWTotali">
                                     <td class="text-right"><label>Nota di gruppo</label></td>
                                     <td colspan="4">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNotaGruppo", @style = "height: 21px;" })</td>
                                     <td class="text-red">TOTALE</td>
                                     <td class="text-red">@Html.TextBox("RWTotale", string.Empty, new { @class = "form-control input-sm RWTotale", @style = "height: 21px;", @readonly = true })</td>
-                                    <td>Valorizza</td>
+                                    <td><input type="button" onclick="ValorizzaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Valorizza" /></td>
                                 </tr>
                             </table>
                         </div>
@@ -185,8 +186,13 @@
             var idDettaglio = $(".hdIdAleDettaglio", trDettaglio[i]);
             var idd = $(idDettaglio).val();
 
+            var dettagliCosti = getDettaglioCostiFase(idd);
+
             var prezzo = $(".RWPrezzo", trDettaglio[i]);
             var p = $(prezzo).val();
+
+            var costo = $(".RWCosto", trDettaglio[i]);
+            var c = $(costo).val();
 
             if (p == '')
             {
@@ -196,7 +202,7 @@
             var nota = $(".RWNota", trDettaglio[i]);
             var n = $(nota).val();
 
-            var dettaglio = { 'IdAleDettaglio': idd, 'Prezzo': p, 'Nota': n };
+            var dettaglio = { 'IdAleDettaglio': idd, 'Prezzo': p,'Costo':c,'CostiFase':dettagliCosti, 'Nota': n };
             dettagli.push(dettaglio);
         }
 
@@ -226,4 +232,72 @@
         });
     }
 
+    function getDettaglioCostiFase(IdAleDettaglio)
+    {
+        var dettagliCosti = [];
+        var nomeTabella = '#tblFaseCosto_' + IdAleDettaglio;
+        var tabella = $(nomeTabella);
+
+        var trs = $('tr', tabella);
+
+        for (var i = 0; i < trs.length; i++)
+        {
+            var tdFase = $('td', trs[i])[0];
+            var tdCosto = $('td', trs[i])[1];
+            var inputFase = tdFase.children[0];
+            var inputCosto = tdCosto.children[0];
+            var costo = $(inputCosto).val();
+            var fase = $(inputFase).val();
+
+            var dettaglioCosto = { 'IdAleDettaglio': IdAleDettaglio, 'Fase': fase, 'Costo': costo };
+            dettagliCosti.push(dettaglioCosto);
+        }
+
+        return dettagliCosti;
+    }
+
+    function AggiungiCosto(IdAleDettaglio, sender)
+    {
+
+        var nomeTabella = '#tblFaseCosto_' + IdAleDettaglio;
+
+        var riga = '<tr><input type="hidden" value="' + IdAleDettaglio + '" class="hdidAleDet"><td width="55%" style="font-size:12px"><input class="form-control input-sm RWFASE" id="txtFase_' + IdAleDettaglio + '" name="txtFase_' + IdAleDettaglio + '" type="text" value=""></td><td width="35%" style="font-size:12px"><input class="form-control input-sm RWCOSTOFASE" id="txtCostoFase_' + IdAleDettaglio + '" name="txtCostoFase_' + IdAleDettaglio + '" oninput="onDecimalInput(this,8,2)" onkeypress="return FilterDecimal(event,this)" type="text" value="0"></td><td width="10%" style="font-size:12px"><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td></tr>'
+
+        $(tabella).last().append(riga);
+        AvviaCalcolaTotali();
+    }
+
+    function AvviaCalcolaTotali()
+    {
+        $('.RWCOSTOFASE').change(function ()
+        {
+           
+            var id = $(this).attr('id');
+            var str = id.split('_');
+            var IdAleDettaglio = str[1];
+            aggiornaTotale(IdAleDettaglio);
+        });
+    }
+
+    function aggiornaTotale(IdAleDettaglio)
+    {
+        
+        var nomeTabella = '#tblFaseCosto_' + IdAleDettaglio;
+        var tabella = $(nomeTabella);
+        var totale = 0;
+        var trs = $('tr', tabella);
+
+        for (var i = 0; i < trs.length; i++)
+        {
+            var td = $('td', trs[i])[1];
+            var input = td.children[0];
+            var costo = $(input).val();
+            var aux = parseFloat(costo);
+            totale = totale + aux;
+        }
+        var nomeCostoTotale = '#txtCosto_' + IdAleDettaglio;
+
+        var txtCostoTotale = $(nomeCostoTotale);
+        $(txtCostoTotale).val(totale.toFixed(2));
+    }
 </script>

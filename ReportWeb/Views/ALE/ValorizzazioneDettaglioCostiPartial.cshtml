@@ -3,22 +3,22 @@
 <table id="headerSPCAlZTable" class="table">
     <tbody>
         <tr>
-            <td width="45%"><label class="input-sm">Fase</label></td>
-            <td width="45%"><label class="input-sm">Costo</label></td>
-            <td width="10%"></td>
+            <td width="55%"><label class="input-sm">Fase</label></td>
+            <td width="35%"><label class="input-sm">Costo</label></td>
+            <td width="10%"><a class="disabilitaVersione" onclick="AggiungiCosto(@Model.IdAleDettaglio,this)" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
         </tr>
     </tbody>
 </table>
 
-<div id="divValidSpCalz" class="overflow96">
+<div id="divValidSpCalz">
     <table id="tblFaseCosto_@Model.IdAleDettaglio" class="table table-hover RWtblFaseCosto">
         <tbody>
             @foreach (string fase in Model.ListaFasi)
             {
                 <tr>
                     <input type="hidden" value='@Model.IdAleDettaglio' class="hdidAleDet" />
-                    <td width="45%" style="font-size:12px">@fase</td>
-                    <td width="45%" style="font-size:12px">0</td>
+                    <td width="55%" style="font-size:12px">@Html.TextBox("txtFase_" + Model.IdAleDettaglio.ToString(),fase , new { @class = "form-control input-sm RWFASE" })</td>
+                    <td width="35%" style="font-size:12px">@Html.TextBox("txtCostoFase_" + Model.IdAleDettaglio.ToString(), "0", new { @class = "form-control input-sm RWCOSTOFASE", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
                     <td width="10%" style="font-size:12px"><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>
                 </tr>
             }
@@ -26,72 +26,16 @@
     </table>
 </div>
 
-<table class="table">
-    <tbody>
-        <tr>
-            <td width="45%">
-                @Html.TextBox("txtFase_" + Model.IdAleDettaglio.ToString(), "", new { @class = "form-control input-sm", @maxlength = "20" })
-            </td>
-            <td width="45%">
-                @Html.TextBox("txtCostoFase_" + Model.IdAleDettaglio.ToString(), "", new { @class = "form-control input-sm", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })
-            </td>
-            <td width="10%">
-                <a class="disabilitaVersione" onclick="AggiungiCosto(@Model.IdAleDettaglio,this)" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
 </div>
 
 <script type="text/javascript">
 
     $(function ()
     {
-
+        aggiornaTotale(@Model.IdAleDettaglio);
+        AvviaCalcolaTotali();
     });
 
-    function AggiungiCosto(IdAleDettaglio, sender)
-    {
-
-        var nomeTabella = '#tblFaseCosto_' + IdAleDettaglio;
-        var nomeFase = '#txtFase_' + IdAleDettaglio;
-        var nomeCosto = '#txtCostoFase_' + IdAleDettaglio;
-
-        var tabella = $(nomeTabella);
-        var txtFase = $(nomeFase);
-        var txtCosto = $(nomeCosto);
-
-        if (txtFase.val() == "" || txtCosto.val() == "")
-            return;
-        $(tabella).last().append('<tr><input type="hidden" value = ' + IdAleDettaglio + ' class="hdidAleDet" /><td width="45%">' + txtFase.val() + '</td><td width="45%">' + txtCosto.val() + '</td><td width="10%"><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td></tr>');
-
-        txtFase.val('');
-        txtCosto.val('');
-
-        aggiornaTotale(IdAleDettaglio);
-
-
-    }
-
-    function aggiornaTotale(IdAleDettaglio)
-    {
-        var nomeTabella = '#tblFaseCosto_' + IdAleDettaglio;
-        var tabella = $(nomeTabella);
-        var totale = 0;
-        var trs = $('tr', tabella);
-
-        for (var i = 0; i < trs.length; i++)
-        {
-            var td = $('td', trs[i])[1];
-            var costo = td.textContent;
-            var aux = parseFloat(costo);
-            totale = totale + aux;
-        }
-        var nomeCostoTotale = '#txtCosto_' + IdAleDettaglio;
-
-        var txtCostoTotale = $(nomeCostoTotale);
-        $(txtCostoTotale).val(totale.toFixed(2));
-    }
+ 
 
 </script>

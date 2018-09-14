@@ -7,128 +7,131 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-2"><label>Data fine: </label>@ViewData["dataFine"].ToString() </div>
     </div>
-    <table class="table table-condensed">
-        <tr>
-            <th width="6%">
-                <label>Giorno</label>
-            </th>
-            <th width="10%">
-                Macchina
-            </th>
-            <th width="6%">
-                <label>Cod. Finitura</label>
-            </th>
-            <th width="10%">
-                <label>Finitura</label>
-            </th>
-            <th width="6%">
-                <label>Tipo ciclo</label>
-            </th>
-            <th width="5%">
-                <label>Inizio</label>
-            </th>
-            <th width="5%">
-                <label>Fine</label>
-            </th>
-            <th width="5%">
-                <label>Durata</label>
-            </th>
-            <th width="5%">
-                <label>Quanità</label>
-            </th>
-            <th width="10%">
-                <label>Clienti</label>
-            </th>
-            <th width="10%">
-                <label>Articolo</label>
-            </th>
-            <th width="10%">
-                <label>Impegno</label>
-            </th>
-        </tr>
-        <tboby>
-            @foreach (PVDConsuntivoModel c in Model.Consuntivo)
+    <div style="overflow-y: auto; height:550px;">
+        <table class="table table-condensed">
+            <tr>
+                <th width="6%">
+                    <label>Giorno</label>
+                </th>
+                <th width="10%">
+                    Macchina
+                </th>
+                <th width="6%">
+                    <label>Cod. Finitura</label>
+                </th>
+                <th width="10%">
+                    <label>Finitura</label>
+                </th>
+                <th width="6%">
+                    <label>Tipo ciclo</label>
+                </th>
+                <th width="5%">
+                    <label>Inizio</label>
+                </th>
+                <th width="5%">
+                    <label>Fine</label>
+                </th>
+                <th width="5%">
+                    <label>Durata</label>
+                </th>
+                <th width="5%">
+                    <label>Quanità</label>
+                </th>
+                <th width="10%">
+                    <label>Clienti</label>
+                </th>
+                <th width="10%">
+                    <label>Articolo</label>
+                </th>
+                <th width="10%">
+                    <label>Impegno</label>
+                </th>
+            </tr>
+            <tboby>
+                @foreach (PVDConsuntivoModel c in Model.Consuntivo)
             {
-                <tr>
-                    <td>
-                        @c.Giorno.ToShortDateString()
-                    </td>
-                    <td>
-                        @c.Macchina
-                    </td>
-                    <td>
-                        @c.FinituraCodice
-                    </td>
-                    <td>
-                        @c.FinituraDescrizione
-                    </td>
-                    <td>
-                        @c.TipoCiclo
-                    </td>
-                    <td>
-                        @c.Inizio
-                    </td>
-                    <td>
-                        @c.Fine
-                    </td>
-                    <td>
-                        @c.Durata
-                    </td>
-                    <td>
-                        @c.Quantita
-                    </td>
-                    <td>
-                        @c.Clienti
-                    </td>
-                    <td>
-                        @c.Articolo
-                    </td>
-                    <td>
-                        @c.Impegno
-                    </td>
-                </tr>
-            }
-        </tboby>
-    </table>
-    <table class="table table-condensed text-red text-bold">
-        <tr>
-            <th width="6%">
-                <label>TOTALI</label>
-            </th>
-            <th width="10%">
-                
-            </th>
-            <th width="6%">
-                <label></label>
-            </th>
-            <th width="10%">
-                <label></label>
-            </th>
-            <th width="6%">
-                <label> </label>
-            </th>
-            <th width="5%">
-                <label></label>
-            </th>
-            <th width="5%">
-                <label></label>
-            </th>
-            <th width="5%">
-                <label>@Model.DurataTotale</label>
-            </th>
-            <th width="5%">
-                <label></label>
-            </th>
-            <th width="10%">
-                <label></label>
-            </th>
-            <th width="10%">
-                <label></label>
-            </th>
-            <th width="10%">
-                <label></label>
-            </th>
-        </tr>
-        
-    </table>
+                    <tr>
+                        <td>
+                            @c.Giorno.ToShortDateString()
+                        </td>
+                        <td>
+                            @c.Macchina
+                        </td>
+                        <td>
+                            @c.FinituraCodice
+                        </td>
+                        <td>
+                            @c.FinituraDescrizione
+                        </td>
+                        <td>
+                            @c.TipoCiclo
+                        </td>
+                        <td>
+                            @c.Inizio
+                        </td>
+                        <td>
+                            @c.Fine
+                        </td>
+                        <td>
+                            @c.Durata
+                        </td>
+                        <td>
+                            @c.Quantita
+                        </td>
+                        <td>
+                            @c.Clienti
+                        </td>
+                        <td>
+                            @c.Articolo
+                        </td>
+                        <td>
+                            @c.Impegno
+                        </td>
+                    </tr>
+                }
+            </tboby>
+        </table>
+
+        <table class="table table-condensed text-red text-bold">
+            <tr>
+                <th width="6%">
+                    <label>TOTALI</label>
+                </th>
+                <th width="10%">
+
+                </th>
+                <th width="6%">
+                    <label></label>
+                </th>
+                <th width="10%">
+                    <label></label>
+                </th>
+                <th width="6%">
+                    <label> </label>
+                </th>
+                <th width="5%">
+                    <label></label>
+                </th>
+                <th width="5%">
+                    <label></label>
+                </th>
+                <th width="5%">
+                    <label>@Model.DurataTotale</label>
+                </th>
+                <th width="5%">
+                    <label></label>
+                </th>
+                <th width="10%">
+                    <label></label>
+                </th>
+                <th width="10%">
+                    <label></label>
+                </th>
+                <th width="10%">
+                    <label></label>
+                </th>
+            </tr>
+
+        </table>
+    </div>
 </div>
