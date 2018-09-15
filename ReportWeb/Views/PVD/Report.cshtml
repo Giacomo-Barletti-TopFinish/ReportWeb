@@ -42,6 +42,42 @@
 
     });
 
+    function Report()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var settimana = $('#ddlSettimane').val();
+        if (settimana == null || settimana == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Selezionare una settimana" + "</br>";
+            esegui = false;
+        }
+
+        var anno = $('#ddlAnno').val();
+        if (anno == null || anno == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Selezionare un anno" + "</br>";
+            esegui = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var macchina = $('#ddlMacchina').val();
+
+        var url = '@Url.Action("ReportPDF", "PVD")';
+        url = url + '?Anno='+anno;
+        url = url + '&Settimana=' + settimana;
+        url = url + '&Macchina='+macchina;
+
+        var win = window.open(url, '_blank');
+        win.document.title = "Report PVD";
+        win.focus();
+
+    }
 
     function Trova()
     {

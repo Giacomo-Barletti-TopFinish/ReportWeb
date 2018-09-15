@@ -8,8 +8,9 @@
         <div class="col-sm-1"><label>Data inizio: </label>@ViewData["dataInizio"].ToString() </div>
         <div class="col-sm-1"></div>
         <div class="col-sm-1"><label>Data fine: </label>@ViewData["dataFine"].ToString() </div>
+        <div class="col-sm-2"><input type="button" onclick="Report();" class="btn btn-primary" value="Report PDF" /></div>
     </div>
-    <div style="overflow-y: auto; height:550px; ">
+    <div style="overflow-y: auto; height:550px; margin-top:5px">
         <table class="table table-condensed">
             <tr>
                 <th width="5%">

@@ -1,6 +1,7 @@
 ﻿using ReportWeb.Business;
 using ReportWeb.Common.Helpers;
 using ReportWeb.Models;
+using ReportWeb.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,19 @@ namespace ReportWeb.Controllers
             ViewData.Add("dataInizio", dataInizioSettimana.ToShortDateString());
             ViewData.Add("dataFine", dataFine.ToShortDateString());
             return PartialView("GrigliaReportPartial", report);
+        }
+
+        public ActionResult ReportPDF(int Anno, int Settimana)
+        {
+            GalvanicaBLL bll = new GalvanicaBLL();
+            DateTime dataInizioSettimana = DateTimeHelper.PrimoGiornoSettimana(Anno, Settimana);
+            DateTime dataFine = dataInizioSettimana.AddDays(7);
+            GalvanicaReportModel report = bll.EstraiConsutivo(dataInizioSettimana, dataFine);
+
+            PDFHelper pdfHelper = new PDFHelper();
+            byte[] fileContents = pdfHelper.EstraiGalvanicaReport(report, dataInizioSettimana, dataFine);
+
+            return File(fileContents, "application/pdf", "Report.pdf");
         }
     }
 }

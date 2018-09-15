@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReportWeb.Common.Helpers;
+using ReportWeb.Reports;
 
 namespace ReportWeb.Controllers
 {
@@ -76,10 +77,23 @@ namespace ReportWeb.Controllers
             PVDBLL bll = new PVDBLL();
             DateTime dataInizioSettimana = DateTimeHelper.PrimoGiornoSettimana(Anno, Settimana);
             DateTime dataFine = dataInizioSettimana.AddDays(7);
-            PVDReportModel report = bll.EstraiConsutivo(dataInizioSettimana, dataFine,Macchina);
+            PVDReportModel report = bll.EstraiConsutivo(dataInizioSettimana, dataFine, Macchina);
             ViewData.Add("dataInizio", dataInizioSettimana.ToShortDateString());
             ViewData.Add("dataFine", dataFine.ToShortDateString());
             return PartialView("GrigliaReportPartial", report);
+        }
+
+        public FileResult ReportPDF(int Anno, int Settimana, string Macchina)
+        {
+            PVDBLL bll = new PVDBLL();
+            DateTime dataInizioSettimana = DateTimeHelper.PrimoGiornoSettimana(Anno, Settimana);
+            DateTime dataFine = dataInizioSettimana.AddDays(7);
+            PVDReportModel report = bll.EstraiConsutivo(dataInizioSettimana, dataFine, Macchina);
+
+            PDFHelper pdfHelper = new PDFHelper();
+            byte[] fileContents = pdfHelper.EstraiPDVReport(report, dataInizioSettimana, dataFine);
+
+            return File(fileContents, "application/pdf", "Report.pdf");
         }
     }
 }

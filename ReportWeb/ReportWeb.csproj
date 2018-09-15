@@ -452,6 +452,10 @@
       <Project>{712fd937-e2ec-4f78-b20a-f39efb1d5e60}</Project>
       <Name>ReportWeb.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReportWeb.Reports\ReportWeb.Reports.csproj">
+      <Project>{54F4C18A-7F78-4AC2-9581-1B3EB814A0FD}</Project>
+      <Name>ReportWeb.Reports</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

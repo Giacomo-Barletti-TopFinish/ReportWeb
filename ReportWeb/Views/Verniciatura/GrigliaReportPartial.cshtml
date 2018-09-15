@@ -7,53 +7,55 @@
         <div class="col-sm-1"><label>Data inizio: </label>@ViewData["dataInizio"].ToString() </div>
         <div class="col-sm-1"></div>
         <div class="col-sm-1"><label>Data fine: </label>@ViewData["dataFine"].ToString() </div>
-    </div>
-    <table class="table table-condensed">
-        <tr>
-            <th width="6%">
-                <label>Giorno</label>
-            </th>
-            <th width="15%">
-                Quantita manuale
-            </th>
-            <th width="15%">
-                <label>Barre</label>
-            </th>
-            <th></th>
-        </tr>
-        <tboby>
-            @foreach (VerniciaturaConsuntivoModel c in Model.Consuntivo)
+        <div class="col-sm-2"><input type="button" onclick="Report();" class="btn btn-primary" value="Report PDF" /></div>
+    </div><div style="overflow-y: auto; height:550px; margin-top:5px">
+        <table class="table table-condensed">
+            <tr>
+                <th width="6%">
+                    <label>Giorno</label>
+                </th>
+                <th width="15%">
+                    Quantita manuale
+                </th>
+                <th width="15%">
+                    <label>Barre</label>
+                </th>
+                <th></th>
+            </tr>
+            <tboby>
+                @foreach (VerniciaturaConsuntivoModel c in Model.Consuntivo)
             {
-                <tr>
-                    <td>
-                        @c.Giorno.ToShortDateString()
-                    </td>
-                    <td>
-                        @c.QuantitaManuale
-                    </td>
-                    <td>
-                        @c.Barre
-                    </td>
-                    <td></td>
-                </tr>
-            }
-        </tboby>
-    </table>
-    <table class="table table-condensed text-red text-bold">
-        <tr>
-            <th width="6%">
-                <label>TOTALI</label>
-            </th>
-            <th width="15%">
-                <label>@Model.QuantitaManualeTotale</label>
-            </th>
-            <th width="15%">
-                <label>@Model.BarreTotali</label>
-            </th>
-            <th>
-                <label></label>
-            </th>
-        </tr>
+                    <tr>
+                        <td>
+                            @c.Giorno.ToShortDateString()
+                        </td>
+                        <td>
+                            @c.QuantitaManuale
+                        </td>
+                        <td>
+                            @c.Barre
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </tboby>
+        </table>
+        <table class="table table-condensed text-red text-bold">
+            <tr>
+                <th width="6%">
+                    <label>TOTALI</label>
+                </th>
+                <th width="15%">
+                    <label>@Model.QuantitaManualeTotale</label>
+                </th>
+                <th width="15%">
+                    <label>@Model.BarreTotali</label>
+                </th>
+                <th>
+                    <label></label>
+                </th>
+            </tr>
 
-    </table>
+        </table>
+    </div>
 </div>

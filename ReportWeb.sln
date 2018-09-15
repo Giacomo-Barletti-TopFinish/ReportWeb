@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportWeb.Models", "ReportW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportWeb.Common", "ReportWeb.Common\ReportWeb.Common.csproj", "{4A7C19E0-6664-45C2-8999-A5E0896FE111}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportWeb.Reports", "ReportWeb.Reports\ReportWeb.Reports.csproj", "{54F4C18A-7F78-4AC2-9581-1B3EB814A0FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{4A7C19E0-6664-45C2-8999-A5E0896FE111}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A7C19E0-6664-45C2-8999-A5E0896FE111}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A7C19E0-6664-45C2-8999-A5E0896FE111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F4C18A-7F78-4AC2-9581-1B3EB814A0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F4C18A-7F78-4AC2-9581-1B3EB814A0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F4C18A-7F78-4AC2-9581-1B3EB814A0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F4C18A-7F78-4AC2-9581-1B3EB814A0FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
