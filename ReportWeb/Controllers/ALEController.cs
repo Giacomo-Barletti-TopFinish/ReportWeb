@@ -174,7 +174,10 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaGruppiFatturati()
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            List<GruppoModel> model = bll.LeggiGruppi(ALEStatoDettaglio.FATTURATO);
+            DateTime dataInizio = DateTime.Today.AddDays(-7);
+            DateTime dataFine = DateTime.Today.AddHours(24);
+
+            List<GruppoModel> model = bll.LeggiGruppiFatturati(dataInizio, dataFine);
             return PartialView("GruppiFatturatiPartial", model);
         }
 

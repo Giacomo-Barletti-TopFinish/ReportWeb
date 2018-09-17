@@ -544,6 +544,49 @@ namespace ReportWeb.Business
             return model;
         }
 
+        public List<GruppoModel> LeggiGruppiFatturati(DateTime DataInizio, DateTime DataFine)
+        {
+            List<GruppoModel> model = new List<GruppoModel>();
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_GRUPPOFatturato(ds, DataInizio, DataFine);
+
+                List<decimal> idGruppi = ds.RW_ALE_GRUPPO.Select(x => x.IDALEGRUPPO).Distinct().ToList();
+                bALE.FillRW_ALE_DETTAGLIO(ds, idGruppi);
+                bALE.FillCLIFO(ds);
+                bALE.FillUSR_TAB_TIPODIFETTI(ds);
+                bALE.FillUSR_ANA_DIFETTI(ds);
+                List<string> IDCHECKQT = ds.RW_ALE_DETTAGLIO.Select(x => x.IDCHECKQT).ToList();
+                bALE.FillUSR_CHECKQ_T(ds, IDCHECKQT);
+                bALE.FillUSR_CHECKQ_C(ds, IDCHECKQT);
+                bALE.FillUSR_PRD_MOVFASI(ds, IDCHECKQT);
+                List<string> IDMAGAZZ = ds.USR_CHECKQ_T.Select(x => x.IDMAGAZZ).ToList();
+                bALE.FillMAGAZZ(ds, IDMAGAZZ);
+                bALE.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+                bALE.FillTABFAS(ds);
+
+                List<string> IDPRDMOVFASE = ds.USR_PRD_MOVFASI.Select(x => x.IDPRDMOVFASE).Distinct().ToList();
+                bALE.FillUSR_PRD_FASI(ds, IDPRDMOVFASE);
+
+                List<decimal> IDALEDETTAGLIO = ds.RW_ALE_DETTAGLIO.Select(x => x.IDALEDETTAGLIO).ToList();
+                bALE.FillRW_ALE_DETT_COSTO(ds, IDALEDETTAGLIO);
+
+                bool annullaAddebito = false;
+                bool annullaValorizzazione = false;
+                bool annullaApprovazione = false;
+
+                foreach (ALEDS.RW_ALE_GRUPPORow gruppo in ds.RW_ALE_GRUPPO)
+                {
+                    GruppoModel grModel = CreaGruppoModel(gruppo, ds, annullaAddebito, annullaValorizzazione, annullaApprovazione);
+                    model.Add(grModel);
+                }
+            }
+
+            return model;
+        }
+
         private GruppoModel CreaGruppoModel(ALEDS.RW_ALE_GRUPPORow RWGruppo, ALEDS ds, bool addebitoAnnullabile, bool valorizzazioneAnnullabile, bool approvazioneAnnullabile)
         {
             GruppoModel grModel = new GruppoModel();
@@ -658,7 +701,7 @@ namespace ReportWeb.Business
                         else
                             dettaglio.SetPREZZO_APPROVATONull();
                         dettaglio.STATO = ALEStatoDettaglio.APPROVATO;
-                        dettaglio.NOTAAPPROVAZIONE = val.Nota;                        
+                        dettaglio.NOTAAPPROVAZIONE = val.Nota;
                     }
                 }
                 ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == idGruppo).FirstOrDefault();
@@ -732,7 +775,7 @@ namespace ReportWeb.Business
             }
         }
 
-        public void FatturaGruppo(string IDALEGRUPPO,  string NotaGruppo, string UIDUSER)
+        public void FatturaGruppo(string IDALEGRUPPO, string NotaGruppo, string UIDUSER)
         {
             decimal idAleAgruppo = decimal.Parse(IDALEGRUPPO);
             using (ALEBusiness bALE = new ALEBusiness())
@@ -742,7 +785,7 @@ namespace ReportWeb.Business
                 bALE.FillRW_ALE_DETTAGLIO(ds, idAleAgruppo);
                 bALE.FillRW_ALE_GRUPPO(ds, new List<decimal>(new decimal[] { idGruppo }));
 
-                foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO== idAleAgruppo))
+                foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == idAleAgruppo))
                 {
                     if (dettaglio != null)
                     {

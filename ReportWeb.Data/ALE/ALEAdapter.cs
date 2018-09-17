@@ -143,6 +143,7 @@ namespace ReportWeb.Data
             }
         }
 
+
         public void FillRW_ALE_DETTAGLIO(ALEDS ds, decimal IDALEGRUPPO)
         {
             string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE IDALEGRUPPO = $P{IDALEGRUPPO}";
@@ -445,7 +446,7 @@ namespace ReportWeb.Data
             ParamSet ps = new ParamSet();
             ps.AddParam("IDALEGRUPPO", DbType.Decimal, IDALEGRUPPO);
 
-            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.RW_ALE_GRUPPO);
             }
@@ -465,11 +466,26 @@ namespace ReportWeb.Data
 
         }
 
+        public void FillRW_ALE_GRUPPOFatturato(ALEDS ds, DateTime DataInizio, DateTime DataFine)
+        {
+            string select = @"SELECT * FROM RW_ALE_GRUPPO WHERE DATA_FATTURAZIONE >= to_date('{0}','DD/MM/YYYY') AND DATA_FATTURAZIONE <= to_date('{1}','DD/MM/YYYY') ";
+
+            string dtInizio = DataInizio.ToString("dd/MM/yyyy");
+            string dtFine = DataFine.ToString("dd/MM/yyyy");
+            select = string.Format(select, dtInizio, dtFine);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_ALE_GRUPPO);
+            }
+
+        }
+
         public void FillTABFAS(ALEDS ds)
         {
             string select = @"SELECT * FROM GRUPPO.TABFAS ";
 
-           
+
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.TABFAS);

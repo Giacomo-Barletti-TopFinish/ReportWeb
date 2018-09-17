@@ -245,5 +245,12 @@ namespace ReportWeb.Data.ALE
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.FillUSR_PRD_FASI(ds, IDPRDMOVFASE);
         }
+
+        [DataContext]
+        public void FillRW_ALE_GRUPPOFatturato(ALEDS ds, DateTime DataInizio, DateTime DataFine)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_GRUPPOFatturato(ds, DataInizio, DataFine);
+        }
     }
 }
