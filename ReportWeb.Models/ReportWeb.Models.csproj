@@ -44,11 +44,8 @@
   <ItemGroup>
     <Compile Include="ALE\AddebitoModel.cs" />
     <Compile Include="ALE\ALEStatoRichiesta.cs" />
-    <Compile Include="ALE\ApprovatoModel.cs" />
-    <Compile Include="ALE\FatturatoModel.cs" />
     <Compile Include="ALE\GruppiModel.cs" />
     <Compile Include="ALE\InserimentoModel.cs" />
-    <Compile Include="ALE\ValorizzatoModel.cs" />
     <Compile Include="GalvanicaConsuntivoModel.cs" />
     <Compile Include="GalvanicaReportModel.cs" />
     <Compile Include="JSON\ALEAddebitiJsonModel.cs" />
