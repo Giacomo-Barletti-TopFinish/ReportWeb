@@ -2,6 +2,14 @@
 @using ReportWeb.Models.ALE
 @model List<GruppoModel>
 
+@if (Model.Count == 0)
+{
+    <div class="col-sm-12">
+        <h4 class="text-red">Non ci sono gruppi da visualizzare</h4>
+    </div>
+}
+else
+{
 <div class="col-sm-12">
     <table class="table table-condensed" id="tblGruppi">
         <thead>
@@ -69,9 +77,9 @@
                                         <td style="font-size:12px">@dettaglio.LavoranteDescrizione</td>
                                         <td style="font-size:12px">@dettaglio.QuantitaAddebitata</td>
                                         <td style="font-size:12px">@Html.Partial("ValorizzazioneDettaglioCostiPartial", dettaglio)</td>
-                                        <td style="font-size:12px">@Html.TextBox("txtCosto_"+dettaglio.IdAleDettaglio.ToString(), "", new { @maxlength = "8", @class = "form-control input-sm RWCosto", @style = "height: 21px;", @readonly = true })</td>
+                                        <td style="font-size:12px">@Html.TextBox("txtCosto_" + dettaglio.IdAleDettaglio.ToString(), "", new { @maxlength = "8", @class = "form-control input-sm RWCosto", @style = "height: 21px;", @readonly = true })</td>
                                         <td style="font-size:12px">@Html.TextBox("txtPrezzo", "", new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
-                                        <td style="font-size:12px">@Html.TextBox("txtValore", string.Empty, new {  @class = "form-control input-sm RWValore", @style = "height: 21px;", @readonly = true }) </td>
+                                        <td style="font-size:12px">@Html.TextBox("txtValore", string.Empty, new { @class = "form-control input-sm RWValore", @style = "height: 21px;", @readonly = true }) </td>
                                         <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
                                     </tr>
                                     if (!string.IsNullOrEmpty(dettaglio.NotaInserimento))
@@ -106,7 +114,7 @@
     </table>
 </div>
 
-
+}
 <script language="javascript" type="text/javascript">
     $(function ()
     {
@@ -171,7 +179,6 @@
 
     function ValorizzaGruppo(sender, IDALEGRUPPO)
     {
-
         var divGruppoName = "#Dettaglio_" + IDALEGRUPPO;
         var divGruppo = $(divGruppoName);
 
@@ -258,12 +265,11 @@
 
     function AggiungiCosto(IdAleDettaglio, sender)
     {
-
         var nomeTabella = '#tblFaseCosto_' + IdAleDettaglio;
 
         var riga = '<tr><input type="hidden" value="' + IdAleDettaglio + '" class="hdidAleDet"><td width="55%" style="font-size:12px"><input class="form-control input-sm RWFASE" id="txtFase_' + IdAleDettaglio + '" name="txtFase_' + IdAleDettaglio + '" type="text" value=""></td><td width="35%" style="font-size:12px"><input class="form-control input-sm RWCOSTOFASE" id="txtCostoFase_' + IdAleDettaglio + '" name="txtCostoFase_' + IdAleDettaglio + '" oninput="onDecimalInput(this,8,2)" onkeypress="return FilterDecimal(event,this)" type="text" value="0"></td><td width="10%" style="font-size:12px"><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td></tr>'
 
-        $(tabella).last().append(riga);
+        $(nomeTabella).last().append(riga);
         AvviaCalcolaTotali();
     }
 

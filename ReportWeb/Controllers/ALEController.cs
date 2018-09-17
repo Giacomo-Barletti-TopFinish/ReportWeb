@@ -122,10 +122,10 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaGruppiValorizzati()
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            List<GruppoValorizzatoModel> model = bll.LeggiGruppiValorizzati();
-            List<GruppoValorizzatoModel> altri = bll.LeggiAltriGruppiNonValorizzati();
-            model.AddRange(altri);
-            return PartialView("GruppiValorizzatiPartial", model);
+            List<GruppoModel> modelValorizzato = bll.LeggiGruppi(ALEStatoDettaglio.VALORIZZATO);
+            List<GruppoModel> modelApprovato = bll.LeggiGruppi(ALEStatoDettaglio.APPROVATO);
+            modelValorizzato.AddRange(modelApprovato);
+            return PartialView("GruppiValorizzatiPartial", modelValorizzato);
         }
 
         public ActionResult Valorizza(string IDALEGRUPPO, string Dettagli, string Nota)

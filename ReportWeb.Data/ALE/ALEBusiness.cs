@@ -198,6 +198,12 @@ namespace ReportWeb.Data.ALE
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.UpdateALEDSTable(ds.RW_ALE_GRUPPO.TableName, ds);
         }
+        [DataContext(true)]
+        public void UpdateRW_ALE_DETT_COSTO(ALEDS ds)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.UpdateALEDSTable(ds.RW_ALE_DETT_COSTO.TableName, ds);
+        }
         [DataContext]
         public void FillRW_ALE_GRUPPO(ALEDS ds, bool Aperto)
         {

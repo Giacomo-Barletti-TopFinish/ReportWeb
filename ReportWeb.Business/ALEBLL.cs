@@ -263,6 +263,7 @@ namespace ReportWeb.Business
             m.NotaInserimento = riga.IsNOTAINSERIMENTONull() ? string.Empty : riga.NOTAINSERIMENTO;
             m.NotaApprovazione = riga.IsNOTAAPPROVAZIONENull() ? string.Empty : riga.NOTAAPPROVAZIONE;
             m.NotaAddebito = riga.IsNOTAADDEBITONull() ? string.Empty : riga.NOTAADDEBITO;
+            m.NotaValorizzazione = riga.IsNOTAVALORIZZAZIONENull() ? string.Empty : riga.NOTAVALORIZZAZIONE;
 
             m.Prezzo = riga.IsPREZZONull() ? 0 : riga.PREZZO;
             m.Valore = riga.IsVALORENull() ? 0 : riga.VALORE;
@@ -686,6 +687,8 @@ namespace ReportWeb.Business
                 ALEDS ds = new ALEDS();
                 bALE.FillRW_ALE_DETTAGLIO(ds, idAleAgruppo);
                 bALE.FillRW_ALE_GRUPPO(ds, new List<decimal>(new decimal[] { idGruppo }));
+                List<decimal> idDettaglio = ds.RW_ALE_DETTAGLIO.Select(x => x.IDALEDETTAGLIO).ToList();
+                bALE.FillRW_ALE_DETT_COSTO(ds, idDettaglio);
 
                 foreach (ALEValorizzaJson val in Valorizzati)
                 {
@@ -698,14 +701,31 @@ namespace ReportWeb.Business
                             dettaglio.SetPREZZONull();
                         dettaglio.STATO = ALEStatoDettaglio.VALORIZZATO;
                         dettaglio.NOTAVALORIZZAZIONE = val.Nota;
+
+                        foreach (CostoFaseJson costoFase in val.CostiFase)
+                        {
+                            ALEDS.RW_ALE_DETT_COSTORow dettCosto = ds.RW_ALE_DETT_COSTO.NewRW_ALE_DETT_COSTORow();
+                            dettCosto.IDALEDETTAGLIO = dettaglio.IDALEDETTAGLIO;
+                            dettCosto.FASE = costoFase.Fase;
+                            if (costoFase.Costo.HasValue)
+                                dettCosto.COSTO = costoFase.Costo.Value;
+                            else
+                                dettCosto.COSTO = 0;
+                            dettCosto.DATA_INSERIMENTO = DateTime.Now;
+                            dettCosto.UIDUSER = UIDUSER;
+                            ds.RW_ALE_DETT_COSTO.AddRW_ALE_DETT_COSTORow(dettCosto);
+                        }
                     }
                 }
                 ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == idGruppo).FirstOrDefault();
                 if (gruppo != null)
                 {
                     gruppo.NOTA_VALORIZZAZIONE = NotaGruppo;
+                    gruppo.DATA_VALORIZZAZIONE = DateTime.Now;
+                    gruppo.UIDUSER_VALORIZZAZIONE = UIDUSER;
                 }
                 bALE.UpdateRW_ALE_DETTAGLIO(ds);
+                bALE.UpdateRW_ALE_DETT_COSTO(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
             }
         }
@@ -778,13 +798,19 @@ namespace ReportWeb.Business
                 long idGruppo = long.Parse(IDALEGRUPPO);
                 ALEDS ds = new ALEDS();
                 bALE.FillRW_ALE_DETTAGLIO(ds, idAleAgruppo);
+                List<decimal> idDettaglio = ds.RW_ALE_DETTAGLIO.Select(x => x.IDALEDETTAGLIO).ToList();
                 bALE.FillRW_ALE_GRUPPO(ds, new List<decimal>(new decimal[] { idGruppo }));
+                bALE.FillRW_ALE_DETT_COSTO(ds, idDettaglio);
+
 
                 foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == idGruppo))
                 {
                     dettaglio.SetPREZZONull();
                     dettaglio.STATO = ALEStatoDettaglio.ADDEBITATO;
                     dettaglio.SetNOTAVALORIZZAZIONENull();
+
+                    foreach (ALEDS.RW_ALE_DETT_COSTORow costo in ds.RW_ALE_DETT_COSTO.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDALEDETTAGLIO == dettaglio.IDALEDETTAGLIO))
+                        costo.Delete();
                 }
                 ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == idGruppo).FirstOrDefault();
                 if (gruppo != null)
@@ -793,6 +819,7 @@ namespace ReportWeb.Business
                 }
                 bALE.UpdateRW_ALE_DETTAGLIO(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
+                bALE.UpdateRW_ALE_DETT_COSTO(ds);
             }
         }
 
