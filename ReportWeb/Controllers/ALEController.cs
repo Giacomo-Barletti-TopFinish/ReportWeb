@@ -174,7 +174,7 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaGruppiFatturati()
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            List<GruppoFatturatoModel> model = bll.LeggiGruppiFatturati();
+            List<GruppoModel> model = bll.LeggiGruppi(ALEStatoDettaglio.FATTURATO);
             return PartialView("GruppiFatturatiPartial", model);
         }
 
@@ -182,14 +182,14 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaGruppiDaFatturare()
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            List<GruppoApprovatoModel> model = bll.LeggiGruppiApprovati();
-            return PartialView("GruppiDaFatturarePartial", model);
+            List<GruppoModel> modelApprovato = bll.LeggiGruppi(ALEStatoDettaglio.APPROVATO);
+            return PartialView("GruppiDaFatturarePartial", modelApprovato);
         }
 
-        public ActionResult FatturaGruppo(string IDALEGRUPPO, string Dettagli, string Nota)
+        public ActionResult FatturaGruppo(string IDALEGRUPPO, string Nota)
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            bll.FatturaGruppo(IDALEGRUPPO, Dettagli, Nota, ConnectedUser);
+            bll.FatturaGruppo(IDALEGRUPPO, Nota, ConnectedUser);
             return null;
         }
         public ActionResult AnnullaFatturazione(string IDALEGRUPPO)

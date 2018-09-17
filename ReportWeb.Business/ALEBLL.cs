@@ -1037,9 +1037,8 @@ namespace ReportWeb.Business
             return model;
         }
 
-        public void FatturaGruppo(string IDALEGRUPPO, string Dettagli, string NotaGruppo, string UIDUSER)
+        public void FatturaGruppo(string IDALEGRUPPO,  string NotaGruppo, string UIDUSER)
         {
-            ALEValorizzaJson[] Valorizzati = JSonSerializer.Deserialize<ALEValorizzaJson[]>(Dettagli);
             decimal idAleAgruppo = decimal.Parse(IDALEGRUPPO);
             using (ALEBusiness bALE = new ALEBusiness())
             {
@@ -1048,9 +1047,8 @@ namespace ReportWeb.Business
                 bALE.FillRW_ALE_DETTAGLIO(ds, idAleAgruppo);
                 bALE.FillRW_ALE_GRUPPO(ds, new List<decimal>(new decimal[] { idGruppo }));
 
-                foreach (ALEValorizzaJson val in Valorizzati)
+                foreach (ALEDS.RW_ALE_DETTAGLIORow dettaglio in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO== idAleAgruppo))
                 {
-                    ALEDS.RW_ALE_DETTAGLIORow dettaglio = ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEDETTAGLIO == val.IdAleDettaglio).FirstOrDefault();
                     if (dettaglio != null)
                     {
                         dettaglio.STATO = ALEStatoDettaglio.FATTURATO;
@@ -1061,6 +1059,8 @@ namespace ReportWeb.Business
                 {
                     gruppo.NOTA_FATTURAZIONE = NotaGruppo;
                     gruppo.APERTO = "1";
+                    gruppo.UIDUSER_FATTURAZIONE = UIDUSER;
+                    gruppo.DATA_FATTURAZIONE = DateTime.Now;
                 }
                 bALE.UpdateRW_ALE_DETTAGLIO(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
