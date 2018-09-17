@@ -10,109 +10,109 @@
 }
 else
 {
-<div class="col-sm-12">
-    <table class="table table-condensed" id="tblGruppi">
-        <thead>
-            <tr>
-                <th width="5%"><label>ID</label></th>
-                <th width="10%"><label>Lavorante</label></th>
-                <th width="75%"><label>Nota</label></th>
-                <th width="5%"></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (GruppoModel a in Model)
-            {
-                <tr valign="top">
-                    <td>@a.IDALEGRUPPO</td>
-                    <td>@a.LavoranteDescrizione</td>
-                    <td>@a.NotaAddebito</td>
-                    <input type="hidden" value="@a.IDALEGRUPPO" class="hdIDALEGRUPPO" />
-                    <td width="10%"><input type="button" onclick="MostraDettaglioGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
-                    <td></td>
-                </tr>
+    <div class="col-sm-12">
+        <table class="table table-condensed" id="tblGruppi">
+            <thead>
                 <tr>
-                    <td></td>
-                    <td colspan="2">
-                        <div id="Dettaglio_@a.IDALEGRUPPO" style="display:none">
-                            <table width="100%" class="table">
-                                <thead>
-                                    <tr>
-                                        <th style="font-size:12px" width="15%">
-                                            Modello
-                                        </th>
-                                        <th style="font-size:12px" width="15%">
-                                            Difetto
-                                        </th>
-                                        <th style="font-size:12px" width="15%">
-                                            Lavorante
-                                        </th>
-                                        <th style="font-size:12px" width="5%">
-                                            Quantita
-                                        </th>
-                                        <th style="font-size:12px" width="12%">
-                                            Costi
-                                        </th>
-                                        <th style="font-size:12px" width="5%">
-                                            Costo
-                                        </th>
-                                        <th style="font-size:12px" width="5%">
-                                            Prezzo
-                                        </th>
-                                        <th style="font-size:12px" width="5%">
-                                            Valore
-                                        </th>
-                                        <th style="font-size:12px">
-                                            Nota
-                                        </th>
-                                    </tr>
-                                </thead>
-                                @foreach (AddebitoModel dettaglio in a.Dettagli)
-                                {
-                                    <tr class="RWTRDettaglio" valign="top">
-                                        <input type="hidden" class="hdIdAleDettaglio" value="@dettaglio.IdAleDettaglio" />
-                                        <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
-                                        <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
-                                        <td style="font-size:12px">@dettaglio.LavoranteDescrizione</td>
-                                        <td style="font-size:12px">@dettaglio.QuantitaAddebitata</td>
-                                        <td style="font-size:12px">@Html.Partial("ValorizzazioneDettaglioCostiPartial", dettaglio)</td>
-                                        <td style="font-size:12px">@Html.TextBox("txtCosto_" + dettaglio.IdAleDettaglio.ToString(), "", new { @maxlength = "8", @class = "form-control input-sm RWCosto", @style = "height: 21px;", @readonly = true })</td>
-                                        <td style="font-size:12px">@Html.TextBox("txtPrezzo", "", new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
-                                        <td style="font-size:12px">@Html.TextBox("txtValore", string.Empty, new { @class = "form-control input-sm RWValore", @style = "height: 21px;", @readonly = true }) </td>
-                                        <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
-                                    </tr>
-                                    if (!string.IsNullOrEmpty(dettaglio.NotaInserimento))
-                                    {
-                                        <tr>
-                                            <td style="font-size:12px" colspan="8">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
-                                        </tr>
-                                    }
-                                    if (!string.IsNullOrEmpty(dettaglio.NotaAddebito))
-                                    {
-                                        <tr>
-                                            <td style="font-size:12px" colspan="8">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
-                                        </tr>
-                                    }
-                                    <tr><td colspan="9"><hr /></td></tr>
-                                }
-                                <tr class="RWTotali">
-                                    <td class="text-right"><label>Nota di gruppo</label></td>
-                                    <td colspan="4">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNotaGruppo", @style = "height: 21px;" })</td>
-                                    <td class="text-red">TOTALE</td>
-                                    <td class="text-red">@Html.TextBox("RWTotale", string.Empty, new { @class = "form-control input-sm RWTotale", @style = "height: 21px;", @readonly = true })</td>
-                                    <td><input type="button" onclick="ValorizzaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Valorizza" /></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                    <td></td>
-                    <td></td>
+                    <th width="5%"><label>ID</label></th>
+                    <th width="10%"><label>Lavorante</label></th>
+                    <th width="75%"><label>Nota</label></th>
+                    <th width="5%"></th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (GruppoModel a in Model)
+                {
+                    <tr valign="top">
+                        <td>@a.IDALEGRUPPO</td>
+                        <td>@a.LavoranteDescrizione</td>
+                        <td>@a.NotaAddebito</td>
+                        <input type="hidden" value="@a.IDALEGRUPPO" class="hdIDALEGRUPPO" />
+                        <td width="10%"><input type="button" onclick="MostraDettaglioGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">
+                            <div id="Dettaglio_@a.IDALEGRUPPO" style="display:none">
+                                <table width="100%" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="font-size:12px" width="15%">
+                                                Modello
+                                            </th>
+                                            <th style="font-size:12px" width="15%">
+                                                Difetto
+                                            </th>
+                                            <th style="font-size:12px" width="15%">
+                                                Lavorante
+                                            </th>
+                                            <th style="font-size:12px" width="5%">
+                                                Quantita
+                                            </th>
+                                            <th style="font-size:12px" width="12%">
+                                                Costi
+                                            </th>
+                                            <th style="font-size:12px" width="5%">
+                                                Costo
+                                            </th>
+                                            <th style="font-size:12px" width="5%">
+                                                Prezzo
+                                            </th>
+                                            <th style="font-size:12px" width="5%">
+                                                Valore
+                                            </th>
+                                            <th style="font-size:12px">
+                                                Nota
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    @foreach (AddebitoModel dettaglio in a.Dettagli)
+                                    {
+                                        <tr class="RWTRDettaglio" valign="top">
+                                            <input type="hidden" class="hdIdAleDettaglio" value="@dettaglio.IdAleDettaglio" />
+                                            <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
+                                            <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
+                                            <td style="font-size:12px">@dettaglio.LavoranteDescrizione</td>
+                                            <td style="font-size:12px">@dettaglio.QuantitaAddebitata</td>
+                                            <td style="font-size:12px">@Html.Partial("ValorizzazioneDettaglioCostiPartial", dettaglio)</td>
+                                            <td style="font-size:12px">@Html.TextBox("txtCosto_" + dettaglio.IdAleDettaglio.ToString(), "", new { @maxlength = "8", @class = "form-control input-sm RWCosto", @style = "height: 21px;", @readonly = true })</td>
+                                            <td style="font-size:12px">@Html.TextBox("txtPrezzo", "", new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
+                                            <td style="font-size:12px">@Html.TextBox("txtValore", string.Empty, new { @class = "form-control input-sm RWValore", @style = "height: 21px;", @readonly = true }) </td>
+                                            <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
+                                        </tr>
+                                        if (!string.IsNullOrEmpty(dettaglio.NotaInserimento))
+                                        {
+                                            <tr>
+                                                <td style="font-size:12px" colspan="8">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                            </tr>
+                                        }
+                                        if (!string.IsNullOrEmpty(dettaglio.NotaAddebito))
+                                        {
+                                            <tr>
+                                                <td style="font-size:12px" colspan="8">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
+                                            </tr>
+                                        }
+                                        <tr><td colspan="9"><hr /></td></tr>
+                                    }
+                                    <tr class="RWTotali">
+                                        <td class="text-right"><label>Nota di gruppo</label></td>
+                                        <td colspan="4">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNotaGruppo", @style = "height: 21px;" })</td>
+                                        <td class="text-red">TOTALE</td>
+                                        <td class="text-red">@Html.TextBox("RWTotale", string.Empty, new { @class = "form-control input-sm RWTotale", @style = "height: 21px;", @readonly = true })</td>
+                                        <td><input type="button" onclick="ValorizzaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Valorizza" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
 }
 <script language="javascript" type="text/javascript">
@@ -134,7 +134,7 @@ else
         $('.RWtblFaseCosto').on('click', 'a', function ()
         {
             var tr = $(this).closest('tr');
-            var hdIdAleDet = $('.hdidAleDet',tr);
+            var hdIdAleDet = $('.hdidAleDet', tr);
             var IdAleDettaglio = $(hdIdAleDet).val();
             tr.remove();
             aggiornaTotale(IdAleDettaglio);
@@ -209,7 +209,7 @@ else
             var nota = $(".RWNota", trDettaglio[i]);
             var n = $(nota).val();
 
-            var dettaglio = { 'IdAleDettaglio': idd, 'Prezzo': p,'Costo':c,'CostiFase':dettagliCosti, 'Nota': n };
+            var dettaglio = { 'IdAleDettaglio': idd, 'Prezzo': p, 'Costo': c, 'CostiFase': dettagliCosti, 'Nota': n };
             dettagli.push(dettaglio);
         }
 
@@ -277,7 +277,7 @@ else
     {
         $('.RWCOSTOFASE').change(function ()
         {
-           
+
             var id = $(this).attr('id');
             var str = id.split('_');
             var IdAleDettaglio = str[1];
@@ -287,7 +287,7 @@ else
 
     function aggiornaTotale(IdAleDettaglio)
     {
-        
+
         var nomeTabella = '#tblFaseCosto_' + IdAleDettaglio;
         var tabella = $(nomeTabella);
         var totale = 0;

@@ -79,7 +79,7 @@ else
                                             <td style="font-size:11px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
                                             <td style="font-size:11px">@dettaglio.LavoranteDescrizione</td>
                                             <td style="font-size:11px">@dettaglio.QuantitaAddebitata</td>
-                                            <td style="font-size:11px">
+                                            <td style="font-size:11px" rowspan="4">
                                                 <table>
                                                     @{decimal totale = 0;
 
@@ -102,24 +102,15 @@ else
                                             <td style="font-size:11px">@dettaglio.Prezzo</td>
                                             <td style="font-size:11px">@(dettaglio.Prezzo * dettaglio.QuantitaAddebitata)</td>
                                         </tr>
-                                                                    if (!string.IsNullOrEmpty(dettaglio.NotaInserimento))
-                                                                    {
-                                                                        <tr>
-                                                                            <td style="font-size:11px" colspan="6">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                        <tr valign="top">
+                                            <td style="font-size:11px" colspan="4">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                        </tr>
+                                                                        <tr valign="top">
+                                                                            <td style="font-size:11px" colspan="4">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
                                                                         </tr>
-                                                                    }
-                                                                    if (!string.IsNullOrEmpty(dettaglio.NotaAddebito))
-                                                                    {
-                                                                        <tr>
-                                                                            <td style="font-size:11px" colspan="6">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
+                                                                        <tr valign="top">
+                                                                            <td style="font-size:11px" colspan="4">@string.Format("Nota valorizzazione: {0}", dettaglio.NotaValorizzazione)</td>
                                                                         </tr>
-                                                                    }
-                                                                    if (!string.IsNullOrEmpty(dettaglio.NotaValorizzazione))
-                                                                    {
-                                                                        <tr>
-                                                                            <td style="font-size:11px" colspan="6">@string.Format("Nota valorizzazione: {0}", dettaglio.NotaValorizzazione)</td>
-                                                                        </tr>
-                                                                        }
                                                                     }
                                 </table>
                             </div>

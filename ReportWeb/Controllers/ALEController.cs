@@ -145,16 +145,16 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaGruppiDaApprovare()
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            List<GruppoValorizzatoModel> model = bll.LeggiGruppiValorizzati();
-            return PartialView("GruppiDaApprovarePartial", model);
+            List<GruppoModel> modelValorizzato = bll.LeggiGruppi(ALEStatoDettaglio.VALORIZZATO);
+            return PartialView("GruppiDaApprovarePartial", modelValorizzato);
         }
 
 
         public ActionResult CaricaGruppiApprovati()
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            List<GruppoApprovatoModel> model = bll.LeggiGruppiApprovati();
-            return PartialView("GruppiApprovatiPartial", model);
+            List<GruppoModel> modelApprovato = bll.LeggiGruppi(ALEStatoDettaglio.APPROVATO);
+            return PartialView("GruppiApprovatiPartial", modelApprovato);
         }
 
         public ActionResult ApprovaGruppo(string IDALEGRUPPO, string Dettagli, string Nota)

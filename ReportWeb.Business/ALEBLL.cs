@@ -751,13 +751,15 @@ namespace ReportWeb.Business
                         else
                             dettaglio.SetPREZZO_APPROVATONull();
                         dettaglio.STATO = ALEStatoDettaglio.APPROVATO;
-                        dettaglio.NOTAAPPROVAZIONE = val.Nota;
+                        dettaglio.NOTAAPPROVAZIONE = val.Nota;                        
                     }
                 }
                 ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == idGruppo).FirstOrDefault();
                 if (gruppo != null)
                 {
                     gruppo.NOTA_APPROVAZIONE = NotaGruppo;
+                    gruppo.DATA_APPROVAZIONE = DateTime.Now;
+                    gruppo.UIDUSER_APPROVAZIONE = UIDUSER;
                 }
                 bALE.UpdateRW_ALE_DETTAGLIO(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
