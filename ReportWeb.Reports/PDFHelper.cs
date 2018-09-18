@@ -17,13 +17,13 @@ namespace ReportWeb.Reports
         private Document _document;
         public byte[] EstraiGalvanicaReport(GalvanicaReportModel report, DateTime dataInizio, DateTime dataFine)
         {
-            InizializzaDocumento("Report PDV", "Report settimanale", "MetalWeb");
+            InizializzaDocumento("Report Galvanica", "Report settimanale", "MetalWeb");
 
             _document.DefaultPageSetup.Orientation = Orientation.Landscape;
             _document.DefaultPageSetup.RightMargin = 20;
             _document.DefaultPageSetup.LeftMargin = 20;
             _document.AddSection();
-            _document.LastSection.AddParagraph("Report PVD", "Heading2");
+            _document.LastSection.AddParagraph("Report Galvanica", "Heading2");
 
             Paragraph paragraph = _document.LastSection.AddParagraph();
             paragraph.AddText("Report per la settimana dal ");
