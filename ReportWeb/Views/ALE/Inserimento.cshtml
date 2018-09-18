@@ -88,7 +88,7 @@
             messaggio += MESSAGGIO_PUNTINO + " " + "Quantità non può essere 0" + "</br>";
         }
 
-        if(lavorante =='' )
+        if(lavorante ==null || lavorante =='' )
         {
             esito=false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Lavorante esterno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";

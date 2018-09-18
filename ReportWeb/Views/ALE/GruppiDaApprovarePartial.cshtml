@@ -34,7 +34,7 @@ else
                         <td>@a.NotaAddebito</td>
                         <td>@a.NotaValorizzazione</td>
                         <input type="hidden" value="@a.IDALEGRUPPO" class="hdIDALEGRUPPO" />
-                        <td width="10%"><input type="button" onclick="MostraDettaglioValGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
+                        <td width="10%"><input type="button" onclick="MostraDettaglioDaAppGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Dettaglio" /></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -175,7 +175,7 @@ else
         $(tdTotale).val(totale.toFixed(2));
     }
 
-    function MostraDettaglioValGruppo(sender, IDALEGRUPPO)
+    function MostraDettaglioDaAppGruppo(sender, IDALEGRUPPO)
     {
         var title = $(sender).attr("value");
 
