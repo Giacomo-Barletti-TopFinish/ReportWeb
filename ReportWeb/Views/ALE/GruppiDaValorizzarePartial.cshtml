@@ -58,6 +58,9 @@ else
                                                 Costo
                                             </th>
                                             <th style="font-size:12px" width="5%">
+                                                Costo totale
+                                            </th>
+                                            <th style="font-size:12px" width="5%">
                                                 Prezzo
                                             </th>
                                             <th style="font-size:12px" width="5%">
@@ -75,9 +78,10 @@ else
                                             <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
                                             <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
                                             <td style="font-size:12px">@dettaglio.LavoranteDescrizione</td>
-                                            <td style="font-size:12px">@dettaglio.QuantitaAddebitata</td>
+                                            <td style="font-size:12px" id="tdQuantita_@dettaglio.IdAleDettaglio">@dettaglio.QuantitaAddebitata</td>
                                             <td style="font-size:12px">@Html.Partial("ValorizzazioneDettaglioCostiPartial", dettaglio)</td>
                                             <td style="font-size:12px">@Html.TextBox("txtCosto_" + dettaglio.IdAleDettaglio.ToString(), "", new { @maxlength = "8", @class = "form-control input-sm RWCosto", @style = "height: 21px;", @readonly = true })</td>
+                                            <td style="font-size:12px">@Html.TextBox("txtCostoTotale_" + dettaglio.IdAleDettaglio.ToString(), "", new { @maxlength = "8", @class = "form-control input-sm RWCosto", @style = "height: 21px;", @readonly = true })</td>
                                             <td style="font-size:12px">@Html.TextBox("txtPrezzo", "", new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
                                             <td style="font-size:12px">@Html.TextBox("txtValore", string.Empty, new { @class = "form-control input-sm RWValore", @style = "height: 21px;", @readonly = true }) </td>
                                             <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
@@ -98,7 +102,7 @@ else
                                     }
                                     <tr class="RWTotali">
                                         <td class="text-right"><label>Nota di gruppo</label></td>
-                                        <td colspan="4">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNotaGruppo", @style = "height: 21px;" })</td>
+                                        <td colspan="6">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNotaGruppo", @style = "height: 21px;" })</td>
                                         <td class="text-red">TOTALE</td>
                                         <td class="text-red">@Html.TextBox("RWTotale", string.Empty, new { @class = "form-control input-sm RWTotale", @style = "height: 21px;", @readonly = true })</td>
                                         <td><input type="button" onclick="ValorizzaGruppo(this,@a.IDALEGRUPPO);" class="btn-primary" value="Valorizza" /></td>
@@ -302,8 +306,17 @@ else
             totale = totale + aux;
         }
         var nomeCostoTotale = '#txtCosto_' + IdAleDettaglio;
+        var nomeCostoTotaleQuantita = '#txtCostoTotale_' + IdAleDettaglio;
 
         var txtCostoTotale = $(nomeCostoTotale);
         $(txtCostoTotale).val(totale.toFixed(2));
+
+       
+        var costoTotaleQuantita = $(nomeCostoTotaleQuantita);
+        var trPrezzo = $(txtCostoTotale).closest('tr');
+        var tds = trPrezzo.find('td');
+        var quantita = $(tds[3]).text();
+        var totaleCosto = quantita * totale;
+        $(costoTotaleQuantita).val(totaleCosto.toFixed(2));
     }
 </script>

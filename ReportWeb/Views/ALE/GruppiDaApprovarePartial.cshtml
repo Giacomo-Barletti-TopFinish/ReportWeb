@@ -61,6 +61,9 @@ else
                                             </th>
 
                                             <th style="font-size:11px" width="5%">
+                                                Costo totale
+                                            </th>
+                                            <th style="font-size:11px" width="5%">
                                                 Prezzo
                                             </th>
                                             <th style="font-size:11px" width="5%">
@@ -102,6 +105,7 @@ else
                                                 </table>
 
                                             </td>
+                                            <td style="font-size:11px" class="text-red">@(totale * dettaglio.QuantitaAddebitata)</td>
                                             <td style="font-size:11px">@dettaglio.Prezzo</td>
                                             <td style="font-size:11px">@(dettaglio.Prezzo * dettaglio.QuantitaAddebitata)</td>
                                             <td style="font-size:12px">@Html.TextBox("txtPrezzo", dettaglio.Prezzo, new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>

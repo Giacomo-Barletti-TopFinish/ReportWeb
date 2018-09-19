@@ -63,6 +63,9 @@ else
                                             <th style="font-size:11px" width="10">
                                                 Costo fase
                                             </th>
+                                            <th style="font-size:11px" width="5">
+                                                Costo totale
+                                            </th>
 
                                             <th style="font-size:11px" width="5">
                                                 Prezzo
@@ -99,6 +102,7 @@ else
                                                 </table>
 
                                             </td>
+                                            <td style="font-size:11px" class="text-red">@(totale * dettaglio.QuantitaAddebitata)</td>
                                             <td style="font-size:11px">@dettaglio.Prezzo</td>
                                             <td style="font-size:11px">@(dettaglio.Prezzo * dettaglio.QuantitaAddebitata)</td>
                                         </tr>
