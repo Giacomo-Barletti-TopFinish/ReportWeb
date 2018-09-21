@@ -1,0 +1,145 @@
+﻿@using ReportWeb.Models.MailDispatcher
+@{
+    ViewBag.Title = "Mail Dispatcher Admin";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>Amministrazione Mail Dispatcher</h2>
+
+</div>
+
+<label id="lblMessaggi" class="text-red"></label>
+<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:750px">
+    <div class="box" id="sectionDatiGenerali">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Mail in attesa di invio o in errore</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseDatiGenerali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body form-group-sm">
+            <div id="divMail">
+            </div>
+            <label class="text-red input-sm" id="lblMessage"></label>
+        </div>
+    </div>
+    <div class="box box-primary" id="sectionTaglio">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Gruppi mail dispatcher</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseTaglio" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="divGruppi">
+                <div class="row">
+                    <div class="col-sm-3" id="divTabellaGruppi">
+                        @Html.Partial("TabellaGruppi",ViewData)
+                    </div>
+                    <div class="col-sm-3">
+                        destinatari gruppi
+                        <table class="table-condensed" id="tbdDestinatari">
+                            <tr></tr>
+                        </table>
+                        <label id="lblNomeGruppo"></label>
+                    </div>
+                    <div class="col-sm-3">
+                        applicazioni operazioni
+                        <table class="table table-condensed" id="tbdApplicazioni">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.TextBox("txtNuovoGruppo", string.Empty, new { @maxlength = "30", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;" })
+                                    </td>
+                                    <td>
+                                        <a onclick="AggiungiGruppo();" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a>
+                                    </td>
+                                </tr>
+                                @foreach (MD_APPLICAZIONEModel gruppoApp in ViewData["MDGRUPPIAPP"] as List<MD_APPLICAZIONEModel>)
+                                {
+                                    <tr>
+                                        <td>
+                                            @gruppoApp.Applicazione
+                                        </td>
+                                        <td>
+                                            @gruppoApp.Operazione
+                                        </td>
+                                        <td>
+                                            <a onclick="RimuoviApplicazioneOperazione(@gruppoApp.Applicazione,@gruppoApp.Operazione);" title="Elimina"><i class="fa fa-fw fa-remove"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-3">
+                        gruppi applicazioni operazioni
+                        <table class="table-condensed" id="tbdGruppiApp">
+                            <tr></tr>
+                        </table>
+                        <label id="lblNomeGruppo"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        //CaricaGruppiDaFatturare();
+        //CaricaGruppiFatturati();
+    });
+
+    function CreaNuovoGruppo()
+    {
+        $('#lblMessaggi').text('');
+        var gruppo = $('#txtNuovoGruppo').val();
+        if (gruppo == null || gruppo == '')
+        {
+            $('#lblMessaggi').text("Indicare il nome del gruppo");
+            return;
+        }
+        var url = '@Url.Action("CreaNuovoGruppo", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { Gruppo: gruppo },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divTabellaGruppi').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function RimuoviGruppo(IDGRUPPO)
+    {
+        var url = '@Url.Action("RimuoviGruppo", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { IDGRUPPO: IDGRUPPO },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divTabellaGruppi').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+</script>

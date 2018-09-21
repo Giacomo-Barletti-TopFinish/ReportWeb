@@ -1,0 +1,23 @@
+﻿@using ReportWeb.Models.MailDispatcher
+@{ Layout =null;}
+    <table class="table table-condensed" id="tbdGruppi">
+        <tr>
+            <td>
+                @Html.TextBox("txtNuovoGruppo", string.Empty, new { @maxlength = "30", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;" })
+            </td>
+            <td>
+                <a onclick="CreaNuovoGruppo();" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a>
+            </td>
+        </tr>
+        @foreach (MD_GRUPPOModel gruppo in ViewData["MDGRUPPO"] as List<MD_GRUPPOModel>)
+        {
+            <tr>
+                <td>
+                    @gruppo.Nome
+                </td>
+                <td>
+                    <a onclick="RimuoviGruppo(@gruppo.IDGRUPPO);" title="Elimina"><i class="fa fa-fw fa-remove"></i></a>
+                </td>
+            </tr>
+        }
+    </table>

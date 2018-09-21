@@ -147,6 +147,7 @@
     <Compile Include="Controllers\GalvanicaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImpostazioniController.cs" />
+    <Compile Include="Controllers\MailDispatcherController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PVDController.cs" />
     <Compile Include="Controllers\TVController.cs" />
@@ -425,6 +426,8 @@
     <Content Include="Views\ALE\GruppiFatturatiPartial.cshtml" />
     <Content Include="Views\ALE\CaricaSchedeNonAddebitatePartial.cshtml" />
     <Content Include="Views\ALE\ValorizzazioneDettaglioCostiPartial.cshtml" />
+    <Content Include="Views\MailDispatcher\Index.cshtml" />
+    <Content Include="Views\MailDispatcher\TabellaGruppi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -471,7 +474,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>15187</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
