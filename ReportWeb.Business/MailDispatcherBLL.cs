@@ -40,7 +40,7 @@ namespace ReportWeb.Business
             gr.IDGRUPPO = gruppo.IDGRUPPO;
             gr.Nome = gruppo.NOME.ToUpper();
             gr.Destinatari = new List<MD_GRUPPO_DESTINATARIOModel>();
-            foreach (MailDispatcherDS.MD_GRUPPI_DESTINATARIRow destinatario in ds.MD_GRUPPI_DESTINATARI.Where(x => x.IDGRUPPO == gruppo.IDGRUPPO))
+            foreach (MailDispatcherDS.MD_GRUPPI_DESTINATARIRow destinatario in ds.MD_GRUPPI_DESTINATARI.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDGRUPPO == gruppo.IDGRUPPO))
             {
                 MD_GRUPPO_DESTINATARIOModel des = new MD_GRUPPO_DESTINATARIOModel();
                 des.Destinatario = destinatario.DESTINATARIO;
@@ -137,7 +137,7 @@ namespace ReportWeb.Business
                 foreach (MailDispatcherDS.MD_GRUPPIRow gr in ds.MD_GRUPPI.Where(x => x.IDGRUPPO == IDGRUPPO))
                     gr.Delete();
 
-                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_APP.TableName,ds);
+                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_APP.TableName, ds);
                 bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_DESTINATARI.TableName, ds);
                 bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI.TableName, ds);
 
@@ -155,5 +155,59 @@ namespace ReportWeb.Business
 
             return gruppi;
         }
+
+        public List<MD_GRUPPO_DESTINATARIOModel> RimuoviDestinatario(decimal IDDESTINATARIO)
+        {
+            MailDispatcherDS ds = new MailDispatcherDS();
+            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
+            {
+
+                bMD.FillMD_GRUPPI(ds);
+                bMD.FillMD_GRUPPI_DESTINATARI(ds);
+                bMD.FillMD_GRUPPI_APP(ds);
+
+                MailDispatcherDS.MD_GRUPPI_DESTINATARIRow grd = ds.MD_GRUPPI_DESTINATARI.Where(x => x.IDDESTINATARIO == IDDESTINATARIO).FirstOrDefault();
+                decimal IDGRUPPO = grd.IDGRUPPO;
+                grd.Delete();
+
+                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_DESTINATARI.TableName, ds);
+                ds.MD_GRUPPI_DESTINATARI.AcceptChanges();
+
+                MailDispatcherDS.MD_GRUPPIRow gruppo = ds.MD_GRUPPI.Where(x => x.IDGRUPPO == IDGRUPPO).FirstOrDefault();
+                MD_GRUPPOModel gr = CreaGruppoModel(ds, IDGRUPPO);
+
+                return gr.Destinatari;
+            }
+
+        }
+
+        public List<MD_GRUPPO_DESTINATARIOModel> AggiungiDestinatario(decimal IDGRUPPO, string Destinatario)
+        {
+            MailDispatcherDS ds = new MailDispatcherDS();
+            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
+            {
+                MailDispatcherDS.MD_GRUPPI_DESTINATARIRow destinatario = ds.MD_GRUPPI_DESTINATARI.NewMD_GRUPPI_DESTINATARIRow();
+                destinatario.IDGRUPPO = IDGRUPPO;
+                destinatario.DESTINATARIO = Destinatario;
+                ds.MD_GRUPPI_DESTINATARI.AddMD_GRUPPI_DESTINATARIRow(destinatario);
+
+                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_DESTINATARI.TableName, ds);
+
+                ds.Clear();
+                bMD.FillMD_GRUPPI(ds);
+                bMD.FillMD_GRUPPI_DESTINATARI(ds);
+                bMD.FillMD_GRUPPI_APP(ds);
+
+                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_DESTINATARI.TableName, ds);
+                ds.MD_GRUPPI_DESTINATARI.AcceptChanges();
+
+                MailDispatcherDS.MD_GRUPPIRow gruppo = ds.MD_GRUPPI.Where(x => x.IDGRUPPO == IDGRUPPO).FirstOrDefault();
+                MD_GRUPPOModel gr = CreaGruppoModel(ds, IDGRUPPO);
+
+                return gr.Destinatari;
+            }
+
+        }
     }
 }
+

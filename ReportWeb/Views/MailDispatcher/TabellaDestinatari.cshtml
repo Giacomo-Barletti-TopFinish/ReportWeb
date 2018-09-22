@@ -1,0 +1,23 @@
+﻿@using ReportWeb.Models.MailDispatcher
+@{ Layout =null;}
+    <table class="table table-condensed" id="tbdDestinatari">
+        <tr>
+            <td>
+                @Html.TextBox("txtNuovoDestinatario", string.Empty, new { @maxlength = "30", @class = "form-control input-sm", @style = "height: 21px;" })
+            </td>
+            <td>
+                <a onclick="AggiungiDestinatario();" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a>
+            </td>
+        </tr>
+        @foreach (MD_GRUPPO_DESTINATARIOModel destinatario in ViewData["MDDESTINATARI"] as List<MD_GRUPPO_DESTINATARIOModel>)
+        {
+            <tr>
+                <td>
+                    @destinatario.Destinatario
+                </td>
+                <td>
+                    <a onclick="RimuoviDestinatario(@destinatario.IDDESTINATARIO);" title="Elimina"><i class="fa fa-fw fa-remove"></i></a>
+                </td>
+            </tr>
+        }
+    </table>

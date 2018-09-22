@@ -25,7 +25,7 @@ namespace ReportWeb.Controllers
 
         public ActionResult CreaNuovoGruppo(string Gruppo)
         {
-            MailDispatcherBLL bll = new MailDispatcherBLL();            
+            MailDispatcherBLL bll = new MailDispatcherBLL();
             List<MD_GRUPPOModel> gruppi = bll.CreaNuovoGruppo(Gruppo);
 
             ViewData.Add("MDGRUPPO", gruppi);
@@ -39,6 +39,39 @@ namespace ReportWeb.Controllers
 
             ViewData.Add("MDGRUPPO", gruppi);
             return View("TabellaGruppi");
+        }
+
+        public ActionResult LeggiDestinatari(decimal IDGRUPPO)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            List<MD_GRUPPOModel> gruppi = bll.LeggiGruppi();
+            MD_GRUPPOModel gruppo = gruppi.Where(x => x.IDGRUPPO == IDGRUPPO).FirstOrDefault();
+
+            if (gruppo == null) return null;
+
+            List<MD_GRUPPO_DESTINATARIOModel> destinatari = gruppo.Destinatari;
+
+            ViewData.Add("MDDESTINATARI", destinatari);
+            return View("TabellaDestinatari");
+
+        }
+
+        public ActionResult RimuoviDestinatario(decimal IDDESTINATARIO)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            List<MD_GRUPPO_DESTINATARIOModel> destinatari = bll.RimuoviDestinatario(IDDESTINATARIO);
+
+            ViewData.Add("MDDESTINATARI", destinatari);
+            return View("TabellaDestinatari");
+        }
+
+        public ActionResult AggiungiDestinatario(decimal IDGRUPPO, string Destinatario)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            List<MD_GRUPPO_DESTINATARIOModel> destinatari = bll.AggiungiDestinatario(IDGRUPPO, Destinatario);
+
+            ViewData.Add("MDDESTINATARI", destinatari);
+            return View("TabellaDestinatari");
         }
     }
 }

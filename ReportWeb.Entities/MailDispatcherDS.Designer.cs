@@ -28,10 +28,6 @@ namespace ReportWeb.Entities {
         
         private MD_LOGDataTable tableMD_LOG;
         
-        private MD_EMAILDataTable tableMD_EMAIL;
-        
-        private MD_EMAIL_DESTINATARIDataTable tableMD_EMAIL_DESTINATARI;
-        
         private MD_EMAIL_STATODataTable tableMD_EMAIL_STATO;
         
         private MD_GRUPPIDataTable tableMD_GRUPPI;
@@ -39,6 +35,10 @@ namespace ReportWeb.Entities {
         private MD_GRUPPI_APPDataTable tableMD_GRUPPI_APP;
         
         private MD_GRUPPI_DESTINATARIDataTable tableMD_GRUPPI_DESTINATARI;
+        
+        private MD_EMAILDataTable tableMD_EMAIL;
+        
+        private MD_EMAIL_DESTINATARIDataTable tableMD_EMAIL_DESTINATARI;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -74,12 +74,6 @@ namespace ReportWeb.Entities {
                 if ((ds.Tables["MD_LOG"] != null)) {
                     base.Tables.Add(new MD_LOGDataTable(ds.Tables["MD_LOG"]));
                 }
-                if ((ds.Tables["MD_EMAIL"] != null)) {
-                    base.Tables.Add(new MD_EMAILDataTable(ds.Tables["MD_EMAIL"]));
-                }
-                if ((ds.Tables["MD_EMAIL_DESTINATARI"] != null)) {
-                    base.Tables.Add(new MD_EMAIL_DESTINATARIDataTable(ds.Tables["MD_EMAIL_DESTINATARI"]));
-                }
                 if ((ds.Tables["MD_EMAIL_STATO"] != null)) {
                     base.Tables.Add(new MD_EMAIL_STATODataTable(ds.Tables["MD_EMAIL_STATO"]));
                 }
@@ -91,6 +85,12 @@ namespace ReportWeb.Entities {
                 }
                 if ((ds.Tables["MD_GRUPPI_DESTINATARI"] != null)) {
                     base.Tables.Add(new MD_GRUPPI_DESTINATARIDataTable(ds.Tables["MD_GRUPPI_DESTINATARI"]));
+                }
+                if ((ds.Tables["MD_EMAIL"] != null)) {
+                    base.Tables.Add(new MD_EMAILDataTable(ds.Tables["MD_EMAIL"]));
+                }
+                if ((ds.Tables["MD_EMAIL_DESTINATARI"] != null)) {
+                    base.Tables.Add(new MD_EMAIL_DESTINATARIDataTable(ds.Tables["MD_EMAIL_DESTINATARI"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -134,26 +134,6 @@ namespace ReportWeb.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public MD_EMAILDataTable MD_EMAIL {
-            get {
-                return this.tableMD_EMAIL;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public MD_EMAIL_DESTINATARIDataTable MD_EMAIL_DESTINATARI {
-            get {
-                return this.tableMD_EMAIL_DESTINATARI;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public MD_EMAIL_STATODataTable MD_EMAIL_STATO {
             get {
                 return this.tableMD_EMAIL_STATO;
@@ -187,6 +167,26 @@ namespace ReportWeb.Entities {
         public MD_GRUPPI_DESTINATARIDataTable MD_GRUPPI_DESTINATARI {
             get {
                 return this.tableMD_GRUPPI_DESTINATARI;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public MD_EMAILDataTable MD_EMAIL {
+            get {
+                return this.tableMD_EMAIL;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public MD_EMAIL_DESTINATARIDataTable MD_EMAIL_DESTINATARI {
+            get {
+                return this.tableMD_EMAIL_DESTINATARI;
             }
         }
         
@@ -263,12 +263,6 @@ namespace ReportWeb.Entities {
                 if ((ds.Tables["MD_LOG"] != null)) {
                     base.Tables.Add(new MD_LOGDataTable(ds.Tables["MD_LOG"]));
                 }
-                if ((ds.Tables["MD_EMAIL"] != null)) {
-                    base.Tables.Add(new MD_EMAILDataTable(ds.Tables["MD_EMAIL"]));
-                }
-                if ((ds.Tables["MD_EMAIL_DESTINATARI"] != null)) {
-                    base.Tables.Add(new MD_EMAIL_DESTINATARIDataTable(ds.Tables["MD_EMAIL_DESTINATARI"]));
-                }
                 if ((ds.Tables["MD_EMAIL_STATO"] != null)) {
                     base.Tables.Add(new MD_EMAIL_STATODataTable(ds.Tables["MD_EMAIL_STATO"]));
                 }
@@ -280,6 +274,12 @@ namespace ReportWeb.Entities {
                 }
                 if ((ds.Tables["MD_GRUPPI_DESTINATARI"] != null)) {
                     base.Tables.Add(new MD_GRUPPI_DESTINATARIDataTable(ds.Tables["MD_GRUPPI_DESTINATARI"]));
+                }
+                if ((ds.Tables["MD_EMAIL"] != null)) {
+                    base.Tables.Add(new MD_EMAILDataTable(ds.Tables["MD_EMAIL"]));
+                }
+                if ((ds.Tables["MD_EMAIL_DESTINATARI"] != null)) {
+                    base.Tables.Add(new MD_EMAIL_DESTINATARIDataTable(ds.Tables["MD_EMAIL_DESTINATARI"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -326,18 +326,6 @@ namespace ReportWeb.Entities {
                     this.tableMD_LOG.InitVars();
                 }
             }
-            this.tableMD_EMAIL = ((MD_EMAILDataTable)(base.Tables["MD_EMAIL"]));
-            if ((initTable == true)) {
-                if ((this.tableMD_EMAIL != null)) {
-                    this.tableMD_EMAIL.InitVars();
-                }
-            }
-            this.tableMD_EMAIL_DESTINATARI = ((MD_EMAIL_DESTINATARIDataTable)(base.Tables["MD_EMAIL_DESTINATARI"]));
-            if ((initTable == true)) {
-                if ((this.tableMD_EMAIL_DESTINATARI != null)) {
-                    this.tableMD_EMAIL_DESTINATARI.InitVars();
-                }
-            }
             this.tableMD_EMAIL_STATO = ((MD_EMAIL_STATODataTable)(base.Tables["MD_EMAIL_STATO"]));
             if ((initTable == true)) {
                 if ((this.tableMD_EMAIL_STATO != null)) {
@@ -362,6 +350,18 @@ namespace ReportWeb.Entities {
                     this.tableMD_GRUPPI_DESTINATARI.InitVars();
                 }
             }
+            this.tableMD_EMAIL = ((MD_EMAILDataTable)(base.Tables["MD_EMAIL"]));
+            if ((initTable == true)) {
+                if ((this.tableMD_EMAIL != null)) {
+                    this.tableMD_EMAIL.InitVars();
+                }
+            }
+            this.tableMD_EMAIL_DESTINATARI = ((MD_EMAIL_DESTINATARIDataTable)(base.Tables["MD_EMAIL_DESTINATARI"]));
+            if ((initTable == true)) {
+                if ((this.tableMD_EMAIL_DESTINATARI != null)) {
+                    this.tableMD_EMAIL_DESTINATARI.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -376,10 +376,6 @@ namespace ReportWeb.Entities {
             base.Tables.Add(this.tableMD_ALLEGATI);
             this.tableMD_LOG = new MD_LOGDataTable();
             base.Tables.Add(this.tableMD_LOG);
-            this.tableMD_EMAIL = new MD_EMAILDataTable();
-            base.Tables.Add(this.tableMD_EMAIL);
-            this.tableMD_EMAIL_DESTINATARI = new MD_EMAIL_DESTINATARIDataTable();
-            base.Tables.Add(this.tableMD_EMAIL_DESTINATARI);
             this.tableMD_EMAIL_STATO = new MD_EMAIL_STATODataTable();
             base.Tables.Add(this.tableMD_EMAIL_STATO);
             this.tableMD_GRUPPI = new MD_GRUPPIDataTable();
@@ -388,6 +384,10 @@ namespace ReportWeb.Entities {
             base.Tables.Add(this.tableMD_GRUPPI_APP);
             this.tableMD_GRUPPI_DESTINATARI = new MD_GRUPPI_DESTINATARIDataTable();
             base.Tables.Add(this.tableMD_GRUPPI_DESTINATARI);
+            this.tableMD_EMAIL = new MD_EMAILDataTable();
+            base.Tables.Add(this.tableMD_EMAIL);
+            this.tableMD_EMAIL_DESTINATARI = new MD_EMAIL_DESTINATARIDataTable();
+            base.Tables.Add(this.tableMD_EMAIL_DESTINATARI);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -399,18 +399,6 @@ namespace ReportWeb.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeMD_LOG() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeMD_EMAIL() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeMD_EMAIL_DESTINATARI() {
             return false;
         }
         
@@ -435,6 +423,18 @@ namespace ReportWeb.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeMD_GRUPPI_DESTINATARI() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeMD_EMAIL() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeMD_EMAIL_DESTINATARI() {
             return false;
         }
         
@@ -500,12 +500,6 @@ namespace ReportWeb.Entities {
         public delegate void MD_LOGRowChangeEventHandler(object sender, MD_LOGRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void MD_EMAILRowChangeEventHandler(object sender, MD_EMAILRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void MD_EMAIL_DESTINATARIRowChangeEventHandler(object sender, MD_EMAIL_DESTINATARIRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void MD_EMAIL_STATORowChangeEventHandler(object sender, MD_EMAIL_STATORowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -516,6 +510,12 @@ namespace ReportWeb.Entities {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void MD_GRUPPI_DESTINATARIRowChangeEventHandler(object sender, MD_GRUPPI_DESTINATARIRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void MD_EMAILRowChangeEventHandler(object sender, MD_EMAILRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void MD_EMAIL_DESTINATARIRowChangeEventHandler(object sender, MD_EMAIL_DESTINATARIRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -648,13 +648,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_ALLEGATIRow FindByIDEMAIL_ALL(decimal IDEMAIL_ALL) {
-                return ((MD_ALLEGATIRow)(this.Rows.Find(new object[] {
-                            IDEMAIL_ALL})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 MD_ALLEGATIDataTable cln = ((MD_ALLEGATIDataTable)(base.Clone()));
                 cln.InitVars();
@@ -687,10 +680,7 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnFILECONTENT);
                 this.columnFILENAME = new global::System.Data.DataColumn("FILENAME", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFILENAME);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDEMAIL_ALL}, true));
                 this.columnIDEMAIL_ALL.AllowDBNull = false;
-                this.columnIDEMAIL_ALL.Unique = true;
                 this.columnIDMAIL.AllowDBNull = false;
                 this.columnFILECONTENT.AllowDBNull = false;
                 this.columnFILENAME.AllowDBNull = false;
@@ -963,13 +953,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_LOGRow FindByIDMAIL_LOG(decimal IDMAIL_LOG) {
-                return ((MD_LOGRow)(this.Rows.Find(new object[] {
-                            IDMAIL_LOG})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 MD_LOGDataTable cln = ((MD_LOGDataTable)(base.Clone()));
                 cln.InitVars();
@@ -1005,10 +988,7 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnTIPOOPERAZIONE);
                 this.columnNOTA = new global::System.Data.DataColumn("NOTA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNOTA);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDMAIL_LOG}, true));
                 this.columnIDMAIL_LOG.AllowDBNull = false;
-                this.columnIDMAIL_LOG.Unique = true;
                 this.columnIDMAIL.AllowDBNull = false;
                 this.columnDATAOPERAZIONE.AllowDBNull = false;
                 this.columnTIPOOPERAZIONE.AllowDBNull = false;
@@ -1100,689 +1080,6 @@ namespace ReportWeb.Entities {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "MD_LOGDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class MD_EMAILDataTable : global::System.Data.TypedTableBase<MD_EMAILRow> {
-            
-            private global::System.Data.DataColumn columnIDMAIL;
-            
-            private global::System.Data.DataColumn columnTENTATIVO;
-            
-            private global::System.Data.DataColumn columnRICHIEDENTE;
-            
-            private global::System.Data.DataColumn columnDATACREAZIONE;
-            
-            private global::System.Data.DataColumn columnDATAINVIO;
-            
-            private global::System.Data.DataColumn columnSTATO;
-            
-            private global::System.Data.DataColumn columnOGGETTO;
-            
-            private global::System.Data.DataColumn columnCORPO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAILDataTable() {
-                this.TableName = "MD_EMAIL";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal MD_EMAILDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected MD_EMAILDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IDMAILColumn {
-                get {
-                    return this.columnIDMAIL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TENTATIVOColumn {
-                get {
-                    return this.columnTENTATIVO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RICHIEDENTEColumn {
-                get {
-                    return this.columnRICHIEDENTE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DATACREAZIONEColumn {
-                get {
-                    return this.columnDATACREAZIONE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DATAINVIOColumn {
-                get {
-                    return this.columnDATAINVIO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn STATOColumn {
-                get {
-                    return this.columnSTATO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn OGGETTOColumn {
-                get {
-                    return this.columnOGGETTO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CORPOColumn {
-                get {
-                    return this.columnCORPO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAILRow this[int index] {
-                get {
-                    return ((MD_EMAILRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MD_EMAILRowChangeEventHandler MD_EMAILRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MD_EMAILRowChangeEventHandler MD_EMAILRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MD_EMAILRowChangeEventHandler MD_EMAILRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MD_EMAILRowChangeEventHandler MD_EMAILRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddMD_EMAILRow(MD_EMAILRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAILRow AddMD_EMAILRow(decimal IDMAIL, decimal TENTATIVO, string RICHIEDENTE, System.DateTime DATACREAZIONE, System.DateTime DATAINVIO, string STATO, string OGGETTO, string CORPO) {
-                MD_EMAILRow rowMD_EMAILRow = ((MD_EMAILRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        IDMAIL,
-                        TENTATIVO,
-                        RICHIEDENTE,
-                        DATACREAZIONE,
-                        DATAINVIO,
-                        STATO,
-                        OGGETTO,
-                        CORPO};
-                rowMD_EMAILRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMD_EMAILRow);
-                return rowMD_EMAILRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAILRow FindByIDMAIL(decimal IDMAIL) {
-                return ((MD_EMAILRow)(this.Rows.Find(new object[] {
-                            IDMAIL})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                MD_EMAILDataTable cln = ((MD_EMAILDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new MD_EMAILDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnIDMAIL = base.Columns["IDMAIL"];
-                this.columnTENTATIVO = base.Columns["TENTATIVO"];
-                this.columnRICHIEDENTE = base.Columns["RICHIEDENTE"];
-                this.columnDATACREAZIONE = base.Columns["DATACREAZIONE"];
-                this.columnDATAINVIO = base.Columns["DATAINVIO"];
-                this.columnSTATO = base.Columns["STATO"];
-                this.columnOGGETTO = base.Columns["OGGETTO"];
-                this.columnCORPO = base.Columns["CORPO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnIDMAIL = new global::System.Data.DataColumn("IDMAIL", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDMAIL);
-                this.columnTENTATIVO = new global::System.Data.DataColumn("TENTATIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTENTATIVO);
-                this.columnRICHIEDENTE = new global::System.Data.DataColumn("RICHIEDENTE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRICHIEDENTE);
-                this.columnDATACREAZIONE = new global::System.Data.DataColumn("DATACREAZIONE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDATACREAZIONE);
-                this.columnDATAINVIO = new global::System.Data.DataColumn("DATAINVIO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDATAINVIO);
-                this.columnSTATO = new global::System.Data.DataColumn("STATO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSTATO);
-                this.columnOGGETTO = new global::System.Data.DataColumn("OGGETTO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnOGGETTO);
-                this.columnCORPO = new global::System.Data.DataColumn("CORPO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCORPO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDMAIL}, true));
-                this.columnIDMAIL.AllowDBNull = false;
-                this.columnIDMAIL.Unique = true;
-                this.columnRICHIEDENTE.AllowDBNull = false;
-                this.columnRICHIEDENTE.MaxLength = 30;
-                this.columnDATACREAZIONE.AllowDBNull = false;
-                this.columnSTATO.AllowDBNull = false;
-                this.columnSTATO.MaxLength = 3;
-                this.columnOGGETTO.AllowDBNull = false;
-                this.columnOGGETTO.MaxLength = 50;
-                this.columnCORPO.AllowDBNull = false;
-                this.columnCORPO.MaxLength = 4000;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAILRow NewMD_EMAILRow() {
-                return ((MD_EMAILRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new MD_EMAILRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(MD_EMAILRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.MD_EMAILRowChanged != null)) {
-                    this.MD_EMAILRowChanged(this, new MD_EMAILRowChangeEvent(((MD_EMAILRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.MD_EMAILRowChanging != null)) {
-                    this.MD_EMAILRowChanging(this, new MD_EMAILRowChangeEvent(((MD_EMAILRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.MD_EMAILRowDeleted != null)) {
-                    this.MD_EMAILRowDeleted(this, new MD_EMAILRowChangeEvent(((MD_EMAILRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.MD_EMAILRowDeleting != null)) {
-                    this.MD_EMAILRowDeleting(this, new MD_EMAILRowChangeEvent(((MD_EMAILRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveMD_EMAILRow(MD_EMAILRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                MailDispatcherDS ds = new MailDispatcherDS();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "MD_EMAILDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class MD_EMAIL_DESTINATARIDataTable : global::System.Data.TypedTableBase<MD_EMAIL_DESTINATARIRow> {
-            
-            private global::System.Data.DataColumn columnIDEMAIL_DEST;
-            
-            private global::System.Data.DataColumn columnIDMAIL;
-            
-            private global::System.Data.DataColumn columnIDGRUPPO;
-            
-            private global::System.Data.DataColumn columnDESTINATARIO;
-            
-            private global::System.Data.DataColumn columnA_CC;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAIL_DESTINATARIDataTable() {
-                this.TableName = "MD_EMAIL_DESTINATARI";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal MD_EMAIL_DESTINATARIDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected MD_EMAIL_DESTINATARIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IDEMAIL_DESTColumn {
-                get {
-                    return this.columnIDEMAIL_DEST;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IDMAILColumn {
-                get {
-                    return this.columnIDMAIL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IDGRUPPOColumn {
-                get {
-                    return this.columnIDGRUPPO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DESTINATARIOColumn {
-                get {
-                    return this.columnDESTINATARIO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn A_CCColumn {
-                get {
-                    return this.columnA_CC;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAIL_DESTINATARIRow this[int index] {
-                get {
-                    return ((MD_EMAIL_DESTINATARIRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MD_EMAIL_DESTINATARIRowChangeEventHandler MD_EMAIL_DESTINATARIRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MD_EMAIL_DESTINATARIRowChangeEventHandler MD_EMAIL_DESTINATARIRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MD_EMAIL_DESTINATARIRowChangeEventHandler MD_EMAIL_DESTINATARIRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event MD_EMAIL_DESTINATARIRowChangeEventHandler MD_EMAIL_DESTINATARIRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddMD_EMAIL_DESTINATARIRow(MD_EMAIL_DESTINATARIRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAIL_DESTINATARIRow AddMD_EMAIL_DESTINATARIRow(decimal IDEMAIL_DEST, decimal IDMAIL, decimal IDGRUPPO, string DESTINATARIO, string A_CC) {
-                MD_EMAIL_DESTINATARIRow rowMD_EMAIL_DESTINATARIRow = ((MD_EMAIL_DESTINATARIRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        IDEMAIL_DEST,
-                        IDMAIL,
-                        IDGRUPPO,
-                        DESTINATARIO,
-                        A_CC};
-                rowMD_EMAIL_DESTINATARIRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMD_EMAIL_DESTINATARIRow);
-                return rowMD_EMAIL_DESTINATARIRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAIL_DESTINATARIRow FindByIDEMAIL_DEST(decimal IDEMAIL_DEST) {
-                return ((MD_EMAIL_DESTINATARIRow)(this.Rows.Find(new object[] {
-                            IDEMAIL_DEST})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                MD_EMAIL_DESTINATARIDataTable cln = ((MD_EMAIL_DESTINATARIDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new MD_EMAIL_DESTINATARIDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnIDEMAIL_DEST = base.Columns["IDEMAIL_DEST"];
-                this.columnIDMAIL = base.Columns["IDMAIL"];
-                this.columnIDGRUPPO = base.Columns["IDGRUPPO"];
-                this.columnDESTINATARIO = base.Columns["DESTINATARIO"];
-                this.columnA_CC = base.Columns["A_CC"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnIDEMAIL_DEST = new global::System.Data.DataColumn("IDEMAIL_DEST", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDEMAIL_DEST);
-                this.columnIDMAIL = new global::System.Data.DataColumn("IDMAIL", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDMAIL);
-                this.columnIDGRUPPO = new global::System.Data.DataColumn("IDGRUPPO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDGRUPPO);
-                this.columnDESTINATARIO = new global::System.Data.DataColumn("DESTINATARIO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDESTINATARIO);
-                this.columnA_CC = new global::System.Data.DataColumn("A_CC", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnA_CC);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDEMAIL_DEST}, true));
-                this.columnIDEMAIL_DEST.AllowDBNull = false;
-                this.columnIDEMAIL_DEST.Unique = true;
-                this.columnIDMAIL.AllowDBNull = false;
-                this.columnDESTINATARIO.MaxLength = 100;
-                this.columnA_CC.AllowDBNull = false;
-                this.columnA_CC.MaxLength = 1;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAIL_DESTINATARIRow NewMD_EMAIL_DESTINATARIRow() {
-                return ((MD_EMAIL_DESTINATARIRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new MD_EMAIL_DESTINATARIRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(MD_EMAIL_DESTINATARIRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.MD_EMAIL_DESTINATARIRowChanged != null)) {
-                    this.MD_EMAIL_DESTINATARIRowChanged(this, new MD_EMAIL_DESTINATARIRowChangeEvent(((MD_EMAIL_DESTINATARIRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.MD_EMAIL_DESTINATARIRowChanging != null)) {
-                    this.MD_EMAIL_DESTINATARIRowChanging(this, new MD_EMAIL_DESTINATARIRowChangeEvent(((MD_EMAIL_DESTINATARIRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.MD_EMAIL_DESTINATARIRowDeleted != null)) {
-                    this.MD_EMAIL_DESTINATARIRowDeleted(this, new MD_EMAIL_DESTINATARIRowChangeEvent(((MD_EMAIL_DESTINATARIRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.MD_EMAIL_DESTINATARIRowDeleting != null)) {
-                    this.MD_EMAIL_DESTINATARIRowDeleting(this, new MD_EMAIL_DESTINATARIRowChangeEvent(((MD_EMAIL_DESTINATARIRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveMD_EMAIL_DESTINATARIRow(MD_EMAIL_DESTINATARIRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                MailDispatcherDS ds = new MailDispatcherDS();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "MD_EMAIL_DESTINATARIDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -2505,13 +1802,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_GRUPPI_APPRow FindByIDAPPLICAZIONE(decimal IDAPPLICAZIONE) {
-                return ((MD_GRUPPI_APPRow)(this.Rows.Find(new object[] {
-                            IDAPPLICAZIONE})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 MD_GRUPPI_APPDataTable cln = ((MD_GRUPPI_APPDataTable)(base.Clone()));
                 cln.InitVars();
@@ -2547,10 +1837,7 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnIDGRUPPO);
                 this.columnA_CC = new global::System.Data.DataColumn("A_CC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnA_CC);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDAPPLICAZIONE}, true));
                 this.columnIDAPPLICAZIONE.AllowDBNull = false;
-                this.columnIDAPPLICAZIONE.Unique = true;
                 this.columnAPPLICAZIONE.AllowDBNull = false;
                 this.columnAPPLICAZIONE.MaxLength = 50;
                 this.columnOPERAZIONE.AllowDBNull = false;
@@ -2803,13 +2090,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_GRUPPI_DESTINATARIRow FindByIDDESTINATARIO(decimal IDDESTINATARIO) {
-                return ((MD_GRUPPI_DESTINATARIRow)(this.Rows.Find(new object[] {
-                            IDDESTINATARIO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 MD_GRUPPI_DESTINATARIDataTable cln = ((MD_GRUPPI_DESTINATARIDataTable)(base.Clone()));
                 cln.InitVars();
@@ -2839,10 +2119,6 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnIDGRUPPO);
                 this.columnDESTINATARIO = new global::System.Data.DataColumn("DESTINATARIO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDESTINATARIO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDDESTINATARIO}, true));
-                this.columnIDDESTINATARIO.AllowDBNull = false;
-                this.columnIDDESTINATARIO.Unique = true;
                 this.columnDESTINATARIO.AllowDBNull = false;
                 this.columnDESTINATARIO.MaxLength = 100;
             }
@@ -2931,6 +2207,685 @@ namespace ReportWeb.Entities {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "MD_GRUPPI_DESTINATARIDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class MD_EMAILDataTable : global::System.Data.TypedTableBase<MD_EMAILRow> {
+            
+            private global::System.Data.DataColumn columnIDMAIL;
+            
+            private global::System.Data.DataColumn columnTENTATIVO;
+            
+            private global::System.Data.DataColumn columnAPPLICAZIONE;
+            
+            private global::System.Data.DataColumn columnOPERAZIONE;
+            
+            private global::System.Data.DataColumn columnDATACREAZIONE;
+            
+            private global::System.Data.DataColumn columnDATAINVIO;
+            
+            private global::System.Data.DataColumn columnSTATO;
+            
+            private global::System.Data.DataColumn columnOGGETTO;
+            
+            private global::System.Data.DataColumn columnCORPO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAILDataTable() {
+                this.TableName = "MD_EMAIL";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal MD_EMAILDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected MD_EMAILDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDMAILColumn {
+                get {
+                    return this.columnIDMAIL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TENTATIVOColumn {
+                get {
+                    return this.columnTENTATIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn APPLICAZIONEColumn {
+                get {
+                    return this.columnAPPLICAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OPERAZIONEColumn {
+                get {
+                    return this.columnOPERAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATACREAZIONEColumn {
+                get {
+                    return this.columnDATACREAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DATAINVIOColumn {
+                get {
+                    return this.columnDATAINVIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn STATOColumn {
+                get {
+                    return this.columnSTATO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OGGETTOColumn {
+                get {
+                    return this.columnOGGETTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CORPOColumn {
+                get {
+                    return this.columnCORPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAILRow this[int index] {
+                get {
+                    return ((MD_EMAILRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MD_EMAILRowChangeEventHandler MD_EMAILRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MD_EMAILRowChangeEventHandler MD_EMAILRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MD_EMAILRowChangeEventHandler MD_EMAILRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MD_EMAILRowChangeEventHandler MD_EMAILRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddMD_EMAILRow(MD_EMAILRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAILRow AddMD_EMAILRow(decimal IDMAIL, decimal TENTATIVO, string APPLICAZIONE, string OPERAZIONE, System.DateTime DATACREAZIONE, System.DateTime DATAINVIO, string STATO, string OGGETTO, string CORPO) {
+                MD_EMAILRow rowMD_EMAILRow = ((MD_EMAILRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDMAIL,
+                        TENTATIVO,
+                        APPLICAZIONE,
+                        OPERAZIONE,
+                        DATACREAZIONE,
+                        DATAINVIO,
+                        STATO,
+                        OGGETTO,
+                        CORPO};
+                rowMD_EMAILRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMD_EMAILRow);
+                return rowMD_EMAILRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                MD_EMAILDataTable cln = ((MD_EMAILDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new MD_EMAILDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnIDMAIL = base.Columns["IDMAIL"];
+                this.columnTENTATIVO = base.Columns["TENTATIVO"];
+                this.columnAPPLICAZIONE = base.Columns["APPLICAZIONE"];
+                this.columnOPERAZIONE = base.Columns["OPERAZIONE"];
+                this.columnDATACREAZIONE = base.Columns["DATACREAZIONE"];
+                this.columnDATAINVIO = base.Columns["DATAINVIO"];
+                this.columnSTATO = base.Columns["STATO"];
+                this.columnOGGETTO = base.Columns["OGGETTO"];
+                this.columnCORPO = base.Columns["CORPO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnIDMAIL = new global::System.Data.DataColumn("IDMAIL", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDMAIL);
+                this.columnTENTATIVO = new global::System.Data.DataColumn("TENTATIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTENTATIVO);
+                this.columnAPPLICAZIONE = new global::System.Data.DataColumn("APPLICAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAPPLICAZIONE);
+                this.columnOPERAZIONE = new global::System.Data.DataColumn("OPERAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOPERAZIONE);
+                this.columnDATACREAZIONE = new global::System.Data.DataColumn("DATACREAZIONE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATACREAZIONE);
+                this.columnDATAINVIO = new global::System.Data.DataColumn("DATAINVIO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATAINVIO);
+                this.columnSTATO = new global::System.Data.DataColumn("STATO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSTATO);
+                this.columnOGGETTO = new global::System.Data.DataColumn("OGGETTO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOGGETTO);
+                this.columnCORPO = new global::System.Data.DataColumn("CORPO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCORPO);
+                this.columnIDMAIL.AllowDBNull = false;
+                this.columnAPPLICAZIONE.AllowDBNull = false;
+                this.columnAPPLICAZIONE.MaxLength = 50;
+                this.columnOPERAZIONE.AllowDBNull = false;
+                this.columnOPERAZIONE.MaxLength = 50;
+                this.columnDATACREAZIONE.AllowDBNull = false;
+                this.columnSTATO.AllowDBNull = false;
+                this.columnSTATO.MaxLength = 3;
+                this.columnOGGETTO.AllowDBNull = false;
+                this.columnOGGETTO.MaxLength = 50;
+                this.columnCORPO.AllowDBNull = false;
+                this.columnCORPO.MaxLength = 4000;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAILRow NewMD_EMAILRow() {
+                return ((MD_EMAILRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new MD_EMAILRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(MD_EMAILRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.MD_EMAILRowChanged != null)) {
+                    this.MD_EMAILRowChanged(this, new MD_EMAILRowChangeEvent(((MD_EMAILRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.MD_EMAILRowChanging != null)) {
+                    this.MD_EMAILRowChanging(this, new MD_EMAILRowChangeEvent(((MD_EMAILRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.MD_EMAILRowDeleted != null)) {
+                    this.MD_EMAILRowDeleted(this, new MD_EMAILRowChangeEvent(((MD_EMAILRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.MD_EMAILRowDeleting != null)) {
+                    this.MD_EMAILRowDeleting(this, new MD_EMAILRowChangeEvent(((MD_EMAILRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveMD_EMAILRow(MD_EMAILRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                MailDispatcherDS ds = new MailDispatcherDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "MD_EMAILDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class MD_EMAIL_DESTINATARIDataTable : global::System.Data.TypedTableBase<MD_EMAIL_DESTINATARIRow> {
+            
+            private global::System.Data.DataColumn columnIDEMAIL_DEST;
+            
+            private global::System.Data.DataColumn columnIDMAIL;
+            
+            private global::System.Data.DataColumn columnIDGRUPPO;
+            
+            private global::System.Data.DataColumn columnDESTINATARIO;
+            
+            private global::System.Data.DataColumn columnA_CC;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAIL_DESTINATARIDataTable() {
+                this.TableName = "MD_EMAIL_DESTINATARI";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal MD_EMAIL_DESTINATARIDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected MD_EMAIL_DESTINATARIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDEMAIL_DESTColumn {
+                get {
+                    return this.columnIDEMAIL_DEST;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDMAILColumn {
+                get {
+                    return this.columnIDMAIL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDGRUPPOColumn {
+                get {
+                    return this.columnIDGRUPPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DESTINATARIOColumn {
+                get {
+                    return this.columnDESTINATARIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn A_CCColumn {
+                get {
+                    return this.columnA_CC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAIL_DESTINATARIRow this[int index] {
+                get {
+                    return ((MD_EMAIL_DESTINATARIRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MD_EMAIL_DESTINATARIRowChangeEventHandler MD_EMAIL_DESTINATARIRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MD_EMAIL_DESTINATARIRowChangeEventHandler MD_EMAIL_DESTINATARIRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MD_EMAIL_DESTINATARIRowChangeEventHandler MD_EMAIL_DESTINATARIRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MD_EMAIL_DESTINATARIRowChangeEventHandler MD_EMAIL_DESTINATARIRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddMD_EMAIL_DESTINATARIRow(MD_EMAIL_DESTINATARIRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAIL_DESTINATARIRow AddMD_EMAIL_DESTINATARIRow(decimal IDEMAIL_DEST, decimal IDMAIL, decimal IDGRUPPO, string DESTINATARIO, string A_CC) {
+                MD_EMAIL_DESTINATARIRow rowMD_EMAIL_DESTINATARIRow = ((MD_EMAIL_DESTINATARIRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDEMAIL_DEST,
+                        IDMAIL,
+                        IDGRUPPO,
+                        DESTINATARIO,
+                        A_CC};
+                rowMD_EMAIL_DESTINATARIRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMD_EMAIL_DESTINATARIRow);
+                return rowMD_EMAIL_DESTINATARIRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                MD_EMAIL_DESTINATARIDataTable cln = ((MD_EMAIL_DESTINATARIDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new MD_EMAIL_DESTINATARIDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnIDEMAIL_DEST = base.Columns["IDEMAIL_DEST"];
+                this.columnIDMAIL = base.Columns["IDMAIL"];
+                this.columnIDGRUPPO = base.Columns["IDGRUPPO"];
+                this.columnDESTINATARIO = base.Columns["DESTINATARIO"];
+                this.columnA_CC = base.Columns["A_CC"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnIDEMAIL_DEST = new global::System.Data.DataColumn("IDEMAIL_DEST", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDEMAIL_DEST);
+                this.columnIDMAIL = new global::System.Data.DataColumn("IDMAIL", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDMAIL);
+                this.columnIDGRUPPO = new global::System.Data.DataColumn("IDGRUPPO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDGRUPPO);
+                this.columnDESTINATARIO = new global::System.Data.DataColumn("DESTINATARIO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESTINATARIO);
+                this.columnA_CC = new global::System.Data.DataColumn("A_CC", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnA_CC);
+                this.columnIDEMAIL_DEST.AllowDBNull = false;
+                this.columnIDMAIL.AllowDBNull = false;
+                this.columnDESTINATARIO.MaxLength = 100;
+                this.columnA_CC.AllowDBNull = false;
+                this.columnA_CC.MaxLength = 1;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAIL_DESTINATARIRow NewMD_EMAIL_DESTINATARIRow() {
+                return ((MD_EMAIL_DESTINATARIRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new MD_EMAIL_DESTINATARIRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(MD_EMAIL_DESTINATARIRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.MD_EMAIL_DESTINATARIRowChanged != null)) {
+                    this.MD_EMAIL_DESTINATARIRowChanged(this, new MD_EMAIL_DESTINATARIRowChangeEvent(((MD_EMAIL_DESTINATARIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.MD_EMAIL_DESTINATARIRowChanging != null)) {
+                    this.MD_EMAIL_DESTINATARIRowChanging(this, new MD_EMAIL_DESTINATARIRowChangeEvent(((MD_EMAIL_DESTINATARIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.MD_EMAIL_DESTINATARIRowDeleted != null)) {
+                    this.MD_EMAIL_DESTINATARIRowDeleted(this, new MD_EMAIL_DESTINATARIRowChangeEvent(((MD_EMAIL_DESTINATARIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.MD_EMAIL_DESTINATARIRowDeleting != null)) {
+                    this.MD_EMAIL_DESTINATARIRowDeleting(this, new MD_EMAIL_DESTINATARIRowChangeEvent(((MD_EMAIL_DESTINATARIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveMD_EMAIL_DESTINATARIRow(MD_EMAIL_DESTINATARIRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                MailDispatcherDS ds = new MailDispatcherDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "MD_EMAIL_DESTINATARIDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -3114,247 +3069,6 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNOTANull() {
                 this[this.tableMD_LOG.NOTAColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class MD_EMAILRow : global::System.Data.DataRow {
-            
-            private MD_EMAILDataTable tableMD_EMAIL;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal MD_EMAILRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableMD_EMAIL = ((MD_EMAILDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal IDMAIL {
-                get {
-                    return ((decimal)(this[this.tableMD_EMAIL.IDMAILColumn]));
-                }
-                set {
-                    this[this.tableMD_EMAIL.IDMAILColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal TENTATIVO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableMD_EMAIL.TENTATIVOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TENTATIVO\' in table \'MD_EMAIL\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMD_EMAIL.TENTATIVOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string RICHIEDENTE {
-                get {
-                    return ((string)(this[this.tableMD_EMAIL.RICHIEDENTEColumn]));
-                }
-                set {
-                    this[this.tableMD_EMAIL.RICHIEDENTEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime DATACREAZIONE {
-                get {
-                    return ((global::System.DateTime)(this[this.tableMD_EMAIL.DATACREAZIONEColumn]));
-                }
-                set {
-                    this[this.tableMD_EMAIL.DATACREAZIONEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime DATAINVIO {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableMD_EMAIL.DATAINVIOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DATAINVIO\' in table \'MD_EMAIL\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMD_EMAIL.DATAINVIOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string STATO {
-                get {
-                    return ((string)(this[this.tableMD_EMAIL.STATOColumn]));
-                }
-                set {
-                    this[this.tableMD_EMAIL.STATOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string OGGETTO {
-                get {
-                    return ((string)(this[this.tableMD_EMAIL.OGGETTOColumn]));
-                }
-                set {
-                    this[this.tableMD_EMAIL.OGGETTOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CORPO {
-                get {
-                    return ((string)(this[this.tableMD_EMAIL.CORPOColumn]));
-                }
-                set {
-                    this[this.tableMD_EMAIL.CORPOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsTENTATIVONull() {
-                return this.IsNull(this.tableMD_EMAIL.TENTATIVOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetTENTATIVONull() {
-                this[this.tableMD_EMAIL.TENTATIVOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDATAINVIONull() {
-                return this.IsNull(this.tableMD_EMAIL.DATAINVIOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDATAINVIONull() {
-                this[this.tableMD_EMAIL.DATAINVIOColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class MD_EMAIL_DESTINATARIRow : global::System.Data.DataRow {
-            
-            private MD_EMAIL_DESTINATARIDataTable tableMD_EMAIL_DESTINATARI;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal MD_EMAIL_DESTINATARIRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableMD_EMAIL_DESTINATARI = ((MD_EMAIL_DESTINATARIDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal IDEMAIL_DEST {
-                get {
-                    return ((decimal)(this[this.tableMD_EMAIL_DESTINATARI.IDEMAIL_DESTColumn]));
-                }
-                set {
-                    this[this.tableMD_EMAIL_DESTINATARI.IDEMAIL_DESTColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal IDMAIL {
-                get {
-                    return ((decimal)(this[this.tableMD_EMAIL_DESTINATARI.IDMAILColumn]));
-                }
-                set {
-                    this[this.tableMD_EMAIL_DESTINATARI.IDMAILColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal IDGRUPPO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableMD_EMAIL_DESTINATARI.IDGRUPPOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IDGRUPPO\' in table \'MD_EMAIL_DESTINATARI\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMD_EMAIL_DESTINATARI.IDGRUPPOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DESTINATARIO {
-                get {
-                    try {
-                        return ((string)(this[this.tableMD_EMAIL_DESTINATARI.DESTINATARIOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DESTINATARIO\' in table \'MD_EMAIL_DESTINATARI\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMD_EMAIL_DESTINATARI.DESTINATARIOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string A_CC {
-                get {
-                    return ((string)(this[this.tableMD_EMAIL_DESTINATARI.A_CCColumn]));
-                }
-                set {
-                    this[this.tableMD_EMAIL_DESTINATARI.A_CCColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsIDGRUPPONull() {
-                return this.IsNull(this.tableMD_EMAIL_DESTINATARI.IDGRUPPOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetIDGRUPPONull() {
-                this[this.tableMD_EMAIL_DESTINATARI.IDGRUPPOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDESTINATARIONull() {
-                return this.IsNull(this.tableMD_EMAIL_DESTINATARI.DESTINATARIOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDESTINATARIONull() {
-                this[this.tableMD_EMAIL_DESTINATARI.DESTINATARIOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3554,7 +3268,13 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal IDDESTINATARIO {
                 get {
-                    return ((decimal)(this[this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDDESTINATARIO\' in table \'MD_GRUPPI_DESTINATARI\' is DBNull." +
+                                "", e);
+                    }
                 }
                 set {
                     this[this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn] = value;
@@ -3590,6 +3310,18 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIDDESTINATARIONull() {
+                return this.IsNull(this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIDDESTINATARIONull() {
+                this[this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsIDGRUPPONull() {
                 return this.IsNull(this.tableMD_GRUPPI_DESTINATARI.IDGRUPPOColumn);
             }
@@ -3598,6 +3330,258 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetIDGRUPPONull() {
                 this[this.tableMD_GRUPPI_DESTINATARI.IDGRUPPOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class MD_EMAILRow : global::System.Data.DataRow {
+            
+            private MD_EMAILDataTable tableMD_EMAIL;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal MD_EMAILRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableMD_EMAIL = ((MD_EMAILDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IDMAIL {
+                get {
+                    return ((decimal)(this[this.tableMD_EMAIL.IDMAILColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL.IDMAILColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal TENTATIVO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableMD_EMAIL.TENTATIVOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TENTATIVO\' in table \'MD_EMAIL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMD_EMAIL.TENTATIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string APPLICAZIONE {
+                get {
+                    return ((string)(this[this.tableMD_EMAIL.APPLICAZIONEColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL.APPLICAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string OPERAZIONE {
+                get {
+                    return ((string)(this[this.tableMD_EMAIL.OPERAZIONEColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL.OPERAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATACREAZIONE {
+                get {
+                    return ((global::System.DateTime)(this[this.tableMD_EMAIL.DATACREAZIONEColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL.DATACREAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime DATAINVIO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableMD_EMAIL.DATAINVIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATAINVIO\' in table \'MD_EMAIL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMD_EMAIL.DATAINVIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string STATO {
+                get {
+                    return ((string)(this[this.tableMD_EMAIL.STATOColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL.STATOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string OGGETTO {
+                get {
+                    return ((string)(this[this.tableMD_EMAIL.OGGETTOColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL.OGGETTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CORPO {
+                get {
+                    return ((string)(this[this.tableMD_EMAIL.CORPOColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL.CORPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTENTATIVONull() {
+                return this.IsNull(this.tableMD_EMAIL.TENTATIVOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTENTATIVONull() {
+                this[this.tableMD_EMAIL.TENTATIVOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDATAINVIONull() {
+                return this.IsNull(this.tableMD_EMAIL.DATAINVIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDATAINVIONull() {
+                this[this.tableMD_EMAIL.DATAINVIOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class MD_EMAIL_DESTINATARIRow : global::System.Data.DataRow {
+            
+            private MD_EMAIL_DESTINATARIDataTable tableMD_EMAIL_DESTINATARI;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal MD_EMAIL_DESTINATARIRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableMD_EMAIL_DESTINATARI = ((MD_EMAIL_DESTINATARIDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IDEMAIL_DEST {
+                get {
+                    return ((decimal)(this[this.tableMD_EMAIL_DESTINATARI.IDEMAIL_DESTColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL_DESTINATARI.IDEMAIL_DESTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IDMAIL {
+                get {
+                    return ((decimal)(this[this.tableMD_EMAIL_DESTINATARI.IDMAILColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL_DESTINATARI.IDMAILColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IDGRUPPO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableMD_EMAIL_DESTINATARI.IDGRUPPOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDGRUPPO\' in table \'MD_EMAIL_DESTINATARI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMD_EMAIL_DESTINATARI.IDGRUPPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DESTINATARIO {
+                get {
+                    try {
+                        return ((string)(this[this.tableMD_EMAIL_DESTINATARI.DESTINATARIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESTINATARIO\' in table \'MD_EMAIL_DESTINATARI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMD_EMAIL_DESTINATARI.DESTINATARIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string A_CC {
+                get {
+                    return ((string)(this[this.tableMD_EMAIL_DESTINATARI.A_CCColumn]));
+                }
+                set {
+                    this[this.tableMD_EMAIL_DESTINATARI.A_CCColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIDGRUPPONull() {
+                return this.IsNull(this.tableMD_EMAIL_DESTINATARI.IDGRUPPOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIDGRUPPONull() {
+                this[this.tableMD_EMAIL_DESTINATARI.IDGRUPPOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDESTINATARIONull() {
+                return this.IsNull(this.tableMD_EMAIL_DESTINATARI.DESTINATARIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDESTINATARIONull() {
+                this[this.tableMD_EMAIL_DESTINATARI.DESTINATARIOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3655,74 +3639,6 @@ namespace ReportWeb.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public MD_LOGRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class MD_EMAILRowChangeEvent : global::System.EventArgs {
-            
-            private MD_EMAILRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAILRowChangeEvent(MD_EMAILRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAILRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class MD_EMAIL_DESTINATARIRowChangeEvent : global::System.EventArgs {
-            
-            private MD_EMAIL_DESTINATARIRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAIL_DESTINATARIRowChangeEvent(MD_EMAIL_DESTINATARIRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MD_EMAIL_DESTINATARIRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -3859,6 +3775,74 @@ namespace ReportWeb.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public MD_GRUPPI_DESTINATARIRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class MD_EMAILRowChangeEvent : global::System.EventArgs {
+            
+            private MD_EMAILRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAILRowChangeEvent(MD_EMAILRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAILRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class MD_EMAIL_DESTINATARIRowChangeEvent : global::System.EventArgs {
+            
+            private MD_EMAIL_DESTINATARIRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAIL_DESTINATARIRowChangeEvent(MD_EMAIL_DESTINATARIRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MD_EMAIL_DESTINATARIRow Row {
                 get {
                     return this.eventRow;
                 }

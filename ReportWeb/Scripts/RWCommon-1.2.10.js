@@ -479,3 +479,9 @@ function HTMLDecode(testo)
 {
     return $('<textarea />').html(testo).text();
 }
+
+function ValidateEmail(email)
+{
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailReg.test(email);
+}

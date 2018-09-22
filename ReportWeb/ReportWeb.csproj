@@ -376,7 +376,7 @@
     <Content Include="Scripts\nugetexample.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\RWCommon-1.2.9.js" />
+    <Content Include="Scripts\RWCommon-1.2.10.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -428,6 +428,7 @@
     <Content Include="Views\ALE\ValorizzazioneDettaglioCostiPartial.cshtml" />
     <Content Include="Views\MailDispatcher\Index.cshtml" />
     <Content Include="Views\MailDispatcher\TabellaGruppi.cshtml" />
+    <Content Include="Views\MailDispatcher\TabellaDestinatari.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

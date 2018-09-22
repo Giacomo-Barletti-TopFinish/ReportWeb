@@ -21,7 +21,6 @@
         <div class="box-body form-group-sm">
             <div id="divMail">
             </div>
-            <label class="text-red input-sm" id="lblMessage"></label>
         </div>
     </div>
     <div class="box box-primary" id="sectionTaglio">
@@ -35,14 +34,13 @@
             <div id="divGruppi">
                 <div class="row">
                     <div class="col-sm-3" id="divTabellaGruppi">
-                        @Html.Partial("TabellaGruppi",ViewData)
+                        @Html.Partial("TabellaGruppi", ViewData)
                     </div>
                     <div class="col-sm-3">
-                        destinatari gruppi
-                        <table class="table-condensed" id="tbdDestinatari">
-                            <tr></tr>
-                        </table>
-                        <label id="lblNomeGruppo"></label>
+                        Destinatari gruppo <label id="lblNomeGruppo"></label>
+                        <div id="divDestinatari">
+
+                        </div>
                     </div>
                     <div class="col-sm-3">
                         applicazioni operazioni
@@ -51,6 +49,7 @@
                                 <tr>
                                     <td>
                                         @Html.TextBox("txtNuovoGruppo", string.Empty, new { @maxlength = "30", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;" })
+                                        @Html.Hidden("hdIDGRUPPO")
                                     </td>
                                     <td>
                                         <a onclick="AggiungiGruppo();" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a>
@@ -91,10 +90,53 @@
     {
         //CaricaGruppiDaFatturare();
         //CaricaGruppiFatturati();
+
+        OnSelectTr();
     });
+
+    function OnSelectTr()
+    {
+        debugger;
+        $('#tbdGruppi').on('click', 'tbody tr', function (event)
+        {
+            debugger;
+            if ($(this).index() == 0) return;
+            var tds = $('td', this);
+            var nome = tds[0].textContent;
+
+            var idGruppo = $(".RWGRUPPO", this).val();
+
+            $('#hdIDGRUPPO').val(idGruppo);
+            $('#lblNomeGruppo').text(nome);
+
+            LeggiDestinatari(idGruppo);
+        });
+    }
+
+    function LeggiDestinatari(IDGRUPPO)
+    {
+        var url = '@Url.Action("LeggiDestinatari", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { IDGRUPPO: IDGRUPPO },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divDestinatari').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
 
     function CreaNuovoGruppo()
     {
+        debugger;
         $('#lblMessaggi').text('');
         var gruppo = $('#txtNuovoGruppo').val();
         if (gruppo == null || gruppo == '')
@@ -111,6 +153,7 @@
             success: function (data)
             {
                 $('#divTabellaGruppi').html(data).show();
+                OnSelectTr();
             },
             error: function (response)
             {
@@ -132,6 +175,73 @@
             success: function (data)
             {
                 $('#divTabellaGruppi').html(data).show();
+                OnSelectTr();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+        debugger;
+        var IDGRUPPODestinatari = $('#hdIDGRUPPO').val();
+        if (IDGRUPPODestinatari == IDGRUPPO)
+        {
+            $('#divDestinatari').html('').show();
+            $('#lblNomeGruppo').text('');
+
+        }
+
+    }
+
+    function AggiungiDestinatario()
+    {
+        $('#lblMessaggi').text('');
+        var destinatario = $('#txtNuovoDestinatario').val();
+        if (destinatario == null || destinatario == '')
+        {
+            $('#lblMessaggi').text("Inserire l'indirizzo email del destinatario");
+            return;
+        }
+
+        if (!ValidateEmail(destinatario))
+        {
+            $('#lblMessaggi').text("Formato indirizzo email errato");
+            return;
+        }
+
+        var IDGRUPPO = $('#hdIDGRUPPO').val();
+        var url = '@Url.Action("AggiungiDestinatario", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { IDGRUPPO: IDGRUPPO, Destinatario: destinatario },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divDestinatari').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function RimuoviDestinatario(IDDESTINATARIO)
+    {
+        var url = '@Url.Action("RimuoviDestinatario", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { IDDESTINATARIO: IDDESTINATARIO },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divDestinatari').html(data).show();
             },
             error: function (response)
             {

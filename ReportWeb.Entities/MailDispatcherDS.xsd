@@ -14,7 +14,7 @@
   <xs:element name="MailDispatcherDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MailDispatcherDS" msprop:Generator_UserDSName="MailDispatcherDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="MD_ALLEGATI" msprop:Generator_TableClassName="MD_ALLEGATIDataTable" msprop:Generator_TableVarName="tableMD_ALLEGATI" msprop:Generator_TablePropName="MD_ALLEGATI" msprop:Generator_RowDeletingName="MD_ALLEGATIRowDeleting" msprop:Generator_RowChangingName="MD_ALLEGATIRowChanging" msprop:Generator_RowEvHandlerName="MD_ALLEGATIRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_ALLEGATIRowDeleted" msprop:Generator_UserTableName="MD_ALLEGATI" msprop:Generator_RowChangedName="MD_ALLEGATIRowChanged" msprop:Generator_RowEvArgName="MD_ALLEGATIRowChangeEvent" msprop:Generator_RowClassName="MD_ALLEGATIRow">
+        <xs:element name="MD_ALLEGATI" msprop:Generator_TableClassName="MD_ALLEGATIDataTable" msprop:Generator_TableVarName="tableMD_ALLEGATI" msprop:Generator_RowChangedName="MD_ALLEGATIRowChanged" msprop:Generator_TablePropName="MD_ALLEGATI" msprop:Generator_RowDeletingName="MD_ALLEGATIRowDeleting" msprop:Generator_RowChangingName="MD_ALLEGATIRowChanging" msprop:Generator_RowEvHandlerName="MD_ALLEGATIRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_ALLEGATIRowDeleted" msprop:Generator_RowClassName="MD_ALLEGATIRow" msprop:Generator_UserTableName="MD_ALLEGATI" msprop:Generator_RowEvArgName="MD_ALLEGATIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDEMAIL_ALL" msprop:Generator_ColumnVarNameInTable="columnIDEMAIL_ALL" msprop:Generator_ColumnPropNameInRow="IDEMAIL_ALL" msprop:Generator_ColumnPropNameInTable="IDEMAIL_ALLColumn" msprop:Generator_UserColumnName="IDEMAIL_ALL" type="xs:decimal" />
@@ -30,7 +30,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MD_LOG" msprop:Generator_TableClassName="MD_LOGDataTable" msprop:Generator_TableVarName="tableMD_LOG" msprop:Generator_TablePropName="MD_LOG" msprop:Generator_RowDeletingName="MD_LOGRowDeleting" msprop:Generator_RowChangingName="MD_LOGRowChanging" msprop:Generator_RowEvHandlerName="MD_LOGRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_LOGRowDeleted" msprop:Generator_UserTableName="MD_LOG" msprop:Generator_RowChangedName="MD_LOGRowChanged" msprop:Generator_RowEvArgName="MD_LOGRowChangeEvent" msprop:Generator_RowClassName="MD_LOGRow">
+        <xs:element name="MD_LOG" msprop:Generator_TableClassName="MD_LOGDataTable" msprop:Generator_TableVarName="tableMD_LOG" msprop:Generator_RowChangedName="MD_LOGRowChanged" msprop:Generator_TablePropName="MD_LOG" msprop:Generator_RowDeletingName="MD_LOGRowDeleting" msprop:Generator_RowChangingName="MD_LOGRowChanging" msprop:Generator_RowEvHandlerName="MD_LOGRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_LOGRowDeleted" msprop:Generator_RowClassName="MD_LOGRow" msprop:Generator_UserTableName="MD_LOG" msprop:Generator_RowEvArgName="MD_LOGRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMAIL_LOG" msprop:Generator_ColumnVarNameInTable="columnIDMAIL_LOG" msprop:Generator_ColumnPropNameInRow="IDMAIL_LOG" msprop:Generator_ColumnPropNameInTable="IDMAIL_LOGColumn" msprop:Generator_UserColumnName="IDMAIL_LOG" type="xs:decimal" />
@@ -53,15 +53,100 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="MD_EMAIL_STATO" msprop:Generator_TableClassName="MD_EMAIL_STATODataTable" msprop:Generator_TableVarName="tableMD_EMAIL_STATO" msprop:Generator_RowChangedName="MD_EMAIL_STATORowChanged" msprop:Generator_TablePropName="MD_EMAIL_STATO" msprop:Generator_RowDeletingName="MD_EMAIL_STATORowDeleting" msprop:Generator_RowChangingName="MD_EMAIL_STATORowChanging" msprop:Generator_RowEvHandlerName="MD_EMAIL_STATORowChangeEventHandler" msprop:Generator_RowDeletedName="MD_EMAIL_STATORowDeleted" msprop:Generator_RowClassName="MD_EMAIL_STATORow" msprop:Generator_UserTableName="MD_EMAIL_STATO" msprop:Generator_RowEvArgName="MD_EMAIL_STATORowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MD_GRUPPI" msprop:Generator_TableClassName="MD_GRUPPIDataTable" msprop:Generator_TableVarName="tableMD_GRUPPI" msprop:Generator_RowChangedName="MD_GRUPPIRowChanged" msprop:Generator_TablePropName="MD_GRUPPI" msprop:Generator_RowDeletingName="MD_GRUPPIRowDeleting" msprop:Generator_RowChangingName="MD_GRUPPIRowChanging" msprop:Generator_RowEvHandlerName="MD_GRUPPIRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_GRUPPIRowDeleted" msprop:Generator_RowClassName="MD_GRUPPIRow" msprop:Generator_UserTableName="MD_GRUPPI" msprop:Generator_RowEvArgName="MD_GRUPPIRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDGRUPPO" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDGRUPPO" msprop:Generator_ColumnPropNameInRow="IDGRUPPO" msprop:Generator_ColumnPropNameInTable="IDGRUPPOColumn" msprop:Generator_UserColumnName="IDGRUPPO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NOME" msprop:Generator_ColumnVarNameInTable="columnNOME" msprop:Generator_ColumnPropNameInRow="NOME" msprop:Generator_ColumnPropNameInTable="NOMEColumn" msprop:Generator_UserColumnName="NOME">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MD_GRUPPI_APP" msprop:Generator_TableClassName="MD_GRUPPI_APPDataTable" msprop:Generator_TableVarName="tableMD_GRUPPI_APP" msprop:Generator_RowChangedName="MD_GRUPPI_APPRowChanged" msprop:Generator_TablePropName="MD_GRUPPI_APP" msprop:Generator_RowDeletingName="MD_GRUPPI_APPRowDeleting" msprop:Generator_RowChangingName="MD_GRUPPI_APPRowChanging" msprop:Generator_RowEvHandlerName="MD_GRUPPI_APPRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_GRUPPI_APPRowDeleted" msprop:Generator_RowClassName="MD_GRUPPI_APPRow" msprop:Generator_UserTableName="MD_GRUPPI_APP" msprop:Generator_RowEvArgName="MD_GRUPPI_APPRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDAPPLICAZIONE" msprop:Generator_ColumnVarNameInTable="columnIDAPPLICAZIONE" msprop:Generator_ColumnPropNameInRow="IDAPPLICAZIONE" msprop:Generator_ColumnPropNameInTable="IDAPPLICAZIONEColumn" msprop:Generator_UserColumnName="IDAPPLICAZIONE" type="xs:decimal" />
+              <xs:element name="APPLICAZIONE" msprop:Generator_ColumnVarNameInTable="columnAPPLICAZIONE" msprop:Generator_ColumnPropNameInRow="APPLICAZIONE" msprop:Generator_ColumnPropNameInTable="APPLICAZIONEColumn" msprop:Generator_UserColumnName="APPLICAZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OPERAZIONE" msprop:Generator_ColumnVarNameInTable="columnOPERAZIONE" msprop:Generator_ColumnPropNameInRow="OPERAZIONE" msprop:Generator_ColumnPropNameInTable="OPERAZIONEColumn" msprop:Generator_UserColumnName="OPERAZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDGRUPPO" msprop:Generator_ColumnVarNameInTable="columnIDGRUPPO" msprop:Generator_ColumnPropNameInRow="IDGRUPPO" msprop:Generator_ColumnPropNameInTable="IDGRUPPOColumn" msprop:Generator_UserColumnName="IDGRUPPO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="A_CC" msprop:Generator_ColumnVarNameInTable="columnA_CC" msprop:Generator_ColumnPropNameInRow="A_CC" msprop:Generator_ColumnPropNameInTable="A_CCColumn" msprop:Generator_UserColumnName="A_CC">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MD_GRUPPI_DESTINATARI" msprop:Generator_TableClassName="MD_GRUPPI_DESTINATARIDataTable" msprop:Generator_TableVarName="tableMD_GRUPPI_DESTINATARI" msprop:Generator_RowChangedName="MD_GRUPPI_DESTINATARIRowChanged" msprop:Generator_TablePropName="MD_GRUPPI_DESTINATARI" msprop:Generator_RowDeletingName="MD_GRUPPI_DESTINATARIRowDeleting" msprop:Generator_RowChangingName="MD_GRUPPI_DESTINATARIRowChanging" msprop:Generator_RowEvHandlerName="MD_GRUPPI_DESTINATARIRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_GRUPPI_DESTINATARIRowDeleted" msprop:Generator_RowClassName="MD_GRUPPI_DESTINATARIRow" msprop:Generator_UserTableName="MD_GRUPPI_DESTINATARI" msprop:Generator_RowEvArgName="MD_GRUPPI_DESTINATARIRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDDESTINATARIO" msprop:Generator_ColumnVarNameInTable="columnIDDESTINATARIO" msprop:Generator_ColumnPropNameInRow="IDDESTINATARIO" msprop:Generator_ColumnPropNameInTable="IDDESTINATARIOColumn" msprop:Generator_UserColumnName="IDDESTINATARIO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDGRUPPO" msprop:Generator_ColumnVarNameInTable="columnIDGRUPPO" msprop:Generator_ColumnPropNameInRow="IDGRUPPO" msprop:Generator_ColumnPropNameInTable="IDGRUPPOColumn" msprop:Generator_UserColumnName="IDGRUPPO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DESTINATARIO" msprop:Generator_ColumnVarNameInTable="columnDESTINATARIO" msprop:Generator_ColumnPropNameInRow="DESTINATARIO" msprop:Generator_ColumnPropNameInTable="DESTINATARIOColumn" msprop:Generator_UserColumnName="DESTINATARIO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="MD_EMAIL" msprop:Generator_TableClassName="MD_EMAILDataTable" msprop:Generator_TableVarName="tableMD_EMAIL" msprop:Generator_TablePropName="MD_EMAIL" msprop:Generator_RowDeletingName="MD_EMAILRowDeleting" msprop:Generator_RowChangingName="MD_EMAILRowChanging" msprop:Generator_RowEvHandlerName="MD_EMAILRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_EMAILRowDeleted" msprop:Generator_UserTableName="MD_EMAIL" msprop:Generator_RowChangedName="MD_EMAILRowChanged" msprop:Generator_RowEvArgName="MD_EMAILRowChangeEvent" msprop:Generator_RowClassName="MD_EMAILRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMAIL" msprop:Generator_ColumnVarNameInTable="columnIDMAIL" msprop:Generator_ColumnPropNameInRow="IDMAIL" msprop:Generator_ColumnPropNameInTable="IDMAILColumn" msprop:Generator_UserColumnName="IDMAIL" type="xs:decimal" />
               <xs:element name="TENTATIVO" msprop:Generator_ColumnVarNameInTable="columnTENTATIVO" msprop:Generator_ColumnPropNameInRow="TENTATIVO" msprop:Generator_ColumnPropNameInTable="TENTATIVOColumn" msprop:Generator_UserColumnName="TENTATIVO" type="xs:decimal" minOccurs="0" />
-              <xs:element name="RICHIEDENTE" msprop:Generator_ColumnVarNameInTable="columnRICHIEDENTE" msprop:Generator_ColumnPropNameInRow="RICHIEDENTE" msprop:Generator_ColumnPropNameInTable="RICHIEDENTEColumn" msprop:Generator_UserColumnName="RICHIEDENTE">
+              <xs:element name="APPLICAZIONE" msprop:Generator_ColumnVarNameInTable="columnAPPLICAZIONE" msprop:Generator_ColumnPropNameInRow="APPLICAZIONE" msprop:Generator_ColumnPropNameInTable="APPLICAZIONEColumn" msprop:Generator_UserColumnName="APPLICAZIONE">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OPERAZIONE" msprop:Generator_ColumnVarNameInTable="columnOPERAZIONE" msprop:Generator_ColumnPropNameInRow="OPERAZIONE" msprop:Generator_ColumnPropNameInTable="OPERAZIONEColumn" msprop:Generator_UserColumnName="OPERAZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -114,113 +199,11 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MD_EMAIL_STATO" msprop:Generator_TableClassName="MD_EMAIL_STATODataTable" msprop:Generator_TableVarName="tableMD_EMAIL_STATO" msprop:Generator_TablePropName="MD_EMAIL_STATO" msprop:Generator_RowDeletingName="MD_EMAIL_STATORowDeleting" msprop:Generator_RowChangingName="MD_EMAIL_STATORowChanging" msprop:Generator_RowEvHandlerName="MD_EMAIL_STATORowChangeEventHandler" msprop:Generator_RowDeletedName="MD_EMAIL_STATORowDeleted" msprop:Generator_UserTableName="MD_EMAIL_STATO" msprop:Generator_RowChangedName="MD_EMAIL_STATORowChanged" msprop:Generator_RowEvArgName="MD_EMAIL_STATORowChangeEvent" msprop:Generator_RowClassName="MD_EMAIL_STATORow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="3" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="MD_GRUPPI" msprop:Generator_TableClassName="MD_GRUPPIDataTable" msprop:Generator_TableVarName="tableMD_GRUPPI" msprop:Generator_TablePropName="MD_GRUPPI" msprop:Generator_RowDeletingName="MD_GRUPPIRowDeleting" msprop:Generator_RowChangingName="MD_GRUPPIRowChanging" msprop:Generator_RowEvHandlerName="MD_GRUPPIRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_GRUPPIRowDeleted" msprop:Generator_UserTableName="MD_GRUPPI" msprop:Generator_RowChangedName="MD_GRUPPIRowChanged" msprop:Generator_RowEvArgName="MD_GRUPPIRowChangeEvent" msprop:Generator_RowClassName="MD_GRUPPIRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="IDGRUPPO" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDGRUPPO" msprop:Generator_ColumnPropNameInRow="IDGRUPPO" msprop:Generator_ColumnPropNameInTable="IDGRUPPOColumn" msprop:Generator_UserColumnName="IDGRUPPO" type="xs:decimal" minOccurs="0" />
-              <xs:element name="NOME" msprop:Generator_ColumnVarNameInTable="columnNOME" msprop:Generator_ColumnPropNameInRow="NOME" msprop:Generator_ColumnPropNameInTable="NOMEColumn" msprop:Generator_UserColumnName="NOME">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="MD_GRUPPI_APP" msprop:Generator_TableClassName="MD_GRUPPI_APPDataTable" msprop:Generator_TableVarName="tableMD_GRUPPI_APP" msprop:Generator_TablePropName="MD_GRUPPI_APP" msprop:Generator_RowDeletingName="MD_GRUPPI_APPRowDeleting" msprop:Generator_RowChangingName="MD_GRUPPI_APPRowChanging" msprop:Generator_RowEvHandlerName="MD_GRUPPI_APPRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_GRUPPI_APPRowDeleted" msprop:Generator_UserTableName="MD_GRUPPI_APP" msprop:Generator_RowChangedName="MD_GRUPPI_APPRowChanged" msprop:Generator_RowEvArgName="MD_GRUPPI_APPRowChangeEvent" msprop:Generator_RowClassName="MD_GRUPPI_APPRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="IDAPPLICAZIONE" msprop:Generator_ColumnVarNameInTable="columnIDAPPLICAZIONE" msprop:Generator_ColumnPropNameInRow="IDAPPLICAZIONE" msprop:Generator_ColumnPropNameInTable="IDAPPLICAZIONEColumn" msprop:Generator_UserColumnName="IDAPPLICAZIONE" type="xs:decimal" />
-              <xs:element name="APPLICAZIONE" msprop:Generator_ColumnVarNameInTable="columnAPPLICAZIONE" msprop:Generator_ColumnPropNameInRow="APPLICAZIONE" msprop:Generator_ColumnPropNameInTable="APPLICAZIONEColumn" msprop:Generator_UserColumnName="APPLICAZIONE">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="OPERAZIONE" msprop:Generator_ColumnVarNameInTable="columnOPERAZIONE" msprop:Generator_ColumnPropNameInRow="OPERAZIONE" msprop:Generator_ColumnPropNameInTable="OPERAZIONEColumn" msprop:Generator_UserColumnName="OPERAZIONE">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="IDGRUPPO" msprop:Generator_ColumnVarNameInTable="columnIDGRUPPO" msprop:Generator_ColumnPropNameInRow="IDGRUPPO" msprop:Generator_ColumnPropNameInTable="IDGRUPPOColumn" msprop:Generator_UserColumnName="IDGRUPPO" type="xs:decimal" minOccurs="0" />
-              <xs:element name="A_CC" msprop:Generator_ColumnVarNameInTable="columnA_CC" msprop:Generator_ColumnPropNameInRow="A_CC" msprop:Generator_ColumnPropNameInTable="A_CCColumn" msprop:Generator_UserColumnName="A_CC">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="1" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="MD_GRUPPI_DESTINATARI" msprop:Generator_TableClassName="MD_GRUPPI_DESTINATARIDataTable" msprop:Generator_TableVarName="tableMD_GRUPPI_DESTINATARI" msprop:Generator_TablePropName="MD_GRUPPI_DESTINATARI" msprop:Generator_RowDeletingName="MD_GRUPPI_DESTINATARIRowDeleting" msprop:Generator_RowChangingName="MD_GRUPPI_DESTINATARIRowChanging" msprop:Generator_RowEvHandlerName="MD_GRUPPI_DESTINATARIRowChangeEventHandler" msprop:Generator_RowDeletedName="MD_GRUPPI_DESTINATARIRowDeleted" msprop:Generator_UserTableName="MD_GRUPPI_DESTINATARI" msprop:Generator_RowChangedName="MD_GRUPPI_DESTINATARIRowChanged" msprop:Generator_RowEvArgName="MD_GRUPPI_DESTINATARIRowChangeEvent" msprop:Generator_RowClassName="MD_GRUPPI_DESTINATARIRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="IDDESTINATARIO" msprop:Generator_ColumnVarNameInTable="columnIDDESTINATARIO" msprop:Generator_ColumnPropNameInRow="IDDESTINATARIO" msprop:Generator_ColumnPropNameInTable="IDDESTINATARIOColumn" msprop:Generator_UserColumnName="IDDESTINATARIO" type="xs:decimal" />
-              <xs:element name="IDGRUPPO" msprop:Generator_ColumnVarNameInTable="columnIDGRUPPO" msprop:Generator_ColumnPropNameInRow="IDGRUPPO" msprop:Generator_ColumnPropNameInTable="IDGRUPPOColumn" msprop:Generator_UserColumnName="IDGRUPPO" type="xs:decimal" minOccurs="0" />
-              <xs:element name="DESTINATARIO" msprop:Generator_ColumnVarNameInTable="columnDESTINATARIO" msprop:Generator_ColumnPropNameInRow="DESTINATARIO" msprop:Generator_ColumnPropNameInTable="DESTINATARIOColumn" msprop:Generator_UserColumnName="DESTINATARIO">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:MD_ALLEGATI" />
-      <xs:field xpath="mstns:IDEMAIL_ALL" />
-    </xs:unique>
-    <xs:unique name="MD_LOG_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:MD_LOG" />
-      <xs:field xpath="mstns:IDMAIL_LOG" />
-    </xs:unique>
-    <xs:unique name="MD_EMAIL_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:MD_EMAIL" />
-      <xs:field xpath="mstns:IDMAIL" />
-    </xs:unique>
-    <xs:unique name="MD_EMAIL_DESTINATARI_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:MD_EMAIL_DESTINATARI" />
-      <xs:field xpath="mstns:IDEMAIL_DEST" />
-    </xs:unique>
-    <xs:unique name="MD_EMAIL_STATO_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:MD_EMAIL_STATO" />
       <xs:field xpath="mstns:CODICE" />
-    </xs:unique>
-    <xs:unique name="MD_GRUPPI_APP_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:MD_GRUPPI_APP" />
-      <xs:field xpath="mstns:IDAPPLICAZIONE" />
-    </xs:unique>
-    <xs:unique name="MD_GRUPPI_DESTINATARI_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:MD_GRUPPI_DESTINATARI" />
-      <xs:field xpath="mstns:IDDESTINATARIO" />
     </xs:unique>
   </xs:element>
 </xs:schema>

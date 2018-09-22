@@ -12,6 +12,7 @@
         @foreach (MD_GRUPPOModel gruppo in ViewData["MDGRUPPO"] as List<MD_GRUPPOModel>)
         {
             <tr>
+                <input type="hidden" value="@gruppo.IDGRUPPO" class="RWGRUPPO" />
                 <td>
                     @gruppo.Nome
                 </td>
