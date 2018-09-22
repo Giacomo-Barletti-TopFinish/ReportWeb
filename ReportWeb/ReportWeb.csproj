@@ -429,6 +429,8 @@
     <Content Include="Views\MailDispatcher\Index.cshtml" />
     <Content Include="Views\MailDispatcher\TabellaGruppi.cshtml" />
     <Content Include="Views\MailDispatcher\TabellaDestinatari.cshtml" />
+    <Content Include="Views\MailDispatcher\TabellaRichiedenti.cshtml" />
+    <Content Include="Views\MailDispatcher\TabellaGruppiRichiedenti.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

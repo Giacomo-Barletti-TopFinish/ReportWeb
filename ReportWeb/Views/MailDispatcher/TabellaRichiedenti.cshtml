@@ -1,0 +1,25 @@
+﻿
+@using ReportWeb.Models.MailDispatcher
+@{ Layout = null;}
+<table class="table table-condensed" id="tbdRichiedenti">
+    <tr>
+        <td>
+            @Html.TextBox("txtNuovoRichiedente", string.Empty, new { @maxlength = "30", @class = "form-control input-sm", @style = "height: 21px;" })
+        </td>
+        <td>
+            <a onclick="CreaNuovoRichiedente();" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a>
+        </td>
+    </tr>
+    @foreach (MD_RICHIEDENTEModel gruppo in ViewData["MDRICHIEDENTI"] as List<MD_RICHIEDENTEModel>)
+    {
+        <tr>
+            <input type="hidden" value="@gruppo.IDRICHIEDENTE" class="RWRICHIEDENTE" />
+            <td>
+                @gruppo.Richiedente
+            </td>
+            <td>
+                <a onclick="RimuoviRichiedente(@gruppo.IDRICHIEDENTE);" title="Elimina"><i class="fa fa-fw fa-remove"></i></a>
+            </td>
+        </tr>
+    }
+</table>

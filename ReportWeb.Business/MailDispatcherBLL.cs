@@ -19,7 +19,8 @@ namespace ReportWeb.Business
             {
                 bMD.FillMD_GRUPPI(ds);
                 bMD.FillMD_GRUPPI_DESTINATARI(ds);
-                bMD.FillMD_GRUPPI_APP(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
 
                 foreach (MailDispatcherDS.MD_GRUPPIRow gruppo in ds.MD_GRUPPI)
                 {
@@ -52,24 +53,25 @@ namespace ReportWeb.Business
             return gr;
         }
 
-        public List<MD_APPLICAZIONEModel> LeggiGruppiApplicazioni()
+        public List<MD_RICHIEDENTEModel> LeggiRichiedenti()
         {
-            List<MD_APPLICAZIONEModel> gruppi = new List<MD_APPLICAZIONEModel>();
+            List<MD_RICHIEDENTEModel> richiedenti = new List<MD_RICHIEDENTEModel>();
             MailDispatcherDS ds = new MailDispatcherDS();
             using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
             {
                 bMD.FillMD_GRUPPI(ds);
                 bMD.FillMD_GRUPPI_DESTINATARI(ds);
-                bMD.FillMD_GRUPPI_APP(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
 
-                foreach (MailDispatcherDS.MD_GRUPPI_APPRow gruppo in ds.MD_GRUPPI_APP)
+                foreach (MailDispatcherDS.MD_RICHIEDENTIRow richiedente in ds.MD_RICHIEDENTI)
                 {
-                    MD_APPLICAZIONEModel gr = CreaApplicazioneModel(ds, gruppo);
-                    gruppi.Add(gr);
+                    MD_RICHIEDENTEModel r = CreaRichiedenteModel(ds, richiedente.IDRICHIEDENTE);
+                    richiedenti.Add(r);
                 }
             }
 
-            return gruppi;
+            return richiedenti;
         }
 
         public List<MD_GRUPPOModel> CreaNuovoGruppo(string Gruppo)
@@ -78,18 +80,20 @@ namespace ReportWeb.Business
             MailDispatcherDS ds = new MailDispatcherDS();
             using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
             {
-
-                MailDispatcherDS.MD_GRUPPIRow gruppoRow = ds.MD_GRUPPI.NewMD_GRUPPIRow();
-                gruppoRow.NOME = Gruppo;
-
-                ds.MD_GRUPPI.AddMD_GRUPPIRow(gruppoRow);
-
-                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI.TableName, ds);
+                bMD.FillMD_GRUPPI(ds);
+                if (!ds.MD_GRUPPI.Any(x => x.NOME.Trim() == Gruppo.Trim()))
+                {
+                    MailDispatcherDS.MD_GRUPPIRow gruppoRow = ds.MD_GRUPPI.NewMD_GRUPPIRow();
+                    gruppoRow.NOME = Gruppo;
+                    ds.MD_GRUPPI.AddMD_GRUPPIRow(gruppoRow);
+                    bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI.TableName, ds);
+                }
 
                 ds.Clear();
                 bMD.FillMD_GRUPPI(ds);
                 bMD.FillMD_GRUPPI_DESTINATARI(ds);
-                bMD.FillMD_GRUPPI_APP(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
 
                 foreach (MailDispatcherDS.MD_GRUPPIRow gruppo in ds.MD_GRUPPI)
                 {
@@ -101,20 +105,58 @@ namespace ReportWeb.Business
             return gruppi;
         }
 
-        private MD_APPLICAZIONEModel CreaApplicazioneModel(MailDispatcherDS ds, MailDispatcherDS.MD_GRUPPI_APPRow gruppo)
+        public List<MD_RICHIEDENTEModel> CreaNuovoRichiedente(string Richiedente)
         {
-            MD_APPLICAZIONEModel ap = new MD_APPLICAZIONEModel();
-            ap.Applicazione = gruppo.APPLICAZIONE;
-            ap.Operazione = gruppo.OPERAZIONE;
-            ap.GRUPPI = new List<MD_GRUPPO_APPLICAZIONE>();
-            foreach (MailDispatcherDS.MD_GRUPPI_APPRow grApp in ds.MD_GRUPPI_APP.Where(x => x.APPLICAZIONE == gruppo.APPLICAZIONE && x.OPERAZIONE == gruppo.OPERAZIONE))
+            List<MD_RICHIEDENTEModel> richiedenti = new List<MD_RICHIEDENTEModel>();
+            MailDispatcherDS ds = new MailDispatcherDS();
+            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
             {
-                MD_GRUPPO_APPLICAZIONE gra = new MD_GRUPPO_APPLICAZIONE();
-                gra.CC = (grApp.A_CC == "1") ? true : false;
-                gra.Gruppo = CreaGruppoModel(ds, grApp.IDGRUPPO);
-                ap.GRUPPI.Add(gra);
+                bMD.FillMD_RICHIEDENTI(ds);
+                if (!ds.MD_RICHIEDENTI.Any(x => x.RICHIEDENTE.Trim() == Richiedente.Trim()))
+                {
+                    MailDispatcherDS.MD_RICHIEDENTIRow row = ds.MD_RICHIEDENTI.NewMD_RICHIEDENTIRow();
+                    row.RICHIEDENTE = Richiedente;
+                    ds.MD_RICHIEDENTI.AddMD_RICHIEDENTIRow(row);
+                    bMD.UpdateMailDispatcherDSTable(ds.MD_RICHIEDENTI.TableName, ds);
+                }
+
+                ds.Clear();
+                bMD.FillMD_GRUPPI(ds);
+                bMD.FillMD_GRUPPI_DESTINATARI(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
+
+                foreach (MailDispatcherDS.MD_RICHIEDENTIRow richiedente in ds.MD_RICHIEDENTI)
+                {
+                    MD_RICHIEDENTEModel ri = CreaRichiedenteModel(ds, richiedente.IDRICHIEDENTE);
+                    richiedenti.Add(ri);
+                }
             }
-            return ap;
+
+            return richiedenti;
+        }
+
+
+        private MD_RICHIEDENTEModel CreaRichiedenteModel(MailDispatcherDS ds, decimal IDRICHIEDENTE)
+        {
+            MailDispatcherDS.MD_RICHIEDENTIRow richiedente = ds.MD_RICHIEDENTI.Where(x => x.IDRICHIEDENTE == IDRICHIEDENTE).FirstOrDefault();
+
+            if (richiedente == null) return new MD_RICHIEDENTEModel();
+
+            MD_RICHIEDENTEModel rm = new MD_RICHIEDENTEModel();
+            rm.IDRICHIEDENTE = richiedente.IDRICHIEDENTE;
+            rm.Richiedente = richiedente.RICHIEDENTE;
+
+            rm.GRUPPI = new List<MD_GRUPPO_RICHIEDENTEModel>();
+            foreach (MailDispatcherDS.MD_GRUPPI_RICHIEDENTIRow grRich in ds.MD_GRUPPI_RICHIEDENTI.Where(x => x.IDRICHIEDENTE == richiedente.IDRICHIEDENTE))
+            {
+                MD_GRUPPO_RICHIEDENTEModel gra = new MD_GRUPPO_RICHIEDENTEModel();
+                gra.CC = (grRich.A_CC == "1") ? true : false;
+                gra.Gruppo = CreaGruppoModel(ds, grRich.IDGRUPPO);
+                gra.IDRICHIEDENTE = richiedente.IDRICHIEDENTE;
+                rm.GRUPPI.Add(gra);
+            }
+            return rm;
         }
 
         public List<MD_GRUPPOModel> RimuoviGruppo(decimal IDGRUPPO)
@@ -126,9 +168,10 @@ namespace ReportWeb.Business
 
                 bMD.FillMD_GRUPPI(ds);
                 bMD.FillMD_GRUPPI_DESTINATARI(ds);
-                bMD.FillMD_GRUPPI_APP(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
 
-                foreach (MailDispatcherDS.MD_GRUPPI_APPRow gra in ds.MD_GRUPPI_APP.Where(x => x.IDGRUPPO == IDGRUPPO))
+                foreach (MailDispatcherDS.MD_GRUPPI_RICHIEDENTIRow gra in ds.MD_GRUPPI_RICHIEDENTI.Where(x => x.IDGRUPPO == IDGRUPPO))
                     gra.Delete();
 
                 foreach (MailDispatcherDS.MD_GRUPPI_DESTINATARIRow grd in ds.MD_GRUPPI_DESTINATARI.Where(x => x.IDGRUPPO == IDGRUPPO))
@@ -137,14 +180,15 @@ namespace ReportWeb.Business
                 foreach (MailDispatcherDS.MD_GRUPPIRow gr in ds.MD_GRUPPI.Where(x => x.IDGRUPPO == IDGRUPPO))
                     gr.Delete();
 
-                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_APP.TableName, ds);
+                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_RICHIEDENTI.TableName, ds);
                 bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_DESTINATARI.TableName, ds);
                 bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI.TableName, ds);
 
                 ds.Clear();
                 bMD.FillMD_GRUPPI(ds);
                 bMD.FillMD_GRUPPI_DESTINATARI(ds);
-                bMD.FillMD_GRUPPI_APP(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
 
                 foreach (MailDispatcherDS.MD_GRUPPIRow gruppo in ds.MD_GRUPPI)
                 {
@@ -164,7 +208,8 @@ namespace ReportWeb.Business
 
                 bMD.FillMD_GRUPPI(ds);
                 bMD.FillMD_GRUPPI_DESTINATARI(ds);
-                bMD.FillMD_GRUPPI_APP(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
 
                 MailDispatcherDS.MD_GRUPPI_DESTINATARIRow grd = ds.MD_GRUPPI_DESTINATARI.Where(x => x.IDDESTINATARIO == IDDESTINATARIO).FirstOrDefault();
                 decimal IDGRUPPO = grd.IDGRUPPO;
@@ -186,17 +231,22 @@ namespace ReportWeb.Business
             MailDispatcherDS ds = new MailDispatcherDS();
             using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
             {
-                MailDispatcherDS.MD_GRUPPI_DESTINATARIRow destinatario = ds.MD_GRUPPI_DESTINATARI.NewMD_GRUPPI_DESTINATARIRow();
-                destinatario.IDGRUPPO = IDGRUPPO;
-                destinatario.DESTINATARIO = Destinatario;
-                ds.MD_GRUPPI_DESTINATARI.AddMD_GRUPPI_DESTINATARIRow(destinatario);
+                bMD.FillMD_GRUPPI_DESTINATARI(ds);
+                if (!ds.MD_GRUPPI_DESTINATARI.Any(x => x.IDGRUPPO == IDGRUPPO && x.DESTINATARIO == Destinatario.Trim()))
+                {
+                    MailDispatcherDS.MD_GRUPPI_DESTINATARIRow destinatario = ds.MD_GRUPPI_DESTINATARI.NewMD_GRUPPI_DESTINATARIRow();
+                    destinatario.IDGRUPPO = IDGRUPPO;
+                    destinatario.DESTINATARIO = Destinatario;
+                    ds.MD_GRUPPI_DESTINATARI.AddMD_GRUPPI_DESTINATARIRow(destinatario);
 
-                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_DESTINATARI.TableName, ds);
+                    bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_DESTINATARI.TableName, ds);
+                }
 
                 ds.Clear();
                 bMD.FillMD_GRUPPI(ds);
                 bMD.FillMD_GRUPPI_DESTINATARI(ds);
-                bMD.FillMD_GRUPPI_APP(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
 
                 bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_DESTINATARI.TableName, ds);
                 ds.MD_GRUPPI_DESTINATARI.AcceptChanges();
@@ -207,6 +257,43 @@ namespace ReportWeb.Business
                 return gr.Destinatari;
             }
 
+        }
+
+        public List<MD_RICHIEDENTEModel> RimuoviRichiedente(decimal IDRICHIEDENTE)
+        {
+            List<MD_RICHIEDENTEModel> richiedenti = new List<MD_RICHIEDENTEModel>();
+            MailDispatcherDS ds = new MailDispatcherDS();
+            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
+            {
+
+                bMD.FillMD_GRUPPI(ds);
+                bMD.FillMD_GRUPPI_DESTINATARI(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
+
+                foreach (MailDispatcherDS.MD_GRUPPI_RICHIEDENTIRow gra in ds.MD_GRUPPI_RICHIEDENTI.Where(x => x.IDRICHIEDENTE == IDRICHIEDENTE))
+                    gra.Delete();
+
+                foreach (MailDispatcherDS.MD_RICHIEDENTIRow gr in ds.MD_RICHIEDENTI.Where(x => x.IDRICHIEDENTE == IDRICHIEDENTE))
+                    gr.Delete();
+
+                bMD.UpdateMailDispatcherDSTable(ds.MD_GRUPPI_RICHIEDENTI.TableName, ds);
+                bMD.UpdateMailDispatcherDSTable(ds.MD_RICHIEDENTI.TableName, ds);
+
+                ds.Clear();
+                bMD.FillMD_GRUPPI(ds);
+                bMD.FillMD_GRUPPI_DESTINATARI(ds);
+                bMD.FillMD_GRUPPI_RICHIEDENTI(ds);
+                bMD.FillMD_RICHIEDENTI(ds);
+
+                foreach (MailDispatcherDS.MD_RICHIEDENTIRow richiedente in ds.MD_RICHIEDENTI)
+                {
+                    MD_RICHIEDENTEModel ri = CreaRichiedenteModel(ds, richiedente.IDRICHIEDENTE);
+                    richiedenti.Add(ri);
+                }
+            }
+
+            return richiedenti;
         }
     }
 }

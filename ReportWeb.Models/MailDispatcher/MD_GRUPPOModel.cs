@@ -19,15 +19,16 @@ namespace ReportWeb.Models.MailDispatcher
         public string Destinatario { get; set; }
         public decimal IDGRUPPO { get; set; }
     }
-
-    public class MD_APPLICAZIONEModel
+    
+    public class MD_RICHIEDENTEModel
     {
-        public string Applicazione { get; set; }
-        public string Operazione { get; set; }
-        public List<MD_GRUPPO_APPLICAZIONE> GRUPPI { get; set; }
+        public decimal IDRICHIEDENTE { get; set; }
+        public string Richiedente { get; set; }
+        public List<MD_GRUPPO_RICHIEDENTEModel> GRUPPI { get; set; }
     }
-    public class MD_GRUPPO_APPLICAZIONE
+    public class MD_GRUPPO_RICHIEDENTEModel
     {
+        public decimal IDRICHIEDENTE { get; set; }
         public MD_GRUPPOModel Gruppo { get; set; }
         public bool CC { get; set; }
     }

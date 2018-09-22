@@ -1,0 +1,23 @@
+﻿@using ReportWeb.Models.MailDispatcher
+@{ Layout =null;}
+    <table class="table table-condensed" id="tbdDestinatari">
+        <tr>
+            <td>
+                @Html.DropDownList("ddlGruppo", new SelectList(ViewData["MDGRUPPO"] as List<MD_GRUPPOModel>, "IDGRUPPO", "Nome"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+            </td>
+            <td>
+                <a onclick="AggiungiGruppoRichiedente();" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a>
+            </td>
+        </tr>
+        @foreach (MD_GRUPPO_RICHIEDENTEModel gruppoRichiedente in ViewData["MDGRUPPIRICHIEDENTI"] as List<MD_GRUPPO_RICHIEDENTEModel>)
+        {
+            <tr>
+                <td>
+                    @gruppoRichiedente.Gruppo.Nome
+                </td>
+                <td>
+                    <a onclick="RimuoviGruppoRichiedente(@gruppoRichiedente.Gruppo.IDGRUPPO,@gruppoRichiedente.IDRICHIEDENTE);" title="Elimina"><i class="fa fa-fw fa-remove"></i></a>
+                </td>
+            </tr>
+        }
+    </table>

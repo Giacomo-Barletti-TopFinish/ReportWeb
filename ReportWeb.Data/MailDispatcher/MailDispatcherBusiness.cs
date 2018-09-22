@@ -27,11 +27,19 @@ namespace ReportWeb.Data.MailDispatcher
         }
 
         [DataContext]
-        public void FillMD_GRUPPI_APP(MailDispatcherDS ds)
+        public void FillMD_GRUPPI_RICHIEDENTI(MailDispatcherDS ds)
         {
             MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
-            a.FillMD_GRUPPI_APP(ds);
+            a.FillMD_GRUPPI_RICHIEDENTI(ds);
         }
+
+        [DataContext]
+        public void FillMD_RICHIEDENTI(MailDispatcherDS ds)
+        {
+            MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
+            a.FillMD_RICHIEDENTI(ds);
+        }
+
 
         [DataContext(true)]
         public void UpdateMailDispatcherDSTable(string Tablename,MailDispatcherDS ds)

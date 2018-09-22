@@ -15,11 +15,11 @@ namespace ReportWeb.Controllers
         {
             VerificaAbilitazioneUtenteConUscita(22);
             MailDispatcherBLL bll = new MailDispatcherBLL();
-            List<MD_APPLICAZIONEModel> applicazioni = bll.LeggiGruppiApplicazioni();
+            List<MD_RICHIEDENTEModel> richiedenti = bll.LeggiRichiedenti();
             List<MD_GRUPPOModel> gruppi = bll.LeggiGruppi();
 
             ViewData.Add("MDGRUPPO", gruppi);
-            ViewData.Add("MDGRUPPIAPP", applicazioni);
+            ViewData.Add("MDRICHIEDENTI", richiedenti);
             return View();
         }
 
@@ -73,5 +73,42 @@ namespace ReportWeb.Controllers
             ViewData.Add("MDDESTINATARI", destinatari);
             return View("TabellaDestinatari");
         }
+
+        public ActionResult LeggiGruppiRichiedenti(decimal IDRICHIEDENTE)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            List<MD_RICHIEDENTEModel> richiedenti = bll.LeggiRichiedenti();
+            MD_RICHIEDENTEModel richiedente = richiedenti.Where(x => x.IDRICHIEDENTE == IDRICHIEDENTE).FirstOrDefault();
+
+            if (richiedente == null) return null;
+
+            List<MD_GRUPPO_RICHIEDENTEModel> gruppiRichiedente = richiedente.GRUPPI;
+
+            List<MD_GRUPPOModel> gruppi = bll.LeggiGruppi();
+
+            ViewData.Add("MDGRUPPIRICHIEDENTI", gruppiRichiedente);
+            ViewData.Add("MDGRUPPO", gruppi);
+            return View("TabellaGruppiRichiedenti");
+
+        }
+
+        public ActionResult CreaNuovoRichiedente(string Richiedente)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            List<MD_RICHIEDENTEModel> richiedenti = bll.CreaNuovoRichiedente(Richiedente);
+
+            ViewData.Add("MDRICHIEDENTI", richiedenti);
+            return View("TabellaRichiedenti");
+        }
+
+        public ActionResult RimuoviRichiedente(decimal IDRICHIEDENTE)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            List<MD_RICHIEDENTEModel> richiedenti = bll.RimuoviRichiedente(IDRICHIEDENTE);
+
+            ViewData.Add("MDRICHIEDENTI", richiedenti);
+            return View("TabellaRichiedenti");
+        }
+
     }
 }

@@ -38,46 +38,21 @@
                     </div>
                     <div class="col-sm-3">
                         Destinatari gruppo <label id="lblNomeGruppo"></label>
+                        @Html.Hidden("hdIDGRUPPO")
                         <div id="divDestinatari">
 
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        applicazioni operazioni
-                        <table class="table table-condensed" id="tbdApplicazioni">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        @Html.TextBox("txtNuovoGruppo", string.Empty, new { @maxlength = "30", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;" })
-                                        @Html.Hidden("hdIDGRUPPO")
-                                    </td>
-                                    <td>
-                                        <a onclick="AggiungiGruppo();" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a>
-                                    </td>
-                                </tr>
-                                @foreach (MD_APPLICAZIONEModel gruppoApp in ViewData["MDGRUPPIAPP"] as List<MD_APPLICAZIONEModel>)
-                                {
-                                    <tr>
-                                        <td>
-                                            @gruppoApp.Applicazione
-                                        </td>
-                                        <td>
-                                            @gruppoApp.Operazione
-                                        </td>
-                                        <td>
-                                            <a onclick="RimuoviApplicazioneOperazione(@gruppoApp.Applicazione,@gruppoApp.Operazione);" title="Elimina"><i class="fa fa-fw fa-remove"></i></a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                    <div class="col-sm-3" id="divTabellaRichiedenti">
+                        Richiedenti
+                        @Html.Partial("TabellaRichiedenti", ViewData)
                     </div>
                     <div class="col-sm-3">
-                        gruppi applicazioni operazioni
-                        <table class="table-condensed" id="tbdGruppiApp">
-                            <tr></tr>
-                        </table>
-                        <label id="lblNomeGruppo"></label>
+                        Gruppi richedente <label id="lblNomeRichiedente"></label>
+                        @Html.Hidden("hdIDRICHIDENTE")
+                        <div id="divGruppiRichiedenti">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,18 +63,17 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
-        //CaricaGruppiDaFatturare();
-        //CaricaGruppiFatturati();
-
-        OnSelectTr();
+        debugger;
+        OnSelectTrGruppi();
+        OnSelectTrRichiedenti();
     });
 
-    function OnSelectTr()
+    function OnSelectTrGruppi()
     {
-        debugger;
+        
         $('#tbdGruppi').on('click', 'tbody tr', function (event)
         {
-            debugger;
+            
             if ($(this).index() == 0) return;
             var tds = $('td', this);
             var nome = tds[0].textContent;
@@ -110,6 +84,25 @@
             $('#lblNomeGruppo').text(nome);
 
             LeggiDestinatari(idGruppo);
+        });
+    }
+
+    function OnSelectTrRichiedenti()
+    {
+        debugger;
+        $('#tbdRichiedenti').on('click', 'tbody tr', function (event)
+        {
+            debugger;
+            if ($(this).index() == 0) return;
+            var tds = $('td', this);
+            var richiedente = tds[0].textContent;
+
+            var idRichiedente = $(".RWRICHIEDENTE", this).val();
+
+            $('#hdIDRICHIDENTE').val(idRichiedente);
+            $('#lblNomeRichiedente').text(richiedente);
+
+            LeggiGruppiRichiedenti(idRichiedente);
         });
     }
 
@@ -134,9 +127,31 @@
         });
     }
 
-    function CreaNuovoGruppo()
+    function LeggiGruppiRichiedenti(IDRICHIEDENTE)
     {
         debugger;
+        var url = '@Url.Action("LeggiGruppiRichiedenti", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { IDRICHIEDENTE: IDRICHIEDENTE },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGruppiRichiedenti').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function CreaNuovoGruppo()
+    {
+        
         $('#lblMessaggi').text('');
         var gruppo = $('#txtNuovoGruppo').val();
         if (gruppo == null || gruppo == '')
@@ -153,7 +168,7 @@
             success: function (data)
             {
                 $('#divTabellaGruppi').html(data).show();
-                OnSelectTr();
+                OnSelectTrGruppi();
             },
             error: function (response)
             {
@@ -175,7 +190,7 @@
             success: function (data)
             {
                 $('#divTabellaGruppi').html(data).show();
-                OnSelectTr();
+                OnSelectTrGruppi();
             },
             error: function (response)
             {
@@ -184,15 +199,13 @@
                 document.close();
             }
         });
-        debugger;
+        
         var IDGRUPPODestinatari = $('#hdIDGRUPPO').val();
         if (IDGRUPPODestinatari == IDGRUPPO)
         {
             $('#divDestinatari').html('').show();
             $('#lblNomeGruppo').text('');
-
         }
-
     }
 
     function AggiungiDestinatario()
@@ -252,4 +265,63 @@
         });
     }
 
+    function CreaNuovoRichiedente()
+    {
+        $('#lblMessaggi').text('');
+        var richiedente = $('#txtNuovoRichiedente').val();
+        if (richiedente == null || richiedente == '')
+        {
+            $('#lblMessaggi').text("Indicare il richiedente");
+            return;
+        }
+        var url = '@Url.Action("CreaNuovoRichiedente", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { Richiedente: richiedente },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divTabellaRichiedenti').html(data).show();
+                OnSelectTrRichiedenti();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function RimuoviRichiedente(IDRICHIEDENTE)
+    {
+        var url = '@Url.Action("RimuoviRichiedente", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { IDRICHIEDENTE: IDRICHIEDENTE },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divTabellaRichiedenti').html(data).show();
+                OnSelectTrRichiedenti();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+
+        var IDRICHIEDENTESELEZIONATO = $('#hdIDRICHIDENTE').val();
+        if (IDRICHIEDENTESELEZIONATO == IDRICHIEDENTE)
+        {
+            $('#divGruppiRichiedenti').html('').show();
+            $('#lblNomeRichiedente').text('');
+
+        }
+
+    }
 </script>

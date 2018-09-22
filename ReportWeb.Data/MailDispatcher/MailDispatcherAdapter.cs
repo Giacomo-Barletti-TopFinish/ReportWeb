@@ -37,13 +37,23 @@ namespace ReportWeb.Data.MailDispatcher
             }
         }
 
-        public void FillMD_GRUPPI_APP(MailDispatcherDS ds)
+        public void FillMD_RICHIEDENTI(MailDispatcherDS ds)
         {
-            string select = @"SELECT * FROM MD_GRUPPI_APP ";
+            string select = @"SELECT * FROM MD_RICHIEDENTI ";
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
-                da.Fill(ds.MD_GRUPPI_APP);
+                da.Fill(ds.MD_RICHIEDENTI);
+            }
+        }
+
+        public void FillMD_GRUPPI_RICHIEDENTI(MailDispatcherDS ds)
+        {
+            string select = @"SELECT * FROM MD_GRUPPI_RICHIEDENTI ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.MD_GRUPPI_RICHIEDENTI);
             }
         }
 
