@@ -680,7 +680,6 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnFILECONTENT);
                 this.columnFILENAME = new global::System.Data.DataColumn("FILENAME", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFILENAME);
-                this.columnIDEMAIL_ALL.AllowDBNull = false;
                 this.columnIDMAIL.AllowDBNull = false;
                 this.columnFILECONTENT.AllowDBNull = false;
                 this.columnFILENAME.AllowDBNull = false;
@@ -1293,7 +1292,6 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnOGGETTO);
                 this.columnCORPO = new global::System.Data.DataColumn("CORPO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCORPO);
-                this.columnIDMAIL.AllowDBNull = false;
                 this.columnIDRICHIEDENTE.AllowDBNull = false;
                 this.columnDATACREAZIONE.AllowDBNull = false;
                 this.columnSTATO.AllowDBNull = false;
@@ -1828,7 +1826,6 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnIDGRUPPO);
                 this.columnNOME = new global::System.Data.DataColumn("NOME", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNOME);
-                this.columnIDGRUPPO.AllowDBNull = false;
                 this.columnNOME.AllowDBNull = false;
                 this.columnNOME.MaxLength = 30;
             }
@@ -2106,7 +2103,6 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnIDGRUPPO);
                 this.columnDESTINATARIO = new global::System.Data.DataColumn("DESTINATARIO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDESTINATARIO);
-                this.columnIDDESTINATARIO.AllowDBNull = false;
                 this.columnDESTINATARIO.AllowDBNull = false;
                 this.columnDESTINATARIO.MaxLength = 100;
             }
@@ -2412,7 +2408,6 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnTIPOOPERAZIONE);
                 this.columnNOTA = new global::System.Data.DataColumn("NOTA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNOTA);
-                this.columnIDMAIL_LOG.AllowDBNull = false;
                 this.columnIDMAIL.AllowDBNull = false;
                 this.columnDATAOPERAZIONE.AllowDBNull = false;
                 this.columnTIPOOPERAZIONE.AllowDBNull = false;
@@ -2855,7 +2850,12 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal IDEMAIL_ALL {
                 get {
-                    return ((decimal)(this[this.tableMD_ALLEGATI.IDEMAIL_ALLColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMD_ALLEGATI.IDEMAIL_ALLColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDEMAIL_ALL\' in table \'MD_ALLEGATI\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableMD_ALLEGATI.IDEMAIL_ALLColumn] = value;
@@ -2893,6 +2893,18 @@ namespace ReportWeb.Entities {
                 set {
                     this[this.tableMD_ALLEGATI.FILENAMEColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIDEMAIL_ALLNull() {
+                return this.IsNull(this.tableMD_ALLEGATI.IDEMAIL_ALLColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIDEMAIL_ALLNull() {
+                this[this.tableMD_ALLEGATI.IDEMAIL_ALLColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2968,7 +2980,12 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal IDMAIL {
                 get {
-                    return ((decimal)(this[this.tableMD_EMAIL.IDMAILColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMD_EMAIL.IDMAILColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDMAIL\' in table \'MD_EMAIL\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableMD_EMAIL.IDMAILColumn] = value;
@@ -3064,6 +3081,18 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIDMAILNull() {
+                return this.IsNull(this.tableMD_EMAIL.IDMAILColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIDMAILNull() {
+                this[this.tableMD_EMAIL.IDMAILColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTENTATIVONull() {
                 return this.IsNull(this.tableMD_EMAIL.TENTATIVOColumn);
             }
@@ -3142,7 +3171,12 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal IDGRUPPO {
                 get {
-                    return ((decimal)(this[this.tableMD_GRUPPI.IDGRUPPOColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMD_GRUPPI.IDGRUPPOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDGRUPPO\' in table \'MD_GRUPPI\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableMD_GRUPPI.IDGRUPPOColumn] = value;
@@ -3158,6 +3192,18 @@ namespace ReportWeb.Entities {
                 set {
                     this[this.tableMD_GRUPPI.NOMEColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIDGRUPPONull() {
+                return this.IsNull(this.tableMD_GRUPPI.IDGRUPPOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIDGRUPPONull() {
+                this[this.tableMD_GRUPPI.IDGRUPPOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3179,7 +3225,13 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal IDDESTINATARIO {
                 get {
-                    return ((decimal)(this[this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDDESTINATARIO\' in table \'MD_GRUPPI_DESTINATARI\' is DBNull." +
+                                "", e);
+                    }
                 }
                 set {
                     this[this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn] = value;
@@ -3215,6 +3267,18 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIDDESTINATARIONull() {
+                return this.IsNull(this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIDDESTINATARIONull() {
+                this[this.tableMD_GRUPPI_DESTINATARI.IDDESTINATARIOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsIDGRUPPONull() {
                 return this.IsNull(this.tableMD_GRUPPI_DESTINATARI.IDGRUPPOColumn);
             }
@@ -3244,7 +3308,12 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal IDMAIL_LOG {
                 get {
-                    return ((decimal)(this[this.tableMD_LOG.IDMAIL_LOGColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMD_LOG.IDMAIL_LOGColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDMAIL_LOG\' in table \'MD_LOG\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableMD_LOG.IDMAIL_LOGColumn] = value;
@@ -3298,6 +3367,18 @@ namespace ReportWeb.Entities {
                 set {
                     this[this.tableMD_LOG.NOTAColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIDMAIL_LOGNull() {
+                return this.IsNull(this.tableMD_LOG.IDMAIL_LOGColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIDMAIL_LOGNull() {
+                this[this.tableMD_LOG.IDMAIL_LOGColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

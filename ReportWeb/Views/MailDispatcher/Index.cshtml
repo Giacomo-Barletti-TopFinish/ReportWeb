@@ -34,6 +34,7 @@
             <div id="divGruppi">
                 <div class="row">
                     <div class="col-sm-3" id="divTabellaGruppi">
+                        Gruppi
                         @Html.Partial("TabellaGruppi", ViewData)
                     </div>
                     <div class="col-sm-3">
@@ -63,47 +64,24 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
-        debugger;
-        OnSelectTrGruppi();
-        OnSelectTrRichiedenti();
+
     });
 
-    function OnSelectTrGruppi()
-    {
-        
-        $('#tbdGruppi').on('click', 'tbody tr', function (event)
-        {
-            
-            if ($(this).index() == 0) return;
-            var tds = $('td', this);
-            var nome = tds[0].textContent;
-
-            var idGruppo = $(".RWGRUPPO", this).val();
-
-            $('#hdIDGRUPPO').val(idGruppo);
-            $('#lblNomeGruppo').text(nome);
-
-            LeggiDestinatari(idGruppo);
-        });
-    }
-
-    function OnSelectTrRichiedenti()
+    function SelezionaGruppo(nome, idGruppo)
     {
         debugger;
-        $('#tbdRichiedenti').on('click', 'tbody tr', function (event)
-        {
-            debugger;
-            if ($(this).index() == 0) return;
-            var tds = $('td', this);
-            var richiedente = tds[0].textContent;
+        $('#hdIDGRUPPO').val(idGruppo);
+        $('#lblNomeGruppo').text(nome);
 
-            var idRichiedente = $(".RWRICHIEDENTE", this).val();
+        LeggiDestinatari(idGruppo);
+    }
 
-            $('#hdIDRICHIDENTE').val(idRichiedente);
-            $('#lblNomeRichiedente').text(richiedente);
+    function SelezionaRichiedente(richiedente, idRichiedente)
+    {
+        $('#hdIDRICHIDENTE').val(idRichiedente);
+        $('#lblNomeRichiedente').text(richiedente);
 
-            LeggiGruppiRichiedenti(idRichiedente);
-        });
+        LeggiGruppiRichiedenti(idRichiedente);
     }
 
     function LeggiDestinatari(IDGRUPPO)
@@ -129,7 +107,6 @@
 
     function LeggiGruppiRichiedenti(IDRICHIEDENTE)
     {
-        debugger;
         var url = '@Url.Action("LeggiGruppiRichiedenti", "MailDispatcher")';
         $.ajax({
             url: url,
@@ -151,7 +128,7 @@
 
     function CreaNuovoGruppo()
     {
-        
+
         $('#lblMessaggi').text('');
         var gruppo = $('#txtNuovoGruppo').val();
         if (gruppo == null || gruppo == '')
@@ -168,7 +145,6 @@
             success: function (data)
             {
                 $('#divTabellaGruppi').html(data).show();
-                OnSelectTrGruppi();
             },
             error: function (response)
             {
@@ -190,7 +166,6 @@
             success: function (data)
             {
                 $('#divTabellaGruppi').html(data).show();
-                OnSelectTrGruppi();
             },
             error: function (response)
             {
@@ -199,7 +174,7 @@
                 document.close();
             }
         });
-        
+
         var IDGRUPPODestinatari = $('#hdIDGRUPPO').val();
         if (IDGRUPPODestinatari == IDGRUPPO)
         {
@@ -283,7 +258,6 @@
             success: function (data)
             {
                 $('#divTabellaRichiedenti').html(data).show();
-                OnSelectTrRichiedenti();
             },
             error: function (response)
             {
@@ -305,7 +279,6 @@
             success: function (data)
             {
                 $('#divTabellaRichiedenti').html(data).show();
-                OnSelectTrRichiedenti();
             },
             error: function (response)
             {
@@ -314,14 +287,58 @@
                 document.close();
             }
         });
-
         var IDRICHIEDENTESELEZIONATO = $('#hdIDRICHIDENTE').val();
         if (IDRICHIEDENTESELEZIONATO == IDRICHIEDENTE)
         {
             $('#divGruppiRichiedenti').html('').show();
             $('#lblNomeRichiedente').text('');
-
         }
+    }
 
+    function AggiungiGruppoRichiedente()
+    {
+        
+        var idGruppo = $('#ddlGruppo').val();
+        var idRichiedente = $('#hdIDRICHIDENTE').val();
+        var cc = $('#chkCC').prop('checked');
+        var url = '@Url.Action("AggiungiGruppoRichiedente", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { IDRICHIEDENTE: idRichiedente, IDGRUPPO: idGruppo,CC:cc },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGruppiRichiedenti').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function RimuoviGruppoRichiedente(IDGRRICH)
+    {
+        var idRichiedente = $('#hdIDRICHIDENTE').val();
+        var url = '@Url.Action("RimuoviGruppoRichiedente", "MailDispatcher")';
+        $.ajax({
+            url: url,
+            data: { IDGRRICH: IDGRRICH, IDRICHIEDENTE: idRichiedente },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGruppiRichiedenti').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
     }
 </script>

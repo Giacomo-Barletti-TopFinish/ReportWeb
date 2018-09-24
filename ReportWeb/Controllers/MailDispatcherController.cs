@@ -26,7 +26,7 @@ namespace ReportWeb.Controllers
         public ActionResult CreaNuovoGruppo(string Gruppo)
         {
             MailDispatcherBLL bll = new MailDispatcherBLL();
-            List<MD_GRUPPOModel> gruppi = bll.CreaNuovoGruppo(Gruppo);
+            List<MD_GRUPPOModel> gruppi = bll.CreaNuovoGruppo(Gruppo.ToUpper());
 
             ViewData.Add("MDGRUPPO", gruppi);
             return View("TabellaGruppi");
@@ -68,7 +68,7 @@ namespace ReportWeb.Controllers
         public ActionResult AggiungiDestinatario(decimal IDGRUPPO, string Destinatario)
         {
             MailDispatcherBLL bll = new MailDispatcherBLL();
-            List<MD_GRUPPO_DESTINATARIOModel> destinatari = bll.AggiungiDestinatario(IDGRUPPO, Destinatario);
+            List<MD_GRUPPO_DESTINATARIOModel> destinatari = bll.AggiungiDestinatario(IDGRUPPO, Destinatario.Trim().ToUpper());
 
             ViewData.Add("MDDESTINATARI", destinatari);
             return View("TabellaDestinatari");
@@ -84,7 +84,13 @@ namespace ReportWeb.Controllers
 
             List<MD_GRUPPO_RICHIEDENTEModel> gruppiRichiedente = richiedente.GRUPPI;
 
+            MD_GRUPPOModel gruppoVuoto = new MD_GRUPPOModel();
+            gruppoVuoto.IDGRUPPO = -1;
+            gruppoVuoto.Nome = string.Empty;
+            gruppoVuoto.Destinatari = new List<MD_GRUPPO_DESTINATARIOModel>();
+
             List<MD_GRUPPOModel> gruppi = bll.LeggiGruppi();
+            gruppi.Insert(0, gruppoVuoto);
 
             ViewData.Add("MDGRUPPIRICHIEDENTI", gruppiRichiedente);
             ViewData.Add("MDGRUPPO", gruppi);
@@ -95,7 +101,7 @@ namespace ReportWeb.Controllers
         public ActionResult CreaNuovoRichiedente(string Richiedente)
         {
             MailDispatcherBLL bll = new MailDispatcherBLL();
-            List<MD_RICHIEDENTEModel> richiedenti = bll.CreaNuovoRichiedente(Richiedente);
+            List<MD_RICHIEDENTEModel> richiedenti = bll.CreaNuovoRichiedente(Richiedente.Trim().ToUpper());
 
             ViewData.Add("MDRICHIEDENTI", richiedenti);
             return View("TabellaRichiedenti");
@@ -108,6 +114,48 @@ namespace ReportWeb.Controllers
 
             ViewData.Add("MDRICHIEDENTI", richiedenti);
             return View("TabellaRichiedenti");
+        }
+
+        public ActionResult AggiungiGruppoRichiedente(decimal IDRICHIEDENTE, decimal IDGRUPPO, bool CC)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            List<MD_RICHIEDENTEModel> richiedenti = bll.AggiungiGruppoRichiedente(IDRICHIEDENTE, IDGRUPPO, CC);
+
+            MD_RICHIEDENTEModel richiedente = richiedenti.Where(x => x.IDRICHIEDENTE == IDRICHIEDENTE).FirstOrDefault();
+            List<MD_GRUPPO_RICHIEDENTEModel> gruppiRichiedente = richiedente.GRUPPI;
+
+            MD_GRUPPOModel gruppoVuoto = new MD_GRUPPOModel();
+            gruppoVuoto.IDGRUPPO = -1;
+            gruppoVuoto.Nome = string.Empty;
+            gruppoVuoto.Destinatari = new List<MD_GRUPPO_DESTINATARIOModel>();
+
+            List<MD_GRUPPOModel> gruppi = bll.LeggiGruppi();
+            gruppi.Insert(0, gruppoVuoto);
+
+            ViewData.Add("MDGRUPPIRICHIEDENTI", gruppiRichiedente);
+            ViewData.Add("MDGRUPPO", gruppi);
+            return View("TabellaGruppiRichiedenti");
+        }
+
+        public ActionResult RimuoviGruppoRichiedente(decimal IDGRRICH, decimal IDRICHIEDENTE)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            List<MD_RICHIEDENTEModel> richiedenti = bll.RimuoviGruppoRichiedente(IDGRRICH);
+
+            MD_GRUPPOModel gruppoVuoto = new MD_GRUPPOModel();
+            gruppoVuoto.IDGRUPPO = -1;
+            gruppoVuoto.Nome = string.Empty;
+            gruppoVuoto.Destinatari = new List<MD_GRUPPO_DESTINATARIOModel>();
+
+            List<MD_GRUPPOModel> gruppi = bll.LeggiGruppi();
+            gruppi.Insert(0, gruppoVuoto);
+
+            MD_RICHIEDENTEModel richiedente = richiedenti.Where(x => x.IDRICHIEDENTE == IDRICHIEDENTE).FirstOrDefault();
+            List<MD_GRUPPO_RICHIEDENTEModel> gruppiRichiedente = richiedente.GRUPPI;
+
+            ViewData.Add("MDGRUPPIRICHIEDENTI", gruppiRichiedente);
+            ViewData.Add("MDGRUPPO", gruppi);
+            return View("TabellaGruppiRichiedenti");
         }
 
     }
