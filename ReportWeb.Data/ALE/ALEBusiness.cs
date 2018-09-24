@@ -142,10 +142,10 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext(true)]
-        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER, bool Mancante)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
-            a.InsertRW_ALE_DETTAGLIO(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
+            a.InsertRW_ALE_DETTAGLIO(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Mancante, Nota, UIDUSER);
         }
 
         [DataContext]

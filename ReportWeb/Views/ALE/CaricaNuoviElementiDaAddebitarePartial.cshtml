@@ -68,9 +68,12 @@ else
                                         @a.Azienda
                                     </td>
                                     <td colspan="2">
+                                        @string.Format("Inserito da {0}", @a.UidUserInserimento)
+                                    </td>
+                                    <td colspan="2">
                                         @string.Format("Commessa: {0} del {1}", @a.Commessa, @a.DataCommessa)
                                     </td>
-                                    <td colspan="7">
+                                    <td colspan="5">
                                         @a.NotaInserimento
                                     </td>
                                 </tr>

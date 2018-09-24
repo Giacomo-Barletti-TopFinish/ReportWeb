@@ -134,7 +134,7 @@ namespace ReportWeb.Data
 
         public void FillRW_ALE_DETTAGLIO(ALEDS ds, string STATO)
         {
-            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE STATO = $P{STATO}";
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE STATO = $P{STATO} AND MANCANTE = '0'";
             ParamSet ps = new ParamSet();
             ps.AddParam("STATO", DbType.String, STATO);
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
@@ -146,7 +146,7 @@ namespace ReportWeb.Data
 
         public void FillRW_ALE_DETTAGLIO(ALEDS ds, decimal IDALEGRUPPO)
         {
-            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE IDALEGRUPPO = $P{IDALEGRUPPO}";
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE IDALEGRUPPO = $P{IDALEGRUPPO} AND MANCANTE = '0'";
             ParamSet ps = new ParamSet();
             ps.AddParam("IDALEGRUPPO", DbType.Decimal, IDALEGRUPPO);
 
@@ -162,7 +162,7 @@ namespace ReportWeb.Data
             if (IDALEGRUPPO.Count == 0) return;
 
             string selezione = ConvertToStringForInCondition(IDALEGRUPPO);
-            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE IDALEGRUPPO IN ({0})";
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE MANCANTE = '0' AND IDALEGRUPPO IN ({0})";
 
             select = string.Format(select, selezione);
 
@@ -174,7 +174,7 @@ namespace ReportWeb.Data
 
         public void FillRW_ALE_DETTAGLIOByPK(ALEDS ds, decimal IdAleDettaglio)
         {
-            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE IDALEDETTAGLIO = $P{IDALEDETTAGLIO}";
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE IDALEDETTAGLIO = $P{IDALEDETTAGLIO} AND MANCANTE = '0'";
             ParamSet ps = new ParamSet();
             ps.AddParam("IDALEDETTAGLIO", DbType.Decimal, IdAleDettaglio);
 
@@ -351,11 +351,11 @@ namespace ReportWeb.Data
 
         }
 
-        public void InsertRW_ALE_DETTAGLIO(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        public void InsertRW_ALE_DETTAGLIO(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, bool Mancante, string Nota, string UIDUSER)
         {
 
-            string insert = @"INSERT INTO RW_ALE_DETTAGLIO (AZIENDA,BARCODE,IDCHECKQT,QUANTITADIFETTOSI,QUANTITAINSERITA,NOTAINSERIMENTO,LAVORANTE, STATO, DATA_INSERIMENTO,UIDUSER_INSERIMENTO) VALUES
-                                            ($P<AZIENDA>,$P<BARCODE>,$P<IDCHECKQT>,$P<QUANTITADIFETTOSI>,$P<QUANTITAINSERITA>,$P<NOTA>,$P<LAVORANTE>, $P<STATO>,$P<NOW>,$P<UIDUSER>)";
+            string insert = @"INSERT INTO RW_ALE_DETTAGLIO (AZIENDA,BARCODE,IDCHECKQT,QUANTITADIFETTOSI,QUANTITAINSERITA,NOTAINSERIMENTO,LAVORANTE, STATO, DATA_INSERIMENTO,UIDUSER_INSERIMENTO,MANCANTE) VALUES
+                                            ($P<AZIENDA>,$P<BARCODE>,$P<IDCHECKQT>,$P<QUANTITADIFETTOSI>,$P<QUANTITAINSERITA>,$P<NOTA>,$P<LAVORANTE>, $P<STATO>,$P<NOW>,$P<UIDUSER>,$P{MANCANTE})";
             ParamSet ps = new ParamSet();
             ps.AddParam("AZIENDA", DbType.String, Azienda);
             ps.AddParam("BARCODE", DbType.String, Barcode);
@@ -367,6 +367,7 @@ namespace ReportWeb.Data
             ps.AddParam("STATO", DbType.String, ALEStatoDettaglio.INSERITO);
             ps.AddParam("NOW", DbType.DateTime, DateTime.Now);
             ps.AddParam("UIDUSER", DbType.String, UIDUSER);
+            ps.AddParam("MANCANTE", DbType.String, Mancante ? "1" : "0");
 
             using (DbCommand cmd = BuildCommand(insert, ps))
             {

@@ -125,7 +125,18 @@ namespace ReportWeb.Business
         {
             using (ALEBusiness bALE = new ALEBusiness())
             {
-                bALE.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER);
+                bool mancante = VerificaSeMancanti(IDCHECKQT);
+                bALE.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER, mancante);
+            }
+        }
+
+        public bool VerificaSeMancanti(string IDCHECKQT)
+        {
+            ALEDS ds = new ALEDS();
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                bALE.FillUSR_CHECKQ_C(ds, IDCHECKQT);
+                return ds.USR_CHECKQ_C.Any(x => IdMAncanti.ListaIdMancanti.Contains(x.IDDIFETTO));
             }
         }
 
