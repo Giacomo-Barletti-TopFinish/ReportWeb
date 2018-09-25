@@ -7,29 +7,30 @@
 }
 else
 {
-    <div class="col-sm-2"><input type="button" onclick="Report();" class="btn btn-primary" value="Report PDF" /></div>
-
+    <div class="row">
+        <div class="col-sm-2"><input type="button" onclick="Report();" class="btn btn-primary" value="Report PDF" /></div>
+    </div>
     <table>
         <thead>
             <tr>
-                <th>Data inserimento</th>
-                <th>Azienda</th>
-                <th>Lavorante</th>
-                <th>Modello</th>
-                <th>Descrizione</th>
-                <th>Quantità</th>
+                <th width="8%">Data inserimento</th>
+                <th width="8%">Azienda</th>
+                <th width="15%">Lavorante</th>
+                <th width="15%">Modello</th>
+                <th width="25%">Descrizione</th>
+                <th width="8%">Quantità</th>
             </tr>
         </thead>
         <tbody>
             @foreach (AddebitoModel addebito in Model.Addebiti)
             {
                 <tr>
-                    <th>@addebito.DataInserimento</th>
-                    <th>@addebito.Azienda</th>
-                    <th>@addebito.LavoranteDescrizione</th>
-                    <th>@addebito.Modello</th>
-                    <th>@addebito.ModelloDescrizione</th>
-                    <th>@addebito.QuantitaDifettosi</th>
+                    <td>@addebito.DataInserimento</td>
+                    <td>@addebito.Azienda</td>
+                    <td>@addebito.LavoranteDescrizione</td>
+                    <td>@addebito.Modello</td>
+                    <td>@addebito.ModelloDescrizione</td>
+                    <td>@addebito.QuantitaDifettosi</td>
                 </tr>
             }
         </tbody>

@@ -11,6 +11,38 @@ namespace ReportWeb.Business
 {
     public class MailDispatcherBLL
     {
+        public decimal CreaEmail(string Richiedente)
+        {
+            MailDispatcherDS ds = new MailDispatcherDS();
+            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
+            {
+                bMD.FillMD_RICHIEDENTI(ds);
+                MailDispatcherDS.MD_RICHIEDENTIRow richiedente = ds.MD_RICHIEDENTI.Where(x => x.RICHIEDENTE.Trim().ToUpper() == Richiedente.Trim().ToUpper()).FirstOrDefault();
+                if (richiedente == null)
+                    return -1;
+
+                decimal IDMAIL = bMD.CreaMail(richiedente.IDRICHIEDENTE);
+
+                return IDMAIL;
+            }
+        }
+
+        public void InserisciCorpoEOggetto(decimal IDMAIL, string oggetto, string corpo)
+        {
+            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
+            {
+                bMD.InserisciOggettoeCopro(IDMAIL, oggetto, corpo);
+            }
+        }
+
+        public void SottomettiEmail(decimal IDMAIL)
+        {
+            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
+            {
+                bMD.SottomettiEmail(IDMAIL);
+            }
+        }
+
         public List<MD_GRUPPOModel> LeggiGruppi()
         {
             List<MD_GRUPPOModel> gruppi = new List<MD_GRUPPOModel>();

@@ -147,13 +147,17 @@ namespace ReportWeb.Data
         {
             DateTime inizio = DateTime.Parse(dataInizio);
             DateTime fine = DateTime.Parse(dataFine);
-            string select = @"SELECT * FROM RW_ALE_DETTAGLIO where DATA_INSERIMENTO>=$P{dtInizio} AND DATA_INSERIMENTO <=$P{dtFine}";
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO WHERE DATA_INSERIMENTO >= to_date('{0}','DD/MM/YYYY HH24:MI:SS') AND DATA_INSERIMENTO <= to_date('{1}','DD/MM/YYYY HH24:MI:SS') ";
+
+            string dtInizio = inizio.ToString("dd/MM/yyyy");
+            dtInizio += " 00:00:01";
+            string dtFine = fine.ToString("dd/MM/yyyy");
+            dtFine += " 23:59:59";
+            select = string.Format(select, dtInizio, dtFine);
+
             if (SoloMancante)
                 select = select + " AND MANCANTE = '1'";
-            ParamSet ps = new ParamSet();
-            ps.AddParam("dtInizio", DbType.DateTime, inizio);
-            ps.AddParam("dtFine", DbType.DateTime, fine);
-            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.RW_ALE_DETTAGLIO);
             }

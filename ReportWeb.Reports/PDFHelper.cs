@@ -363,11 +363,11 @@ namespace ReportWeb.Reports
             Column column = table.AddColumn(Unit.FromCentimeter(2));
             column.Format.Alignment = ParagraphAlignment.Center;
 
-            table.AddColumn(Unit.FromCentimeter(1.5));
             table.AddColumn(Unit.FromCentimeter(2.5));
+            table.AddColumn(Unit.FromCentimeter(3.5));
 
-            table.AddColumn(Unit.FromCentimeter(2.5));
-            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(4.0));
+            table.AddColumn(Unit.FromCentimeter(5.5));
             table.AddColumn(Unit.FromCentimeter(1.5));
 
 
@@ -394,7 +394,7 @@ namespace ReportWeb.Reports
             foreach (AddebitoModel mancante in report.Addebiti)
             {
                 row = table.AddRow();
-
+                
                 cell = row.Cells[0];
                 cell.AddParagraph(mancante.DataInserimento.ToShortDateString());
                 cell.VerticalAlignment = VerticalAlignment.Top;

@@ -42,12 +42,31 @@ namespace ReportWeb.Data.MailDispatcher
 
 
         [DataContext(true)]
-        public void UpdateMailDispatcherDSTable(string Tablename,MailDispatcherDS ds)
+        public void UpdateMailDispatcherDSTable(string Tablename, MailDispatcherDS ds)
         {
             MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
-            a.UpdateMailDispatcherDSTable(Tablename,ds);
+            a.UpdateMailDispatcherDSTable(Tablename, ds);
         }
 
+        [DataContext(true)]
+        public decimal CreaMail(decimal idRichiedente)
+        {
+            MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
+            return a.CreaMail(idRichiedente);
+        }
 
+        [DataContext(true)]
+        public void SottomettiEmail(decimal IDMAIL)
+        {
+            MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
+            a.SottomettiEmail(IDMAIL);
+        }
+
+        [DataContext(true)]
+        public void InserisciOggettoeCopro(decimal IDMAIL, string oggetto, string corpo)
+        {
+            MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
+            a.InserisciOggettoeCopro(IDMAIL, oggetto, corpo);
+        }
     }
 }

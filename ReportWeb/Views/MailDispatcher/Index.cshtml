@@ -1,4 +1,6 @@
 ﻿@using ReportWeb.Models.MailDispatcher
+@using ReportWeb.Models
+
 @{
     ViewBag.Title = "Mail Dispatcher Admin";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
@@ -12,7 +14,7 @@
 <div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:750px">
     <div class="box" id="sectionDatiGenerali">
         <div class="box-header with-border">
-            <h4 class="box-title text-bold">Mail in attesa di invio o in errore</h4>
+            <h4 class="box-title text-bold">Gestione Email</h4>
             <div class="box-tools pull-right">
                 <button id="btnCollapseDatiGenerali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
             </div>
@@ -20,6 +22,23 @@
         <!-- /.box-header -->
         <div class="box-body form-group-sm">
             <div id="divMail">
+                <div class="row">
+                    <div class="col-sm-4">
+                        INVIO MAIL
+                        @Html.DropDownList("ddlRichiedente", new SelectList(ViewData["MDRICHIEDENTI"] as List<MD_RICHIEDENTEModel>, "IDRICHIEDENTE", "Richiedente"), new { @class = "form-control input-sm select2", @style = "height: 21px;" })
+                        Soggetto
+                        @Html.TextBox("txtSoggetto", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })
+                        Corpo
+                        @Html.TextArea("txtCorpo", "", new { @maxlength = "4000", @class = "form-control input-sm ", cols = "20", rows = "10" })
+                        <input type="button" onclick="CreaMail();" class="btn btn-primary" value="Inserisci email" />
+                    </div>
+                    <div class="col-sm-4">
+                        verifica
+                    </div>
+                    <div class="col-sm-4">
+                        log
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,9 +86,16 @@
 
     });
 
-    function SelezionaGruppo(nome, idGruppo)
+    function CreaMail()
     {
-        debugger;
+        var idRichiedente = $('#ddlRichiedente').val();
+        var soggetto = $('#txtSoggetto').val();
+        var corpo = $('#txtCorpo').val();
+
+    }
+
+    function SelezionaGruppo(nome, idGruppo)
+    {        
         $('#hdIDGRUPPO').val(idGruppo);
         $('#lblNomeGruppo').text(nome);
 
@@ -297,14 +323,14 @@
 
     function AggiungiGruppoRichiedente()
     {
-        
+
         var idGruppo = $('#ddlGruppo').val();
         var idRichiedente = $('#hdIDRICHIDENTE').val();
         var cc = $('#chkCC').prop('checked');
         var url = '@Url.Action("AggiungiGruppoRichiedente", "MailDispatcher")';
         $.ajax({
             url: url,
-            data: { IDRICHIEDENTE: idRichiedente, IDGRUPPO: idGruppo,CC:cc },
+            data: { IDRICHIEDENTE: idRichiedente, IDGRUPPO: idGruppo, CC: cc },
             cache: false,
             type: "POST",
             success: function (data)
