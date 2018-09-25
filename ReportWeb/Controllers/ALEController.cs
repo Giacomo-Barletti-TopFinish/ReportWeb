@@ -1,5 +1,6 @@
 ﻿using ReportWeb.Business;
 using ReportWeb.Models.ALE;
+using ReportWeb.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,31 @@ namespace ReportWeb.Controllers
         {
             VerificaAbilitazioneUtenteConUscita(20);
             return View();
+        }
+        public ActionResult Mancanti()
+        {
+            VerificaAbilitazioneUtenteConUscita(23);
+            return View();
+        }
+
+        public ActionResult TrovaMancanti(string DataInizio, string DataFine)
+        {
+            ALEBLL bll = new ALEBLL(RvlImageSite);
+            AddebitiModel model = bll.TrovaMancanti(DataInizio, DataFine);
+
+            return PartialView("TabellaMancantiPartial", model);
+        }
+
+        public ActionResult ReportPDF(string DataInizio, string DataFine)
+        {
+            ALEBLL bll = new ALEBLL(RvlImageSite);
+            AddebitiModel model = bll.TrovaMancanti(DataInizio, DataFine);
+
+            PDFHelper pdfHelper = new PDFHelper();
+            byte[] fileContents = pdfHelper.EstraiReportALEMancanti(model, DataInizio, DataFine);
+
+            return File(fileContents, "application/pdf", "Report.pdf");
+
         }
 
         public ActionResult CaricaScheda(string Barcode)

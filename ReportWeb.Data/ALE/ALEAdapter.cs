@@ -143,6 +143,21 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillRW_ALE_DETTAGLIO(ALEDS ds, string dataInizio, string dataFine, bool SoloMancante)
+        {
+            DateTime inizio = DateTime.Parse(dataInizio);
+            DateTime fine = DateTime.Parse(dataFine);
+            string select = @"SELECT * FROM RW_ALE_DETTAGLIO where DATA_INSERIMENTO>=$P{dtInizio} AND DATA_INSERIMENTO <=$P{dtFine}";
+            if (SoloMancante)
+                select = select + " AND MANCANTE = '1'";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("dtInizio", DbType.DateTime, inizio);
+            ps.AddParam("dtFine", DbType.DateTime, fine);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.RW_ALE_DETTAGLIO);
+            }
+        }
 
         public void FillRW_ALE_DETTAGLIO(ALEDS ds, decimal IDALEGRUPPO)
         {

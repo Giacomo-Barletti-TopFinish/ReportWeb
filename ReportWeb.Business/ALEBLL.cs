@@ -20,6 +20,45 @@ namespace ReportWeb.Business
         }
         private string rvlImageSite;
 
+        public AddebitiModel TrovaMancanti(string dataInizio, string dataFine)
+        {
+            AddebitiModel model = new AddebitiModel();
+            model.Addebiti = new List<AddebitoModel>();
+            ALEDS ds = new ALEDS();
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                bALE.FillRW_ALE_DETTAGLIO(ds, dataInizio, dataFine, true);
+
+                bALE.FillCLIFO(ds);
+                bALE.FillUSR_TAB_TIPODIFETTI(ds);
+                bALE.FillUSR_ANA_DIFETTI(ds);
+                List<string> IDCHECKQT = ds.RW_ALE_DETTAGLIO.Select(x => x.IDCHECKQT).ToList();
+                bALE.FillUSR_CHECKQ_T(ds, IDCHECKQT);
+                bALE.FillUSR_CHECKQ_C(ds, IDCHECKQT);
+                bALE.FillUSR_PRD_MOVFASI(ds, IDCHECKQT);
+                List<string> IDMAGAZZ = ds.USR_CHECKQ_T.Select(x => x.IDMAGAZZ).ToList();
+                bALE.FillMAGAZZ(ds, IDMAGAZZ);
+                bALE.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+                bALE.FillTABFAS(ds);
+
+                List<decimal> IDALEDETTAGLIO = ds.RW_ALE_DETTAGLIO.Select(x => x.IDALEDETTAGLIO).ToList();
+                bALE.FillRW_ALE_DETT_COSTO(ds, IDALEDETTAGLIO);
+
+                List<string> IDPRDMOVFASE = ds.USR_PRD_MOVFASI.Select(x => x.IDPRDMOVFASE).Distinct().ToList();
+                bALE.FillUSR_PRD_FASI(ds, IDPRDMOVFASE);
+
+                foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO)
+                {
+                    ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
+                    AddebitoModel m = CreaAddebitoModel(ds, riga);
+                    model.Addebiti.Add(m);
+                }
+
+            }
+
+            return model;
+        }
+
         public InserimentoModel CaricaScheda(string Barcode)
         {
             InserimentoModel model = new InserimentoModel();

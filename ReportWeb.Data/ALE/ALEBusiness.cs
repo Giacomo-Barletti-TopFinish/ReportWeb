@@ -226,6 +226,13 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext]
+        public void FillRW_ALE_DETTAGLIO(ALEDS ds, string dataInizio, string dataFine, bool SoloMancante)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_DETTAGLIO(ds, dataInizio,dataFine,SoloMancante);
+        }
+
+        [DataContext]
         public void FillRW_ALE_DETTAGLIOByPK(ALEDS ds, decimal IdAleDettaglio)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);

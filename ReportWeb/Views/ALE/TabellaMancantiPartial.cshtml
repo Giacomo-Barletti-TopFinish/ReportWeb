@@ -1,0 +1,37 @@
+﻿@using ReportWeb.Models.ALE
+@model AddebitiModel
+
+@if (Model.Addebiti.Count == 0)
+{
+    <label class="text-red">Nessun risultato trovato</label>
+}
+else
+{
+    <div class="col-sm-2"><input type="button" onclick="Report();" class="btn btn-primary" value="Report PDF" /></div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Data inserimento</th>
+                <th>Azienda</th>
+                <th>Lavorante</th>
+                <th>Modello</th>
+                <th>Descrizione</th>
+                <th>Quantità</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AddebitoModel addebito in Model.Addebiti)
+            {
+                <tr>
+                    <th>@addebito.DataInserimento</th>
+                    <th>@addebito.Azienda</th>
+                    <th>@addebito.LavoranteDescrizione</th>
+                    <th>@addebito.Modello</th>
+                    <th>@addebito.ModelloDescrizione</th>
+                    <th>@addebito.QuantitaDifettosi</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

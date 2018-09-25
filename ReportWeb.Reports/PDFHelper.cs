@@ -3,6 +3,7 @@ using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using ReportWeb.Common.Helpers;
 using ReportWeb.Models;
+using ReportWeb.Models.ALE;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,32 @@ namespace ReportWeb.Reports
     public class PDFHelper
     {
         private Document _document;
+
+        public byte[] EstraiReportALEMancanti(AddebitiModel report, string dataInizio, string dataFine)
+        {
+            InizializzaDocumento("Report Mancanti ALE", "Report", "MetalWeb");
+
+            _document.DefaultPageSetup.Orientation = Orientation.Portrait;
+            _document.DefaultPageSetup.RightMargin = 20;
+            _document.DefaultPageSetup.LeftMargin = 20;
+            _document.AddSection();
+            _document.LastSection.AddParagraph("Report Mancanti ALE", "Heading2");
+
+            Paragraph paragraph = _document.LastSection.AddParagraph();
+            paragraph.AddText("Report dal ");
+            paragraph.AddFormattedText(dataInizio, TextFormat.Bold);
+            paragraph.AddText(" al ");
+            paragraph.AddFormattedText(dataFine, TextFormat.Bold);
+            paragraph.AddText(".");
+
+            paragraph.Format.SpaceAfter = "1cm";
+
+            CreaTabellaALEMancanti(report);
+
+            byte[] fileContents = EstraiByteDaDocumento();
+            return fileContents;
+        }
+
         public byte[] EstraiGalvanicaReport(GalvanicaReportModel report, DateTime dataInizio, DateTime dataFine)
         {
             InizializzaDocumento("Report Galvanica", "Report settimanale", "MetalWeb");
@@ -327,6 +354,82 @@ namespace ReportWeb.Reports
 
             _document.LastSection.Add(table);
         }
+        private void CreaTabellaALEMancanti(AddebitiModel report)
+        {
+            //12 colonne
+            Table table = new Table();
+            table.Borders.Width = 0.75;
+
+            Column column = table.AddColumn(Unit.FromCentimeter(2));
+            column.Format.Alignment = ParagraphAlignment.Center;
+
+            table.AddColumn(Unit.FromCentimeter(1.5));
+            table.AddColumn(Unit.FromCentimeter(2.5));
+
+            table.AddColumn(Unit.FromCentimeter(2.5));
+            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(1.5));
+
+
+            table.Rows.Height = 10;
+            table.TopPadding = 5;
+            table.BottomPadding = 5;
+
+            Row row = table.AddRow();
+            row.Shading.Color = Colors.PaleGoldenrod;
+            Cell cell = row.Cells[0];
+            cell.AddParagraph("Giorno");
+            cell = row.Cells[1];
+            cell.AddParagraph("Azienda");
+            cell = row.Cells[2];
+            cell.AddParagraph("Lavorante");
+            cell = row.Cells[3];
+            cell.AddParagraph("Modello");
+            cell = row.Cells[4];
+            cell.AddParagraph("Descrizione");
+            cell = row.Cells[5];
+            cell.AddParagraph("Quantità");
+
+
+            foreach (AddebitoModel mancante in report.Addebiti)
+            {
+                row = table.AddRow();
+
+                cell = row.Cells[0];
+                cell.AddParagraph(mancante.DataInserimento.ToShortDateString());
+                cell.VerticalAlignment = VerticalAlignment.Top;
+
+
+                cell = row.Cells[1];
+                cell.AddParagraph(mancante.Azienda);
+                cell.VerticalAlignment = VerticalAlignment.Top;
+
+
+                cell = row.Cells[2];
+                cell.AddParagraph(mancante.LavoranteDescrizione);
+                cell.VerticalAlignment = VerticalAlignment.Top;
+
+
+                cell = row.Cells[3];
+                cell.AddParagraph(mancante.Modello);
+                cell.VerticalAlignment = VerticalAlignment.Top;
+
+
+                cell = row.Cells[4];
+                cell.AddParagraph(mancante.ModelloDescrizione);
+                cell.VerticalAlignment = VerticalAlignment.Top;
+
+
+                cell = row.Cells[5];
+                cell.AddParagraph(mancante.QuantitaDifettosi.ToString());
+                cell.VerticalAlignment = VerticalAlignment.Top;
+
+            }
+
+            table.SetEdge(0, 0, table.Columns.Count, table.Rows.Count, Edge.Box, BorderStyle.Single, 1.5, Colors.Black);
+
+            _document.LastSection.Add(table);
+        }
 
         private void CreaTabellaGalvanica(GalvanicaReportModel report)
         {
@@ -388,57 +491,57 @@ namespace ReportWeb.Reports
                 cell = row.Cells[0];
                 cell.AddParagraph(consuntivo.InizioTurno.ToShortDateString());
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 cell = row.Cells[1];
                 cell.AddParagraph(consuntivo.InizioTurno.ToString("dd/MM/yyyy HH:mm"));
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 cell = row.Cells[2];
                 cell.AddParagraph(consuntivo.FineTurno.ToString("dd/MM/yyyy HH:mm"));
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 cell = row.Cells[3];
                 cell.AddParagraph(consuntivo.Barre.ToString());
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 cell = row.Cells[4];
                 cell.AddParagraph(consuntivo.Durata.ToString(@"hh\:mm"));
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 cell = row.Cells[5];
                 cell.AddParagraph(consuntivo.FermoTotale.ToString(@"hh\:mm"));
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 cell = row.Cells[6];
                 cell.AddParagraph(consuntivo.DurataEffettiva.ToString(@"hh\:mm"));
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 cell = row.Cells[7];
                 cell.AddParagraph(consuntivo.BarreHH.ToString());
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 cell = row.Cells[8];
                 cell.AddParagraph(consuntivo.MinBarre.ToString());
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 cell = row.Cells[10];
                 cell.AddParagraph(consuntivo.UIDUSER);
                 cell.VerticalAlignment = VerticalAlignment.Top;
-                
+
 
                 for (int i = 0; i < consuntivo.Fermi.Count; i++)
                 {
                     cell = row.Cells[9];
-                    string fermo = string.Format("{0} {1} {2} {3}",consuntivo.Fermi[i].Tipo, consuntivo.Fermi[i].Ora, consuntivo.Fermi[i].Durata, consuntivo.Fermi[i].Motivo);
+                    string fermo = string.Format("{0} {1} {2} {3}", consuntivo.Fermi[i].Tipo, consuntivo.Fermi[i].Ora, consuntivo.Fermi[i].Durata, consuntivo.Fermi[i].Motivo);
                     cell.AddParagraph(fermo);
                 }
             }
