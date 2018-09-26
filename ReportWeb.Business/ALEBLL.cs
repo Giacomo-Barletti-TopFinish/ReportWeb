@@ -165,6 +165,19 @@ namespace ReportWeb.Business
             using (ALEBusiness bALE = new ALEBusiness())
             {
                 bool mancante = VerificaSeMancanti(IDCHECKQT);
+                if(!mancante)
+                {
+                    MailDispatcherBLL bllMD = new MailDispatcherBLL();
+                    string oggetto = "ALE - NUOVA SCHEDA INSERITA";
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine("Nuova scheda inserita");
+                    sb.AppendLine();
+                    sb.AppendLine(string.Format("Lavorante: {0}",Lavorante));
+                    sb.AppendLine(string.Format("Quanità: {0}", Inseriti));
+                    sb.AppendLine(string.Format("USerid: {0}", UIDUSER));
+
+                    bllMD.CreaEmail("ALE - ADDEBITO", oggetto, sb.ToString());
+                }
                 bALE.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER, mancante);
             }
         }
@@ -430,6 +443,13 @@ namespace ReportWeb.Business
 
                     bALE.UpdateRW_ALE_DETTAGLIO(ds);
 
+                    MailDispatcherBLL bllMD = new MailDispatcherBLL();
+                    string oggetto = "ALE - NUOVO GRUPPO ADDEBITO INSERITO ID GRUPPO:"+IDGRUPPO.ToString();
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine(string.Format("E' stato creato il gruppo: {0} che deve essere valorizzato", IDGRUPPO));
+
+                    bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
+
                 }
                 catch
                 {
@@ -528,6 +548,13 @@ namespace ReportWeb.Business
 
                     bALE.UpdateRW_ALE_DETTAGLIO(ds);
                     bALE.UpdateRW_ALE_GRUPPO(ds);
+
+                    MailDispatcherBLL bllMD = new MailDispatcherBLL();
+                    string oggetto = "ALE - ANNULLATO NUOVO GRUPPO ADDEBITO INSERITO ID GRUPPO:" + IDALEGRUPPO.ToString();
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine(string.Format("Il gruppo di addebito: {0} è stato annullato. Nessuna valorizzazione da fare", IDALEGRUPPO));
+
+                    bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
 
                 }
                 catch
@@ -727,6 +754,15 @@ namespace ReportWeb.Business
                 bALE.UpdateRW_ALE_DETTAGLIO(ds);
                 bALE.UpdateRW_ALE_DETT_COSTO(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
+
+
+                MailDispatcherBLL bllMD = new MailDispatcherBLL();
+                string oggetto = "ALE - NUOVO GRUPPO DA APPROVARE:" + IDALEGRUPPO.ToString();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(string.Format("E' stato valorizzato il gruppo: {0}.", IDALEGRUPPO));
+
+                bllMD.CreaEmail("ALE - APPROVAZIONE", oggetto, sb.ToString());
+
             }
         }
 
@@ -763,6 +799,14 @@ namespace ReportWeb.Business
                 }
                 bALE.UpdateRW_ALE_DETTAGLIO(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
+
+                MailDispatcherBLL bllMD = new MailDispatcherBLL();
+                string oggetto = "ALE - NUOVO GRUPPO DA FATTURARE:" + IDALEGRUPPO.ToString();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(string.Format("E' stato approvato il gruppo: {0}.", IDALEGRUPPO));
+
+                bllMD.CreaEmail("ALE - FATTURAZIONE", oggetto, sb.ToString());
+
             }
         }
 
@@ -789,6 +833,14 @@ namespace ReportWeb.Business
                 }
                 bALE.UpdateRW_ALE_DETTAGLIO(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
+
+                MailDispatcherBLL bllMD = new MailDispatcherBLL();
+                string oggetto = "ALE - ANNULLATA APPROVAZIONE DEL GRUPPO:" + IDALEGRUPPO.ToString();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(string.Format("L'approvazione per il gruppo: {0} è stata annullata. Nessuna fatturazione da fare", IDALEGRUPPO));
+
+                bllMD.CreaEmail("ALE - FATTURAZIONE", oggetto, sb.ToString());
+
             }
         }
 
@@ -822,6 +874,14 @@ namespace ReportWeb.Business
                 bALE.UpdateRW_ALE_DETTAGLIO(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
                 bALE.UpdateRW_ALE_DETT_COSTO(ds);
+
+                MailDispatcherBLL bllMD = new MailDispatcherBLL();
+                string oggetto = "ALE - ANNULLATA VALORIZZAZIONE DEL GRUPPO:" + IDALEGRUPPO.ToString();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(string.Format("La valorizzazione per il gruppo: {0} è stata annullata. Nessuna approvazione da fare", IDALEGRUPPO));
+
+                bllMD.CreaEmail("ALE - APPROVAZIONE", oggetto, sb.ToString());
+
             }
         }
 
