@@ -1,5 +1,6 @@
 ﻿@using ReportWeb.Models.MailDispatcher
 @using ReportWeb.Models
+@model List<MD_EMAILModel>
 
 @{
     ViewBag.Title = "Mail Dispatcher Admin";
@@ -21,7 +22,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body form-group-sm">
-            <div id="divMail">
+            <div id="divMailCrea">
                 <div class="row">
                     <div class="col-sm-4">
                         INVIO MAIL
@@ -31,340 +32,407 @@
                         Corpo
                         @Html.TextArea("txtCorpo", "", new { @maxlength = "4000", @class = "form-control input-sm ", cols = "20", rows = "10" })
                         <input type="button" onclick="CreaMail();" class="btn btn-primary" value="Inserisci email" />
+                        <label id="lblMessageCreaMail" class="text-red"></label>
                     </div>
-                    <div class="col-sm-4">
-                        verifica
-                    </div>
-                    <div class="col-sm-4">
-                        log
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="box box-primary" id="sectionTaglio">
-        <div class="box-header with-border">
-            <h4 class="box-title text-bold">Gruppi mail dispatcher</h4>
-            <div class="box-tools pull-right">
-                <button id="btnCollapseTaglio" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
-            </div>
-        </div>
-        <div class="box-body">
-            <div id="divGruppi">
-                <div class="row">
-                    <div class="col-sm-3" id="divTabellaGruppi">
-                        Gruppi
-                        @Html.Partial("TabellaGruppi", ViewData)
-                    </div>
-                    <div class="col-sm-3">
-                        Destinatari gruppo <label id="lblNomeGruppo"></label>
-                        @Html.Hidden("hdIDGRUPPO")
-                        <div id="divDestinatari">
-
-                        </div>
-                    </div>
-                    <div class="col-sm-3" id="divTabellaRichiedenti">
-                        Richiedenti
-                        @Html.Partial("TabellaRichiedenti", ViewData)
-                    </div>
-                    <div class="col-sm-3">
-                        Gruppi richedente <label id="lblNomeRichiedente"></label>
-                        @Html.Hidden("hdIDRICHIDENTE")
-                        <div id="divGruppiRichiedenti">
-
+                    <div class="col-sm-4" id="divMail">
+                        @Html.Partial("TabellaMail",Model)
+                                </div>
+                                <div class="col-sm-4" id="divMailLog">
+                                    log
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="box box-primary" id="sectionTaglio">
+                    <div class="box-header with-border">
+                        <h4 class="box-title text-bold">Gruppi mail dispatcher</h4>
+                        <div class="box-tools pull-right">
+                            <button id="btnCollapseTaglio" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div id="divGruppi">
+                            <div class="row">
+                                <div class="col-sm-3" id="divTabellaGruppi">
+                                    Gruppi
+                                    @Html.Partial("TabellaGruppi", ViewData)
+                                </div>
+                                <div class="col-sm-3">
+                                    Destinatari gruppo <label id="lblNomeGruppo"></label>
+                                    @Html.Hidden("hdIDGRUPPO")
+                                    <div id="divDestinatari">
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" id="divTabellaRichiedenti">
+                                    Richiedenti
+                                    @Html.Partial("TabellaRichiedenti", ViewData)
+                                </div>
+                                <div class="col-sm-3">
+                                    Gruppi richedente <label id="lblNomeRichiedente"></label>
+                                    @Html.Hidden("hdIDRICHIDENTE")
+                                    <div id="divGruppiRichiedenti">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<script language="javascript" type="text/javascript">
-    $(function ()
-    {
+            <script language="javascript" type="text/javascript">
+                $(function ()
+                {
 
-    });
+                });
 
-    function CreaMail()
-    {
-        var idRichiedente = $('#ddlRichiedente').val();
-        var soggetto = $('#txtSoggetto').val();
-        var corpo = $('#txtCorpo').val();
+                function CreaMail()
+                {
+                    var idRichiedente = $('#ddlRichiedente').val();
+                    var richiedente = $("#ddlRichiedente").find("option:selected").text();
+                    var soggetto = $('#txtSoggetto').val();
+                    var corpo = $('#txtCorpo').val();
 
-    }
+                    var messaggio = '';
+                    var esito = true;
+                    if (idRichiedente == null || idRichiedente == '')
+                    {
+                        esito = false;
+                        messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il richiedente" + "</br>";
+                    }
 
-    function SelezionaGruppo(nome, idGruppo)
-    {        
-        $('#hdIDGRUPPO').val(idGruppo);
-        $('#lblNomeGruppo').text(nome);
+                    if (soggetto == null || soggetto == '')
+                    {
+                        esito = false;
+                        messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il soggetto della mail" + "</br>";
+                    }
 
-        LeggiDestinatari(idGruppo);
-    }
+                    if (corpo == null || corpo == '')
+                    {
+                        esito = false;
+                        messaggio += MESSAGGIO_PUNTINO + " " + "scrivere il corpo della mail" + "</br>";
+                    }
 
-    function SelezionaRichiedente(richiedente, idRichiedente)
-    {
-        $('#hdIDRICHIDENTE').val(idRichiedente);
-        $('#lblNomeRichiedente').text(richiedente);
+                    $('#lblMessageCreaMail').html(messaggio);
+                    if (!esito) return;
+                    var url = '@Url.Action("CreaMail", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { Richiedente: richiedente, Soggetto: soggetto, Corpo: corpo },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#ddlRichiedente').val('');
+                            $('#txtSoggetto').val('');
+                            $('#txtCorpo').val('');
 
-        LeggiGruppiRichiedenti(idRichiedente);
-    }
+                            $('#divMail').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
 
-    function LeggiDestinatari(IDGRUPPO)
-    {
-        var url = '@Url.Action("LeggiDestinatari", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { IDGRUPPO: IDGRUPPO },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divDestinatari').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-    }
+                }
 
-    function LeggiGruppiRichiedenti(IDRICHIEDENTE)
-    {
-        var url = '@Url.Action("LeggiGruppiRichiedenti", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { IDRICHIEDENTE: IDRICHIEDENTE },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divGruppiRichiedenti').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-    }
+                function LeggiLog(IDMAIL)
+                {
+                    var url = '@Url.Action("LeggiLog", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { IDMAIL: IDMAIL},
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divMailLog').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                }
 
-    function CreaNuovoGruppo()
-    {
+                function SelezionaGruppo(nome, idGruppo)
+                {
+                    $('#hdIDGRUPPO').val(idGruppo);
+                    $('#lblNomeGruppo').text(nome);
 
-        $('#lblMessaggi').text('');
-        var gruppo = $('#txtNuovoGruppo').val();
-        if (gruppo == null || gruppo == '')
-        {
-            $('#lblMessaggi').text("Indicare il nome del gruppo");
-            return;
-        }
-        var url = '@Url.Action("CreaNuovoGruppo", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { Gruppo: gruppo },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divTabellaGruppi').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-    }
+                    LeggiDestinatari(idGruppo);
+                }
 
-    function RimuoviGruppo(IDGRUPPO)
-    {
-        var url = '@Url.Action("RimuoviGruppo", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { IDGRUPPO: IDGRUPPO },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divTabellaGruppi').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
+                function SelezionaRichiedente(richiedente, idRichiedente)
+                {
+                    $('#hdIDRICHIDENTE').val(idRichiedente);
+                    $('#lblNomeRichiedente').text(richiedente);
 
-        var IDGRUPPODestinatari = $('#hdIDGRUPPO').val();
-        if (IDGRUPPODestinatari == IDGRUPPO)
-        {
-            $('#divDestinatari').html('').show();
-            $('#lblNomeGruppo').text('');
-        }
-    }
+                    LeggiGruppiRichiedenti(idRichiedente);
+                }
 
-    function AggiungiDestinatario()
-    {
-        $('#lblMessaggi').text('');
-        var destinatario = $('#txtNuovoDestinatario').val();
-        if (destinatario == null || destinatario == '')
-        {
-            $('#lblMessaggi').text("Inserire l'indirizzo email del destinatario");
-            return;
-        }
+                function LeggiDestinatari(IDGRUPPO)
+                {
+                    var url = '@Url.Action("LeggiDestinatari", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { IDGRUPPO: IDGRUPPO },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divDestinatari').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                }
 
-        if (!ValidateEmail(destinatario))
-        {
-            $('#lblMessaggi').text("Formato indirizzo email errato");
-            return;
-        }
+                function LeggiGruppiRichiedenti(IDRICHIEDENTE)
+                {
+                    var url = '@Url.Action("LeggiGruppiRichiedenti", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { IDRICHIEDENTE: IDRICHIEDENTE },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divGruppiRichiedenti').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                }
 
-        var IDGRUPPO = $('#hdIDGRUPPO').val();
-        var url = '@Url.Action("AggiungiDestinatario", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { IDGRUPPO: IDGRUPPO, Destinatario: destinatario },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divDestinatari').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-    }
+                function CreaNuovoGruppo()
+                {
 
-    function RimuoviDestinatario(IDDESTINATARIO)
-    {
-        var url = '@Url.Action("RimuoviDestinatario", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { IDDESTINATARIO: IDDESTINATARIO },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divDestinatari').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-    }
+                    $('#lblMessaggi').text('');
+                    var gruppo = $('#txtNuovoGruppo').val();
+                    if (gruppo == null || gruppo == '')
+                    {
+                        $('#lblMessaggi').text("Indicare il nome del gruppo");
+                        return;
+                    }
+                    var url = '@Url.Action("CreaNuovoGruppo", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { Gruppo: gruppo },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divTabellaGruppi').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                }
 
-    function CreaNuovoRichiedente()
-    {
-        $('#lblMessaggi').text('');
-        var richiedente = $('#txtNuovoRichiedente').val();
-        if (richiedente == null || richiedente == '')
-        {
-            $('#lblMessaggi').text("Indicare il richiedente");
-            return;
-        }
-        var url = '@Url.Action("CreaNuovoRichiedente", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { Richiedente: richiedente },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divTabellaRichiedenti').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-    }
+                function RimuoviGruppo(IDGRUPPO)
+                {
+                    var url = '@Url.Action("RimuoviGruppo", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { IDGRUPPO: IDGRUPPO },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divTabellaGruppi').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
 
-    function RimuoviRichiedente(IDRICHIEDENTE)
-    {
-        var url = '@Url.Action("RimuoviRichiedente", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { IDRICHIEDENTE: IDRICHIEDENTE },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divTabellaRichiedenti').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-        var IDRICHIEDENTESELEZIONATO = $('#hdIDRICHIDENTE').val();
-        if (IDRICHIEDENTESELEZIONATO == IDRICHIEDENTE)
-        {
-            $('#divGruppiRichiedenti').html('').show();
-            $('#lblNomeRichiedente').text('');
-        }
-    }
+                    var IDGRUPPODestinatari = $('#hdIDGRUPPO').val();
+                    if (IDGRUPPODestinatari == IDGRUPPO)
+                    {
+                        $('#divDestinatari').html('').show();
+                        $('#lblNomeGruppo').text('');
+                    }
+                }
 
-    function AggiungiGruppoRichiedente()
-    {
+                function AggiungiDestinatario()
+                {
+                    $('#lblMessaggi').text('');
+                    var destinatario = $('#txtNuovoDestinatario').val();
+                    if (destinatario == null || destinatario == '')
+                    {
+                        $('#lblMessaggi').text("Inserire l'indirizzo email del destinatario");
+                        return;
+                    }
 
-        var idGruppo = $('#ddlGruppo').val();
-        var idRichiedente = $('#hdIDRICHIDENTE').val();
-        var cc = $('#chkCC').prop('checked');
-        var url = '@Url.Action("AggiungiGruppoRichiedente", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { IDRICHIEDENTE: idRichiedente, IDGRUPPO: idGruppo, CC: cc },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divGruppiRichiedenti').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-    }
+                    if (!ValidateEmail(destinatario))
+                    {
+                        $('#lblMessaggi').text("Formato indirizzo email errato");
+                        return;
+                    }
 
-    function RimuoviGruppoRichiedente(IDGRRICH)
-    {
-        var idRichiedente = $('#hdIDRICHIDENTE').val();
-        var url = '@Url.Action("RimuoviGruppoRichiedente", "MailDispatcher")';
-        $.ajax({
-            url: url,
-            data: { IDGRRICH: IDGRRICH, IDRICHIEDENTE: idRichiedente },
-            cache: false,
-            type: "POST",
-            success: function (data)
-            {
-                $('#divGruppiRichiedenti').html(data).show();
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
-            }
-        });
-    }
-</script>
+                    var IDGRUPPO = $('#hdIDGRUPPO').val();
+                    var url = '@Url.Action("AggiungiDestinatario", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { IDGRUPPO: IDGRUPPO, Destinatario: destinatario },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divDestinatari').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                }
+
+                function RimuoviDestinatario(IDDESTINATARIO)
+                {
+                    var url = '@Url.Action("RimuoviDestinatario", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { IDDESTINATARIO: IDDESTINATARIO },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divDestinatari').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                }
+
+                function CreaNuovoRichiedente()
+                {
+                    $('#lblMessaggi').text('');
+                    var richiedente = $('#txtNuovoRichiedente').val();
+                    if (richiedente == null || richiedente == '')
+                    {
+                        $('#lblMessaggi').text("Indicare il richiedente");
+                        return;
+                    }
+                    var url = '@Url.Action("CreaNuovoRichiedente", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { Richiedente: richiedente },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divTabellaRichiedenti').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                }
+
+                function RimuoviRichiedente(IDRICHIEDENTE)
+                {
+                    var url = '@Url.Action("RimuoviRichiedente", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { IDRICHIEDENTE: IDRICHIEDENTE },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divTabellaRichiedenti').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                    var IDRICHIEDENTESELEZIONATO = $('#hdIDRICHIDENTE').val();
+                    if (IDRICHIEDENTESELEZIONATO == IDRICHIEDENTE)
+                    {
+                        $('#divGruppiRichiedenti').html('').show();
+                        $('#lblNomeRichiedente').text('');
+                    }
+                }
+
+                function AggiungiGruppoRichiedente()
+                {
+
+                    var idGruppo = $('#ddlGruppo').val();
+                    var idRichiedente = $('#hdIDRICHIDENTE').val();
+                    var cc = $('#chkCC').prop('checked');
+                    var url = '@Url.Action("AggiungiGruppoRichiedente", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { IDRICHIEDENTE: idRichiedente, IDGRUPPO: idGruppo, CC: cc },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divGruppiRichiedenti').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                }
+
+                function RimuoviGruppoRichiedente(IDGRRICH)
+                {
+                    var idRichiedente = $('#hdIDRICHIDENTE').val();
+                    var url = '@Url.Action("RimuoviGruppoRichiedente", "MailDispatcher")';
+                    $.ajax({
+                        url: url,
+                        data: { IDGRRICH: IDGRRICH, IDRICHIEDENTE: idRichiedente },
+                        cache: false,
+                        type: "POST",
+                        success: function (data)
+                        {
+                            $('#divGruppiRichiedenti').html(data).show();
+                        },
+                        error: function (response)
+                        {
+                            document.open();
+                            document.write(response.responseText);
+                            document.close();
+                        }
+                    });
+                }
+            </script>

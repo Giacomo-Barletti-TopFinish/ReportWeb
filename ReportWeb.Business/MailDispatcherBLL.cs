@@ -11,7 +11,7 @@ namespace ReportWeb.Business
 {
     public class MailDispatcherBLL
     {
-        public decimal CreaEmail(string Richiedente)
+        public decimal CreaEmail(string Richiedente, string oggetto, string corpo)
         {
             MailDispatcherDS ds = new MailDispatcherDS();
             using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
@@ -21,17 +21,9 @@ namespace ReportWeb.Business
                 if (richiedente == null)
                     return -1;
 
-                decimal IDMAIL = bMD.CreaMail(richiedente.IDRICHIEDENTE);
+                decimal IDMAIL = bMD.CreaMail(richiedente.IDRICHIEDENTE, oggetto, corpo);
 
                 return IDMAIL;
-            }
-        }
-
-        public void InserisciCorpoEOggetto(decimal IDMAIL, string oggetto, string corpo)
-        {
-            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
-            {
-                bMD.InserisciOggettoeCopro(IDMAIL, oggetto, corpo);
             }
         }
 
@@ -40,6 +32,55 @@ namespace ReportWeb.Business
             using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
             {
                 bMD.SottomettiEmail(IDMAIL);
+            }
+        }
+
+        public List<MD_EMAILModel> LeggiMailAppese()
+        {
+            List<MD_EMAILModel> model = new List<MD_EMAILModel>();
+            MailDispatcherDS ds = new MailDispatcherDS();
+            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
+            {
+                bMD.FillMD_RICHIEDENTI(ds);
+                bMD.FillMD_EMAIL_APPESE(ds);
+                foreach (MailDispatcherDS.MD_EMAILRow email in ds.MD_EMAIL.OrderByDescending(x => x.DATACREAZIONE))
+                {
+                    MD_EMAILModel em = new MD_EMAILModel();
+                    em.IDMAIL = email.IDMAIL;
+                    em.Tentativo = email.TENTATIVO;
+                    em.IdRichiedente = email.IDRICHIEDENTE;
+                    MailDispatcherDS.MD_RICHIEDENTIRow richiedente = ds.MD_RICHIEDENTI.Where(x => x.IDRICHIEDENTE == email.IDRICHIEDENTE).FirstOrDefault();
+                    em.Richiedente = richiedente == null ? string.Empty : richiedente.RICHIEDENTE;
+                    em.DataCreazione = email.DATACREAZIONE;
+                    em.Stato = email.STATO;
+                    em.Oggetto = email.OGGETTO;
+
+                    model.Add(em);
+                }
+                return model;
+            }
+        }
+
+        public List<MD_LOGModel> LeggiLog(decimal IDMAIL)
+        {
+            List<MD_LOGModel> model = new List<MD_LOGModel>();
+            MailDispatcherDS ds = new MailDispatcherDS();
+            using (MailDispatcherBusiness bMD = new MailDispatcherBusiness())
+            {
+                if (IDMAIL < 0) return new List<MD_LOGModel>();
+
+                bMD.FillMD_LOG(ds, IDMAIL);
+                foreach (MailDispatcherDS.MD_LOGRow log in ds.MD_LOG.OrderBy(x => x.IDMAIL_LOG))
+                {
+                    MD_LOGModel lm = new MD_LOGModel();
+                    lm.DataOperazione = log.DATAOPERAZIONE;
+                    lm.IDMAIL = log.IDMAIL;
+                    lm.Nota = log.IsNOTANull() ? string.Empty : log.NOTA;
+                    lm.TipoOperazione = log.TIPOOPERAZIONE;
+
+                    model.Add(lm);
+                }
+                return model;
             }
         }
 

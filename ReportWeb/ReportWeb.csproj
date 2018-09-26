@@ -433,6 +433,8 @@
     <Content Include="Views\MailDispatcher\TabellaGruppiRichiedenti.cshtml" />
     <Content Include="Views\ALE\Mancanti.cshtml" />
     <Content Include="Views\ALE\TabellaMancantiPartial.cshtml" />
+    <Content Include="Views\MailDispatcher\TabellaLog.cshtml" />
+    <Content Include="Views\MailDispatcher\TabellaMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

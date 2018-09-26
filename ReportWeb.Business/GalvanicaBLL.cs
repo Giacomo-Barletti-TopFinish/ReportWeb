@@ -49,7 +49,7 @@ namespace ReportWeb.Business
             DateTime fine = DateTime.Now;
             DateTime inizio = fine.AddDays(NumeroGiorni * -1);
 
-            foreach (GalvanicaDS.RW_GALV_CONSUNTIVORow m in ds.RW_GALV_CONSUNTIVO.Where(X => X.INIZIO_TURNO >= inizio && X.INIZIO_TURNO <= fine))
+            foreach (GalvanicaDS.RW_GALV_CONSUNTIVORow m in ds.RW_GALV_CONSUNTIVO.Where(X => X.INIZIO_TURNO >= inizio && X.INIZIO_TURNO <= fine).OrderByDescending(X=>X.INIZIO_TURNO))
             {
                 GalvanicaConsuntivoModel model = CreaGalvanicaConsuntivo(m, ds);
                 consuntivo.Add(model);

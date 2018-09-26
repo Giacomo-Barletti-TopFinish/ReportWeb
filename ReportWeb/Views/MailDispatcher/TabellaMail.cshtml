@@ -1,0 +1,44 @@
+﻿@using ReportWeb.Models.MailDispatcher
+@model List<MD_EMAILModel>
+
+@if (Model.Count == 0)
+{
+    <label class="text-red">Non ci sono mail appese</label>
+}
+else
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>IDMAIL</th>
+                <th>Richiedente</th>
+                <th>Stato</th>
+                <th>Data creazione</th>
+                <th>Oggetto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (MD_EMAILModel email in Model)
+            {
+
+                string stile = "color:black";
+                switch (email.Stato)
+                {
+                    case "BLK":
+                        stile = "color:green";
+                        break;
+                    case "ERR":
+                        stile = "color:red";
+                        break;
+                }
+                <tr style="@stile" onclick="LeggiLog(@email.IDMAIL)">
+                    <td style="font-size:11px">@email.IDMAIL</td>
+                    <td style="font-size:11px">@email.Richiedente</td>
+                    <td style="font-size:11px">@email.Stato</td>
+                    <td style="font-size:11px">@email.DataCreazione.ToShortDateString()</td>
+                    <td style="font-size:11px">@email.Oggetto</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

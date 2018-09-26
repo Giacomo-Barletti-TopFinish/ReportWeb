@@ -1,0 +1,29 @@
+﻿@using ReportWeb.Models.MailDispatcher
+@model List<MD_LOGModel>
+
+@if (Model.Count == 0)
+{
+    <label class="text-red">Nessun log trovato</label>
+}
+else
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Operazione</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (MD_LOGModel log in Model)
+            {
+                <tr>
+                    <td style="font-size:11px">@log.DataOperazione</td>
+                    <td style="font-size:11px">@log.TipoOperazione</td>
+                    <td style="font-size:11px">@log.Nota</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

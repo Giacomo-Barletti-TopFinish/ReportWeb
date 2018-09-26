@@ -40,7 +40,7 @@ namespace ReportWeb.Business
                 bPDV.FillRW_PVD_CONSUNTIVO(ds);
             }
 
-            foreach (PVDDS.RW_PVD_CONSUNTIVORow m in ds.RW_PVD_CONSUNTIVO.Where(X => X.IDRESOURCEF == IDRESOURCEF))
+            foreach (PVDDS.RW_PVD_CONSUNTIVORow m in ds.RW_PVD_CONSUNTIVO.Where(X => X.IDRESOURCEF == IDRESOURCEF).OrderByDescending(X=>X.GIORNO))
             {
                 PVDConsuntivoModel model = new PVDConsuntivoModel();
 

@@ -73,35 +73,35 @@ namespace ReportWeb.Data.MailDispatcher
             }
         }
 
-        public decimal CreaMail(decimal idRichiedente)
-        {
-            string insert = @"INSERT INTO MD_EMAIL (IDRICHIEDENTE,DATACREAZIONE, STATO) VALUES ($P{IDRICHIEDENTE},$P{DATA},${STATO}) RETURNING IDMAIL INTO $P{IDMAIL}";
-            ParamSet ps = new ParamSet();
-            ps.AddParam("IDRICHIEDENTE", DbType.Decimal, idRichiedente);
-            ps.AddParam("DATA", DbType.DateTime, DateTime.Now);
-            ps.AddParam("STATO", DbType.String, "CRT");
-            ps.AddOutputParam("IDMAIL", DbType.Decimal);
-            decimal IDMAIL = -1;
-            using (DbCommand cmd = BuildCommand(insert, ps))
-            {
-                cmd.ExecuteNonQuery();
-                IDMAIL = RetrieveParamValue<int>(cmd, "IDMAIL");
-            }
-            return IDMAIL;
-        }
-
-        public void InserisciOggettoeCopro(decimal IDMAIL, string oggetto, string corpo)
+        public decimal CreaMail(decimal idRichiedente, string oggetto, string corpo)
         {
             if (oggetto.Length > 50)
                 oggetto = oggetto.Substring(0, 50);
 
             if (corpo.Length > 4000)
                 corpo = corpo.Substring(0, 4000);
-
-            string insert = @"UPDATE MD_EMAIL SET OGGETTO = $P{OGGETTO}, CORPO = ${CORPO} WHERE IDMAIL = $P{IDMAIL}";
+            string insert = @"INSERT INTO MD_EMAIL (IDRICHIEDENTE,DATACREAZIONE, STATO, TENTATIVO,OGGETTO,CORPO) VALUES ($P{IDRICHIEDENTE},$P{DATA},$P{STATO},0,$P{OGGETTO},$P{CORPO}) RETURNING IDMAIL INTO $P{IDMAIL}";
             ParamSet ps = new ParamSet();
+            ps.AddParam("IDRICHIEDENTE", DbType.Decimal, idRichiedente);
+            ps.AddParam("DATA", DbType.DateTime, DateTime.Now);
+            ps.AddParam("STATO", DbType.String, "CRT");
             ps.AddParam("OGGETTO", DbType.String, oggetto);
             ps.AddParam("CORPO", DbType.String, corpo);
+            ps.AddOutputParam("IDMAIL", DbType.Decimal);
+            decimal IDMAIL = -1;
+            using (DbCommand cmd = BuildCommand(insert, ps))
+            {
+                cmd.ExecuteNonQuery();
+                IDMAIL = RetrieveParamValue<decimal>(cmd, "IDMAIL");
+            }
+            return IDMAIL;
+        }
+
+        public void SottomettiEmail(decimal IDMAIL)
+        {
+            string insert = @"UPDATE MD_EMAIL SET STATO = $P{STATO} WHERE IDMAIL = $P{IDMAIL}";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("STATO", DbType.String, "DIN");
             ps.AddParam("IDMAIL", DbType.Decimal, IDMAIL);
 
             using (DbCommand cmd = BuildCommand(insert, ps))
@@ -110,18 +110,27 @@ namespace ReportWeb.Data.MailDispatcher
             }
         }
 
-        public void SottomettiEmail(decimal IDMAIL)
+        public void FillMD_EMAIL_APPESE(MailDispatcherDS ds)
         {
-            string insert = @"UPDATE MD_EMAIL SET STATO = $P{STATO} WHERE IDMAIL = $P{IDMAIL}";
-            ParamSet ps = new ParamSet();
-            ps.AddParam("STATO", DbType.String, "DIN");
+            string select = @"SELECT * FROM MD_EMAIL WHERE STATO IN ('ERR','DIN','BLK') ";
 
-            using (DbCommand cmd = BuildCommand(insert, ps))
+            using (DbDataAdapter da = BuildDataAdapter(select))
             {
-                cmd.ExecuteNonQuery();
+                da.Fill(ds.MD_EMAIL);
             }
         }
 
+        public void FillMD_LOG(MailDispatcherDS ds, decimal IDMAIL)
+        {
+            string select = @"SELECT * FROM MD_LOG WHERE IDMAIL = $P{IDMAIL}";
 
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDMAIL", DbType.Decimal, IDMAIL);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.MD_LOG);
+            }
+        }
     }
 }

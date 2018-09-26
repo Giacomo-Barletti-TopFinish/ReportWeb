@@ -40,6 +40,19 @@ namespace ReportWeb.Data.MailDispatcher
             a.FillMD_RICHIEDENTI(ds);
         }
 
+        [DataContext]
+        public void FillMD_EMAIL_APPESE(MailDispatcherDS ds)
+        {
+            MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
+            a.FillMD_EMAIL_APPESE(ds);
+        }
+
+        [DataContext]
+        public void FillMD_LOG(MailDispatcherDS ds, decimal IDMAIL)
+        {
+            MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
+            a.FillMD_LOG(ds, IDMAIL);
+        }
 
         [DataContext(true)]
         public void UpdateMailDispatcherDSTable(string Tablename, MailDispatcherDS ds)
@@ -49,10 +62,10 @@ namespace ReportWeb.Data.MailDispatcher
         }
 
         [DataContext(true)]
-        public decimal CreaMail(decimal idRichiedente)
+        public decimal CreaMail(decimal idRichiedente, string oggetto, string corpo)
         {
             MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
-            return a.CreaMail(idRichiedente);
+            return a.CreaMail(idRichiedente, oggetto, corpo);
         }
 
         [DataContext(true)]
@@ -60,13 +73,6 @@ namespace ReportWeb.Data.MailDispatcher
         {
             MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
             a.SottomettiEmail(IDMAIL);
-        }
-
-        [DataContext(true)]
-        public void InserisciOggettoeCopro(decimal IDMAIL, string oggetto, string corpo)
-        {
-            MailDispatcherAdapter a = new MailDispatcherAdapter(DbConnection, DbTransaction);
-            a.InserisciOggettoeCopro(IDMAIL, oggetto, corpo);
         }
     }
 }

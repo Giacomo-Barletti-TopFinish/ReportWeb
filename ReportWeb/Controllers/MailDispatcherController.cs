@@ -15,12 +15,23 @@ namespace ReportWeb.Controllers
         {
             VerificaAbilitazioneUtenteConUscita(22);
             MailDispatcherBLL bll = new MailDispatcherBLL();
+
+            List<MD_EMAILModel> emails = bll.LeggiMailAppese();
+
             List<MD_RICHIEDENTEModel> richiedenti = bll.LeggiRichiedenti();
             List<MD_GRUPPOModel> gruppi = bll.LeggiGruppi();
 
             ViewData.Add("MDGRUPPO", gruppi);
             ViewData.Add("MDRICHIEDENTI", richiedenti);
-            return View();
+            return View(emails);
+        }
+
+        public ActionResult LeggiLog(decimal IDMAIL)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            List<MD_LOGModel> model = bll.LeggiLog(IDMAIL);
+
+            return PartialView("TabellaLog", model);
         }
 
         public ActionResult CreaNuovoGruppo(string Gruppo)
@@ -156,6 +167,19 @@ namespace ReportWeb.Controllers
             ViewData.Add("MDGRUPPIRICHIEDENTI", gruppiRichiedente);
             ViewData.Add("MDGRUPPO", gruppi);
             return View("TabellaGruppiRichiedenti");
+        }
+
+        public ActionResult CreaMail(string Richiedente, string Soggetto, string Corpo)
+        {
+            MailDispatcherBLL bll = new MailDispatcherBLL();
+            decimal IDMAIL = bll.CreaEmail(Richiedente, Soggetto.Trim().ToUpper(), Corpo.Trim().ToUpper());
+            if (IDMAIL >= 0)
+            {
+                bll.SottomettiEmail(IDMAIL);
+            }
+
+            List<MD_EMAILModel> emails = bll.LeggiMailAppese();
+            return PartialView("TabellaMail", emails);
         }
 
     }

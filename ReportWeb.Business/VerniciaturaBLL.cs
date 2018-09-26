@@ -23,7 +23,7 @@ namespace ReportWeb.Business
             DateTime fine = DateTime.Now;
             DateTime inizio = fine.AddDays(NumeroGiorni * -1);
 
-            foreach (VerniciaturaDS.RW_VERNICIATURA_CONSUNTIVORow m in ds.RW_VERNICIATURA_CONSUNTIVO.Where(X => X.GIORNO >= inizio && X.GIORNO <= fine))
+            foreach (VerniciaturaDS.RW_VERNICIATURA_CONSUNTIVORow m in ds.RW_VERNICIATURA_CONSUNTIVO.Where(X => X.GIORNO >= inizio && X.GIORNO <= fine).OrderByDescending(X=>X.GIORNO))
             {
                 VerniciaturaConsuntivoModel model = new VerniciaturaConsuntivoModel();
 
