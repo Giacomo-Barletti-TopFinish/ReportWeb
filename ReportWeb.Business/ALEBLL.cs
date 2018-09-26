@@ -101,11 +101,16 @@ namespace ReportWeb.Business
                 model.QuantitaDifforme = CHECKQ_C == null ? 0 : (CHECKQ_C.IsQTA_DIFNull() ? 0 : CHECKQ_C.QTA_DIF);
 
                 model.RepartoCodice = CHECKQ_T.IsCODICECLIFO_RILNull() ? string.Empty : CHECKQ_T.CODICECLIFO_RIL.Trim();
-                ALEDS.CLIFORow reparto = ds.CLIFO.Where(x => x.CODICE == CHECKQ_T.CODICECLIFO_RIL).FirstOrDefault();
-                if (reparto != null)
-                    model.Reparto = reparto.RAGIONESOC;
-                else
-                    model.Reparto = string.Empty;
+
+
+                model.Reparto = string.Empty;
+                if (!CHECKQ_T.IsCODICECLIFO_RILNull())
+                {
+                    ALEDS.CLIFORow reparto = ds.CLIFO.Where(x => x.CODICE == CHECKQ_T.CODICECLIFO_RIL).FirstOrDefault();
+                    if (reparto != null)
+                        model.Reparto = reparto.RAGIONESOC;
+
+                }
 
                 model.Difetto = string.Empty;
                 model.TipoDifetto = string.Empty;
