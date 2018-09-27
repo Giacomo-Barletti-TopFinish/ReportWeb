@@ -170,18 +170,19 @@ namespace ReportWeb.Business
             using (ALEBusiness bALE = new ALEBusiness())
             {
                 bool mancante = VerificaSeMancanti(IDCHECKQT);
-                if(!mancante)
+                if (!mancante)
                 {
                     MailDispatcherBLL bllMD = new MailDispatcherBLL();
                     string oggetto = "ALE - NUOVA SCHEDA INSERITA";
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("Nuova scheda inserita");
                     sb.AppendLine();
-                    sb.AppendLine(string.Format("Lavorante: {0}",Lavorante));
+                    sb.AppendLine(string.Format("Lavorante: {0}", Lavorante));
                     sb.AppendLine(string.Format("Quanità: {0}", Inseriti));
                     sb.AppendLine(string.Format("USerid: {0}", UIDUSER));
 
-                    bllMD.CreaEmail("ALE - ADDEBITO", oggetto, sb.ToString());
+                    decimal IDMAIL = bllMD.CreaEmail("ALE - ADDEBITO", oggetto, sb.ToString());
+                    bllMD.SottomettiEmail(IDMAIL);
                 }
                 bALE.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER, mancante);
             }
@@ -390,22 +391,26 @@ namespace ReportWeb.Business
             }
 
             m.ListaFasi = new List<string>();
-            string IDPRDFASE = MovFase.IDPRDFASE;
-            ALEDS.USR_PRD_FASIRow fase = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == IDPRDFASE).FirstOrDefault();
-            ALEDS.USR_PRD_FASIRow figlia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == fase.IDPRDFASE).FirstOrDefault();
-            while (figlia != null)
+            if (MovFase != null && !MovFase.IsIDPRDFASENull())
             {
-                string descrizioneFase = string.Empty;
-                if (!figlia.IsIDTABFASNull())
+                string IDPRDFASE = MovFase.IDPRDFASE;
+                ALEDS.USR_PRD_FASIRow fase = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == IDPRDFASE).FirstOrDefault();
+                ALEDS.USR_PRD_FASIRow figlia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == fase.IDPRDFASE).FirstOrDefault();
+                while (figlia != null)
                 {
-                    ALEDS.TABFASRow tf = ds.TABFAS.Where(x => x.IDTABFAS == figlia.IDTABFAS).FirstOrDefault();
-                    if (tf != null)
+                    string descrizioneFase = string.Empty;
+                    if (!figlia.IsIDTABFASNull())
                     {
-                        descrizioneFase = tf.CODICEFASE;
+                        ALEDS.TABFASRow tf = ds.TABFAS.Where(x => x.IDTABFAS == figlia.IDTABFAS).FirstOrDefault();
+                        if (tf != null)
+                        {
+                            descrizioneFase = tf.CODICEFASE;
+                        }
                     }
+                    m.ListaFasi.Add(descrizioneFase);
+                    figlia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == figlia.IDPRDFASE).FirstOrDefault();
                 }
-                m.ListaFasi.Add(descrizioneFase);
-                figlia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == figlia.IDPRDFASE).FirstOrDefault();
+
             }
 
             return m;
@@ -449,12 +454,12 @@ namespace ReportWeb.Business
                     bALE.UpdateRW_ALE_DETTAGLIO(ds);
 
                     MailDispatcherBLL bllMD = new MailDispatcherBLL();
-                    string oggetto = "ALE - NUOVO GRUPPO ADDEBITO INSERITO ID GRUPPO:"+IDGRUPPO.ToString();
+                    string oggetto = "ALE - NUOVO GRUPPO ADDEBITO INSERITO ID GRUPPO:" + IDGRUPPO.ToString();
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine(string.Format("E' stato creato il gruppo: {0} che deve essere valorizzato", IDGRUPPO));
 
-                    bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
-
+                    decimal IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
+                    bllMD.SottomettiEmail(IDMAIL);
                 }
                 catch
                 {
@@ -559,7 +564,9 @@ namespace ReportWeb.Business
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine(string.Format("Il gruppo di addebito: {0} è stato annullato. Nessuna valorizzazione da fare", IDALEGRUPPO));
 
-                    bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
+                    decimal IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
+                    bllMD.SottomettiEmail(IDMAIL);
+
 
                 }
                 catch
@@ -766,7 +773,8 @@ namespace ReportWeb.Business
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(string.Format("E' stato valorizzato il gruppo: {0}.", IDALEGRUPPO));
 
-                bllMD.CreaEmail("ALE - APPROVAZIONE", oggetto, sb.ToString());
+                decimal IDMAIL = bllMD.CreaEmail("ALE - APPROVAZIONE", oggetto, sb.ToString());
+                bllMD.SottomettiEmail(IDMAIL);
 
             }
         }
@@ -810,7 +818,8 @@ namespace ReportWeb.Business
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(string.Format("E' stato approvato il gruppo: {0}.", IDALEGRUPPO));
 
-                bllMD.CreaEmail("ALE - FATTURAZIONE", oggetto, sb.ToString());
+                decimal IDMAIL = bllMD.CreaEmail("ALE - FATTURAZIONE", oggetto, sb.ToString());
+                bllMD.SottomettiEmail(IDMAIL);
 
             }
         }
@@ -844,8 +853,8 @@ namespace ReportWeb.Business
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(string.Format("L'approvazione per il gruppo: {0} è stata annullata. Nessuna fatturazione da fare", IDALEGRUPPO));
 
-                bllMD.CreaEmail("ALE - FATTURAZIONE", oggetto, sb.ToString());
-
+                decimal IDMAIL = bllMD.CreaEmail("ALE - FATTURAZIONE", oggetto, sb.ToString());
+                bllMD.SottomettiEmail(IDMAIL);
             }
         }
 
@@ -885,7 +894,8 @@ namespace ReportWeb.Business
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(string.Format("La valorizzazione per il gruppo: {0} è stata annullata. Nessuna approvazione da fare", IDALEGRUPPO));
 
-                bllMD.CreaEmail("ALE - APPROVAZIONE", oggetto, sb.ToString());
+                decimal IDMAIL = bllMD.CreaEmail("ALE - APPROVAZIONE", oggetto, sb.ToString());
+                bllMD.SottomettiEmail(IDMAIL);
 
             }
         }
@@ -938,6 +948,7 @@ namespace ReportWeb.Business
                 if (gruppo != null)
                 {
                     gruppo.SetNOTA_FATTURAZIONENull();
+                    gruppo.SetDATA_FATTURAZIONENull();
                     gruppo.APERTO = "0";
 
                 }
