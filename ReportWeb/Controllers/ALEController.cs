@@ -65,6 +65,18 @@ namespace ReportWeb.Controllers
 
         }
 
+        public ActionResult ReportExcel(string DataInizio, string DataFine)
+        {
+            ALEBLL bll = new ALEBLL(RvlImageSite);
+            AddebitiModel model = bll.TrovaMancanti(DataInizio, DataFine);
+
+            ExcelHelper excel= new ExcelHelper();
+            byte[] fileContents = excel.CreaExcelMancanti(model);
+           
+            return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Mancanti.xlsx");
+
+        }
+
         public ActionResult CaricaScheda(string Barcode)
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);

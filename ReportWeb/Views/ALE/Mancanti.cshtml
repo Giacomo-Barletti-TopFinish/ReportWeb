@@ -85,4 +85,18 @@
         win.document.title = "Report";
         win.focus();
     }
+
+    function Excel()
+    {
+        var datainizio = $('#dtInizio').val();
+        var datafine = $('#dtFine').val();
+        var url = '@Url.Action("ReportExcel", "ALE")';
+
+        url = url + '?DataInizio=' + datainizio;
+        url = url + '&DataFine=' + datafine;
+
+        var win = window.open(url, '_blank');
+        win.document.title = "Report";
+        win.focus();
+    }
 </script>
