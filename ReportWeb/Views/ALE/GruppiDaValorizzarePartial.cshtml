@@ -34,11 +34,14 @@ else
                     </tr>
                     <tr>
                         <td></td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <div id="Dettaglio_@a.IDALEGRUPPO" style="display:none">
                                 <table width="100%" class="table">
                                     <thead>
                                         <tr>
+                                            <th style="font-size:12px" width="7%">
+                                                Azienda
+                                            </th>
                                             <th style="font-size:12px" width="15%">
                                                 Modello
                                             </th>
@@ -75,6 +78,7 @@ else
                                     {
                                         <tr class="RWTRDettaglio" valign="top">
                                             <input type="hidden" class="hdIdAleDettaglio" value="@dettaglio.IdAleDettaglio" />
+                                            <td style="font-size:12px">@dettaglio.Azienda </td>
                                             <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
                                             <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
                                             <td style="font-size:12px">@dettaglio.LavoranteDescrizione</td>
@@ -110,7 +114,7 @@ else
                                 </table>
                             </div>
                         </td>
-                        <td></td>
+                       
                         <td></td>
                     </tr>
                 }
