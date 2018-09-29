@@ -437,6 +437,7 @@
     <Content Include="Views\MailDispatcher\TabellaLog.cshtml" />
     <Content Include="Views\MailDispatcher\TabellaMail.cshtml" />
     <Content Include="Views\Magazzino\Index.cshtml" />
+    <Content Include="Views\Magazzino\TabellaGiacenze.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

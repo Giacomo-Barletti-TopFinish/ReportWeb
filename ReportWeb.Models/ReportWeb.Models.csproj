@@ -52,6 +52,7 @@
     <Compile Include="JSON\ALEValorizzaJson.cs" />
     <Compile Include="JSON\FermiJsonModel.cs" />
     <Compile Include="LoginModel.cs" />
+    <Compile Include="Magazzino\ModelloGiacenzaModel.cs" />
     <Compile Include="MailDispatcher\MD_EMAILModel.cs" />
     <Compile Include="MailDispatcher\MD_GRUPPOModel.cs" />
     <Compile Include="MailDispatcher\MD_LOGModel.cs" />

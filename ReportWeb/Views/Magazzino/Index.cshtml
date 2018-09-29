@@ -4,5 +4,88 @@
 }
 <div class="content-top">
     <h2>Magazzino - Giacenze</h2>
-
 </div>
+<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:750px">
+    <div class="row">
+        <div class="col-sm-1"><label>Modello</label></div>
+        <div class="col-sm-2">@Html.TextBox("txtModello", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
+    </div>
+    <label class="text-red" id="lblMessage"></label>
+    <div class="row" id="divRisultati"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+
+    });
+
+    function Trova()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var modello = $('#txtModello').val();
+        if (settimana == null || settimana == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il modello da cercare" + "</br>";
+            esegui = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("TrovaModello", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Modello: modello
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function SalvaGiacenza(sender, IDMAGAZZ)
+    {
+        $('#lblMessage').html('');
+        var tr = $(sender).closest('tr');
+        var giacenza = $(".RWGIACENZA", tr).val();
+        var url = '@Url.Action("SalvaGiacenza", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                IDMAGAZZ: IDMAGAZZ,
+                Giacenza: giacenza
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

@@ -1,0 +1,32 @@
+﻿@using ReportWeb.Models.Magazzino
+@model List<ModelloGiacenzaModel>
+
+
+@if (Model.Count == 0)
+{
+    <h3 class="text-red">Nessun elemento trovato</h3>
+}
+else
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Modello</th>
+                <th>Descrizione</th>
+                <th>Giacenza</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ModelloGiacenzaModel elemento in Model)
+            {
+                <tr>
+                    <td>@elemento.Modello</td>
+                    <td>@elemento.Descrizione</td>
+                    <td> <input id="txtGiacenza" type="number" name="txtGiacenza" min="0" max="100000" value="@elemento.Giacenza" /></td>
+                    <td><input type="button" onclick="SalvaGiacenza(this,@elemento.IDMAGAZZ);" class="btn btn-primary" value="Salva" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

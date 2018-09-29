@@ -55,6 +55,11 @@
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="IdMAncanti.cs" />
+    <Compile Include="MagazzinoDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MagazzinoDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MailDispatcherDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,6 +115,17 @@
     </None>
     <None Include="GalvanicaDS.xss">
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
+    </None>
+    <None Include="MagazzinoDS.xsc">
+      <DependentUpon>MagazzinoDS.xsd</DependentUpon>
+    </None>
+    <None Include="MagazzinoDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MagazzinoDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MagazzinoDS.xss">
+      <DependentUpon>MagazzinoDS.xsd</DependentUpon>
     </None>
     <None Include="MailDispatcherDS.xsc">
       <DependentUpon>MailDispatcherDS.xsd</DependentUpon>

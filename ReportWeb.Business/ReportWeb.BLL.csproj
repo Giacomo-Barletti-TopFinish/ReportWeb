@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ALEBLL.cs" />
     <Compile Include="GalvanicaBLL.cs" />
+    <Compile Include="MagazzinoBLL.cs" />
     <Compile Include="MailDispatcherBLL.cs" />
     <Compile Include="ODLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

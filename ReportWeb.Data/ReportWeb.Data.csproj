@@ -56,6 +56,8 @@
     <Compile Include="Core\Exceptions.cs" />
     <Compile Include="Galvanica\GalvanicaAdapter.cs" />
     <Compile Include="Galvanica\GalvanicaBusiness.cs" />
+    <Compile Include="Magazzino\MagazzinoAdapter.cs" />
+    <Compile Include="Magazzino\MagazzinoBusiness.cs" />
     <Compile Include="MailDispatcher\MailDispatcherAdapter.cs" />
     <Compile Include="MailDispatcher\MailDispatcherBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
