@@ -5,7 +5,7 @@
 <div class="content-top">
     <h2>Magazzino - Giacenze</h2>
 </div>
-<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:750px">
+<div style="overflow-y:auto; overflow-x:hidden; height:750px; padding-left:10px">
     <div class="row">
         <div class="col-sm-1"><label>Modello</label></div>
         <div class="col-sm-2">@Html.TextBox("txtModello", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
@@ -27,7 +27,7 @@
         var esegui = true;
         var messaggio = '';
         var modello = $('#txtModello').val();
-        if (settimana == null || settimana == '')
+        if (modello == null || modello == '')
         {
             messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il modello da cercare" + "</br>";
             esegui = false;
@@ -61,17 +61,35 @@
         });
     }
 
-    function SalvaGiacenza(sender, IDMAGAZZ)
+    function SalvaGiacenza()
     {
+        var modello = $('#txtModello').val();
+        var data = [];
+        var trs = $('#tblGiacenze >tbody >tr');
+        for (i = 0; i < trs.length; i++)
+        {
+            var tr = trs[i];
+            var IDMAGAZZ = $(".hdIDMAGAZZ", tr).val();
+            var checkbox = $(".RWCHECK", tr);
+            var checked = $(checkbox).prop('checked');
+            var giacenza = $(".RWGIACENZA", tr).val();
+            if (giacenza == null || giacenza == '') giacenza = 0;
+            var elemento = {
+                'Checked': checked, 'IDMAGAZZ': IDMAGAZZ, 'Giacenza': giacenza
+            };
+            data.push(elemento);
+        }
+
+        var giacenze = JSON.stringify(data);
+
         $('#lblMessage').html('');
-        var tr = $(sender).closest('tr');
-        var giacenza = $(".RWGIACENZA", tr).val();
+
         var url = '@Url.Action("SalvaGiacenza", "Magazzino")';
         $.ajax({
             url: url,
             data: {
-                IDMAGAZZ: IDMAGAZZ,
-                Giacenza: giacenza
+                Giacenze: giacenze,
+                Modello:modello
             },
             cache: false,
             type: "POST",

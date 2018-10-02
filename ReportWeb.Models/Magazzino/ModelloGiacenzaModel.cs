@@ -12,5 +12,6 @@ namespace ReportWeb.Models.Magazzino
         public string Modello { get; set; }
         public string Descrizione { get; set; }
         public string Giacenza { get; set; }
+        public bool Presente{ get; set; }
     }
 }

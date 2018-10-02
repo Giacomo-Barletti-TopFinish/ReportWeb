@@ -23,10 +23,12 @@ namespace ReportWeb.Controllers
             return PartialView("TabellaGiacenze", model);
         }
 
-        public ActionResult SalvaGiacenza(decimal IDMAGAZZ, string Giacenza)
+        public ActionResult SalvaGiacenza(string Giacenze, string Modello)
         {
-            decimal giacenza = decimal.Parse(Giacenza);
-
+            MagazzinoBLL bll = new MagazzinoBLL();
+            bll.SalvaGiacenze(Giacenze, Modello);
+            List<ModelloGiacenzaModel> model = bll.TrovaModello(Modello);
+            return PartialView("TabellaGiacenze", model);
         }
     }
 }

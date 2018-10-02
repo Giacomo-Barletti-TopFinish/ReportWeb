@@ -8,23 +8,31 @@
 }
 else
 {
-    <table class="table table-condensed">
+    <input type="button" onclick="SalvaGiacenza();" class="btn btn-primary" value="Salva giacenze" />
+    <table class="table table-condensed" id="tblGiacenze">
         <thead>
             <tr>
+                <th></th>
                 <th>Modello</th>
                 <th>Descrizione</th>
                 <th>Giacenza</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (ModelloGiacenzaModel elemento in Model)
             {
                 <tr>
-                    <td>@elemento.Modello</td>
+                    @if (elemento.Presente)
+                    {
+                        <td><input type="checkbox" class="RWCHECK" checked /></td>
+                    }
+                    else
+                    {
+                        <td><input type="checkbox" class="RWCHECK" /></td>
+                    }
+                    <td>@elemento.Modello <input type="hidden" value="@elemento.IDMAGAZZ" class="hdIDMAGAZZ"></td>
                     <td>@elemento.Descrizione</td>
-                    <td> <input id="txtGiacenza" type="number" name="txtGiacenza" min="0" max="100000" value="@elemento.Giacenza" /></td>
-                    <td><input type="button" onclick="SalvaGiacenza(this,@elemento.IDMAGAZZ);" class="btn btn-primary" value="Salva" /></td>
+                    <td> <input id="txtGiacenza" class="RWGIACENZA" type="number" name="txtGiacenza" min="0" max="100000" value="@elemento.Giacenza" /></td>
                 </tr>
             }
         </tbody>

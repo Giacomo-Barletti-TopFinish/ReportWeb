@@ -25,5 +25,12 @@ namespace ReportWeb.Data.Magazzino
             MagazzinoAdapter a = new MagazzinoAdapter(DbConnection, DbTransaction);
             a.FillMAGAZZ(ds, filtro);
         }
+
+        [DataContext(true)]
+        public void UpdateMONITOR_GIACENZA(MagazzinoDS ds)
+        {
+            MagazzinoAdapter a = new MagazzinoAdapter(DbConnection, DbTransaction);
+            a.UpdateMagazzinoDSTable(ds.MONITOR_GIACENZA.TableName, ds);
+        }
     }
 }

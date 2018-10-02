@@ -39,5 +39,21 @@ namespace ReportWeb.Data.Magazzino
                 da.Fill(ds.MAGAZZ);
             }
         }
+
+        public void UpdateMagazzinoDSTable(string tablename, MagazzinoDS ds)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                a.ContinueUpdateOnError = false;
+                DataTable dt = ds.Tables[tablename];
+                DbCommandBuilder cmd = BuildCommandBuilder(a);
+                a.UpdateCommand = cmd.GetUpdateCommand();
+                a.DeleteCommand = cmd.GetDeleteCommand();
+                a.InsertCommand = cmd.GetInsertCommand();
+                a.Update(dt);
+            }
+        }
     }
 }
