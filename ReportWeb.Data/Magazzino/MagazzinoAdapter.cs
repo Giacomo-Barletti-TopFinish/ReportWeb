@@ -29,7 +29,7 @@ namespace ReportWeb.Data.Magazzino
 
         public void FillMAGAZZ(MagazzinoDS ds, string filtro)
         {
-            string f = string.Format("%{0}%", filtro);
+            string f = string.Format("%{0}%", filtro.Trim().ToUpper());
             string select = @"SELECT * FROM GRUPPO.MAGAZZ WHERE MODELLO LIKE $P{FILTRO}";
 
             ParamSet ps = new ParamSet();
