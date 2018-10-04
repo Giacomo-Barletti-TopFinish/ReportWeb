@@ -1,0 +1,42 @@
+﻿@using ReportWeb.Models.Magazzino
+@model List<ModelloApprovvigionamentoModel>
+
+
+@if (Model.Count == 0)
+{
+    <h3 class="text-red">Nessun elemento trovato</h3>
+}
+else
+{
+    <input type="button" onclick="SalvaApprovvigionamenti();" class="btn btn-primary" value="Salva approvvigionamenti" />
+    <table class="table table-condensed" id="tblApprovvigionamenti">
+        <thead>
+            <tr>
+                <th></th>
+                <th width="15%">Modello</th>
+                <th>Descrizione</th>
+                <th width="30%">Nota</th>
+                <th width="8%">Data scadenza</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ModelloApprovvigionamentoModel elemento in Model)
+            {
+                <tr>
+                    @if (elemento.Presente)
+                    {
+                        <td><input type="checkbox" class="RWCHECK" checked /></td>
+                    }
+                    else
+                    {
+                        <td><input type="checkbox" class="RWCHECK" /></td>
+                    }
+                    <td>@elemento.Modello <input type="hidden" value="@elemento.IDMAGAZZ" class="hdIDMAGAZZ"></td>
+                    <td>@elemento.Descrizione.Trim()</td>
+                    <td>@Html.TextBox("txtNota", elemento.Nota, new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
+                    <td> <input class="RWDATASCADENZA" type="date" value="@elemento.DataScadenza" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

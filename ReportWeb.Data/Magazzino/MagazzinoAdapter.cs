@@ -27,6 +27,16 @@ namespace ReportWeb.Data.Magazzino
             }
         }
 
+        public void FillMONITOR_APPROVVIGIONAMENTO(MagazzinoDS ds)
+        {
+            string select = @"SELECT * FROM MONITOR_APPROVVIGIONAMENTO ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.MONITOR_APPROVVIGIONAMENTO);
+            }
+        }
+
         public void FillMAGAZZ(MagazzinoDS ds, string filtro)
         {
             string f = string.Format("%{0}%", filtro.Trim().ToUpper());

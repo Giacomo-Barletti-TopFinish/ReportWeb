@@ -50,9 +50,11 @@
     <Compile Include="GalvanicaReportModel.cs" />
     <Compile Include="JSON\ALEAddebitiJsonModel.cs" />
     <Compile Include="JSON\ALEValorizzaJson.cs" />
+    <Compile Include="JSON\ApprovvigionamentiMagazzino.cs" />
     <Compile Include="JSON\FermiJsonModel.cs" />
     <Compile Include="JSON\GiacenzaMagazzino.cs" />
     <Compile Include="LoginModel.cs" />
+    <Compile Include="Magazzino\ModelloApprovvigionamentoModel.cs" />
     <Compile Include="Magazzino\ModelloGiacenzaModel.cs" />
     <Compile Include="MailDispatcher\MD_EMAILModel.cs" />
     <Compile Include="MailDispatcher\MD_GRUPPOModel.cs" />

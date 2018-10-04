@@ -15,7 +15,7 @@
   <xs:element name="MagazzinoDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MagazzinoDS" msprop:Generator_UserDSName="MagazzinoDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="MONITOR_GIACENZA" msprop:Generator_TableClassName="MONITOR_GIACENZADataTable" msprop:Generator_TableVarName="tableMONITOR_GIACENZA" msprop:Generator_TablePropName="MONITOR_GIACENZA" msprop:Generator_RowDeletingName="MONITOR_GIACENZARowDeleting" msprop:Generator_RowChangingName="MONITOR_GIACENZARowChanging" msprop:Generator_RowEvHandlerName="MONITOR_GIACENZARowChangeEventHandler" msprop:Generator_RowDeletedName="MONITOR_GIACENZARowDeleted" msprop:Generator_UserTableName="MONITOR_GIACENZA" msprop:Generator_RowChangedName="MONITOR_GIACENZARowChanged" msprop:Generator_RowEvArgName="MONITOR_GIACENZARowChangeEvent" msprop:Generator_RowClassName="MONITOR_GIACENZARow">
+        <xs:element name="MONITOR_GIACENZA" msprop:Generator_TableClassName="MONITOR_GIACENZADataTable" msprop:Generator_TableVarName="tableMONITOR_GIACENZA" msprop:Generator_RowChangedName="MONITOR_GIACENZARowChanged" msprop:Generator_TablePropName="MONITOR_GIACENZA" msprop:Generator_RowDeletingName="MONITOR_GIACENZARowDeleting" msprop:Generator_RowChangingName="MONITOR_GIACENZARowChanging" msprop:Generator_RowEvHandlerName="MONITOR_GIACENZARowChangeEventHandler" msprop:Generator_RowDeletedName="MONITOR_GIACENZARowDeleted" msprop:Generator_RowClassName="MONITOR_GIACENZARow" msprop:Generator_UserTableName="MONITOR_GIACENZA" msprop:Generator_RowEvArgName="MONITOR_GIACENZARowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
@@ -29,7 +29,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MAGAZZ" msprop:Generator_TableClassName="MAGAZZDataTable" msprop:Generator_TableVarName="tableMAGAZZ" msprop:Generator_TablePropName="MAGAZZ" msprop:Generator_RowDeletingName="MAGAZZRowDeleting" msprop:Generator_RowChangingName="MAGAZZRowChanging" msprop:Generator_RowEvHandlerName="MAGAZZRowChangeEventHandler" msprop:Generator_RowDeletedName="MAGAZZRowDeleted" msprop:Generator_UserTableName="MAGAZZ" msprop:Generator_RowChangedName="MAGAZZRowChanged" msprop:Generator_RowEvArgName="MAGAZZRowChangeEvent" msprop:Generator_RowClassName="MAGAZZRow">
+        <xs:element name="MAGAZZ" msprop:Generator_TableClassName="MAGAZZDataTable" msprop:Generator_TableVarName="tableMAGAZZ" msprop:Generator_RowChangedName="MAGAZZRowChanged" msprop:Generator_TablePropName="MAGAZZ" msprop:Generator_RowDeletingName="MAGAZZRowDeleting" msprop:Generator_RowChangingName="MAGAZZRowChanging" msprop:Generator_RowEvHandlerName="MAGAZZRowChangeEventHandler" msprop:Generator_RowDeletedName="MAGAZZRowDeleted" msprop:Generator_RowClassName="MAGAZZRow" msprop:Generator_UserTableName="MAGAZZ" msprop:Generator_RowEvArgName="MAGAZZRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
@@ -514,6 +514,27 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="MONITOR_APPROVVIGIONAMENTO" msprop:Generator_TableClassName="MONITOR_APPROVVIGIONAMENTODataTable" msprop:Generator_TableVarName="tableMONITOR_APPROVVIGIONAMENTO" msprop:Generator_TablePropName="MONITOR_APPROVVIGIONAMENTO" msprop:Generator_RowDeletingName="MONITOR_APPROVVIGIONAMENTORowDeleting" msprop:Generator_RowChangingName="MONITOR_APPROVVIGIONAMENTORowChanging" msprop:Generator_RowEvHandlerName="MONITOR_APPROVVIGIONAMENTORowChangeEventHandler" msprop:Generator_RowDeletedName="MONITOR_APPROVVIGIONAMENTORowDeleted" msprop:Generator_UserTableName="MONITOR_APPROVVIGIONAMENTO" msprop:Generator_RowChangedName="MONITOR_APPROVVIGIONAMENTORowChanged" msprop:Generator_RowEvArgName="MONITOR_APPROVVIGIONAMENTORowChangeEvent" msprop:Generator_RowClassName="MONITOR_APPROVVIGIONAMENTORow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOTA" msprop:Generator_ColumnVarNameInTable="columnNOTA" msprop:Generator_ColumnPropNameInRow="NOTA" msprop:Generator_ColumnPropNameInTable="NOTAColumn" msprop:Generator_UserColumnName="NOTA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATASCADENZA" msprop:Generator_ColumnVarNameInTable="columnDATASCADENZA" msprop:Generator_ColumnPropNameInRow="DATASCADENZA" msprop:Generator_ColumnPropNameInTable="DATASCADENZAColumn" msprop:Generator_UserColumnName="DATASCADENZA" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -522,6 +543,10 @@
     </xs:unique>
     <xs:unique name="MAGAZZ_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:MAGAZZ" />
+      <xs:field xpath="mstns:IDMAGAZZ" />
+    </xs:unique>
+    <xs:unique name="MONITOR_APPROVVIGIONAMENTO_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:MONITOR_APPROVVIGIONAMENTO" />
       <xs:field xpath="mstns:IDMAGAZZ" />
     </xs:unique>
   </xs:element>
