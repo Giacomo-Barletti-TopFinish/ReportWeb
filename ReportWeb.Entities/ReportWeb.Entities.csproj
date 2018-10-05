@@ -81,6 +81,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="RvlDocumentiDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RvlDocumentiDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SecurityDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -163,6 +168,17 @@
     </None>
     <None Include="ReportDS.xss">
       <DependentUpon>ReportDS.xsd</DependentUpon>
+    </None>
+    <None Include="RvlDocumentiDS.xsc">
+      <DependentUpon>RvlDocumentiDS.xsd</DependentUpon>
+    </None>
+    <None Include="RvlDocumentiDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RvlDocumentiDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="RvlDocumentiDS.xss">
+      <DependentUpon>RvlDocumentiDS.xsd</DependentUpon>
     </None>
     <None Include="SecurityDS.xsc">
       <DependentUpon>SecurityDS.xsd</DependentUpon>

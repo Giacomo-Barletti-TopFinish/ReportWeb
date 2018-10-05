@@ -65,6 +65,10 @@
     <Compile Include="PVDConsuntivoModel.cs" />
     <Compile Include="PVDReportModel.cs" />
     <Compile Include="QuadrantiModel.cs" />
+    <Compile Include="RvlDocumenti\BollaCaricoModel.cs" />
+    <Compile Include="RvlDocumenti\BollaVenditaDettaglioModel.cs" />
+    <Compile Include="RvlDocumenti\BolleVenditaModel.cs" />
+    <Compile Include="RvlDocumenti\PrdMovFasiModel.cs" />
     <Compile Include="RWListItem.cs" />
     <Compile Include="TokenModel.cs" />
     <Compile Include="VerniciaturaConsuntivoModel.cs" />

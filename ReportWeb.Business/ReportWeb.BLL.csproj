@@ -47,6 +47,7 @@
     <Compile Include="ODLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PVDBLL.cs" />
+    <Compile Include="RvlDocumentiBLL.cs" />
     <Compile Include="SecurityBLL.cs" />
     <Compile Include="VerniciaturaBLL.cs" />
   </ItemGroup>

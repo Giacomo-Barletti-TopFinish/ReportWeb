@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -151,6 +152,7 @@
     <Compile Include="Controllers\MailDispatcherController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PVDController.cs" />
+    <Compile Include="Controllers\RvlDocumentiController.cs" />
     <Compile Include="Controllers\TVController.cs" />
     <Compile Include="Controllers\VerniciaturaController.cs" />
     <Compile Include="Exceptions.cs" />
@@ -440,6 +442,8 @@
     <Content Include="Views\Magazzino\TabellaGiacenze.cshtml" />
     <Content Include="Views\Magazzino\APPROVVIGIONAMENTI.cshtml" />
     <Content Include="Views\Magazzino\TabellaApprovvigionamenti.cshtml" />
+    <Content Include="Views\RvlDocumenti\BolleVendita.cshtml" />
+    <Content Include="Views\RvlDocumenti\TabellaBolleVendita.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
