@@ -1,7 +1,10 @@
 ﻿
 @using ReportWeb.Models.RvlDocumenti
 @model List<BollaCaricoModel>
-
+@if(Model.Count==0)
+{
+    <h2>Nessun dato trovato</h2>
+}
 @foreach (BollaCaricoModel bolla in Model)
 {
     <div class="row">

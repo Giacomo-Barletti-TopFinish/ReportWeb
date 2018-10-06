@@ -261,7 +261,8 @@ namespace ReportWeb.Data.RvlDocumenti
 
             if (!string.IsNullOrEmpty(Riferimento))
             {
-                whereCondition += "AND RIFERIMENTO=$P{RIFERIMENTO} ";
+                whereCondition += "AND RIFERIMENTO LIKE $P{RIFERIMENTO} ";
+                Riferimento = Riferimento.Trim() + "%";
                 ps.AddParam("RIFERIMENTO", DbType.String, Riferimento);
             }
 

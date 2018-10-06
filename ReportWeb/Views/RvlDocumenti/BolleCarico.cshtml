@@ -37,13 +37,14 @@
         var esegui = true;
         var messaggio = '';
         var numeroDocumento = $('#txtNumeroDocumento').val();
-        if (numeroDocumento == null || numeroDocumento == '')
+        var riferimento = $('#txtRiferimento').val();
+
+        if ((numeroDocumento == null || numeroDocumento == '') && (riferimento == null || riferimento == ''))
         {
-            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il numero del documento da cercare" + "</br>";
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il numero del documento o il riferimento da cercare" + "</br>";
             esegui = false;
         }
 
-        var riferimento = $('#txtRiferimento').val();
         var fornitore = $('#ddlFornitori').val();
 
         $('#lblMessage').html(messaggio);
