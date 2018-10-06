@@ -444,6 +444,8 @@
     <Content Include="Views\Magazzino\TabellaApprovvigionamenti.cshtml" />
     <Content Include="Views\RvlDocumenti\BolleVendita.cshtml" />
     <Content Include="Views\RvlDocumenti\TabellaBolleVendita.cshtml" />
+    <Content Include="Views\RvlDocumenti\BolleCarico.cshtml" />
+    <Content Include="Views\RvlDocumenti\TabellaBolleCarico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

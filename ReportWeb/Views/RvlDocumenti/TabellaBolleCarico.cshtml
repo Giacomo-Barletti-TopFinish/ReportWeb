@@ -1,0 +1,97 @@
+﻿
+@using ReportWeb.Models.RvlDocumenti
+@model List<BollaCaricoModel>
+
+@foreach (BollaCaricoModel bolla in Model)
+{
+    <div class="row">
+        <div class="col-sm-1">
+            <label class="input-sm">Numero documento</label>
+        </div>
+        <div class="col-sm-1">
+            @bolla.FullNumDoc
+        </div>
+        <div class="col-sm-1">
+            <label class="input-sm">Tipo documento</label>
+        </div>
+        <div class="col-sm-1">
+            @bolla.TipoDocumento
+        </div>
+        <div class="col-sm-1">
+            <label class="input-sm">Data</label>
+        </div>
+        <div class="col-sm-1">
+            @bolla.Data
+        </div>
+        <div class="col-sm-1">
+            <label class="input-sm">Fornitore</label>
+        </div>
+        <div class="col-sm-2">
+            @bolla.Fornitore
+        </div>
+        <div class="col-sm-1">
+            <label class="input-sm">Riferimento</label>
+        </div>
+        <div class="col-sm-2">
+            @bolla.Riferimento
+        </div>
+    </div>
+    foreach (PrdMovFasiModel fase in bolla.Fasi)
+    {
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-1">
+                <label class="input-sm">ODL</label>
+            </div>
+            <div class="col-sm-1">
+                @fase.NumeroMovimentoFase
+            </div>
+            <div class="col-sm-1">
+                <label class="input-sm">Modello</label>
+            </div>
+            <div class="col-sm-2">
+                @fase.Modello
+            </div>
+            <div class="col-sm-1">
+                <label class="input-sm">Quantita</label>
+            </div>
+            <div class="col-sm-1">
+                @fase.Quantita
+            </div>
+        </div>
+
+        foreach (BollaVenditaModel acquisto in fase.Vendite)
+        {
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-1">
+                    <label class="input-sm">Documento origine</label>
+                </div>
+                <div class="col-sm-1">
+                    @acquisto.TipoDocumento
+                </div>
+                <div class="col-sm-1">
+                    <label class="input-sm">Nome documento</label>
+                </div>
+                <div class="col-sm-1">
+                    @acquisto.FullNumDoc
+                </div>
+                <div class="col-sm-1">
+                    <label class="input-sm">Data</label>
+                </div>
+                <div class="col-sm-1">
+                    @acquisto.Data
+                </div>
+                <div class="col-sm-1">
+                    <label class="input-sm">Numero documento</label>
+                </div>
+                <div class="col-sm-2">
+                    @acquisto.NumeroDocumento
+                </div>
+            </div>
+
+        }
+    }
+    <hr />
+}

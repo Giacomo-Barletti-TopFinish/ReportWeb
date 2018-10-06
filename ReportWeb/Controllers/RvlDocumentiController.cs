@@ -1,4 +1,5 @@
 ﻿using ReportWeb.Business;
+using ReportWeb.Models;
 using ReportWeb.Models.RvlDocumenti;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,27 @@ namespace ReportWeb.Controllers
         {
             RvlDocumentiBLL bll = new RvlDocumentiBLL();
             List<BollaVenditaModel> model = bll.TrovaBollaVendita(NumeroDocumento);
-            return PartialView("TabellaBolleVendita",model);
+            return PartialView("TabellaBolleVendita", model);
+        }
+
+        public ActionResult BolleCarico()
+        {
+            VerificaAbilitazioneUtenteConUscita(29);
+            RvlDocumentiBLL bll = new RvlDocumentiBLL();
+            List<RWListItem> model = bll.CaricaTipoDocumentoBolleCarico();
+            model.Insert(0, new RWListItem(string.Empty, "-1"));
+            ViewData.Add("tipoDocumento", model);
+            List<RWListItem> fornitori = bll.CaricaListaFornitori();
+            fornitori.Insert(0, new RWListItem(string.Empty, "-1"));
+            ViewData.Add("fornitori", fornitori);
+            return View();
+        }
+
+        public ActionResult TrovaBollaCarico(string NumeroDocumento, string TipoDocumento, string Data, string Riferimento, string Fornitore)
+        {
+            RvlDocumentiBLL bll = new RvlDocumentiBLL();
+            List<BollaCaricoModel> model = bll.TrovaBollaCarico(NumeroDocumento, TipoDocumento, Data, Riferimento,Fornitore);
+            return PartialView("TabellaBolleCarico", model);
         }
     }
 }

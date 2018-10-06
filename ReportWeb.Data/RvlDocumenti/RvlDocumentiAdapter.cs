@@ -49,6 +49,23 @@ namespace ReportWeb.Data.RvlDocumenti
             }
         }
 
+        public void FillUSR_VENDITET(RvlDocumentiDS ds, List<string> IDVENDITET)
+        {
+            if (IDVENDITET.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDVENDITET);
+            string select = @"SELECT * FROM DITTA1.USR_VENDITET WHERE IDVENDITET IN ({0})
+                                UNION ALL
+                              SELECT * FROM DITTA2.USR_VENDITET WHERE IDVENDITET IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_VENDITET);
+            }
+        }
+
         public void FillUSR_PRD_FLUSSO_MOVMATE(RvlDocumentiDS ds, List<string> IDVENDITED)
         {
             if (IDVENDITED.Count == 0) return;
@@ -66,6 +83,22 @@ namespace ReportWeb.Data.RvlDocumenti
             }
         }
 
+        public void FillUSR_PRD_FLUSSO_MOVMATEByIDPRDMOVMATE(RvlDocumentiDS ds, List<string> IDPRDMOVMATE)
+        {
+            if (IDPRDMOVMATE.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDPRDMOVMATE);
+            string select = @"SELECT * FROM DITTA1.USR_PRD_FLUSSO_MOVMATE WHERE IDPRDMOVMATE IN ({0})
+                                UNION ALL
+                              SELECT * FROM DITTA2.USR_PRD_FLUSSO_MOVMATE WHERE IDPRDMOVMATE IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PRD_FLUSSO_MOVMATE);
+            }
+        }
         public void FillUSR_PRD_MOVMATE(RvlDocumentiDS ds, List<string> IDPRDMOVMATE)
         {
             if (IDPRDMOVMATE.Count == 0) return;
@@ -83,6 +116,23 @@ namespace ReportWeb.Data.RvlDocumenti
             }
         }
 
+        public void FillUSR_PRD_MOVMATEByIDPRDMOVFASE(RvlDocumentiDS ds, List<string> IDPRDMOVFASE)
+        {
+            if (IDPRDMOVFASE.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDPRDMOVFASE);
+            string select = @"SELECT * FROM DITTA1.USR_PRD_MOVMATE WHERE IDPRDMOVFASE IN ({0})
+                                UNION ALL
+                              SELECT * FROM DITTA2.USR_PRD_MOVMATE WHERE IDPRDMOVFASE IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PRD_MOVMATE);
+            }
+        }
+
         public void FillUSR_PRD_FLUSSO_MOVFASI(RvlDocumentiDS ds, List<string> IDPRDMOVFASE)
         {
             if (IDPRDMOVFASE.Count == 0) return;
@@ -91,6 +141,23 @@ namespace ReportWeb.Data.RvlDocumenti
             string select = @"SELECT * FROM DITTA1.USR_PRD_FLUSSO_MOVFASI WHERE IDPRDMOVFASE IN ({0})
                                 UNION ALL
                               SELECT * FROM DITTA2.USR_PRD_FLUSSO_MOVFASI WHERE IDPRDMOVFASE IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PRD_FLUSSO_MOVFASI);
+            }
+        }
+
+        public void FillUSR_PRD_FLUSSO_MOVFASIByIDACQUISTID(RvlDocumentiDS ds, List<string> IDACQUISTID)
+        {
+            if (IDACQUISTID.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDACQUISTID);
+            string select = @"SELECT * FROM DITTA1.USR_PRD_FLUSSO_MOVFASI WHERE IDACQUISTID IN ({0})
+                                UNION ALL
+                              SELECT * FROM DITTA2.USR_PRD_FLUSSO_MOVFASI WHERE IDACQUISTID IN ({0})";
 
             select = string.Format(select, selezione);
 
@@ -133,6 +200,23 @@ namespace ReportWeb.Data.RvlDocumenti
             }
         }
 
+        public void FillUSR_ACQUISTIDByIDUSRACQUISTIT(RvlDocumentiDS ds, List<string> IDUSRACQUISTIT)
+        {
+            if (IDUSRACQUISTIT.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDUSRACQUISTIT);
+            string select = @"SELECT * FROM DITTA1.USR_ACQUISTID WHERE IDACQUISTIT IN ({0})
+                                UNION ALL
+                              SELECT * FROM DITTA2.USR_ACQUISTID WHERE IDACQUISTIT IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_ACQUISTID);
+            }
+        }
+
         public void FillUSR_ACQUISTIT(RvlDocumentiDS ds, List<string> IDUSRACQUISTIT)
         {
             if (IDUSRACQUISTIT.Count == 0) return;
@@ -150,9 +234,61 @@ namespace ReportWeb.Data.RvlDocumenti
             }
         }
 
+
+        public void FillUSR_ACQUISTIT(RvlDocumentiDS ds, string NumeroDocumento, string TipoDocumento, string Data, string Riferimento, string Fornitore)
+        {
+            string whereCondition = "WHERE 1=1 ";
+            ParamSet ps = new ParamSet();
+
+            if (!string.IsNullOrEmpty(NumeroDocumento))
+            {
+                whereCondition += "AND NUMDOC=$P{NUMDOC} ";
+                ps.AddParam("NUMDOC", DbType.String, NumeroDocumento);
+            }
+
+            if (!string.IsNullOrEmpty(TipoDocumento) && TipoDocumento != "-1")
+            {
+                whereCondition += "AND IDTABTIPDOC=$P{IDTABTIPDOC} ";
+                ps.AddParam("IDTABTIPDOC", DbType.String, TipoDocumento);
+            }
+
+            DateTime data;
+            if (!string.IsNullOrEmpty(Data) && DateTime.TryParse(Data, out data))
+            {
+                whereCondition += "AND DATDOC=$P{DATDOC} ";
+                ps.AddParam("DATDOC", DbType.DateTime, data);
+            }
+
+            if (!string.IsNullOrEmpty(Riferimento))
+            {
+                whereCondition += "AND RIFERIMENTO=$P{RIFERIMENTO} ";
+                ps.AddParam("RIFERIMENTO", DbType.String, Riferimento);
+            }
+
+            if (!string.IsNullOrEmpty(Fornitore) && Fornitore != "-1")
+            {
+                whereCondition += "AND CODICECLIFO=$P{CODICECLIFO} ";
+                ps.AddParam("CODICECLIFO", DbType.String, Fornitore);
+            }
+
+            string select = @"SELECT * FROM DITTA1.USR_ACQUISTIT " + whereCondition;
+
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_ACQUISTIT);
+            }
+
+            select = @"SELECT * FROM DITTA2.USR_ACQUISTIT " + whereCondition;
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_ACQUISTIT);
+            }
+        }
+
         public void FillCLIFO(RvlDocumentiDS ds)
         {
-            string select = @"SELECT * FROM GRUPPO.CLIFO ";
+            string select = @"SELECT * FROM GRUPPO.CLIFO WHERE RAGIONESOC IS NOT NULL";
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {

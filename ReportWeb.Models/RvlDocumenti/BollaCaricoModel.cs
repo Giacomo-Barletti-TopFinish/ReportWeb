@@ -16,5 +16,7 @@ namespace ReportWeb.Models.RvlDocumenti
         public string FullNumDoc { get; set; }
         public string Riferimento { get; set; }
         public string Fornitore { get; set; }
+
+        public List<PrdMovFasiModel> Fasi { get; set; }
     }
 }

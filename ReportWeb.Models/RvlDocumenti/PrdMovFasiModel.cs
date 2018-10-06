@@ -14,5 +14,6 @@ namespace ReportWeb.Models.RvlDocumenti
         public decimal Quantita { get; set; }
 
         public List<BollaCaricoModel> Acquisti { get; set; }
+        public List<BollaVenditaModel> Vendite { get; set; }
     }
 }

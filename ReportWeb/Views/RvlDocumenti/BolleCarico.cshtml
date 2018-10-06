@@ -1,0 +1,85 @@
+﻿@using ReportWeb.Models
+@{
+    ViewBag.Title = "RVL Documenti - Bolle carico";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>RVL Documenti - Bolle carico</h2>
+    <div class="row">
+        <div class="col-sm-1"><label>Tipo documento</label></div>
+        <div class="col-sm-1"> @Html.DropDownList("ddlTipoDocumento", new SelectList(ViewData["tipoDocumento"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-1"><label>Numero documento</label></div>
+        <div class="col-sm-1">@Html.TextBox("txtNumeroDocumento", "", new { @maxlength = "8", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })</div>
+        <div class="col-sm-1 text-right"><label>Data</label></div>
+        <div class="col-sm-1"><input type="date" id="txtData" /></div>
+        <div class="col-sm-1 text-right"><label>Riferimento</label></div>
+        <div class="col-sm-1"><input id="txtRiferimento" /></div>
+        <div class="col-sm-1 text-right"><label>Fornitore</label></div>
+        <div class="col-sm-2"> @Html.DropDownList("ddlFornitori", new SelectList(ViewData["fornitori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
+        <label class="text-red" id="lblMessage"></label>
+    </div>
+</div>
+<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:730px; ">
+    <div class="box-body form-group-sm">
+        <div id="divRisultati"></div>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $('#ddlFornitori').select2();
+    });
+
+    function Trova()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var numeroDocumento = $('#txtNumeroDocumento').val();
+        if (numeroDocumento == null || numeroDocumento == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il numero del documento da cercare" + "</br>";
+            esegui = false;
+        }
+
+        var riferimento = $('#txtRiferimento').val();
+        var fornitore = $('#ddlFornitori').val();
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var tipoDocumento = $('#ddlTipoDocumento').val();
+        var data = $('#txtData').val();
+
+        var url = '@Url.Action("TrovaBollaCarico", "RvlDocumenti")';
+        $.ajax({
+            url: url,
+            data: {
+                NumeroDocumento: numeroDocumento,
+                TipoDocumento: tipoDocumento,
+                Data: data,
+                Riferimento: riferimento,
+                Fornitore: fornitore
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+
+</script>

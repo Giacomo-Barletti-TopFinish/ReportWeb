@@ -27,10 +27,24 @@ namespace ReportWeb.Data.RvlDocumenti
         }
 
         [DataContext]
+        public void FillUSR_VENDITET(RvlDocumentiDS ds, List<string> IDVENDITET)
+        {
+            RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
+            a.FillUSR_VENDITET(ds, IDVENDITET);
+        }
+
+        [DataContext]
         public void FillUSR_PRD_FLUSSO_MOVMATE(RvlDocumentiDS ds, List<string> IDVENDITED)
         {
             RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
             a.FillUSR_PRD_FLUSSO_MOVMATE(ds, IDVENDITED);
+        }
+
+        [DataContext]
+        public void FillUSR_PRD_FLUSSO_MOVMATEByIDPRDMOVMATE(RvlDocumentiDS ds, List<string> IDPRDMOVMATE)
+        {
+            RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_FLUSSO_MOVMATEByIDPRDMOVMATE(ds, IDPRDMOVMATE);
         }
 
         [DataContext]
@@ -41,12 +55,25 @@ namespace ReportWeb.Data.RvlDocumenti
         }
 
         [DataContext]
+        public void FillUSR_PRD_MOVMATEByIDPRDMOVFASE(RvlDocumentiDS ds, List<string> IDPRDMOVFASE)
+        {
+            RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_MOVMATEByIDPRDMOVFASE(ds, IDPRDMOVFASE);
+        }
+
+        [DataContext]
         public void FillUSR_PRD_FLUSSO_MOVFASI(RvlDocumentiDS ds, List<string> IDPRDMOVFASE)
         {
             RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
             a.FillUSR_PRD_FLUSSO_MOVFASI(ds, IDPRDMOVFASE);
         }
 
+        [DataContext]
+        public void FillUSR_PRD_FLUSSO_MOVFASIByIDACQUISTID(RvlDocumentiDS ds, List<string> IDACQUISTID)
+        {
+            RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_FLUSSO_MOVFASIByIDACQUISTID(ds, IDACQUISTID);
+        }
         [DataContext]
         public void FillUSR_PRD_MOVFASI(RvlDocumentiDS ds, List<string> IDPRDMOVFASE)
         {
@@ -62,10 +89,24 @@ namespace ReportWeb.Data.RvlDocumenti
         }
 
         [DataContext]
+        public void FillUSR_ACQUISTIDByIDUSRACQUISTIT(RvlDocumentiDS ds, List<string> IDUSRACQUISTIT)
+        {
+            RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
+            a.FillUSR_ACQUISTIDByIDUSRACQUISTIT(ds, IDUSRACQUISTIT);
+        }
+
+        [DataContext]
         public void FillUSR_ACQUISTIT(RvlDocumentiDS ds, List<string> IDUSRACQUISTIT)
         {
             RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
             a.FillUSR_ACQUISTIT(ds, IDUSRACQUISTIT);
+        }
+
+        [DataContext]
+        public void FillUSR_ACQUISTIT(RvlDocumentiDS ds, string NumeroDocumento, string TipoDocumento, string Data, string Riferimento, string Fornitore)
+        {
+            RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
+            a.FillUSR_ACQUISTIT(ds, NumeroDocumento, TipoDocumento, Data, Riferimento, Fornitore);
         }
 
         [DataContext]
