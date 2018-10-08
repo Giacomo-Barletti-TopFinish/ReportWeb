@@ -7,88 +7,129 @@
 
 @foreach (BollaVenditaModel bolla in Model)
 {
-    <div class="row">
-        <div class="col-sm-1">
-            <label class="input-sm">Numero documento</label>
-        </div>
-        <div class="col-sm-1">
-            @bolla.FullNumDoc
-        </div>
-        <div class="col-sm-1">
-            <label class="input-sm">Tipo documento</label>
-        </div>
-        <div class="col-sm-1">
-            @bolla.TipoDocumento
-        </div>
-        <div class="col-sm-1">
-            <label class="input-sm">Cliente</label>
-        </div>
-        <div class="col-sm-2">
-            @bolla.Cliente
-        </div>
-        <div class="col-sm-1">
-            <label class="input-sm">Data</label>
-        </div>
-        <div class="col-sm-1">
-            @bolla.Data
-        </div>
-    </div>
-    foreach (PrdMovFasiModel fase in bolla.PRDMOVFASI)
-    {
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-1">
-                <label class="input-sm">ODL</label>
-            </div>
-            <div class="col-sm-1">
-                @fase.NumeroMovimentoFase
-            </div>
-            <div class="col-sm-1">
-                <label class="input-sm">Modello</label>
-            </div>
-            <div class="col-sm-2">
-                @fase.Modello
-            </div>
-            <div class="col-sm-1">
-                <label class="input-sm">Quantita</label>
-            </div>
-            <div class="col-sm-1">
-                @fase.Quantita
-            </div>
-        </div>
-
-        foreach (BollaCaricoModel acquisto in fase.Acquisti)
-        {
+    <div class="box box-primary collapsed-box" id="sectionPartiSpeciali">
+        <div class="box-header with-border">
             <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-1"></div>
                 <div class="col-sm-1">
-                    <label class="input-sm">Documento acquisto</label>
+                    <label class="input-sm">Numero documento</label>
                 </div>
                 <div class="col-sm-1">
-                    @acquisto.TipoDocumento
-                </div>
-                <div class="col-sm-1">
-                    <label class="input-sm">Nome documento</label>
-                </div>
-                <div class="col-sm-1">
-                    @acquisto.FullNumDoc
-                </div>
-                <div class="col-sm-1">
-                    <label class="input-sm">Riferimento</label>
-                </div>
-                <div class="col-sm-1">
-                    @acquisto.Riferimento
-                </div>
-                <div class="col-sm-1">
-                    <label class="input-sm">Fornitore</label>
+                    <label class="input-sm">Azienda</label>
                 </div>
                 <div class="col-sm-2">
-                    @acquisto.Fornitore
+                    <label class="input-sm">Documento</label>
+                </div>
+                <div class="col-sm-2">
+                    <label class="input-sm">Tipo documento</label>
+                </div>
+                <div class="col-sm-2">
+                    <label class="input-sm">Cliente</label>
+                </div>
+                <div class="col-sm-2">
+                    <label class="input-sm">Data</label>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-sm-1">
+                    @bolla.NumeroDocumento
+                </div>
+                <div class="col-sm-1">
+                    @bolla.Azienda
+                </div>
+                <div class="col-sm-2">
+                    @bolla.FullNumDoc
+                </div>
+                <div class="col-sm-2">
+                    @bolla.TipoDocumento
+                </div>
+                <div class="col-sm-2">
+                    @bolla.Cliente
+                </div>
+                <div class="col-sm-2">
+                    @bolla.Data
+                </div>
+            </div>
+            <div class="box-tools pull-right">
+                <button id="btnCollapsePSpeciali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-down"></i></button>
+            </div>
+        </div>
+        @foreach (PrdMovFasiModel fase in bolla.PRDMOVFASI)
+        {
+            <div class="box-body">
+                                   
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <label class="input-sm"></label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="input-sm">ODL</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="input-sm">Modello</label>
+                            </div>
+                            <div class="col-sm-1">
+                                <label class="input-sm">Quantità</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1">
+                            </div>
+                            <div class="col-sm-2">
+                                @fase.NumeroMovimentoFase
+                            </div>
+                            <div class="col-sm-2">
+                                @fase.Modello
+                            </div>
+                            <div class="col-sm-2">
+                                @fase.Quantita
+                            </div>
+                        </div>
+                                         
+                        <div class="row">
+                            <div class="col-sm-2">
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Documento</label>
+                            </div>
+                            <div class="col-sm-1">
+                                <label>Tipo</label>
+                            </div>
+                            <div class="col-sm-1">
+                                <label>Numero</label>
+                            </div>
+                            <div class="col-sm-1">
+                                <label>Riferimento</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Fornitore</label>
+                            </div>
+                        </div>
+                        @foreach (BollaCaricoModel acquisto in fase.Acquisti)
+                        {
+                        <div class="row">
+                            <div class="col-sm-2">
+                            </div>
+                            <div class="col-sm-2">
+                                @acquisto.FullNumDoc
+                            </div>
+                            <div class="col-sm-1">
+                                @acquisto.TipoDocumento
+                            </div>
+                            <div class="col-sm-1">
+                                @acquisto.NumeroDocumento
+                            </div>
+                            <div class="col-sm-1">
+                                @acquisto.Riferimento
+                            </div>
+                            <div class="col-sm-2">
+                                @acquisto.Fornitore
+                            </div>
+                        </div>
+                        }
+                    
+               
+            </div>
         }
-    }
-    <hr />
+    </div>
+
 }

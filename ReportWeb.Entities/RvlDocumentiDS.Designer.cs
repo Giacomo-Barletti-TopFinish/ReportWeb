@@ -6803,6 +6803,8 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnIDTABMAG_CL;
             
+            private global::System.Data.DataColumn columnAZIENDA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public USR_VENDITETDataTable() {
@@ -7670,6 +7672,14 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn AZIENDAColumn {
+                get {
+                    return this.columnAZIENDA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -7809,7 +7819,8 @@ namespace ReportWeb.Entities {
                         string NOTEVENSOM, 
                         decimal ABILCLAV_SN, 
                         string CODICECLIFO_CL, 
-                        string IDTABMAG_CL) {
+                        string IDTABMAG_CL, 
+                        string AZIENDA) {
                 USR_VENDITETRow rowUSR_VENDITETRow = ((USR_VENDITETRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDVENDITET,
@@ -7915,7 +7926,8 @@ namespace ReportWeb.Entities {
                         NOTEVENSOM,
                         ABILCLAV_SN,
                         CODICECLIFO_CL,
-                        IDTABMAG_CL};
+                        IDTABMAG_CL,
+                        AZIENDA};
                 rowUSR_VENDITETRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSR_VENDITETRow);
                 return rowUSR_VENDITETRow;
@@ -8049,6 +8061,7 @@ namespace ReportWeb.Entities {
                 this.columnABILCLAV_SN = base.Columns["ABILCLAV_SN"];
                 this.columnCODICECLIFO_CL = base.Columns["CODICECLIFO_CL"];
                 this.columnIDTABMAG_CL = base.Columns["IDTABMAG_CL"];
+                this.columnAZIENDA = base.Columns["AZIENDA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8262,6 +8275,8 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnCODICECLIFO_CL);
                 this.columnIDTABMAG_CL = new global::System.Data.DataColumn("IDTABMAG_CL", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDTABMAG_CL);
+                this.columnAZIENDA = new global::System.Data.DataColumn("AZIENDA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAZIENDA);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDVENDITET}, true));
                 this.columnIDVENDITET.AllowDBNull = false;
@@ -27013,6 +27028,22 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string AZIENDA {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_VENDITET.AZIENDAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AZIENDA\' in table \'USR_VENDITET\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_VENDITET.AZIENDAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDTABTIPDOCNull() {
                 return this.IsNull(this.tableUSR_VENDITET.IDTABTIPDOCColumn);
             }
@@ -27909,6 +27940,18 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIDTABMAG_CLNull() {
                 this[this.tableUSR_VENDITET.IDTABMAG_CLColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsAZIENDANull() {
+                return this.IsNull(this.tableUSR_VENDITET.AZIENDAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetAZIENDANull() {
+                this[this.tableUSR_VENDITET.AZIENDAColumn] = global::System.Convert.DBNull;
             }
         }
         

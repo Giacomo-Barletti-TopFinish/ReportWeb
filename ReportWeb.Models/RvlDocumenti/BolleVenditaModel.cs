@@ -15,6 +15,7 @@ namespace ReportWeb.Models.RvlDocumenti
         public string Data { get; set; }
         public string Cliente { get; set; }
         public string FullNumDoc { get; set; }
+        public string Azienda { get; set; }
 
         public List<PrdMovFasiModel> PRDMOVFASI { get; set; }
     }

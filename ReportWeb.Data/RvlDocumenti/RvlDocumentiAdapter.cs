@@ -20,9 +20,9 @@ namespace ReportWeb.Data.RvlDocumenti
 
             string f = string.Format("{0}", NumeroDocumento.Trim().ToUpper());
             string select = @"
-    SELECT * FROM DITTA1.USR_VENDITET WHERE NUMDOC LIKE $P{NUMDOC}
+    SELECT DITTA1.USR_VENDITET.*,'METAL-PLUS' AS AZIENDA FROM DITTA1.USR_VENDITET WHERE NUMDOC LIKE $P{NUMDOC}
     UNION ALL 
-    SELECT * FROM DITTA2.USR_VENDITET WHERE NUMDOC LIKE $P{NUMDOC}";
+    SELECT DITTA2.USR_VENDITET.*, 'TOPFINISH' AS AZIENDA FROM DITTA2.USR_VENDITET WHERE NUMDOC LIKE $P{NUMDOC}";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("NUMDOC", DbType.String, f);

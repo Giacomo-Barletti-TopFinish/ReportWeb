@@ -121,7 +121,7 @@ namespace ReportWeb.Business
             BollaVenditaModel bollaVendita = new BollaVenditaModel();
             bollaVendita.IDVENDITET = testata.IDVENDITET;
             bollaVendita.NumeroDocumento = testata.IsNUMDOCNull() ? string.Empty : testata.NUMDOC;
-
+            bollaVendita.Azienda = testata.IsAZIENDANull() ? string.Empty : testata.AZIENDA;
             RvlDocumentiDS.TABTIPDOCRow tipDoc = ds.TABTIPDOC.Where(x => x.IDTABTIPDOC == testata.IDTABTIPDOC).FirstOrDefault();
             if (tipDoc != null)
                 bollaVendita.TipoDocumento = tipDoc.CODICETIPDOC;
@@ -239,7 +239,7 @@ namespace ReportWeb.Business
                         IDPRDMOVMATE = ds.USR_PRD_MOVMATE.Where(x => x.IDPRDMOVFASE == movFaseRow.IDPRDMOVFASE).Select(x => x.IDPRDMOVMATE).Distinct().ToList();
                         IDVENDITET = ds.USR_PRD_FLUSSO_MOVMATE.Where(x => !x.IsIDVENDITETNull() && IDPRDMOVMATE.Contains(x.IDPRDMOVMATE)).Select(x => x.IDVENDITET).Distinct().ToList();
 
-                        foreach(RvlDocumentiDS.USR_VENDITETRow vendita in ds.USR_VENDITET.Where(x=>x.IDVENDITET.Contains(x.IDVENDITET)))
+                        foreach (RvlDocumentiDS.USR_VENDITETRow vendita in ds.USR_VENDITET.Where(x => x.IDVENDITET.Contains(x.IDVENDITET)))
                         {
                             BollaVenditaModel bollaVendita = creaBollaVenditaModel(ds, vendita);
                             movFase.Vendite.Add(bollaVendita);
