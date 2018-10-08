@@ -272,7 +272,7 @@ namespace ReportWeb.Data.RvlDocumenti
                 ps.AddParam("CODICECLIFO", DbType.String, Fornitore);
             }
 
-            string select = @"SELECT * FROM DITTA1.USR_ACQUISTIT " + whereCondition;
+            string select = @"SELECT DITTA1.USR_ACQUISTIT.*, 'METAL-PLUS' AS AZIENDA FROM DITTA1.USR_ACQUISTIT " + whereCondition;
 
 
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
@@ -280,7 +280,7 @@ namespace ReportWeb.Data.RvlDocumenti
                 da.Fill(ds.USR_ACQUISTIT);
             }
 
-            select = @"SELECT * FROM DITTA2.USR_ACQUISTIT " + whereCondition;
+            select = @"SELECT DITTA2.USR_ACQUISTIT.*, 'TOPFINISH' AS AZIENDA FROM DITTA2.USR_ACQUISTIT " + whereCondition;
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.USR_ACQUISTIT);

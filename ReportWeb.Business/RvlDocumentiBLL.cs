@@ -175,7 +175,7 @@ namespace ReportWeb.Business
             bollaCarico.Anno = acquistoRow.ANNODOC;
             bollaCarico.Data = acquistoRow.IsDATDOCNull() ? string.Empty : acquistoRow.DATDOC.ToShortDateString();
             bollaCarico.Riferimento = acquistoRow.IsRIFERIMENTONull() ? string.Empty : acquistoRow.RIFERIMENTO;
-
+            bollaCarico.Azienda = acquistoRow.IsAZIENDANull() ? string.Empty : acquistoRow.AZIENDA;
             bollaCarico.Fornitore = string.Empty;
             if (!acquistoRow.IsCODICECLIFONull())
             {

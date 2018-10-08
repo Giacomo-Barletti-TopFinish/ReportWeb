@@ -106,7 +106,7 @@ namespace ReportWeb.Data.RvlDocumenti
         public void FillUSR_ACQUISTIT(RvlDocumentiDS ds, string NumeroDocumento, string TipoDocumento, string Data, string Riferimento, string Fornitore)
         {
             RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
-            a.FillUSR_ACQUISTIT(ds, NumeroDocumento, TipoDocumento, Data, Riferimento, Fornitore);
+            a.FillUSR_ACQUISTIT(ds, NumeroDocumento, TipoDocumento, Data, Riferimento.ToUpper(), Fornitore);
         }
 
         [DataContext]

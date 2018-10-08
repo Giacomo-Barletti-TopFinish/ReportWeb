@@ -7,16 +7,20 @@
     <h2>RVL Documenti - Bolle carico</h2>
     <div class="row">
         <div class="col-sm-1"><label>Tipo documento</label></div>
-        <div class="col-sm-1"> @Html.DropDownList("ddlTipoDocumento", new SelectList(ViewData["tipoDocumento"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
         <div class="col-sm-1"><label>Numero documento</label></div>
+        <div class="col-sm-2"><label>Data</label></div>
+        <div class="col-sm-2"><label>Riferimento</label></div>
+        <div class="col-sm-1"><label>Fornitore</label></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"> @Html.DropDownList("ddlTipoDocumento", new SelectList(ViewData["tipoDocumento"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
         <div class="col-sm-1">@Html.TextBox("txtNumeroDocumento", "", new { @maxlength = "8", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })</div>
-        <div class="col-sm-1 text-right"><label>Data</label></div>
-        <div class="col-sm-1"><input type="date" id="txtData" /></div>
-        <div class="col-sm-1 text-right"><label>Riferimento</label></div>
-        <div class="col-sm-1"><input id="txtRiferimento" /></div>
-        <div class="col-sm-1 text-right"><label>Fornitore</label></div>
+        <div class="col-sm-2"><input type="date" id="txtData" /></div>
+        <div class="col-sm-2"><input id="txtRiferimento" /></div>
         <div class="col-sm-2"> @Html.DropDownList("ddlFornitori", new SelectList(ViewData["fornitori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
         <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
+    </div>
+    <div class="row">
         <label class="text-red" id="lblMessage"></label>
     </div>
 </div>
