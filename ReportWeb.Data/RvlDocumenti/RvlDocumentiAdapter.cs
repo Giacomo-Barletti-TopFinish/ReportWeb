@@ -15,17 +15,45 @@ namespace ReportWeb.Data.RvlDocumenti
             base(connection, transaction)
         { }
 
-        public void FillUSR_VENDITET(RvlDocumentiDS ds, string NumeroDocumento)
+        public void FillUSR_VENDITET(RvlDocumentiDS ds, string NumeroDocumento, string TipoDocumento, string Data, string Cliente)
         {
-
-            string f = string.Format("{0}", NumeroDocumento.Trim().ToUpper());
-            string select = @"
-    SELECT DITTA1.USR_VENDITET.*,'METAL-PLUS' AS AZIENDA FROM DITTA1.USR_VENDITET WHERE NUMDOC LIKE $P{NUMDOC}
-    UNION ALL 
-    SELECT DITTA2.USR_VENDITET.*, 'TOPFINISH' AS AZIENDA FROM DITTA2.USR_VENDITET WHERE NUMDOC LIKE $P{NUMDOC}";
-
+            string whereCondition = "WHERE 1=1 ";
             ParamSet ps = new ParamSet();
-            ps.AddParam("NUMDOC", DbType.String, f);
+
+            if (!string.IsNullOrEmpty(NumeroDocumento))
+            {
+                whereCondition += "AND NUMDOC=$P{NUMDOC} ";
+                ps.AddParam("NUMDOC", DbType.String, NumeroDocumento);
+            }
+
+            if (!string.IsNullOrEmpty(TipoDocumento) && TipoDocumento != "-1")
+            {
+                whereCondition += "AND IDTABTIPDOC=$P{IDTABTIPDOC} ";
+                ps.AddParam("IDTABTIPDOC", DbType.String, TipoDocumento);
+            }
+
+            DateTime data;
+            if (!string.IsNullOrEmpty(Data) && DateTime.TryParse(Data, out data))
+            {
+                whereCondition += "AND DATDOC=$P{DATDOC} ";
+                ps.AddParam("DATDOC", DbType.DateTime, data);
+            }
+
+            if (!string.IsNullOrEmpty(Cliente) && Cliente != "-1")
+            {
+                whereCondition += "AND CODICECLIFO=$P{CODICECLIFO} ";
+                ps.AddParam("CODICECLIFO", DbType.String, Cliente);
+            }
+
+            string select = @"SELECT DITTA1.USR_VENDITET.*,'METAL-PLUS' AS AZIENDA FROM DITTA1.USR_VENDITET " + whereCondition;
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_VENDITET);
+            }
+
+            select = @"SELECT DITTA2.USR_VENDITET.*,'METAL-PLUS' AS AZIENDA FROM DITTA2.USR_VENDITET " + whereCondition;
+
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.USR_VENDITET);

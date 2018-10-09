@@ -13,10 +13,10 @@ namespace ReportWeb.Data.RvlDocumenti
         public RvlDocumentiBusiness() : base() { }
 
         [DataContext]
-        public void FillUSR_VENDITET(RvlDocumentiDS ds, string NumeroDocumento)
+        public void FillUSR_VENDITET(RvlDocumentiDS ds, string NumeroDocumento, string TipoDocumento, string Data, string Cliente)
         {
             RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
-            a.FillUSR_VENDITET(ds, NumeroDocumento);
+            a.FillUSR_VENDITET(ds, NumeroDocumento, TipoDocumento, Data, Cliente);
         }
 
         [DataContext]

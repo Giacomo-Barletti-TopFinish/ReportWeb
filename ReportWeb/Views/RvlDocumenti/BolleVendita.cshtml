@@ -1,13 +1,24 @@
-﻿@{
+﻿@using ReportWeb.Models
+@{
     ViewBag.Title = "RVL Documenti - Bolle vendita";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 <div class="content-top">
     <h2>RVL Documenti - Bolle vendita</h2>
     <div class="row">
+        <div class="col-sm-1"><label>Tipo documento</label></div>
         <div class="col-sm-1"><label>Numero documento</label></div>
-        <div class="col-sm-2">@Html.TextBox("txtNumeroDocumento")</div>
+        <div class="col-sm-2"><label>Data</label></div>
+        <div class="col-sm-1"><label>Cliente</label></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"> @Html.DropDownList("ddlTipoDocumento", new SelectList(ViewData["tipoDocumento"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-1">@Html.TextBox("txtNumeroDocumento", "", new { @maxlength = "8", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })</div>
+        <div class="col-sm-2"><input type="date" id="txtData" /></div>
+        <div class="col-sm-2"> @Html.DropDownList("ddlCLienti", new SelectList(ViewData["fornitori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
         <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
+    </div>
+    <div class="row">
         <label class="text-red" id="lblMessage"></label>
     </div>
 </div>
@@ -17,10 +28,10 @@
     </div>
 </div>
 
-    <script language="javascript" type="text/javascript">
+<script language="javascript" type="text/javascript">
     $(function ()
     {
-
+        $('#ddlCLienti').select2();
     });
 
     function Trova()
@@ -34,17 +45,24 @@
             esegui = false;
         }
 
+        var cliente = $('#ddlCLienti').val();
+
         $('#lblMessage').html(messaggio);
         if (!esegui)
         {
             return;
         }
+        var tipoDocumento = $('#ddlTipoDocumento').val();
+        var data = $('#txtData').val();
 
         var url = '@Url.Action("TrovaBollaVendita", "RvlDocumenti")';
         $.ajax({
             url: url,
             data: {
-                NumeroDocumento: numeroDocumento
+                NumeroDocumento: numeroDocumento,
+                TipoDocumento: tipoDocumento,
+                Data: data,
+                Cliente: cliente
             },
             cache: false,
             type: "POST",
@@ -62,5 +80,5 @@
         });
     }
 
-    
-    </script>
+
+</script>

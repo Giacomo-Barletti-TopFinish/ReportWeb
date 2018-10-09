@@ -15,13 +15,20 @@ namespace ReportWeb.Controllers
         public ActionResult BolleVendita()
         {
             VerificaAbilitazioneUtenteConUscita(28);
+            RvlDocumentiBLL bll = new RvlDocumentiBLL();
+            List<RWListItem> model = bll.CaricaTipoDocumentoBolleVendita();
+            model.Insert(0, new RWListItem(string.Empty, "-1"));
+            ViewData.Add("tipoDocumento", model);
+            List<RWListItem> fornitori = bll.CaricaListaFornitori();
+            fornitori.Insert(0, new RWListItem(string.Empty, "-1"));
+            ViewData.Add("fornitori", fornitori);
             return View();
         }
 
-        public ActionResult TrovaBollaVendita(string NumeroDocumento)
+        public ActionResult TrovaBollaVendita(string NumeroDocumento, string TipoDocumento, string Data, string Cliente)
         {
             RvlDocumentiBLL bll = new RvlDocumentiBLL();
-            List<BollaVenditaModel> model = bll.TrovaBollaVendita(NumeroDocumento);
+            List<BollaVenditaModel> model = bll.TrovaBollaVendita(NumeroDocumento, TipoDocumento, Data, Cliente);
             return PartialView("TabellaBolleVendita", model);
         }
 
@@ -41,7 +48,7 @@ namespace ReportWeb.Controllers
         public ActionResult TrovaBollaCarico(string NumeroDocumento, string TipoDocumento, string Data, string Riferimento, string Fornitore)
         {
             RvlDocumentiBLL bll = new RvlDocumentiBLL();
-            List<BollaCaricoModel> model = bll.TrovaBollaCarico(NumeroDocumento, TipoDocumento, Data, Riferimento,Fornitore);
+            List<BollaCaricoModel> model = bll.TrovaBollaCarico(NumeroDocumento, TipoDocumento, Data, Riferimento, Fornitore);
             return PartialView("TabellaBolleCarico", model);
         }
     }

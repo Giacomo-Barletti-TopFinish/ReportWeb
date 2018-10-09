@@ -34,6 +34,28 @@ namespace ReportWeb.Business
             return model;
         }
 
+        public List<RWListItem> CaricaTipoDocumentoBolleVendita()
+        {
+            List<RWListItem> model = new List<RWListItem>();
+            using (RvlDocumentiBusiness bRvlDocumenti = new RvlDocumentiBusiness())
+            {
+                RvlDocumentiDS ds = new RvlDocumentiDS();
+                bRvlDocumenti.FillTABTIPDOC(ds);
+
+                List<string> documentiAmmessi = new List<string>();
+                documentiAmmessi.Add("0000000022");
+                documentiAmmessi.Add("0000000024");
+                documentiAmmessi.Add("0000000026");
+                documentiAmmessi.Add("0000000028");
+
+                foreach (RvlDocumentiDS.TABTIPDOCRow tipoDoc in ds.TABTIPDOC.Where(x => documentiAmmessi.Contains(x.IDTABTIPDOC)))
+                {
+                    model.Add(new RWListItem(tipoDoc.CODICETIPDOC, tipoDoc.IDTABTIPDOC));
+                }
+            }
+            return model;
+        }
+
         public List<RWListItem> CaricaListaFornitori()
         {
             List<RWListItem> model = new List<RWListItem>();
@@ -49,7 +71,7 @@ namespace ReportWeb.Business
             }
             return model;
         }
-        public List<BollaVenditaModel> TrovaBollaVendita(string NumeroDocumento)
+        public List<BollaVenditaModel> TrovaBollaVendita(string NumeroDocumento, string TipoDocumento, string Data, string Cliente)
         {
             List<BollaVenditaModel> bolleVendita = new List<BollaVenditaModel>();
 
@@ -57,7 +79,7 @@ namespace ReportWeb.Business
             {
                 RvlDocumentiDS ds = new RvlDocumentiDS();
 
-                bRvlDocumenti.FillUSR_VENDITET(ds, NumeroDocumento);
+                bRvlDocumenti.FillUSR_VENDITET(ds, NumeroDocumento, TipoDocumento, Data, Cliente);
 
                 List<string> IDVENDITET = ds.USR_VENDITET.Select(x => x.IDVENDITET).ToList();
                 if (IDVENDITET.Count > 0)
