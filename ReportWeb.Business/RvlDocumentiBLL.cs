@@ -56,15 +56,19 @@ namespace ReportWeb.Business
             return model;
         }
 
-        public List<RWListItem> CaricaListaFornitori()
+        public List<RWListItem> CaricaListaFornitori(bool fornitori)
         {
             List<RWListItem> model = new List<RWListItem>();
             using (RvlDocumentiBusiness bRvlDocumenti = new RvlDocumentiBusiness())
             {
                 RvlDocumentiDS ds = new RvlDocumentiDS();
                 bRvlDocumenti.FillCLIFO(ds);
-
-                foreach (RvlDocumentiDS.CLIFORow fornitore in ds.CLIFO.OrderBy(x => x.RAGIONESOC))
+                string filtro = "C";
+                if(fornitori)
+                {
+                    filtro = "F";
+                }
+                foreach (RvlDocumentiDS.CLIFORow fornitore in ds.CLIFO.Where(x => !x.IsCODICENull() && !x.IsRAGIONESOCNull() && !x.IsTIPONull() && x.TIPO == filtro).OrderBy(x => x.RAGIONESOC))
                 {
                     model.Add(new RWListItem(fornitore.RAGIONESOC.Trim(), fornitore.CODICE));
                 }
@@ -314,7 +318,7 @@ namespace ReportWeb.Business
                         IDPRDMOVMATE = ds.USR_PRD_MOVMATE.Where(x => x.IDPRDMOVFASE == movFaseRow.IDPRDMOVFASE).Select(x => x.IDPRDMOVMATE).Distinct().ToList();
                         IDVENDITET = ds.USR_PRD_FLUSSO_MOVMATE.Where(x => !x.IsIDVENDITETNull() && IDPRDMOVMATE.Contains(x.IDPRDMOVMATE)).Select(x => x.IDVENDITET).Distinct().ToList();
 
-                        foreach (RvlDocumentiDS.USR_VENDITETRow vendita in ds.USR_VENDITET.Where(x => x.IDVENDITET.Contains(x.IDVENDITET)))
+                        foreach (RvlDocumentiDS.USR_VENDITETRow vendita in ds.USR_VENDITET.Where(x => IDVENDITET.Contains(x.IDVENDITET)))
                         {
                             BollaVenditaModel bollaVendita = creaBollaVenditaModel(ds, vendita);
                             movFase.Vendite.Add(bollaVendita);

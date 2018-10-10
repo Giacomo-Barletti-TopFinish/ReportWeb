@@ -19,7 +19,7 @@ namespace ReportWeb.Controllers
             List<RWListItem> model = bll.CaricaTipoDocumentoBolleVendita();
             model.Insert(0, new RWListItem(string.Empty, "-1"));
             ViewData.Add("tipoDocumento", model);
-            List<RWListItem> fornitori = bll.CaricaListaFornitori();
+            List<RWListItem> fornitori = bll.CaricaListaFornitori(true);
             fornitori.Insert(0, new RWListItem(string.Empty, "-1"));
             ViewData.Add("fornitori", fornitori);
             return View();
@@ -39,7 +39,7 @@ namespace ReportWeb.Controllers
             List<RWListItem> model = bll.CaricaTipoDocumentoBolleCarico();
             model.Insert(0, new RWListItem(string.Empty, "-1"));
             ViewData.Add("tipoDocumento", model);
-            List<RWListItem> fornitori = bll.CaricaListaFornitori();
+            List<RWListItem> fornitori = bll.CaricaListaFornitori(true);
             fornitori.Insert(0, new RWListItem(string.Empty, "-1"));
             ViewData.Add("fornitori", fornitori);
             return View();
