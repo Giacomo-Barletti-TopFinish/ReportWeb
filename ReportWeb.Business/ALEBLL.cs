@@ -89,7 +89,7 @@ namespace ReportWeb.Business
                 bALE.FillUSR_PRD_FLUSSO_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
                 bALE.FillUSR_PRD_MOVFASI(ds, CHECKQ_T.IDCHECKQT);
                 ALEDS.USR_CHECKQ_DRow CHECKQ_D = ds.USR_CHECKQ_D.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
-                ALEDS.USR_CHECKQ_CRow CHECKQ_C = ds.USR_CHECKQ_C.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).FirstOrDefault();
+                List<ALEDS.USR_CHECKQ_CRow> CHECKQ_C = ds.USR_CHECKQ_C.Where(x => x.IDCHECKQT == CHECKQ_T.IDCHECKQT).ToList();
 
                 model.EsitoRicerca = 2;
                 model.IDCHECKQT = CHECKQ_T.IDCHECKQT;
@@ -98,7 +98,6 @@ namespace ReportWeb.Business
                 model.NumeroDocumento = CHECKQ_T.NUMCHECKQT;
                 model.DataDocumento = CHECKQ_T.DATACHECKQT.ToString("dd MMM yyyy");
                 model.Quantita = CHECKQ_T.IsQTANull() ? 0 : CHECKQ_T.QTA;
-                model.QuantitaDifforme = CHECKQ_C == null ? 0 : (CHECKQ_C.IsQTA_DIFNull() ? 0 : CHECKQ_C.QTA_DIF);
 
                 model.RepartoCodice = CHECKQ_T.IsCODICECLIFO_RILNull() ? string.Empty : CHECKQ_T.CODICECLIFO_RIL.Trim();
 
@@ -111,16 +110,25 @@ namespace ReportWeb.Business
                         model.Reparto = reparto.RAGIONESOC;
 
                 }
-
-                model.Difetto = string.Empty;
-                model.TipoDifetto = string.Empty;
-                if (CHECKQ_C != null)
+                model.Difetti = new List<DifettoRilevato>();
+                foreach (ALEDS.USR_CHECKQ_CRow difettoRow in CHECKQ_C)
                 {
-                    ALEDS.USR_ANA_DIFETTIRow difetto = ds.USR_ANA_DIFETTI.Where(x => x.IDDIFETTO == CHECKQ_C.IDDIFETTO).FirstOrDefault();
-                    ALEDS.USR_TAB_TIPODIFETTIRow tipoDifetto = ds.USR_TAB_TIPODIFETTI.Where(x => x.IDTIPODIFETTO == difetto.IDTIPODIFETTO).FirstOrDefault();
-                    model.TipoDifetto = tipoDifetto.DESTIPODIFETTO;
-                    model.Difetto = difetto.DESDIFETTO;
+                    DifettoRilevato difetto = new DifettoRilevato();
+
+                    difetto.QuantitaDifforme = difettoRow == null ? 0 : (difettoRow.IsQTA_DIFNull() ? 0 : difettoRow.QTA_DIF);
+
+                    difetto.Difetto = string.Empty;
+                    difetto.TipoDifetto = string.Empty;
+                    if (difettoRow != null)
+                    {
+                        ALEDS.USR_ANA_DIFETTIRow dif = ds.USR_ANA_DIFETTI.Where(x => x.IDDIFETTO == difettoRow.IDDIFETTO).FirstOrDefault();
+                        ALEDS.USR_TAB_TIPODIFETTIRow tipoDifetto = ds.USR_TAB_TIPODIFETTI.Where(x => x.IDTIPODIFETTO == dif.IDTIPODIFETTO).FirstOrDefault();
+                        difetto.TipoDifetto = tipoDifetto.DESTIPODIFETTO;
+                        difetto.Difetto = dif.DESDIFETTO;
+                    }
+                    model.Difetti.Add(difetto);
                 }
+
 
                 bALE.FillMAGAZZ(ds, CHECKQ_T.IDMAGAZZ);
                 ALEDS.MAGAZZRow modello = ds.MAGAZZ.Where(x => x.IDMAGAZZ == CHECKQ_T.IDMAGAZZ).FirstOrDefault();
@@ -157,7 +165,13 @@ namespace ReportWeb.Business
             ALEDS.USR_PDM_FILESRow immagine = ds.USR_PDM_FILES.Where(x => x.IDMAGAZZ == IDMAGAZZ).FirstOrDefault();
             if (immagine != null)
             {
-
+                if(System.IO.Path.GetPathRoot(immagine.NOMEFILE)== "R:\\")
+                {
+                    string newUrl = RvlImageSite.Replace("rvlimmagini", "rvlimmaginir");
+                    string newPath = immagine.NOMEFILE.ToUpper().Replace("R:\\", string.Empty);
+                    newPath = newPath.Replace("\\", "/");
+                    return newUrl + newPath;
+                }
                 return RvlImageSite + immagine.NOMEFILE;
             }
 

@@ -15,7 +15,7 @@
 
         @Html.Hidden("hdBarcode", @Model.Barcode)
         @Html.Hidden("hdIDCHECKQT", @Model.IDCHECKQT)
-        @Html.Hidden("hdQtaDifettosa", @Model.QuantitaDifforme)
+        @Html.Hidden("hdQtaDifettosa", @Model.Quantita)
         @Html.Hidden("hdAzienda", @Model.Azienda)
 
         <div class="row">
@@ -46,46 +46,51 @@
 
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-1"><label>Modello</label></div>
+            <div class="col-sm-2">@Model.Modello</div>
+            <div class="col-sm-8">@Model.ModelloDescrizione</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"><label>ODL</label></div>
+            <div class="col-sm-2">@Model.ODL</div>
+            <div class="col-sm-1"><label>Del</label></div>
+            <div class="col-sm-1">@Model.DataODL</div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-1"><label>Commessa</label></div>
+            <div class="col-sm-2">@Model.Commessa</div>
+            <div class="col-sm-1"><label>Del</label></div>
+            <div class="col-sm-1">@Model.DataCommessa</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9"><label>Difetto</label></div>
+            <div class="col-sm-1"><label>Quantita difettosa</label></div>
+        </div>
+        foreach (DifettoRilevato difetto in Model.Difetti)
+        {
             <div class="row">
-                <div class="col-sm-1"><label>Modello</label></div>
-                <div class="col-sm-2">@Model.Modello</div>
-                <div class="col-sm-8">@Model.ModelloDescrizione</div>
+                <div class="col-sm-2">@difetto.TipoDifetto</div>
+                <div class="col-sm-7">@difetto.Difetto</div>
+                <div class="col-sm-1">@difetto.QuantitaDifforme</div>
             </div>
-            <div class="row">
-                <div class="col-sm-1"><label>ODL</label></div>
-                <div class="col-sm-2">@Model.ODL</div>
-                <div class="col-sm-1"><label>Del</label></div>
-                <div class="col-sm-1">@Model.DataODL</div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-1"><label>Commessa</label></div>
-                <div class="col-sm-2">@Model.Commessa</div>
-                <div class="col-sm-1"><label>Del</label></div>
-                <div class="col-sm-1">@Model.DataCommessa</div>
-            </div>
-            <div class="row">
-                <div class="col-sm-1"><label>Difetto</label></div>
-                <div class="col-sm-2">@Model.TipoDifetto</div>
-                <div class="col-sm-6">@Model.Difetto</div>
-                <div class="col-sm-1"><label>Quantita difettosa</label></div>
-                <div class="col-sm-1">@Model.QuantitaDifforme</div>
-            </div>
-            <div id="divInserimento" class="box">
-                <div class="box-body form-group-sm">
-                    <div class="col-sm-12 row">
-                        <div class="col-sm-1"><label>Quantità</label>@Html.TextBox("txtQuantita", "", new { @maxlength = "8", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })</div>
-                        <div class="col-sm-3">
-                            <label>Lavorante esterno</label>
-                            @Html.DropDownListFor(model => model.RepartoCodice, new SelectList(Model.LavorantiEsterni, "Value", "Text", Model.RepartoCodice), new { @class = "form-control input-sm select2", @id = "ddlLavoranti" })
-                        </div>
-                        <div class="col-sm-7"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        }
+        <div id="divInserimento" class="box">
+            <div class="box-body form-group-sm">
+                <div class="col-sm-12 row">
+                    <div class="col-sm-1"><label>Quantità</label>@Html.TextBox("txtQuantita", "", new { @maxlength = "8", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })</div>
+                    <div class="col-sm-3">
+                        <label>Lavorante esterno</label>
+                        @Html.DropDownListFor(model => model.RepartoCodice, new SelectList(Model.LavorantiEsterni, "Value", "Text", Model.RepartoCodice), new { @class = "form-control input-sm select2", @id = "ddlLavoranti" })
                     </div>
-                    <div class="col-sm-12 row">
-                        <input type="button" onclick="Salva();" class="btn btn-primary" value="Inserisci" />
-                        <input type="button" onclick="Annulla();" class="btn btn-primary" value="Annulla" />
-                    </div>
-                    <label class="text-red input-sm" id="lblMessage"></label>
+                    <div class="col-sm-7"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
                 </div>
+                <div class="col-sm-12 row">
+                    <input type="button" onclick="Salva();" class="btn btn-primary" value="Inserisci" />
+                    <input type="button" onclick="Annulla();" class="btn btn-primary" value="Annulla" />
+                </div>
+                <label class="text-red input-sm" id="lblMessage"></label>
             </div>
+        </div>
         break;
 }
 
@@ -95,7 +100,7 @@
 
         $('#ddlLavoranti').select2();
         $('#ddlLavoranti').val('@Model.RepartoCodice');
-        $('#txtQuantita').val('@Model.QuantitaDifforme');
+        $('#txtQuantita').val('@Model.Quantita');
 
     });
 

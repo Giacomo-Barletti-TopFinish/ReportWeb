@@ -31,7 +31,7 @@ namespace ReportWeb.Controllers
             if (ModelState.IsValid)
             {
                 SecurityBLL security = new SecurityBLL();
-                string token = security.VerifyUser(model.UserId.ToUpper(), model.Password.ToUpper(), ClientIPAddress);
+                string token = security.VerifyUser(model.UserId.ToUpper().Trim(), model.Password.ToUpper().Trim(), ClientIPAddress);
 
                 if (string.IsNullOrWhiteSpace(token))
                 {

@@ -21,14 +21,20 @@ namespace ReportWeb.Models.ALE
         public string Modello { get; set; }
         public string ModelloDescrizione { get; set; }
         public decimal Quantita { get; set; }
-        public decimal QuantitaDifforme { get; set; }
-        public string TipoDifetto { get; set; }
-        public string Difetto { get; set; }
         public string ODL { get; set; }
         public string DataODL { get; set; }
         public string Commessa { get; set; }
         public string DataCommessa { get; set; }
         public string ImageUrl { get; set; }
         public List<RWListItem> LavorantiEsterni { get; set; }
+
+        public List<DifettoRilevato> Difetti { get; set; }
+    }
+
+    public class DifettoRilevato
+    {
+        public decimal QuantitaDifforme { get; set; }
+        public string TipoDifetto { get; set; }
+        public string Difetto { get; set; }
     }
 }
