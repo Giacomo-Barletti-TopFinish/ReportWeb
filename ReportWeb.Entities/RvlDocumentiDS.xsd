@@ -4223,6 +4223,92 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="TABCAUMGT" msprop:Generator_TableClassName="TABCAUMGTDataTable" msprop:Generator_TableVarName="tableTABCAUMGT" msprop:Generator_TablePropName="TABCAUMGT" msprop:Generator_RowDeletingName="TABCAUMGTRowDeleting" msprop:Generator_RowChangingName="TABCAUMGTRowChanging" msprop:Generator_RowEvHandlerName="TABCAUMGTRowChangeEventHandler" msprop:Generator_RowDeletedName="TABCAUMGTRowDeleted" msprop:Generator_UserTableName="TABCAUMGT" msprop:Generator_RowChangedName="TABCAUMGTRowChanged" msprop:Generator_RowEvArgName="TABCAUMGTRowChangeEvent" msprop:Generator_RowClassName="TABCAUMGTRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDTABCAUMGT" msprop:Generator_ColumnVarNameInTable="columnIDTABCAUMGT" msprop:Generator_ColumnPropNameInRow="IDTABCAUMGT" msprop:Generator_ColumnPropNameInTable="IDTABCAUMGTColumn" msprop:Generator_UserColumnName="IDTABCAUMGT">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CODICECAUMGT" msprop:Generator_ColumnVarNameInTable="columnCODICECAUMGT" msprop:Generator_ColumnPropNameInRow="CODICECAUMGT" msprop:Generator_ColumnPropNameInTable="CODICECAUMGTColumn" msprop:Generator_UserColumnName="CODICECAUMGT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESTABCAUMGT" msprop:Generator_ColumnVarNameInTable="columnDESTABCAUMGT" msprop:Generator_ColumnPropNameInRow="DESTABCAUMGT" msprop:Generator_ColumnPropNameInTable="DESTABCAUMGTColumn" msprop:Generator_UserColumnName="DESTABCAUMGT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="254" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="QRIM" msprop:Generator_ColumnVarNameInTable="columnQRIM" msprop:Generator_ColumnPropNameInRow="QRIM" msprop:Generator_ColumnPropNameInTable="QRIMColumn" msprop:Generator_UserColumnName="QRIM" type="xs:decimal" />
+              <xs:element name="QCARPROG" msprop:Generator_ColumnVarNameInTable="columnQCARPROG" msprop:Generator_ColumnPropNameInRow="QCARPROG" msprop:Generator_ColumnPropNameInTable="QCARPROGColumn" msprop:Generator_UserColumnName="QCARPROG" type="xs:decimal" />
+              <xs:element name="QSCAPROG" msprop:Generator_ColumnVarNameInTable="columnQSCAPROG" msprop:Generator_ColumnPropNameInRow="QSCAPROG" msprop:Generator_ColumnPropNameInTable="QSCAPROGColumn" msprop:Generator_UserColumnName="QSCAPROG" type="xs:decimal" />
+              <xs:element name="QESI" msprop:Generator_ColumnVarNameInTable="columnQESI" msprop:Generator_ColumnPropNameInRow="QESI" msprop:Generator_ColumnPropNameInTable="QESIColumn" msprop:Generator_UserColumnName="QESI" type="xs:decimal" />
+              <xs:element name="CAUTIPO" msprop:Generator_ColumnVarNameInTable="columnCAUTIPO" msprop:Generator_ColumnPropNameInRow="CAUTIPO" msprop:Generator_ColumnPropNameInTable="CAUTIPOColumn" msprop:Generator_UserColumnName="CAUTIPO" type="xs:decimal" />
+              <xs:element name="CAUVALQTA" msprop:Generator_ColumnVarNameInTable="columnCAUVALQTA" msprop:Generator_ColumnPropNameInRow="CAUVALQTA" msprop:Generator_ColumnPropNameInTable="CAUVALQTAColumn" msprop:Generator_UserColumnName="CAUVALQTA" type="xs:decimal" />
+              <xs:element name="CAUMET" msprop:Generator_ColumnVarNameInTable="columnCAUMET" msprop:Generator_ColumnPropNameInRow="CAUMET" msprop:Generator_ColumnPropNameInTable="CAUMETColumn" msprop:Generator_UserColumnName="CAUMET" type="xs:decimal" />
+              <xs:element name="CAULOT" msprop:Generator_ColumnVarNameInTable="columnCAULOT" msprop:Generator_ColumnPropNameInRow="CAULOT" msprop:Generator_ColumnPropNameInTable="CAULOTColumn" msprop:Generator_UserColumnName="CAULOT" type="xs:decimal" />
+              <xs:element name="IDTABRAGCAUMG" msprop:Generator_ColumnVarNameInTable="columnIDTABRAGCAUMG" msprop:Generator_ColumnPropNameInRow="IDTABRAGCAUMG" msprop:Generator_ColumnPropNameInTable="IDTABRAGCAUMGColumn" msprop:Generator_UserColumnName="IDTABRAGCAUMG" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GIORNALESN" msprop:Generator_ColumnVarNameInTable="columnGIORNALESN" msprop:Generator_ColumnPropNameInRow="GIORNALESN" msprop:Generator_ColumnPropNameInTable="GIORNALESNColumn" msprop:Generator_UserColumnName="GIORNALESN" type="xs:decimal" />
+              <xs:element name="COSTOMEDIOSN" msprop:Generator_ColumnVarNameInTable="columnCOSTOMEDIOSN" msprop:Generator_ColumnPropNameInRow="COSTOMEDIOSN" msprop:Generator_ColumnPropNameInTable="COSTOMEDIOSNColumn" msprop:Generator_UserColumnName="COSTOMEDIOSN" type="xs:decimal" />
+              <xs:element name="COSTOULTIMOSN" msprop:Generator_ColumnVarNameInTable="columnCOSTOULTIMOSN" msprop:Generator_ColumnPropNameInRow="COSTOULTIMOSN" msprop:Generator_ColumnPropNameInTable="COSTOULTIMOSNColumn" msprop:Generator_UserColumnName="COSTOULTIMOSN" type="xs:decimal" />
+              <xs:element name="COSTOSTANDARD" msprop:Generator_ColumnVarNameInTable="columnCOSTOSTANDARD" msprop:Generator_ColumnPropNameInRow="COSTOSTANDARD" msprop:Generator_ColumnPropNameInTable="COSTOSTANDARDColumn" msprop:Generator_UserColumnName="COSTOSTANDARD" type="xs:decimal" />
+              <xs:element name="IDTABCAUMGTC" msprop:Generator_ColumnVarNameInTable="columnIDTABCAUMGTC" msprop:Generator_ColumnPropNameInRow="IDTABCAUMGTC" msprop:Generator_ColumnPropNameInTable="IDTABCAUMGTCColumn" msprop:Generator_UserColumnName="IDTABCAUMGTC" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDTABTOTSALMG" msprop:Generator_ColumnVarNameInTable="columnIDTABTOTSALMG" msprop:Generator_ColumnPropNameInRow="IDTABTOTSALMG" msprop:Generator_ColumnPropNameInTable="IDTABTOTSALMGColumn" msprop:Generator_UserColumnName="IDTABTOTSALMG" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ATTIVOSN" msprop:Generator_ColumnVarNameInTable="columnATTIVOSN" msprop:Generator_ColumnPropNameInRow="ATTIVOSN" msprop:Generator_ColumnPropNameInTable="ATTIVOSNColumn" msprop:Generator_UserColumnName="ATTIVOSN" type="xs:decimal" />
+              <xs:element name="DATACR" msprop:Generator_ColumnVarNameInTable="columnDATACR" msprop:Generator_ColumnPropNameInRow="DATACR" msprop:Generator_ColumnPropNameInTable="DATACRColumn" msprop:Generator_UserColumnName="DATACR" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DATAVR" msprop:Generator_ColumnVarNameInTable="columnDATAVR" msprop:Generator_ColumnPropNameInRow="DATAVR" msprop:Generator_ColumnPropNameInTable="DATAVRColumn" msprop:Generator_UserColumnName="DATAVR" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CAUMATR" msprop:Generator_ColumnVarNameInTable="columnCAUMATR" msprop:Generator_ColumnPropNameInRow="CAUMATR" msprop:Generator_ColumnPropNameInTable="CAUMATRColumn" msprop:Generator_UserColumnName="CAUMATR" type="xs:decimal" />
+              <xs:element name="CAUDATA" msprop:Generator_ColumnVarNameInTable="columnCAUDATA" msprop:Generator_ColumnPropNameInRow="CAUDATA" msprop:Generator_ColumnPropNameInTable="CAUDATAColumn" msprop:Generator_UserColumnName="CAUDATA" type="xs:decimal" />
+              <xs:element name="IDTABCAUMGT_SEC" msprop:Generator_ColumnVarNameInTable="columnIDTABCAUMGT_SEC" msprop:Generator_ColumnPropNameInRow="IDTABCAUMGT_SEC" msprop:Generator_ColumnPropNameInTable="IDTABCAUMGT_SECColumn" msprop:Generator_UserColumnName="IDTABCAUMGT_SEC" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDTABCAUMGT_SUCC" msprop:Generator_ColumnVarNameInTable="columnIDTABCAUMGT_SUCC" msprop:Generator_ColumnPropNameInRow="IDTABCAUMGT_SUCC" msprop:Generator_ColumnPropNameInTable="IDTABCAUMGT_SUCCColumn" msprop:Generator_UserColumnName="IDTABCAUMGT_SUCC" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -4272,6 +4358,10 @@
     <xs:unique name="MAGAZZ_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:MAGAZZ" />
       <xs:field xpath="mstns:IDMAGAZZ" />
+    </xs:unique>
+    <xs:unique name="TABCAUMGT_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TABCAUMGT" />
+      <xs:field xpath="mstns:IDTABCAUMGT" />
     </xs:unique>
   </xs:element>
 </xs:schema>

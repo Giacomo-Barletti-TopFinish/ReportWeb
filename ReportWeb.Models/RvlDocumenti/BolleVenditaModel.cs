@@ -18,5 +18,6 @@ namespace ReportWeb.Models.RvlDocumenti
         public string Azienda { get; set; }
 
         public List<PrdMovFasiModel> PRDMOVFASI { get; set; }
+        public List<BollaVenditaDettaglioModel> Dettagli { get; set; }
     }
 }

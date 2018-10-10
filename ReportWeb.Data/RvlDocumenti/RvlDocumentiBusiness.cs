@@ -11,6 +11,13 @@ namespace ReportWeb.Data.RvlDocumenti
     public class RvlDocumentiBusiness : ReportWebBusinessBase
     {
         public RvlDocumentiBusiness() : base() { }
+        [DataContext]
+        public void FillTABCAUMGT(RvlDocumentiDS ds)
+        {
+            RvlDocumentiAdapter a = new RvlDocumentiAdapter(DbConnection, DbTransaction);
+            a.FillTABCAUMGT(ds);
+
+        }
 
         [DataContext]
         public void FillUSR_VENDITET(RvlDocumentiDS ds, string NumeroDocumento, string TipoDocumento, string Data, string Cliente)

@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace ReportWeb.Models.RvlDocumenti
 {
-    public class BollaVenditaDettaglioModel
+    public class BollaCaricoDettaglioModel
     {
-        public string IDVENDITED { get; set; }
-        public string  NRIGA { get; set; }
+        public string IDACQUISTID { get; set; }
         public string Modello { get; set; }
-        public decimal Quantita { get; set; }
-
-
+        public decimal Quantita{ get; set; }
+        public string Causale { get; set; }
     }
 }

@@ -335,6 +335,16 @@ namespace ReportWeb.Data.RvlDocumenti
             }
         }
 
+        public void FillTABCAUMGT(RvlDocumentiDS ds)
+        {
+            string select = @"SELECT * FROM GRUPPO.TABCAUMGT ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.TABCAUMGT);
+            }
+        }
+
         public void FillMAGAZZ(RvlDocumentiDS ds)
         {
             string select = @"SELECT * FROM GRUPPO.MAGAZZ ";

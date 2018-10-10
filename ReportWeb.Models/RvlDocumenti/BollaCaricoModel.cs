@@ -19,5 +19,6 @@ namespace ReportWeb.Models.RvlDocumenti
         public string Azienda { get; set; }
 
         public List<PrdMovFasiModel> Fasi { get; set; }
+        public List<BollaCaricoDettaglioModel> Dettagli { get; set; }
     }
 }

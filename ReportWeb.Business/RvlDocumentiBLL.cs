@@ -86,6 +86,7 @@ namespace ReportWeb.Business
                 {
                     bRvlDocumenti.FillCLIFO(ds);
                     bRvlDocumenti.FillTABTIPDOC(ds);
+                    bRvlDocumenti.FillTABCAUMGT(ds);
                 }
 
                 bRvlDocumenti.FillUSR_VENDITED(ds, IDVENDITET);
@@ -107,6 +108,7 @@ namespace ReportWeb.Business
                 bRvlDocumenti.FillUSR_ACQUISTIT(ds, IDACQUISTIT);
 
                 List<string> IDMAGAZZ = ds.USR_PRD_MOVFASI.Select(x => x.IDMAGAZZ).Distinct().ToList();
+                IDMAGAZZ.AddRange(ds.USR_VENDITED.Select(x => x.IDMAGAZZ).Distinct().ToList());
                 bRvlDocumenti.FillMAGAZZ(ds, IDMAGAZZ);
 
                 foreach (RvlDocumentiDS.USR_VENDITETRow testata in ds.USR_VENDITET)
@@ -138,6 +140,23 @@ namespace ReportWeb.Business
             return bolleVendita;
         }
 
+        private BollaVenditaDettaglioModel creaBollaVenditaDettaglioModel(RvlDocumentiDS ds, RvlDocumentiDS.USR_VENDITEDRow venditad)
+        {
+            BollaVenditaDettaglioModel dettaglio = new BollaVenditaDettaglioModel();
+            dettaglio.IDVENDITED = venditad.IDVENDITED;
+            dettaglio.NRIGA = venditad.NRRIGA;
+            dettaglio.Modello = string.Empty;
+            if (!venditad.IsIDMAGAZZNull())
+            {
+                RvlDocumentiDS.MAGAZZRow magaz = ds.MAGAZZ.Where(x => x.IDMAGAZZ == venditad.IDMAGAZZ).FirstOrDefault();
+                if (magaz != null)
+                    dettaglio.Modello = magaz.MODELLO.Trim();
+            }
+            dettaglio.Quantita = venditad.QTATOT;
+
+            return dettaglio;
+        }
+
         private BollaVenditaModel creaBollaVenditaModel(RvlDocumentiDS ds, RvlDocumentiDS.USR_VENDITETRow testata)
         {
             BollaVenditaModel bollaVendita = new BollaVenditaModel();
@@ -160,7 +179,12 @@ namespace ReportWeb.Business
             }
 
             bollaVendita.PRDMOVFASI = new List<PrdMovFasiModel>();
+            bollaVendita.Dettagli = new List<BollaVenditaDettaglioModel>();
 
+            foreach (RvlDocumentiDS.USR_VENDITEDRow venditad in ds.USR_VENDITED.Where(x => x.IDVENDITET == bollaVendita.IDVENDITET))
+            {
+                bollaVendita.Dettagli.Add(creaBollaVenditaDettaglioModel(ds, venditad));
+            }
             return bollaVendita;
         }
 
@@ -206,6 +230,32 @@ namespace ReportWeb.Business
                     bollaCarico.Fornitore = cliente.RAGIONESOC.Trim();
             }
             bollaCarico.Fasi = new List<PrdMovFasiModel>();
+            bollaCarico.Dettagli = new List<BollaCaricoDettaglioModel>();
+
+            foreach (RvlDocumentiDS.USR_ACQUISTIDRow acquistidRow in ds.USR_ACQUISTID.Where(x => x.IDACQUISTIT == acquistoRow.IDACQUISTIT))
+            {
+                BollaCaricoDettaglioModel dettaglio = new BollaCaricoDettaglioModel();
+
+                dettaglio.IDACQUISTID = acquistidRow.IDACQUISTID;
+                if (!acquistidRow.IsIDMAGAZZNull())
+                {
+                    RvlDocumentiDS.MAGAZZRow magaz = ds.MAGAZZ.Where(x => x.IDMAGAZZ == acquistidRow.IDMAGAZZ).FirstOrDefault();
+                    if (magaz != null)
+                        dettaglio.Modello = magaz.MODELLO.Trim();
+                }
+                dettaglio.Quantita = acquistidRow.QTATOT;
+
+                dettaglio.Causale = string.Empty;
+                if (!acquistidRow.IsIDTABCAUMGTNull())
+                {
+                    RvlDocumentiDS.TABCAUMGTRow cau = ds.TABCAUMGT.Where(x => x.IDTABCAUMGT == acquistidRow.IDTABCAUMGT).FirstOrDefault();
+                    if (cau != null)
+                        dettaglio.Causale = cau.IsDESTABCAUMGTNull() ? string.Empty : cau.DESTABCAUMGT;
+                }
+
+                bollaCarico.Dettagli.Add(dettaglio);
+            }
+
             return bollaCarico;
         }
 
@@ -224,6 +274,7 @@ namespace ReportWeb.Business
                 {
                     bRvlDocumenti.FillCLIFO(ds);
                     bRvlDocumenti.FillTABTIPDOC(ds);
+                    bRvlDocumenti.FillTABCAUMGT(ds);
                 }
 
                 bRvlDocumenti.FillUSR_ACQUISTIDByIDUSRACQUISTIT(ds, IDACQUISTIT);
@@ -239,10 +290,12 @@ namespace ReportWeb.Business
 
                 List<string> IDVENDITET = ds.USR_PRD_FLUSSO_MOVMATE.Where(x => !x.IsIDVENDITETNull()).Select(x => x.IDVENDITET).Distinct().ToList();
                 bRvlDocumenti.FillUSR_VENDITET(ds, IDVENDITET);
+                bRvlDocumenti.FillUSR_VENDITED(ds, IDVENDITET);
 
                 bRvlDocumenti.FillUSR_PRD_MOVFASI(ds, IDPRDMOVFASE);
 
                 List<string> IDMAGAZZ = ds.USR_PRD_MOVFASI.Select(x => x.IDMAGAZZ).Distinct().ToList();
+                IDMAGAZZ.AddRange(ds.USR_VENDITED.Select(x => x.IDMAGAZZ).Distinct().ToList());
                 bRvlDocumenti.FillMAGAZZ(ds, IDMAGAZZ);
 
                 foreach (RvlDocumentiDS.USR_ACQUISTITRow testata in ds.USR_ACQUISTIT)

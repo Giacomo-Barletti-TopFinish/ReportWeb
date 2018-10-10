@@ -61,14 +61,35 @@
                 <button id="btnCollapsePSpeciali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-down"></i></button>
             </div>
         </div>
-        @foreach (PrdMovFasiModel fase in bolla.Fasi)
-        {
-            <div class="box-body">
+        <div class="box-body">
+            <h3>Dettaglio documento</h3>
+            <div class="row col-sm-12">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Modello</th>
+                            <th>Quantità</th>
+                            <th>Causale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (BollaCaricoDettaglioModel dettaglio in bolla.Dettagli)
+                        {
+                            <tr>
+                                <td>@dettaglio.Modello</td>
+                                <td>@dettaglio.Quantita</td>
+                                <td>@dettaglio.Causale</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <h3>ODL documento</h3>
+            @foreach (PrdMovFasiModel fase in bolla.Fasi)
+            {
+
 
                 <div class="row">
-                    <div class="col-sm-1">
-                        <label class="input-sm"></label>
-                    </div>
                     <div class="col-sm-2">
                         <label class="input-sm">ODL</label>
                     </div>
@@ -80,8 +101,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-1">
-                    </div>
                     <div class="col-sm-2">
                         @fase.NumeroMovimentoFase
                     </div>
@@ -94,7 +113,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                     </div>
                     <div class="col-sm-2">
                         <label>Documento</label>
@@ -112,10 +131,10 @@
                         <label>Cliente</label>
                     </div>
                 </div>
-                @foreach (BollaVenditaModel acquisto in fase.Vendite)
+                foreach (BollaVenditaModel acquisto in fase.Vendite)
                 {
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-1">
                         </div>
                         <div class="col-sm-2">
                             @acquisto.FullNumDoc
@@ -133,11 +152,32 @@
                             @acquisto.Cliente
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-1">Dettaglio</div>
+                        <div class="col-sm-6">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Modello</th>
+                                        <th>Quantità</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (BollaVenditaDettaglioModel dettaglio in acquisto.Dettagli)
+                                    {
+                                        <tr>
+                                            <td>@dettaglio.Modello</td>
+                                            <td>@dettaglio.Quantita</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 }
-
-
-            </div>
-        }
+            }
+        </div>
     </div>
 
 }
