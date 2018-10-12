@@ -165,7 +165,7 @@ namespace ReportWeb.Business
             ALEDS.USR_PDM_FILESRow immagine = ds.USR_PDM_FILES.Where(x => x.IDMAGAZZ == IDMAGAZZ).FirstOrDefault();
             if (immagine != null)
             {
-                if(System.IO.Path.GetPathRoot(immagine.NOMEFILE)== "R:\\")
+                if (System.IO.Path.GetPathRoot(immagine.NOMEFILE) == "R:\\")
                 {
                     string newUrl = RvlImageSite.Replace("rvlimmagini", "rvlimmaginir");
                     string newPath = immagine.NOMEFILE.ToUpper().Replace("R:\\", string.Empty);
@@ -183,17 +183,22 @@ namespace ReportWeb.Business
         {
             using (ALEBusiness bALE = new ALEBusiness())
             {
+                ALEDS ds = new ALEDS();
                 bool mancante = VerificaSeMancanti(IDCHECKQT);
                 if (!mancante)
                 {
+                    bALE.FillCLIFO(ds);
+                    ALEDS.CLIFORow lavoranteRow = ds.CLIFO.Where(x => x.CODICE.Trim() == Lavorante).FirstOrDefault();
+
                     MailDispatcherBLL bllMD = new MailDispatcherBLL();
                     string oggetto = "ALE - NUOVA SCHEDA INSERITA";
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("Nuova scheda inserita");
                     sb.AppendLine();
-                    sb.AppendLine(string.Format("Lavorante: {0}", Lavorante));
+                    if (lavoranteRow != null)
+                        sb.AppendLine(string.Format("Lavorante: {0}", lavoranteRow.IsRAGIONESOCNull() ? string.Empty : lavoranteRow.RAGIONESOC.Trim()));
                     sb.AppendLine(string.Format("Quanità: {0}", Inseriti));
-                    sb.AppendLine(string.Format("USerid: {0}", UIDUSER));
+                    sb.AppendLine(string.Format("Inserita da: {0}", UIDUSER));
 
                     decimal IDMAIL = bllMD.CreaEmail("ALE - ADDEBITO", oggetto, sb.ToString());
                     bllMD.SottomettiEmail(IDMAIL);
@@ -466,12 +471,23 @@ namespace ReportWeb.Business
                     }
 
                     bALE.UpdateRW_ALE_DETTAGLIO(ds);
+                    ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == IDGRUPPO).FirstOrDefault();
+                    GruppoModel model = CreaGruppoModel(gruppo, ds, false, false, false);
 
                     MailDispatcherBLL bllMD = new MailDispatcherBLL();
                     string oggetto = "ALE - NUOVO GRUPPO ADDEBITO INSERITO ID GRUPPO:" + IDGRUPPO.ToString();
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine(string.Format("E' stato creato il gruppo: {0} che deve essere valorizzato", IDGRUPPO));
-
+                    sb.AppendFormat(string.Empty);
+                    sb.AppendLine(string.Format("Lavorante: {0}", model.LavoranteDescrizione.Trim()));
+                    sb.AppendLine(string.Format("Creato da: {0}", model.UtenteAddebito.Trim()));
+                    sb.AppendFormat(string.Empty);
+                    sb.AppendFormat("Articoli addebitati");
+                    sb.AppendFormat(string.Empty);
+                    foreach (AddebitoModel addebito in model.Dettagli)
+                    {
+                        sb.AppendLine(string.Format("Modello: {0}  Numero pezzi: {1}  Motivo scarto: {2}  Note: {3}", addebito.Modello, addebito.QuantitaAddebitata, addebito.Difetto, addebito.NotaAddebito));
+                    }
                     decimal IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
                     bllMD.SottomettiEmail(IDMAIL);
                 }
