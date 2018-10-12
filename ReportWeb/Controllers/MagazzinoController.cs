@@ -14,7 +14,9 @@ namespace ReportWeb.Controllers
         public ActionResult Index()
         {
             VerificaAbilitazioneUtenteConUscita(25);
-            return View();
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<ModelloGiacenzaModel> model = bll.CaricaGiacenze();
+            return View(model);
         }
 
         public ActionResult TrovaModello(string Modello)
@@ -28,14 +30,16 @@ namespace ReportWeb.Controllers
         {
             MagazzinoBLL bll = new MagazzinoBLL();
             bll.SalvaGiacenze(Giacenze, Modello);
-            List<ModelloGiacenzaModel> model = bll.TrovaModelloGiacenza(Modello);
+            List<ModelloGiacenzaModel> model = new List<ModelloGiacenzaModel>();
             return PartialView("TabellaGiacenze", model);
         }
 
         public ActionResult APPROVVIGIONAMENTI()
         {
             VerificaAbilitazioneUtenteConUscita(26);
-            return View();
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<ModelloApprovvigionamentoModel> model = bll.CaricaApprovvigionamento();
+            return View(model);
         }
 
         public ActionResult TrovaModelloApprovvigionamenti(string Modello)
@@ -49,7 +53,7 @@ namespace ReportWeb.Controllers
         {
             MagazzinoBLL bll = new MagazzinoBLL();
             bll.SalvaApprovvigionamenti(Approvvigionamenti, Modello);
-            List<ModelloApprovvigionamentoModel> model = bll.TrovaModelloApprovvigionamento(Modello);
+            List<ModelloApprovvigionamentoModel> model = new List<ModelloApprovvigionamentoModel>();// bll.TrovaModelloApprovvigionamento(Modello);
             return PartialView("TabellaApprovvigionamenti", model);
         }
 

@@ -50,6 +50,23 @@ namespace ReportWeb.Data.Magazzino
             }
         }
 
+        public void FillMAGAZZ(MagazzinoDS ds, List<string> IDMAGAZZ)
+        {
+
+            if (IDMAGAZZ.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDMAGAZZ);
+            string select = @"SELECT * FROM GRUPPO.MAGAZZ WHERE IDMAGAZZ IN ({0})";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.MAGAZZ);
+            }
+
+        }
+
         public void UpdateMagazzinoDSTable(string tablename, MagazzinoDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

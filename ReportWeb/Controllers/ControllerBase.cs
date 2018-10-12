@@ -102,6 +102,9 @@ namespace ReportWeb.Controllers
                 case "PVD":
                 case "Galvanica":
                 case "Verniciatura":
+                case "Magazzino":
+                case "MailDispatcher":
+                case "RvlDocumenti":
                 case "ALE":
                     HttpCookie coockie = filterContext.RequestContext.HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
                     if (coockie == null)

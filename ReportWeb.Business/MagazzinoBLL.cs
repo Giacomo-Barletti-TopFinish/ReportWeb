@@ -21,8 +21,30 @@ namespace ReportWeb.Business
                 MagazzinoDS ds = new MagazzinoDS();
                 bMagazzino.FillMONITOR_GIACENZA(ds);
                 bMagazzino.FillMAGAZZ(ds, Modello);
+                List<string> IDMAGAZZ = ds.MONITOR_GIACENZA.Select(X => X.IDMAGAZZ).Distinct().ToList();
 
-                foreach (MagazzinoDS.MAGAZZRow articolo in ds.MAGAZZ)
+                foreach (MagazzinoDS.MAGAZZRow articolo in ds.MAGAZZ.Where(x => !IDMAGAZZ.Contains(x.IDMAGAZZ)))
+                {
+                    ModelloGiacenzaModel m = CreaModelloGiacenzeModel(articolo, ds);
+
+                    model.Add(m);
+                }
+            }
+
+            return model;
+        }
+
+        public List<ModelloGiacenzaModel> CaricaGiacenze()
+        {
+            List<ModelloGiacenzaModel> model = new List<ModelloGiacenzaModel>();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                MagazzinoDS ds = new MagazzinoDS();
+                bMagazzino.FillMONITOR_GIACENZA(ds);
+                List<string> magazz = ds.MONITOR_GIACENZA.Select(x => x.IDMAGAZZ).ToList();
+                bMagazzino.FillMAGAZZ(ds, magazz);
+
+                foreach (MagazzinoDS.MAGAZZRow articolo in ds.MAGAZZ.OrderBy(x => x.MODELLO))
                 {
                     ModelloGiacenzaModel m = CreaModelloGiacenzeModel(articolo, ds);
 
@@ -136,6 +158,27 @@ namespace ReportWeb.Business
                 bMagazzino.FillMAGAZZ(ds, Modello);
 
                 foreach (MagazzinoDS.MAGAZZRow articolo in ds.MAGAZZ)
+                {
+                    ModelloApprovvigionamentoModel m = CreaModelloApprovvigionamentoModel(articolo, ds);
+
+                    model.Add(m);
+                }
+            }
+
+            return model;
+        }
+
+        public List<ModelloApprovvigionamentoModel> CaricaApprovvigionamento()
+        {
+            List<ModelloApprovvigionamentoModel> model = new List<ModelloApprovvigionamentoModel>();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                MagazzinoDS ds = new MagazzinoDS();
+                bMagazzino.FillMONITOR_APPROVVIGIONAMENTO(ds);
+                List<string> magazz = ds.MONITOR_APPROVVIGIONAMENTO.Select(x => x.IDMAGAZZ).ToList();
+                bMagazzino.FillMAGAZZ(ds, magazz);
+
+                foreach (MagazzinoDS.MAGAZZRow articolo in ds.MAGAZZ.OrderBy(x => x.MODELLO))
                 {
                     ModelloApprovvigionamentoModel m = CreaModelloApprovvigionamentoModel(articolo, ds);
 
