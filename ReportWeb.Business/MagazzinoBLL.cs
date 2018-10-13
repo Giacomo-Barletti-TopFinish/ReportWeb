@@ -209,5 +209,35 @@ namespace ReportWeb.Business
 
             return m;
         }
+
+        public List<MagazzinoLavorantiEsterniModel> EstraiMagazzinoLavorantiEsterni(string dataInizio, string dataFine, string lavorante)
+        {
+            List<MagazzinoLavorantiEsterniModel> model = new List<MagazzinoLavorantiEsterniModel>();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                MagazzinoDS ds = new MagazzinoDS();
+                bMagazzino.FillMAGAZZINOESTERNO(dataInizio, dataFine, lavorante, ds);
+
+                foreach (MagazzinoDS.MAGAZZINOESTERNORow magaz in ds.MAGAZZINOESTERNO.OrderBy(x => x.MODELLO))
+                {
+                    MagazzinoLavorantiEsterniModel m = new MagazzinoLavorantiEsterniModel();
+                    m.IdMOdello = magaz.IDMODELLO;
+                    m.Modello = magaz.MODELLO.Trim();
+                    m.ModelloDescrizione = magaz.MODDESC.Trim();
+                    m.Quanita = magaz.QTA;
+                    m.Peso = magaz.PESO;
+                    m.IdComponente = magaz.IDCOMPONENTE;
+                    m.Componente = magaz.COMPONENTE.Trim();
+                    m.ComponenteDescrizione = magaz.COMDESC.Trim();
+                    m.QuanitaComponente = magaz.FABBITOT;
+                    m.PesoComponente = magaz.PESOCOMPONENTE;
+                    m.DataInizio = magaz.INIZIO.ToShortDateString();
+                    m.DataFine= magaz.FINE.ToShortDateString();
+
+                    model.Add(m);
+                }
+            }
+            return model;
+        }
     }
 }

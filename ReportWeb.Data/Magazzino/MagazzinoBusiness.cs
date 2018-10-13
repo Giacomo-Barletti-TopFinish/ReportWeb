@@ -53,5 +53,12 @@ namespace ReportWeb.Data.Magazzino
             MagazzinoAdapter a = new MagazzinoAdapter(DbConnection, DbTransaction);
             a.FillMONITOR_APPROVVIGIONAMENTO(ds);
         }
+
+        [DataContext]
+        public void FillMAGAZZINOESTERNO(String dataInizio, String dataFine, string codiceLavorante, MagazzinoDS ds)
+        {
+            MagazzinoAdapter a = new MagazzinoAdapter(DbConnection, DbTransaction);
+            a.FillMAGAZZINOESTERNO(dataInizio, dataFine, codiceLavorante, ds);
+        }
     }
 }

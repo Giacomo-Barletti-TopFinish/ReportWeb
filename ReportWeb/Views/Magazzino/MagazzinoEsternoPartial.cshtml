@@ -1,0 +1,49 @@
+﻿@using ReportWeb.Models.Magazzino
+@model List<MagazzinoLavorantiEsterniModel>
+
+@if (Model.Count == 0)
+{
+    <h2 class="text-red">Nessun dato trovato</h2>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-1"><input type="button" onclick="Excel();" class="btn btn-primary" value="Esporta Excel" /></div>
+    </div>
+    <div class="row">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Data inizio</th>
+                    <th>Data fine</th>
+                    <th>Modello</th>
+                    <th>Descrizione</th>
+                    <th>Quantità</th>
+                    <th>Peso</th>
+                    <th>Componente</th>
+                    <th>Descrizione</th>
+                    <th>Quantità</th>
+                    <th>Peso</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (MagazzinoLavorantiEsterniModel elemento in Model)
+                {
+                    <tr>
+                        <td>@elemento.DataInizio</td>
+                        <td>@elemento.DataFine</td>
+                        <td>@elemento.Modello</td>
+                        <td>@elemento.ModelloDescrizione</td>
+                        <td>@elemento.Quanita</td>
+                        <td>@elemento.Peso</td>
+                        <td>@elemento.Componente</td>
+                        <td>@elemento.ComponenteDescrizione</td>
+                        <td>@elemento.QuanitaComponente</td>
+                        <td>@elemento.PesoComponente</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}

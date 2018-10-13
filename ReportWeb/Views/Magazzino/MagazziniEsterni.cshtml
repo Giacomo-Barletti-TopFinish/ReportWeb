@@ -1,0 +1,107 @@
+﻿@using ReportWeb.Models
+@{
+    ViewBag.Title = "Magazzini Esterni";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Magazzini Esterni</h2>
+    <div class="row">
+        <div class="col-sm-1">Data inizio</div>
+        <div class="col-sm-1">Data fine</div>
+        <div class="col-sm-2">Lavorante</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"><input type="date" id="txtDataInizio" /></div>
+        <div class="col-sm-1"><input type="date" id="txtDataFine" /></div>
+        <div class="col-sm-2">@Html.DropDownList("ddlLavorante", new SelectList(ViewData["lavoranti"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-1"><input type="button" onclick="Estrai();" class="btn btn-primary" value="Estrai dati" /></div>
+    </div>
+</div>
+<label class="text-red" id="lblMessage"></label>
+<div style="overflow-y:auto; overflow-x:hidden; height:750px; padding-left:10px">
+    <div id="divRisultati"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $('#ddlLavorante').select2();
+    });
+
+    function Estrai()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var dataInizio = $('#txtDataInizio').val();
+        if (dataInizio == null || dataInizio == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la data di inizio" + "</br>";
+            esegui = false;
+        }
+
+        var dataFine = $('#txtDataFine').val();
+        if (dataFine == null || dataFine == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la data di fine" + "</br>";
+            esegui = false;
+        }
+
+        var lavorante = $('#ddlLavorante').val();
+        if (lavorante == null || lavorante == '' || lavorante == '-1') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il lavorante esterno" + "</br>";
+            esegui = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("EstraiDati", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                DataInizio: dataInizio,
+                DataFine: dataFine,
+                Lavorante: lavorante
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+     function Excel()
+     {
+         
+         var dataInizio = $('#txtDataInizio').val();
+
+         var dataFine = $('#txtDataFine').val();
+
+         var lavorante = $('#ddlLavorante').val();
+
+        var url = '@Url.Action("ReportExcel", "Magazzino")';
+
+         url = url + '?DataInizio=' + dataInizio;
+         url = url + '&DataFine=' + dataFine;
+         url = url + '&Lavorante=' + lavorante;
+
+        var win = window.open(url, '_blank');
+        win.document.title = "Report";
+        win.focus();
+    }
+
+</script>

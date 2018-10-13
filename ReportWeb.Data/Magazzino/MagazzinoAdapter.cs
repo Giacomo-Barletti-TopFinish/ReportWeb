@@ -82,5 +82,29 @@ namespace ReportWeb.Data.Magazzino
                 a.Update(dt);
             }
         }
+
+        public void FillMAGAZZINOESTERNO(String dataInizio, String dataFine, string codiceLavorante, MagazzinoDS ds)
+        {
+            DateTime inizio = DateTime.Parse(dataInizio);
+            DateTime fine = DateTime.Parse(dataFine);
+
+            string select = @"SELECT * FROM MAGAZZINIESTERNI 
+                                WHERE CODICECLIFO = '{2}'
+                                AND INIZIO >= to_date('{0}','DD/MM/YYYY')
+                                AND FINE <= to_date('{1}','DD/MM/YYYY')
+                                ORDER BY MODELLO";
+
+
+
+            string dtInizio = inizio.ToString("dd/MM/yyyy");
+            string dtFine = fine.ToString("dd/MM/yyyy");
+            select = string.Format(select, dtInizio, dtFine,codiceLavorante.Trim());
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.MAGAZZINOESTERNO);
+            }
+
+        }
     }
 }

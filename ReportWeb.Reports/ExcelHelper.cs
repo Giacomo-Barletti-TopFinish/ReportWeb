@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using ReportWeb.Models.Magazzino;
 
 namespace ReportWeb.Reports
 {
@@ -33,42 +34,42 @@ namespace ReportWeb.Reports
 
                 // Setting up columns
                 Columns columns = new Columns(
-                        new Column // Id column
+                        new Column
                         {
                             Min = 1,
                             Max = 1,
                             Width = 15,
                             CustomWidth = true
                         },
-                        new Column // Id column
+                        new Column
                         {
                             Min = 2,
                             Max = 2,
                             Width = 20,
                             CustomWidth = false
                         },
-                        new Column // Id column
+                        new Column
                         {
                             Min = 3,
                             Max = 3,
                             Width = 20,
                             CustomWidth = true
                         },
-                        new Column // Id column
+                        new Column
                         {
                             Min = 4,
                             Max = 4,
                             Width = 40,
                             CustomWidth = false
                         },
-                        new Column // Id column
+                        new Column
                         {
                             Min = 5,
                             Max = 5,
                             Width = 60,
                             CustomWidth = true
                         },
-                        new Column // Salary column
+                        new Column
                         {
                             Min = 1,
                             Max = 1,
@@ -180,6 +181,156 @@ namespace ReportWeb.Reports
             styleSheet = new Stylesheet(fonts, fills, borders, cellFormats);
 
             return styleSheet;
+        }
+
+        public byte[] CreaExcelMagazziniEsterni(List<MagazzinoLavorantiEsterniModel> magazzini, string lavorante)
+        {
+            byte[] content;
+            MemoryStream ms = new MemoryStream();
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                // Setting up columns
+                Columns columns = new Columns(
+                        new Column // 
+                        {
+                            Min = 1,
+                            Max = 1,
+                            Width = 15,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 2,
+                            Max = 2,
+                            Width = 15,
+                            CustomWidth = false
+                        },
+                        new Column
+                        {
+                            Min = 3,
+                            Max = 3,
+                            Width = 20,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 4,
+                            Max = 4,
+                            Width = 40,
+                            CustomWidth = false
+                        },
+                        new Column
+                        {
+                            Min = 5,
+                            Max = 5,
+                            Width = 15,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 6,
+                            Max = 6,
+                            Width = 15,
+                            CustomWidth = true
+                        },
+                          new Column
+                          {
+                              Min = 7,
+                              Max = 7,
+                              Width = 20,
+                              CustomWidth = true
+                          },
+                        new Column
+                        {
+                            Min = 8,
+                            Max = 8,
+                            Width = 40,
+                            CustomWidth = false
+                        },
+                        new Column
+                        {
+                            Min = 9,
+                            Max = 9,
+                            Width = 15,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 10,
+                            Max = 10,
+                            Width = 15,
+                            CustomWidth = true
+                        });
+
+                worksheetPart.Worksheet.AppendChild(columns);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = lavorante };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                // Constructing header
+                Row row = new Row();
+
+                row.Append(
+                    ConstructCell("Data inizio", CellValues.String, 2),
+                    ConstructCell("Data fine", CellValues.String, 2),
+                    ConstructCell("Modello", CellValues.String, 2),
+                    ConstructCell("Descrizione", CellValues.String, 2),
+                    ConstructCell("Quantità", CellValues.String, 2),
+                    ConstructCell("Peso", CellValues.String, 2),
+                    ConstructCell("Componente", CellValues.String, 2),
+                    ConstructCell("Descrizione", CellValues.String, 2),
+                    ConstructCell("Quantità", CellValues.String, 2),
+                    ConstructCell("Peso", CellValues.String, 2));
+
+                sheetData.AppendChild(row);
+
+                foreach (MagazzinoLavorantiEsterniModel elemento in magazzini)
+                {
+                    row = new Row();
+
+                    row.Append(
+                        ConstructCell(elemento.DataInizio, CellValues.String, 1),
+                        ConstructCell(elemento.DataFine, CellValues.String, 1),
+                        ConstructCell(elemento.Modello, CellValues.String, 1),
+                        ConstructCell(elemento.ModelloDescrizione, CellValues.String, 1),
+                        ConstructCell(elemento.Quanita.ToString(), CellValues.String, 1),
+                        ConstructCell(elemento.Peso.ToString(), CellValues.String, 1),
+                        ConstructCell(elemento.Componente, CellValues.String, 1),
+                        ConstructCell(elemento.ComponenteDescrizione, CellValues.String, 1),
+                        ConstructCell(elemento.QuanitaComponente.ToString(), CellValues.String, 1),
+                        ConstructCell(elemento.PesoComponente.ToString(), CellValues.String, 1));
+
+
+                    sheetData.AppendChild(row);
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+
+            return content;
         }
 
     }
