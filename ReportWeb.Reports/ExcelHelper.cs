@@ -183,7 +183,7 @@ namespace ReportWeb.Reports
             return styleSheet;
         }
 
-        public byte[] CreaExcelMagazziniEsterni(List<MagazzinoLavorantiEsterniModel> magazzini, string lavorante)
+        public byte[] CreaExcelMagazziniEsterni(List<MagazzinoLavorantiEsterniModel> magazzini, string lavorante, string DataInizio, string DataFine)
         {
             byte[] content;
             MemoryStream ms = new MemoryStream();
@@ -298,6 +298,15 @@ namespace ReportWeb.Reports
                 workbookPart.Workbook.Save();
 
                 SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                Row staticRow = new Row();
+                staticRow.Append(
+                   ConstructCell("Dal", CellValues.String, 2),
+                   ConstructCell(DataInizio, CellValues.String, 1),
+                   ConstructCell("Al", CellValues.String, 2),
+                   ConstructCell(DataFine, CellValues.String, 1));
+                sheetData.AppendChild(staticRow);
+                sheetData.AppendChild(new Row());
 
                 // Constructing header
                 Row row = new Row();

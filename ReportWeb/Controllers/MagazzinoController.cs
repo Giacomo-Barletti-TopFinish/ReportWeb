@@ -88,7 +88,7 @@ namespace ReportWeb.Controllers
             List<MagazzinoLavorantiEsterniModel> model = bll.EstraiMagazzinoLavorantiEsterni(DataInizio, DataFine, Lavorante);
 
             ExcelHelper excel = new ExcelHelper();
-            byte[] fileContents = excel.CreaExcelMagazziniEsterni(model, lavorante);
+            byte[] fileContents = excel.CreaExcelMagazziniEsterni(model, lavorante, DataInizio, DataFine);
 
             return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MagazziniEsterni.xlsx");
         }
