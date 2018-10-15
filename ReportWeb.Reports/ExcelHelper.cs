@@ -202,74 +202,88 @@ namespace ReportWeb.Reports
 
                 // Setting up columns
                 Columns columns = new Columns(
-                        new Column // 
-                        {
-                            Min = 1,
-                            Max = 1,
-                            Width = 15,
-                            CustomWidth = true
-                        },
+                     new Column
+                     {
+                         Min = 1,
+                         Max = 1,
+                         Width = 15,
+                         CustomWidth = true
+                     },
                         new Column
                         {
                             Min = 2,
                             Max = 2,
-                            Width = 15,
+                            Width = 20,
                             CustomWidth = false
                         },
                         new Column
                         {
                             Min = 3,
                             Max = 3,
-                            Width = 20,
+                            Width = 15,
                             CustomWidth = true
                         },
                         new Column
                         {
                             Min = 4,
                             Max = 4,
-                            Width = 40,
+                            Width = 15,
                             CustomWidth = false
                         },
                         new Column
                         {
                             Min = 5,
                             Max = 5,
-                            Width = 15,
+                            Width = 30,
                             CustomWidth = true
                         },
                         new Column
                         {
                             Min = 6,
                             Max = 6,
-                            Width = 15,
-                            CustomWidth = true
-                        },
-                          new Column
-                          {
-                              Min = 7,
-                              Max = 7,
-                              Width = 20,
-                              CustomWidth = true
-                          },
-                        new Column
-                        {
-                            Min = 8,
-                            Max = 8,
-                            Width = 40,
+                            Width = 60,
                             CustomWidth = false
                         },
                         new Column
                         {
-                            Min = 9,
-                            Max = 9,
-                            Width = 15,
+                            Min = 7,
+                            Max = 7,
+                            Width = 10,
                             CustomWidth = true
                         },
                         new Column
                         {
+                            Min = 8,
+                            Max = 8,
+                            Width = 10,
+                            CustomWidth = true
+                        },
+                          new Column
+                          {
+                              Min = 9,
+                              Max = 9,
+                              Width = 30,
+                              CustomWidth = true
+                          },
+                        new Column
+                        {
                             Min = 10,
                             Max = 10,
-                            Width = 15,
+                            Width = 60,
+                            CustomWidth = false
+                        },
+                        new Column
+                        {
+                            Min = 11,
+                            Max = 11,
+                            Width = 10,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 12,
+                            Max = 12,
+                            Width = 10,
                             CustomWidth = true
                         });
 
@@ -289,6 +303,8 @@ namespace ReportWeb.Reports
                 Row row = new Row();
 
                 row.Append(
+                    ConstructCell("Azienda", CellValues.String, 2),
+                    ConstructCell("ODL", CellValues.String, 2),
                     ConstructCell("Data inizio", CellValues.String, 2),
                     ConstructCell("Data fine", CellValues.String, 2),
                     ConstructCell("Modello", CellValues.String, 2),
@@ -307,6 +323,8 @@ namespace ReportWeb.Reports
                     row = new Row();
 
                     row.Append(
+                        ConstructCell(elemento.Azienda, CellValues.String, 1),
+                        ConstructCell(elemento.ODL, CellValues.String, 1),
                         ConstructCell(elemento.DataInizio, CellValues.String, 1),
                         ConstructCell(elemento.DataFine, CellValues.String, 1),
                         ConstructCell(elemento.Modello, CellValues.String, 1),

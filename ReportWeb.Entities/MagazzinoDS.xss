@@ -9,7 +9,7 @@
     <Shape ID="DesignTable:MONITOR_GIACENZA" ZOrder="4" X="592" Y="254" Height="67" Width="192" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="63" />
     <Shape ID="DesignTable:MAGAZZ" ZOrder="3" X="951" Y="150" Height="304" Width="208" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="301" />
     <Shape ID="DesignTable:MONITOR_APPROVVIGIONAMENTO" ZOrder="2" X="127" Y="311" Height="86" Width="277" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="130" />
-    <Shape ID="DesignTable:MAGAZZINOESTERNO" ZOrder="1" X="697" Y="538" Height="276" Width="196" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="301" />
+    <Shape ID="DesignTable:MAGAZZINIESTERNI" ZOrder="1" X="706" Y="504" Height="304" Width="185" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

@@ -14,33 +14,37 @@ else
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <th>Data inizio</th>
-                    <th>Data fine</th>
-                    <th>Modello</th>
-                    <th>Descrizione</th>
-                    <th>Quantità</th>
-                    <th>Peso</th>
-                    <th>Componente</th>
-                    <th>Descrizione</th>
-                    <th>Quantità</th>
-                    <th>Peso</th>
+                    <th style="font-size:11px">Azienda</th>
+                    <th style="font-size:11px">ODL</th>
+                    <th style="font-size:11px">Data inizio</th>
+                    <th style="font-size:11px">Data fine</th>
+                    <th style="font-size:11px">Modello</th>
+                    <th style="font-size:11px">Descrizione</th>
+                    <th style="font-size:11px">Quantità</th>
+                    <th style="font-size:11px">Peso</th>
+                    <th style="font-size:11px">Componente</th>
+                    <th style="font-size:11px">Descrizione</th>
+                    <th style="font-size:11px">Quantità</th>
+                    <th style="font-size:11px">Peso</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (MagazzinoLavorantiEsterniModel elemento in Model)
                 {
-                    <tr>
-                        <td>@elemento.DataInizio</td>
-                        <td>@elemento.DataFine</td>
-                        <td>@elemento.Modello</td>
-                        <td>@elemento.ModelloDescrizione</td>
-                        <td>@elemento.Quanita</td>
-                        <td>@elemento.Peso</td>
-                        <td>@elemento.Componente</td>
-                        <td>@elemento.ComponenteDescrizione</td>
-                        <td>@elemento.QuanitaComponente</td>
-                        <td>@elemento.PesoComponente</td>
-                    </tr>
+                <tr>
+                    <td style="font-size:11px">@elemento.Azienda</td>
+                    <td style="font-size:11px">@elemento.ODL</td>
+                    <td style="font-size:11px">@elemento.DataInizio</td>
+                    <td style="font-size:11px">@elemento.DataFine</td>
+                    <td style="font-size:11px">@elemento.Modello</td>
+                    <td style="font-size:11px">@elemento.ModelloDescrizione</td>
+                    <td style="font-size:11px">@elemento.Quanita</td>
+                    <td style="font-size:11px">@elemento.Peso</td>
+                    <td style="font-size:11px">@elemento.Componente</td>
+                    <td style="font-size:11px">@elemento.ComponenteDescrizione</td>
+                    <td style="font-size:11px">@elemento.QuanitaComponente</td>
+                    <td style="font-size:11px">@elemento.PesoComponente</td>
+                </tr>
                 }
 
             </tbody>

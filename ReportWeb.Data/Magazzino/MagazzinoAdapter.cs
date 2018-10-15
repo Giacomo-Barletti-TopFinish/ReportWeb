@@ -90,9 +90,15 @@ namespace ReportWeb.Data.Magazzino
 
             string select = @"SELECT * FROM MAGAZZINIESTERNI 
                                 WHERE CODICECLIFO = '{2}'
-                                AND INIZIO >= to_date('{0}','DD/MM/YYYY')
-                                AND FINE <= to_date('{1}','DD/MM/YYYY')
-                                ORDER BY MODELLO";
+                                AND (
+                                      ( INIZIO <= to_date('{0}','DD/MM/YYYY')
+                                      AND FINE >= to_date('{0}','DD/MM/YYYY'))
+      
+                                      OR
+                                      ( INIZIO <= to_date('{0}','DD/MM/YYYY')
+                                      AND INIZIO > to_date('{1}','DD/MM/YYYY'))
+                                      )      
+                                ORDER BY AZIENDA,NUMMOVFASE,MODELLO";
 
 
 
@@ -102,7 +108,7 @@ namespace ReportWeb.Data.Magazzino
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
-                da.Fill(ds.MAGAZZINOESTERNO);
+                da.Fill(ds.MAGAZZINIESTERNI);
             }
 
         }

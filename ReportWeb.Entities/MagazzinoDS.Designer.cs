@@ -30,7 +30,7 @@ namespace ReportWeb.Entities {
         
         private MONITOR_APPROVVIGIONAMENTODataTable tableMONITOR_APPROVVIGIONAMENTO;
         
-        private MAGAZZINOESTERNODataTable tableMAGAZZINOESTERNO;
+        private MAGAZZINIESTERNIDataTable tableMAGAZZINIESTERNI;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -69,8 +69,8 @@ namespace ReportWeb.Entities {
                 if ((ds.Tables["MONITOR_APPROVVIGIONAMENTO"] != null)) {
                     base.Tables.Add(new MONITOR_APPROVVIGIONAMENTODataTable(ds.Tables["MONITOR_APPROVVIGIONAMENTO"]));
                 }
-                if ((ds.Tables["MAGAZZINOESTERNO"] != null)) {
-                    base.Tables.Add(new MAGAZZINOESTERNODataTable(ds.Tables["MAGAZZINOESTERNO"]));
+                if ((ds.Tables["MAGAZZINIESTERNI"] != null)) {
+                    base.Tables.Add(new MAGAZZINIESTERNIDataTable(ds.Tables["MAGAZZINIESTERNI"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -124,9 +124,9 @@ namespace ReportWeb.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public MAGAZZINOESTERNODataTable MAGAZZINOESTERNO {
+        public MAGAZZINIESTERNIDataTable MAGAZZINIESTERNI {
             get {
-                return this.tableMAGAZZINOESTERNO;
+                return this.tableMAGAZZINIESTERNI;
             }
         }
         
@@ -206,8 +206,8 @@ namespace ReportWeb.Entities {
                 if ((ds.Tables["MONITOR_APPROVVIGIONAMENTO"] != null)) {
                     base.Tables.Add(new MONITOR_APPROVVIGIONAMENTODataTable(ds.Tables["MONITOR_APPROVVIGIONAMENTO"]));
                 }
-                if ((ds.Tables["MAGAZZINOESTERNO"] != null)) {
-                    base.Tables.Add(new MAGAZZINOESTERNODataTable(ds.Tables["MAGAZZINOESTERNO"]));
+                if ((ds.Tables["MAGAZZINIESTERNI"] != null)) {
+                    base.Tables.Add(new MAGAZZINIESTERNIDataTable(ds.Tables["MAGAZZINIESTERNI"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -260,10 +260,10 @@ namespace ReportWeb.Entities {
                     this.tableMONITOR_APPROVVIGIONAMENTO.InitVars();
                 }
             }
-            this.tableMAGAZZINOESTERNO = ((MAGAZZINOESTERNODataTable)(base.Tables["MAGAZZINOESTERNO"]));
+            this.tableMAGAZZINIESTERNI = ((MAGAZZINIESTERNIDataTable)(base.Tables["MAGAZZINIESTERNI"]));
             if ((initTable == true)) {
-                if ((this.tableMAGAZZINOESTERNO != null)) {
-                    this.tableMAGAZZINOESTERNO.InitVars();
+                if ((this.tableMAGAZZINIESTERNI != null)) {
+                    this.tableMAGAZZINIESTERNI.InitVars();
                 }
             }
         }
@@ -282,8 +282,8 @@ namespace ReportWeb.Entities {
             base.Tables.Add(this.tableMAGAZZ);
             this.tableMONITOR_APPROVVIGIONAMENTO = new MONITOR_APPROVVIGIONAMENTODataTable();
             base.Tables.Add(this.tableMONITOR_APPROVVIGIONAMENTO);
-            this.tableMAGAZZINOESTERNO = new MAGAZZINOESTERNODataTable();
-            base.Tables.Add(this.tableMAGAZZINOESTERNO);
+            this.tableMAGAZZINIESTERNI = new MAGAZZINIESTERNIDataTable();
+            base.Tables.Add(this.tableMAGAZZINIESTERNI);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -306,7 +306,7 @@ namespace ReportWeb.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeMAGAZZINOESTERNO() {
+        private bool ShouldSerializeMAGAZZINIESTERNI() {
             return false;
         }
         
@@ -375,7 +375,7 @@ namespace ReportWeb.Entities {
         public delegate void MONITOR_APPROVVIGIONAMENTORowChangeEventHandler(object sender, MONITOR_APPROVVIGIONAMENTORowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void MAGAZZINOESTERNORowChangeEventHandler(object sender, MAGAZZINOESTERNORowChangeEvent e);
+        public delegate void MAGAZZINIESTERNIRowChangeEventHandler(object sender, MAGAZZINIESTERNIRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2798,7 +2798,11 @@ namespace ReportWeb.Entities {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class MAGAZZINOESTERNODataTable : global::System.Data.TypedTableBase<MAGAZZINOESTERNORow> {
+        public partial class MAGAZZINIESTERNIDataTable : global::System.Data.TypedTableBase<MAGAZZINIESTERNIRow> {
+            
+            private global::System.Data.DataColumn columnAZIENDA;
+            
+            private global::System.Data.DataColumn columnNUMMOVFASE;
             
             private global::System.Data.DataColumn columnIDMODELLO;
             
@@ -2828,8 +2832,8 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public MAGAZZINOESTERNODataTable() {
-                this.TableName = "MAGAZZINOESTERNO";
+            public MAGAZZINIESTERNIDataTable() {
+                this.TableName = "MAGAZZINIESTERNI";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -2837,7 +2841,7 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal MAGAZZINOESTERNODataTable(global::System.Data.DataTable table) {
+            internal MAGAZZINIESTERNIDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -2854,9 +2858,25 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected MAGAZZINOESTERNODataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected MAGAZZINIESTERNIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn AZIENDAColumn {
+                get {
+                    return this.columnAZIENDA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn NUMMOVFASEColumn {
+                get {
+                    return this.columnNUMMOVFASE;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2974,35 +2994,37 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public MAGAZZINOESTERNORow this[int index] {
+            public MAGAZZINIESTERNIRow this[int index] {
                 get {
-                    return ((MAGAZZINOESTERNORow)(this.Rows[index]));
+                    return ((MAGAZZINIESTERNIRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event MAGAZZINOESTERNORowChangeEventHandler MAGAZZINOESTERNORowChanging;
+            public event MAGAZZINIESTERNIRowChangeEventHandler MAGAZZINIESTERNIRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event MAGAZZINOESTERNORowChangeEventHandler MAGAZZINOESTERNORowChanged;
+            public event MAGAZZINIESTERNIRowChangeEventHandler MAGAZZINIESTERNIRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event MAGAZZINOESTERNORowChangeEventHandler MAGAZZINOESTERNORowDeleting;
+            public event MAGAZZINIESTERNIRowChangeEventHandler MAGAZZINIESTERNIRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event MAGAZZINOESTERNORowChangeEventHandler MAGAZZINOESTERNORowDeleted;
+            public event MAGAZZINIESTERNIRowChangeEventHandler MAGAZZINIESTERNIRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddMAGAZZINOESTERNORow(MAGAZZINOESTERNORow row) {
+            public void AddMAGAZZINIESTERNIRow(MAGAZZINIESTERNIRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public MAGAZZINOESTERNORow AddMAGAZZINOESTERNORow(string IDMODELLO, string MODELLO, string MODDESC, decimal QTA, decimal PESO, string CODICECLIFO, string IDCOMPONENTE, string COMPONENTE, string COMDESC, decimal FABBITOT, decimal PESOCOMPONENTE, System.DateTime INIZIO, System.DateTime FINE) {
-                MAGAZZINOESTERNORow rowMAGAZZINOESTERNORow = ((MAGAZZINOESTERNORow)(this.NewRow()));
+            public MAGAZZINIESTERNIRow AddMAGAZZINIESTERNIRow(string AZIENDA, string NUMMOVFASE, string IDMODELLO, string MODELLO, string MODDESC, decimal QTA, decimal PESO, string CODICECLIFO, string IDCOMPONENTE, string COMPONENTE, string COMDESC, decimal FABBITOT, decimal PESOCOMPONENTE, System.DateTime INIZIO, System.DateTime FINE) {
+                MAGAZZINIESTERNIRow rowMAGAZZINIESTERNIRow = ((MAGAZZINIESTERNIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        AZIENDA,
+                        NUMMOVFASE,
                         IDMODELLO,
                         MODELLO,
                         MODDESC,
@@ -3016,15 +3038,15 @@ namespace ReportWeb.Entities {
                         PESOCOMPONENTE,
                         INIZIO,
                         FINE};
-                rowMAGAZZINOESTERNORow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMAGAZZINOESTERNORow);
-                return rowMAGAZZINOESTERNORow;
+                rowMAGAZZINIESTERNIRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMAGAZZINIESTERNIRow);
+                return rowMAGAZZINIESTERNIRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                MAGAZZINOESTERNODataTable cln = ((MAGAZZINOESTERNODataTable)(base.Clone()));
+                MAGAZZINIESTERNIDataTable cln = ((MAGAZZINIESTERNIDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -3032,12 +3054,14 @@ namespace ReportWeb.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new MAGAZZINOESTERNODataTable();
+                return new MAGAZZINIESTERNIDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
+                this.columnAZIENDA = base.Columns["AZIENDA"];
+                this.columnNUMMOVFASE = base.Columns["NUMMOVFASE"];
                 this.columnIDMODELLO = base.Columns["IDMODELLO"];
                 this.columnMODELLO = base.Columns["MODELLO"];
                 this.columnMODDESC = base.Columns["MODDESC"];
@@ -3056,6 +3080,10 @@ namespace ReportWeb.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private void InitClass() {
+                this.columnAZIENDA = new global::System.Data.DataColumn("AZIENDA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAZIENDA);
+                this.columnNUMMOVFASE = new global::System.Data.DataColumn("NUMMOVFASE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNUMMOVFASE);
                 this.columnIDMODELLO = new global::System.Data.DataColumn("IDMODELLO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDMODELLO);
                 this.columnMODELLO = new global::System.Data.DataColumn("MODELLO", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3082,48 +3110,41 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnINIZIO);
                 this.columnFINE = new global::System.Data.DataColumn("FINE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFINE);
+                this.columnAZIENDA.MaxLength = 10;
+                this.columnNUMMOVFASE.MaxLength = 25;
                 this.columnIDMODELLO.MaxLength = 10;
-                this.columnMODELLO.AllowDBNull = false;
                 this.columnMODELLO.MaxLength = 30;
-                this.columnMODDESC.AllowDBNull = false;
                 this.columnMODDESC.MaxLength = 100;
-                this.columnQTA.AllowDBNull = false;
-                this.columnPESO.AllowDBNull = false;
                 this.columnCODICECLIFO.MaxLength = 10;
-                this.columnIDCOMPONENTE.AllowDBNull = false;
                 this.columnIDCOMPONENTE.MaxLength = 10;
-                this.columnCOMPONENTE.AllowDBNull = false;
                 this.columnCOMPONENTE.MaxLength = 30;
-                this.columnCOMDESC.AllowDBNull = false;
                 this.columnCOMDESC.MaxLength = 100;
-                this.columnFABBITOT.AllowDBNull = false;
-                this.columnPESOCOMPONENTE.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public MAGAZZINOESTERNORow NewMAGAZZINOESTERNORow() {
-                return ((MAGAZZINOESTERNORow)(this.NewRow()));
+            public MAGAZZINIESTERNIRow NewMAGAZZINIESTERNIRow() {
+                return ((MAGAZZINIESTERNIRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new MAGAZZINOESTERNORow(builder);
+                return new MAGAZZINIESTERNIRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(MAGAZZINOESTERNORow);
+                return typeof(MAGAZZINIESTERNIRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.MAGAZZINOESTERNORowChanged != null)) {
-                    this.MAGAZZINOESTERNORowChanged(this, new MAGAZZINOESTERNORowChangeEvent(((MAGAZZINOESTERNORow)(e.Row)), e.Action));
+                if ((this.MAGAZZINIESTERNIRowChanged != null)) {
+                    this.MAGAZZINIESTERNIRowChanged(this, new MAGAZZINIESTERNIRowChangeEvent(((MAGAZZINIESTERNIRow)(e.Row)), e.Action));
                 }
             }
             
@@ -3131,8 +3152,8 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.MAGAZZINOESTERNORowChanging != null)) {
-                    this.MAGAZZINOESTERNORowChanging(this, new MAGAZZINOESTERNORowChangeEvent(((MAGAZZINOESTERNORow)(e.Row)), e.Action));
+                if ((this.MAGAZZINIESTERNIRowChanging != null)) {
+                    this.MAGAZZINIESTERNIRowChanging(this, new MAGAZZINIESTERNIRowChangeEvent(((MAGAZZINIESTERNIRow)(e.Row)), e.Action));
                 }
             }
             
@@ -3140,8 +3161,8 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.MAGAZZINOESTERNORowDeleted != null)) {
-                    this.MAGAZZINOESTERNORowDeleted(this, new MAGAZZINOESTERNORowChangeEvent(((MAGAZZINOESTERNORow)(e.Row)), e.Action));
+                if ((this.MAGAZZINIESTERNIRowDeleted != null)) {
+                    this.MAGAZZINIESTERNIRowDeleted(this, new MAGAZZINIESTERNIRowChangeEvent(((MAGAZZINIESTERNIRow)(e.Row)), e.Action));
                 }
             }
             
@@ -3149,14 +3170,14 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.MAGAZZINOESTERNORowDeleting != null)) {
-                    this.MAGAZZINOESTERNORowDeleting(this, new MAGAZZINOESTERNORowChangeEvent(((MAGAZZINOESTERNORow)(e.Row)), e.Action));
+                if ((this.MAGAZZINIESTERNIRowDeleting != null)) {
+                    this.MAGAZZINIESTERNIRowDeleting(this, new MAGAZZINIESTERNIRowChangeEvent(((MAGAZZINIESTERNIRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveMAGAZZINOESTERNORow(MAGAZZINOESTERNORow row) {
+            public void RemoveMAGAZZINIESTERNIRow(MAGAZZINIESTERNIRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -3183,7 +3204,7 @@ namespace ReportWeb.Entities {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "MAGAZZINOESTERNODataTable";
+                attribute2.FixedValue = "MAGAZZINIESTERNIDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -5628,15 +5649,47 @@ namespace ReportWeb.Entities {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class MAGAZZINOESTERNORow : global::System.Data.DataRow {
+        public partial class MAGAZZINIESTERNIRow : global::System.Data.DataRow {
             
-            private MAGAZZINOESTERNODataTable tableMAGAZZINOESTERNO;
+            private MAGAZZINIESTERNIDataTable tableMAGAZZINIESTERNI;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal MAGAZZINOESTERNORow(global::System.Data.DataRowBuilder rb) : 
+            internal MAGAZZINIESTERNIRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableMAGAZZINOESTERNO = ((MAGAZZINOESTERNODataTable)(this.Table));
+                this.tableMAGAZZINIESTERNI = ((MAGAZZINIESTERNIDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string AZIENDA {
+                get {
+                    try {
+                        return ((string)(this[this.tableMAGAZZINIESTERNI.AZIENDAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AZIENDA\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMAGAZZINIESTERNI.AZIENDAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string NUMMOVFASE {
+                get {
+                    try {
+                        return ((string)(this[this.tableMAGAZZINIESTERNI.NUMMOVFASEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NUMMOVFASE\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMAGAZZINIESTERNI.NUMMOVFASEColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5644,14 +5697,14 @@ namespace ReportWeb.Entities {
             public string IDMODELLO {
                 get {
                     try {
-                        return ((string)(this[this.tableMAGAZZINOESTERNO.IDMODELLOColumn]));
+                        return ((string)(this[this.tableMAGAZZINIESTERNI.IDMODELLOColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IDMODELLO\' in table \'MAGAZZINOESTERNO\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDMODELLO\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.IDMODELLOColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.IDMODELLOColumn] = value;
                 }
             }
             
@@ -5659,10 +5712,15 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string MODELLO {
                 get {
-                    return ((string)(this[this.tableMAGAZZINOESTERNO.MODELLOColumn]));
+                    try {
+                        return ((string)(this[this.tableMAGAZZINIESTERNI.MODELLOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MODELLO\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.MODELLOColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.MODELLOColumn] = value;
                 }
             }
             
@@ -5670,10 +5728,15 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string MODDESC {
                 get {
-                    return ((string)(this[this.tableMAGAZZINOESTERNO.MODDESCColumn]));
+                    try {
+                        return ((string)(this[this.tableMAGAZZINIESTERNI.MODDESCColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MODDESC\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.MODDESCColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.MODDESCColumn] = value;
                 }
             }
             
@@ -5681,10 +5744,15 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal QTA {
                 get {
-                    return ((decimal)(this[this.tableMAGAZZINOESTERNO.QTAColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMAGAZZINIESTERNI.QTAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'QTA\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.QTAColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.QTAColumn] = value;
                 }
             }
             
@@ -5692,10 +5760,15 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal PESO {
                 get {
-                    return ((decimal)(this[this.tableMAGAZZINOESTERNO.PESOColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMAGAZZINIESTERNI.PESOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PESO\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.PESOColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.PESOColumn] = value;
                 }
             }
             
@@ -5704,14 +5777,14 @@ namespace ReportWeb.Entities {
             public string CODICECLIFO {
                 get {
                     try {
-                        return ((string)(this[this.tableMAGAZZINOESTERNO.CODICECLIFOColumn]));
+                        return ((string)(this[this.tableMAGAZZINIESTERNI.CODICECLIFOColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CODICECLIFO\' in table \'MAGAZZINOESTERNO\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODICECLIFO\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.CODICECLIFOColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.CODICECLIFOColumn] = value;
                 }
             }
             
@@ -5719,10 +5792,15 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string IDCOMPONENTE {
                 get {
-                    return ((string)(this[this.tableMAGAZZINOESTERNO.IDCOMPONENTEColumn]));
+                    try {
+                        return ((string)(this[this.tableMAGAZZINIESTERNI.IDCOMPONENTEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDCOMPONENTE\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.IDCOMPONENTEColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.IDCOMPONENTEColumn] = value;
                 }
             }
             
@@ -5730,10 +5808,15 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string COMPONENTE {
                 get {
-                    return ((string)(this[this.tableMAGAZZINOESTERNO.COMPONENTEColumn]));
+                    try {
+                        return ((string)(this[this.tableMAGAZZINIESTERNI.COMPONENTEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COMPONENTE\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.COMPONENTEColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.COMPONENTEColumn] = value;
                 }
             }
             
@@ -5741,10 +5824,15 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string COMDESC {
                 get {
-                    return ((string)(this[this.tableMAGAZZINOESTERNO.COMDESCColumn]));
+                    try {
+                        return ((string)(this[this.tableMAGAZZINIESTERNI.COMDESCColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COMDESC\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.COMDESCColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.COMDESCColumn] = value;
                 }
             }
             
@@ -5752,10 +5840,15 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal FABBITOT {
                 get {
-                    return ((decimal)(this[this.tableMAGAZZINOESTERNO.FABBITOTColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMAGAZZINIESTERNI.FABBITOTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FABBITOT\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.FABBITOTColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.FABBITOTColumn] = value;
                 }
             }
             
@@ -5763,10 +5856,15 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal PESOCOMPONENTE {
                 get {
-                    return ((decimal)(this[this.tableMAGAZZINOESTERNO.PESOCOMPONENTEColumn]));
+                    try {
+                        return ((decimal)(this[this.tableMAGAZZINIESTERNI.PESOCOMPONENTEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PESOCOMPONENTE\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.PESOCOMPONENTEColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.PESOCOMPONENTEColumn] = value;
                 }
             }
             
@@ -5775,14 +5873,14 @@ namespace ReportWeb.Entities {
             public System.DateTime INIZIO {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableMAGAZZINOESTERNO.INIZIOColumn]));
+                        return ((global::System.DateTime)(this[this.tableMAGAZZINIESTERNI.INIZIOColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'INIZIO\' in table \'MAGAZZINOESTERNO\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'INIZIO\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.INIZIOColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.INIZIOColumn] = value;
                 }
             }
             
@@ -5791,63 +5889,195 @@ namespace ReportWeb.Entities {
             public System.DateTime FINE {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableMAGAZZINOESTERNO.FINEColumn]));
+                        return ((global::System.DateTime)(this[this.tableMAGAZZINIESTERNI.FINEColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FINE\' in table \'MAGAZZINOESTERNO\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'FINE\' in table \'MAGAZZINIESTERNI\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMAGAZZINOESTERNO.FINEColumn] = value;
+                    this[this.tableMAGAZZINIESTERNI.FINEColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsAZIENDANull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.AZIENDAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetAZIENDANull() {
+                this[this.tableMAGAZZINIESTERNI.AZIENDAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsNUMMOVFASENull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.NUMMOVFASEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetNUMMOVFASENull() {
+                this[this.tableMAGAZZINIESTERNI.NUMMOVFASEColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDMODELLONull() {
-                return this.IsNull(this.tableMAGAZZINOESTERNO.IDMODELLOColumn);
+                return this.IsNull(this.tableMAGAZZINIESTERNI.IDMODELLOColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIDMODELLONull() {
-                this[this.tableMAGAZZINOESTERNO.IDMODELLOColumn] = global::System.Convert.DBNull;
+                this[this.tableMAGAZZINIESTERNI.IDMODELLOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMODELLONull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.MODELLOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMODELLONull() {
+                this[this.tableMAGAZZINIESTERNI.MODELLOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMODDESCNull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.MODDESCColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMODDESCNull() {
+                this[this.tableMAGAZZINIESTERNI.MODDESCColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsQTANull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.QTAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetQTANull() {
+                this[this.tableMAGAZZINIESTERNI.QTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPESONull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.PESOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPESONull() {
+                this[this.tableMAGAZZINIESTERNI.PESOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsCODICECLIFONull() {
-                return this.IsNull(this.tableMAGAZZINOESTERNO.CODICECLIFOColumn);
+                return this.IsNull(this.tableMAGAZZINIESTERNI.CODICECLIFOColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCODICECLIFONull() {
-                this[this.tableMAGAZZINOESTERNO.CODICECLIFOColumn] = global::System.Convert.DBNull;
+                this[this.tableMAGAZZINIESTERNI.CODICECLIFOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDCOMPONENTENull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.IDCOMPONENTEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDCOMPONENTENull() {
+                this[this.tableMAGAZZINIESTERNI.IDCOMPONENTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCOMPONENTENull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.COMPONENTEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCOMPONENTENull() {
+                this[this.tableMAGAZZINIESTERNI.COMPONENTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCOMDESCNull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.COMDESCColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCOMDESCNull() {
+                this[this.tableMAGAZZINIESTERNI.COMDESCColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsFABBITOTNull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.FABBITOTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetFABBITOTNull() {
+                this[this.tableMAGAZZINIESTERNI.FABBITOTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPESOCOMPONENTENull() {
+                return this.IsNull(this.tableMAGAZZINIESTERNI.PESOCOMPONENTEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPESOCOMPONENTENull() {
+                this[this.tableMAGAZZINIESTERNI.PESOCOMPONENTEColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsINIZIONull() {
-                return this.IsNull(this.tableMAGAZZINOESTERNO.INIZIOColumn);
+                return this.IsNull(this.tableMAGAZZINIESTERNI.INIZIOColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetINIZIONull() {
-                this[this.tableMAGAZZINOESTERNO.INIZIOColumn] = global::System.Convert.DBNull;
+                this[this.tableMAGAZZINIESTERNI.INIZIOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsFINENull() {
-                return this.IsNull(this.tableMAGAZZINOESTERNO.FINEColumn);
+                return this.IsNull(this.tableMAGAZZINIESTERNI.FINEColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetFINENull() {
-                this[this.tableMAGAZZINOESTERNO.FINEColumn] = global::System.Convert.DBNull;
+                this[this.tableMAGAZZINIESTERNI.FINEColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5957,22 +6187,22 @@ namespace ReportWeb.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class MAGAZZINOESTERNORowChangeEvent : global::System.EventArgs {
+        public class MAGAZZINIESTERNIRowChangeEvent : global::System.EventArgs {
             
-            private MAGAZZINOESTERNORow eventRow;
+            private MAGAZZINIESTERNIRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public MAGAZZINOESTERNORowChangeEvent(MAGAZZINOESTERNORow row, global::System.Data.DataRowAction action) {
+            public MAGAZZINIESTERNIRowChangeEvent(MAGAZZINIESTERNIRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public MAGAZZINOESTERNORow Row {
+            public MAGAZZINIESTERNIRow Row {
                 get {
                     return this.eventRow;
                 }

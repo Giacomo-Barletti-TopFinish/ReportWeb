@@ -8,7 +8,9 @@ namespace ReportWeb.Models.Magazzino
 {
     public class MagazzinoLavorantiEsterniModel
     {
-        public string IdMOdello { get; set; }
+        public string Azienda { get; set; }
+        public string ODL{ get; set; }
+        public string IdModello { get; set; }
         public string Modello { get; set; }
         public string ModelloDescrizione { get; set; }
         public Decimal Quanita { get; set; }

@@ -218,10 +218,12 @@ namespace ReportWeb.Business
                 MagazzinoDS ds = new MagazzinoDS();
                 bMagazzino.FillMAGAZZINOESTERNO(dataInizio, dataFine, lavorante, ds);
 
-                foreach (MagazzinoDS.MAGAZZINOESTERNORow magaz in ds.MAGAZZINOESTERNO.OrderBy(x => x.MODELLO))
+                foreach (MagazzinoDS.MAGAZZINIESTERNIRow magaz in ds.MAGAZZINIESTERNI.OrderBy(x => x.MODELLO))
                 {
                     MagazzinoLavorantiEsterniModel m = new MagazzinoLavorantiEsterniModel();
-                    m.IdMOdello = magaz.IDMODELLO;
+                    m.ODL = magaz.NUMMOVFASE;
+                    m.Azienda = magaz.AZIENDA;
+                    m.IdModello = magaz.IDMODELLO;
                     m.Modello = magaz.MODELLO.Trim();
                     m.ModelloDescrizione = magaz.MODDESC.Trim();
                     m.Quanita = magaz.QTA;
@@ -232,7 +234,7 @@ namespace ReportWeb.Business
                     m.QuanitaComponente = magaz.FABBITOT;
                     m.PesoComponente = magaz.PESOCOMPONENTE;
                     m.DataInizio = magaz.INIZIO.ToShortDateString();
-                    m.DataFine= magaz.FINE.ToShortDateString();
+                    m.DataFine = magaz.FINE.ToShortDateString();
 
                     model.Add(m);
                 }
