@@ -92,5 +92,15 @@ namespace ReportWeb.Controllers
 
             return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MagazziniEsterni.xlsx");
         }
+
+        public ActionResult ReportExcelGiacenze()
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<ModelloGiacenzaModel> model = bll.CaricaGiacenze();
+            ExcelHelper excel = new ExcelHelper();
+            byte[] fileContents = excel.CreaExcelGiacenzeMagazzino(model);
+
+            return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "GiacenzeMagazzini.xlsx");
+        }
     }
 }

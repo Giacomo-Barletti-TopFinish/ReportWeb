@@ -10,6 +10,9 @@
 <div style="overflow-y:auto; overflow-x:hidden; height:450px; padding-left:10px">
     <div><h4>Giacenze esistenti</h4></div>
     <div class="row">
+        <div class="col-sm-1"><input type="button" onclick="Excel();" class="btn btn-primary" value="Esporta Excel" /></div>
+    </div>
+    <div class="row">
         @if (Model.Count == 0)
         {
             <h3 class="text-red">Nessun elemento trovato</h3>
@@ -165,5 +168,13 @@
             }
         });
     }
-
+     function Excel()
+     {
+         
+        var url = '@Url.Action("ReportExcelGiacenze", "Magazzino")';
+       
+        var win = window.open(url, '_blank');
+        win.document.title = "Report";
+        win.focus();
+    }
 </script>
