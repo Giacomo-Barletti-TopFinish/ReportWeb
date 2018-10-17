@@ -448,7 +448,7 @@ namespace ReportWeb.Business
         public void Addebita(string NotaGruppo, string Lavorante, string AddebitiJson, string UIDUSER)
         {
             ALEAddebitiJsonModel[] addebiti = JSonSerializer.Deserialize<ALEAddebitiJsonModel[]>(AddebitiJson);
-
+            int IDGRUPPO = -1;
             using (ALEBusiness bALE = new ALEBusiness())
             {
                 try
@@ -456,7 +456,7 @@ namespace ReportWeb.Business
                     ALEDS ds = new ALEDS();
                     bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.INSERITO);
 
-                    int IDGRUPPO = bALE.CreaGruppo(NotaGruppo, Lavorante.Trim(), UIDUSER);
+                    IDGRUPPO = bALE.CreaGruppo(NotaGruppo, Lavorante.Trim(), UIDUSER);
 
                     foreach (ALEAddebitiJsonModel addebitoJ in addebiti)
                     {
@@ -471,25 +471,7 @@ namespace ReportWeb.Business
                     }
 
                     bALE.UpdateRW_ALE_DETTAGLIO(ds);
-                    ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == IDGRUPPO).FirstOrDefault();
-                    GruppoModel model = CreaGruppoModel(gruppo, ds, false, false, false);
 
-                    MailDispatcherBLL bllMD = new MailDispatcherBLL();
-                    string oggetto = "ALE - NUOVO GRUPPO ADDEBITO INSERITO ID GRUPPO:" + IDGRUPPO.ToString();
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendLine(string.Format("E' stato creato il gruppo: {0} che deve essere valorizzato", IDGRUPPO));
-                    sb.AppendFormat(string.Empty);
-                    sb.AppendLine(string.Format("Lavorante: {0}", model.LavoranteDescrizione.Trim()));
-                    sb.AppendLine(string.Format("Creato da: {0}", model.UtenteAddebito.Trim()));
-                    sb.AppendFormat(string.Empty);
-                    sb.AppendFormat("Articoli addebitati");
-                    sb.AppendFormat(string.Empty);
-                    foreach (AddebitoModel addebito in model.Dettagli)
-                    {
-                        sb.AppendLine(string.Format("Modello: {0}  Numero pezzi: {1}  Motivo scarto: {2}  Note: {3}", addebito.Modello, addebito.QuantitaAddebitata, addebito.Difetto, addebito.NotaAddebito));
-                    }
-                    decimal IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
-                    bllMD.SottomettiEmail(IDMAIL);
                 }
                 catch
                 {
@@ -497,6 +479,26 @@ namespace ReportWeb.Business
                     throw;
                 }
             }
+
+            GruppoModel gruppo = LeggiGruppi(ALEStatoDettaglio.ADDEBITATO).Where(x => x.IDALEGRUPPO == IDGRUPPO).FirstOrDefault();
+
+            MailDispatcherBLL bllMD = new MailDispatcherBLL();
+            string oggetto = "ALE - NUOVO GRUPPO ADDEBITO INSERITO ID GRUPPO:" + IDGRUPPO.ToString();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(string.Format("E' stato creato il gruppo: {0} che deve essere valorizzato", IDGRUPPO));
+            sb.AppendLine(string.Empty);
+            sb.AppendLine(string.Format("Lavorante: {0}", gruppo.LavoranteDescrizione.Trim()));
+            sb.AppendLine(string.Format("Creato da: {0}", gruppo.UtenteAddebito.Trim()));
+            sb.AppendLine(string.Empty);
+            sb.AppendLine("Articoli addebitati");
+            sb.AppendLine(string.Empty);
+            foreach (AddebitoModel addebito in gruppo.Dettagli)
+            {
+                sb.AppendLine(string.Format("Modello: {0}  Numero pezzi: {1}  Motivo scarto: {2}  Note: {3}", addebito.Modello, addebito.QuantitaAddebitata, addebito.Difetto, addebito.NotaAddebito));
+            }
+            decimal IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
+            bllMD.SottomettiEmail(IDMAIL);
+
         }
 
         public void NonAddebitare(string NotaGruppo, string AddebitiJson, string UIDUSER)
