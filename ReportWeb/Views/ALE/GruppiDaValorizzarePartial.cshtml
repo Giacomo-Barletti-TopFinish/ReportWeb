@@ -15,8 +15,10 @@ else
             <thead>
                 <tr>
                     <th width="5%"><label>ID</label></th>
+                    <th width="10%"><label>Data addebito</label></th>
+                    <th width="10%"><label>Utente</label></th>
                     <th width="10%"><label>Lavorante</label></th>
-                    <th width="75%"><label>Nota</label></th>
+                    <th width="65%"><label>Nota</label></th>
                     <th width="5%"></th>
                     <th></th>
                 </tr>
@@ -26,6 +28,11 @@ else
                 {
                     <tr valign="top">
                         <td>@a.IDALEGRUPPO</td>
+                        <td>
+                            @if (a.DataAddebito.HasValue)
+                            {<text>@a.DataAddebito.Value.ToShortDateString()</text>}
+                        </td>
+                        <td>@a.UtenteAddebito</td>
                         <td>@a.LavoranteDescrizione</td>
                         <td>@a.NotaAddebito</td>
                         <input type="hidden" value="@a.IDALEGRUPPO" class="hdIDALEGRUPPO" />
@@ -34,7 +41,7 @@ else
                     </tr>
                     <tr>
                         <td></td>
-                        <td colspan="3">
+                        <td colspan="5">
                             <div id="Dettaglio_@a.IDALEGRUPPO" style="display:none">
                                 <table width="100%" class="table">
                                     <thead>
@@ -114,7 +121,7 @@ else
                                 </table>
                             </div>
                         </td>
-                       
+
                         <td></td>
                     </tr>
                 }
@@ -315,7 +322,7 @@ else
         var txtCostoTotale = $(nomeCostoTotale);
         $(txtCostoTotale).val(totale.toFixed(2));
 
-       
+
         var costoTotaleQuantita = $(nomeCostoTotaleQuantita);
         var trPrezzo = $(txtCostoTotale).closest('tr');
         var tds = trPrezzo.find('td');

@@ -16,9 +16,10 @@ else
             <thead>
                 <tr>
                     <th width="5%"><label>ID</label></th>
+                    <th width="5%"><label>Data val.</label></th>
                     <th width="5%"><label>Utente</label></th>
                     <th width="10%"><label>Lavorante</label></th>
-                    <th width="35%"><label>Nota addebito</label></th>
+                    <th width="30%"><label>Nota addebito</label></th>
                     <th width="35%"><label>Nota valorizzazione</label></th>
                     <th width="5%"></th>
                     <th></th>
@@ -29,6 +30,10 @@ else
                 {
                     <tr valign="top">
                         <td>@a.IDALEGRUPPO</td>
+                        <td>
+                            @if (a.DataValorizzazione.HasValue)
+                            {<text>@a.DataValorizzazione.Value.ToShortDateString()</text>}
+                                            </td>
                         <td>@a.UtenteValorizzazione</td>
                         <td>@a.LavoranteDescrizione</td>
                         <td>@a.NotaAddebito</td>

@@ -489,12 +489,18 @@ namespace ReportWeb.Business
             sb.AppendLine(string.Empty);
             sb.AppendLine(string.Format("Lavorante: {0}", gruppo.LavoranteDescrizione.Trim()));
             sb.AppendLine(string.Format("Creato da: {0}", gruppo.UtenteAddebito.Trim()));
+            if (!string.IsNullOrEmpty(gruppo.NotaAddebito))
+                sb.AppendLine(string.Format("Nota addebito: {0}", gruppo.NotaAddebito.Trim()));
             sb.AppendLine(string.Empty);
             sb.AppendLine("Articoli addebitati");
             sb.AppendLine(string.Empty);
             foreach (AddebitoModel addebito in gruppo.Dettagli)
             {
-                sb.AppendLine(string.Format("Modello: {0}  Numero pezzi: {1}  Motivo scarto: {2}  Note: {3}", addebito.Modello, addebito.QuantitaAddebitata, addebito.Difetto, addebito.NotaAddebito));
+                sb.AppendLine(string.Format("Modello: {0}  Numero pezzi: {1}  Motivo scarto: {2}", addebito.Modello, addebito.QuantitaAddebitata, addebito.Difetto));
+                if (!string.IsNullOrEmpty(addebito.NotaInserimento))
+                    sb.AppendLine(string.Format("         Nota inserimento: {0}", addebito.NotaInserimento));
+                if (!string.IsNullOrEmpty(addebito.NotaAddebito))
+                    sb.AppendLine(string.Format("         Nota addebito: {0}", addebito.NotaAddebito));
             }
             decimal IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
             bllMD.SottomettiEmail(IDMAIL);
