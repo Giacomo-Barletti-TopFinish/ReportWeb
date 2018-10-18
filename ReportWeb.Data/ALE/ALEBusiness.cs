@@ -124,7 +124,7 @@ namespace ReportWeb.Data.ALE
         public void FillMAGAZZ(ALEDS ds, List<string> IDMAGAZZ)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
-            a.FillMAGAZZ(ds, IDMAGAZZ);
+            a.FillMAGAZZ(ds, IDMAGAZZ.Distinct().ToList());
         }
 
         [DataContext]
@@ -138,7 +138,7 @@ namespace ReportWeb.Data.ALE
         public void FillUSR_PDM_FILES(ALEDS ds, List<string> IDMAGAZZ)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
-            a.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+            a.FillUSR_PDM_FILES(ds, IDMAGAZZ.Distinct().ToList());
         }
 
         [DataContext(true)]

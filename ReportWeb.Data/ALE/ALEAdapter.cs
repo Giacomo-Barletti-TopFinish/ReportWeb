@@ -356,7 +356,7 @@ namespace ReportWeb.Data
         {
             if (IDMAGAZZ.Count == 0) return;
 
-            string selezione = ConvertToStringForInCondition(IDMAGAZZ);
+            string selezione = ConvertToStringForInCondition(IDMAGAZZ.Distinct().ToList());
             string select = @"  select FI.*, IM.IDMAGAZZ from gruppo.USR_PDM_FILES FI
                                 INNER JOIN GRUPPO.USR_PDM_IMG_MAGAZZ IM ON IM.IDPDMFILE = FI.IDPDMFILE
                                 where IM.idmagazz IN ({0})";

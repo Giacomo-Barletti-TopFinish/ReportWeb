@@ -7502,13 +7502,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public USR_PDM_FILESRow FindByIDPDMFILE(string IDPDMFILE) {
-                return ((USR_PDM_FILESRow)(this.Rows.Find(new object[] {
-                            IDPDMFILE})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 USR_PDM_FILESDataTable cln = ((USR_PDM_FILESDataTable)(base.Clone()));
                 cln.InitVars();
@@ -7571,10 +7564,7 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnCOLLEGSN);
                 this.columnIDMAGAZZ = new global::System.Data.DataColumn("IDMAGAZZ", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDMAGAZZ);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDPDMFILE}, true));
                 this.columnIDPDMFILE.AllowDBNull = false;
-                this.columnIDPDMFILE.Unique = true;
                 this.columnIDPDMFILE.MaxLength = 25;
                 this.columnORIGINEFILE.AllowDBNull = false;
                 this.columnIDPDMPATH.MaxLength = 10;
@@ -12132,13 +12122,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public USR_PRD_FLUSSO_MOVFASIRow FindByIDFLUSSOMOVFASE(string IDFLUSSOMOVFASE) {
-                return ((USR_PRD_FLUSSO_MOVFASIRow)(this.Rows.Find(new object[] {
-                            IDFLUSSOMOVFASE})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 USR_PRD_FLUSSO_MOVFASIDataTable cln = ((USR_PRD_FLUSSO_MOVFASIDataTable)(base.Clone()));
                 cln.InitVars();
@@ -12270,10 +12253,7 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnVALORE);
                 this.columnIDCHECKQT = new global::System.Data.DataColumn("IDCHECKQT", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDCHECKQT);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDFLUSSOMOVFASE}, true));
                 this.columnIDFLUSSOMOVFASE.AllowDBNull = false;
-                this.columnIDFLUSSOMOVFASE.Unique = true;
                 this.columnIDFLUSSOMOVFASE.MaxLength = 25;
                 this.columnIDPRDMOVFASE.MaxLength = 25;
                 this.columnROOTSN.AllowDBNull = false;
@@ -15021,13 +15001,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public USR_PRD_FASIRow FindByIDPRDFASE(string IDPRDFASE) {
-                return ((USR_PRD_FASIRow)(this.Rows.Find(new object[] {
-                            IDPRDFASE})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 USR_PRD_FASIDataTable cln = ((USR_PRD_FASIDataTable)(base.Clone()));
                 cln.InitVars();
@@ -15321,10 +15294,7 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnDATAPERCOSTO);
                 this.columnIDTABMAG_ATTESA = new global::System.Data.DataColumn("IDTABMAG_ATTESA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDTABMAG_ATTESA);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDPRDFASE}, true));
                 this.columnIDPRDFASE.AllowDBNull = false;
-                this.columnIDPRDFASE.Unique = true;
                 this.columnIDPRDFASE.MaxLength = 25;
                 this.columnIDLANCIOD.MaxLength = 25;
                 this.columnROOTSN.AllowDBNull = false;
