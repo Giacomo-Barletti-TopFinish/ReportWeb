@@ -90,17 +90,21 @@ namespace ReportWeb.Data.Magazzino
 
             string select = @"SELECT * FROM MAGAZZINIESTERNI 
                                 WHERE CODICECLIFO = '{2}'
-                                AND (
-                                      ( INIZIO <= to_date('{0}','DD/MM/YYYY')
-                                      AND FINE >= to_date('{0}','DD/MM/YYYY'))
-      
-                                      OR
-                                      ( INIZIO <= to_date('{0}','DD/MM/YYYY')
-                                      AND INIZIO > to_date('{1}','DD/MM/YYYY'))
-                                      )      
+                                AND INIZIO <= to_date('{1}','DD/MM/YYYY')
+                                AND FINE > to_date('{0}','DD/MM/YYYY')
                                 ORDER BY AZIENDA,NUMMOVFASE,MODELLO";
 
+            //VECCHIA CONDIZIONE
+            //AND(
+            //                        (INIZIO <= to_date('{0}', 'DD/MM/YYYY')
 
+            //                        AND FINE >= to_date('{0}', 'DD/MM/YYYY'))
+
+
+            //                          OR
+            //                          (INIZIO <= to_date('{0}', 'DD/MM/YYYY')
+            //                          AND INIZIO > to_date('{1}', 'DD/MM/YYYY'))
+            //                          )      
 
             string dtInizio = inizio.ToString("dd/MM/yyyy");
             string dtFine = fine.ToString("dd/MM/yyyy");
