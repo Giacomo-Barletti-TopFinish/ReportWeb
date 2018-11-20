@@ -113,7 +113,8 @@ else
                                             <td style="font-size:11px">@(dettaglio.PrezzoApprovato * dettaglio.QuantitaAddebitata)</td>
                                         </tr>
                                         <tr valign="top">
-                                            <td style="font-size:11px" colspan="5">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                            <td style="font-size:11px" colspan="2">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                            <td style="font-size:11px" colspan="2">@string.Format("Verificato da: {0}", dettaglio.UidUserInserimento)</td>
                                         </tr>
                                         <tr valign="top">
                                             <td style="font-size:11px" colspan="5">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>

@@ -55,6 +55,8 @@ namespace ReportWeb.Models.ALE
         public List<CostiAddebitiModel> Costi { get; set; }
 
         public List<string> ListaFasi { get; set; }
+
+        public bool SCARTODEFINITIVO { get; set; }
     }
 
 

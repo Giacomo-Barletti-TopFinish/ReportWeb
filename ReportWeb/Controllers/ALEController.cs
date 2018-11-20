@@ -70,9 +70,9 @@ namespace ReportWeb.Controllers
             ALEBLL bll = new ALEBLL(RvlImageSite);
             AddebitiModel model = bll.TrovaMancanti(DataInizio, DataFine);
 
-            ExcelHelper excel= new ExcelHelper();
+            ExcelHelper excel = new ExcelHelper();
             byte[] fileContents = excel.CreaExcelMancanti(model);
-           
+
             return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Mancanti.xlsx");
 
         }
@@ -86,10 +86,10 @@ namespace ReportWeb.Controllers
             return PartialView("CaricaSchedaPartial", model);
         }
 
-        public ActionResult SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota)
+        public ActionResult SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, bool ScartoDefinitivo)
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            bll.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, ConnectedUser);
+            bll.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, ScartoDefinitivo, ConnectedUser);
 
             return null;
         }

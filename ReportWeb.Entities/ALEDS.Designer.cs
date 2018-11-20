@@ -16536,6 +16536,8 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnMANCANTE;
             
+            private global::System.Data.DataColumn columnSCARTODEFINITIVO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public RW_ALE_DETTAGLIODataTable() {
@@ -16747,6 +16749,14 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn SCARTODEFINITIVOColumn {
+                get {
+                    return this.columnSCARTODEFINITIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -16804,7 +16814,8 @@ namespace ReportWeb.Entities {
                         string UIDUSER_INSERIMENTO, 
                         System.DateTime DATA_NONADDEBITO, 
                         string UIDUSER_NONADDEBITO, 
-                        string MANCANTE) {
+                        string MANCANTE, 
+                        string SCARTODEFINITIVO) {
                 RW_ALE_DETTAGLIORow rowRW_ALE_DETTAGLIORow = ((RW_ALE_DETTAGLIORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDALEDETTAGLIO,
@@ -16828,7 +16839,8 @@ namespace ReportWeb.Entities {
                         UIDUSER_INSERIMENTO,
                         DATA_NONADDEBITO,
                         UIDUSER_NONADDEBITO,
-                        MANCANTE};
+                        MANCANTE,
+                        SCARTODEFINITIVO};
                 rowRW_ALE_DETTAGLIORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRW_ALE_DETTAGLIORow);
                 return rowRW_ALE_DETTAGLIORow;
@@ -16880,6 +16892,7 @@ namespace ReportWeb.Entities {
                 this.columnDATA_NONADDEBITO = base.Columns["DATA_NONADDEBITO"];
                 this.columnUIDUSER_NONADDEBITO = base.Columns["UIDUSER_NONADDEBITO"];
                 this.columnMANCANTE = base.Columns["MANCANTE"];
+                this.columnSCARTODEFINITIVO = base.Columns["SCARTODEFINITIVO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16929,6 +16942,8 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnUIDUSER_NONADDEBITO);
                 this.columnMANCANTE = new global::System.Data.DataColumn("MANCANTE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMANCANTE);
+                this.columnSCARTODEFINITIVO = new global::System.Data.DataColumn("SCARTODEFINITIVO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSCARTODEFINITIVO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDALEDETTAGLIO}, true));
                 this.columnIDALEDETTAGLIO.AllowDBNull = false;
@@ -16954,6 +16969,7 @@ namespace ReportWeb.Entities {
                 this.columnUIDUSER_INSERIMENTO.MaxLength = 254;
                 this.columnUIDUSER_NONADDEBITO.MaxLength = 254;
                 this.columnMANCANTE.MaxLength = 1;
+                this.columnSCARTODEFINITIVO.MaxLength = 1;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -32899,6 +32915,22 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string SCARTODEFINITIVO {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_DETTAGLIO.SCARTODEFINITIVOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SCARTODEFINITIVO\' in table \'RW_ALE_DETTAGLIO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_DETTAGLIO.SCARTODEFINITIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDALEGRUPPONull() {
                 return this.IsNull(this.tableRW_ALE_DETTAGLIO.IDALEGRUPPOColumn);
             }
@@ -33039,6 +33071,18 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetMANCANTENull() {
                 this[this.tableRW_ALE_DETTAGLIO.MANCANTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsSCARTODEFINITIVONull() {
+                return this.IsNull(this.tableRW_ALE_DETTAGLIO.SCARTODEFINITIVOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetSCARTODEFINITIVONull() {
+                this[this.tableRW_ALE_DETTAGLIO.SCARTODEFINITIVOColumn] = global::System.Convert.DBNull;
             }
         }
         

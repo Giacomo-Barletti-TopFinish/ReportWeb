@@ -117,7 +117,8 @@ else
                                             <td style="font-size:12px">@Html.TextBox("txtValore", string.Empty, new { @class = "form-control input-sm RWValore", @style = "height: 21px;", @readonly = true }) </td>
                                         </tr>
                                         <tr valign="top">
-                                            <td style="font-size:11px" colspan="4">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                            <td style="font-size:11px" colspan="3">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                            <td style="font-size:11px" colspan="2">@string.Format("Verificato da: {0}", dettaglio.UidUserInserimento)</td>
                                         </tr>
                                         <tr valign="top">
                                             <td style="font-size:11px" colspan="4">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>

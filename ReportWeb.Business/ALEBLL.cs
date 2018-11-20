@@ -179,7 +179,7 @@ namespace ReportWeb.Business
 
         }
 
-        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER)
+        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota,bool scartoDefinitivo, string UIDUSER)
         {
             using (ALEBusiness bALE = new ALEBusiness())
             {
@@ -203,7 +203,7 @@ namespace ReportWeb.Business
                     decimal IDMAIL = bllMD.CreaEmail("ALE - ADDEBITO", oggetto, sb.ToString());
                     bllMD.SottomettiEmail(IDMAIL);
                 }
-                bALE.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER, mancante);
+                bALE.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, UIDUSER, mancante, scartoDefinitivo);
             }
         }
 
@@ -347,6 +347,8 @@ namespace ReportWeb.Business
             m.QuantitaDifettosi = riga.QUANTITADIFETTOSI;
             m.QuantitaInseriti = riga.QUANTITAINSERITA;
             m.QuantitaAddebitata = riga.IsQUANTITAADDEBITATANull() ? 0 : riga.QUANTITAADDEBITATA;
+
+            m.SCARTODEFINITIVO = riga.IsSCARTODEFINITIVONull() ? false : (riga.SCARTODEFINITIVO == "0") ? false : true;
 
             m.NotaInserimento = riga.IsNOTAINSERIMENTONull() ? string.Empty : riga.NOTAINSERIMENTO;
             m.NotaApprovazione = riga.IsNOTAAPPROVAZIONENull() ? string.Empty : riga.NOTAAPPROVAZIONE;

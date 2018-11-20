@@ -96,6 +96,8 @@
         $('#lblMessage').html(messaggio);
         if(!esito) return;
 
+        var checked = $('#CHKDEFINITIVO').prop('checked');
+
         var url = '@Url.Action("SalvaInserimento", "ALE")';
         $.ajax({
             url: url,
@@ -106,7 +108,8 @@
                 Difettosi:difettosi,
                 Inseriti:inseriti,
                 Lavorante:lavorante,
-                Nota:nota
+                Nota: nota,
+                ScartoDefinitivo: checked
             },
             cache: false,
             type: "POST",

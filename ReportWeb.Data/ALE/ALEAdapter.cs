@@ -370,11 +370,11 @@ namespace ReportWeb.Data
 
         }
 
-        public void InsertRW_ALE_DETTAGLIO(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, bool Mancante, string Nota, string UIDUSER)
+        public void InsertRW_ALE_DETTAGLIO(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, bool Mancante, string Nota, bool scartoDefinitivo, string UIDUSER)
         {
 
-            string insert = @"INSERT INTO RW_ALE_DETTAGLIO (AZIENDA,BARCODE,IDCHECKQT,QUANTITADIFETTOSI,QUANTITAINSERITA,NOTAINSERIMENTO,LAVORANTE, STATO, DATA_INSERIMENTO,UIDUSER_INSERIMENTO,MANCANTE) VALUES
-                                            ($P<AZIENDA>,$P<BARCODE>,$P<IDCHECKQT>,$P<QUANTITADIFETTOSI>,$P<QUANTITAINSERITA>,$P<NOTA>,$P<LAVORANTE>, $P<STATO>,$P<NOW>,$P<UIDUSER>,$P{MANCANTE})";
+            string insert = @"INSERT INTO RW_ALE_DETTAGLIO (AZIENDA,BARCODE,IDCHECKQT,QUANTITADIFETTOSI,QUANTITAINSERITA,NOTAINSERIMENTO,LAVORANTE, STATO, DATA_INSERIMENTO,UIDUSER_INSERIMENTO,MANCANTE, SCARTODEFINITIVO) VALUES
+                                            ($P<AZIENDA>,$P<BARCODE>,$P<IDCHECKQT>,$P<QUANTITADIFETTOSI>,$P<QUANTITAINSERITA>,$P<NOTA>,$P<LAVORANTE>, $P<STATO>,$P<NOW>,$P<UIDUSER>,$P{MANCANTE},$P{SCARTODEFINITIVO})";
             ParamSet ps = new ParamSet();
             ps.AddParam("AZIENDA", DbType.String, Azienda);
             ps.AddParam("BARCODE", DbType.String, Barcode);
@@ -387,6 +387,7 @@ namespace ReportWeb.Data
             ps.AddParam("NOW", DbType.DateTime, DateTime.Now);
             ps.AddParam("UIDUSER", DbType.String, UIDUSER);
             ps.AddParam("MANCANTE", DbType.String, Mancante ? "1" : "0");
+            ps.AddParam("SCARTODEFINITIVO", DbType.String, scartoDefinitivo ? "1" : "0");
 
             using (DbCommand cmd = BuildCommand(insert, ps))
             {
