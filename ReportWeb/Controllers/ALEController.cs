@@ -24,6 +24,13 @@ namespace ReportWeb.Controllers
 
             return View();
         }
+        public ActionResult Rilavorazione()
+        {
+            VerificaAbilitazioneUtenteConUscita(31);
+
+
+            return View();
+        }
         public ActionResult Valorizzazione()
         {
             VerificaAbilitazioneUtenteConUscita(18);
@@ -110,10 +117,10 @@ namespace ReportWeb.Controllers
             return PartialView("CaricaSchedeNonAddebitatePartial", model);
         }
 
-        public ActionResult Addebita(string NotaGruppo, string Lavorante, string Addebiti)
+        public ActionResult Addebita(string NotaGruppo, string Lavorante, string Addebiti, bool Rilavorazione)
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            bll.Addebita(NotaGruppo, Lavorante, Addebiti, ConnectedUser);
+            bll.Addebita(NotaGruppo, Lavorante, Addebiti, Rilavorazione, ConnectedUser);
             return null;
         }
 
@@ -152,7 +159,14 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaGruppiDaValorizzare()
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            List<GruppoModel> model = bll.LeggiGruppi(ALEStatoDettaglio.ADDEBITATO);
+            List<GruppoModel> model = bll.LeggiGruppi(ALEStatoDettaglio.ADDEBITATO).Where(x => !x.Rilavorazione).ToList();
+            return PartialView("GruppiDaValorizzarePartial", model);
+        }
+
+        public ActionResult CaricaGruppiDaValorizzarePerRilavorazione()
+        {
+            ALEBLL bll = new ALEBLL(RvlImageSite);
+            List<GruppoModel> model = bll.LeggiGruppi(ALEStatoDettaglio.ADDEBITATO).Where(x => x.Rilavorazione).ToList();
             return PartialView("GruppiDaValorizzarePartial", model);
         }
 
@@ -160,8 +174,17 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaGruppiValorizzati()
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            List<GruppoModel> modelValorizzato = bll.LeggiGruppi(ALEStatoDettaglio.VALORIZZATO);
-            List<GruppoModel> modelApprovato = bll.LeggiGruppi(ALEStatoDettaglio.APPROVATO);
+            List<GruppoModel> modelValorizzato = bll.LeggiGruppi(ALEStatoDettaglio.VALORIZZATO).Where(x => !x.Rilavorazione).ToList();
+            List<GruppoModel> modelApprovato = bll.LeggiGruppi(ALEStatoDettaglio.APPROVATO).Where(x => !x.Rilavorazione).ToList();
+            modelValorizzato.AddRange(modelApprovato);
+            return PartialView("GruppiValorizzatiPartial", modelValorizzato);
+        }
+
+        public ActionResult CaricaGruppiValorizzatiPerRilavorazione()
+        {
+            ALEBLL bll = new ALEBLL(RvlImageSite);
+            List<GruppoModel> modelValorizzato = bll.LeggiGruppi(ALEStatoDettaglio.VALORIZZATO).Where(x => x.Rilavorazione).ToList();
+            List<GruppoModel> modelApprovato = bll.LeggiGruppi(ALEStatoDettaglio.APPROVATO).Where(x => x.Rilavorazione).ToList();
             modelValorizzato.AddRange(modelApprovato);
             return PartialView("GruppiValorizzatiPartial", modelValorizzato);
         }

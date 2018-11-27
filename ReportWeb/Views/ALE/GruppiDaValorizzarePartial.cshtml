@@ -322,11 +322,11 @@ else
         var txtCostoTotale = $(nomeCostoTotale);
         $(txtCostoTotale).val(totale.toFixed(2));
 
-
+        debugger;
         var costoTotaleQuantita = $(nomeCostoTotaleQuantita);
         var trPrezzo = $(txtCostoTotale).closest('tr');
         var tds = trPrezzo.find('td');
-        var quantita = $(tds[3]).text();
+        var quantita = $(tds[4]).text();
         var totaleCosto = quantita * totale;
         $(costoTotaleQuantita).val(totaleCosto.toFixed(2));
     }

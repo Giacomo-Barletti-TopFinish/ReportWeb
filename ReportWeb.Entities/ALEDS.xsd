@@ -2705,6 +2705,13 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="RILAVORAZIONECOMPLESSA" msprop:Generator_ColumnVarNameInTable="columnRILAVORAZIONECOMPLESSA" msprop:Generator_ColumnPropNameInRow="RILAVORAZIONECOMPLESSA" msprop:Generator_ColumnPropNameInTable="RILAVORAZIONECOMPLESSAColumn" msprop:Generator_UserColumnName="RILAVORAZIONECOMPLESSA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -3426,6 +3433,13 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="SCARTODEFINITIVO" msprop:Generator_ColumnVarNameInTable="columnSCARTODEFINITIVO" msprop:Generator_ColumnPropNameInRow="SCARTODEFINITIVO" msprop:Generator_ColumnPropNameInTable="SCARTODEFINITIVOColumn" msprop:Generator_UserColumnName="SCARTODEFINITIVO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RILAVORAZIONECOMPLESSA" msprop:Generator_ColumnVarNameInTable="columnRILAVORAZIONECOMPLESSA" msprop:Generator_ColumnPropNameInRow="RILAVORAZIONECOMPLESSA" msprop:Generator_ColumnPropNameInTable="RILAVORAZIONECOMPLESSAColumn" msprop:Generator_UserColumnName="RILAVORAZIONECOMPLESSA" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="1" />

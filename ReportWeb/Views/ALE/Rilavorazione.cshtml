@@ -1,0 +1,171 @@
+﻿@using ReportWeb.Models.ALE
+@{
+    ViewBag.Title = "ALE Rilavorazione";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Addebito Lavoranti Esterni - Rilavorazione</h2>
+</div>
+
+<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:750px">
+    <div class="box" id="sectionDatiGenerali">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Nuovi gruppi da valorizzare</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseDatiGenerali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body form-group-sm">
+            <div id="divGruppiDaValorizzare">
+            </div>
+            <label class="text-red input-sm" id="lblMessage"></label>
+        </div>
+    </div>
+    <div class="box box-primary" id="sectionTaglio">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Gruppi valorizzati</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseTaglio" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="divGruppiValorizzati">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        CaricaGruppiDaValorizzarePerRilavorazione();
+        CaricaGruppiValorizzatiPerRilavorazione();
+    });
+
+    function CaricaGruppiDaValorizzarePerRilavorazione()
+    {
+
+        var url = '@Url.Action("CaricaGruppiDaValorizzarePerRilavorazione", "ALE")';
+        $.ajax({
+            url: url,
+            data: { },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGruppiDaValorizzare').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function CaricaGruppiValorizzatiPerRilavorazione()
+    {
+        var url = '@Url.Action("CaricaGruppiValorizzatiPerRilavorazione", "ALE")';
+        $.ajax({
+            url: url,
+            data: {},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divGruppiValorizzati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function Addebita()
+    {
+        var addebiti = [];
+        $('.chkRWALE').each(function ()
+        {
+
+            var checked = $(this).prop('checked');
+            if (checked)
+            {
+                var trCheckbox = $(this).closest('tr');
+                var IdAleDettaglio = $(".hdIdAleDettaglio", trCheckbox).val();
+                var qta = $(".rwqta", trCheckbox).val();
+                var nota = $(".rwtxt", trCheckbox).val();
+
+                var addebito = {
+                    'IdAleDettaglio': IdAleDettaglio, 'Qta': qta, 'Nota': nota
+                };
+                addebiti.push(addebito);
+            }
+        });
+
+        var esito = true;
+        var messaggio = '';
+        if (addebiti.length == 0)
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "selezionare almeno un addebito" + "</br>";
+            esito = false;
+        }
+
+        var totale = 0;
+        for (var i = 0; i < addebiti.length; i++)
+        {
+            var qta = addebiti[i].Qta;
+            if (qta == '')
+            {
+                $('#.lblMessage').val("Ci sono addebiti senza quantità");
+                return;
+            }
+            else
+                totale = totale + parseInt(qta);
+        }
+        if (esito && totale == 0)
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "le quantità degli addebiti sono tutte zero" + "</br>";
+            esito = false;
+        }
+
+        var lavorante = $('#ddlLavoranti').val();
+        if (lavorante == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il lavorante esterno a cui addebitare le lavorazioni" + "</br>";
+            esito = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+
+        if (!esito)
+            return;
+
+        var txtNotaGruppo = $('#txtNotaGruppo').val();
+        var addebitiJson = JSON.stringify(addebiti);
+
+        var url = '@Url.Action("Addebita", "ALE")';
+        $.ajax({
+            url: url,
+            data: { NotaGruppo: txtNotaGruppo, Lavorante: lavorante, Addebiti: addebitiJson },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CaricaNuoviElementiDaAddebitare();
+                CaricaGruppiAddebitatiPartial();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

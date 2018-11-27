@@ -163,11 +163,11 @@ namespace ReportWeb.Data.ALE
             a.FillRW_ALE_DETTAGLIOByBarcode(ds, Barcode);
         }
         [DataContext(true)]
-        public int CreaGruppo(string NotaAddebito, string Lavorante, string UIDUSER)
+        public int CreaGruppo(string NotaAddebito, string Lavorante, string UIDUSER, bool Rilavorazione)
         {
             Int32 id = (int)GetID();
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
-            a.InsertRW_ALE_GRUPPO(id, NotaAddebito, Lavorante, UIDUSER);
+            a.InsertRW_ALE_GRUPPO(id, NotaAddebito, Lavorante, UIDUSER,Rilavorazione);
             return id;
         }
 

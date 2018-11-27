@@ -407,11 +407,11 @@ namespace ReportWeb.Data
             }
         }
 
-        public void InsertRW_ALE_GRUPPO(int IDALEGRUPPO, string NotaAddebito, string lavorante, string UIDUSER)
+        public void InsertRW_ALE_GRUPPO(int IDALEGRUPPO, string NotaAddebito, string lavorante, string UIDUSER, bool Rilavorazione)
         {
-
-            string insert = @"INSERT INTO RW_ALE_GRUPPO (IDALEGRUPPO,NOTA_ADDEBITO,APERTO, DATA_ADDEBITO,LAVORANTE,UIDUSER,UIDUSER_ADDEBITO,DATA_CREAZIONE) VALUES
-                                            ($P<IDALEGRUPPO>,$P<NOTA_ADDEBITO>,$P<APERTO>,$P<NOW>,$P<LAVORANTE>,$P<UIDUSER>,$P<UIDUSER_ADDEBITO>,$P<DATA_CREAZIONE>)";
+            string rilavorazione = Rilavorazione ? "1" : "0";
+            string insert = @"INSERT INTO RW_ALE_GRUPPO (IDALEGRUPPO,NOTA_ADDEBITO,APERTO, DATA_ADDEBITO,LAVORANTE,UIDUSER,UIDUSER_ADDEBITO,DATA_CREAZIONE,RILAVORAZIONECOMPLESSA) VALUES
+                                            ($P<IDALEGRUPPO>,$P<NOTA_ADDEBITO>,$P<APERTO>,$P<NOW>,$P<LAVORANTE>,$P<UIDUSER>,$P<UIDUSER_ADDEBITO>,$P<DATA_CREAZIONE>,$P<RILAVORAZIONECOMPLESSA>)";
             ParamSet ps = new ParamSet();
             ps.AddParam("IDALEGRUPPO", DbType.Int32, IDALEGRUPPO);
             ps.AddParam("NOTA_ADDEBITO", DbType.String, NotaAddebito);
@@ -421,6 +421,7 @@ namespace ReportWeb.Data
             ps.AddParam("UIDUSER_ADDEBITO", DbType.String, UIDUSER);
             ps.AddParam("DATA_CREAZIONE", DbType.DateTime, DateTime.Now);
             ps.AddParam("LAVORANTE", DbType.String, lavorante);
+            ps.AddParam("RILAVORAZIONECOMPLESSA", DbType.String, rilavorazione);
 
             using (DbCommand cmd = BuildCommand(insert, ps))
             {

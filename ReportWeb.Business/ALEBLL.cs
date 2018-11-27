@@ -179,7 +179,7 @@ namespace ReportWeb.Business
 
         }
 
-        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota,bool scartoDefinitivo, string UIDUSER)
+        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, bool scartoDefinitivo, string UIDUSER)
         {
             using (ALEBusiness bALE = new ALEBusiness())
             {
@@ -447,7 +447,7 @@ namespace ReportWeb.Business
             }
         }
 
-        public void Addebita(string NotaGruppo, string Lavorante, string AddebitiJson, string UIDUSER)
+        public void Addebita(string NotaGruppo, string Lavorante, string AddebitiJson, bool Rilavorazione, string UIDUSER)
         {
             ALEAddebitiJsonModel[] addebiti = JSonSerializer.Deserialize<ALEAddebitiJsonModel[]>(AddebitiJson);
             int IDGRUPPO = -1;
@@ -458,7 +458,7 @@ namespace ReportWeb.Business
                     ALEDS ds = new ALEDS();
                     bALE.FillRW_ALE_DETTAGLIO(ds, ALEStatoDettaglio.INSERITO);
 
-                    IDGRUPPO = bALE.CreaGruppo(NotaGruppo, Lavorante.Trim(), UIDUSER);
+                    IDGRUPPO = bALE.CreaGruppo(NotaGruppo, Lavorante.Trim(), UIDUSER, Rilavorazione);
 
                     foreach (ALEAddebitiJsonModel addebitoJ in addebiti)
                     {
@@ -504,7 +504,12 @@ namespace ReportWeb.Business
                 if (!string.IsNullOrEmpty(addebito.NotaAddebito))
                     sb.AppendLine(string.Format("         Nota addebito: {0}", addebito.NotaAddebito));
             }
-            decimal IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
+            Decimal IDMAIL = 0;
+            if (gruppo.Rilavorazione)
+                IDMAIL = bllMD.CreaEmail("ALE - RILAVORAZIONE", oggetto, sb.ToString());
+            else
+                IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
+
             bllMD.SottomettiEmail(IDMAIL);
 
         }
@@ -604,7 +609,11 @@ namespace ReportWeb.Business
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine(string.Format("Il gruppo di addebito: {0} è stato annullato. Nessuna valorizzazione da fare", IDALEGRUPPO));
 
-                    decimal IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
+                    decimal IDMAIL = 0;
+                    if (gruppo.RILAVORAZIONECOMPLESSA == "1")
+                        IDMAIL = bllMD.CreaEmail("ALE - RILAVORAZIONE", oggetto, sb.ToString());
+                    else
+                        IDMAIL = bllMD.CreaEmail("ALE - VALORIZZAZIONE", oggetto, sb.ToString());
                     bllMD.SottomettiEmail(IDMAIL);
 
 
@@ -746,6 +755,7 @@ namespace ReportWeb.Business
             grModel.UtenteValorizzazione = RWGruppo.IsUIDUSER_VALORIZZAZIONENull() ? string.Empty : RWGruppo.UIDUSER_VALORIZZAZIONE;
             grModel.UtenteApprovazione = RWGruppo.IsUIDUSER_APPROVAZIONENull() ? string.Empty : RWGruppo.UIDUSER_APPROVAZIONE;
             grModel.UtenteFatturazione = RWGruppo.IsUIDUSER_FATTURAZIONENull() ? string.Empty : RWGruppo.UIDUSER_FATTURAZIONE;
+            grModel.Rilavorazione = RWGruppo.IsRILAVORAZIONECOMPLESSANull() ? false : (RWGruppo.RILAVORAZIONECOMPLESSA == "0" ? false : true);
 
             foreach (ALEDS.RW_ALE_DETTAGLIORow riga in ds.RW_ALE_DETTAGLIO.Where(x => x.IDALEGRUPPO == RWGruppo.IDALEGRUPPO))
             {
@@ -892,8 +902,11 @@ namespace ReportWeb.Business
                 string oggetto = "ALE - ANNULLATA APPROVAZIONE DEL GRUPPO:" + IDALEGRUPPO.ToString();
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(string.Format("L'approvazione per il gruppo: {0} è stata annullata. Nessuna fatturazione da fare", IDALEGRUPPO));
-
-                decimal IDMAIL = bllMD.CreaEmail("ALE - FATTURAZIONE", oggetto, sb.ToString());
+                decimal IDMAIL = 0;
+                if (gruppo.RILAVORAZIONECOMPLESSA == "1")
+                    IDMAIL = bllMD.CreaEmail("ALE - RILAVORAZIONE", oggetto, sb.ToString());
+                else
+                    IDMAIL = bllMD.CreaEmail("ALE - FATTURAZIONE", oggetto, sb.ToString());
                 bllMD.SottomettiEmail(IDMAIL);
             }
         }

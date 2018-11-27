@@ -12454,6 +12454,8 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnUIDUSER;
             
+            private global::System.Data.DataColumn columnRILAVORAZIONECOMPLESSA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public RW_ALE_GRUPPODataTable() {
@@ -12625,6 +12627,14 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn RILAVORAZIONECOMPLESSAColumn {
+                get {
+                    return this.columnRILAVORAZIONECOMPLESSA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -12677,7 +12687,8 @@ namespace ReportWeb.Entities {
                         string UIDUSER_ADDEBITO, 
                         string UIDUSER_FATTURAZIONE, 
                         System.DateTime DATA_CREAZIONE, 
-                        string UIDUSER) {
+                        string UIDUSER, 
+                        string RILAVORAZIONECOMPLESSA) {
                 RW_ALE_GRUPPORow rowRW_ALE_GRUPPORow = ((RW_ALE_GRUPPORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDALEGRUPPO,
@@ -12696,7 +12707,8 @@ namespace ReportWeb.Entities {
                         UIDUSER_ADDEBITO,
                         UIDUSER_FATTURAZIONE,
                         DATA_CREAZIONE,
-                        UIDUSER};
+                        UIDUSER,
+                        RILAVORAZIONECOMPLESSA};
                 rowRW_ALE_GRUPPORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRW_ALE_GRUPPORow);
                 return rowRW_ALE_GRUPPORow;
@@ -12743,6 +12755,7 @@ namespace ReportWeb.Entities {
                 this.columnUIDUSER_FATTURAZIONE = base.Columns["UIDUSER_FATTURAZIONE"];
                 this.columnDATA_CREAZIONE = base.Columns["DATA_CREAZIONE"];
                 this.columnUIDUSER = base.Columns["UIDUSER"];
+                this.columnRILAVORAZIONECOMPLESSA = base.Columns["RILAVORAZIONECOMPLESSA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12782,6 +12795,8 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnDATA_CREAZIONE);
                 this.columnUIDUSER = new global::System.Data.DataColumn("UIDUSER", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUIDUSER);
+                this.columnRILAVORAZIONECOMPLESSA = new global::System.Data.DataColumn("RILAVORAZIONECOMPLESSA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRILAVORAZIONECOMPLESSA);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDALEGRUPPO}, true));
                 this.columnIDALEGRUPPO.AllowDBNull = false;
@@ -12802,6 +12817,7 @@ namespace ReportWeb.Entities {
                 this.columnDATA_CREAZIONE.AllowDBNull = false;
                 this.columnUIDUSER.AllowDBNull = false;
                 this.columnUIDUSER.MaxLength = 254;
+                this.columnRILAVORAZIONECOMPLESSA.MaxLength = 1;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16538,6 +16554,8 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnSCARTODEFINITIVO;
             
+            private global::System.Data.DataColumn columnRILAVORAZIONECOMPLESSA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public RW_ALE_DETTAGLIODataTable() {
@@ -16757,6 +16775,14 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn RILAVORAZIONECOMPLESSAColumn {
+                get {
+                    return this.columnRILAVORAZIONECOMPLESSA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -16815,7 +16841,8 @@ namespace ReportWeb.Entities {
                         System.DateTime DATA_NONADDEBITO, 
                         string UIDUSER_NONADDEBITO, 
                         string MANCANTE, 
-                        string SCARTODEFINITIVO) {
+                        string SCARTODEFINITIVO, 
+                        string RILAVORAZIONECOMPLESSA) {
                 RW_ALE_DETTAGLIORow rowRW_ALE_DETTAGLIORow = ((RW_ALE_DETTAGLIORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDALEDETTAGLIO,
@@ -16840,7 +16867,8 @@ namespace ReportWeb.Entities {
                         DATA_NONADDEBITO,
                         UIDUSER_NONADDEBITO,
                         MANCANTE,
-                        SCARTODEFINITIVO};
+                        SCARTODEFINITIVO,
+                        RILAVORAZIONECOMPLESSA};
                 rowRW_ALE_DETTAGLIORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRW_ALE_DETTAGLIORow);
                 return rowRW_ALE_DETTAGLIORow;
@@ -16893,6 +16921,7 @@ namespace ReportWeb.Entities {
                 this.columnUIDUSER_NONADDEBITO = base.Columns["UIDUSER_NONADDEBITO"];
                 this.columnMANCANTE = base.Columns["MANCANTE"];
                 this.columnSCARTODEFINITIVO = base.Columns["SCARTODEFINITIVO"];
+                this.columnRILAVORAZIONECOMPLESSA = base.Columns["RILAVORAZIONECOMPLESSA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16944,6 +16973,8 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnMANCANTE);
                 this.columnSCARTODEFINITIVO = new global::System.Data.DataColumn("SCARTODEFINITIVO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSCARTODEFINITIVO);
+                this.columnRILAVORAZIONECOMPLESSA = new global::System.Data.DataColumn("RILAVORAZIONECOMPLESSA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRILAVORAZIONECOMPLESSA);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDALEDETTAGLIO}, true));
                 this.columnIDALEDETTAGLIO.AllowDBNull = false;
@@ -16970,6 +17001,7 @@ namespace ReportWeb.Entities {
                 this.columnUIDUSER_NONADDEBITO.MaxLength = 254;
                 this.columnMANCANTE.MaxLength = 1;
                 this.columnSCARTODEFINITIVO.MaxLength = 1;
+                this.columnRILAVORAZIONECOMPLESSA.MaxLength = 1;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -29156,6 +29188,23 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string RILAVORAZIONECOMPLESSA {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_GRUPPO.RILAVORAZIONECOMPLESSAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RILAVORAZIONECOMPLESSA\' in table \'RW_ALE_GRUPPO\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_GRUPPO.RILAVORAZIONECOMPLESSAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsNOTA_ADDEBITONull() {
                 return this.IsNull(this.tableRW_ALE_GRUPPO.NOTA_ADDEBITOColumn);
             }
@@ -29284,6 +29333,18 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetUIDUSER_FATTURAZIONENull() {
                 this[this.tableRW_ALE_GRUPPO.UIDUSER_FATTURAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsRILAVORAZIONECOMPLESSANull() {
+                return this.IsNull(this.tableRW_ALE_GRUPPO.RILAVORAZIONECOMPLESSAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetRILAVORAZIONECOMPLESSANull() {
+                this[this.tableRW_ALE_GRUPPO.RILAVORAZIONECOMPLESSAColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -32931,6 +32992,23 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string RILAVORAZIONECOMPLESSA {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_DETTAGLIO.RILAVORAZIONECOMPLESSAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RILAVORAZIONECOMPLESSA\' in table \'RW_ALE_DETTAGLIO\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_DETTAGLIO.RILAVORAZIONECOMPLESSAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDALEGRUPPONull() {
                 return this.IsNull(this.tableRW_ALE_DETTAGLIO.IDALEGRUPPOColumn);
             }
@@ -33083,6 +33161,18 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSCARTODEFINITIVONull() {
                 this[this.tableRW_ALE_DETTAGLIO.SCARTODEFINITIVOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsRILAVORAZIONECOMPLESSANull() {
+                return this.IsNull(this.tableRW_ALE_DETTAGLIO.RILAVORAZIONECOMPLESSAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetRILAVORAZIONECOMPLESSANull() {
+                this[this.tableRW_ALE_DETTAGLIO.RILAVORAZIONECOMPLESSAColumn] = global::System.Convert.DBNull;
             }
         }
         

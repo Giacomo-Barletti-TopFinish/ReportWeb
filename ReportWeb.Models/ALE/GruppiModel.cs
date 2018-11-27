@@ -29,6 +29,7 @@ namespace ReportWeb.Models.ALE
         public bool AddebitoAnnulabile{ get; set; }
         public bool ValorizzazioneAnnulabile { get; set; }
         public bool ApprovazioneAnnulabile { get; set; }
+        public bool Rilavorazione { get; set; }
     }
    
 }

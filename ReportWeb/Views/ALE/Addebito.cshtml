@@ -177,14 +177,15 @@
 
         if (!esito)
             return;
-
+       
         var txtNotaGruppo = $('#txtNotaGruppo').val();
         var addebitiJson = JSON.stringify(addebiti);
+        var rilavorazione = $('#chkRilavorazione').prop('checked');
 
         var url = '@Url.Action("Addebita", "ALE")';
         $.ajax({
             url: url,
-            data: { NotaGruppo: txtNotaGruppo, Lavorante: lavorante, Addebiti: addebitiJson },
+            data: { NotaGruppo: txtNotaGruppo, Lavorante: lavorante, Addebiti: addebitiJson, Rilavorazione: rilavorazione },
             cache: false,
             type: "POST",
             success: function (data)
