@@ -22,5 +22,12 @@ namespace ReportWeb.Controllers
             List<Commessa> commesse = bll.TrovaCommessa(RicercaPerCommessa, NomeCommessa, Articolo);
             return PartialView("GrigliaCommessePartial", commesse);
         }
+
+        public ActionResult CaricaCommessa(string IDLANCIOD)
+        {
+            PreserieBLL bll = new PreserieBLL();
+            Commessa commessa = bll.CaricaCommessa(IDLANCIOD);
+            return PartialView("GrigliaCommessePartial", commessa);
+        }
     }
 }

@@ -33,3 +33,14 @@ else
         </tbody>
     </table>
 }
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tblCommesse').on('click', 'td', function () {
+            debugger;
+            var tr = $(this).closest('tr');
+            var hdIDLANCIOD = $('.hdIDLANCIOD', tr);
+            var IDLANCIOD = $(hdIDLANCIOD).val();
+        })
+    });
+</script>

@@ -32,6 +32,22 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillUSR_PRD_LANCIOD(string IDLANCIOD, PreserieDS ds)
+        {
+            string query = @"SELECT * FROM DITTA1.USR_PRD_LANCIOD WHERE IDLANCIOD = ${IDLANCIOD1}
+                             UNION ALL
+                            SELECT * FROM DITTA2.USR_PRD_LANCIOD WHERE IDLANCIOD = ${IDLANCIOD2}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD1", DbType.String, IDLANCIOD);
+            ps.AddParam("IDLANCIOD2", DbType.String, IDLANCIOD);
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.USR_PRD_LANCIOD);
+            }
+        }
+
         public void TrovaCommessaPerModello(string Modello, PreserieDS ds)
         {
             if (string.IsNullOrEmpty(Modello)) return;
@@ -63,6 +79,38 @@ namespace ReportWeb.Data
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.MAGAZZ);
+            }
+        }
+
+        public void FillUSR_PRD_FASI(string IDLANCIOD, PreserieDS ds)
+        {
+            string query = @"SELECT * FROM DITTA1.USR_PRD_FASI WHERE IDLANCIOD = ${IDLANCIOD1}
+                             UNION ALL
+                            SELECT * FROM DITTA2.USR_PRD_FASI WHERE IDLANCIOD = ${IDLANCIOD2}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD1", DbType.String, IDLANCIOD);
+            ps.AddParam("IDLANCIOD2", DbType.String, IDLANCIOD);
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.USR_PRD_FASI);
+            }
+        }
+
+        public void FillUSR_PRD_MOVFASI(string IDLANCIOD, PreserieDS ds)
+        {
+            string query = @"SELECT MF.* FROM DITTA1.USR_PRD_MOVFASI MF INNER JOIN DITTA1.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE WHERE FA.IDLANCIOD = ${IDLANCIOD1}
+                             UNION ALL
+                            SELECT MF.* FROM DITTA2.USR_PRD_MOVFASI MF INNER JOIN DITTA2.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE WHERE FA.IDLANCIOD = ${IDLANCIOD2}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD1", DbType.String, IDLANCIOD);
+            ps.AddParam("IDLANCIOD2", DbType.String, IDLANCIOD);
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.USR_PRD_MOVFASI);
             }
         }
 

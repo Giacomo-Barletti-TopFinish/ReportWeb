@@ -19,8 +19,8 @@ namespace ReportWeb.Models.Preserie
 
         public string DataInizio;
         public string DatFine;
-        public int Offset;
-        public int Leadtime;
+        public decimal Offset;
+        public decimal Leadtime;
         List<DettaglioBase> Dettagli;
 
     }
