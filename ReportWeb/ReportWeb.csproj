@@ -151,6 +151,7 @@
     <Compile Include="Controllers\MagazzinoController.cs" />
     <Compile Include="Controllers\MailDispatcherController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PreserieController.cs" />
     <Compile Include="Controllers\PVDController.cs" />
     <Compile Include="Controllers\RvlDocumentiController.cs" />
     <Compile Include="Controllers\TVController.cs" />
@@ -449,6 +450,8 @@
     <Content Include="Views\Magazzino\MagazziniEsterni.cshtml" />
     <Content Include="Views\Magazzino\MagazzinoEsternoPartial.cshtml" />
     <Content Include="Views\ALE\Rilavorazione.cshtml" />
+    <Content Include="Views\Preserie\Analisi.cshtml" />
+    <Content Include="Views\Preserie\GrigliaCommessePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -62,6 +62,10 @@
     <Compile Include="MailDispatcher\MD_LOGModel.cs" />
     <Compile Include="MenuModel.cs" />
     <Compile Include="ODLApertiModel.cs" />
+    <Compile Include="Preserie\Articolo.cs" />
+    <Compile Include="Preserie\Commessa.cs" />
+    <Compile Include="Preserie\Dettaglio.cs" />
+    <Compile Include="Preserie\Lavorazione.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PVDConsuntivoModel.cs" />
     <Compile Include="PVDReportModel.cs" />
@@ -76,6 +80,7 @@
     <Compile Include="VerniciaturaConsuntivoModel.cs" />
     <Compile Include="VerniciaturaReportModel.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

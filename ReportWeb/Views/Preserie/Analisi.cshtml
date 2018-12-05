@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Preserie";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Preserie- Analisi commessa</h2>
+    <div class="row">
+        <div class="col-sm-2">
+            <label>
+                <input type="radio" name="rdSelezione" value="Commessa">
+                Ricerca per commessa
+
+            </label>
+        </div>
+        <div class="col-sm-1"><label>Numero commessa</label></div>
+        <div class="col-sm-2"><input id="txtCommessa" type="text" maxlength="19" /></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <label>
+                <input type="radio" name="rdSelezione" value="Articolo">
+                Ricerca per articolo
+            </label>
+        </div>
+        <div class="col-sm-1"><label>Modello articolo</label></div>
+        <div class="col-sm-2"><input id="txtArticolo" type="text" maxlength="30" /></div>
+        <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
+    </div>
+    <div class="row">
+        <label class="text-red" id="lblMessage"></label>
+    </div>
+</div>
+<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:730px; ">
+    <div class="box-body form-group-sm">
+        <div id="divRisultati"></div>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    function Trova()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var selezione = $('input[name=rdSelezione]:checked').val()
+        if (selezione == undefined) {
+            esegui = false;
+            messaggio = "Indicare il tipo di ricerca Commessa o Articolo";
+        }
+        var txtCommessa = $('#txtCommessa').val().trim().toUpperCase();
+        var txtArticolo = $('#txtArticolo').val().trim().toUpperCase();
+
+        if (selezione == "Commessa" && (txtCommessa == null || txtCommessa == ''))
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il numero della commessa" + "</br>";
+            esegui = false;
+        }
+
+        if (selezione == "Articolo" && (txtArticolo == null || txtArticolo == '')) {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il modello dell'articolo" + "</br>";
+            esegui = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+        if (txtArticolo.length > 4) {
+            var prefisso = txtArticolo.substr(0, 4);
+            if (prefisso != 'PRE-') {
+                txtArticolo = 'PRE-' + txtArticolo;
+                $('#txtArticolo').val(txtArticolo);
+            }
+        }
+        else if (txtArticolo.length>0) {
+            txtArticolo = 'PRE-' + txtArticolo;
+            $('#txtArticolo').val(txtArticolo);
+        }
+        var url = '@Url.Action("TrovaCommesse", "Preserie")';
+        $.ajax({
+            url: url,
+            data: {
+                RicercaPerCommessa: selezione == "Commessa",
+                NomeCommessa: txtCommessa,
+                Articolo: txtArticolo
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+
+</script>

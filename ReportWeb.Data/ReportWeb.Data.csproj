@@ -60,6 +60,8 @@
     <Compile Include="Magazzino\MagazzinoBusiness.cs" />
     <Compile Include="MailDispatcher\MailDispatcherAdapter.cs" />
     <Compile Include="MailDispatcher\MailDispatcherBusiness.cs" />
+    <Compile Include="Preserie\PreserieAdapter.cs" />
+    <Compile Include="Preserie\PreserieBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PVD\PVDAdapter.cs" />
     <Compile Include="PVD\PVDBusiness.cs" />

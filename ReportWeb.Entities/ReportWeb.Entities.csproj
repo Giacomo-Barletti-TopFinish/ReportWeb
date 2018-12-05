@@ -65,6 +65,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MailDispatcherDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="PreserieDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PreserieDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -142,6 +147,17 @@
     </None>
     <None Include="MailDispatcherDS.xss">
       <DependentUpon>MailDispatcherDS.xsd</DependentUpon>
+    </None>
+    <None Include="PreserieDS.xsc">
+      <DependentUpon>PreserieDS.xsd</DependentUpon>
+    </None>
+    <None Include="PreserieDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PreserieDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PreserieDS.xss">
+      <DependentUpon>PreserieDS.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
