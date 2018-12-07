@@ -101,35 +101,54 @@ namespace ReportWeb.Business
             commessa.NomeCommessa = lanciod.IsNOMECOMMESSANull() ? string.Empty : lanciod.NOMECOMMESSA;
             commessa.Riferimento = lanciod.IsRIFERIMENTONull() ? string.Empty : lanciod.RIFERIMENTO;
             commessa.Lavorazioni = new List<Lavorazione>();
-            int sequenzaLavorazione = 0;
+            int sequenzaLavorazione = 1;
             PreserieDS.USR_PRD_FASIRow faseRoot = ds.USR_PRD_FASI.Where(x => x.IDLANCIOD == lanciod.IDLANCIOD && x.ROOTSN == 1).FirstOrDefault();
             if (faseRoot != null)
             {
-                Lavorazione lavorazioneRoot = CreaLavorazione(faseRoot, sequenzaLavorazione, ds);
+                Lavorazione lavorazioneRoot = CreaLavorazione(faseRoot, sequenzaLavorazione.ToString(), ds);
                 sequenzaLavorazione++;
                 commessa.Lavorazioni.Add(lavorazioneRoot);
 
                 List<PreserieDS.USR_PRD_FASIRow> faseFiglie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseRoot.IDPRDFASE).ToList();
-                EspandiAlberoFasi(faseFiglie, ds, sequenzaLavorazione, commessa);
+                EspandiAlberoFasi(faseFiglie, ds, sequenzaLavorazione.ToString(), commessa);
 
             }
 
             return commessa;
         }
 
-        private void EspandiAlberoFasi(List<PreserieDS.USR_PRD_FASIRow> faseFiglie, PreserieDS ds, int sequenzaLavorazione, Commessa commessa)
+        private void EspandiAlberoFasi(List<PreserieDS.USR_PRD_FASIRow> faseFiglie, PreserieDS ds, string radice, Commessa commessa)
         {
-            sequenzaLavorazione++;
+            //if (faseFiglie.Count == 0) return;
+            //if (faseFiglie.Count == 1)
+            //{
+            //    string[] radiceStr = radice.Split('.');
+            //    int indice = Int32.Parse(radiceStr[radiceStr.Length - 1]);
+            //    string radiceNuova = string.Empty;
+            //    if (radice.Length > 1)
+            //        for (int i = 0; i < radiceStr.Length - 1; i++)
+            //            radiceNuova = radiceStr[i] + ".";
+            //    radiceNuova += (indice+1).ToString();
+            //    Lavorazione lavorazione = CreaLavorazione(faseFiglie[0], radiceNuova, ds);
+            //    commessa.Lavorazioni.Add(lavorazione);
+            //    List<PreserieDS.USR_PRD_FASIRow> figlie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseFiglie[0].IDPRDFASE).ToList();
+            //    EspandiAlberoFasi(figlie, ds, radiceNuova, commessa);
+            //    return;
+            //}
+
+            int sequenzaLavorazione = 1;
             foreach (PreserieDS.USR_PRD_FASIRow faseFiglia in faseFiglie)
             {
-                Lavorazione lavorazione = CreaLavorazione(faseFiglia, sequenzaLavorazione, ds);
+                string nuovaRadice = string.Format("{0}.{1}", radice, sequenzaLavorazione);
+                Lavorazione lavorazione = CreaLavorazione(faseFiglia, nuovaRadice, ds);
+                sequenzaLavorazione++;
                 commessa.Lavorazioni.Add(lavorazione);
                 List<PreserieDS.USR_PRD_FASIRow> figlie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseFiglia.IDPRDFASE).ToList();
-                EspandiAlberoFasi(figlie, ds, sequenzaLavorazione, commessa);
+                EspandiAlberoFasi(figlie, ds, nuovaRadice, commessa);
             }
         }
 
-        private Lavorazione CreaLavorazione(PreserieDS.USR_PRD_FASIRow fase, int sequenza, PreserieDS ds)
+        private Lavorazione CreaLavorazione(PreserieDS.USR_PRD_FASIRow fase, string sequenza, PreserieDS ds)
         {
             if (fase == null) return null;
 

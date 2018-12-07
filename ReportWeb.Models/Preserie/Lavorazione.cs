@@ -9,7 +9,7 @@ namespace ReportWeb.Models.Preserie
     public class Lavorazione
     {
         public string IDPRDFASE;
-        public int Sequenza;
+        public string Sequenza;
         public string IDMAGAZZ;
         public string Reparto;
         public decimal Quantita;
