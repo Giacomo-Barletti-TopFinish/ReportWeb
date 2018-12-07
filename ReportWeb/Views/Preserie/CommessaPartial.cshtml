@@ -18,13 +18,18 @@
     <div class="col-sm-1">@Model.Riferimento</div>
     <div class="col-sm-1">Quantita</div>
     <div class="col-sm-1">@Model.Quantita</div>
+    <div class="col-sm-1">Modello</div>
+    <div class="col-sm-2">@Model.Articolo.Modello</div>
+    <div class="col-sm-1">Descrizione</div>
+    <div class="col-sm-2">@Model.Articolo.Descrizione</div>
 </div>
 
 <table class="table table-condensed" id="tblCommesse">
     <tbody>
-        @foreach (Lavorazione lavorazione in Model.Lavorazioni.OrderBy(x => x.Sequenza))
+        @foreach (Lavorazione lavorazione in Model.Lavorazioni)
         {
             <tr>
+                <td>@lavorazione.Sequenza</td>
                 <td>@lavorazione.Reparto<input type="hidden" value="@lavorazione.IDPRDFASE" class="hdIDPRDFASE"></td>
                 <td>Quantita</td>
                 <td>@lavorazione.Quantita</td>
@@ -41,6 +46,7 @@
             {
             <tr>
                 <td></td>
+                <td></td>
                 <td>@lavorazione.Odl.NUMMOVFASE<input type="hidden" value="@lavorazione.Odl.IDPRDMOVFASE" class="hdIDPRDMOVFASE"></td>
                 <td>Barcode</td>
                 <td>@lavorazione.Odl.Barcode</td>
@@ -54,6 +60,7 @@
 
             </tr>
             }
+            <tr><td colspan="12"><hr /></td></tr>
         }
     </tbody>
 </table>

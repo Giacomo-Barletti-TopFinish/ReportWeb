@@ -109,19 +109,26 @@ namespace ReportWeb.Business
                 sequenzaLavorazione++;
                 commessa.Lavorazioni.Add(lavorazioneRoot);
 
-                PreserieDS.USR_PRD_FASIRow faseFiglia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseRoot.IDPRDFASE).FirstOrDefault();
-                while (faseFiglia != null)
-                {
-                    Lavorazione lavorazione = CreaLavorazione(faseFiglia, sequenzaLavorazione, ds);
-                    sequenzaLavorazione++;
-                    commessa.Lavorazioni.Add(lavorazione);
-                    faseFiglia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseFiglia.IDPRDFASE).FirstOrDefault();
-                }
+                List<PreserieDS.USR_PRD_FASIRow> faseFiglie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseRoot.IDPRDFASE).ToList();
+                EspandiAlberoFasi(faseFiglie, ds, sequenzaLavorazione, commessa);
 
             }
 
             return commessa;
         }
+
+        private void EspandiAlberoFasi(List<PreserieDS.USR_PRD_FASIRow> faseFiglie, PreserieDS ds, int sequenzaLavorazione, Commessa commessa)
+        {
+            foreach (PreserieDS.USR_PRD_FASIRow faseFiglia in faseFiglie)
+            {
+                Lavorazione lavorazione = CreaLavorazione(faseFiglia, sequenzaLavorazione, ds);
+                sequenzaLavorazione++;
+                commessa.Lavorazioni.Add(lavorazione);
+                List<PreserieDS.USR_PRD_FASIRow> figlie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseFiglia.IDPRDFASE).ToList();
+                EspandiAlberoFasi(figlie, ds, sequenzaLavorazione, commessa);
+            }
+        }
+
         private Lavorazione CreaLavorazione(PreserieDS.USR_PRD_FASIRow fase, int sequenza, PreserieDS ds)
         {
             if (fase == null) return null;
