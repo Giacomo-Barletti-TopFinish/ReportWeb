@@ -119,10 +119,10 @@ namespace ReportWeb.Business
 
         private void EspandiAlberoFasi(List<PreserieDS.USR_PRD_FASIRow> faseFiglie, PreserieDS ds, int sequenzaLavorazione, Commessa commessa)
         {
+            sequenzaLavorazione++;
             foreach (PreserieDS.USR_PRD_FASIRow faseFiglia in faseFiglie)
             {
                 Lavorazione lavorazione = CreaLavorazione(faseFiglia, sequenzaLavorazione, ds);
-                sequenzaLavorazione++;
                 commessa.Lavorazioni.Add(lavorazione);
                 List<PreserieDS.USR_PRD_FASIRow> figlie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseFiglia.IDPRDFASE).ToList();
                 EspandiAlberoFasi(figlie, ds, sequenzaLavorazione, commessa);
@@ -187,6 +187,89 @@ namespace ReportWeb.Business
             odl.QuantitaDaTerminare = movFase.QTADATER;
 
             return odl;
+        }
+
+        public ODLSchedaModel CaricaSchedaODL(string Barcode, string rvlImageSite)
+        {
+            ODLSchedaModel model = new ODLSchedaModel();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+
+                bPreserie.FillCLIFO(ds);
+                bPreserie.FillUSR_PRD_MOVFASIByBarcode(Barcode, ds);
+
+                PreserieDS.USR_PRD_MOVFASIRow odl = ds.USR_PRD_MOVFASI.Where(x => x.BARCODE == Barcode).FirstOrDefault();
+                if (odl == null)
+                {
+                    model.EsitoRicerca = 1;
+                    return model;
+                }
+                model.EsitoRicerca = 2;
+                model.Barcode = odl.BARCODE;
+                model.IDPRDMOVFASE = odl.IDPRDMOVFASE;
+                model.NumeroDocumento = odl.NUMMOVFASE;
+                model.DataDocumento = odl.IsDATAMOVFASENull() ? string.Empty : odl.DATAMOVFASE.ToString("dd MMM yyyy");
+                model.Quantita = odl.QTA;
+
+                model.RepartoCodice = odl.IsCODICECLIFONull() ? string.Empty : odl.CODICECLIFO.Trim();
+
+
+                model.Reparto = string.Empty;
+                if (!odl.IsCODICECLIFONull())
+                {
+                    PreserieDS.CLIFORow reparto = ds.CLIFO.Where(x => x.CODICE == odl.CODICECLIFO).FirstOrDefault();
+                    if (reparto != null)
+                        model.Reparto = reparto.RAGIONESOC;
+
+                }
+
+
+                bPreserie.FillMAGAZZ(ds, new List<string>(new string[] { odl.IDMAGAZZ }));
+                PreserieDS.MAGAZZRow modello = ds.MAGAZZ.Where(x => x.IDMAGAZZ == odl.IDMAGAZZ).FirstOrDefault();
+                model.Modello = modello.MODELLO;
+                model.ModelloDescrizione = modello.DESMAGAZZ;
+
+                model.Commessa = string.Empty;
+                model.DataCommessa = string.Empty;
+                model.Riferimento = string.Empty;
+
+                PreserieDS.USR_PRD_FASIRow fase = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == odl.IDPRDFASE).FirstOrDefault();
+                if (fase != null)
+                {
+                    PreserieDS.USR_PRD_LANCIODRow lancio = ds.USR_PRD_LANCIOD.Where(x => x.IDLANCIOD == fase.IDLANCIOD).FirstOrDefault();
+                    if (lancio != null)
+                    {
+                        model.Commessa = lancio.IsNOMECOMMESSANull() ? string.Empty : lancio.NOMECOMMESSA;
+                        model.DataCommessa = lancio.IsDATACOMMESSANull() ? string.Empty : lancio.DATACOMMESSA.ToShortDateString();
+                        model.Riferimento = lancio.IsRIFERIMENTONull() ? string.Empty : lancio.RIFERIMENTO;
+                    }
+                }
+
+                bPreserie.FillUSR_PDM_FILES(ds, odl.IDMAGAZZ);
+                model.ImageUrl = creaUrlImage(rvlImageSite, odl.IDMAGAZZ, ds);
+
+                return model;
+            }
+        }
+
+        private string creaUrlImage(string RvlImageSite, string IDMAGAZZ, PreserieDS ds)
+        {
+            PreserieDS.USR_PDM_FILESRow immagine = ds.USR_PDM_FILES.Where(x => x.IDMAGAZZ == IDMAGAZZ).FirstOrDefault();
+            if (immagine != null)
+            {
+                if (System.IO.Path.GetPathRoot(immagine.NOMEFILE) == "R:\\")
+                {
+                    string newUrl = RvlImageSite.Replace("rvlimmagini", "rvlimmaginir");
+                    string newPath = immagine.NOMEFILE.ToUpper().Replace("R:\\", string.Empty);
+                    newPath = newPath.Replace("\\", "/");
+                    return newUrl + newPath;
+                }
+                return RvlImageSite + immagine.NOMEFILE;
+            }
+
+            return string.Empty;
+
         }
     }
 }

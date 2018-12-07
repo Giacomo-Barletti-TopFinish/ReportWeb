@@ -66,6 +66,7 @@
     <Compile Include="Preserie\Commessa.cs" />
     <Compile Include="Preserie\Dettaglio.cs" />
     <Compile Include="Preserie\Lavorazione.cs" />
+    <Compile Include="Preserie\ODLSchedaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PVDConsuntivoModel.cs" />
     <Compile Include="PVDReportModel.cs" />

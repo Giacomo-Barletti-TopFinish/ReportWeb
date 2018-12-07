@@ -98,6 +98,38 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillUSR_PRD_FASIByBarcode(string Barcode, PreserieDS ds)
+        {
+            string query = @"SELECT FA.* FROM DITTA1.USR_PRD_FASI FA INNER JOIN DITTA1.USR_PRD_MOVFASI MF ON MF.IDPRDFASE = FA.IDPRDFASE WHERE MF.BARCODE = $P{BARCODE1}
+                             UNION ALL
+                            SELECT FA.* FROM DITTA2.USR_PRD_FASI FA INNER JOIN DITTA2.USR_PRD_MOVFASI MF ON MF.IDPRDFASE = FA.IDPRDFASE WHERE MF.BARCODE = $P{BARCODE2}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE1", DbType.String, Barcode);
+            ps.AddParam("BARCODE2", DbType.String, Barcode);
+
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(ds.USR_PRD_FASI);
+            }
+        }
+
+        public void FillUSR_PRD_LANCIODByBarcode(string Barcode, PreserieDS ds)
+        {
+            string query = @"SELECT LA.* FROM DITTA1.USR_PRD_FASI FA INNER JOIN DITTA1.USR_PRD_MOVFASI MF ON MF.IDPRDFASE = FA.IDPRDFASE INNER JOIN DITTA1.USR_PRD_LANCIOD LA ON LA.IDLANCIOD = FA.IDLANCIOD WHERE MF.BARCODE = $P{BARCODE1}
+                             UNION ALL
+                            SELECT LA.* FROM DITTA2.USR_PRD_FASI FA INNER JOIN DITTA2.USR_PRD_MOVFASI MF ON MF.IDPRDFASE = FA.IDPRDFASE INNER JOIN DITTA2.USR_PRD_LANCIOD LA ON LA.IDLANCIOD = FA.IDLANCIOD WHERE MF.BARCODE = $P{BARCODE2}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE1", DbType.String, Barcode);
+            ps.AddParam("BARCODE2", DbType.String, Barcode);
+
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(ds.USR_PRD_LANCIOD);
+            }
+        }
+
         public void FillUSR_PRD_MOVFASI(string IDLANCIOD, PreserieDS ds)
         {
             string query = @"SELECT MF.* FROM DITTA1.USR_PRD_MOVFASI MF INNER JOIN DITTA1.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE WHERE FA.IDLANCIOD = $P{IDLANCIOD1}
@@ -114,5 +146,46 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillUSR_PRD_MOVFASIByBarcode(string Barcode, PreserieDS ds)
+        {
+            string query = @"SELECT * FROM DITTA1.USR_PRD_MOVFASI WHERE BARCODE = $P{BARCODE1}
+                             UNION ALL
+                            SELECT * FROM DITTA2.USR_PRD_MOVFASI WHERE BARCODE = $P{BARCODE2}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE1", DbType.String, Barcode);
+            ps.AddParam("BARCODE2", DbType.String, Barcode);
+
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(ds.USR_PRD_MOVFASI);
+            }
+        }
+
+        public void FillCLIFO(PreserieDS ds)
+        {
+            string select = @"SELECT * FROM GRUPPO.CLIFO";
+
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.CLIFO);
+            }
+        }
+
+        public void FillUSR_PDM_FILES(PreserieDS ds, string IDMAGAZZ)
+        {
+            string select = @"  select FI.*, IM.IDMAGAZZ from gruppo.USR_PDM_FILES FI
+            INNER JOIN GRUPPO.USR_PDM_IMG_MAGAZZ IM ON IM.IDPDMFILE = FI.IDPDMFILE
+            where IM.idmagazz = $P{IDMAGAZZ}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDMAGAZZ", DbType.String, IDMAGAZZ);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PDM_FILES);
+            }
+        }
     }
 }

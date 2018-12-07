@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Preserie";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Preserie- Inserimento dati</h2>
+    <div class="col-sm-1">
+        <label>Barcode</label>
+        <input type="text" id="txtBarcode" />
+    </div>
+    <div class="col-sm-12">
+        <div id="divScheda"></div>
+    </div>
+    <div class="row">
+        <label class="text-red" id="lblMessage"></label>
+    </div>
+</div>
+<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:730px; ">
+    <div class="box-body form-group-sm">
+        <div id="divRisultati"></div>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#txtBarcode").focus();
+        $("#txtBarcode").change(function () {
+            var barcode = $(this).val();
+            if (barcode != '') {
+                $(this).val('');
+                $(this).focus();
+
+                CaricaScheda(barcode);
+            }
+        });
+    });
+
+    function CaricaScheda(barcode)
+    {
+        var url = '@Url.Action("CaricaScheda", "Preserie")';
+        $.ajax({
+            url: url,
+            data: { Barcode: barcode },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divScheda').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

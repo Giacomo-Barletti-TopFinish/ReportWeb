@@ -8,11 +8,12 @@ using System.Web.Mvc;
 
 namespace ReportWeb.Controllers
 {
-    public class PreserieController : Controller
+    public class PreserieController : ControllerBase
     {
         // GET: Preserie
         public ActionResult Analisi()
         {
+            VerificaAbilitazioneUtenteConUscita(33);
             return View();
         }
 
@@ -34,6 +35,21 @@ namespace ReportWeb.Controllers
             PreserieBLL bll = new PreserieBLL();
             Commessa commessa = bll.CaricaCommessa(IDLANCIOD);
             return PartialView("CommessaPartial", commessa);
+        }
+
+        public ActionResult InserimentoDati()
+        {
+            VerificaAbilitazioneUtenteConUscita(34);
+            return View();
+        }
+
+        public ActionResult CaricaScheda(string Barcode)
+        {
+            PreserieBLL bll = new PreserieBLL();
+            ODLSchedaModel model = bll.CaricaSchedaODL(Barcode, RvlImageSite);
+
+
+            return PartialView("CaricaSchedaPartial", model);
         }
     }
 }

@@ -55,5 +55,27 @@ namespace ReportWeb.Data.Preserie
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
             a.FillUSR_PRD_FASI(IDLANCIOD, ds);
         }
+        [DataContext]
+        public void FillUSR_PRD_MOVFASIByBarcode(string Barcode, PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_MOVFASIByBarcode(Barcode, ds);
+            a.FillUSR_PRD_FASIByBarcode(Barcode, ds);
+            a.FillUSR_PRD_LANCIODByBarcode(Barcode, ds);
+        }
+
+        [DataContext]
+        public void FillCLIFO(PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillCLIFO(ds);
+        }
+
+        [DataContext]
+        public void FillUSR_PDM_FILES(PreserieDS ds, string IDMAGAZZ)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PDM_FILES(ds, IDMAGAZZ);
+        }
     }
 }
