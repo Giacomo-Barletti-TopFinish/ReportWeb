@@ -138,7 +138,7 @@ namespace ReportWeb.Reports
 
         private byte[] EstraiByteDaDocumento()
         {
-            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always);
+            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);// parametro obsoleto , PdfSharp.Pdf.PdfFontEmbedding.Always);
             renderer.Document = _document;
 
             renderer.RenderDocument();

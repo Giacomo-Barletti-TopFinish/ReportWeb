@@ -1,0 +1,65 @@
+﻿@using ReportWeb.Models.Preserie
+@model Commessa
+
+<div class="row">
+    <div class="col-sm-1">Nome commessa</div>
+    <div class="col-sm-1">@Model.NomeCommessa</div>
+    <div class="col-sm-1">Data commessa</div>
+    <div class="col-sm-1">@Model.DataCommessa</div>
+    <div class="col-sm-1">Data inizio</div>
+    <div class="col-sm-1">@Model.DataInizio</div>
+    <div class="col-sm-1">Data inizio</div>
+    <div class="col-sm-1">@Model.DataInizio</div>
+    <div class="col-sm-1">Data fine</div>
+    <div class="col-sm-1">@Model.DataFine</div>
+</div>
+<div class="row">
+    <div class="col-sm-1">Riferimento</div>
+    <div class="col-sm-1">@Model.Riferimento</div>
+    <div class="col-sm-1">Quantita</div>
+    <div class="col-sm-1">@Model.Quantita</div>
+</div>
+
+<table class="table table-condensed" id="tblCommesse">
+    <tbody>
+        @foreach (Lavorazione lavorazione in Model.Lavorazioni.OrderBy(x => x.Sequenza))
+        {
+            <tr>
+                <td>@lavorazione.Reparto<input type="hidden" value="@lavorazione.IDPRDFASE" class="hdIDPRDFASE"></td>
+                <td>Quantita</td>
+                <td>@lavorazione.Quantita</td>
+                <td>Quantita terminata</td>
+                <td>@lavorazione.QuantitaTerminata</td>
+                <td>Quantita da terminare</td>
+                <td>@lavorazione.QuantitaDaTerminare</td>
+                <td>Data inizio</td>
+                <td>@lavorazione.DataInizio</td>
+                <td>Data fine</td>
+                <td>@lavorazione.DataFine</td>
+            </tr>
+            if (lavorazione.Odl != null)
+            {
+            <tr>
+                <td></td>
+                <td>@lavorazione.Odl.NUMMOVFASE<input type="hidden" value="@lavorazione.Odl.IDPRDMOVFASE" class="hdIDPRDMOVFASE"></td>
+                <td>Barcode</td>
+                <td>@lavorazione.Odl.Barcode</td>
+                <td>Quantita</td>
+                <td>@lavorazione.Odl.Quantita</td>
+                <td>Quantita terminata</td>
+                <td>@lavorazione.Odl.QuantitaTerminata</td>
+                <td>Quantita da terminare</td>
+                <td>@lavorazione.Odl.QuantitaDaTerminare</td>
+                <td></td>
+
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+    });
+</script>

@@ -37,10 +37,38 @@ else
 <script language="javascript" type="text/javascript">
     $(function () {
         $('#tblCommesse').on('click', 'td', function () {
-            debugger;
+          
             var tr = $(this).closest('tr');
             var hdIDLANCIOD = $('.hdIDLANCIOD', tr);
             var IDLANCIOD = $(hdIDLANCIOD).val();
+            CaricaCommessa(IDLANCIOD);
+
         })
     });
+
+
+
+    function CaricaCommessa(IDLANCIOD)
+    {
+        var url = '@Url.Action("CaricaCommessa", "Preserie")';
+        $.ajax({
+            url: url,
+            data: {
+                IDLANCIOD: IDLANCIOD
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
 </script>

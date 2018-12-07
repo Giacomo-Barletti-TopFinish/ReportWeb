@@ -138,12 +138,17 @@ namespace ReportWeb.Business
             lavorazione.QuantitaDaTerminare = fase.QTADATER;
 
             lavorazione.DataInizio = fase.IsDATAINIZIONull() ? string.Empty : fase.DATAINIZIO.ToShortDateString();
-            lavorazione.DatFine = fase.IsDATAFINENull() ? string.Empty : fase.DATAFINE.ToShortDateString();
+            lavorazione.DataFine = fase.IsDATAFINENull() ? string.Empty : fase.DATAFINE.ToShortDateString();
 
             lavorazione.Offset = fase.OFFSETTIME;
             lavorazione.Leadtime = fase.LEADTIME;
-            List<DettaglioBase> Dettagli = new List<DettaglioBase>();
 
+            PreserieDS.USR_PRD_MOVFASIRow movFase = ds.USR_PRD_MOVFASI.Where(x => x.IDPRDFASE == fase.IDPRDFASE).FirstOrDefault();
+
+            if (movFase != null)
+                lavorazione.Odl = CreaOdl(movFase);
+
+            List<DettaglioBase> Dettagli = new List<DettaglioBase>();
 
             return lavorazione;
         }
@@ -158,6 +163,23 @@ namespace ReportWeb.Business
             articolo.Descrizione = magazz.IsDESMODELLOBASENull() ? string.Empty : magazz.DESMAGAZZ;
 
             return articolo;
+        }
+
+        private ODL CreaOdl(PreserieDS.USR_PRD_MOVFASIRow movFase)
+        {
+            ODL odl = new ODL();
+
+            odl.IDPRDMOVFASE = movFase.IDPRDMOVFASE;
+            odl.NUMMOVFASE = movFase.IsNUMMOVFASENull() ? string.Empty : movFase.NUMMOVFASE;
+            odl.DATAMOVFASE = movFase.IsDATAMOVFASENull() ? string.Empty : movFase.DATAMOVFASE.ToShortDateString();
+            odl.Barcode = movFase.IsBARCODENull() ? string.Empty : movFase.BARCODE;
+            odl.Reparto = movFase.IsCODICECLIFONull() ? string.Empty : movFase.CODICECLIFO;
+            odl.Quantita = movFase.QTA;
+            odl.QuantitaNetta = movFase.QTANET;
+            odl.QuantitaTerminata = movFase.QTATER;
+            odl.QuantitaDaTerminare = movFase.QTADATER;
+
+            return odl;
         }
     }
 }

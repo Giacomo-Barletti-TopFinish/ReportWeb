@@ -18,11 +18,11 @@ namespace ReportWeb.Models.Preserie
         public decimal QuantitaDaTerminare;
 
         public string DataInizio;
-        public string DatFine;
+        public string DataFine;
         public decimal Offset;
         public decimal Leadtime;
-        List<DettaglioBase> Dettagli;
-
+        public List<DettaglioBase> Dettagli;
+        public ODL Odl;
     }
 
     public class ODL

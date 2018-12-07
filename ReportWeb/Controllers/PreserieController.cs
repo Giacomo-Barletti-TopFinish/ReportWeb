@@ -20,6 +20,12 @@ namespace ReportWeb.Controllers
         {
             PreserieBLL bll = new PreserieBLL();
             List<Commessa> commesse = bll.TrovaCommessa(RicercaPerCommessa, NomeCommessa, Articolo);
+
+            if(commesse.Count==1)
+            {
+                Commessa commessa = bll.CaricaCommessa(commesse[0].IDLANCIOD);
+                return PartialView("CommessaPartial", commessa);
+            }
             return PartialView("GrigliaCommessePartial", commesse);
         }
 
@@ -27,7 +33,7 @@ namespace ReportWeb.Controllers
         {
             PreserieBLL bll = new PreserieBLL();
             Commessa commessa = bll.CaricaCommessa(IDLANCIOD);
-            return PartialView("GrigliaCommessePartial", commessa);
+            return PartialView("CommessaPartial", commessa);
         }
     }
 }

@@ -34,15 +34,15 @@ namespace ReportWeb.Data
 
         public void FillUSR_PRD_LANCIOD(string IDLANCIOD, PreserieDS ds)
         {
-            string query = @"SELECT * FROM DITTA1.USR_PRD_LANCIOD WHERE IDLANCIOD = ${IDLANCIOD1}
+            string query = @"SELECT * FROM DITTA1.USR_PRD_LANCIOD WHERE IDLANCIOD = $P{IDLANCIOD1}
                              UNION ALL
-                            SELECT * FROM DITTA2.USR_PRD_LANCIOD WHERE IDLANCIOD = ${IDLANCIOD2}";
+                            SELECT * FROM DITTA2.USR_PRD_LANCIOD WHERE IDLANCIOD = $P{IDLANCIOD2}";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDLANCIOD1", DbType.String, IDLANCIOD);
             ps.AddParam("IDLANCIOD2", DbType.String, IDLANCIOD);
 
-            using (DbDataAdapter da = BuildDataAdapter(query))
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
             {
                 da.Fill(ds.USR_PRD_LANCIOD);
             }
@@ -84,15 +84,15 @@ namespace ReportWeb.Data
 
         public void FillUSR_PRD_FASI(string IDLANCIOD, PreserieDS ds)
         {
-            string query = @"SELECT * FROM DITTA1.USR_PRD_FASI WHERE IDLANCIOD = ${IDLANCIOD1}
+            string query = @"SELECT * FROM DITTA1.USR_PRD_FASI WHERE IDLANCIOD = $P{IDLANCIOD1}
                              UNION ALL
-                            SELECT * FROM DITTA2.USR_PRD_FASI WHERE IDLANCIOD = ${IDLANCIOD2}";
+                            SELECT * FROM DITTA2.USR_PRD_FASI WHERE IDLANCIOD = $P{IDLANCIOD2}";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDLANCIOD1", DbType.String, IDLANCIOD);
             ps.AddParam("IDLANCIOD2", DbType.String, IDLANCIOD);
 
-            using (DbDataAdapter da = BuildDataAdapter(query))
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
             {
                 da.Fill(ds.USR_PRD_FASI);
             }
@@ -100,15 +100,15 @@ namespace ReportWeb.Data
 
         public void FillUSR_PRD_MOVFASI(string IDLANCIOD, PreserieDS ds)
         {
-            string query = @"SELECT MF.* FROM DITTA1.USR_PRD_MOVFASI MF INNER JOIN DITTA1.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE WHERE FA.IDLANCIOD = ${IDLANCIOD1}
+            string query = @"SELECT MF.* FROM DITTA1.USR_PRD_MOVFASI MF INNER JOIN DITTA1.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE WHERE FA.IDLANCIOD = $P{IDLANCIOD1}
                              UNION ALL
-                            SELECT MF.* FROM DITTA2.USR_PRD_MOVFASI MF INNER JOIN DITTA2.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE WHERE FA.IDLANCIOD = ${IDLANCIOD2}";
+                            SELECT MF.* FROM DITTA2.USR_PRD_MOVFASI MF INNER JOIN DITTA2.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE WHERE FA.IDLANCIOD = $P{IDLANCIOD2}";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDLANCIOD1", DbType.String, IDLANCIOD);
             ps.AddParam("IDLANCIOD2", DbType.String, IDLANCIOD);
 
-            using (DbDataAdapter da = BuildDataAdapter(query))
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
             {
                 da.Fill(ds.USR_PRD_MOVFASI);
             }
