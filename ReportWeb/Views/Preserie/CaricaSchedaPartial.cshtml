@@ -68,6 +68,23 @@
     <div class="col-sm-3"><label>Lavorante esterno preferito</label>@Html.DropDownList("ddlLavoranti", new SelectList(ViewData["LavorantiEsterni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-6"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "250", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
 </div>
+<div class="row">
+    <div class="col-sm-1"><input type="button" onclick="Inserisci();" class="btn btn-primary" value="Inserisci" /></div>
+    <div class="col-sm-11">
+        <label class="text-red" id="lblMessage"></label>
+    </div>
+</div>
+<div class="col-sm-12">
+    <table class="table table-condensed">
+        <thead>
+        <th>
+        <td>Fase</td>
+        <td>Pezzi orari</td>
+        <td>Lavorante</td>
+        <td>Nota</td>
+        </th></thead>
+    </table>
+</div>
 <script language="javascript" type="text/javascript">
     $(function () {
         $('#ddlFasi').select2();
