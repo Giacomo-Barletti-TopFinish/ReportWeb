@@ -1,4 +1,5 @@
 ﻿using ReportWeb.Business;
+using ReportWeb.Models;
 using ReportWeb.Models.Preserie;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace ReportWeb.Controllers
             PreserieBLL bll = new PreserieBLL();
             List<Commessa> commesse = bll.TrovaCommessa(RicercaPerCommessa, NomeCommessa, Articolo);
 
-            if(commesse.Count==1)
+            if (commesse.Count == 1)
             {
                 Commessa commessa = bll.CaricaCommessa(commesse[0].IDLANCIOD);
                 return PartialView("CommessaPartial", commessa);
@@ -47,7 +48,11 @@ namespace ReportWeb.Controllers
         {
             PreserieBLL bll = new PreserieBLL();
             ODLSchedaModel model = bll.CaricaSchedaODL(Barcode, RvlImageSite);
+            List<RWListItem> fasi = bll.CaricaTabFas(model.RepartoCodice);
+            List<RWListItem> lavorantiEsterni = bll.CreaListaLavorantiEsterni();
 
+            ViewData.Add("Fasi", fasi);
+            ViewData.Add("LavorantiEsterni", lavorantiEsterni);
 
             return PartialView("CaricaSchedaPartial", model);
         }

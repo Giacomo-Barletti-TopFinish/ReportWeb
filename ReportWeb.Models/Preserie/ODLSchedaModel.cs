@@ -23,5 +23,7 @@ namespace ReportWeb.Models.Preserie
         public string IDPRDMOVFASE { get; set; }
         public string Riferimento { get; set; }
 
+        public string ModelloFinale { get; set; }
+        public string ModelloFinaleDescrizione { get; set; }
     }
 }

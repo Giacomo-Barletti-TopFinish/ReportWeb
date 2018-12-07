@@ -187,5 +187,16 @@ namespace ReportWeb.Data
                 da.Fill(ds.USR_PDM_FILES);
             }
         }
+
+        public void FillTABFAS(PreserieDS ds)
+        {
+            string select = @"SELECT * FROM GRUPPO.TABFAS ";
+
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.TABFAS);
+            }
+        }
     }
 }

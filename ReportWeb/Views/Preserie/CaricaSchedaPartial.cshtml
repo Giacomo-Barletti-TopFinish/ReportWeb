@@ -1,4 +1,5 @@
 ﻿@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
 @model ODLSchedaModel
 
 @switch (Model.EsitoRicerca)
@@ -35,7 +36,7 @@
                 <div class="row">
                     <div class="col-sm-1"><label>Quantità</label></div>
                     <div class="col-sm-2">@Model.Quantita</div>
-                    <div class="col-sm-1"><label>Modello</label></div>
+                    <div class="col-sm-1"><label>Modello WIP</label></div>
                     <div class="col-sm-2">@Model.Modello</div>
                     <div class="col-sm-5">@Model.ModelloDescrizione</div>
                 </div>
@@ -47,6 +48,11 @@
                     <div class="col-sm-1"><label>Riferimento</label></div>
                     <div class="col-sm-2">@Model.Riferimento</div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-1"><label>Modello</label></div>
+                    <div class="col-sm-2">@Model.ModelloFinale</div>
+                    <div class="col-sm-5">@Model.ModelloFinaleDescrizione</div>
+                </div>
             </div>
         </div>
 
@@ -55,9 +61,17 @@
 
 <div class="col-sm-12"><hr /></div>
 
+
+<div class="col-sm-12">
+    <div class="col-sm-2"><label>Fase</label>@Html.DropDownList("ddlFasi", new SelectList(ViewData["Fasi"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Pezzi orari</label>@Html.TextBox("txtPezzi", "0", new { @class = "form-control input-sm RWPEZZIORARI", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
+    <div class="col-sm-3"><label>Lavorante esterno preferito</label>@Html.DropDownList("ddlLavoranti", new SelectList(ViewData["LavorantiEsterni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-6"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "250", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+</div>
 <script language="javascript" type="text/javascript">
     $(function () {
-
+        $('#ddlFasi').select2();
+        $('#ddlLavoranti').select2();
 
     });
 

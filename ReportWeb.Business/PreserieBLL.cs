@@ -1,5 +1,6 @@
 ﻿using ReportWeb.Data.Preserie;
 using ReportWeb.Entities;
+using ReportWeb.Models;
 using ReportWeb.Models.Preserie;
 using System;
 using System.Collections.Generic;
@@ -119,23 +120,6 @@ namespace ReportWeb.Business
 
         private void EspandiAlberoFasi(List<PreserieDS.USR_PRD_FASIRow> faseFiglie, PreserieDS ds, string radice, Commessa commessa)
         {
-            //if (faseFiglie.Count == 0) return;
-            //if (faseFiglie.Count == 1)
-            //{
-            //    string[] radiceStr = radice.Split('.');
-            //    int indice = Int32.Parse(radiceStr[radiceStr.Length - 1]);
-            //    string radiceNuova = string.Empty;
-            //    if (radice.Length > 1)
-            //        for (int i = 0; i < radiceStr.Length - 1; i++)
-            //            radiceNuova = radiceStr[i] + ".";
-            //    radiceNuova += (indice+1).ToString();
-            //    Lavorazione lavorazione = CreaLavorazione(faseFiglie[0], radiceNuova, ds);
-            //    commessa.Lavorazioni.Add(lavorazione);
-            //    List<PreserieDS.USR_PRD_FASIRow> figlie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseFiglie[0].IDPRDFASE).ToList();
-            //    EspandiAlberoFasi(figlie, ds, radiceNuova, commessa);
-            //    return;
-            //}
-
             int sequenzaLavorazione = 1;
             foreach (PreserieDS.USR_PRD_FASIRow faseFiglia in faseFiglie)
             {
@@ -262,6 +246,11 @@ namespace ReportWeb.Business
                         model.Commessa = lancio.IsNOMECOMMESSANull() ? string.Empty : lancio.NOMECOMMESSA;
                         model.DataCommessa = lancio.IsDATACOMMESSANull() ? string.Empty : lancio.DATACOMMESSA.ToShortDateString();
                         model.Riferimento = lancio.IsRIFERIMENTONull() ? string.Empty : lancio.RIFERIMENTO;
+
+                        bPreserie.FillMAGAZZ(ds, new List<string>(new string[] { lancio.IDMAGAZZ }));
+                        PreserieDS.MAGAZZRow modelloLancio = ds.MAGAZZ.Where(x => x.IDMAGAZZ == lancio.IDMAGAZZ).FirstOrDefault();
+                        model.ModelloFinale = modelloLancio.MODELLO;
+                        model.ModelloFinaleDescrizione= modelloLancio.DESMAGAZZ;
                     }
                 }
 
@@ -289,6 +278,38 @@ namespace ReportWeb.Business
 
             return string.Empty;
 
+        }
+
+        public List<RWListItem> CaricaTabFas(string Reparto)
+        {
+            List<RWListItem> model = new List<RWListItem>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillTABFAS(ds);
+                model.Add(new RWListItem(string.Empty, string.Empty));
+
+                foreach (PreserieDS.TABFASRow fase in ds.TABFAS.Where(x => !x.IsCODICECLIFOPREDFASENull() && x.CODICECLIFOPREDFASE.Trim() == Reparto).OrderBy(x => x.CODICEFASE))
+                    model.Add(new RWListItem(fase.CODICEFASE, fase.IDTABFAS));
+
+                return model;
+            }
+        }
+
+        public List<RWListItem> CreaListaLavorantiEsterni()
+        {
+            List<RWListItem> LavorantiEsterni = new List<RWListItem>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillCLIFO(ds);
+                LavorantiEsterni.Add(new RWListItem(string.Empty, string.Empty));
+                int aux;
+                foreach (PreserieDS.CLIFORow fornitore in ds.CLIFO.Where(x => !x.IsCODICENull() && !x.IsRAGIONESOCNull() && !x.IsTIPONull() && x.TIPO == "F" && int.TryParse(x.CODICE, out aux)))
+                    LavorantiEsterni.Add(new RWListItem(fornitore.RAGIONESOC.Trim(), fornitore.CODICE.Trim()));
+            }
+
+            return LavorantiEsterni;
         }
     }
 }

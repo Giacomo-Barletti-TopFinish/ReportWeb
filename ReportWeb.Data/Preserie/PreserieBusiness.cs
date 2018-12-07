@@ -77,5 +77,12 @@ namespace ReportWeb.Data.Preserie
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
             a.FillUSR_PDM_FILES(ds, IDMAGAZZ);
         }
+
+        [DataContext]
+        public void FillTABFAS(PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillTABFAS(ds);
+        }
     }
 }
