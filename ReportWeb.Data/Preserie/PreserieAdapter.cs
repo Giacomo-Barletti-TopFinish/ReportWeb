@@ -146,6 +146,28 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillPRE_DETTAGLIOByLancio(string IDLANCIOD, PreserieDS ds)
+        {
+            string query = @"SELECT PRE.* FROM PRE_DETTAGLIO PRE 
+                                INNER JOIN DITTA1.USR_PRD_MOVFASI MF ON MF.IDPRDMOVFASE = PRE.IDPRDMOVFASE
+                                INNER JOIN DITTA1.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE 
+                                WHERE FA.IDLANCIOD = $P{IDLANCIOD1}
+                             UNION ALL
+                            SELECT PRE.* FROM PRE_DETTAGLIO PRE 
+                                INNER JOIN DITTA2.USR_PRD_MOVFASI MF ON MF.IDPRDMOVFASE = PRE.IDPRDMOVFASE
+                                INNER JOIN DITTA2.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE 
+                                WHERE FA.IDLANCIOD = $P{IDLANCIOD2}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD1", DbType.String, IDLANCIOD);
+            ps.AddParam("IDLANCIOD2", DbType.String, IDLANCIOD);
+
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(ds.PRE_DETTAGLIO);
+            }
+        }
+
         public void FillUSR_PRD_MOVFASIByBarcode(string Barcode, PreserieDS ds)
         {
             string query = @"SELECT * FROM DITTA1.USR_PRD_MOVFASI WHERE BARCODE = $P{BARCODE1}
@@ -196,6 +218,35 @@ namespace ReportWeb.Data
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.TABFAS);
+            }
+        }
+
+        public void FillPRE_DETTAGLIO(string Barcode, PreserieDS ds)
+        {
+            string query = @"SELECT * FROM PRE_DETTAGLIO WHERE BARCODE = $P{BARCODE1}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE1", DbType.String, Barcode);
+
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(ds.PRE_DETTAGLIO);
+            }
+        }
+
+        public void UpdatePREDTable(string tablename, PreserieDS ds)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                a.ContinueUpdateOnError = false;
+                DataTable dt = ds.Tables[tablename];
+                DbCommandBuilder cmd = BuildCommandBuilder(a);
+                a.UpdateCommand = cmd.GetUpdateCommand();
+                a.DeleteCommand = cmd.GetDeleteCommand();
+                a.InsertCommand = cmd.GetInsertCommand();
+                a.Update(dt);
             }
         }
     }

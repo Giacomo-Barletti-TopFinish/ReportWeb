@@ -20,7 +20,7 @@ namespace ReportWeb.Controllers
         {
             get
             {
-                return _user;
+                return _user.Trim();
             }
             set
             {
@@ -105,6 +105,7 @@ namespace ReportWeb.Controllers
                 case "Magazzino":
                 case "MailDispatcher":
                 case "RvlDocumenti":
+                case "Preserie":
                 case "ALE":
                     HttpCookie coockie = filterContext.RequestContext.HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
                     if (coockie == null)

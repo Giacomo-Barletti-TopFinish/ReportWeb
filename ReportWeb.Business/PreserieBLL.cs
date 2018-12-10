@@ -1,7 +1,9 @@
-﻿using ReportWeb.Data.Preserie;
+﻿using ReportWeb.Common.Helpers;
+using ReportWeb.Data.Preserie;
 using ReportWeb.Entities;
 using ReportWeb.Models;
 using ReportWeb.Models.Preserie;
+using ReportWeb.Views.Preserie;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +52,9 @@ namespace ReportWeb.Business
                 bPreserie.FillUSR_PRD_LANCIOD(IDLANCIOD, ds);
                 bPreserie.FillUSR_PRD_FASI(IDLANCIOD, ds);
                 bPreserie.FillUSR_PRD_MOVFASI(IDLANCIOD, ds);
+                bPreserie.FillPRE_DETTAGLIOByLancio(IDLANCIOD, ds);
+                bPreserie.FillTABFAS(ds);
+                bPreserie.FillCLIFO(ds);
 
                 if (ds.USR_PRD_LANCIOD.Count == 0)
                     return null;
@@ -156,9 +161,14 @@ namespace ReportWeb.Business
             PreserieDS.USR_PRD_MOVFASIRow movFase = ds.USR_PRD_MOVFASI.Where(x => x.IDPRDFASE == fase.IDPRDFASE).FirstOrDefault();
 
             if (movFase != null)
+            {
                 lavorazione.Odl = CreaOdl(movFase);
+                if (!movFase.IsBARCODENull())
+                {
+                   lavorazione.Dettagli = CreaListaDettaglio(movFase.BARCODE, ds);
+                }
 
-            List<DettaglioBase> Dettagli = new List<DettaglioBase>();
+            }
 
             return lavorazione;
         }
@@ -192,6 +202,39 @@ namespace ReportWeb.Business
             return odl;
         }
 
+        private List<Dettaglio> CreaListaDettaglio(string barcode, PreserieDS ds)
+        {
+            List<Dettaglio> dettagli = new List<Dettaglio>();
+            foreach (PreserieDS.PRE_DETTAGLIORow dettaglio in ds.PRE_DETTAGLIO.Where(x => x.BARCODE == barcode))
+            {
+                PreserieDS.TABFASRow fase = ds.TABFAS.Where(x => x.IDTABFAS == dettaglio.IDTABFAS).FirstOrDefault();
+                if (fase == null) continue;
+
+
+                Dettaglio d = new Dettaglio();
+                d.IDDETTAGLIO = dettaglio.IDDETTAGLIO;
+                d.idFase = fase.IDTABFAS;
+                d.Fase = fase.CODICEFASE;
+
+                if (!dettaglio.IsCODICECLIFONull())
+                {
+                    PreserieDS.CLIFORow clifo = ds.CLIFO.Where(x => x.CODICE == dettaglio.CODICECLIFO).FirstOrDefault();
+                    if (clifo != null)
+                    {
+                        d.Lavorante = clifo.RAGIONESOC.Trim();
+                        d.idLavorante = clifo.CODICE;
+                    }
+                }
+
+                d.Nota = dettaglio.IsNOTANull() ? string.Empty : dettaglio.NOTA;
+                d.PezziOra = dettaglio.PEZZIORARI;
+
+                dettagli.Add(d);
+            }
+
+            return dettagli;
+        }
+
         public ODLSchedaModel CaricaSchedaODL(string Barcode, string rvlImageSite)
         {
             ODLSchedaModel model = new ODLSchedaModel();
@@ -201,6 +244,8 @@ namespace ReportWeb.Business
 
                 bPreserie.FillCLIFO(ds);
                 bPreserie.FillUSR_PRD_MOVFASIByBarcode(Barcode, ds);
+                bPreserie.FillPRE_DETTAGLIO(Barcode, ds);
+                bPreserie.FillTABFAS(ds);
 
                 PreserieDS.USR_PRD_MOVFASIRow odl = ds.USR_PRD_MOVFASI.Where(x => x.BARCODE == Barcode).FirstOrDefault();
                 if (odl == null)
@@ -224,7 +269,6 @@ namespace ReportWeb.Business
                     PreserieDS.CLIFORow reparto = ds.CLIFO.Where(x => x.CODICE == odl.CODICECLIFO).FirstOrDefault();
                     if (reparto != null)
                         model.Reparto = reparto.RAGIONESOC;
-
                 }
 
 
@@ -250,12 +294,14 @@ namespace ReportWeb.Business
                         bPreserie.FillMAGAZZ(ds, new List<string>(new string[] { lancio.IDMAGAZZ }));
                         PreserieDS.MAGAZZRow modelloLancio = ds.MAGAZZ.Where(x => x.IDMAGAZZ == lancio.IDMAGAZZ).FirstOrDefault();
                         model.ModelloFinale = modelloLancio.MODELLO;
-                        model.ModelloFinaleDescrizione= modelloLancio.DESMAGAZZ;
+                        model.ModelloFinaleDescrizione = modelloLancio.DESMAGAZZ;
                     }
                 }
 
                 bPreserie.FillUSR_PDM_FILES(ds, odl.IDMAGAZZ);
                 model.ImageUrl = creaUrlImage(rvlImageSite, odl.IDMAGAZZ, ds);
+
+                model.Dettagli = CreaListaDettaglio(Barcode, ds);
 
                 return model;
             }
@@ -310,6 +356,48 @@ namespace ReportWeb.Business
             }
 
             return LavorantiEsterni;
+        }
+
+        public void SalvaDettagli(string Dettagli, string IDPRDMOVFASE, string Barcode, string IDUSER)
+        {
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillCLIFO(ds);
+                bPreserie.FillTABFAS(ds);
+                bPreserie.FillPRE_DETTAGLIO(Barcode, ds);
+
+                PreserieDettaglio[] dettaglioPreserie = JSonSerializer.Deserialize<PreserieDettaglio[]>(Dettagli);
+
+                foreach (PreserieDettaglio dettaglio in dettaglioPreserie)
+                {
+                    PreserieDS.PRE_DETTAGLIORow dettaglioRow = ds.PRE_DETTAGLIO.Where(x => x.IDDETTAGLIO == dettaglio.IDDETTAGLIO).FirstOrDefault();
+                    if (dettaglioRow == null)
+                    {
+                        dettaglioRow = ds.PRE_DETTAGLIO.NewPRE_DETTAGLIORow();
+                        dettaglioRow.BARCODE = Barcode;
+                        dettaglioRow.CODICECLIFO = dettaglio.Lavorante;
+                        dettaglioRow.DATACR = DateTime.Now;
+                        dettaglioRow.IDPRDMOVFASE = IDPRDMOVFASE;
+                        dettaglioRow.IDTABFAS = dettaglio.Fase;
+                        dettaglioRow.IDUSER = IDUSER;
+                        dettaglioRow.NOTA = dettaglio.Nota;
+                        dettaglioRow.PEZZIORARI = dettaglio.Pezzi;
+                        ds.PRE_DETTAGLIO.AddPRE_DETTAGLIORow(dettaglioRow);
+                    }
+                    else
+                    {
+                        dettaglioRow.CODICECLIFO = dettaglio.Lavorante;
+                        dettaglioRow.DATACR = DateTime.Now;
+                        dettaglioRow.IDTABFAS = dettaglio.Fase;
+                        dettaglioRow.IDUSER = IDUSER;
+                        dettaglioRow.NOTA = dettaglio.Nota;
+                        dettaglioRow.PEZZIORARI = dettaglio.Pezzi;
+                    }
+                }
+
+                bPreserie.UpdatePRE_DETTAGLIO(ds);
+            }
         }
     }
 }

@@ -25,5 +25,7 @@ namespace ReportWeb.Models.Preserie
 
         public string ModelloFinale { get; set; }
         public string ModelloFinaleDescrizione { get; set; }
+
+        public List<Dettaglio> Dettagli { get; set; }
     }
 }

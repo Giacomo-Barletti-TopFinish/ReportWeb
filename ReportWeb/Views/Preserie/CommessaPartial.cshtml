@@ -44,21 +44,42 @@
             </tr>
             if (lavorazione.Odl != null)
             {
-            <tr>
-                <td></td>
-                <td></td>
-                <td>@lavorazione.Odl.NUMMOVFASE<input type="hidden" value="@lavorazione.Odl.IDPRDMOVFASE" class="hdIDPRDMOVFASE"></td>
-                <td>Barcode</td>
-                <td>@lavorazione.Odl.Barcode</td>
-                <td>Quantita</td>
-                <td>@lavorazione.Odl.Quantita</td>
-                <td>Quantita terminata</td>
-                <td>@lavorazione.Odl.QuantitaTerminata</td>
-                <td>Quantita da terminare</td>
-                <td>@lavorazione.Odl.QuantitaDaTerminare</td>
-                <td></td>
-
-            </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>@lavorazione.Odl.NUMMOVFASE<input type="hidden" value="@lavorazione.Odl.IDPRDMOVFASE" class="hdIDPRDMOVFASE"></td>
+                    <td>Barcode</td>
+                    <td>@lavorazione.Odl.Barcode</td>
+                    <td>Quantita</td>
+                    <td>@lavorazione.Odl.Quantita</td>
+                    <td>Quantita terminata</td>
+                    <td>@lavorazione.Odl.QuantitaTerminata</td>
+                    <td>Quantita da terminare</td>
+                    <td>@lavorazione.Odl.QuantitaDaTerminare</td>
+                    <td></td>
+                </tr>
+                if (lavorazione.Dettagli != null && lavorazione.Dettagli.Count>0)
+                {
+                    foreach (Dettaglio d in lavorazione.Dettagli)
+                    {
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><b>Fase</b></td>
+                            <td><b>@d.Fase</b></td>
+                            <td>Pezzi orari</td>
+                            <td>@d.PezziOra</td>
+                            <td>Lavorante</td>
+                            <td>@d.Lavorante</td>
+                            <td colspan="3">@d.Nota</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="3"></td>
+                        <td colspan="2"><input type="button" onclick="ModificaDati('@lavorazione.Odl.Barcode');" class="btn btn-primary" value="Modifica" /></td>
+                    </tr>
+                }
             }
             <tr><td colspan="12"><hr /></td></tr>
         }
@@ -69,4 +90,10 @@
 <script language="javascript" type="text/javascript">
     $(function () {
     });
+
+    function ModificaDati(barcode) {        
+        var url = '@Url.Action("ModificaDati", "Preserie")';
+        url = url + '?barcode=' + barcode;
+        window.open(url);
+    }
 </script>

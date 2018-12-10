@@ -455,6 +455,7 @@
     <Content Include="Views\Preserie\CommessaPartial.cshtml" />
     <Content Include="Views\Preserie\InserimentoDati.cshtml" />
     <Content Include="Views\Preserie\CaricaSchedaPartial.cshtml" />
+    <Content Include="Views\Preserie\ModificaDati.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

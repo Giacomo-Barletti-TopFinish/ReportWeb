@@ -49,6 +49,15 @@ namespace ReportWeb.Data.Preserie
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
             a.FillUSR_PRD_MOVFASI(IDLANCIOD, ds);
         }
+
+        [DataContext]
+        public void FillPRE_DETTAGLIOByLancio(string IDLANCIOD, PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillPRE_DETTAGLIOByLancio(IDLANCIOD, ds);
+        }
+
+
         [DataContext]
         public void FillUSR_PRD_FASI(string IDLANCIOD, PreserieDS ds)
         {
@@ -83,6 +92,20 @@ namespace ReportWeb.Data.Preserie
         {
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
             a.FillTABFAS(ds);
+        }
+
+        [DataContext]
+        public void FillPRE_DETTAGLIO(string Barcode, PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillPRE_DETTAGLIO(Barcode, ds);
+        }
+
+        [DataContext(true)]
+        public void UpdatePRE_DETTAGLIO(PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.UpdatePREDTable(ds.PRE_DETTAGLIO.TableName, ds);
         }
     }
 }

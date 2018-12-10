@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace ReportWeb.Models.Preserie
 {
-    public abstract class DettaglioBase
+    public class Dettaglio
     {
-        public decimal PezziOra;
-        public string Lavorazione;
+        public string PezziOra;
+        public string Lavorante;
         public string Nota;
-
-        public abstract string Contenuto();
+        public string Fase;
+        public string idFase;
+        public string idLavorante;
+        public decimal IDDETTAGLIO;
 
     }
 }

@@ -44,6 +44,12 @@ namespace ReportWeb.Controllers
             return View();
         }
 
+        public ActionResult ModificaDati(string barcode)
+        {
+            ViewData.Add("Barcode", barcode);
+            return View();
+        }
+
         public ActionResult CaricaScheda(string Barcode)
         {
             PreserieBLL bll = new PreserieBLL();
@@ -55,6 +61,13 @@ namespace ReportWeb.Controllers
             ViewData.Add("LavorantiEsterni", lavorantiEsterni);
 
             return PartialView("CaricaSchedaPartial", model);
+        }
+
+        public ActionResult SalvaDettagli(string Dettagli, string IDPRDMOVFASE, string Barcode)
+        {
+            PreserieBLL bll = new PreserieBLL();
+            bll.SalvaDettagli(Dettagli, IDPRDMOVFASE, Barcode, ConnectedUser);
+            return null;
         }
     }
 }

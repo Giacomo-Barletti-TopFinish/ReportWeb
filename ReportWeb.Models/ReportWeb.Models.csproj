@@ -53,6 +53,7 @@
     <Compile Include="JSON\ApprovvigionamentiMagazzino.cs" />
     <Compile Include="JSON\FermiJsonModel.cs" />
     <Compile Include="JSON\GiacenzaMagazzino.cs" />
+    <Compile Include="JSON\PreserieDettaglio.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="Magazzino\MagazzinoLavorantiEsterniModel.cs" />
     <Compile Include="Magazzino\ModelloApprovvigionamentoModel.cs" />
