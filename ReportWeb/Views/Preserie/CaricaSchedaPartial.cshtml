@@ -173,6 +173,7 @@
             var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
 
             if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
+            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
             if (idLavorante == undefined) idLavorante = '';
 
             var tdPezzi = $(tr).find('td')[1];
