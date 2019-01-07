@@ -54,7 +54,7 @@ namespace ReportWeb.Controllers
 
             List<RWListItem> settimane = new List<RWListItem>();
             settimane.Add(new RWListItem(string.Empty, string.Empty));
-            for (int i = 1; i <= 52; i++)
+            for (int i = 1; i <= 53; i++)
                 settimane.Add(new RWListItem(i.ToString(), i.ToString()));
 
             List<RWListItem> Anni = new List<RWListItem>();
