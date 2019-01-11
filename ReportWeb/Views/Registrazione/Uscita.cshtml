@@ -4,24 +4,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Registrazione - Uscita</h2>
+<table>
+    <tr>
+        <td>
+            <img src="~/Content/Image/logo_MP_240X200 maggio 2018.png" />
+        </td>
+        <td><h2>Registrazione - Uscita</h2></td>
+        <td>
+            <img src="~/Content/Image/logo_TF_240X200 maggio 2018.png" />
+        </td>
+    </tr>
+</table>
 <div class="box" style="padding-left:10px">
     <div class="box-body form-group-sm">
-        @foreach (Tuple<decimal, string, string> utente in Model)
+        @if (Model.Count > 0)
         {
-        <div class="row">
-            <div class="col-sm-2">
-                <label class="text-red input-sm" id="lblMessage2"></label><br />
-                <input type="button" onclick="RegistraUscita(@utente.Item1);" class="btn btn-primary" value="Registra uscita" />
-            </div>
-            <div class="col-sm-2">
-                <label class="text-red input-sm" id="lblMessage2">@utente.Item2</label>
-            </div>
-            <div class="col-sm-2">
-                @utente.Item3
-            </div>
-        </div>
+            foreach (Tuple<decimal, string, string> utente in Model)
+            {
+                <div class="row">
+
+                    <div class="col-sm-2">
+                        <label class="text-red input-sm" id="lblMessage3"></label><br />
+                        <h5>@utente.Item2</h5>
+                    </div>
+                    <div class="col-sm-1">
+                        <label class="text-red input-sm" id="lblMessage5"></label><br />
+                        <h5>@utente.Item3</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="text-red input-sm" id="lblMessage2"></label><br />
+                        <input type="button" onclick="RegistraUscita(@utente.Item1);" class="btn btn-primary" value="Registra uscita" />
+                    </div>
+                </div>
+            }
         }
+        else
+        {
+            <div class="row">
+                <div class="col-sm-1">
+                </div>
+
+                <div class="col-sm-3">
+                    <h3>Nessuna uscita da registrare</h3>
+                </div>
+
+            </div>
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-2">
+                <input type="button" onclick="Ritorna();" class="btn btn-primary" value="Torna indietro" />
+            </div>
+        }
+
     </div>
 </div>
 
@@ -41,7 +75,8 @@
             success: function (data)
             {
                 if (data == '') {
-                    location.reload();
+                    alert('Uscita registrata correttamente');
+                    window.location.href = "@Url.Action("INDEX", "Registrazione")";
                 }
                 else {
                     $('#lblMessage2').html(data);
@@ -56,4 +91,7 @@
         });
     }
 
+    function Ritorna() {
+            window.location.href = "@Url.Action("INDEX", "Registrazione")";
+    }
 </script>

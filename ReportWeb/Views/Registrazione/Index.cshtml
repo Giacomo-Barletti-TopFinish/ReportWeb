@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table>
+    <tr>
+        <td>
+            <img src="~/Content/Image/logo_MP_240X200 maggio 2018.png" />
+        </td>
+        <td><h2>Registrazione - Visitatori</h2></td>
+        <td>
+            <img src="~/Content/Image/logo_TF_240X200 maggio 2018.png" />
+        </td>
+    </tr>
+</table>
+
+<div class="box" style="padding-left:10px">
+    <div class="box-body form-group-sm">
+
+       
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-sm-1">
+                <input type="button" style="width:200px" onclick="Ingresso();" class="btn btn-primary" value="Registra ingresso" />
+            </div>
+        </div>
+        <div class="row"><label></label></div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-sm-1">
+                <input type="button" style="width:200px" onclick="Uscita();" class="btn btn-primary" value="Registra uscita" />
+            </div>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+
+  function Ingresso()
+    {
+        window.location.href = "@Url.Action("INGRESSO", "REGISTRAZIONE")";
+    }
+
+     function Uscita()
+    {
+        window.location.href = "@Url.Action("USCITA", "REGISTRAZIONE")";
+    }
+
+</script>

@@ -459,6 +459,7 @@
     <Content Include="Views\Preserie\ModificaDati.cshtml" />
     <Content Include="Views\Registrazione\Ingresso.cshtml" />
     <Content Include="Views\Registrazione\Uscita.cshtml" />
+    <Content Include="Views\Registrazione\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

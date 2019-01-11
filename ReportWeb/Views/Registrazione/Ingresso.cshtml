@@ -3,7 +3,18 @@
     ViewBag.Title = "Ingresso";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Registrazione - Ingresso</h2>
+<table>
+    <tr>
+        <td>
+            <img src="~/Content/Image/logo_MP_240X200 maggio 2018.png" />
+        </td>
+        <td><h2>Registrazione - Ingresso</h2></td>
+        <td>
+            <img src="~/Content/Image/logo_TF_240X200 maggio 2018.png" />
+        </td>
+    </tr>
+</table>
+
 <div class="box" style="padding-left:10px">
     <div class="box-body form-group-sm">
         <div class="row">
@@ -114,8 +125,8 @@
             success: function (data)
             {
                 if (data == '') {
-                    CancellaInput();
-                    $('#lblMessage2').html('<h2>Registrazione eseguita correttamente</h2>');
+                    alert('Ingresso registrato correttamente');
+                    window.location.href = "@Url.Action("INDEX", "Registrazione")";
                 }
                 else {
                     $('#lblMessage2').html(data);

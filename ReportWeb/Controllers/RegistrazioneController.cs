@@ -9,7 +9,10 @@ namespace ReportWeb.Controllers
 {
     public class RegistrazioneController : Controller
     {
-        // GET: Registrazione
+        public ActionResult Index()
+        {
+            return View();
+        }
         public ActionResult Ingresso()
         {
             return View();
