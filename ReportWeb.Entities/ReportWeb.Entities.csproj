@@ -81,6 +81,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PVDDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="RegistrazioneDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistrazioneDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ReportDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +178,17 @@
     </None>
     <None Include="PVDDS.xss">
       <DependentUpon>PVDDS.xsd</DependentUpon>
+    </None>
+    <None Include="RegistrazioneDS.xsc">
+      <DependentUpon>RegistrazioneDS.xsd</DependentUpon>
+    </None>
+    <None Include="RegistrazioneDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RegistrazioneDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="RegistrazioneDS.xss">
+      <DependentUpon>RegistrazioneDS.xsd</DependentUpon>
     </None>
     <None Include="ReportDS.xsc">
       <DependentUpon>ReportDS.xsd</DependentUpon>

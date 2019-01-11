@@ -1,0 +1,59 @@
+﻿@model  List<Tuple<decimal, string, string>>
+@{
+    ViewBag.Title = "Uscita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registrazione - Uscita</h2>
+<div class="box" style="padding-left:10px">
+    <div class="box-body form-group-sm">
+        @foreach (Tuple<decimal, string, string> utente in Model)
+        {
+        <div class="row">
+            <div class="col-sm-2">
+                <label class="text-red input-sm" id="lblMessage2"></label><br />
+                <input type="button" onclick="RegistraUscita(@utente.Item1);" class="btn btn-primary" value="Registra uscita" />
+            </div>
+            <div class="col-sm-2">
+                <label class="text-red input-sm" id="lblMessage2">@utente.Item2</label>
+            </div>
+            <div class="col-sm-2">
+                @utente.Item3
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+
+    function RegistraUscita(idregistrazione)
+    {
+
+        var url = '@Url.Action("RegistraUscita", "Registrazione")';
+        $.ajax({
+            url: url,
+            data: {
+                IdRegistrazione: idregistrazione
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                if (data == '') {
+                    location.reload();
+                }
+                else {
+                    $('#lblMessage2').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+</script>

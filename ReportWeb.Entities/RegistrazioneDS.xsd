@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RegistrazioneDS" targetNamespace="http://tempuri.org/RegistrazioneDS.xsd" xmlns:mstns="http://tempuri.org/RegistrazioneDS.xsd" xmlns="http://tempuri.org/RegistrazioneDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.ReportWeb.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RegistrazioneDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RegistrazioneDS" msprop:Generator_UserDSName="RegistrazioneDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RW_REGISTRAZIONE" msprop:Generator_TableClassName="RW_REGISTRAZIONEDataTable" msprop:Generator_TableVarName="tableRW_REGISTRAZIONE" msprop:Generator_TablePropName="RW_REGISTRAZIONE" msprop:Generator_RowDeletingName="RW_REGISTRAZIONERowDeleting" msprop:Generator_RowChangingName="RW_REGISTRAZIONERowChanging" msprop:Generator_RowEvHandlerName="RW_REGISTRAZIONERowChangeEventHandler" msprop:Generator_RowDeletedName="RW_REGISTRAZIONERowDeleted" msprop:Generator_UserTableName="RW_REGISTRAZIONE" msprop:Generator_RowChangedName="RW_REGISTRAZIONERowChanged" msprop:Generator_RowEvArgName="RW_REGISTRAZIONERowChangeEvent" msprop:Generator_RowClassName="RW_REGISTRAZIONERow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDREGISTRAZIONE" msprop:Generator_ColumnVarNameInTable="columnIDREGISTRAZIONE" msprop:Generator_ColumnPropNameInRow="IDREGISTRAZIONE" msprop:Generator_ColumnPropNameInTable="IDREGISTRAZIONEColumn" msprop:Generator_UserColumnName="IDREGISTRAZIONE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NOME" msprop:Generator_ColumnVarNameInTable="columnNOME" msprop:Generator_ColumnPropNameInRow="NOME" msprop:Generator_ColumnPropNameInTable="NOMEColumn" msprop:Generator_UserColumnName="NOME">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COGNOME" msprop:Generator_ColumnVarNameInTable="columnCOGNOME" msprop:Generator_ColumnPropNameInRow="COGNOME" msprop:Generator_ColumnPropNameInTable="COGNOMEColumn" msprop:Generator_UserColumnName="COGNOME">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AZIENDA" msprop:Generator_ColumnVarNameInTable="columnAZIENDA" msprop:Generator_ColumnPropNameInRow="AZIENDA" msprop:Generator_ColumnPropNameInTable="AZIENDAColumn" msprop:Generator_UserColumnName="AZIENDA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DOCUMENTO" msprop:Generator_ColumnVarNameInTable="columnDOCUMENTO" msprop:Generator_ColumnPropNameInRow="DOCUMENTO" msprop:Generator_ColumnPropNameInTable="DOCUMENTOColumn" msprop:Generator_UserColumnName="DOCUMENTO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TIPODOCUMENTO" msprop:Generator_ColumnVarNameInTable="columnTIPODOCUMENTO" msprop:Generator_ColumnPropNameInRow="TIPODOCUMENTO" msprop:Generator_ColumnPropNameInTable="TIPODOCUMENTOColumn" msprop:Generator_UserColumnName="TIPODOCUMENTO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="REFERENTE" msprop:Generator_ColumnVarNameInTable="columnREFERENTE" msprop:Generator_ColumnPropNameInRow="REFERENTE" msprop:Generator_ColumnPropNameInTable="REFERENTEColumn" msprop:Generator_UserColumnName="REFERENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INGRESSO" msprop:Generator_ColumnVarNameInTable="columnINGRESSO" msprop:Generator_ColumnPropNameInRow="INGRESSO" msprop:Generator_ColumnPropNameInTable="INGRESSOColumn" msprop:Generator_UserColumnName="INGRESSO" type="xs:dateTime" />
+              <xs:element name="USCITA" msprop:Generator_ColumnVarNameInTable="columnUSCITA" msprop:Generator_ColumnPropNameInRow="USCITA" msprop:Generator_ColumnPropNameInTable="USCITAColumn" msprop:Generator_UserColumnName="USCITA" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

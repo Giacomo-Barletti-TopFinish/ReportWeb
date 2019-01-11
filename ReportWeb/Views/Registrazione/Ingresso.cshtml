@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Ingresso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Registrazione - Ingresso</h2>
+<div class="box" style="padding-left:10px">
+    <div class="box-body form-group-sm">
+        <div class="row">
+            <div class="col-md-2">
+                <label>Cognome</label><br />
+                <input autocomplete="off" type="text" id="txtCognome" class="form-control" maxlength="50">
+            </div>
+            <div class="col-md-2">
+                <label>Nome</label><br />
+                <input autocomplete="off" type="text" id="txtNome" class="form-control" maxlength="30">
+            </div>
+            <div class="col-md-2">
+                <label>Azienda</label><br />
+                <input autocomplete="off" type="text" id="txtAzienda" class="form-control" maxlength="50">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>Tipo documento</label><br />
+                <select class="form-control" style="height:30px" id="txtTipo">
+                    <option selected value="CartaIdentita">Carta d'identità</option>
+                    <option value="Patente">Patente</option>
+                    <option value="Passaporto">Passaporto</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label>Numero documento</label><br />
+                <input autocomplete="off" type="text" class="form-control" id="txtNumero" maxlength="30">
+            </div>
+            <div class="col-md-2">
+                <label>Referente</label><br />
+                <input autocomplete="off" type="text" class="form-control" id="txtReferente" maxlength="100">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <label class="text-red input-sm" id="lblMessage2"></label><br />
+                <input type="button" onclick="Salva();" class="btn btn-primary" value="Registra ingresso" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+
+    function Salva()
+    {
+        var MESSAGGIO_PUNTINO = '·';
+        var MESSAGGIO_DEVE_ESSERE_VALORIZZATO = ' deve essere valorizzato/a';
+
+        var esegui = true;
+        var messaggio = '';
+        var cognome = $('#txtCognome').val();
+        if (cognome == null || cognome == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Cognome" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var nome = $('#txtNome').val();
+        if (nome == null || nome == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Nome" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var azienda = $('#txtAzienda').val();
+        if (azienda == null) azienda = '';
+
+        var tipo = $('#txtTipo').val();
+        if (tipo == null || tipo == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Tipo documento" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var numero = $('#txtNumero').val();
+        if (numero == null || numero == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Numero documento" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var referente = $('#txtReferente').val();
+        if (referente == null || referente == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Referente" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        $('#lblMessage2').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("RegistraIngresso", "Registrazione")';
+        $.ajax({
+            url: url,
+            data: {
+                Cognome: cognome,
+                Nome: nome,
+                Azienda: azienda,
+                Tipo: tipo,
+                Numero: numero,
+                Referente: referente,
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                if (data == '') {
+                    CancellaInput();
+                    $('#lblMessage2').html('<h2>Registrazione eseguita correttamente</h2>');
+                }
+                else {
+                    $('#lblMessage2').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function CancellaInput()
+    {
+        $('#txtCognome').val('');
+        $('#txtNome').val('');
+        $('#txtAzienda').val('');
+        $('#txtNumero').val('');
+        $('#txtReferente').val('');
+    }
+
+</script>

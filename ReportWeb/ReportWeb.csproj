@@ -153,6 +153,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PreserieController.cs" />
     <Compile Include="Controllers\PVDController.cs" />
+    <Compile Include="Controllers\RegistrazioneController.cs" />
     <Compile Include="Controllers\RvlDocumentiController.cs" />
     <Compile Include="Controllers\TVController.cs" />
     <Compile Include="Controllers\VerniciaturaController.cs" />
@@ -456,6 +457,8 @@
     <Content Include="Views\Preserie\InserimentoDati.cshtml" />
     <Content Include="Views\Preserie\CaricaSchedaPartial.cshtml" />
     <Content Include="Views\Preserie\ModificaDati.cshtml" />
+    <Content Include="Views\Registrazione\Ingresso.cshtml" />
+    <Content Include="Views\Registrazione\Uscita.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
