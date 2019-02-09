@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PVDBLL.cs" />
     <Compile Include="RegistrazioneBLL.cs" />
+    <Compile Include="RilevazioneBLL.cs" />
     <Compile Include="RvlDocumentiBLL.cs" />
     <Compile Include="SecurityBLL.cs" />
     <Compile Include="VerniciaturaBLL.cs" />

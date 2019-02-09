@@ -91,6 +91,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="RilevazioniDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RilevazioniDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="RvlDocumentiDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,6 +205,17 @@
     </None>
     <None Include="ReportDS.xss">
       <DependentUpon>ReportDS.xsd</DependentUpon>
+    </None>
+    <None Include="RilevazioniDS.xsc">
+      <DependentUpon>RilevazioniDS.xsd</DependentUpon>
+    </None>
+    <None Include="RilevazioniDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RilevazioniDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="RilevazioniDS.xss">
+      <DependentUpon>RilevazioniDS.xsd</DependentUpon>
     </None>
     <None Include="RvlDocumentiDS.xsc">
       <DependentUpon>RvlDocumentiDS.xsd</DependentUpon>

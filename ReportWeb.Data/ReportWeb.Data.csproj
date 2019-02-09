@@ -71,6 +71,8 @@
     <Compile Include="ReportWebAdapterBase.cs" />
     <Compile Include="ReportWebBusiness.cs" />
     <Compile Include="ReportWebBusinessBase.cs" />
+    <Compile Include="Rilevazione\RilevazioneAdapter.cs" />
+    <Compile Include="Rilevazione\RilevazioneBusiness.cs" />
     <Compile Include="RvlDocumenti\RvlDocumentiAdapter.cs" />
     <Compile Include="RvlDocumenti\RvlDocumentiBusiness.cs" />
     <Compile Include="SecurityAdapter.cs" />

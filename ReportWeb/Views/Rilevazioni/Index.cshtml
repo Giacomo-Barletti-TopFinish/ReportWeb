@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table>
+    <tr>
+        <td>
+            <img src="~/Content/Image/logo_MP_240X200 maggio 2018.png" />
+        </td>
+        <td><h2>Rilevazione Tempi</h2></td>
+        <td>
+            <img src="~/Content/Image/logo_TF_240X200 maggio 2018.png" />
+        </td>
+    </tr>
+</table>
+
+
+<div class="box" style="padding-left:10px" id="divBarcodeLavoratore">
+    <div class="box-body form-group-sm">
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>Barcode lavoratore</label>
+                <input type="text" id="txtBarcodeLavoratore" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="box" style="padding-left:10px" id="divBarcodeODL"></div>
+
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#txtBarcodeLavoratore").focus();
+        $("#txtBarcodeLavoratore").change(function () {
+            var barcode = $(this).val();
+            if (barcode != '') {
+                $(this).val('');
+                $(this).focus();
+
+                CaricaSchedaLavoratore(barcode);
+            }
+        });
+    });
+
+    function CaricaSchedaLavoratore(barcode)
+    {
+        var url = '@Url.Action("CaricaSchedaLavoratore", "Rilevazioni")';
+        $.ajax({
+            url: url,
+            data: { Barcode: barcode },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divBarcodeODL').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

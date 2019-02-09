@@ -154,6 +154,7 @@
     <Compile Include="Controllers\PreserieController.cs" />
     <Compile Include="Controllers\PVDController.cs" />
     <Compile Include="Controllers\RegistrazioneController.cs" />
+    <Compile Include="Controllers\RilevazioniController.cs" />
     <Compile Include="Controllers\RvlDocumentiController.cs" />
     <Compile Include="Controllers\TVController.cs" />
     <Compile Include="Controllers\VerniciaturaController.cs" />
@@ -460,6 +461,8 @@
     <Content Include="Views\Registrazione\Ingresso.cshtml" />
     <Content Include="Views\Registrazione\Uscita.cshtml" />
     <Content Include="Views\Registrazione\Index.cshtml" />
+    <Content Include="Views\Rilevazioni\Index.cshtml" />
+    <Content Include="Views\Rilevazioni\CaricaSchedaLavoratore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
