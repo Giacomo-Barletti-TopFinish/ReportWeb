@@ -31,6 +31,7 @@
 
 
 <div class="box" style="padding-left:10px" id="divBarcodeODL"></div>
+<div class="box" style="padding-left:10px" id="divStart"></div>
 
 
 
@@ -48,6 +49,10 @@
         });
     });
 
+    function Annulla() {
+         window.location.href = "@Url.Action("INDEX", "Rilevazioni")";
+    }
+
     function CaricaSchedaLavoratore(barcode)
     {
         var url = '@Url.Action("CaricaSchedaLavoratore", "Rilevazioni")';
@@ -59,6 +64,92 @@
             success: function (data)
             {
                 $('#divBarcodeODL').html(data).show();
+                $('#divBarcodeLavoratore').hide();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+     function CaricaSchedaODL(barcode)
+    {
+        var url = '@Url.Action("CaricaSchedaODL", "Rilevazioni")';
+        $.ajax({
+            url: url,
+            data: { Barcode: barcode },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divStart').html(data).show();
+                $('#divPulsanteAnnulla1').hide();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+     function Inizia()
+     {
+         var barcodeUtente = $('#hdBarcodeLavoratore').val();
+         var barcodeODL = $('#hdBarcodeODL').val();
+
+        var url = '@Url.Action("InizioAttivita", "Rilevazioni")';
+        $.ajax({
+            url: url,
+            data: { BarcodeLavoratore: barcodeUtente, BarcodeOLD: barcodeODL},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                if (data == 'True') {
+                    alert("Operazione completata con successo");
+                    Annulla();
+                }
+                else {
+                    alert("ERRORE nel salvataggio. Riprovare.");
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+     function Chiudi()
+     {
+        
+         var barcodeUtente = $('#hdBarcodeLavoratore').val();
+         var barcodeODL = $('#hdBarcodeODL').val();
+         var nota = $('#txtNota').val();
+         var qta = $('#txtQuantita').val();
+
+        var url = '@Url.Action("TerminaAttivita", "Rilevazioni")';
+        $.ajax({
+            url: url,
+            data: { BarcodeLavoratore: barcodeUtente, BarcodeOLD: barcodeODL, Nota: nota, Quantita:qta},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                if (data == 'True') {
+                    alert("Operazione completata con successo");
+                    Annulla();
+                }
+                else {
+                    alert("ERRORE nel salvataggio. Riprovare.");
+                }
             },
             error: function (response)
             {

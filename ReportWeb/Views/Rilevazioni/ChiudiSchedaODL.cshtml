@@ -1,0 +1,96 @@
+﻿
+
+@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
+@model ODLSchedaModel
+<div class="row">
+    <div class="col-md-1">@Html.Hidden("hdBarcodeLavoratore", @ViewData["BarcodeLavoratore"])</div>
+    <div class="col-md-2"><label>@ViewData["Lavoratore"]</label></div>
+</div>
+
+@switch (Model.EsitoRicerca)
+{
+    case 0:
+        <label class="text-red text-bold"> Barcode già inserito per addebito</label>
+        break;
+    case 1:
+        <label class="text-red text-bold"> Barcode non trovato</label>
+        break;
+    case 2:
+        <div class="col-md-12 text-center"><h2>SCHEDA CONTROLLO QUALITA'</h2></div>
+
+        @Html.Hidden("hdBarcodeODL", @Model.Barcode)
+
+        <div class="row">
+            <div class="col-sm-3">
+                <img id="articleImg" style="max-height:130px; max-width:100%; display: block; margin: auto;" src="@Model.ImageUrl">
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-sm-1"><label>N° Doc</label></div>
+                    <div class="col-sm-2">@Model.NumeroDocumento</div>
+                    <div class="col-sm-1"><label>Del</label></div>
+                    <div class="col-sm-3">@Model.DataDocumento</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"><label>Reparto</label></div>
+                    <div class="col-sm-2">@Model.Reparto</div>
+                    <div class="col-sm-1"><label>Barcode</label></div>
+                    <div class="col-sm-3">@Model.Barcode</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"><label>Quantità</label></div>
+                    <div class="col-sm-2">@Model.Quantita</div>
+                    <div class="col-sm-1"><label>Modello WIP</label></div>
+                    <div class="col-sm-2">@Model.Modello</div>
+                    <div class="col-sm-5">@Model.ModelloDescrizione</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"><label>Commessa</label></div>
+                    <div class="col-sm-2">@Model.Commessa</div>
+                    <div class="col-sm-1"><label>Del</label></div>
+                    <div class="col-sm-2">@Model.DataCommessa</div>
+                    <div class="col-sm-1"><label>Riferimento</label></div>
+                    <div class="col-sm-2">@Model.Riferimento</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"><label>Modello</label></div>
+                    <div class="col-sm-2">@Model.ModelloFinale</div>
+                    <div class="col-sm-5">@Model.ModelloFinaleDescrizione</div>
+                </div>
+            </div>
+        </div>
+
+        break;
+}
+
+<div class="col-sm-12"><hr /></div>
+<div class="row">
+    <div class="col-sd-1"><label>Quantità lavorata</label></div>
+    <div class="col-sm-1">
+        <input id="txtQuantita" type="number" name="txtQuantita" min="1" max="100000">
+    </div>
+    <div class="col-md-1"><label>Nota</label></div>
+    <div class="col-sm-3">
+        <input id="txtNota" type="text" name="txtNota" >
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-sm-1">
+        <input type="button" style="width:200px" onclick="Chiudi();" class="btn btn-primary" value="Termina lavorazione" />
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-sm-1">
+        <input type="button" style="width:200px" onclick="Annulla();" class="btn btn-primary" value="Annulla" />
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+
+
+    });
+
+</script>

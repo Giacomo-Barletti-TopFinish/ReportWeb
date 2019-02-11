@@ -463,6 +463,8 @@
     <Content Include="Views\Registrazione\Index.cshtml" />
     <Content Include="Views\Rilevazioni\Index.cshtml" />
     <Content Include="Views\Rilevazioni\CaricaSchedaLavoratore.cshtml" />
+    <Content Include="Views\Rilevazioni\CaricaSchedaODL.cshtml" />
+    <Content Include="Views\Rilevazioni\ChiudiSchedaODL.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

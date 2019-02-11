@@ -20,7 +20,12 @@ namespace ReportWeb.Data.Rilevazione
             a.FillUSR_PRD_RESOURCESF(ds, BARCODE);
         }
 
-
+        [DataContext]
+        public void FillRW_TEMPI_APERTI(RilevazioniDS ds, string BARCODE)
+        {
+            RilevazioneAdapter a = new RilevazioneAdapter(DbConnection, DbTransaction);
+            a.FillRW_TEMPI_APERTI(ds, BARCODE);
+        }
 
         [DataContext(true)]
         public void UpdateRW_TEMPI(RilevazioniDS ds)

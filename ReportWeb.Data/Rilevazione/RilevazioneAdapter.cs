@@ -30,6 +30,20 @@ namespace ReportWeb.Data.Rilevazione
             }
         }
 
+        public void FillRW_TEMPI_APERTI(RilevazioniDS ds, string BARCODE)
+        {
+
+            string query = @"SELECT * FROM RW_TEMPI WHERE APERTO = 1 AND BARCODE_UTENTE = $P{BARCODE}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE", DbType.String, BARCODE);
+
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(ds.RW_TEMPI);
+            }
+        }
+
         public void UpdateRegistrazioneDS(string tablename, RilevazioniDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
