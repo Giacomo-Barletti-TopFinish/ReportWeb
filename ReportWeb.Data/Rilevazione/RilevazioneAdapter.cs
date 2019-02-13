@@ -44,6 +44,17 @@ namespace ReportWeb.Data.Rilevazione
             }
         }
 
+
+        public void FillRW_TEMPI_LAVORAZIONI(RilevazioniDS ds)
+        {
+            string query = @"SELECT * FROM RW_TEMPI_LAVORAZIONI ORDER BY SEQUENZA";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.RW_TEMPI_LAVORAZIONI);
+            }
+        }
+
         public void UpdateRegistrazioneDS(string tablename, RilevazioniDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

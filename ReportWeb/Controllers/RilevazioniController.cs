@@ -1,4 +1,5 @@
 ﻿using ReportWeb.Business;
+using ReportWeb.Models;
 using ReportWeb.Models.Preserie;
 using ReportWeb.Properties;
 using System;
@@ -24,16 +25,20 @@ namespace ReportWeb.Controllers
             ViewData.Add("BarcodeLavoratore", Barcode);
             ViewData.Add("Lavoratore", lavoratore);
 
-            string barcodeODL = bll.CaricaSchedaAperto(Barcode);
-            if (string.IsNullOrEmpty(barcodeODL))
+            List<RWListItem> lavorazioni = bll.CaricaListaLavorazioni();
+            ViewData.Add("Lavorazioni", lavorazioni);
+            string barcodeODL;
+            string lavorazione = bll.CaricaSchedaAperto(Barcode, out barcodeODL);
+            if (string.IsNullOrEmpty(lavorazione))
             {
                 return PartialView("CaricaSchedaLavoratore");
             }
+            ViewData.Add("Lavorazione", lavorazione);
 
-            PreserieBLL bllPr = new PreserieBLL();
-            ODLSchedaModel model = bllPr.CaricaSchedaODL(barcodeODL, Settings.Default.RvlImageSite);
+            PreserieBLL bll1 = new PreserieBLL();
+            ODLSchedaModel model = bll1.CaricaSchedaODL(barcodeODL, Settings.Default.RvlImageSite);
 
-            return PartialView("ChiudiSchedaODL",model);
+            return PartialView("ChiudiSchedaODL", model);
 
         }
 
@@ -45,10 +50,10 @@ namespace ReportWeb.Controllers
             return PartialView("CaricaSchedaODL", model);
         }
 
-        public ActionResult InizioAttivita(string BarcodeLavoratore, string BarcodeOLD)
+        public ActionResult InizioAttivita(string BarcodeLavoratore, string BarcodeOLD, string Lavorazione)
         {
             RilevazioneBLL bll = new RilevazioneBLL();
-            bool esito = bll.InizioAttivita(BarcodeLavoratore, BarcodeOLD);
+            bool esito = bll.InizioAttivita(BarcodeLavoratore, BarcodeOLD, Lavorazione);
 
             return Content(esito.ToString());
         }

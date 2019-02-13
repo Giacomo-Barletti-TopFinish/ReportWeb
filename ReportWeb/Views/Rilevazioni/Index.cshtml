@@ -101,11 +101,11 @@
      {
          var barcodeUtente = $('#hdBarcodeLavoratore').val();
          var barcodeODL = $('#hdBarcodeODL').val();
-
+         var lavorazione = $("#ddlLavorazioni").find("option:selected").text();
         var url = '@Url.Action("InizioAttivita", "Rilevazioni")';
         $.ajax({
             url: url,
-            data: { BarcodeLavoratore: barcodeUtente, BarcodeOLD: barcodeODL},
+            data: { BarcodeLavoratore: barcodeUtente, BarcodeOLD: barcodeODL,Lavorazione:lavorazione},
             cache: false,
             type: "POST",
             success: function (data)
@@ -128,8 +128,7 @@
     }
 
      function Chiudi()
-     {
-        
+     {         
          var barcodeUtente = $('#hdBarcodeLavoratore').val();
          var barcodeODL = $('#hdBarcodeODL').val();
          var nota = $('#txtNota').val();

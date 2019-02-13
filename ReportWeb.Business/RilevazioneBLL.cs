@@ -1,5 +1,6 @@
 ﻿using ReportWeb.Data.Rilevazione;
 using ReportWeb.Entities;
+using ReportWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace ReportWeb.Business
 
         }
 
-        public bool InizioAttivita(string BarcodeLavoratore, string BarcodeOLD)
+        public bool InizioAttivita(string BarcodeLavoratore, string BarcodeOLD, string Lavorazione)
         {
             try
             {
@@ -39,6 +40,7 @@ namespace ReportWeb.Business
                     tempo.BARCODE_ODL = BarcodeOLD;
                     tempo.BARCODE_UTENTE = BarcodeLavoratore;
                     tempo.IDDATO = bRilevazione.GetID();
+                    tempo.LAVORAZIONE = (Lavorazione.Length > 100) ? Lavorazione.Substring(0, 100) : Lavorazione;
                     tempo.INIZIO = DateTime.Now;
 
                     ds.RW_TEMPI.AddRW_TEMPIRow(tempo);
@@ -82,8 +84,9 @@ namespace ReportWeb.Business
 
         }
 
-        public string CaricaSchedaAperto(string BarcodeLavoratore)
+        public string CaricaSchedaAperto(string BarcodeLavoratore, out string BarcodeOdl)
         {
+            BarcodeOdl = string.Empty;
             RilevazioniDS ds = new RilevazioniDS();
             using (RilevazioneBusiness bRilevazione = new RilevazioneBusiness())
             {
@@ -92,7 +95,18 @@ namespace ReportWeb.Business
                 RilevazioniDS.RW_TEMPIRow tempoAperto = ds.RW_TEMPI.FirstOrDefault();
                 if (tempoAperto == null) return string.Empty;
 
-                return tempoAperto.BARCODE_ODL;
+                BarcodeOdl= tempoAperto.BARCODE_ODL;
+                return tempoAperto.LAVORAZIONE;
+            }
+        }
+
+        public List<RWListItem> CaricaListaLavorazioni()
+        {
+            RilevazioniDS ds = new RilevazioniDS();
+            using (RilevazioneBusiness bRilevazione = new RilevazioneBusiness())
+            {
+                bRilevazione.FillRW_TEMPI_LAVORAZIONI(ds);
+                return (from tp in ds.RW_TEMPI_LAVORAZIONI select new RWListItem(tp.DESCRIZIONE, tp.SEQUENZA.ToString())).ToList();
             }
         }
     }

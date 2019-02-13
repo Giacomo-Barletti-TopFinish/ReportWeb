@@ -1,4 +1,4 @@
-﻿
+﻿@using ReportWeb.Models
 <div class="row">
     <div class="col-md-1">@Html.Hidden("hdBarcodeLavoratore", @ViewData["BarcodeLavoratore"])</div>
     <div class="col-md-2"><label>@ViewData["Lavoratore"]</label></div>
@@ -8,10 +8,14 @@
         <label>Barcode scheda da lavorare</label>
         <input type="text" id="txtBarcodeODL" />
     </div>
+    <div class="col-md-2">
+        <label>Lavorazione</label>
+        @Html.DropDownList("ddlLavorazioni", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 30px;" })
+    </div>
 </div>
 <br />
 <div class="row" id="divPulsanteAnnulla1">
-  
+
     <div class="col-sm-1">
         <input type="button" style="width:100px" onclick="Annulla();" class="btn btn-primary" value="Annulla" />
     </div>
@@ -19,6 +23,7 @@
 
 <script language="javascript" type="text/javascript">
     $(function () {
+        $('#ddlLavorazioni').val('0');
         $("#txtBarcodeODL").focus();
         $("#txtBarcodeODL").change(function () {
             var barcode = $(this).val();
