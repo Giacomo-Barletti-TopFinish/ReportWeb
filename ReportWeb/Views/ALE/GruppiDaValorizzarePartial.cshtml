@@ -135,9 +135,10 @@ else
     {
         $(".RWPrezzo").change(function ()
         {
+            
             var trPrezzo = $(this).closest('tr');
             var tds = trPrezzo.find('td');
-            var quantita = $(tds[3]).text();
+            var quantita = $(tds[4]).text();
             prezzo = $(this).val();
             var prezzoValue = parseFloat(prezzo);
             var valore = prezzoValue * quantita;
@@ -158,6 +159,7 @@ else
 
     function CalcolaTotale(trPrezzo)
     {
+        
         var table = $(trPrezzo).parent();
         var trs = $(table).find('tr');
         var trTotali = $('.RWTotali', table);
