@@ -14,7 +14,7 @@
   <xs:element name="RegistrazioneDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RegistrazioneDS" msprop:Generator_UserDSName="RegistrazioneDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="RW_REGISTRAZIONE" msprop:Generator_TableClassName="RW_REGISTRAZIONEDataTable" msprop:Generator_TableVarName="tableRW_REGISTRAZIONE" msprop:Generator_TablePropName="RW_REGISTRAZIONE" msprop:Generator_RowDeletingName="RW_REGISTRAZIONERowDeleting" msprop:Generator_RowChangingName="RW_REGISTRAZIONERowChanging" msprop:Generator_RowEvHandlerName="RW_REGISTRAZIONERowChangeEventHandler" msprop:Generator_RowDeletedName="RW_REGISTRAZIONERowDeleted" msprop:Generator_UserTableName="RW_REGISTRAZIONE" msprop:Generator_RowChangedName="RW_REGISTRAZIONERowChanged" msprop:Generator_RowEvArgName="RW_REGISTRAZIONERowChangeEvent" msprop:Generator_RowClassName="RW_REGISTRAZIONERow">
+        <xs:element name="RW_REGISTRAZIONE" msprop:Generator_TableClassName="RW_REGISTRAZIONEDataTable" msprop:Generator_TableVarName="tableRW_REGISTRAZIONE" msprop:Generator_RowChangedName="RW_REGISTRAZIONERowChanged" msprop:Generator_TablePropName="RW_REGISTRAZIONE" msprop:Generator_RowDeletingName="RW_REGISTRAZIONERowDeleting" msprop:Generator_RowChangingName="RW_REGISTRAZIONERowChanging" msprop:Generator_RowEvHandlerName="RW_REGISTRAZIONERowChangeEventHandler" msprop:Generator_RowDeletedName="RW_REGISTRAZIONERowDeleted" msprop:Generator_RowClassName="RW_REGISTRAZIONERow" msprop:Generator_UserTableName="RW_REGISTRAZIONE" msprop:Generator_RowEvArgName="RW_REGISTRAZIONERowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDREGISTRAZIONE" msprop:Generator_ColumnVarNameInTable="columnIDREGISTRAZIONE" msprop:Generator_ColumnPropNameInRow="IDREGISTRAZIONE" msprop:Generator_ColumnPropNameInTable="IDREGISTRAZIONEColumn" msprop:Generator_UserColumnName="IDREGISTRAZIONE" type="xs:decimal" minOccurs="0" />
@@ -62,6 +62,14 @@
               </xs:element>
               <xs:element name="INGRESSO" msprop:Generator_ColumnVarNameInTable="columnINGRESSO" msprop:Generator_ColumnPropNameInRow="INGRESSO" msprop:Generator_ColumnPropNameInTable="INGRESSOColumn" msprop:Generator_UserColumnName="INGRESSO" type="xs:dateTime" />
               <xs:element name="USCITA" msprop:Generator_ColumnVarNameInTable="columnUSCITA" msprop:Generator_ColumnPropNameInRow="USCITA" msprop:Generator_ColumnPropNameInTable="USCITAColumn" msprop:Generator_UserColumnName="USCITA" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TESSERA" msprop:Generator_ColumnVarNameInTable="columnTESSERA" msprop:Generator_ColumnPropNameInRow="TESSERA" msprop:Generator_ColumnPropNameInTable="TESSERAColumn" msprop:Generator_UserColumnName="TESSERA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DITTA" msprop:Generator_ColumnVarNameInTable="columnDITTA" msprop:Generator_ColumnPropNameInRow="DITTA" msprop:Generator_ColumnPropNameInTable="DITTAColumn" msprop:Generator_UserColumnName="DITTA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -50,9 +50,27 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-2">
+                <label>Azienda visitata</label><br />
+                <select class="form-control" style="height:30px" id="txtDitta">
+                    <option selected value="Metal-plus">Metal-plus</option>
+                    <option value="Topfinish">Topfinish</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label>Numero tessera visitatore</label><br />
+                <input autocomplete="off" type="number" min="1" max="99" class="form-control" id="txtTessera" maxlength="30">
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-2">
                 <label class="text-red input-sm" id="lblMessage2"></label><br />
                 <input type="button" onclick="Salva();" class="btn btn-primary" value="Registra ingresso" />
+            </div>
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-2">
+                <input type="button" onclick="Ritorna();" class="btn btn-primary" value="Torna indietro" />
             </div>
         </div>
     </div>
@@ -83,6 +101,15 @@
 
         var azienda = $('#txtAzienda').val();
         if (azienda == null) azienda = '';
+
+        var ditta = $('#txtDitta').val();
+        if (ditta == null) ditta = '';
+
+        var tessera = $('#txtTessera').val();
+        if (tessera == null || tessera == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Numero tessera " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
 
         var tipo = $('#txtTipo').val();
         if (tipo == null || tipo == '')
@@ -119,6 +146,8 @@
                 Tipo: tipo,
                 Numero: numero,
                 Referente: referente,
+                Tessera: tessera,
+                Ditta: ditta
             },
             cache: false,
             type: "POST",
@@ -149,5 +178,7 @@
         $('#txtNumero').val('');
         $('#txtReferente').val('');
     }
-
+      function Ritorna() {
+            window.location.href = "@Url.Action("INDEX", "Registrazione")";
+    }
 </script>

@@ -297,6 +297,10 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnUSCITA;
             
+            private global::System.Data.DataColumn columnTESSERA;
+            
+            private global::System.Data.DataColumn columnDITTA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public RW_REGISTRAZIONEDataTable() {
@@ -404,6 +408,22 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn TESSERAColumn {
+                get {
+                    return this.columnTESSERA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DITTAColumn {
+                get {
+                    return this.columnDITTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -439,7 +459,7 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_REGISTRAZIONERow AddRW_REGISTRAZIONERow(decimal IDREGISTRAZIONE, string NOME, string COGNOME, string AZIENDA, string DOCUMENTO, string TIPODOCUMENTO, string REFERENTE, System.DateTime INGRESSO, System.DateTime USCITA) {
+            public RW_REGISTRAZIONERow AddRW_REGISTRAZIONERow(decimal IDREGISTRAZIONE, string NOME, string COGNOME, string AZIENDA, string DOCUMENTO, string TIPODOCUMENTO, string REFERENTE, System.DateTime INGRESSO, System.DateTime USCITA, decimal TESSERA, string DITTA) {
                 RW_REGISTRAZIONERow rowRW_REGISTRAZIONERow = ((RW_REGISTRAZIONERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDREGISTRAZIONE,
@@ -450,7 +470,9 @@ namespace ReportWeb.Entities {
                         TIPODOCUMENTO,
                         REFERENTE,
                         INGRESSO,
-                        USCITA};
+                        USCITA,
+                        TESSERA,
+                        DITTA};
                 rowRW_REGISTRAZIONERow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRW_REGISTRAZIONERow);
                 return rowRW_REGISTRAZIONERow;
@@ -482,6 +504,8 @@ namespace ReportWeb.Entities {
                 this.columnREFERENTE = base.Columns["REFERENTE"];
                 this.columnINGRESSO = base.Columns["INGRESSO"];
                 this.columnUSCITA = base.Columns["USCITA"];
+                this.columnTESSERA = base.Columns["TESSERA"];
+                this.columnDITTA = base.Columns["DITTA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -505,6 +529,10 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnINGRESSO);
                 this.columnUSCITA = new global::System.Data.DataColumn("USCITA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUSCITA);
+                this.columnTESSERA = new global::System.Data.DataColumn("TESSERA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTESSERA);
+                this.columnDITTA = new global::System.Data.DataColumn("DITTA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDITTA);
                 this.columnNOME.AllowDBNull = false;
                 this.columnNOME.MaxLength = 30;
                 this.columnCOGNOME.AllowDBNull = false;
@@ -515,6 +543,8 @@ namespace ReportWeb.Entities {
                 this.columnREFERENTE.AllowDBNull = false;
                 this.columnREFERENTE.MaxLength = 100;
                 this.columnINGRESSO.AllowDBNull = false;
+                this.columnDITTA.AllowDBNull = false;
+                this.columnDITTA.MaxLength = 20;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -781,6 +811,33 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal TESSERA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_REGISTRAZIONE.TESSERAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TESSERA\' in table \'RW_REGISTRAZIONE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_REGISTRAZIONE.TESSERAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DITTA {
+                get {
+                    return ((string)(this[this.tableRW_REGISTRAZIONE.DITTAColumn]));
+                }
+                set {
+                    this[this.tableRW_REGISTRAZIONE.DITTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDREGISTRAZIONENull() {
                 return this.IsNull(this.tableRW_REGISTRAZIONE.IDREGISTRAZIONEColumn);
             }
@@ -837,6 +894,18 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetUSCITANull() {
                 this[this.tableRW_REGISTRAZIONE.USCITAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsTESSERANull() {
+                return this.IsNull(this.tableRW_REGISTRAZIONE.TESSERAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetTESSERANull() {
+                this[this.tableRW_REGISTRAZIONE.TESSERAColumn] = global::System.Convert.DBNull;
             }
         }
         

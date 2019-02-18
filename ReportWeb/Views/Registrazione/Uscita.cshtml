@@ -1,4 +1,5 @@
-﻿@model  List<Tuple<decimal, string, string>>
+﻿@using ReportWeb.Models
+@model List<Registrazione>
 @{
     ViewBag.Title = "Uscita";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,24 +20,37 @@
     <div class="box-body form-group-sm">
         @if (Model.Count > 0)
         {
-            foreach (Tuple<decimal, string, string> utente in Model)
+            foreach (Registrazione utente in Model)
             {
                 <div class="row">
 
                     <div class="col-sm-2">
                         <label class="text-red input-sm" id="lblMessage3"></label><br />
-                        <h5>@utente.Item2</h5>
+                        <h5>@utente.Nome</h5>
                     </div>
                     <div class="col-sm-1">
                         <label class="text-red input-sm" id="lblMessage5"></label><br />
-                        <h5>@utente.Item3</h5>
+                        <h5>@utente.Data</h5>
+                    </div>
+                    <div class="col-sm-1">
+                        <label class="text-red input-sm" id="lblMessage5"></label><br />
+                        <h5>@utente.Ditta</h5>
+                    </div>
+                    <div class="col-sm-1">
+                        <label class="text-red input-sm" id="lblMessage5"></label><br />
+                        <h5>@utente.Tessera</h5>
                     </div>
                     <div class="col-sm-2">
                         <label class="text-red input-sm" id="lblMessage2"></label><br />
-                        <input type="button" onclick="RegistraUscita(@utente.Item1);" class="btn btn-primary" value="Registra uscita" />
+                        <input type="button" onclick="RegistraUscita(@utente.IDREGISTRAZIONE);" class="btn btn-primary" value="Registra uscita" />
                     </div>
                 </div>
             }
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-2">
+                <input type="button" onclick="Ritorna();" class="btn btn-primary" value="Torna indietro" />
+            </div>
         }
         else
         {

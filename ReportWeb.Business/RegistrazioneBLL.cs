@@ -1,5 +1,6 @@
 ﻿using ReportWeb.Data.Registrazione;
 using ReportWeb.Entities;
+using ReportWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace ReportWeb.Business
 {
     public class RegistrazioneBLL
     {
-        public List<Tuple<decimal, string, string>> FillRW_REGISTRAZIONE()
+        public List<Registrazione> FillRW_REGISTRAZIONE()
         {
             RegistrazioneDS ds = new RegistrazioneDS();
             using (RegistrazioneBusiness bRegistrazione = new RegistrazioneBusiness())
@@ -18,19 +19,41 @@ namespace ReportWeb.Business
                 bRegistrazione.FillRW_REGISTRAZIONE(ds);
             }
 
-            List<Tuple<decimal, string, string>> utentiRegistrati = new List<Tuple<decimal, string, string>>();
+            List<Registrazione> utentiRegistrati = new List<Registrazione>();
             foreach (RegistrazioneDS.RW_REGISTRAZIONERow utenteRegistrato in ds.RW_REGISTRAZIONE.OrderBy(x => x.COGNOME))
             {
                 string nome = string.Format("{0} {1}", utenteRegistrato.NOME, utenteRegistrato.COGNOME);
                 string data = string.Format("{0} {1}", utenteRegistrato.INGRESSO.ToShortDateString(), utenteRegistrato.INGRESSO.ToShortTimeString());
-                Tuple<decimal, string, string> utente = new Tuple<decimal, string, string>(utenteRegistrato.IDREGISTRAZIONE, nome, data);
+                decimal tessera = utenteRegistrato.IsTESSERANull() ? -1 : utenteRegistrato.TESSERA;
+                Registrazione utente = new Registrazione()
+                {
+                    Data = data,
+                    Ditta = utenteRegistrato.DITTA,
+                    IDREGISTRAZIONE = utenteRegistrato.IDREGISTRAZIONE,
+                    Nome = nome,
+                    Tessera = tessera
+                };
+
                 utentiRegistrati.Add(utente);
             }
 
             return utentiRegistrati;
         }
 
-        public bool RegistraIngresso(string Cognome, string Nome, string Azienda, string Tipo, string Numero, string Referente, out string messaggio)
+
+        public bool VerificaTesseraInUso(decimal tessera)
+        {
+            RegistrazioneDS ds = new RegistrazioneDS();
+            using (RegistrazioneBusiness bRegistrazione = new RegistrazioneBusiness())
+            {
+                bRegistrazione.FillRW_REGISTRAZIONE(ds);
+            }
+
+            return ds.RW_REGISTRAZIONE.Any(x => x.IsUSCITANull() && !x.IsTESSERANull() && x.TESSERA == tessera);
+
+        }
+
+        public bool RegistraIngresso(string Cognome, string Nome, string Azienda, string Tipo, string Numero, string Referente, Decimal Tessera, string Ditta, out string messaggio)
         {
             messaggio = string.Empty;
             RegistrazioneDS ds = new RegistrazioneDS();
@@ -57,6 +80,9 @@ namespace ReportWeb.Business
 
                 if (!string.IsNullOrEmpty(Numero))
                     registrazione.DOCUMENTO = Numero;
+
+                registrazione.TESSERA = Tessera;
+                registrazione.DITTA = Ditta;
 
                 ds.RW_REGISTRAZIONE.AddRW_REGISTRAZIONERow(registrazione);
                 bRegistrazione.UpdateRW_REGISTRAZIONE(ds);

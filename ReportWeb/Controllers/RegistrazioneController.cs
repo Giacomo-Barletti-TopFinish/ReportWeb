@@ -1,4 +1,5 @@
 ﻿using ReportWeb.Business;
+using ReportWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +19,23 @@ namespace ReportWeb.Controllers
             return View();
         }
         public ActionResult Uscita()
-        {            
+        {
             RegistrazioneBLL bll = new RegistrazioneBLL();
-            List<Tuple<decimal, string, string>> utenti = bll.FillRW_REGISTRAZIONE();
-
-
+            List<Registrazione> utenti = bll.FillRW_REGISTRAZIONE();
 
             return View(utenti);
         }
 
-        public ActionResult RegistraIngresso(string Cognome, string Nome, string Azienda, string Tipo, string Numero, string Referente)
+        public ActionResult RegistraIngresso(string Cognome, string Nome, string Azienda, string Tipo, string Numero, string Referente, decimal Tessera, string Ditta)
         {
             string messaggio;
             RegistrazioneBLL bll = new RegistrazioneBLL();
-            bool esito = bll.RegistraIngresso(Cognome.Trim().ToUpper(), Nome.Trim().ToUpper(), Azienda.Trim().ToUpper(), Tipo.Trim().ToUpper(), Numero.Trim().ToUpper(), Referente.Trim().ToUpper(), out messaggio);
+            if (bll.VerificaTesseraInUso(Tessera))
+            {
+                return Content("Tessera visitatore già in uso. Selezionare una tessera diversa.");
+            }
+
+            bool esito = bll.RegistraIngresso(Cognome.Trim().ToUpper(), Nome.Trim().ToUpper(), Azienda.Trim().ToUpper(), Tipo.Trim().ToUpper(), Numero.Trim().ToUpper(), Referente.Trim().ToUpper(), Tessera, Ditta, out messaggio);
             return Content(esito ? string.Empty : messaggio);
 
         }
