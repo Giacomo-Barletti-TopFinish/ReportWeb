@@ -15,7 +15,7 @@
   <xs:element name="RilevazioniDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RilevazioniDS" msprop:Generator_UserDSName="RilevazioniDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="USR_PRD_RESOURCESF" msprop:Generator_TableClassName="USR_PRD_RESOURCESFDataTable" msprop:Generator_TableVarName="tableUSR_PRD_RESOURCESF" msprop:Generator_RowChangedName="USR_PRD_RESOURCESFRowChanged" msprop:Generator_TablePropName="USR_PRD_RESOURCESF" msprop:Generator_RowDeletingName="USR_PRD_RESOURCESFRowDeleting" msprop:Generator_RowChangingName="USR_PRD_RESOURCESFRowChanging" msprop:Generator_RowEvHandlerName="USR_PRD_RESOURCESFRowChangeEventHandler" msprop:Generator_RowDeletedName="USR_PRD_RESOURCESFRowDeleted" msprop:Generator_RowClassName="USR_PRD_RESOURCESFRow" msprop:Generator_UserTableName="USR_PRD_RESOURCESF" msprop:Generator_RowEvArgName="USR_PRD_RESOURCESFRowChangeEvent">
+        <xs:element name="USR_PRD_RESOURCESF" msprop:Generator_TableClassName="USR_PRD_RESOURCESFDataTable" msprop:Generator_TableVarName="tableUSR_PRD_RESOURCESF" msprop:Generator_TablePropName="USR_PRD_RESOURCESF" msprop:Generator_RowDeletingName="USR_PRD_RESOURCESFRowDeleting" msprop:Generator_RowChangingName="USR_PRD_RESOURCESFRowChanging" msprop:Generator_RowEvHandlerName="USR_PRD_RESOURCESFRowChangeEventHandler" msprop:Generator_RowDeletedName="USR_PRD_RESOURCESFRowDeleted" msprop:Generator_UserTableName="USR_PRD_RESOURCESF" msprop:Generator_RowChangedName="USR_PRD_RESOURCESFRowChanged" msprop:Generator_RowEvArgName="USR_PRD_RESOURCESFRowChangeEvent" msprop:Generator_RowClassName="USR_PRD_RESOURCESFRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDRESOURCEF" msprop:Generator_ColumnVarNameInTable="columnIDRESOURCEF" msprop:Generator_ColumnPropNameInRow="IDRESOURCEF" msprop:Generator_ColumnPropNameInTable="IDRESOURCEFColumn" msprop:Generator_UserColumnName="IDRESOURCEF">
@@ -93,7 +93,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="USR_PRD_MOVFASI" msprop:Generator_TableClassName="USR_PRD_MOVFASIDataTable" msprop:Generator_TableVarName="tableUSR_PRD_MOVFASI" msprop:Generator_RowChangedName="USR_PRD_MOVFASIRowChanged" msprop:Generator_TablePropName="USR_PRD_MOVFASI" msprop:Generator_RowDeletingName="USR_PRD_MOVFASIRowDeleting" msprop:Generator_RowChangingName="USR_PRD_MOVFASIRowChanging" msprop:Generator_RowEvHandlerName="USR_PRD_MOVFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="USR_PRD_MOVFASIRowDeleted" msprop:Generator_RowClassName="USR_PRD_MOVFASIRow" msprop:Generator_UserTableName="USR_PRD_MOVFASI" msprop:Generator_RowEvArgName="USR_PRD_MOVFASIRowChangeEvent">
+        <xs:element name="USR_PRD_MOVFASI" msprop:Generator_TableClassName="USR_PRD_MOVFASIDataTable" msprop:Generator_TableVarName="tableUSR_PRD_MOVFASI" msprop:Generator_TablePropName="USR_PRD_MOVFASI" msprop:Generator_RowDeletingName="USR_PRD_MOVFASIRowDeleting" msprop:Generator_RowChangingName="USR_PRD_MOVFASIRowChanging" msprop:Generator_RowEvHandlerName="USR_PRD_MOVFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="USR_PRD_MOVFASIRowDeleted" msprop:Generator_UserTableName="USR_PRD_MOVFASI" msprop:Generator_RowChangedName="USR_PRD_MOVFASIRowChanged" msprop:Generator_RowEvArgName="USR_PRD_MOVFASIRowChangeEvent" msprop:Generator_RowClassName="USR_PRD_MOVFASIRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="AZIENDA" msprop:Generator_ColumnVarNameInTable="columnAZIENDA" msprop:Generator_ColumnPropNameInRow="AZIENDA" msprop:Generator_ColumnPropNameInTable="AZIENDAColumn" msprop:Generator_UserColumnName="AZIENDA" minOccurs="0">
@@ -408,18 +408,18 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="RW_TEMPI" msprop:Generator_TableClassName="RW_TEMPIDataTable" msprop:Generator_TableVarName="tableRW_TEMPI" msprop:Generator_TablePropName="RW_TEMPI" msprop:Generator_RowDeletingName="RW_TEMPIRowDeleting" msprop:Generator_RowChangingName="RW_TEMPIRowChanging" msprop:Generator_RowEvHandlerName="RW_TEMPIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_TEMPIRowDeleted" msprop:Generator_UserTableName="RW_TEMPI" msprop:Generator_RowChangedName="RW_TEMPIRowChanged" msprop:Generator_RowEvArgName="RW_TEMPIRowChangeEvent" msprop:Generator_RowClassName="RW_TEMPIRow">
+        <xs:element name="RW_TEMPI" msprop:Generator_TableClassName="RW_TEMPIDataTable" msprop:Generator_TableVarName="tableRW_TEMPI" msprop:Generator_RowChangedName="RW_TEMPIRowChanged" msprop:Generator_TablePropName="RW_TEMPI" msprop:Generator_RowDeletingName="RW_TEMPIRowDeleting" msprop:Generator_RowChangingName="RW_TEMPIRowChanging" msprop:Generator_RowEvHandlerName="RW_TEMPIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_TEMPIRowDeleted" msprop:Generator_RowClassName="RW_TEMPIRow" msprop:Generator_UserTableName="RW_TEMPI" msprop:Generator_RowEvArgName="RW_TEMPIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDDATO" msprop:Generator_ColumnVarNameInTable="columnIDDATO" msprop:Generator_ColumnPropNameInRow="IDDATO" msprop:Generator_ColumnPropNameInTable="IDDATOColumn" msprop:Generator_UserColumnName="IDDATO" type="xs:decimal" />
-              <xs:element name="BARCODE_UTENTE" msprop:Generator_ColumnVarNameInTable="columnBARCODE_UTENTE" msprop:Generator_ColumnPropNameInRow="BARCODE_UTENTE" msprop:Generator_ColumnPropNameInTable="BARCODE_UTENTEColumn" msprop:Generator_UserColumnName="BARCODE_UTENTE">
+              <xs:element name="BARCODE_UTENTE" msprop:Generator_ColumnVarNameInTable="columnBARCODE_UTENTE" msprop:Generator_ColumnPropNameInRow="BARCODE_UTENTE" msprop:Generator_ColumnPropNameInTable="BARCODE_UTENTEColumn" msprop:Generator_UserColumnName="BARCODE_UTENTE" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="13" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="BARCODE_ODL" msprop:Generator_ColumnVarNameInTable="columnBARCODE_ODL" msprop:Generator_ColumnPropNameInRow="BARCODE_ODL" msprop:Generator_ColumnPropNameInTable="BARCODE_ODLColumn" msprop:Generator_UserColumnName="BARCODE_ODL">
+              <xs:element name="BARCODE_ODL" msprop:Generator_ColumnVarNameInTable="columnBARCODE_ODL" msprop:Generator_ColumnPropNameInRow="BARCODE_ODL" msprop:Generator_ColumnPropNameInTable="BARCODE_ODLColumn" msprop:Generator_UserColumnName="BARCODE_ODL" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="13" />
@@ -437,6 +437,13 @@
               <xs:element name="INIZIO" msprop:Generator_ColumnVarNameInTable="columnINIZIO" msprop:Generator_ColumnPropNameInRow="INIZIO" msprop:Generator_ColumnPropNameInTable="INIZIOColumn" msprop:Generator_UserColumnName="INIZIO" type="xs:dateTime" />
               <xs:element name="FINE" msprop:Generator_ColumnVarNameInTable="columnFINE" msprop:Generator_ColumnPropNameInRow="FINE" msprop:Generator_ColumnPropNameInTable="FINEColumn" msprop:Generator_UserColumnName="FINE" type="xs:dateTime" minOccurs="0" />
               <xs:element name="QUANTITA" msprop:Generator_ColumnVarNameInTable="columnQUANTITA" msprop:Generator_ColumnPropNameInRow="QUANTITA" msprop:Generator_ColumnPropNameInTable="QUANTITAColumn" msprop:Generator_UserColumnName="QUANTITA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="NOTA" msprop:Generator_ColumnVarNameInTable="columnNOTA" msprop:Generator_ColumnPropNameInRow="NOTA" msprop:Generator_ColumnPropNameInTable="NOTAColumn" msprop:Generator_UserColumnName="NOTA" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -447,7 +454,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="RW_TEMPI_LAVORAZIONI" msprop:Generator_TableClassName="RW_TEMPI_LAVORAZIONIDataTable" msprop:Generator_TableVarName="tableRW_TEMPI_LAVORAZIONI" msprop:Generator_TablePropName="RW_TEMPI_LAVORAZIONI" msprop:Generator_RowDeletingName="RW_TEMPI_LAVORAZIONIRowDeleting" msprop:Generator_RowChangingName="RW_TEMPI_LAVORAZIONIRowChanging" msprop:Generator_RowEvHandlerName="RW_TEMPI_LAVORAZIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_TEMPI_LAVORAZIONIRowDeleted" msprop:Generator_UserTableName="RW_TEMPI_LAVORAZIONI" msprop:Generator_RowChangedName="RW_TEMPI_LAVORAZIONIRowChanged" msprop:Generator_RowEvArgName="RW_TEMPI_LAVORAZIONIRowChangeEvent" msprop:Generator_RowClassName="RW_TEMPI_LAVORAZIONIRow">
+        <xs:element name="RW_TEMPI_LAVORAZIONI" msprop:Generator_TableClassName="RW_TEMPI_LAVORAZIONIDataTable" msprop:Generator_TableVarName="tableRW_TEMPI_LAVORAZIONI" msprop:Generator_RowChangedName="RW_TEMPI_LAVORAZIONIRowChanged" msprop:Generator_TablePropName="RW_TEMPI_LAVORAZIONI" msprop:Generator_RowDeletingName="RW_TEMPI_LAVORAZIONIRowDeleting" msprop:Generator_RowChangingName="RW_TEMPI_LAVORAZIONIRowChanging" msprop:Generator_RowEvHandlerName="RW_TEMPI_LAVORAZIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_TEMPI_LAVORAZIONIRowDeleted" msprop:Generator_RowClassName="RW_TEMPI_LAVORAZIONIRow" msprop:Generator_UserTableName="RW_TEMPI_LAVORAZIONI" msprop:Generator_RowEvArgName="RW_TEMPI_LAVORAZIONIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
@@ -461,11 +468,36 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="RW_TEMPI_REPARTI" msprop:Generator_TableClassName="RW_TEMPI_REPARTIDataTable" msprop:Generator_TableVarName="tableRW_TEMPI_REPARTI" msprop:Generator_TablePropName="RW_TEMPI_REPARTI" msprop:Generator_RowDeletingName="RW_TEMPI_REPARTIRowDeleting" msprop:Generator_RowChangingName="RW_TEMPI_REPARTIRowChanging" msprop:Generator_RowEvHandlerName="RW_TEMPI_REPARTIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_TEMPI_REPARTIRowDeleted" msprop:Generator_UserTableName="RW_TEMPI_REPARTI" msprop:Generator_RowChangedName="RW_TEMPI_REPARTIRowChanged" msprop:Generator_RowEvArgName="RW_TEMPI_REPARTIRowChangeEvent" msprop:Generator_RowClassName="RW_TEMPI_REPARTIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="REPARTO" msprop:Generator_ColumnVarNameInTable="columnREPARTO" msprop:Generator_ColumnPropNameInRow="REPARTO" msprop:Generator_ColumnPropNameInTable="REPARTOColumn" msprop:Generator_UserColumnName="REPARTO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:USR_PRD_RESOURCESF" />
       <xs:field xpath="mstns:IDRESOURCEF" />
+    </xs:unique>
+    <xs:unique name="RW_TEMPI_REPARTI_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:RW_TEMPI_REPARTI" />
+      <xs:field xpath="mstns:REPARTO" />
+      <xs:field xpath="mstns:UTENTE" />
     </xs:unique>
   </xs:element>
 </xs:schema>

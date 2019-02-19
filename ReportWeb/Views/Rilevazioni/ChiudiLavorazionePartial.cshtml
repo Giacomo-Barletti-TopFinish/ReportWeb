@@ -1,0 +1,27 @@
+﻿
+@using ReportWeb.Models
+<div class="col-md-12">
+    <h3>Chiudi lavorazione</h3>
+    <div class="row">
+        <div class="col-sm-1">Utente</div>
+        <div class="col-sm-3">@ViewData["Utente"]</div>
+        <div class="col-sm-1">Lavorazione</div>
+        <div class="col-sm-4">@ViewData["Lavorazione"]</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"><label>Quantità lavorata</label></div>
+        <div class="col-sm-2">
+            <input id="txtQuantita" type="number" name="txtQuantita" min="1" max="100000" value="0">
+        </div>
+        <div class="col-sm-1"><label>Nota</label></div>
+        <div class="col-sm-3">
+            <input id="txtNota" type="text" name="txtNota">
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <input type="button" style="width:200px" onclick="ChiudiLavorazioneUtente('@ViewData["Utente"]');" class="btn btn-primary" value="Termina lavorazione" />
+        <label id="lblMessaggio"></label>
+    </div>
+
+</div>

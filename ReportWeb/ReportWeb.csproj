@@ -469,6 +469,9 @@
     <Content Include="Views\Rilevazioni\CaricaSchedaLavoratore.cshtml" />
     <Content Include="Views\Rilevazioni\CaricaSchedaODL.cshtml" />
     <Content Include="Views\Rilevazioni\ChiudiSchedaODL.cshtml" />
+    <Content Include="Views\Rilevazioni\Reparto.cshtml" />
+    <Content Include="Views\Rilevazioni\ApriLavorazionePartial.cshtml" />
+    <Content Include="Views\Rilevazioni\ChiudiLavorazionePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

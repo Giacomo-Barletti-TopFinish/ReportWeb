@@ -28,6 +28,16 @@ namespace ReportWeb.Business
 
         }
 
+        public List<string> GetUtentiPerReparto(string Reparto)
+        {
+            RilevazioniDS ds = new RilevazioniDS();
+            using (RilevazioneBusiness bRilevazione = new RilevazioneBusiness())
+            {
+                bRilevazione.FillRW_TEMPI_REPARTI(ds);
+                return ds.RW_TEMPI_REPARTI.Where(x => x.REPARTO == Reparto).Select(x => x.UTENTE).ToList();
+            }
+        }
+
         public bool InizioAttivita(string BarcodeLavoratore, string BarcodeOLD, string Lavorazione)
         {
             try
@@ -39,6 +49,33 @@ namespace ReportWeb.Business
                     tempo.APERTO = 1;
                     tempo.BARCODE_ODL = BarcodeOLD;
                     tempo.BARCODE_UTENTE = BarcodeLavoratore;
+                    tempo.IDDATO = bRilevazione.GetID();
+                    tempo.LAVORAZIONE = (Lavorazione.Length > 100) ? Lavorazione.Substring(0, 100) : Lavorazione;
+                    tempo.INIZIO = DateTime.Now;
+
+                    ds.RW_TEMPI.AddRW_TEMPIRow(tempo);
+                    bRilevazione.UpdateRW_TEMPI(ds);
+
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public bool InizioAttivita(string Utente, string Lavorazione)
+        {
+            try
+            {
+                RilevazioniDS ds = new RilevazioniDS();
+                using (RilevazioneBusiness bRilevazione = new RilevazioneBusiness())
+                {
+                    RilevazioniDS.RW_TEMPIRow tempo = ds.RW_TEMPI.NewRW_TEMPIRow();
+                    tempo.APERTO = 1;
+                    tempo.UTENTE = Utente;
                     tempo.IDDATO = bRilevazione.GetID();
                     tempo.LAVORAZIONE = (Lavorazione.Length > 100) ? Lavorazione.Substring(0, 100) : Lavorazione;
                     tempo.INIZIO = DateTime.Now;
@@ -84,6 +121,32 @@ namespace ReportWeb.Business
 
         }
 
+        public bool TerminaAttivita(string Utente, string Nota, decimal Quantita)
+        {
+            try
+            {
+                RilevazioniDS ds = new RilevazioniDS();
+                using (RilevazioneBusiness bRilevazione = new RilevazioneBusiness())
+                {
+                    bRilevazione.FillRW_TEMPI_APERTI_PER_UTENTE(ds, Utente);
+                    RilevazioniDS.RW_TEMPIRow tempo = ds.RW_TEMPI.FirstOrDefault();
+
+                    tempo.APERTO = 0;
+                    tempo.FINE = DateTime.Now;
+                    tempo.NOTA = Nota.Length > 100 ? Nota.Substring(0, 100) : Nota;
+                    tempo.QUANTITA = Quantita;
+
+                    bRilevazione.UpdateRW_TEMPI(ds);
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
         public string CaricaSchedaAperto(string BarcodeLavoratore, out string BarcodeOdl)
         {
             BarcodeOdl = string.Empty;
@@ -95,7 +158,21 @@ namespace ReportWeb.Business
                 RilevazioniDS.RW_TEMPIRow tempoAperto = ds.RW_TEMPI.FirstOrDefault();
                 if (tempoAperto == null) return string.Empty;
 
-                BarcodeOdl= tempoAperto.BARCODE_ODL;
+                BarcodeOdl = tempoAperto.BARCODE_ODL;
+                return tempoAperto.LAVORAZIONE;
+            }
+        }
+
+        public string CaricaSchedaAperto(string Utente)
+        {
+            RilevazioniDS ds = new RilevazioniDS();
+            using (RilevazioneBusiness bRilevazione = new RilevazioneBusiness())
+            {
+                bRilevazione.FillRW_TEMPI_APERTI_PER_UTENTE(ds, Utente);
+
+                RilevazioniDS.RW_TEMPIRow tempoAperto = ds.RW_TEMPI.FirstOrDefault();
+                if (tempoAperto == null) return string.Empty;
+
                 return tempoAperto.LAVORAZIONE;
             }
         }

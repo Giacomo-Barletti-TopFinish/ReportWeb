@@ -28,6 +28,13 @@ namespace ReportWeb.Data.Rilevazione
         }
 
         [DataContext]
+        public void FillRW_TEMPI_APERTI_PER_UTENTE(RilevazioniDS ds, string Utente)
+        {
+            RilevazioneAdapter a = new RilevazioneAdapter(DbConnection, DbTransaction);
+            a.FillRW_TEMPI_APERTI_PER_UTENTE(ds, Utente);
+        }
+
+        [DataContext]
         public void FillRW_TEMPI_LAVORAZIONI(RilevazioniDS ds)
         {
             RilevazioneAdapter a = new RilevazioneAdapter(DbConnection, DbTransaction);
@@ -39,6 +46,13 @@ namespace ReportWeb.Data.Rilevazione
         {
             RilevazioneAdapter a = new RilevazioneAdapter(DbConnection, DbTransaction);
             a.UpdateRegistrazioneDS(ds.RW_TEMPI.TableName, ds);
+        }
+
+        [DataContext]
+        public void FillRW_TEMPI_REPARTI(RilevazioniDS ds)
+        {
+            RilevazioneAdapter a = new RilevazioneAdapter(DbConnection, DbTransaction);
+            a.FillRW_TEMPI_REPARTI(ds);
         }
     }
 }

@@ -1,0 +1,169 @@
+﻿@model List<string>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table>
+    <tr>
+        <td>
+            <img height="100px" src="~/Content/Image/logo_Metal-Plus_bn.jpg" />
+        </td>
+        <td><h2>Rilevazione Tempi</h2></td>
+        <td>
+            <img height="100px" src="~/Content/Image/logo_TOP-FINISH_BN.jpg" />
+        </td>
+    </tr>
+</table>
+
+<div class="box box-primary box-body" id="divUtente">
+</div>
+
+<div class="box" style="padding-left:10px" id="divBarcodeLavoratore">
+    <div class="box-body form-group-sm">
+        <div id="divPulsanti">
+
+            @{
+                int colonne = 4;
+                decimal dRighe = (decimal)(Model.Count / colonne);
+                int righe = (int)Math.Round(dRighe, 0);
+
+                for (int i = 0; i < righe; i++)
+                {
+                    <div class="row">
+                        @for (int j = 0; j < colonne; j++)
+                        {
+                            int index = colonne * i + j;
+                            if (index < Model.Count)
+                            {
+                                <div class="col-sm-2">
+                                    <br />
+                                    <input type="button" style="height:120px;font-size:14px" onclick="SelezionaUtente('@Model[index]');" class="btn btn-primary input-block-level form-control" value="@Model[index]" />
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+    });
+
+    function SelezionaUtente(utente) {
+        $("#divUtente").html('');
+        
+        var titolo = "Attività - " + utente;
+
+        $("#divUtente").dialog({
+            autoOpen: true,
+            position: { my: "center top+50", at: "center top", of: window },
+            width: 1000,
+            resizable: false,
+            title: titolo,
+            modal: true,
+            closeText: '',
+            open: function ()
+            {
+                var url = '@Url.Action("GetUtentePartial", "Rilevazioni")';
+
+                $.ajax({
+                    url: url,
+                    data: {
+                        Utente:utente
+                    },
+                    cache: false,
+                    type: "POST",
+                    success: function (data)
+                    {
+                        $("#divUtente").html(data).show();
+                    },
+                    error: function (response)
+                    {
+                        document.open();
+                        document.write(response.responseText);
+                        document.close();
+                    }
+                });
+            },
+            buttons:
+             [
+            {
+                text: 'Chiudi',
+                click: function ()
+                {
+                    $(this).dialog("close");
+                    $(this).dialog("destroy");
+                    $(this).html('');
+                }
+            }
+             ]
+        });
+    }
+
+    function ApriLavorazioneUtente(utente) {
+        $('#lblMessaggio').html('');
+       
+        var lavorazione = $("#ddlLavorazioni").find("option:selected").text();
+         var url = '@Url.Action("ApriLavorazioneUtente", "Rilevazioni")';
+        $.ajax({
+            url: url,
+            data: { Utente: utente,Lavorazione:lavorazione},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                if (data == 'True') {
+                    var messaggio = "Operazione completata con successo";
+                    $('#lblMessaggio').html(messaggio);
+                }
+                else {
+                    var messaggio = "ERRORE nel salvataggio. Riprovare.";
+                    $('#lblMessaggio').html(messaggio);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function ChiudiLavorazioneUtente(utente) {
+        
+        $('#lblMessaggio').html('');
+        var nota = $('#txtNota').val();
+        var qta = $('#txtQuantita').val();
+        var url = '@Url.Action("ChiudiLavorazioneUtente", "Rilevazioni")';
+        $.ajax({
+            url: url,
+            data: { Utente: utente, Nota: nota, Quantita: qta},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                if (data == 'True') {
+                    var messaggio = "Operazione completata con successo";
+                    $('#lblMessaggio').html(messaggio);
+                }
+                else {
+                    var messaggio = "ERRORE nel salvataggio. Riprovare.";
+                    $('#lblMessaggio').html(messaggio);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

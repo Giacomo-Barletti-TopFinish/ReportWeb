@@ -44,6 +44,19 @@ namespace ReportWeb.Data.Rilevazione
             }
         }
 
+        public void FillRW_TEMPI_APERTI_PER_UTENTE(RilevazioniDS ds, string UTENTE)
+        {
+
+            string query = @"SELECT * FROM RW_TEMPI WHERE APERTO = 1 AND UTENTE = $P{UTENTE}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("UTENTE", DbType.String, UTENTE);
+
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(ds.RW_TEMPI);
+            }
+        }
 
         public void FillRW_TEMPI_LAVORAZIONI(RilevazioniDS ds)
         {
@@ -54,6 +67,17 @@ namespace ReportWeb.Data.Rilevazione
                 da.Fill(ds.RW_TEMPI_LAVORAZIONI);
             }
         }
+
+        public void FillRW_TEMPI_REPARTI(RilevazioniDS ds)
+        {
+            string query = @"SELECT * FROM RW_TEMPI_REPARTI ORDER BY REPARTO, UTENTE";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.RW_TEMPI_REPARTI);
+            }
+        }
+
 
         public void UpdateRegistrazioneDS(string tablename, RilevazioniDS ds)
         {

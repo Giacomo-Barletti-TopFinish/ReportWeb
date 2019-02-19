@@ -1,0 +1,17 @@
+﻿@using ReportWeb.Models
+<div class="col-md-12">
+    <h3>Apri lavorazione</h3>
+    <div class="row">
+        <div class="col-sm-1">Utente</div>
+        <div class="col-sm-3">@ViewData["Utente"]</div>
+        <div class="col-sm-1">Lavorazioni</div>
+        <div class="col-sm-3">
+            @Html.DropDownList("ddlLavorazioni", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 30px;" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <input type="button" style="width:100px" onclick="ApriLavorazioneUtente('@ViewData["Utente"]');" class="btn btn-primary" value="Inizia attività" />
+<label id="lblMessaggio"></label>
+    </div>
+</div>
