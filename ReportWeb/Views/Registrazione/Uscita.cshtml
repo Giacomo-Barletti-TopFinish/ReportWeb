@@ -88,9 +88,9 @@
             type: "POST",
             success: function (data)
             {
+                debugger;
                 if (data == '') {
-                    alert('Uscita registrata correttamente');
-                    window.location.href = "@Url.Action("INDEX", "Registrazione")";
+                    InfoPopupWithRedirect('Uscita registrata correttamente',"@Url.Action("INDEX", "Registrazione")");
                 }
                 else {
                     $('#lblMessage2').html(data);

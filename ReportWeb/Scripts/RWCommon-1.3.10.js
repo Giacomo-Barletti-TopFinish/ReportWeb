@@ -232,6 +232,41 @@ function InfoPopup(messaggio)
     });
 }
 
+
+function InfoPopupWithRedirect(messaggio,newUrl) {
+    var titolo = "Informazione";
+
+    messaggio = messaggio.replace("\\", "\\\\")
+        .replace("\r\n", "\n")
+        .replace("\n", "\\n")
+        .replace("\t", "\\t")
+        .replace("\"", "\\\"");
+
+    $("#divInfoAggiuntive").dialog({
+        autoOpen: true,
+        position: { my: "center", at: "center", of: window },
+        width: 500,
+        resizable: false,
+        title: titolo,
+        modal: true,
+        closeText: '',
+        open: function () {
+            var data = '<table><tr><td><h5><i class="fa fa-info-circle fa-2x pull-left" style="color:#3c8dbc"></i></h5></td><td><h5><label style="font-weight: normal; padding-top: 7px; padding-left: 7px;">' + messaggio + '</label></h5></td></tr></table>';
+            $(this).html(data).show();
+        },
+        buttons:
+            [{
+                text: 'OK',
+                click: function () {
+                    $(this).html('').show();
+                    $(this).dialog("close");
+                    window.location.href = newUrl;
+                }
+            }
+            ]
+    });
+}
+
 function AlertPopup(messaggio)
 {
     var titolo = "Avviso";

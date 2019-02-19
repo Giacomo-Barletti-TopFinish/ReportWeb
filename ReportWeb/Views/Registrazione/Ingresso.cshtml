@@ -70,6 +70,7 @@
             <div class="col-sm-1">
             </div>
             <div class="col-sm-2">
+                <br />
                 <input type="button" onclick="Ritorna();" class="btn btn-primary" value="Torna indietro" />
             </div>
         </div>
@@ -154,8 +155,7 @@
             success: function (data)
             {
                 if (data == '') {
-                    alert('Ingresso registrato correttamente');
-                    window.location.href = "@Url.Action("INDEX", "Registrazione")";
+                    InfoPopupWithRedirect('Ingresso registrato correttamente',"@Url.Action("INDEX", "Registrazione")");
                 }
                 else {
                     $('#lblMessage2').html(data);
