@@ -5,16 +5,14 @@
 @switch (Model.EsitoRicerca)
 {
     case 0:
-        <label class="text-red text-bold"> Barcode già inserito per addebito</label>
+        <label class="text-red text-bold">Dati già inseriti</label>
         break;
     case 1:
         <label class="text-red text-bold"> Barcode non trovato</label>
         break;
     case 2:
-        <div class="col-md-12 text-center"><h2>SCHEDA CONTROLLO QUALITA'</h2></div>
+        <div class="col-md-12 text-center"><h2>SCHEDA ODL</h2></div>
 
-        @Html.Hidden("hdBarcode", @Model.Barcode)
-        @Html.Hidden("hdIDPRDMOVFASE", @Model.IDPRDMOVFASE)
 
         <div class="row">
             <div class="col-sm-3">
@@ -60,152 +58,115 @@
 }
 
 <div class="col-sm-12"><hr /></div>
+@Html.Hidden("hfRepartoCodice", @Model.RepartoCodice)
+@Html.Hidden("hfIDLANCIOD", @Model.IdLancioD)
+@Html.Hidden("hfIDMAGAZZ", @Model.IdMagazz)
+@Html.Hidden("hfBarcode", @Model.Barcode)
+@Html.Hidden("hfIDPRDMOVFASE", @Model.IDPRDMOVFASE)
+@Html.Hidden("hfIDTABFAS", @Model.IdTabFas)
+<div class="col-sm-12" id="divDettaglioReparto"></div>
 
+<div class="col-sm-12"><hr /></div>
 
-<div class="col-sm-12">
-    <div class="col-sm-2"><label>Fase</label>@Html.DropDownList("ddlFasi", new SelectList(ViewData["Fasi"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+<div class="row">
     <div class="col-sm-1"><label>Pezzi orari</label>@Html.TextBox("txtPezzi", "0", new { @class = "form-control input-sm RWPEZZIORARI", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
-    <div class="col-sm-3"><label>Lavorante esterno preferito</label>@Html.DropDownList("ddlLavoranti", new SelectList(ViewData["LavorantiEsterni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-3"><label>Packaging</label>@Html.DropDownList("ddlPackaging", new SelectList(ViewData["Packaging"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Peso</label>@Html.TextBox("txtPeso", "0", new { @class = "form-control input-sm RWPEZZIORARI", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
     <div class="col-sm-6"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "250", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
 </div>
 <div class="row">
-    <div class="col-sm-1"><input type="button" onclick="InserisciRiga();" class="btn btn-primary" value="Inserisci" /></div>
-    <div class="col-sm-1"><input type="button" onclick="SalvaTabella();" class="btn btn-primary" value="Salva" /></div>
-    <div class="col-sm-10">
-        <label class="text-red" id="lblMessage"></label>
-    </div>
+    <div class="col-sm-1"><input type="button" onclick="SalvaDati('');" class="btn btn-primary" value="Salva" /></div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-1"><input type="button" onclick="Annulla();" class="btn btn-primary" value="Annulla" /></div>
 </div>
-<div class="col-sm-12">
-    <table class="table table-condensed" id="tblDettaglio">
 
-        <tr>
-            <td width="10%">Fase</td>
-            <td width="10%">Pezzi orari</td>
-            <td width="20%">Lavorante</td>
-            <td width="55%">Nota</td>
-            <td></td>
-        </tr>
-        @foreach (Dettaglio d in Model.Dettagli)
-        {
-            <tr>
-                <input type="hidden" value='@d.idFase' class="hdFase" />
-                <input type="hidden" value='@d.idLavorante' class="hdLavorante" />
-                <input type="hidden" value='@d.IDDETTAGLIO' class="hdIDDETTAGLIO" />
-                <td>@d.Fase</td>
-                <td>@d.PezziOra</td>
-                <td>@d.Lavorante</td>
-                <td>@d.Nota</td>
-                <td><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>
-            </tr>
-        }
-    </table>
-</div>
 <script language="javascript" type="text/javascript">
     $(function () {
-        $('#ddlFasi').select2();
-        $('#ddlLavoranti').select2();
-
-        $('#tblDettaglio').on('click', 'a', function () {
-            $(this).closest('tr').remove();
-        })
-
+        CaricaSchedaDettaglioReparto('@Model.RepartoCodice');
     });
 
-    function InserisciRiga() {
-        var idFase = $('#ddlFasi').val();
-        var fase = $("#ddlFasi").find("option:selected").text();
-
-        var pezzi = $('#txtPezzi').val();
-
-        var idLavorante = $('#ddlLavoranti').val();
-        var lavorante = $("#ddlLavoranti").find("option:selected").text();
-
-        var nota = $('#txtNota').val();
-
-        var messaggio = '';
-        var esito = true;
-        if (fase == null || fase == '') {
-            esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la fase di lavorazione" + "</br>";
-        }
-
-        if (pezzi == null || pezzi == '' || pezzi == 0) {
-            esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il numero di pezzo per ora" + "</br>";
-        }
-
-        $('#lblMessage').html(messaggio);
-        if (!esito) return;
-
-        var tr = '<tr>';
-        tr += '<input type="hidden" value = ' + idFase + ' class="hdFase" />';
-        tr += '<input type="hidden" value = ' + idLavorante + ' class="hdLavorante" />';
-        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
-        tr += '<td>' + fase + '</td>';
-        tr += '<td>' + pezzi + '</td>';
-        tr += '<td>' + lavorante + '</td>';
-        tr += '<td>' + nota + '</td>';
-        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
-        tr += '<\tr>';
-        $('#tblDettaglio').append(tr);
-
-        $("#ddlFasi").val('').trigger('change');;
-        $("#txtPezzi").val('');
-        $("#ddlLavoranti").val('').trigger('change');;
-        $("#txtNota").val('');
-    }
-
-    function SalvaTabella() {
-
-        var rowCount = $('table#tblDettaglio tr:last').index() + 1;
-        var messaggio = '';
-        if (rowCount <= 1) {
-            $('#lblMessage').html("Non ci sono righe da salvare in tabella.");
-            return;
-        }
-        
-        var data = [];
-        var trs = $('#tblDettaglio > tbody > tr');
-        for (i = 1; i < trs.length; i++) {
-            var tr = trs[i];
-            var idFase = $(".hdFase", tr).val();
-            var idLavorante = $(".hdLavorante", tr).val();
-            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
-
-            if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
-            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
-            if (idLavorante == undefined) idLavorante = '';
-
-            var tdPezzi = $(tr).find('td')[1];
-            var pezzi = $(tdPezzi).text().trim();
-
-            var tdNota = $(tr).find('td')[3];
-            var nota = $(tdNota).text().trim();
-
-            var dettaglio = {
-                'Fase': idFase, 'Pezzi': pezzi, 'Lavorante': idLavorante, 'Nota': nota, 'IDDETTAGLIO': IDDETTAGLIO
-            };
-            data.push(dettaglio);
-        }
-
-        var dettagli = JSON.stringify(data);
-        var hdIDPRDMOVFASE = $('#hdIDPRDMOVFASE').val();
-        var hdBarcode = $('#hdBarcode').val();
-
-          var url = '@Url.Action("SalvaDettagli", "Preserie")';
+    function CaricaSchedaDettaglioReparto(RepartoCodice) {
+         var url = '@Url.Action("CaricaSchedaDettaglioReparto", "Preserie")';
         $.ajax({
             url: url,
             data: {
-                Dettagli: dettagli,
-                IDPRDMOVFASE: hdIDPRDMOVFASE,
-                Barcode: hdBarcode
+                RepartoCodice: RepartoCodice
             },
             cache: false,
             type: "POST",
             success: function (data)
             {
-                $('#lblMessage').html("Dati salvati correttamente.");
-                $("#txtBarcode").focus();
+                $('#divDettaglioReparto').html(data);
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function Annulla() {
+        window.location.href = "@Url.Action("InserimentoDati", "Preserie")";
+    }
+
+    function SalvaDati() {
+
+        var messaggio = '';
+        var esito = true;
+        var pezziOrari = $('#txtPezzi').val();
+        if (pezziOrari == 0) {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il numero di pezzi per ora" + "</br>";
+        }
+
+        var packaging = $("#ddlPackaging").find("option:selected").text();
+        if (packaging == null || packaging == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il packaging" + "</br>";
+        }
+
+        var peso = $("#txtPeso").val();
+        if (packaging == 0 ) {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il peso" + "</br>";
+        }
+
+        var nota = $("#txtNota").val();
+
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+        var reparto = $('#hfRepartoCodice').val();
+        var idlanciod = $('#hfIDLANCIOD').val();
+        var idmagazz = $('#hfIDMAGAZZ').val();
+        var idprdmovfase = $('#hfIDPRDMOVFASE').val();
+        var barcode = $('#hfBarcode').val();
+        var idtabfas = $('#hfIDTABFAS').val();
+        var dettagli = GetTabellaDettaglio();
+
+         var url = '@Url.Action("SalvaDettagli", "Preserie")';
+        $.ajax({
+            url: url,
+            data: {
+                RepartoCodice: reparto,
+                Pezzi: pezziOrari,
+                Packaging: packaging,
+                Peso: peso,
+                Nota: nota,
+                Dettagli: dettagli,
+                IDPRDMOVFASE: idprdmovfase,
+                Barcode: barcode,
+                IdLancioD: idlanciod,
+                IDMAGAZZ: idmagazz,
+                IDTABFAS: idtabfas
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                InfoPopupWithRedirect('Dati salvati correttamente',"@Url.Action("InserimentoDati", "Preserie")");
             },
             error: function (response)
             {

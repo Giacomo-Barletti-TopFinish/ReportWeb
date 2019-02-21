@@ -146,25 +146,19 @@ namespace ReportWeb.Data
             }
         }
 
-        public void FillPRE_DETTAGLIOByLancio(string IDLANCIOD, PreserieDS ds)
+        public void FillRW_PR_DETTAGLIOByLancio(string IDLANCIOD, PreserieDS ds)
         {
-            string query = @"SELECT PRE.* FROM PRE_DETTAGLIO PRE 
-                                INNER JOIN DITTA1.USR_PRD_MOVFASI MF ON MF.IDPRDMOVFASE = PRE.IDPRDMOVFASE
-                                INNER JOIN DITTA1.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE 
-                                WHERE FA.IDLANCIOD = $P{IDLANCIOD1}
-                             UNION ALL
-                            SELECT PRE.* FROM PRE_DETTAGLIO PRE 
-                                INNER JOIN DITTA2.USR_PRD_MOVFASI MF ON MF.IDPRDMOVFASE = PRE.IDPRDMOVFASE
-                                INNER JOIN DITTA2.USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE 
-                                WHERE FA.IDLANCIOD = $P{IDLANCIOD2}";
+            string query = @"SELECT PRE.* FROM RW_PR_DETTAGLIO PRE 
+                                INNER JOIN USR_PRD_MOVFASI MF ON MF.IDPRDMOVFASE = PRE.IDPRDMOVFASE
+                                INNER JOIN USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE 
+                                WHERE FA.IDLANCIOD = $P{IDLANCIOD1}";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDLANCIOD1", DbType.String, IDLANCIOD);
-            ps.AddParam("IDLANCIOD2", DbType.String, IDLANCIOD);
 
             using (DbDataAdapter da = BuildDataAdapter(query, ps))
             {
-                da.Fill(ds.PRE_DETTAGLIO);
+                da.Fill(ds.RW_PR_DETTAGLIO);
             }
         }
 
@@ -221,17 +215,39 @@ namespace ReportWeb.Data
             }
         }
 
-        public void FillPRE_DETTAGLIO(string Barcode, PreserieDS ds)
+        public void FillRW_PR_DETTAGLIO(string Barcode, PreserieDS ds)
         {
-            string query = @"SELECT * FROM PRE_DETTAGLIO WHERE BARCODE = $P{BARCODE1}";
+            string query = @"SELECT * FROM RW_PR_DETTAGLIO WHERE BARCODE = $P{BARCODE1}";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("BARCODE1", DbType.String, Barcode);
 
             using (DbDataAdapter da = BuildDataAdapter(query, ps))
             {
-                da.Fill(ds.PRE_DETTAGLIO);
+                da.Fill(ds.RW_PR_DETTAGLIO);
             }
+        }
+
+        public void FillRW_PR_PACKAGING(PreserieDS ds)
+        {
+            string query = @"SELECT * FROM RW_PR_PACKAGING ORDER BY IDPACKAGING";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.RW_PR_PACKAGING);
+            }
+
+        }
+
+        public void FillRW_PR_LAVORAZIONE(PreserieDS ds)
+        {
+            string query = @"SELECT * FROM RW_PR_LAVORAZIONE ORDER BY REPARTO,CODICE";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.RW_PR_LAVORAZIONE);
+            }
+
         }
 
         public void UpdatePREDTable(string tablename, PreserieDS ds)

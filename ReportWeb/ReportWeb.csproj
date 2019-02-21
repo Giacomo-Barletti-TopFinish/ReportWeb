@@ -472,6 +472,7 @@
     <Content Include="Views\Rilevazioni\Reparto.cshtml" />
     <Content Include="Views\Rilevazioni\ApriLavorazionePartial.cshtml" />
     <Content Include="Views\Rilevazioni\ChiudiLavorazionePartial.cshtml" />
+    <Content Include="Views\Preserie\PulimentaturaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

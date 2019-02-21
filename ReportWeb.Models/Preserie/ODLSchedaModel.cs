@@ -26,6 +26,9 @@ namespace ReportWeb.Models.Preserie
         public string ModelloFinale { get; set; }
         public string ModelloFinaleDescrizione { get; set; }
 
+        public string IdLancioD { get; set; }
+        public string IdMagazz { get; set; }
+        public string IdTabFas { get; set; }
         public List<Dettaglio> Dettagli { get; set; }
     }
 }

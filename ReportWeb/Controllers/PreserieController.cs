@@ -1,4 +1,5 @@
 ﻿using ReportWeb.Business;
+using ReportWeb.Common;
 using ReportWeb.Models;
 using ReportWeb.Models.Preserie;
 using System;
@@ -54,20 +55,64 @@ namespace ReportWeb.Controllers
         {
             PreserieBLL bll = new PreserieBLL();
             ODLSchedaModel model = bll.CaricaSchedaODL(Barcode, RvlImageSite);
-            List<RWListItem> fasi = bll.CaricaTabFas(model.RepartoCodice);
-            List<RWListItem> lavorantiEsterni = bll.CreaListaLavorantiEsterni();
+            List<RWListItem> Packaging = bll.CaricaPackaging();
 
-            ViewData.Add("Fasi", fasi);
-            ViewData.Add("LavorantiEsterni", lavorantiEsterni);
+            ViewData.Add("Packaging", Packaging);
 
             return PartialView("CaricaSchedaPartial", model);
         }
 
-        public ActionResult SalvaDettagli(string Dettagli, string IDPRDMOVFASE, string Barcode)
+        public ActionResult SalvaDettagli(string RepartoCodice, decimal Pezzi, string Packaging, decimal Peso,
+            string Nota, string Dettagli, string IDPRDMOVFASE, string Barcode, string IdLancioD, string IdMagazz, string IDTABFAS)
         {
             PreserieBLL bll = new PreserieBLL();
-            bll.SalvaDettagli(Dettagli, IDPRDMOVFASE, Barcode, ConnectedUser);
+            bll.SalvaDettagli(RepartoCodice, Pezzi, Packaging, Peso,
+             Nota, Dettagli, IDPRDMOVFASE, Barcode, IdLancioD, IdMagazz, IDTABFAS, ConnectedUser);
             return null;
         }
+
+        public ActionResult CaricaSchedaDettaglioReparto(string RepartoCodice)
+        {
+            List<RWListItem> SiNoListItem = CreaListaSiNo(); ;
+            ViewData.Add("SiNoListItem", SiNoListItem);
+
+            PreserieBLL bll = new PreserieBLL();
+            switch (RepartoCodice)
+            {
+                case Reparti.Pulimentatura:
+                    List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
+                    ViewData.Add("Lavorazioni", Lavorazioni);
+
+                    List<RWListItem> Automatico = CreaListaAutomaticoManuale(); ;
+                    ViewData.Add("Automatico", Automatico);
+
+                    return PartialView("PulimentaturaPartial");
+
+
+                default: return null;
+            }
+
+        }
+
+        private List<RWListItem> CreaListaSiNo()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("Si", "1"));
+            result.Add(new RWListItem("No", "2"));
+
+            return result;
+        }
+
+        private List<RWListItem> CreaListaAutomaticoManuale()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("Automatico", "1"));
+            result.Add(new RWListItem("Manuale", "2"));
+
+            return result;
+        }
+
     }
 }

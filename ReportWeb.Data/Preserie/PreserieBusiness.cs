@@ -51,10 +51,10 @@ namespace ReportWeb.Data.Preserie
         }
 
         [DataContext]
-        public void FillPRE_DETTAGLIOByLancio(string IDLANCIOD, PreserieDS ds)
+        public void FillRW_PR_DETTAGLIOByLancio(string IDLANCIOD, PreserieDS ds)
         {
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
-            a.FillPRE_DETTAGLIOByLancio(IDLANCIOD, ds);
+            a.FillRW_PR_DETTAGLIOByLancio(IDLANCIOD, ds);
         }
 
 
@@ -95,17 +95,31 @@ namespace ReportWeb.Data.Preserie
         }
 
         [DataContext]
-        public void FillPRE_DETTAGLIO(string Barcode, PreserieDS ds)
+        public void FillRW_PR_DETTAGLIO(string Barcode, PreserieDS ds)
         {
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
-            a.FillPRE_DETTAGLIO(Barcode, ds);
+            a.FillRW_PR_DETTAGLIO(Barcode, ds);
+        }
+
+        [DataContext]
+        public void FillRW_PR_PACKAGING(PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillRW_PR_PACKAGING(ds);
+        }
+
+        [DataContext]
+        public void FillRW_PR_LAVORAZIONE(PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillRW_PR_LAVORAZIONE(ds);
         }
 
         [DataContext(true)]
-        public void UpdatePRE_DETTAGLIO(PreserieDS ds)
+        public void UpdateRW_PR(string tablename,PreserieDS ds)
         {
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
-            a.UpdatePREDTable(ds.PRE_DETTAGLIO.TableName, ds);
+            a.UpdatePREDTable(tablename, ds);
         }
     }
 }

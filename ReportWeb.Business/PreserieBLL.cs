@@ -1,8 +1,10 @@
-﻿using ReportWeb.Common.Helpers;
+﻿using ReportWeb.Common;
+using ReportWeb.Common.Helpers;
 using ReportWeb.Data.Preserie;
 using ReportWeb.Entities;
 using ReportWeb.Models;
 using ReportWeb.Models.Preserie;
+using ReportWeb.Models.Preserie.JSON;
 using ReportWeb.Views.Preserie;
 using System;
 using System.Collections.Generic;
@@ -52,7 +54,7 @@ namespace ReportWeb.Business
                 bPreserie.FillUSR_PRD_LANCIOD(IDLANCIOD, ds);
                 bPreserie.FillUSR_PRD_FASI(IDLANCIOD, ds);
                 bPreserie.FillUSR_PRD_MOVFASI(IDLANCIOD, ds);
-                bPreserie.FillPRE_DETTAGLIOByLancio(IDLANCIOD, ds);
+                bPreserie.FillRW_PR_DETTAGLIOByLancio(IDLANCIOD, ds);
                 bPreserie.FillTABFAS(ds);
                 bPreserie.FillCLIFO(ds);
 
@@ -165,7 +167,7 @@ namespace ReportWeb.Business
                 lavorazione.Odl = CreaOdl(movFase);
                 if (!movFase.IsBARCODENull())
                 {
-                   lavorazione.Dettagli = CreaListaDettaglio(movFase.BARCODE, ds);
+                    lavorazione.Dettagli = CreaListaDettaglio(movFase.BARCODE, ds);
                 }
 
             }
@@ -205,7 +207,7 @@ namespace ReportWeb.Business
         private List<Dettaglio> CreaListaDettaglio(string barcode, PreserieDS ds)
         {
             List<Dettaglio> dettagli = new List<Dettaglio>();
-            foreach (PreserieDS.PRE_DETTAGLIORow dettaglio in ds.PRE_DETTAGLIO.Where(x => x.BARCODE == barcode))
+            foreach (PreserieDS.RW_PR_DETTAGLIORow dettaglio in ds.RW_PR_DETTAGLIO.Where(x => x.BARCODE == barcode))
             {
                 PreserieDS.TABFASRow fase = ds.TABFAS.Where(x => x.IDTABFAS == dettaglio.IDTABFAS).FirstOrDefault();
                 if (fase == null) continue;
@@ -216,9 +218,9 @@ namespace ReportWeb.Business
                 d.idFase = fase.IDTABFAS;
                 d.Fase = fase.CODICEFASE;
 
-                if (!dettaglio.IsCODICECLIFONull())
+                if (!dettaglio.IsREPARTONull())
                 {
-                    PreserieDS.CLIFORow clifo = ds.CLIFO.Where(x => x.CODICE == dettaglio.CODICECLIFO).FirstOrDefault();
+                    PreserieDS.CLIFORow clifo = ds.CLIFO.Where(x => x.CODICE == dettaglio.REPARTO).FirstOrDefault();
                     if (clifo != null)
                     {
                         d.Lavorante = clifo.RAGIONESOC.Trim();
@@ -227,7 +229,7 @@ namespace ReportWeb.Business
                 }
 
                 d.Nota = dettaglio.IsNOTANull() ? string.Empty : dettaglio.NOTA;
-                d.PezziOra = dettaglio.PEZZIORARI;
+                d.PezziOra = dettaglio.PEZZI_ORARI;
 
                 dettagli.Add(d);
             }
@@ -244,7 +246,7 @@ namespace ReportWeb.Business
 
                 bPreserie.FillCLIFO(ds);
                 bPreserie.FillUSR_PRD_MOVFASIByBarcode(Barcode, ds);
-                bPreserie.FillPRE_DETTAGLIO(Barcode, ds);
+                bPreserie.FillRW_PR_DETTAGLIO(Barcode, ds);
                 bPreserie.FillTABFAS(ds);
 
                 PreserieDS.USR_PRD_MOVFASIRow odl = ds.USR_PRD_MOVFASI.Where(x => x.BARCODE == Barcode).FirstOrDefault();
@@ -284,6 +286,12 @@ namespace ReportWeb.Business
                 PreserieDS.USR_PRD_FASIRow fase = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == odl.IDPRDFASE).FirstOrDefault();
                 if (fase != null)
                 {
+
+                    model.IdLancioD = fase.IDLANCIOD;
+
+                    model.IdMagazz = fase.IDMAGAZZ;
+                    model.IdTabFas = fase.IDTABFAS;
+
                     PreserieDS.USR_PRD_LANCIODRow lancio = ds.USR_PRD_LANCIOD.Where(x => x.IDLANCIOD == fase.IDLANCIOD).FirstOrDefault();
                     if (lancio != null)
                     {
@@ -342,6 +350,38 @@ namespace ReportWeb.Business
             }
         }
 
+        public List<RWListItem> CaricaPackaging()
+        {
+            List<RWListItem> model = new List<RWListItem>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillRW_PR_PACKAGING(ds);
+                model.Add(new RWListItem(string.Empty, string.Empty));
+
+                foreach (PreserieDS.RW_PR_PACKAGINGRow fase in ds.RW_PR_PACKAGING)
+                    model.Add(new RWListItem(fase.PACKAGING, fase.IDPACKAGING.ToString()));
+
+                return model;
+            }
+        }
+
+        public List<RWListItem> CaricaLavorazioni(string RepartoCodice)
+        {
+            List<RWListItem> model = new List<RWListItem>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillRW_PR_LAVORAZIONE(ds);
+                model.Add(new RWListItem(string.Empty, string.Empty));
+
+                foreach (PreserieDS.RW_PR_LAVORAZIONERow lavorazione in ds.RW_PR_LAVORAZIONE.Where(x => x.REPARTO == RepartoCodice))
+                    model.Add(new RWListItem(lavorazione.DESCRIZIONE, lavorazione.CODICE.ToString()));
+
+                return model;
+            }
+        }
+
         public List<RWListItem> CreaListaLavorantiEsterni()
         {
             List<RWListItem> LavorantiEsterni = new List<RWListItem>();
@@ -358,45 +398,85 @@ namespace ReportWeb.Business
             return LavorantiEsterni;
         }
 
-        public void SalvaDettagli(string Dettagli, string IDPRDMOVFASE, string Barcode, string IDUSER)
+        public void SalvaDettagli(string RepartoCodice, decimal Pezzi, string Packaging, decimal Peso,
+            string Nota, string Dettagli, string IDPRDMOVFASE, string Barcode, string IdLancioD, string IdMagazz, string IDTABFAS, string IDUSER)
         {
             PreserieDS ds = new PreserieDS();
             using (PreserieBusiness bPreserie = new PreserieBusiness())
             {
-                bPreserie.FillCLIFO(ds);
-                bPreserie.FillTABFAS(ds);
-                bPreserie.FillPRE_DETTAGLIO(Barcode, ds);
+                //bPreserie.FillCLIFO(ds);
+                //bPreserie.FillTABFAS(ds);
+                //bPreserie.FillRW_PR_DETTAGLIO(Barcode, ds);
 
-                PreserieDettaglio[] dettaglioPreserie = JSonSerializer.Deserialize<PreserieDettaglio[]>(Dettagli);
 
-                foreach (PreserieDettaglio dettaglio in dettaglioPreserie)
+                long idDettaglio = bPreserie.GetID();
+                PreserieDS.RW_PR_DETTAGLIORow dettaglioRow = null;// ds.RW_PR_DETTAGLIO.Where(x => x.IDDETTAGLIO == dettaglio.IDDETTAGLIO).FirstOrDefault();
+                if (dettaglioRow == null)
                 {
-                    PreserieDS.PRE_DETTAGLIORow dettaglioRow = ds.PRE_DETTAGLIO.Where(x => x.IDDETTAGLIO == dettaglio.IDDETTAGLIO).FirstOrDefault();
-                    if (dettaglioRow == null)
-                    {
-                        dettaglioRow = ds.PRE_DETTAGLIO.NewPRE_DETTAGLIORow();
-                        dettaglioRow.BARCODE = Barcode;
-                        dettaglioRow.CODICECLIFO = dettaglio.Lavorante;
-                        dettaglioRow.DATACR = DateTime.Now;
-                        dettaglioRow.IDPRDMOVFASE = IDPRDMOVFASE;
-                        dettaglioRow.IDTABFAS = dettaglio.Fase;
-                        dettaglioRow.IDUSER = IDUSER;
-                        dettaglioRow.NOTA = dettaglio.Nota;
-                        dettaglioRow.PEZZIORARI = dettaglio.Pezzi;
-                        ds.PRE_DETTAGLIO.AddPRE_DETTAGLIORow(dettaglioRow);
-                    }
-                    else
-                    {
-                        dettaglioRow.CODICECLIFO = dettaglio.Lavorante;
-                        dettaglioRow.DATACR = DateTime.Now;
-                        dettaglioRow.IDTABFAS = dettaglio.Fase;
-                        dettaglioRow.IDUSER = IDUSER;
-                        dettaglioRow.NOTA = dettaglio.Nota;
-                        dettaglioRow.PEZZIORARI = dettaglio.Pezzi;
-                    }
+
+                    dettaglioRow = ds.RW_PR_DETTAGLIO.NewRW_PR_DETTAGLIORow();
+                    dettaglioRow.IDDETTAGLIO = idDettaglio;
+                    dettaglioRow.BARCODE = Barcode;
+                    dettaglioRow.REPARTO = RepartoCodice;
+                    dettaglioRow.DATACR = DateTime.Now;
+                    dettaglioRow.IDPRDMOVFASE = IDPRDMOVFASE;
+                    dettaglioRow.IDTABFAS = IDTABFAS;
+                    dettaglioRow.IDUSER = IDUSER;
+                    dettaglioRow.NOTA = Nota;
+                    dettaglioRow.PEZZI_ORARI = Pezzi.ToString();
+                    dettaglioRow.PESO = Peso;
+                    dettaglioRow.PACKAGING = Packaging;
+                    dettaglioRow.IDLANCIOD = IdLancioD;
+                    dettaglioRow.IDMAGAZZ = IdMagazz;
+
+                    ds.RW_PR_DETTAGLIO.AddRW_PR_DETTAGLIORow(dettaglioRow);
+                }
+                else
+                {
+                    dettaglioRow.DATACR = DateTime.Now;
+                    dettaglioRow.IDTABFAS = IDTABFAS;
+                    dettaglioRow.IDUSER = IDUSER;
+                    dettaglioRow.NOTA = Nota;
+                    dettaglioRow.PEZZI_ORARI = Pezzi.ToString();
+                    dettaglioRow.PESO = Peso;
+                    dettaglioRow.PACKAGING = Packaging;
+                    dettaglioRow.IDLANCIOD = IdLancioD;
+                    dettaglioRow.IDMAGAZZ = IdMagazz;
                 }
 
-                bPreserie.UpdatePRE_DETTAGLIO(ds);
+                switch (RepartoCodice)
+                {
+                    case Reparti.Pulimentatura:
+                        PulimentaturaJson[] dettagli = JSonSerializer.Deserialize<PulimentaturaJson[]>(Dettagli);
+                        InserisciDettaglioPulimentatura(ds, dettagli, idDettaglio, bPreserie);
+                        break;
+                }
+
+                bPreserie.UpdateRW_PR(ds.RW_PR_DETTAGLIO.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_PULIMENTATURA.TableName, ds);
+
+            }
+        }
+
+        private void InserisciDettaglioPulimentatura(PreserieDS ds, PulimentaturaJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
+        {
+            int sequenza = 1;
+            foreach (PulimentaturaJson dettaglio in dettagli)
+            {
+                long idElemento = bPreserie.GetID();
+                PreserieDS.RW_PR_PULIMENTATURARow pul = ds.RW_PR_PULIMENTATURA.NewRW_PR_PULIMENTATURARow();
+                pul.IDELEMENTO = idElemento;
+                pul.IDDETTAGLIO = IDDETTAGLIO;
+                pul.SEQUENZA = sequenza;
+                sequenza++;
+
+                pul.LAVORAZIONE = dettaglio.Lavorazione;
+                pul.AUTOMATICO = dettaglio.Automatico;
+                pul.SPAZZOLE = dettaglio.Spazzole;
+                pul.PASTE = dettaglio.Paste;
+                pul.PARTA_LAVORATA = dettaglio.ParteLavorata;
+
+                ds.RW_PR_PULIMENTATURA.AddRW_PR_PULIMENTATURARow(pul);
             }
         }
     }

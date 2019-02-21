@@ -1,0 +1,112 @@
+﻿@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
+
+<div class="row">
+    <div class="col-sm-2"><label>Lavorazione</label>@Html.DropDownList("dllLavorazione", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Automatico</label>@Html.DropDownList("dllAutomatico", new SelectList(ViewData["Automatico"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Parte lavorata</label>@Html.TextBox("txtParteLavorata", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Spazzole</label>@Html.TextBox("txtSpazzole", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Paste particolari</label>@Html.TextBox("txtPaste", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"><input type="button" onclick="InserisciRiga();" class="btn btn-primary" value="Inserisci lavorazione" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed" id="tblDettaglio"></table>
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tblDettaglio').on('click', 'a', function () {
+            $(this).closest('tr').remove();
+        })
+    });
+
+    function InserisciRiga() {
+        
+        var lavorazione = $("#dllLavorazione").find("option:selected").text();
+        var automatico = $("#dllAutomatico").find("option:selected").text();
+
+        var parteLavorata = $('#txtParteLavorata').val();
+        var spazzole = $('#txtSpazzole').val();
+        var paste= $('#txtPaste').val();
+
+        var messaggio = '';
+        var esito = true;
+        if (lavorazione == null || lavorazione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la lavorazione" + "</br>";
+        }
+
+        if (automatico == null || automatico == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare se automatico o manuale" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="17%">' + lavorazione + '</td>';
+        tr += '<td width="9%">' + automatico + '</td>';
+        tr += '<td width="17%">' + parteLavorata + '</td>';
+        tr += '<td width="17%">' + spazzole + '</td>';
+        tr += '<td width="17%">' + paste + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
+
+        $("#dllLavorazione").val('').trigger('change');
+        $("#dllAutomatico").val('').trigger('change');
+        $("#txtParteLavorata").val('');
+        $("#txtSpazzole").val('');
+        $("#txtPaste").val('');
+    }
+
+    function GetTabellaDettaglio() {
+
+        var rowCount = $('table#tblDettaglio tr:last').index() + 1;
+        var messaggio = '';
+
+        var data = [];
+        var trs = $('#tblDettaglio > tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
+
+            if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
+            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
+
+            var tdLavorazione = $(tr).find('td')[0];
+            var lavorazione = $(tdLavorazione).text().trim();
+
+            var tdAutomatico = $(tr).find('td')[1];
+            var automatico = $(tdAutomatico).text().trim();
+
+            var tdParte = $(tr).find('td')[2];
+            var parteLavorata = $(tdParte).text().trim();
+
+            var tdSpazzole = $(tr).find('td')[3];
+            var spazzole = $(tdSpazzole).text().trim();
+
+            var tdPaste = $(tr).find('td')[4];
+            var paste = $(tdPaste).text().trim();
+
+            var dettaglio = {
+                'Lavorazione': lavorazione, 'Automatico': automatico, 'ParteLavorata': parteLavorata, 'Spazzole': spazzole, 'Paste': paste
+            };
+            data.push(dettaglio);
+        }
+
+        var dettagli = JSON.stringify(data);
+
+        return dettagli;
+
+    }
+
+</script>
