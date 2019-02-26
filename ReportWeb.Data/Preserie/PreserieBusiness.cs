@@ -95,6 +95,13 @@ namespace ReportWeb.Data.Preserie
         }
 
         [DataContext]
+        public void FillRW_PR_MATERIALE(PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillRW_PR_MATERIALE(ds);
+        }
+
+        [DataContext]
         public void FillRW_PR_DETTAGLIO(string Barcode, PreserieDS ds)
         {
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
@@ -115,8 +122,15 @@ namespace ReportWeb.Data.Preserie
             a.FillRW_PR_LAVORAZIONE(ds);
         }
 
+        [DataContext]
+        public void FillRW_PR_VIBRATORI(PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillRW_PR_VIBRATORI(ds);
+        }
+
         [DataContext(true)]
-        public void UpdateRW_PR(string tablename,PreserieDS ds)
+        public void UpdateRW_PR(string tablename, PreserieDS ds)
         {
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
             a.UpdatePREDTable(tablename, ds);

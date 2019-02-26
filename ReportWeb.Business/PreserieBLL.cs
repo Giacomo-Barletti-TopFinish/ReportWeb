@@ -350,7 +350,41 @@ namespace ReportWeb.Business
             }
         }
 
-        public List<RWListItem> CaricaPackaging()
+        public List<RWListItem> CaricaListaMateriali()
+        {
+            List<RWListItem> model = new List<RWListItem>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillRW_PR_MATERIALE(ds);
+                model.Add(new RWListItem(string.Empty, string.Empty));
+
+                foreach (PreserieDS.RW_PR_MATERIALERow materiale in ds.RW_PR_MATERIALE.OrderBy(x => x.IDMATERIALE))
+                    model.Add(new RWListItem(materiale.MATERIALE, materiale.IDMATERIALE.ToString()));
+
+                return model;
+            }
+
+        }
+
+        public List<RWListItem> CaricaListaVibratori()
+        {
+            List<RWListItem> model = new List<RWListItem>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillRW_PR_VIBRATORI(ds);
+                model.Add(new RWListItem(string.Empty, string.Empty));
+
+                foreach (PreserieDS.RW_PR_VIBRATORIRow vibratore in ds.RW_PR_VIBRATORI.OrderBy(x => x.IDVIBRATORE))
+                    model.Add(new RWListItem(vibratore.VIBRATORE, vibratore.IDVIBRATORE.ToString()));
+
+                return model;
+            }
+
+        }
+
+        public List<RWListItem> CaricaListaPackaging()
         {
             List<RWListItem> model = new List<RWListItem>();
             PreserieDS ds = new PreserieDS();
@@ -447,13 +481,22 @@ namespace ReportWeb.Business
                 switch (RepartoCodice)
                 {
                     case Reparti.Pulimentatura:
-                        PulimentaturaJson[] dettagli = JSonSerializer.Deserialize<PulimentaturaJson[]>(Dettagli);
-                        InserisciDettaglioPulimentatura(ds, dettagli, idDettaglio, bPreserie);
-                        break;
+                        {
+                            PulimentaturaJson[] dettagli = JSonSerializer.Deserialize<PulimentaturaJson[]>(Dettagli);
+                            InserisciDettaglioPulimentatura(ds, dettagli, idDettaglio, bPreserie);
+                            break;
+                        }
+                    case Reparti.Vibratura:
+                        {
+                            VibraturaJson[] dettagli = JSonSerializer.Deserialize<VibraturaJson[]>(Dettagli);
+                            InserisciDettaglioVibratura(ds, dettagli, idDettaglio, bPreserie);
+                            break;
+                        }
                 }
 
                 bPreserie.UpdateRW_PR(ds.RW_PR_DETTAGLIO.TableName, ds);
                 bPreserie.UpdateRW_PR(ds.RW_PR_PULIMENTATURA.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_VIBRATURA.TableName, ds);
 
             }
         }
@@ -471,12 +514,35 @@ namespace ReportWeb.Business
                 sequenza++;
 
                 pul.LAVORAZIONE = dettaglio.Lavorazione;
-                pul.AUTOMATICO = dettaglio.Automatico;
+                pul.AUTOMATICO = dettaglio.Automatico == "Automatico" ? "S" : "N";
                 pul.SPAZZOLE = dettaglio.Spazzole;
                 pul.PASTE = dettaglio.Paste;
                 pul.PARTA_LAVORATA = dettaglio.ParteLavorata;
 
                 ds.RW_PR_PULIMENTATURA.AddRW_PR_PULIMENTATURARow(pul);
+            }
+        }
+
+        private void InserisciDettaglioVibratura(PreserieDS ds, VibraturaJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
+        {
+            int sequenza = 1;
+            foreach (VibraturaJson dettaglio in dettagli)
+            {
+                long idElemento = bPreserie.GetID();
+                PreserieDS.RW_PR_VIBRATURARow vib = ds.RW_PR_VIBRATURA.NewRW_PR_VIBRATURARow();
+                vib.IDELEMENTO = idElemento;
+                vib.IDDETTAGLIO = IDDETTAGLIO;
+                vib.SEQUENZA = sequenza;
+                sequenza++;
+
+                vib.LAVORAZIONE = dettaglio.Lavorazione;
+                vib.TIPOLOGIA = dettaglio.AcquaSecco;
+                vib.MATERIALE = dettaglio.Materiale;
+                vib.ADDITIVI = dettaglio.Additivi;
+                vib.MAXPEZZI = dettaglio.Pezzi;
+                vib.TEMPO = dettaglio.Tempo;
+
+                ds.RW_PR_VIBRATURA.AddRW_PR_VIBRATURARow(vib);
             }
         }
     }

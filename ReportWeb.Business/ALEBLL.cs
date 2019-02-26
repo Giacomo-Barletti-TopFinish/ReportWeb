@@ -174,8 +174,7 @@ namespace ReportWeb.Business
                 }
                 return RvlImageSite + immagine.NOMEFILE;
             }
-
-            return string.Empty;
+            return RvlImageSite + "NoImage.png";
 
         }
 

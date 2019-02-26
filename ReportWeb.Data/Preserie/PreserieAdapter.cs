@@ -215,6 +215,24 @@ namespace ReportWeb.Data
             }
         }
 
+        public void FillRW_PR_MATERIALE(PreserieDS ds)
+        {
+            string select = @"SELECT * FROM RW_PR_MATERIALE";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_PR_MATERIALE);
+            }
+        }
+
+        public void FillRW_PR_VIBRATORI(PreserieDS ds)
+        {
+            string select = @"SELECT * FROM RW_PR_VIBRATORI";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_PR_VIBRATORI);
+            }
+        }
+
         public void FillRW_PR_DETTAGLIO(string Barcode, PreserieDS ds)
         {
             string query = @"SELECT * FROM RW_PR_DETTAGLIO WHERE BARCODE = $P{BARCODE1}";

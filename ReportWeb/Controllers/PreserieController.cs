@@ -55,7 +55,7 @@ namespace ReportWeb.Controllers
         {
             PreserieBLL bll = new PreserieBLL();
             ODLSchedaModel model = bll.CaricaSchedaODL(Barcode, RvlImageSite);
-            List<RWListItem> Packaging = bll.CaricaPackaging();
+            List<RWListItem> Packaging = bll.CaricaListaPackaging();
 
             ViewData.Add("Packaging", Packaging);
 
@@ -80,14 +80,31 @@ namespace ReportWeb.Controllers
             switch (RepartoCodice)
             {
                 case Reparti.Pulimentatura:
-                    List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
-                    ViewData.Add("Lavorazioni", Lavorazioni);
+                    {
+                        List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
+                        ViewData.Add("Lavorazioni", Lavorazioni);
 
-                    List<RWListItem> Automatico = CreaListaAutomaticoManuale(); ;
-                    ViewData.Add("Automatico", Automatico);
+                        List<RWListItem> Automatico = CreaListaAutomaticoManuale(); ;
+                        ViewData.Add("Automatico", Automatico);
 
-                    return PartialView("PulimentaturaPartial");
+                        return PartialView("PulimentaturaPartial");
+                    }
+                case Reparti.Vibratura:
+                    {
+                        List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
+                        ViewData.Add("Lavorazioni", Lavorazioni);
 
+                        List<RWListItem> Automatico = CreaListaAcquaSecco(); 
+                        ViewData.Add("AcquaSecco", Automatico);
+
+                        List<RWListItem> Materiale = bll.CaricaListaMateriali(); 
+                        ViewData.Add("Materiali", Materiale);
+
+                        List<RWListItem> Vibratori = bll.CaricaListaVibratori(); 
+                        ViewData.Add("Vibratori", Vibratori);
+
+                        return PartialView("VibraturaPartial");
+                    }
 
                 default: return null;
             }
@@ -110,6 +127,16 @@ namespace ReportWeb.Controllers
             result.Add(new RWListItem(string.Empty, string.Empty));
             result.Add(new RWListItem("Automatico", "1"));
             result.Add(new RWListItem("Manuale", "2"));
+
+            return result;
+        }
+
+        private List<RWListItem> CreaListaAcquaSecco()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("Acqua", "1"));
+            result.Add(new RWListItem("Secco", "2"));
 
             return result;
         }
