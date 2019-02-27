@@ -123,10 +123,17 @@ namespace ReportWeb.Data.Preserie
         }
 
         [DataContext]
-        public void FillRW_PR_VIBRATORI(PreserieDS ds)
+        public void FillUSR_PRD_RESOURCESF(PreserieDS ds)
         {
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
-            a.FillRW_PR_VIBRATORI(ds);
+            a.FillUSR_PRD_RESOURCESF(ds);
+        }
+
+        [DataContext]
+        public void FillMetalliBase(PreserieDS ds)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillMetalliBase(ds);
         }
 
         [DataContext(true)]

@@ -94,18 +94,34 @@ namespace ReportWeb.Controllers
                         List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
                         ViewData.Add("Lavorazioni", Lavorazioni);
 
-                        List<RWListItem> Automatico = CreaListaAcquaSecco(); 
+                        List<RWListItem> Automatico = CreaListaAcquaSecco();
                         ViewData.Add("AcquaSecco", Automatico);
 
-                        List<RWListItem> Materiale = bll.CaricaListaMateriali(); 
+                        List<RWListItem> Materiale = bll.CaricaListaMateriali();
                         ViewData.Add("Materiali", Materiale);
 
-                        List<RWListItem> Vibratori = bll.CaricaListaVibratori(); 
+                        List<RWListItem> Vibratori = bll.CaricaListaMacchine(RepartoCodice);
                         ViewData.Add("Vibratori", Vibratori);
 
                         return PartialView("VibraturaPartial");
                     }
 
+                case Reparti.Modelleria:
+                    {
+                        List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
+                        ViewData.Add("Lavorazioni", Lavorazioni);
+
+                        List<RWListItem> Attrezzaggio = CreaListaSiNo();
+                        ViewData.Add("Attrezzaggio", Attrezzaggio);
+
+                        List<RWListItem> MetalloBase = bll.CaricaListaMetalliBase();
+                        ViewData.Add("MetalloBase", MetalloBase);
+
+                        List<RWListItem> Macchine = bll.CaricaListaMacchine(RepartoCodice);
+                        ViewData.Add("Macchine", Macchine);
+
+                        return PartialView("ModelleriaPartial");
+                    }
                 default: return null;
             }
 

@@ -224,14 +224,24 @@ namespace ReportWeb.Data
             }
         }
 
-        public void FillRW_PR_VIBRATORI(PreserieDS ds)
+        public void FillUSR_PRD_RESOURCESF(PreserieDS ds)
         {
-            string select = @"SELECT * FROM RW_PR_VIBRATORI";
+            string select = @"SELECT * FROM GRUPPO.USR_PRD_RESOURCESF";
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
-                da.Fill(ds.RW_PR_VIBRATORI);
+                da.Fill(ds.USR_PRD_RESOURCESF);
             }
         }
+
+        public void FillMetalliBase(PreserieDS ds)
+        {
+            string select = @"SELECT * FROM GRUPPO.MAGAZZ WHERE IDTABSETT = '0000000015'";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.MAGAZZ);
+            }
+        }
+
 
         public void FillRW_PR_DETTAGLIO(string Barcode, PreserieDS ds)
         {

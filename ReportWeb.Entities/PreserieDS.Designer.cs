@@ -50,9 +50,11 @@ namespace ReportWeb.Entities {
         
         private RW_PR_MATERIALEDataTable tableRW_PR_MATERIALE;
         
-        private RW_PR_VIBRATORIDataTable tableRW_PR_VIBRATORI;
-        
         private RW_PR_VIBRATURADataTable tableRW_PR_VIBRATURA;
+        
+        private USR_PRD_RESOURCESFDataTable tableUSR_PRD_RESOURCESF;
+        
+        private RW_PR_MODELLERIADataTable tableRW_PR_MODELLERIA;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -121,11 +123,14 @@ namespace ReportWeb.Entities {
                 if ((ds.Tables["RW_PR_MATERIALE"] != null)) {
                     base.Tables.Add(new RW_PR_MATERIALEDataTable(ds.Tables["RW_PR_MATERIALE"]));
                 }
-                if ((ds.Tables["RW_PR_VIBRATORI"] != null)) {
-                    base.Tables.Add(new RW_PR_VIBRATORIDataTable(ds.Tables["RW_PR_VIBRATORI"]));
-                }
                 if ((ds.Tables["RW_PR_VIBRATURA"] != null)) {
                     base.Tables.Add(new RW_PR_VIBRATURADataTable(ds.Tables["RW_PR_VIBRATURA"]));
+                }
+                if ((ds.Tables["USR_PRD_RESOURCESF"] != null)) {
+                    base.Tables.Add(new USR_PRD_RESOURCESFDataTable(ds.Tables["USR_PRD_RESOURCESF"]));
+                }
+                if ((ds.Tables["RW_PR_MODELLERIA"] != null)) {
+                    base.Tables.Add(new RW_PR_MODELLERIADataTable(ds.Tables["RW_PR_MODELLERIA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -279,9 +284,9 @@ namespace ReportWeb.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public RW_PR_VIBRATORIDataTable RW_PR_VIBRATORI {
+        public RW_PR_VIBRATURADataTable RW_PR_VIBRATURA {
             get {
-                return this.tableRW_PR_VIBRATORI;
+                return this.tableRW_PR_VIBRATURA;
             }
         }
         
@@ -289,9 +294,19 @@ namespace ReportWeb.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public RW_PR_VIBRATURADataTable RW_PR_VIBRATURA {
+        public USR_PRD_RESOURCESFDataTable USR_PRD_RESOURCESF {
             get {
-                return this.tableRW_PR_VIBRATURA;
+                return this.tableUSR_PRD_RESOURCESF;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public RW_PR_MODELLERIADataTable RW_PR_MODELLERIA {
+            get {
+                return this.tableRW_PR_MODELLERIA;
             }
         }
         
@@ -401,11 +416,14 @@ namespace ReportWeb.Entities {
                 if ((ds.Tables["RW_PR_MATERIALE"] != null)) {
                     base.Tables.Add(new RW_PR_MATERIALEDataTable(ds.Tables["RW_PR_MATERIALE"]));
                 }
-                if ((ds.Tables["RW_PR_VIBRATORI"] != null)) {
-                    base.Tables.Add(new RW_PR_VIBRATORIDataTable(ds.Tables["RW_PR_VIBRATORI"]));
-                }
                 if ((ds.Tables["RW_PR_VIBRATURA"] != null)) {
                     base.Tables.Add(new RW_PR_VIBRATURADataTable(ds.Tables["RW_PR_VIBRATURA"]));
+                }
+                if ((ds.Tables["USR_PRD_RESOURCESF"] != null)) {
+                    base.Tables.Add(new USR_PRD_RESOURCESFDataTable(ds.Tables["USR_PRD_RESOURCESF"]));
+                }
+                if ((ds.Tables["RW_PR_MODELLERIA"] != null)) {
+                    base.Tables.Add(new RW_PR_MODELLERIADataTable(ds.Tables["RW_PR_MODELLERIA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -518,16 +536,22 @@ namespace ReportWeb.Entities {
                     this.tableRW_PR_MATERIALE.InitVars();
                 }
             }
-            this.tableRW_PR_VIBRATORI = ((RW_PR_VIBRATORIDataTable)(base.Tables["RW_PR_VIBRATORI"]));
-            if ((initTable == true)) {
-                if ((this.tableRW_PR_VIBRATORI != null)) {
-                    this.tableRW_PR_VIBRATORI.InitVars();
-                }
-            }
             this.tableRW_PR_VIBRATURA = ((RW_PR_VIBRATURADataTable)(base.Tables["RW_PR_VIBRATURA"]));
             if ((initTable == true)) {
                 if ((this.tableRW_PR_VIBRATURA != null)) {
                     this.tableRW_PR_VIBRATURA.InitVars();
+                }
+            }
+            this.tableUSR_PRD_RESOURCESF = ((USR_PRD_RESOURCESFDataTable)(base.Tables["USR_PRD_RESOURCESF"]));
+            if ((initTable == true)) {
+                if ((this.tableUSR_PRD_RESOURCESF != null)) {
+                    this.tableUSR_PRD_RESOURCESF.InitVars();
+                }
+            }
+            this.tableRW_PR_MODELLERIA = ((RW_PR_MODELLERIADataTable)(base.Tables["RW_PR_MODELLERIA"]));
+            if ((initTable == true)) {
+                if ((this.tableRW_PR_MODELLERIA != null)) {
+                    this.tableRW_PR_MODELLERIA.InitVars();
                 }
             }
         }
@@ -566,10 +590,12 @@ namespace ReportWeb.Entities {
             base.Tables.Add(this.tableRW_PR_DETTAGLIO);
             this.tableRW_PR_MATERIALE = new RW_PR_MATERIALEDataTable();
             base.Tables.Add(this.tableRW_PR_MATERIALE);
-            this.tableRW_PR_VIBRATORI = new RW_PR_VIBRATORIDataTable();
-            base.Tables.Add(this.tableRW_PR_VIBRATORI);
             this.tableRW_PR_VIBRATURA = new RW_PR_VIBRATURADataTable();
             base.Tables.Add(this.tableRW_PR_VIBRATURA);
+            this.tableUSR_PRD_RESOURCESF = new USR_PRD_RESOURCESFDataTable();
+            base.Tables.Add(this.tableUSR_PRD_RESOURCESF);
+            this.tableRW_PR_MODELLERIA = new RW_PR_MODELLERIADataTable();
+            base.Tables.Add(this.tableRW_PR_MODELLERIA);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -652,13 +678,19 @@ namespace ReportWeb.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeRW_PR_VIBRATORI() {
+        private bool ShouldSerializeRW_PR_VIBRATURA() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeRW_PR_VIBRATURA() {
+        private bool ShouldSerializeUSR_PRD_RESOURCESF() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeRW_PR_MODELLERIA() {
             return false;
         }
         
@@ -757,10 +789,13 @@ namespace ReportWeb.Entities {
         public delegate void RW_PR_MATERIALERowChangeEventHandler(object sender, RW_PR_MATERIALERowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void RW_PR_VIBRATORIRowChangeEventHandler(object sender, RW_PR_VIBRATORIRowChangeEvent e);
+        public delegate void RW_PR_VIBRATURARowChangeEventHandler(object sender, RW_PR_VIBRATURARowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void RW_PR_VIBRATURARowChangeEventHandler(object sender, RW_PR_VIBRATURARowChangeEvent e);
+        public delegate void USR_PRD_RESOURCESFRowChangeEventHandler(object sender, USR_PRD_RESOURCESFRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void RW_PR_MODELLERIARowChangeEventHandler(object sender, RW_PR_MODELLERIARowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -12260,270 +12295,6 @@ namespace ReportWeb.Entities {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class RW_PR_VIBRATORIDataTable : global::System.Data.TypedTableBase<RW_PR_VIBRATORIRow> {
-            
-            private global::System.Data.DataColumn columnIDVIBRATORE;
-            
-            private global::System.Data.DataColumn columnVIBRATORE;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_PR_VIBRATORIDataTable() {
-                this.TableName = "RW_PR_VIBRATORI";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal RW_PR_VIBRATORIDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected RW_PR_VIBRATORIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn IDVIBRATOREColumn {
-                get {
-                    return this.columnIDVIBRATORE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn VIBRATOREColumn {
-                get {
-                    return this.columnVIBRATORE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_PR_VIBRATORIRow this[int index] {
-                get {
-                    return ((RW_PR_VIBRATORIRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event RW_PR_VIBRATORIRowChangeEventHandler RW_PR_VIBRATORIRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event RW_PR_VIBRATORIRowChangeEventHandler RW_PR_VIBRATORIRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event RW_PR_VIBRATORIRowChangeEventHandler RW_PR_VIBRATORIRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event RW_PR_VIBRATORIRowChangeEventHandler RW_PR_VIBRATORIRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddRW_PR_VIBRATORIRow(RW_PR_VIBRATORIRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_PR_VIBRATORIRow AddRW_PR_VIBRATORIRow(decimal IDVIBRATORE, string VIBRATORE) {
-                RW_PR_VIBRATORIRow rowRW_PR_VIBRATORIRow = ((RW_PR_VIBRATORIRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        IDVIBRATORE,
-                        VIBRATORE};
-                rowRW_PR_VIBRATORIRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowRW_PR_VIBRATORIRow);
-                return rowRW_PR_VIBRATORIRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                RW_PR_VIBRATORIDataTable cln = ((RW_PR_VIBRATORIDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new RW_PR_VIBRATORIDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal void InitVars() {
-                this.columnIDVIBRATORE = base.Columns["IDVIBRATORE"];
-                this.columnVIBRATORE = base.Columns["VIBRATORE"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            private void InitClass() {
-                this.columnIDVIBRATORE = new global::System.Data.DataColumn("IDVIBRATORE", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDVIBRATORE);
-                this.columnVIBRATORE = new global::System.Data.DataColumn("VIBRATORE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVIBRATORE);
-                this.columnIDVIBRATORE.AllowDBNull = false;
-                this.columnVIBRATORE.AllowDBNull = false;
-                this.columnVIBRATORE.MaxLength = 30;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_PR_VIBRATORIRow NewRW_PR_VIBRATORIRow() {
-                return ((RW_PR_VIBRATORIRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new RW_PR_VIBRATORIRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(RW_PR_VIBRATORIRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.RW_PR_VIBRATORIRowChanged != null)) {
-                    this.RW_PR_VIBRATORIRowChanged(this, new RW_PR_VIBRATORIRowChangeEvent(((RW_PR_VIBRATORIRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.RW_PR_VIBRATORIRowChanging != null)) {
-                    this.RW_PR_VIBRATORIRowChanging(this, new RW_PR_VIBRATORIRowChangeEvent(((RW_PR_VIBRATORIRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.RW_PR_VIBRATORIRowDeleted != null)) {
-                    this.RW_PR_VIBRATORIRowDeleted(this, new RW_PR_VIBRATORIRowChangeEvent(((RW_PR_VIBRATORIRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.RW_PR_VIBRATORIRowDeleting != null)) {
-                    this.RW_PR_VIBRATORIRowDeleting(this, new RW_PR_VIBRATORIRowChangeEvent(((RW_PR_VIBRATORIRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveRW_PR_VIBRATORIRow(RW_PR_VIBRATORIRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                PreserieDS ds = new PreserieDS();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "RW_PR_VIBRATORIDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class RW_PR_VIBRATURADataTable : global::System.Data.TypedTableBase<RW_PR_VIBRATURARow> {
             
             private global::System.Data.DataColumn columnIDELEMENTO;
@@ -12727,13 +12498,6 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_PR_VIBRATURARow FindByIDELEMENTO(decimal IDELEMENTO) {
-                return ((RW_PR_VIBRATURARow)(this.Rows.Find(new object[] {
-                            IDELEMENTO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 RW_PR_VIBRATURADataTable cln = ((RW_PR_VIBRATURADataTable)(base.Clone()));
                 cln.InitVars();
@@ -12787,10 +12551,6 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnMAXPEZZI);
                 this.columnVIBRATORE = new global::System.Data.DataColumn("VIBRATORE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVIBRATORE);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnIDELEMENTO}, true));
-                this.columnIDELEMENTO.AllowDBNull = false;
-                this.columnIDELEMENTO.Unique = true;
                 this.columnIDDETTAGLIO.AllowDBNull = false;
                 this.columnSEQUENZA.AllowDBNull = false;
                 this.columnLAVORAZIONE.AllowDBNull = false;
@@ -12799,7 +12559,7 @@ namespace ReportWeb.Entities {
                 this.columnTIPOLOGIA.MaxLength = 10;
                 this.columnMATERIALE.MaxLength = 50;
                 this.columnADDITIVI.MaxLength = 50;
-                this.columnVIBRATORE.MaxLength = 30;
+                this.columnVIBRATORE.MaxLength = 100;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12886,6 +12646,918 @@ namespace ReportWeb.Entities {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "RW_PR_VIBRATURADataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class USR_PRD_RESOURCESFDataTable : global::System.Data.TypedTableBase<USR_PRD_RESOURCESFRow> {
+            
+            private global::System.Data.DataColumn columnIDRESOURCEF;
+            
+            private global::System.Data.DataColumn columnIDRESOURCE;
+            
+            private global::System.Data.DataColumn columnCODRESOURCEF;
+            
+            private global::System.Data.DataColumn columnDESRESOURCEF;
+            
+            private global::System.Data.DataColumn columnIDCESPITE;
+            
+            private global::System.Data.DataColumn columnCODICECLIFO;
+            
+            private global::System.Data.DataColumn columnCAP01;
+            
+            private global::System.Data.DataColumn columnCAP02;
+            
+            private global::System.Data.DataColumn columnCAP03;
+            
+            private global::System.Data.DataColumn columnCAP04;
+            
+            private global::System.Data.DataColumn columnCAP05;
+            
+            private global::System.Data.DataColumn columnCAP06;
+            
+            private global::System.Data.DataColumn columnCAP07;
+            
+            private global::System.Data.DataColumn columnDATACR;
+            
+            private global::System.Data.DataColumn columnDATAVR;
+            
+            private global::System.Data.DataColumn columnUTENTE;
+            
+            private global::System.Data.DataColumn columnBARCODE;
+            
+            private global::System.Data.DataColumn columnIDUSER;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public USR_PRD_RESOURCESFDataTable() {
+                this.TableName = "USR_PRD_RESOURCESF";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal USR_PRD_RESOURCESFDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected USR_PRD_RESOURCESFDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDRESOURCEFColumn {
+                get {
+                    return this.columnIDRESOURCEF;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDRESOURCEColumn {
+                get {
+                    return this.columnIDRESOURCE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODRESOURCEFColumn {
+                get {
+                    return this.columnCODRESOURCEF;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESRESOURCEFColumn {
+                get {
+                    return this.columnDESRESOURCEF;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDCESPITEColumn {
+                get {
+                    return this.columnIDCESPITE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODICECLIFOColumn {
+                get {
+                    return this.columnCODICECLIFO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CAP01Column {
+                get {
+                    return this.columnCAP01;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CAP02Column {
+                get {
+                    return this.columnCAP02;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CAP03Column {
+                get {
+                    return this.columnCAP03;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CAP04Column {
+                get {
+                    return this.columnCAP04;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CAP05Column {
+                get {
+                    return this.columnCAP05;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CAP06Column {
+                get {
+                    return this.columnCAP06;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CAP07Column {
+                get {
+                    return this.columnCAP07;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DATACRColumn {
+                get {
+                    return this.columnDATACR;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DATAVRColumn {
+                get {
+                    return this.columnDATAVR;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn UTENTEColumn {
+                get {
+                    return this.columnUTENTE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn BARCODEColumn {
+                get {
+                    return this.columnBARCODE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDUSERColumn {
+                get {
+                    return this.columnIDUSER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public USR_PRD_RESOURCESFRow this[int index] {
+                get {
+                    return ((USR_PRD_RESOURCESFRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event USR_PRD_RESOURCESFRowChangeEventHandler USR_PRD_RESOURCESFRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event USR_PRD_RESOURCESFRowChangeEventHandler USR_PRD_RESOURCESFRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event USR_PRD_RESOURCESFRowChangeEventHandler USR_PRD_RESOURCESFRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event USR_PRD_RESOURCESFRowChangeEventHandler USR_PRD_RESOURCESFRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddUSR_PRD_RESOURCESFRow(USR_PRD_RESOURCESFRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public USR_PRD_RESOURCESFRow AddUSR_PRD_RESOURCESFRow(
+                        string IDRESOURCEF, 
+                        string IDRESOURCE, 
+                        string CODRESOURCEF, 
+                        string DESRESOURCEF, 
+                        string IDCESPITE, 
+                        string CODICECLIFO, 
+                        decimal CAP01, 
+                        decimal CAP02, 
+                        decimal CAP03, 
+                        decimal CAP04, 
+                        decimal CAP05, 
+                        decimal CAP06, 
+                        decimal CAP07, 
+                        System.DateTime DATACR, 
+                        System.DateTime DATAVR, 
+                        string UTENTE, 
+                        string BARCODE, 
+                        string IDUSER) {
+                USR_PRD_RESOURCESFRow rowUSR_PRD_RESOURCESFRow = ((USR_PRD_RESOURCESFRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDRESOURCEF,
+                        IDRESOURCE,
+                        CODRESOURCEF,
+                        DESRESOURCEF,
+                        IDCESPITE,
+                        CODICECLIFO,
+                        CAP01,
+                        CAP02,
+                        CAP03,
+                        CAP04,
+                        CAP05,
+                        CAP06,
+                        CAP07,
+                        DATACR,
+                        DATAVR,
+                        UTENTE,
+                        BARCODE,
+                        IDUSER};
+                rowUSR_PRD_RESOURCESFRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowUSR_PRD_RESOURCESFRow);
+                return rowUSR_PRD_RESOURCESFRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public USR_PRD_RESOURCESFRow FindByIDRESOURCEF(string IDRESOURCEF) {
+                return ((USR_PRD_RESOURCESFRow)(this.Rows.Find(new object[] {
+                            IDRESOURCEF})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                USR_PRD_RESOURCESFDataTable cln = ((USR_PRD_RESOURCESFDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new USR_PRD_RESOURCESFDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDRESOURCEF = base.Columns["IDRESOURCEF"];
+                this.columnIDRESOURCE = base.Columns["IDRESOURCE"];
+                this.columnCODRESOURCEF = base.Columns["CODRESOURCEF"];
+                this.columnDESRESOURCEF = base.Columns["DESRESOURCEF"];
+                this.columnIDCESPITE = base.Columns["IDCESPITE"];
+                this.columnCODICECLIFO = base.Columns["CODICECLIFO"];
+                this.columnCAP01 = base.Columns["CAP01"];
+                this.columnCAP02 = base.Columns["CAP02"];
+                this.columnCAP03 = base.Columns["CAP03"];
+                this.columnCAP04 = base.Columns["CAP04"];
+                this.columnCAP05 = base.Columns["CAP05"];
+                this.columnCAP06 = base.Columns["CAP06"];
+                this.columnCAP07 = base.Columns["CAP07"];
+                this.columnDATACR = base.Columns["DATACR"];
+                this.columnDATAVR = base.Columns["DATAVR"];
+                this.columnUTENTE = base.Columns["UTENTE"];
+                this.columnBARCODE = base.Columns["BARCODE"];
+                this.columnIDUSER = base.Columns["IDUSER"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDRESOURCEF = new global::System.Data.DataColumn("IDRESOURCEF", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDRESOURCEF);
+                this.columnIDRESOURCE = new global::System.Data.DataColumn("IDRESOURCE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDRESOURCE);
+                this.columnCODRESOURCEF = new global::System.Data.DataColumn("CODRESOURCEF", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODRESOURCEF);
+                this.columnDESRESOURCEF = new global::System.Data.DataColumn("DESRESOURCEF", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESRESOURCEF);
+                this.columnIDCESPITE = new global::System.Data.DataColumn("IDCESPITE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDCESPITE);
+                this.columnCODICECLIFO = new global::System.Data.DataColumn("CODICECLIFO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODICECLIFO);
+                this.columnCAP01 = new global::System.Data.DataColumn("CAP01", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCAP01);
+                this.columnCAP02 = new global::System.Data.DataColumn("CAP02", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCAP02);
+                this.columnCAP03 = new global::System.Data.DataColumn("CAP03", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCAP03);
+                this.columnCAP04 = new global::System.Data.DataColumn("CAP04", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCAP04);
+                this.columnCAP05 = new global::System.Data.DataColumn("CAP05", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCAP05);
+                this.columnCAP06 = new global::System.Data.DataColumn("CAP06", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCAP06);
+                this.columnCAP07 = new global::System.Data.DataColumn("CAP07", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCAP07);
+                this.columnDATACR = new global::System.Data.DataColumn("DATACR", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATACR);
+                this.columnDATAVR = new global::System.Data.DataColumn("DATAVR", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATAVR);
+                this.columnUTENTE = new global::System.Data.DataColumn("UTENTE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUTENTE);
+                this.columnBARCODE = new global::System.Data.DataColumn("BARCODE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBARCODE);
+                this.columnIDUSER = new global::System.Data.DataColumn("IDUSER", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDUSER);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnIDRESOURCEF}, true));
+                this.columnIDRESOURCEF.AllowDBNull = false;
+                this.columnIDRESOURCEF.Unique = true;
+                this.columnIDRESOURCEF.MaxLength = 10;
+                this.columnIDRESOURCE.MaxLength = 10;
+                this.columnCODRESOURCEF.MaxLength = 100;
+                this.columnDESRESOURCEF.MaxLength = 254;
+                this.columnIDCESPITE.MaxLength = 100;
+                this.columnCODICECLIFO.MaxLength = 10;
+                this.columnCAP01.AllowDBNull = false;
+                this.columnCAP02.AllowDBNull = false;
+                this.columnCAP03.AllowDBNull = false;
+                this.columnCAP04.AllowDBNull = false;
+                this.columnCAP05.AllowDBNull = false;
+                this.columnCAP06.AllowDBNull = false;
+                this.columnCAP07.AllowDBNull = false;
+                this.columnUTENTE.MaxLength = 10;
+                this.columnBARCODE.MaxLength = 13;
+                this.columnIDUSER.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public USR_PRD_RESOURCESFRow NewUSR_PRD_RESOURCESFRow() {
+                return ((USR_PRD_RESOURCESFRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new USR_PRD_RESOURCESFRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(USR_PRD_RESOURCESFRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.USR_PRD_RESOURCESFRowChanged != null)) {
+                    this.USR_PRD_RESOURCESFRowChanged(this, new USR_PRD_RESOURCESFRowChangeEvent(((USR_PRD_RESOURCESFRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.USR_PRD_RESOURCESFRowChanging != null)) {
+                    this.USR_PRD_RESOURCESFRowChanging(this, new USR_PRD_RESOURCESFRowChangeEvent(((USR_PRD_RESOURCESFRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.USR_PRD_RESOURCESFRowDeleted != null)) {
+                    this.USR_PRD_RESOURCESFRowDeleted(this, new USR_PRD_RESOURCESFRowChangeEvent(((USR_PRD_RESOURCESFRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.USR_PRD_RESOURCESFRowDeleting != null)) {
+                    this.USR_PRD_RESOURCESFRowDeleting(this, new USR_PRD_RESOURCESFRowChangeEvent(((USR_PRD_RESOURCESFRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveUSR_PRD_RESOURCESFRow(USR_PRD_RESOURCESFRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                PreserieDS ds = new PreserieDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "USR_PRD_RESOURCESFDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class RW_PR_MODELLERIADataTable : global::System.Data.TypedTableBase<RW_PR_MODELLERIARow> {
+            
+            private global::System.Data.DataColumn columnIDELEMENTO;
+            
+            private global::System.Data.DataColumn columnIDDETTAGLIO;
+            
+            private global::System.Data.DataColumn columnSEQUENZA;
+            
+            private global::System.Data.DataColumn columnCOSTO;
+            
+            private global::System.Data.DataColumn columnLAVORAZIONE;
+            
+            private global::System.Data.DataColumn columnMATERIALE;
+            
+            private global::System.Data.DataColumn columnPROGRAMMA;
+            
+            private global::System.Data.DataColumn columnUTENSILI;
+            
+            private global::System.Data.DataColumn columnATTREZZAGGIO;
+            
+            private global::System.Data.DataColumn columnMACCHINA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_PR_MODELLERIADataTable() {
+                this.TableName = "RW_PR_MODELLERIA";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal RW_PR_MODELLERIADataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected RW_PR_MODELLERIADataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDELEMENTOColumn {
+                get {
+                    return this.columnIDELEMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDDETTAGLIOColumn {
+                get {
+                    return this.columnIDDETTAGLIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn SEQUENZAColumn {
+                get {
+                    return this.columnSEQUENZA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn COSTOColumn {
+                get {
+                    return this.columnCOSTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn LAVORAZIONEColumn {
+                get {
+                    return this.columnLAVORAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn MATERIALEColumn {
+                get {
+                    return this.columnMATERIALE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PROGRAMMAColumn {
+                get {
+                    return this.columnPROGRAMMA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn UTENSILIColumn {
+                get {
+                    return this.columnUTENSILI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ATTREZZAGGIOColumn {
+                get {
+                    return this.columnATTREZZAGGIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn MACCHINAColumn {
+                get {
+                    return this.columnMACCHINA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_PR_MODELLERIARow this[int index] {
+                get {
+                    return ((RW_PR_MODELLERIARow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_PR_MODELLERIARowChangeEventHandler RW_PR_MODELLERIARowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_PR_MODELLERIARowChangeEventHandler RW_PR_MODELLERIARowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_PR_MODELLERIARowChangeEventHandler RW_PR_MODELLERIARowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_PR_MODELLERIARowChangeEventHandler RW_PR_MODELLERIARowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddRW_PR_MODELLERIARow(RW_PR_MODELLERIARow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_PR_MODELLERIARow AddRW_PR_MODELLERIARow(decimal IDELEMENTO, decimal IDDETTAGLIO, decimal SEQUENZA, decimal COSTO, string LAVORAZIONE, string MATERIALE, string PROGRAMMA, string UTENSILI, string ATTREZZAGGIO, string MACCHINA) {
+                RW_PR_MODELLERIARow rowRW_PR_MODELLERIARow = ((RW_PR_MODELLERIARow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDELEMENTO,
+                        IDDETTAGLIO,
+                        SEQUENZA,
+                        COSTO,
+                        LAVORAZIONE,
+                        MATERIALE,
+                        PROGRAMMA,
+                        UTENSILI,
+                        ATTREZZAGGIO,
+                        MACCHINA};
+                rowRW_PR_MODELLERIARow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRW_PR_MODELLERIARow);
+                return rowRW_PR_MODELLERIARow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                RW_PR_MODELLERIADataTable cln = ((RW_PR_MODELLERIADataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new RW_PR_MODELLERIADataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDELEMENTO = base.Columns["IDELEMENTO"];
+                this.columnIDDETTAGLIO = base.Columns["IDDETTAGLIO"];
+                this.columnSEQUENZA = base.Columns["SEQUENZA"];
+                this.columnCOSTO = base.Columns["COSTO"];
+                this.columnLAVORAZIONE = base.Columns["LAVORAZIONE"];
+                this.columnMATERIALE = base.Columns["MATERIALE"];
+                this.columnPROGRAMMA = base.Columns["PROGRAMMA"];
+                this.columnUTENSILI = base.Columns["UTENSILI"];
+                this.columnATTREZZAGGIO = base.Columns["ATTREZZAGGIO"];
+                this.columnMACCHINA = base.Columns["MACCHINA"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDELEMENTO = new global::System.Data.DataColumn("IDELEMENTO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDELEMENTO);
+                this.columnIDDETTAGLIO = new global::System.Data.DataColumn("IDDETTAGLIO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDDETTAGLIO);
+                this.columnSEQUENZA = new global::System.Data.DataColumn("SEQUENZA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEQUENZA);
+                this.columnCOSTO = new global::System.Data.DataColumn("COSTO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOSTO);
+                this.columnLAVORAZIONE = new global::System.Data.DataColumn("LAVORAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLAVORAZIONE);
+                this.columnMATERIALE = new global::System.Data.DataColumn("MATERIALE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMATERIALE);
+                this.columnPROGRAMMA = new global::System.Data.DataColumn("PROGRAMMA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPROGRAMMA);
+                this.columnUTENSILI = new global::System.Data.DataColumn("UTENSILI", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUTENSILI);
+                this.columnATTREZZAGGIO = new global::System.Data.DataColumn("ATTREZZAGGIO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnATTREZZAGGIO);
+                this.columnMACCHINA = new global::System.Data.DataColumn("MACCHINA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMACCHINA);
+                this.columnIDDETTAGLIO.AllowDBNull = false;
+                this.columnSEQUENZA.AllowDBNull = false;
+                this.columnLAVORAZIONE.AllowDBNull = false;
+                this.columnLAVORAZIONE.MaxLength = 30;
+                this.columnMATERIALE.MaxLength = 50;
+                this.columnPROGRAMMA.MaxLength = 50;
+                this.columnUTENSILI.MaxLength = 50;
+                this.columnATTREZZAGGIO.MaxLength = 2;
+                this.columnMACCHINA.MaxLength = 100;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_PR_MODELLERIARow NewRW_PR_MODELLERIARow() {
+                return ((RW_PR_MODELLERIARow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new RW_PR_MODELLERIARow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(RW_PR_MODELLERIARow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.RW_PR_MODELLERIARowChanged != null)) {
+                    this.RW_PR_MODELLERIARowChanged(this, new RW_PR_MODELLERIARowChangeEvent(((RW_PR_MODELLERIARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.RW_PR_MODELLERIARowChanging != null)) {
+                    this.RW_PR_MODELLERIARowChanging(this, new RW_PR_MODELLERIARowChangeEvent(((RW_PR_MODELLERIARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.RW_PR_MODELLERIARowDeleted != null)) {
+                    this.RW_PR_MODELLERIARowDeleted(this, new RW_PR_MODELLERIARowChangeEvent(((RW_PR_MODELLERIARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.RW_PR_MODELLERIARowDeleting != null)) {
+                    this.RW_PR_MODELLERIARowDeleting(this, new RW_PR_MODELLERIARowChangeEvent(((RW_PR_MODELLERIARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveRW_PR_MODELLERIARow(RW_PR_MODELLERIARow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                PreserieDS ds = new PreserieDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "RW_PR_MODELLERIADataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -24882,43 +25554,6 @@ namespace ReportWeb.Entities {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class RW_PR_VIBRATORIRow : global::System.Data.DataRow {
-            
-            private RW_PR_VIBRATORIDataTable tableRW_PR_VIBRATORI;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal RW_PR_VIBRATORIRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableRW_PR_VIBRATORI = ((RW_PR_VIBRATORIDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal IDVIBRATORE {
-                get {
-                    return ((decimal)(this[this.tableRW_PR_VIBRATORI.IDVIBRATOREColumn]));
-                }
-                set {
-                    this[this.tableRW_PR_VIBRATORI.IDVIBRATOREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string VIBRATORE {
-                get {
-                    return ((string)(this[this.tableRW_PR_VIBRATORI.VIBRATOREColumn]));
-                }
-                set {
-                    this[this.tableRW_PR_VIBRATORI.VIBRATOREColumn] = value;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
         public partial class RW_PR_VIBRATURARow : global::System.Data.DataRow {
             
             private RW_PR_VIBRATURADataTable tableRW_PR_VIBRATURA;
@@ -24934,7 +25569,12 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal IDELEMENTO {
                 get {
-                    return ((decimal)(this[this.tableRW_PR_VIBRATURA.IDELEMENTOColumn]));
+                    try {
+                        return ((decimal)(this[this.tableRW_PR_VIBRATURA.IDELEMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDELEMENTO\' in table \'RW_PR_VIBRATURA\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableRW_PR_VIBRATURA.IDELEMENTOColumn] = value;
@@ -25083,6 +25723,18 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDELEMENTONull() {
+                return this.IsNull(this.tableRW_PR_VIBRATURA.IDELEMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDELEMENTONull() {
+                this[this.tableRW_PR_VIBRATURA.IDELEMENTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsCOSTONull() {
                 return this.IsNull(this.tableRW_PR_VIBRATURA.COSTOColumn);
             }
@@ -25151,6 +25803,633 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetVIBRATORENull() {
                 this[this.tableRW_PR_VIBRATURA.VIBRATOREColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class USR_PRD_RESOURCESFRow : global::System.Data.DataRow {
+            
+            private USR_PRD_RESOURCESFDataTable tableUSR_PRD_RESOURCESF;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal USR_PRD_RESOURCESFRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableUSR_PRD_RESOURCESF = ((USR_PRD_RESOURCESFDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDRESOURCEF {
+                get {
+                    return ((string)(this[this.tableUSR_PRD_RESOURCESF.IDRESOURCEFColumn]));
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.IDRESOURCEFColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDRESOURCE {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RESOURCESF.IDRESOURCEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDRESOURCE\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.IDRESOURCEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODRESOURCEF {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RESOURCESF.CODRESOURCEFColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODRESOURCEF\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.CODRESOURCEFColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESRESOURCEF {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RESOURCESF.DESRESOURCEFColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESRESOURCEF\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.DESRESOURCEFColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDCESPITE {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RESOURCESF.IDCESPITEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDCESPITE\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.IDCESPITEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODICECLIFO {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RESOURCESF.CODICECLIFOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODICECLIFO\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.CODICECLIFOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal CAP01 {
+                get {
+                    return ((decimal)(this[this.tableUSR_PRD_RESOURCESF.CAP01Column]));
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.CAP01Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal CAP02 {
+                get {
+                    return ((decimal)(this[this.tableUSR_PRD_RESOURCESF.CAP02Column]));
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.CAP02Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal CAP03 {
+                get {
+                    return ((decimal)(this[this.tableUSR_PRD_RESOURCESF.CAP03Column]));
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.CAP03Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal CAP04 {
+                get {
+                    return ((decimal)(this[this.tableUSR_PRD_RESOURCESF.CAP04Column]));
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.CAP04Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal CAP05 {
+                get {
+                    return ((decimal)(this[this.tableUSR_PRD_RESOURCESF.CAP05Column]));
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.CAP05Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal CAP06 {
+                get {
+                    return ((decimal)(this[this.tableUSR_PRD_RESOURCESF.CAP06Column]));
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.CAP06Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal CAP07 {
+                get {
+                    return ((decimal)(this[this.tableUSR_PRD_RESOURCESF.CAP07Column]));
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.CAP07Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATACR {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableUSR_PRD_RESOURCESF.DATACRColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATACR\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.DATACRColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATAVR {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableUSR_PRD_RESOURCESF.DATAVRColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATAVR\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.DATAVRColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string UTENTE {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RESOURCESF.UTENTEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UTENTE\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.UTENTEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string BARCODE {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RESOURCESF.BARCODEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BARCODE\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.BARCODEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDUSER {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RESOURCESF.IDUSERColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDUSER\' in table \'USR_PRD_RESOURCESF\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RESOURCESF.IDUSERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDRESOURCENull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.IDRESOURCEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDRESOURCENull() {
+                this[this.tableUSR_PRD_RESOURCESF.IDRESOURCEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCODRESOURCEFNull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.CODRESOURCEFColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCODRESOURCEFNull() {
+                this[this.tableUSR_PRD_RESOURCESF.CODRESOURCEFColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDESRESOURCEFNull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.DESRESOURCEFColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDESRESOURCEFNull() {
+                this[this.tableUSR_PRD_RESOURCESF.DESRESOURCEFColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDCESPITENull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.IDCESPITEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDCESPITENull() {
+                this[this.tableUSR_PRD_RESOURCESF.IDCESPITEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCODICECLIFONull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.CODICECLIFOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCODICECLIFONull() {
+                this[this.tableUSR_PRD_RESOURCESF.CODICECLIFOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDATACRNull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.DATACRColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDATACRNull() {
+                this[this.tableUSR_PRD_RESOURCESF.DATACRColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDATAVRNull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.DATAVRColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDATAVRNull() {
+                this[this.tableUSR_PRD_RESOURCESF.DATAVRColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsUTENTENull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.UTENTEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetUTENTENull() {
+                this[this.tableUSR_PRD_RESOURCESF.UTENTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsBARCODENull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.BARCODEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetBARCODENull() {
+                this[this.tableUSR_PRD_RESOURCESF.BARCODEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDUSERNull() {
+                return this.IsNull(this.tableUSR_PRD_RESOURCESF.IDUSERColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDUSERNull() {
+                this[this.tableUSR_PRD_RESOURCESF.IDUSERColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class RW_PR_MODELLERIARow : global::System.Data.DataRow {
+            
+            private RW_PR_MODELLERIADataTable tableRW_PR_MODELLERIA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal RW_PR_MODELLERIARow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableRW_PR_MODELLERIA = ((RW_PR_MODELLERIADataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDELEMENTO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_PR_MODELLERIA.IDELEMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDELEMENTO\' in table \'RW_PR_MODELLERIA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.IDELEMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDDETTAGLIO {
+                get {
+                    return ((decimal)(this[this.tableRW_PR_MODELLERIA.IDDETTAGLIOColumn]));
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.IDDETTAGLIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal SEQUENZA {
+                get {
+                    return ((decimal)(this[this.tableRW_PR_MODELLERIA.SEQUENZAColumn]));
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.SEQUENZAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal COSTO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_PR_MODELLERIA.COSTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COSTO\' in table \'RW_PR_MODELLERIA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.COSTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string LAVORAZIONE {
+                get {
+                    return ((string)(this[this.tableRW_PR_MODELLERIA.LAVORAZIONEColumn]));
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.LAVORAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string MATERIALE {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_PR_MODELLERIA.MATERIALEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MATERIALE\' in table \'RW_PR_MODELLERIA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.MATERIALEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string PROGRAMMA {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_PR_MODELLERIA.PROGRAMMAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PROGRAMMA\' in table \'RW_PR_MODELLERIA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.PROGRAMMAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string UTENSILI {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_PR_MODELLERIA.UTENSILIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UTENSILI\' in table \'RW_PR_MODELLERIA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.UTENSILIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ATTREZZAGGIO {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_PR_MODELLERIA.ATTREZZAGGIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ATTREZZAGGIO\' in table \'RW_PR_MODELLERIA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.ATTREZZAGGIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string MACCHINA {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_PR_MODELLERIA.MACCHINAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MACCHINA\' in table \'RW_PR_MODELLERIA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_PR_MODELLERIA.MACCHINAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDELEMENTONull() {
+                return this.IsNull(this.tableRW_PR_MODELLERIA.IDELEMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDELEMENTONull() {
+                this[this.tableRW_PR_MODELLERIA.IDELEMENTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCOSTONull() {
+                return this.IsNull(this.tableRW_PR_MODELLERIA.COSTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCOSTONull() {
+                this[this.tableRW_PR_MODELLERIA.COSTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMATERIALENull() {
+                return this.IsNull(this.tableRW_PR_MODELLERIA.MATERIALEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMATERIALENull() {
+                this[this.tableRW_PR_MODELLERIA.MATERIALEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPROGRAMMANull() {
+                return this.IsNull(this.tableRW_PR_MODELLERIA.PROGRAMMAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPROGRAMMANull() {
+                this[this.tableRW_PR_MODELLERIA.PROGRAMMAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsUTENSILINull() {
+                return this.IsNull(this.tableRW_PR_MODELLERIA.UTENSILIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetUTENSILINull() {
+                this[this.tableRW_PR_MODELLERIA.UTENSILIColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsATTREZZAGGIONull() {
+                return this.IsNull(this.tableRW_PR_MODELLERIA.ATTREZZAGGIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetATTREZZAGGIONull() {
+                this[this.tableRW_PR_MODELLERIA.ATTREZZAGGIOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMACCHINANull() {
+                return this.IsNull(this.tableRW_PR_MODELLERIA.MACCHINAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMACCHINANull() {
+                this[this.tableRW_PR_MODELLERIA.MACCHINAColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -25600,22 +26879,22 @@ namespace ReportWeb.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class RW_PR_VIBRATORIRowChangeEvent : global::System.EventArgs {
+        public class RW_PR_VIBRATURARowChangeEvent : global::System.EventArgs {
             
-            private RW_PR_VIBRATORIRow eventRow;
+            private RW_PR_VIBRATURARow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_PR_VIBRATORIRowChangeEvent(RW_PR_VIBRATORIRow row, global::System.Data.DataRowAction action) {
+            public RW_PR_VIBRATURARowChangeEvent(RW_PR_VIBRATURARow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_PR_VIBRATORIRow Row {
+            public RW_PR_VIBRATURARow Row {
                 get {
                     return this.eventRow;
                 }
@@ -25634,22 +26913,56 @@ namespace ReportWeb.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class RW_PR_VIBRATURARowChangeEvent : global::System.EventArgs {
+        public class USR_PRD_RESOURCESFRowChangeEvent : global::System.EventArgs {
             
-            private RW_PR_VIBRATURARow eventRow;
+            private USR_PRD_RESOURCESFRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_PR_VIBRATURARowChangeEvent(RW_PR_VIBRATURARow row, global::System.Data.DataRowAction action) {
+            public USR_PRD_RESOURCESFRowChangeEvent(USR_PRD_RESOURCESFRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_PR_VIBRATURARow Row {
+            public USR_PRD_RESOURCESFRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class RW_PR_MODELLERIARowChangeEvent : global::System.EventArgs {
+            
+            private RW_PR_MODELLERIARow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_PR_MODELLERIARowChangeEvent(RW_PR_MODELLERIARow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_PR_MODELLERIARow Row {
                 get {
                     return this.eventRow;
                 }

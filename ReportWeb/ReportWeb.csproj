@@ -475,6 +475,7 @@
     <Content Include="Views\Rilevazioni\ChiudiLavorazionePartial.cshtml" />
     <Content Include="Views\Preserie\PulimentaturaPartial.cshtml" />
     <Content Include="Views\Preserie\VibraturaPartial.cshtml" />
+    <Content Include="Views\Preserie\ModelleriaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

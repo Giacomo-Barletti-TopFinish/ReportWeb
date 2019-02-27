@@ -367,21 +367,36 @@ namespace ReportWeb.Business
 
         }
 
-        public List<RWListItem> CaricaListaVibratori()
+        public List<RWListItem> CaricaListaMacchine(string Reparto)
         {
             List<RWListItem> model = new List<RWListItem>();
             PreserieDS ds = new PreserieDS();
             using (PreserieBusiness bPreserie = new PreserieBusiness())
             {
-                bPreserie.FillRW_PR_VIBRATORI(ds);
+                bPreserie.FillUSR_PRD_RESOURCESF(ds);
                 model.Add(new RWListItem(string.Empty, string.Empty));
 
-                foreach (PreserieDS.RW_PR_VIBRATORIRow vibratore in ds.RW_PR_VIBRATORI.OrderBy(x => x.IDVIBRATORE))
-                    model.Add(new RWListItem(vibratore.VIBRATORE, vibratore.IDVIBRATORE.ToString()));
+                foreach (PreserieDS.USR_PRD_RESOURCESFRow macchina in ds.USR_PRD_RESOURCESF.Where(x => x.IDRESOURCE != "0000000019" && x.CODICECLIFO == Reparto).OrderBy(x => x.CODRESOURCEF))
+                    model.Add(new RWListItem(macchina.CODRESOURCEF, macchina.IDRESOURCEF));
 
                 return model;
             }
+        }
 
+        public List<RWListItem> CaricaListaMetalliBase()
+        {
+            List<RWListItem> model = new List<RWListItem>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillMetalliBase(ds);
+                model.Add(new RWListItem(string.Empty, string.Empty));
+
+                foreach (PreserieDS.MAGAZZRow metallo in ds.MAGAZZ.OrderBy(x => x.MODELLO))
+                    model.Add(new RWListItem(metallo.MODELLO, metallo.IDMAGAZZ));
+
+                return model;
+            }
         }
 
         public List<RWListItem> CaricaListaPackaging()
@@ -492,6 +507,12 @@ namespace ReportWeb.Business
                             InserisciDettaglioVibratura(ds, dettagli, idDettaglio, bPreserie);
                             break;
                         }
+                    case Reparti.Modelleria:
+                        {
+                            ModelleriaJson[] dettagli = JSonSerializer.Deserialize<ModelleriaJson[]>(Dettagli);
+                            InserisciDettaglioModelleria(ds, dettagli, idDettaglio, bPreserie);
+                            break;
+                        }
                 }
 
                 bPreserie.UpdateRW_PR(ds.RW_PR_DETTAGLIO.TableName, ds);
@@ -543,6 +564,38 @@ namespace ReportWeb.Business
                 vib.TEMPO = dettaglio.Tempo;
 
                 ds.RW_PR_VIBRATURA.AddRW_PR_VIBRATURARow(vib);
+            }
+        }
+
+        private void InserisciDettaglioModelleria(PreserieDS ds, ModelleriaJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
+        {
+            int sequenza = 1;
+            foreach (ModelleriaJson dettaglio in dettagli)
+            {
+                long idElemento = bPreserie.GetID();
+                PreserieDS.RW_PR_MODELLERIARow mod = ds.RW_PR_MODELLERIA.NewRW_PR_MODELLERIARow();
+                mod.IDELEMENTO = idElemento;
+                mod.IDDETTAGLIO = IDDETTAGLIO;
+                mod.SEQUENZA = sequenza;
+                sequenza++;
+
+                mod.LAVORAZIONE = dettaglio.Lavorazione;
+                if (string.IsNullOrEmpty(dettaglio.Materiale))
+                    mod.MATERIALE = dettaglio.Materiale;
+
+                if (string.IsNullOrEmpty(dettaglio.Programma))
+                    mod.PROGRAMMA = dettaglio.Programma;
+
+                if (string.IsNullOrEmpty(dettaglio.Utensili))
+                    mod.UTENSILI = dettaglio.Utensili;
+
+                if (string.IsNullOrEmpty(dettaglio.Attrezzaggio))
+                    mod.ATTREZZAGGIO = dettaglio.Attrezzaggio;
+
+                if (string.IsNullOrEmpty(dettaglio.Macchina))
+                    mod.MACCHINA = dettaglio.Macchina;
+
+                ds.RW_PR_MODELLERIA.AddRW_PR_MODELLERIARow(mod);
             }
         }
     }
