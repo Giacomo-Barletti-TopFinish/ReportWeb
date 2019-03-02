@@ -122,6 +122,64 @@ namespace ReportWeb.Controllers
 
                         return PartialView("ModelleriaPartial");
                     }
+
+                case Reparti.Pressofusione:
+                    {
+                        List<RWListItem> Impronte = CreaLiCreaListaImpronte();
+                        ViewData.Add("Impronte", Impronte);
+
+                        List<RWListItem> Materiale = bll.CaricaListaMateriali();
+                        ViewData.Add("Materiali", Materiale);
+
+                        return PartialView("PressofusionePartial");
+                    }
+
+                case Reparti.Tornitura:
+                    {
+                        List<RWListItem> Macchine = bll.CaricaListaMacchine(RepartoCodice);
+                        ViewData.Add("Macchine", Macchine);
+
+                        List<RWListItem> Materiale = bll.CaricaListaMateriali();
+                        ViewData.Add("Materiali", Materiale);
+
+                        return PartialView("TornituraPartial");
+                    }
+
+                case Reparti.Riprese:
+                    {
+                        List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
+                        ViewData.Add("Lavorazioni", Lavorazioni);
+
+                        List<RWListItem> Piazzatura = CreaListaSiNo();
+                        ViewData.Add("Piazzatura", Piazzatura);
+
+                        return PartialView("RipresePartial");
+                    }
+
+                case Reparti.Laser:
+                    {
+                        List<RWListItem> TipoLaseratura = CreaListaLaseratura();
+                        ViewData.Add("TipoLaseratura", TipoLaseratura);
+
+                        List<RWListItem> Piazzatura = CreaListaPiazzaturaLaser();
+                        ViewData.Add("Piazzatura", Piazzatura);
+
+                        List<RWListItem> Magazzino = CreaListaSiNo();
+                        ViewData.Add("Magazzino", Magazzino);
+
+                        return PartialView("LaserPartial");
+                    }
+                case Reparti.Verniciatura:
+                    {
+
+                        return PartialView("VerniciaturaPartial");
+                    }
+
+                case Reparti.GalvanicaAuto:
+                    {
+
+                        return PartialView("GalvanicaPartial");
+                    }
                 default: return null;
             }
 
@@ -136,6 +194,51 @@ namespace ReportWeb.Controllers
 
             return result;
         }
+
+        private List<RWListItem> CreaListaLaseratura()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("Incisione", "1"));
+            result.Add(new RWListItem("Satinatura", "2"));
+
+            return result;
+        }
+
+        private List<RWListItem> CreaListaPiazzaturaLaser()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("Divisore", "1"));
+            result.Add(new RWListItem("Pallet", "2"));
+            result.Add(new RWListItem("Piazzatura", "3"));
+
+            return result;
+        }
+
+        private List<RWListItem> CreaLiCreaListaImpronte()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("1", "1"));
+            result.Add(new RWListItem("2", "2"));
+            result.Add(new RWListItem("3", "3"));
+            result.Add(new RWListItem("4", "4"));
+            result.Add(new RWListItem("5", "5"));
+            result.Add(new RWListItem("6", "6"));
+            result.Add(new RWListItem("7", "7"));
+            result.Add(new RWListItem("8", "8"));
+            result.Add(new RWListItem("9", "9"));
+            result.Add(new RWListItem("10", "10"));
+            result.Add(new RWListItem("11", "11"));
+            result.Add(new RWListItem("12", "12"));
+            result.Add(new RWListItem("13", "13"));
+            result.Add(new RWListItem("14", "14"));
+            result.Add(new RWListItem("15", "15"));
+
+            return result;
+        }
+
 
         private List<RWListItem> CreaListaAutomaticoManuale()
         {

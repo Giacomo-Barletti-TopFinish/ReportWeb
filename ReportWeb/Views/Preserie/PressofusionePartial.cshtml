@@ -1,0 +1,113 @@
+﻿@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
+
+<div class="row">
+    <div class="col-sm-1"><label>Tipo stampo</label>@Html.TextBox("txtTipoStampo", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Codice stampo</label>@Html.TextBox("txtCodiceStampo", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Impronte</label>@Html.DropDownList("dllImpronte", new SelectList(ViewData["Impronte"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Battute</label>@Html.TextBox("txtBattute", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Materiale</label>@Html.DropDownList("ddlMateriale", new SelectList(ViewData["Materiale"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"><input type="button" onclick="InserisciRiga();" class="btn btn-primary" value="Inserisci lavorazione" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed" id="tblDettaglio"></table>
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tblDettaglio').on('click', 'a', function () {
+            $(this).closest('tr').remove();
+        })
+    });
+
+    function InserisciRiga() {
+
+        var impronte = $("#dllImpronte").find("option:selected").text();
+
+        var materiale = $('#dllMateriale').find("option:selected").text();
+
+        var tipoStampo = $('#txtTipoStampo').val();
+        var codiceStampo = $('#txtCodiceStampo').val();
+        var battute = $('#txtBattute').val();
+
+        var messaggio = '';
+        var esito = true;
+        if (impronte == null || impronte == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il numero di impronte" + "</br>";
+        }
+
+        if (materiale == null || materiale == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il materiale" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="9%">' + tipoStampo + '</td>';
+        tr += '<td width="9%">' + codiceStampo + '</td>';
+        tr += '<td width="9%">' + impronte + '</td>';
+        tr += '<td width="17%">' + battute + '</td>';
+        tr += '<td width="17%">' + materiale + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
+
+        $("#dllImpronte").val('').trigger('change');
+        $("#dllMateriale").val('').trigger('change');
+        $("#txtTipoStampo").val('');
+        $("#txtCodiceStampo").val('');
+        $("#txtBattute").val('');
+    }
+
+    function GetTabellaDettaglio() {
+
+        var rowCount = $('table#tblDettaglio tr:last').index() + 1;
+        var messaggio = '';
+
+        var data = [];
+        var trs = $('#tblDettaglio > tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
+
+            if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
+            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
+
+            var tdTipoStampo = $(tr).find('td')[0];
+            var tipoStampo = $(tdTipoStampo).text().trim();
+
+            var tdCodiceStampo = $(tr).find('td')[1];
+            var codiceStampo = $(tdCodiceStampo).text().trim();
+
+            var tdImpronte = $(tr).find('td')[2];
+            var impronte = $(tdImpronte).text().trim();
+
+            var tdBatture = $(tr).find('td')[3];
+            var battute = $(tdBatture).text().trim();
+
+            var tdMateriale = $(tr).find('td')[4];
+            var materiale = $(tdMateriale).text().trim();
+
+            var dettaglio = {
+                'TipoStampo': tipoStampo, 'CodiceStampo': codiceStampo, 'Impronte': impronte, 'Batture': batture, 'Materiale': materiale
+            };
+            data.push(dettaglio);
+        }
+
+        var dettagli = JSON.stringify(data);
+
+        return dettagli;
+
+    }
+
+</script>

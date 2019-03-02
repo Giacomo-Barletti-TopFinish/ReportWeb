@@ -67,6 +67,12 @@
     <Compile Include="Preserie\Commessa.cs" />
     <Compile Include="Preserie\Dettaglio.cs" />
     <Compile Include="Preserie\JSON\Modelleria.cs" />
+    <Compile Include="Preserie\JSON\Pressofusione.cs" />
+    <Compile Include="Preserie\JSON\Tornitura.cs" />
+    <Compile Include="Preserie\JSON\Riprese.cs" />
+    <Compile Include="Preserie\JSON\Laser.cs" />
+    <Compile Include="Preserie\JSON\Verniciatura.cs" />
+    <Compile Include="Preserie\JSON\Galvanica.cs" />
     <Compile Include="Preserie\JSON\Vibratura.cs" />
     <Compile Include="Preserie\JSON\Pulimentatura.cs" />
     <Compile Include="Preserie\Lavorazione.cs" />

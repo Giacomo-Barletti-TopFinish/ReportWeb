@@ -1,0 +1,101 @@
+﻿@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
+
+<div class="row">
+    <div class="col-sm-2"><label>Tipo legatura</label>@Html.TextBox("txtLegatura", "", new { @maxlength = "30", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Telaio</label>@Html.TextBox("txtTelaio", "", new { @maxlength = "30", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Pezzi per filo</label>@Html.TextBox("txtPezziFilo", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Fili per telaio</label>@Html.TextBox("txtFiloTelaio", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Spessore</label>@Html.TextBox("txtSpessore", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"><input type="button" onclick="InserisciRiga();" class="btn btn-primary" value="Inserisci lavorazione" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed" id="tblDettaglio"></table>
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tblDettaglio').on('click', 'a', function () {
+            $(this).closest('tr').remove();
+        })
+    });
+
+    function InserisciRiga() {
+
+        var legatura = $('#txtLegatura').val();
+        var telaio = $('#txtTelaio').val();
+        var pezziFilo= $('#txtPezziFilo').val();
+        var FiliTelaio = $('#txtFiloTelaio').val();
+        var spessore = $('#txtSpessore').val();
+
+        var messaggio = '';
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="17%">' + legatura + '</td>';
+        tr += '<td width="17%">' + telaio + '</td>';
+        tr += '<td width="17%">' + pezziFilo + '</td>';
+        tr += '<td width="17%">' + FiliTelaio + '</td>';
+        tr += '<td width="17%">' + spessore + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
+
+        $("#txtLegatura").val('');
+        $("#txtTelaio").val('');
+        $("#txtPezziFilo").val('');
+        $("#txtFiloTelaio").val('');
+        $("#txtSpessore").val('');
+    }
+
+    function GetTabellaDettaglio() {
+
+        var rowCount = $('table#tblDettaglio tr:last').index() + 1;
+        var messaggio = '';
+
+        var data = [];
+        var trs = $('#tblDettaglio > tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
+
+            if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
+            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
+
+            var tdLegatura = $(tr).find('td')[0];
+            var legatura = $(tdLegatura).text().trim();
+
+            var tdTelaio = $(tr).find('td')[1];
+            var telaio = $(tdTelaio).text().trim();
+
+            var tdPezziFilo = $(tr).find('td')[2];
+            var pezziFilo = $(tdPezziFilo).text().trim();
+
+            var tdFiloTelaio = $(tr).find('td')[3];
+            var filoTelaio = $(tdFiloTelaio).text().trim();
+
+            var tdSpessore = $(tr).find('td')[4];
+            var spessore = $(tdSpessore).text().trim();
+
+            var dettaglio = {
+                'Legatura': legatura, 'Telaio': telaio, 'PezziFilo': pezziFilo, 'FiliTealio': filoTelaio, 'Spessore': spessore
+            };
+            data.push(dettaglio);
+        }
+
+        var dettagli = JSON.stringify(data);
+
+        return dettagli;
+
+    }
+
+</script>

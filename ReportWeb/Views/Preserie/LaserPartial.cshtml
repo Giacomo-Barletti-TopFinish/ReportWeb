@@ -1,0 +1,112 @@
+﻿@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
+
+<div class="row">
+    <div class="col-sm-2"><label>Tipo laseratura</label>@Html.DropDownList("ddlTipoLaseratura", new SelectList(ViewData["TipoLaseratura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Parametri</label>@Html.TextBox("txtParametri", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Piazzatura</label>@Html.DropDownList("ddlPiazzatura", new SelectList(ViewData["Piazzatura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Magazzino</label>@Html.DropDownList("ddlMagazzino", new SelectList(ViewData["Magazzino"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Laser</label>@Html.TextBox("txtLaser", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"><input type="button" onclick="InserisciRiga();" class="btn btn-primary" value="Inserisci lavorazione" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed" id="tblDettaglio"></table>
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tblDettaglio').on('click', 'a', function () {
+            $(this).closest('tr').remove();
+        })
+    });
+
+    function InserisciRiga() {
+
+        var tipoLaseratura = $("#ddlTipoLaseratura").find("option:selected").text();
+        var piazzatura = $("#ddlPiazzatura").find("option:selected").text();
+        var magazzino = $("#ddlMagazzino").find("option:selected").text();
+
+        var parametri = $('#txtParametri').val();
+        var laser = $('#txtLaser').val();
+
+        var messaggio = '';
+        var esito = true;
+        if (tipoLaseratura == null || tipoLaseratura == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare tipo laseratura" + "</br>";
+        }
+
+        if (piazzatura == null || piazzatura == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare se piazzatura" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="17%">' + tipoLaseratura + '</td>';
+        tr += '<td width="17%">' + parametri + '</td>';
+        tr += '<td width="9%">' + piazzatura + '</td>';
+        tr += '<td width="9%">' + magazzino + '</td>';
+        tr += '<td width="17%">' + laser + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
+
+        $("#ddlTipoLaseratura").val('').trigger('change');
+        $("#ddlPiazzatura").val('').trigger('change');
+        $("#ddlMagazzino").val('').trigger('change');
+        $("#txtParametri").val('');
+        $("#txtLaser").val('');
+    }
+
+    function GetTabellaDettaglio() {
+
+        var rowCount = $('table#tblDettaglio tr:last').index() + 1;
+        var messaggio = '';
+
+        var data = [];
+        var trs = $('#tblDettaglio > tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
+
+            if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
+            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
+
+            var tdTipoLaseratura = $(tr).find('td')[0];
+            var tipoLaseratura = $(tdTipoLaseratura).text().trim();
+
+            var tdParametri = $(tr).find('td')[1];
+            var parametri = $(tdParametri).text().trim();
+
+            var tdPiazzatura = $(tr).find('td')[2];
+            var piazzatura = $(tdPiazzatura).text().trim();
+
+            var tdMagazzino = $(tr).find('td')[3];
+            var magazzino = $(tdMagazzino).text().trim();
+
+            var tdLaser = $(tr).find('td')[4];
+            var laser = $(tdLaser).text().trim();
+
+            var dettaglio = {
+                'TipoLaseratura': tipoLaseratura, 'Parametri': parametri, 'Piazzatura': piazzatura, 'Magazzino': magazzino, 'Laser': laser
+            };
+            data.push(dettaglio);
+        }
+
+        var dettagli = JSON.stringify(data);
+
+        return dettagli;
+
+    }
+
+</script>

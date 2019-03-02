@@ -1,0 +1,108 @@
+﻿@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
+
+<div class="row">
+    <div class="col-sm-2"><label>Lavorazione</label>@Html.DropDownList("dllLavorazione", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Pezzi orari</label>@Html.TextBox("txtPezziOrari", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Piazzatura</label>@Html.DropDownList("ddlPiazzatura", new SelectList(ViewData["Piazzatura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Utensili</label>@Html.TextBox("txtUtensili", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-3"><label>Materiali</label>@Html.TextBox("txtMateriali", "", new { @maxlength = "250", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"><input type="button" onclick="InserisciRiga();" class="btn btn-primary" value="Inserisci lavorazione" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed" id="tblDettaglio"></table>
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tblDettaglio').on('click', 'a', function () {
+            $(this).closest('tr').remove();
+        })
+    });
+
+    function InserisciRiga() {
+
+        var lavorazione = $("#dllLavorazione").find("option:selected").text();
+        var piazzatura = $("#ddlPiazzatura").find("option:selected").text();
+
+        var pezziOrari = $('#txtPezziOrari').val();
+        var utensili = $('#txtUtensili').val();
+        var materiali = $('#txtMateriali').val();
+
+        var messaggio = '';
+        var esito = true;
+        if (lavorazione == null || lavorazione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la lavorazione" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="17%">' + lavorazione + '</td>';
+        tr += '<td width="17%">' + pezziOrari + '</td>';
+        tr += '<td width="9%">' + piazzatura + '</td>';
+        tr += '<td width="17%">' + utensili + '</td>';
+        tr += '<td width="25%">' + materiali + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
+
+        $("#dllLavorazione").val('').trigger('change');
+        $("#ddlPiazzatura").val('').trigger('change');
+        $("#txtPezziOrari").val('');
+        $("#txtUtensili").val('');
+        $("#txtMateriali").val('');
+    }
+
+    function GetTabellaDettaglio() {
+
+        var rowCount = $('table#tblDettaglio tr:last').index() + 1;
+        var messaggio = '';
+
+        var data = [];
+        var trs = $('#tblDettaglio > tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
+
+            if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
+            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
+
+            var tdLavorazione = $(tr).find('td')[0];
+            var lavorazione = $(tdLavorazione).text().trim();
+
+            var tdPezziOrari = $(tr).find('td')[1];
+            var pezziOrari = $(tdPezziOrari).text().trim();
+
+            var tdPiazzatura = $(tr).find('td')[2];
+            var piazzatura = $(tdPiazzatura).text().trim();
+
+            var tdUtensili = $(tr).find('td')[3];
+            var utensili = $(tdUtensili).text().trim();
+
+            var tdMateriali = $(tr).find('td')[4];
+            var materiali = $(tdMateriali).text().trim();
+
+
+            var dettaglio = {
+                'Lavorazione': lavorazione, 'PezziOrari': pezziOrari, 'Piazzatura': piazzatura, 'Utensili': utensili, 'Materiali': materiali
+            };
+            data.push(dettaglio);
+        }
+
+        var dettagli = JSON.stringify(data);
+
+        return dettagli;
+
+    }
+
+</script>

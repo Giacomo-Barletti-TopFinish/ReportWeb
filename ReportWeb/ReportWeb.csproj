@@ -476,6 +476,12 @@
     <Content Include="Views\Preserie\PulimentaturaPartial.cshtml" />
     <Content Include="Views\Preserie\VibraturaPartial.cshtml" />
     <Content Include="Views\Preserie\ModelleriaPartial.cshtml" />
+    <Content Include="Views\Preserie\PressofusionePartial.cshtml" />
+    <Content Include="Views\Preserie\TornituraPartial.cshtml" />
+    <Content Include="Views\Preserie\RipresePartial.cshtml" />
+    <Content Include="Views\Preserie\LaserPartial.cshtml" />
+    <Content Include="Views\Preserie\VerniciaturaPartial.cshtml" />
+    <Content Include="Views\Preserie\GalvanicaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
