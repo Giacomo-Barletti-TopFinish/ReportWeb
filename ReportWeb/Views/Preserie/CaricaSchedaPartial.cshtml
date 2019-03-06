@@ -64,15 +64,16 @@
 @Html.Hidden("hfBarcode", @Model.Barcode)
 @Html.Hidden("hfIDPRDMOVFASE", @Model.IDPRDMOVFASE)
 @Html.Hidden("hfIDTABFAS", @Model.IdTabFas)
+@Html.Hidden("hfIDDETTAGLIO", @Model.Dettaglio.IDDETTAGLIO)
 <div class="col-sm-12" id="divDettaglioReparto"></div>
 
 <div class="col-sm-12"><hr /></div>
 
 <div class="row">
-    <div class="col-sm-1"><label>Pezzi orari</label>@Html.TextBox("txtPezzi", "0", new { @class = "form-control input-sm RWPEZZIORARI", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
-    <div class="col-sm-3"><label>Packaging</label>@Html.DropDownList("ddlPackaging", new SelectList(ViewData["Packaging"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Peso</label>@Html.TextBox("txtPeso", "0", new { @class = "form-control input-sm RWPEZZIORARI", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
-    <div class="col-sm-6"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "250", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Pezzi orari</label>@Html.TextBox("txtPezzi", Model.Dettaglio.PezziOra, new { @class = "form-control input-sm RWPEZZIORARI", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
+    <div class="col-sm-3"><label>Packaging</label>@Html.DropDownList("ddlPackaging", new SelectList(ViewData["Packaging"] as List<RWListItem>, "Value", "Text", Model.Dettaglio.Packaging), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Peso</label>@Html.TextBox("txtPeso", Model.Dettaglio.Peso, new { @class = "form-control input-sm RWPEZZIORARI", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
+    <div class="col-sm-6"><label>Nota</label>@Html.TextBox("txtNota", Model.Dettaglio.Nota, new { @maxlength = "250", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
 </div>
 <div class="row">
     <div class="col-sm-1"><input type="button" onclick="SalvaDati('');" class="btn btn-primary" value="Salva" /></div>
@@ -82,15 +83,16 @@
 
 <script language="javascript" type="text/javascript">
     $(function () {
-        CaricaSchedaDettaglioReparto('@Model.RepartoCodice','@Model.IdTabFas');
+
+        CaricaSchedaDettaglioReparto('@Model.RepartoCodice', '@Model.IdTabFas', '@Model.Barcode');
     });
 
-    function CaricaSchedaDettaglioReparto(RepartoCodice,IdTabFas) {
+    function CaricaSchedaDettaglioReparto(RepartoCodice,IdTabFas,Barcode) {
          var url = '@Url.Action("CaricaSchedaDettaglioReparto", "Preserie")';
         $.ajax({
             url: url,
             data: {
-                RepartoCodice: RepartoCodice, IDTABFASS: IdTabFas
+                RepartoCodice: RepartoCodice, IDTABFASS: IdTabFas, Barcode: Barcode
             },
             cache: false,
             type: "POST",
@@ -112,7 +114,7 @@
     }
 
     function SalvaDati() {
-
+        debugger;
         var messaggio = '';
         var esito = true;
         var pezziOrari = $('#txtPezzi').val();
@@ -121,20 +123,24 @@
             messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il numero di pezzi per ora" + "</br>";
         }
 
-        var packaging = $("#ddlPackaging").find("option:selected").text();
+        var packaging = $("#ddlPackaging").val();
         if (packaging == null || packaging == '') {
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il packaging" + "</br>";
         }
 
         var peso = $("#txtPeso").val();
-        if (packaging == 0 ) {
+        if (peso == 0 ) {
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il peso" + "</br>";
         }
 
         var nota = $("#txtNota").val();
-
+        var dettagli = GetTabellaDettaglio();
+        if (dettagli == null || dettagli == '[]') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Inserire almeno una lavorazione" + "</br>";
+        }
 
         $('#lblMessage').html(messaggio);
         if (!esito) return;
@@ -144,12 +150,16 @@
         var idprdmovfase = $('#hfIDPRDMOVFASE').val();
         var barcode = $('#hfBarcode').val();
         var idtabfas = $('#hfIDTABFAS').val();
-        var dettagli = GetTabellaDettaglio();
+        var hfIDDETTAGLIO = $('#hfIDDETTAGLIO').val();
+
+        if (hfIDDETTAGLIO == undefined) hfIDDETTAGLIO = -1;
+        if (hfIDDETTAGLIO == '') hfIDDETTAGLIO = -1;
 
          var url = '@Url.Action("SalvaDettagli", "Preserie")';
         $.ajax({
             url: url,
             data: {
+                IDDettaglio: hfIDDETTAGLIO,
                 RepartoCodice: reparto,
                 Pezzi: pezziOrari,
                 Packaging: packaging,

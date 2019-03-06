@@ -293,5 +293,22 @@ namespace ReportWeb.Data
                 a.Update(dt);
             }
         }
+
+        public void FillDettaglioReparto(PreserieDS ds,DataTable dt, string barcode)
+        {
+            string query = @"SELECT VI.* FROM {0} VI
+                                INNER JOIN RW_PR_DETTAGLIO DT ON DT.IDDETTAGLIO = VI.IDDETTAGLIO
+                                WHERE DT.BARCODE = $P<BARCODE>";
+
+            query = string.Format(query, dt.TableName);
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE", DbType.String, barcode);
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(dt);
+            }
+
+        }
     }
 }

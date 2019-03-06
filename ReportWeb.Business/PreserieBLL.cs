@@ -167,7 +167,7 @@ namespace ReportWeb.Business
                 lavorazione.Odl = CreaOdl(movFase);
                 if (!movFase.IsBARCODENull())
                 {
-                    lavorazione.Dettagli = CreaListaDettaglio(movFase.BARCODE, ds);
+                    //    lavorazione.Dettagli = CreaListaDettaglio(movFase.BARCODE, ds);
                 }
 
             }
@@ -204,16 +204,17 @@ namespace ReportWeb.Business
             return odl;
         }
 
-        private List<Dettaglio> CreaListaDettaglio(string barcode, PreserieDS ds)
+        private Dettaglio CreaListaDettaglio(string barcode, PreserieDS ds)
         {
-            List<Dettaglio> dettagli = new List<Dettaglio>();
-            foreach (PreserieDS.RW_PR_DETTAGLIORow dettaglio in ds.RW_PR_DETTAGLIO.Where(x => x.BARCODE == barcode))
+            Dettaglio d = new Dettaglio();
+            PreserieDS.RW_PR_DETTAGLIORow dettaglio = ds.RW_PR_DETTAGLIO.Where(x => x.BARCODE == barcode).FirstOrDefault();
+            if (dettaglio != null)
             {
                 PreserieDS.TABFASRow fase = ds.TABFAS.Where(x => x.IDTABFAS == dettaglio.IDTABFAS).FirstOrDefault();
-                if (fase == null) continue;
+                if (fase == null) new Dettaglio();
 
 
-                Dettaglio d = new Dettaglio();
+
                 d.IDDETTAGLIO = dettaglio.IDDETTAGLIO;
                 d.idFase = fase.IDTABFAS;
                 d.Fase = fase.CODICEFASE;
@@ -223,18 +224,31 @@ namespace ReportWeb.Business
                     PreserieDS.CLIFORow clifo = ds.CLIFO.Where(x => x.CODICE == dettaglio.REPARTO).FirstOrDefault();
                     if (clifo != null)
                     {
-                        d.Lavorante = clifo.RAGIONESOC.Trim();
-                        d.idLavorante = clifo.CODICE;
+                        d.Reparto = clifo.RAGIONESOC.Trim();
+                        d.IdReparto = clifo.CODICE;
+                    }
+                }
+
+                if (!dettaglio.IsFORNITORENull())
+                {
+                    PreserieDS.CLIFORow clifo = ds.CLIFO.Where(x => x.CODICE == dettaglio.FORNITORE).FirstOrDefault();
+                    if (clifo != null)
+                    {
+                        d.Fornitore = clifo.RAGIONESOC.Trim();
+                        d.IdFORNITORE = clifo.CODICE;
                     }
                 }
 
                 d.Nota = dettaglio.IsNOTANull() ? string.Empty : dettaglio.NOTA;
                 d.PezziOra = dettaglio.PEZZI_ORARI;
 
-                dettagli.Add(d);
+                d.Peso = dettaglio.IsPESONull() ? 0 : dettaglio.PESO;
+
+                d.Packaging = dettaglio.IsPACKAGINGNull() ? -1 : dettaglio.PACKAGING;
+
             }
 
-            return dettagli;
+            return d;
         }
 
         public ODLSchedaModel CaricaSchedaODL(string Barcode, string rvlImageSite)
@@ -309,7 +323,32 @@ namespace ReportWeb.Business
                 bPreserie.FillUSR_PDM_FILES(ds, odl.IDMAGAZZ);
                 model.ImageUrl = creaUrlImage(rvlImageSite, odl.IDMAGAZZ, ds);
 
-                model.Dettagli = CreaListaDettaglio(Barcode, ds);
+                model.Dettaglio = CreaListaDettaglio(Barcode, ds);
+
+                return model;
+            }
+        }
+
+
+        public List<VibraturaJson> FillRW_PR_VIBRATURA(string barcode)
+        {
+            List<VibraturaJson> model = new List<VibraturaJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_VIBRATURA, barcode);
+                foreach (PreserieDS.RW_PR_VIBRATURARow vib in ds.RW_PR_VIBRATURA)
+                {
+                    VibraturaJson m = new VibraturaJson();
+                    m.AcquaSecco = vib.TIPOLOGIA;
+                    m.Additivi = vib.ADDITIVI;
+                    m.Lavorazione = vib.LAVORAZIONE;
+                    m.Materiale = vib.MATERIALE;
+                    m.Pezzi = vib.MAXPEZZI;
+                    m.Tempo = vib.TEMPO;
+                    m.Vibratore = vib.IsVIBRATORENull()?string.Empty: vib.VIBRATORE;
+                    model.Add(m);
+                }
 
                 return model;
             }
@@ -447,7 +486,7 @@ namespace ReportWeb.Business
             return LavorantiEsterni;
         }
 
-        public void SalvaDettagli(string RepartoCodice, decimal Pezzi, string Packaging, decimal Peso,
+        public void SalvaDettagli(decimal IDDettaglio, string RepartoCodice, decimal Pezzi, decimal Packaging, decimal Peso,
             string Nota, string Dettagli, string IDPRDMOVFASE, string Barcode, string IdLancioD, string IdMagazz, string IDTABFAS, string IDUSER)
         {
             PreserieDS ds = new PreserieDS();
@@ -455,11 +494,11 @@ namespace ReportWeb.Business
             {
                 //bPreserie.FillCLIFO(ds);
                 //bPreserie.FillTABFAS(ds);
-                //bPreserie.FillRW_PR_DETTAGLIO(Barcode, ds);
+                bPreserie.FillRW_PR_DETTAGLIO(Barcode, ds);
 
 
                 long idDettaglio = bPreserie.GetID();
-                PreserieDS.RW_PR_DETTAGLIORow dettaglioRow = null;// ds.RW_PR_DETTAGLIO.Where(x => x.IDDETTAGLIO == dettaglio.IDDETTAGLIO).FirstOrDefault();
+                PreserieDS.RW_PR_DETTAGLIORow dettaglioRow = ds.RW_PR_DETTAGLIO.Where(x => x.IDDETTAGLIO == IDDettaglio).FirstOrDefault();
                 if (dettaglioRow == null)
                 {
 
@@ -511,6 +550,7 @@ namespace ReportWeb.Business
                             }
                             else
                             {
+                                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_VIBRATURA, Barcode);
                                 VibraturaJson[] dettagli = JSonSerializer.Deserialize<VibraturaJson[]>(Dettagli);
                                 InserisciDettaglioVibratura(ds, dettagli, idDettaglio, bPreserie);
                                 break;
@@ -639,6 +679,8 @@ namespace ReportWeb.Business
 
         private void InserisciDettaglioVibratura(PreserieDS ds, VibraturaJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
         {
+            ds.RW_PR_VIBRATURA.ToList().ForEach(x => x.Delete());
+
             int sequenza = 1;
             foreach (VibraturaJson dettaglio in dettagli)
             {
@@ -655,7 +697,7 @@ namespace ReportWeb.Business
                 vib.ADDITIVI = dettaglio.Additivi;
                 vib.MAXPEZZI = dettaglio.Pezzi;
                 vib.TEMPO = dettaglio.Tempo;
-
+                vib.VIBRATORE = dettaglio.Vibratore;
                 ds.RW_PR_VIBRATURA.AddRW_PR_VIBRATURARow(vib);
             }
         }

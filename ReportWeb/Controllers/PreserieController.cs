@@ -2,6 +2,7 @@
 using ReportWeb.Common;
 using ReportWeb.Models;
 using ReportWeb.Models.Preserie;
+using ReportWeb.Models.Preserie.JSON;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,16 +63,16 @@ namespace ReportWeb.Controllers
             return PartialView("CaricaSchedaPartial", model);
         }
 
-        public ActionResult SalvaDettagli(string RepartoCodice, decimal Pezzi, string Packaging, decimal Peso,
+        public ActionResult SalvaDettagli(decimal IDDettaglio, string RepartoCodice, decimal Pezzi, decimal Packaging, decimal Peso,
             string Nota, string Dettagli, string IDPRDMOVFASE, string Barcode, string IdLancioD, string IdMagazz, string IDTABFAS)
         {
             PreserieBLL bll = new PreserieBLL();
-            bll.SalvaDettagli(RepartoCodice, Pezzi, Packaging, Peso,
+            bll.SalvaDettagli(IDDettaglio,RepartoCodice, Pezzi, Packaging, Peso,
              Nota, Dettagli, IDPRDMOVFASE, Barcode, IdLancioD, IdMagazz, IDTABFAS, ConnectedUser);
             return null;
         }
 
-        public ActionResult CaricaSchedaDettaglioReparto(string RepartoCodice, string IDTABFASS)
+        public ActionResult CaricaSchedaDettaglioReparto(string RepartoCodice, string IDTABFASS, string Barcode)
         {
             List<RWListItem> SiNoListItem = CreaListaSiNo(); ;
             ViewData.Add("SiNoListItem", SiNoListItem);
@@ -120,7 +121,8 @@ namespace ReportWeb.Controllers
                             List<RWListItem> Vibratori = bll.CaricaListaMacchine(RepartoCodice);
                             ViewData.Add("Vibratori", Vibratori);
 
-                            return PartialView("VibraturaPartial");
+                            List<VibraturaJson> model = bll.FillRW_PR_VIBRATURA(Barcode);
+                            return PartialView("VibraturaPartial", model);
                         }
                     }
 
@@ -265,9 +267,9 @@ namespace ReportWeb.Controllers
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
-            result.Add(new RWListItem("Billetta", "1"));
-            result.Add(new RWListItem("Piatto", "2"));
-            result.Add(new RWListItem("Piastra", "3"));
+            result.Add(new RWListItem("Billetta", "Billetta"));
+            result.Add(new RWListItem("Piatto", "Piatto"));
+            result.Add(new RWListItem("Piastra", "Piastra"));
 
             return result;
         }
@@ -289,9 +291,9 @@ namespace ReportWeb.Controllers
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
-            result.Add(new RWListItem("Rosso - Alemar", "1"));
-            result.Add(new RWListItem("Nero - NuovaVS", "2"));
-            result.Add(new RWListItem("Blu - RBL", "3"));
+            result.Add(new RWListItem("Rosso - Alemar", "Rosso - Alemar"));
+            result.Add(new RWListItem("Nero - NuovaVS", "Nero - NuovaVS"));
+            result.Add(new RWListItem("Blu - RBL", "Blu - RBL"));
 
             return result;
         }
@@ -330,12 +332,12 @@ namespace ReportWeb.Controllers
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
-            result.Add(new RWListItem("Sassi", "1"));
-            result.Add(new RWListItem("Ceramica", "2"));
-            result.Add(new RWListItem("Legnetti", "3"));
-            result.Add(new RWListItem("materiale1", "4"));
-            result.Add(new RWListItem("materiale2", "5"));
-            result.Add(new RWListItem("materiale3", "6"));
+            result.Add(new RWListItem("Sassi", "Sassi"));
+            result.Add(new RWListItem("Ceramica", "Ceramica"));
+            result.Add(new RWListItem("Legnetti", "Legnetti"));
+            result.Add(new RWListItem("materiale1", "materiale1"));
+            result.Add(new RWListItem("materiale2", "materiale2"));
+            result.Add(new RWListItem("materiale3", "materiale3"));
 
             return result;
         }
@@ -343,8 +345,8 @@ namespace ReportWeb.Controllers
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
-            result.Add(new RWListItem("Si", "1"));
-            result.Add(new RWListItem("No", "2"));
+            result.Add(new RWListItem("Si", "Si"));
+            result.Add(new RWListItem("No", "No"));
 
             return result;
         }
@@ -353,8 +355,8 @@ namespace ReportWeb.Controllers
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
-            result.Add(new RWListItem("Statico", "1"));
-            result.Add(new RWListItem("Roto", "2"));
+            result.Add(new RWListItem("Statico", "Statico"));
+            result.Add(new RWListItem("Roto", "Roto"));
 
             return result;
         }
@@ -363,8 +365,8 @@ namespace ReportWeb.Controllers
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
-            result.Add(new RWListItem("Incisione", "1"));
-            result.Add(new RWListItem("Satinatura", "2"));
+            result.Add(new RWListItem("Incisione", "Incisione"));
+            result.Add(new RWListItem("Satinatura", "Satinatura"));
 
             return result;
         }
@@ -373,9 +375,9 @@ namespace ReportWeb.Controllers
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
-            result.Add(new RWListItem("Divisore", "1"));
-            result.Add(new RWListItem("Pallet", "2"));
-            result.Add(new RWListItem("Piazzatura", "3"));
+            result.Add(new RWListItem("Divisore", "Divisore"));
+            result.Add(new RWListItem("Pallet", "Pallet"));
+            result.Add(new RWListItem("Piazzatura", "Piazzatura"));
 
             return result;
         }
@@ -408,8 +410,8 @@ namespace ReportWeb.Controllers
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
-            result.Add(new RWListItem("Automatico", "1"));
-            result.Add(new RWListItem("Manuale", "2"));
+            result.Add(new RWListItem("Automatico", "Automatico"));
+            result.Add(new RWListItem("Manuale", "Manuale"));
 
             return result;
         }
@@ -418,8 +420,8 @@ namespace ReportWeb.Controllers
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
-            result.Add(new RWListItem("Acqua", "1"));
-            result.Add(new RWListItem("Secco", "2"));
+            result.Add(new RWListItem("Acqua", "Acqua"));
+            result.Add(new RWListItem("Secco", "Secco"));
 
             return result;
         }

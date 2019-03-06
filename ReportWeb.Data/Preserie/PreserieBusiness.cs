@@ -142,5 +142,12 @@ namespace ReportWeb.Data.Preserie
             PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
             a.UpdatePREDTable(tablename, ds);
         }
+
+        [DataContext]
+        public void FillDettaglioReparto(PreserieDS ds, DataTable dt, string barcode)
+        {
+            PreserieAdapter a = new PreserieAdapter(DbConnection, DbTransaction);
+            a.FillDettaglioReparto(ds, dt, barcode);
+        }
     }
 }

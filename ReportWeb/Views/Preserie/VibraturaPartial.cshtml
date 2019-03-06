@@ -1,13 +1,14 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
+@model List<VibraturaJson>
 
 <div class="row">
     <div class="col-sm-2"><label>Lavorazione</label>@Html.DropDownList("dllLavorazione", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-1"><label>Tipo</label>@Html.DropDownList("ddlAcquaSecco", new SelectList(ViewData["AcquaSecco"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-1"><label>Materiale</label>@Html.DropDownList("dllMateriale", new SelectList(ViewData["Materiali"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-2"><label>Additivi</label>@Html.TextBox("txtAdditivi", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-2"><label>Vibratore</label>@Html.DropDownList("ddlVibratori", new SelectList(ViewData["Vibratori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-2"><label>Pezzi per vibratore</label>@Html.TextBox("txtPezziVibratore", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Vibratore</label>@Html.DropDownList("ddlVibratori", new SelectList(ViewData["Vibratori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Pezzi per vibratore</label>@Html.TextBox("txtPezziVibratore", "", new { @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
     <div class="col-sm-1"><label>Tempo</label>@Html.TextBox("txtTempo", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
 </div>
 
@@ -16,7 +17,24 @@
 </div>
 <div class="row">
     <div class="col-sm-12">
-        <table class="table table-condensed" id="tblDettaglio"></table>
+        <table class="table table-condensed" id="tblDettaglio">
+            <tbody>
+                @foreach (VibraturaJson elemento in Model)
+                {
+                    <tr>
+                        <td width="17%">@elemento.Lavorazione</td>
+                        <td width="9%">@elemento.AcquaSecco</td>
+                        <td width="9%">@elemento.Materiale</td>
+                        <td width="17%">@elemento.Additivi</td>
+                        <td width="9%">@elemento.Vibratore</td>
+                        <td width="9%">@elemento.Pezzi</td>
+                        <td width="9%">@elemento.Tempo</td>
+                        <td><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
 
     </div>
 </div>
@@ -55,13 +73,13 @@
         if (!esito) return;
 
         var tr = '<tr>';
-        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<input type="hidden" value =""  class="hdIDELEMENTO" />';
         tr += '<td width="17%">' + lavorazione + '</td>';
         tr += '<td width="9%">' + acquaSecco + '</td>';
         tr += '<td width="9%">' + materiale + '</td>';
         tr += '<td width="17%">' + additivi + '</td>';
-        tr += '<td width="17%">' + vibratore + '</td>';
-        tr += '<td width="17%">' + pezzi + '</td>';
+        tr += '<td width="9%">' + vibratore + '</td>';
+        tr += '<td width="9%">' + pezzi + '</td>';
         tr += '<td width="9%">' + tempo + '</td>';
         tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
         tr += '<\tr>';
@@ -82,10 +100,10 @@
         var messaggio = '';
 
         var data = [];
-        var trs = $('#tblDettaglio > tr');
+        var trs = $('#tblDettaglio > tbody > tr');
         for (i = 0; i < trs.length; i++) {
             var tr = trs[i];
-            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
+            var IDDETTAGLIO = $('.hdIDELEMENTO', tr).val();
 
             if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
             if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
@@ -99,11 +117,11 @@
             var tdMateriale = $(tr).find('td')[2];
             var materiale = $(tdMateriale).text().trim();
 
-            var tdVibratore = $(tr).find('td')[3];
-            var vibratore = $(tdVibratore).text().trim();
-
-            var tdAdditivi = $(tr).find('td')[4];
+            var tdAdditivi = $(tr).find('td')[3];
             var additivi = $(tdAdditivi).text().trim();
+
+            var tdVibratore = $(tr).find('td')[4];
+            var vibratore = $(tdVibratore).text().trim();
 
             var tdPezzi = $(tr).find('td')[5];
             var pezzi = $(tdPezzi).text().trim();

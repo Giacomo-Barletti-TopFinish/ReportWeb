@@ -9,12 +9,16 @@ namespace ReportWeb.Models.Preserie
     public class Dettaglio
     {
         public string PezziOra;
-        public string Lavorante;
+        public string Reparto;
         public string Nota;
         public string Fase;
         public string idFase;
-        public string idLavorante;
-        public decimal IDDETTAGLIO;
+        public string IdReparto;
+        public decimal IDDETTAGLIO = -1;
+        public decimal Peso = 0;
+        public decimal Packaging = -1;
+        public string IdFORNITORE;
+        public string Fornitore;
 
     }
 }
