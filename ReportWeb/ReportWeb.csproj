@@ -482,6 +482,12 @@
     <Content Include="Views\Preserie\LaserPartial.cshtml" />
     <Content Include="Views\Preserie\VerniciaturaPartial.cshtml" />
     <Content Include="Views\Preserie\GalvanicaPartial.cshtml" />
+    <Content Include="Views\Preserie\DecapaggioPartial.cshtml" />
+    <Content Include="Views\Preserie\SmaltaturaPartial.cshtml" />
+    <Content Include="Views\Preserie\ScoperturaPartial.cshtml" />
+    <Content Include="Views\Preserie\StampaggioPartial.cshtml" />
+    <Content Include="Views\Preserie\MontaggioPartial.cshtml" />
+    <Content Include="Views\Preserie\SaldaturaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

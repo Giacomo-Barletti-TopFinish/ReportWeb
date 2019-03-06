@@ -82,15 +82,15 @@
 
 <script language="javascript" type="text/javascript">
     $(function () {
-        CaricaSchedaDettaglioReparto('@Model.RepartoCodice');
+        CaricaSchedaDettaglioReparto('@Model.RepartoCodice','@Model.IdTabFas');
     });
 
-    function CaricaSchedaDettaglioReparto(RepartoCodice) {
+    function CaricaSchedaDettaglioReparto(RepartoCodice,IdTabFas) {
          var url = '@Url.Action("CaricaSchedaDettaglioReparto", "Preserie")';
         $.ajax({
             url: url,
             data: {
-                RepartoCodice: RepartoCodice
+                RepartoCodice: RepartoCodice, IDTABFASS: IdTabFas
             },
             cache: false,
             type: "POST",

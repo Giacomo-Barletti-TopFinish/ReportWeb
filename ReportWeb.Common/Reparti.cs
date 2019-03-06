@@ -32,6 +32,7 @@ namespace ReportWeb.Common
         public const string Legatura = "LEGAT";
         public const string Tornitura = "TORN";
         public const string PVD = "PVD";
+        public const string Smaltatura = "02694";
 
         public static string LeggiEtichetta(string Reparto)
         {
@@ -89,7 +90,7 @@ namespace ReportWeb.Common
 
                 default:
                     return string.Empty;
-                    
+
 
             }
         }

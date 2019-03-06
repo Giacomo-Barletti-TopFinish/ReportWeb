@@ -71,7 +71,7 @@ namespace ReportWeb.Controllers
             return null;
         }
 
-        public ActionResult CaricaSchedaDettaglioReparto(string RepartoCodice)
+        public ActionResult CaricaSchedaDettaglioReparto(string RepartoCodice, string IDTABFASS)
         {
             List<RWListItem> SiNoListItem = CreaListaSiNo(); ;
             ViewData.Add("SiNoListItem", SiNoListItem);
@@ -81,6 +81,7 @@ namespace ReportWeb.Controllers
             {
                 case Reparti.Pulimentatura:
                     {
+
                         List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
                         ViewData.Add("Lavorazioni", Lavorazioni);
 
@@ -88,22 +89,39 @@ namespace ReportWeb.Controllers
                         ViewData.Add("Automatico", Automatico);
 
                         return PartialView("PulimentaturaPartial");
+
                     }
                 case Reparti.Vibratura:
                     {
-                        List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
-                        ViewData.Add("Lavorazioni", Lavorazioni);
+                        if (IDTABFASS == "0000000060")//decapaggio
+                        {
+                            List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
+                            ViewData.Add("Lavorazioni", Lavorazioni);
 
-                        List<RWListItem> Automatico = CreaListaAcquaSecco();
-                        ViewData.Add("AcquaSecco", Automatico);
+                            List<RWListItem> Interno = CreaListaSiNo();
+                            ViewData.Add("Interno", Interno);
 
-                        List<RWListItem> Materiale = bll.CaricaListaMateriali();
-                        ViewData.Add("Materiali", Materiale);
+                            List<RWListItem> Tipologia = CreaListaTipoDecapaggio();
+                            ViewData.Add("Tipologia", Tipologia);
 
-                        List<RWListItem> Vibratori = bll.CaricaListaMacchine(RepartoCodice);
-                        ViewData.Add("Vibratori", Vibratori);
+                            return PartialView("DecapaggioPartial");
+                        }
+                        else
+                        {
+                            List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
+                            ViewData.Add("Lavorazioni", Lavorazioni);
 
-                        return PartialView("VibraturaPartial");
+                            List<RWListItem> Automatico = CreaListaAcquaSecco();
+                            ViewData.Add("AcquaSecco", Automatico);
+
+                            List<RWListItem> Materiale = CaricaListaMaterialiVibratura();
+                            ViewData.Add("Materiali", Materiale);
+
+                            List<RWListItem> Vibratori = bll.CaricaListaMacchine(RepartoCodice);
+                            ViewData.Add("Vibratori", Vibratori);
+
+                            return PartialView("VibraturaPartial");
+                        }
                     }
 
                 case Reparti.Modelleria:
@@ -147,28 +165,31 @@ namespace ReportWeb.Controllers
 
                 case Reparti.Riprese:
                     {
-                        List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
-                        ViewData.Add("Lavorazioni", Lavorazioni);
+                        if (IDTABFASS == "0000000146")//laser
+                        {
+                            List<RWListItem> TipoLaseratura = CreaListaLaseratura();
+                            ViewData.Add("TipoLaseratura", TipoLaseratura);
 
-                        List<RWListItem> Piazzatura = CreaListaSiNo();
-                        ViewData.Add("Piazzatura", Piazzatura);
+                            List<RWListItem> Piazzatura = CreaListaPiazzaturaLaser();
+                            ViewData.Add("Piazzatura", Piazzatura);
 
-                        return PartialView("RipresePartial");
+                            List<RWListItem> Magazzino = CreaListaSiNo();
+                            ViewData.Add("Magazzino", Magazzino);
+
+                            return PartialView("LaserPartial");
+                        }
+                        else
+                        {
+                            List<RWListItem> Lavorazioni = bll.CaricaLavorazioni(RepartoCodice);
+                            ViewData.Add("Lavorazioni", Lavorazioni);
+
+                            List<RWListItem> Piazzatura = CreaListaSiNo();
+                            ViewData.Add("Piazzatura", Piazzatura);
+
+                            return PartialView("RipresePartial");
+                        }
                     }
 
-                case Reparti.Laser:
-                    {
-                        List<RWListItem> TipoLaseratura = CreaListaLaseratura();
-                        ViewData.Add("TipoLaseratura", TipoLaseratura);
-
-                        List<RWListItem> Piazzatura = CreaListaPiazzaturaLaser();
-                        ViewData.Add("Piazzatura", Piazzatura);
-
-                        List<RWListItem> Magazzino = CreaListaSiNo();
-                        ViewData.Add("Magazzino", Magazzino);
-
-                        return PartialView("LaserPartial");
-                    }
                 case Reparti.Verniciatura:
                     {
 
@@ -180,17 +201,160 @@ namespace ReportWeb.Controllers
 
                         return PartialView("GalvanicaPartial");
                     }
+
+
+                case Reparti.Smaltatura:
+                    {
+                        List<RWListItem> Piazzatura = CreaListaSiNo();
+                        ViewData.Add("Piazzatura", Piazzatura);
+
+                        return PartialView("SmaltaturaPartial");
+                    }
+                //case Reparti.Scopertura:
+                //    {
+                //        List<RWListItem> Lavorazioni = bll.CaricaLavorazioni("VIBR");
+                //        ViewData.Add("Lavorazioni", Lavorazioni);
+
+                //        List<RWListItem> Materiale = CaricaListaMaterialiVibratura();
+                //        ViewData.Add("Materiali", Materiale);
+
+                //        List<RWListItem> Vibratori = bll.CaricaListaMacchine(RepartoCodice);
+                //        ViewData.Add("Vibratori", Vibratori);
+
+                //        return PartialView("ScoperturaPartial");
+                //    }
+                case Reparti.Stampaggio:
+                    {
+                        List<RWListItem> MetalloBase = bll.CaricaListaMetalliBase();
+                        ViewData.Add("MetalloBase", MetalloBase);
+
+                        List<RWListItem> Materiali = CaricaListaMaterialiStampaggio();
+                        ViewData.Add("Materiali", Materiali);
+
+                        List<RWListItem> Impronte = CaricaListaMaterialiStampaggio();
+                        ViewData.Add("Impronte", Impronte);
+
+                        List<RWListItem> Tranciature = CaricaListaTranciature();
+                        ViewData.Add("Tranciature", Tranciature);
+
+                        return PartialView("StampaggioPartial");
+                    }
+                case Reparti.Saldatura:
+                    {
+                        List<RWListItem> Piazzatura = CreaListaSiNo();
+                        ViewData.Add("Piazzatura", Piazzatura);
+
+                        return PartialView("SaldaturaPartial");
+                    }
+                case Reparti.Montaggio:
+                    {
+                        List<RWListItem> difficolta = CaricaListaDifficoltà();
+                        ViewData.Add("Difficolta", difficolta);
+
+                        List<RWListItem> Colori = CaricaListaColori();
+                        ViewData.Add("Colori", Colori);
+
+                        return PartialView("MontaggioPartial");
+                    }
                 default: return null;
             }
 
         }
 
+        private List<RWListItem> CaricaListaMaterialiStampaggio()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("Billetta", "1"));
+            result.Add(new RWListItem("Piatto", "2"));
+            result.Add(new RWListItem("Piastra", "3"));
+
+            return result;
+        }
+
+        private List<RWListItem> CaricaListaDifficoltà()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("1", "1"));
+            result.Add(new RWListItem("2", "2"));
+            result.Add(new RWListItem("3", "3"));
+            result.Add(new RWListItem("4", "4"));
+            result.Add(new RWListItem("5", "5"));
+
+            return result;
+        }
+
+        private List<RWListItem> CaricaListaColori()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("Rosso - Alemar", "1"));
+            result.Add(new RWListItem("Nero - NuovaVS", "2"));
+            result.Add(new RWListItem("Blu - RBL", "3"));
+
+            return result;
+        }
+
+        private List<RWListItem> CaricaListaImpronteStampo()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("1", "1"));
+            result.Add(new RWListItem("2", "2"));
+            result.Add(new RWListItem("3", "3"));
+            result.Add(new RWListItem("4", "4"));
+            result.Add(new RWListItem("5", "5"));
+            result.Add(new RWListItem("6", "6"));
+            result.Add(new RWListItem("7", "7"));
+            result.Add(new RWListItem("8", "8"));
+            result.Add(new RWListItem("9", "9"));
+            result.Add(new RWListItem("10", "10"));
+
+            return result;
+        }
+
+        private List<RWListItem> CaricaListaTranciature()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("1", "1"));
+            result.Add(new RWListItem("2", "2"));
+            result.Add(new RWListItem("3", "3"));
+            result.Add(new RWListItem("4", "4"));
+            result.Add(new RWListItem("5", "5"));
+
+            return result;
+        }
+        private List<RWListItem> CaricaListaMaterialiVibratura()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("Sassi", "1"));
+            result.Add(new RWListItem("Ceramica", "2"));
+            result.Add(new RWListItem("Legnetti", "3"));
+            result.Add(new RWListItem("materiale1", "4"));
+            result.Add(new RWListItem("materiale2", "5"));
+            result.Add(new RWListItem("materiale3", "6"));
+
+            return result;
+        }
         private List<RWListItem> CreaListaSiNo()
         {
             List<RWListItem> result = new List<RWListItem>();
             result.Add(new RWListItem(string.Empty, string.Empty));
             result.Add(new RWListItem("Si", "1"));
             result.Add(new RWListItem("No", "2"));
+
+            return result;
+        }
+
+        private List<RWListItem> CreaListaTipoDecapaggio()
+        {
+            List<RWListItem> result = new List<RWListItem>();
+            result.Add(new RWListItem(string.Empty, string.Empty));
+            result.Add(new RWListItem("Statico", "1"));
+            result.Add(new RWListItem("Roto", "2"));
 
             return result;
         }

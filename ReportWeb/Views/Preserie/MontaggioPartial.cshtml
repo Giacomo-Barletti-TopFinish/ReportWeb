@@ -1,0 +1,108 @@
+﻿@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
+
+<div class="row">
+    <div class="col-sm-2"><label>Difficolta</label>@Html.DropDownList("dllDifficolta", new SelectList(ViewData["Difficolta"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Attrezzi</label>@Html.TextBox("txtAttrezzi", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Colle</label>@Html.TextBox("txtColle", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Attesa</label>@Html.TextBox("txtAttesa", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Colore</label>@Html.DropDownList("ddlColore", new SelectList(ViewData["Colori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"><input type="button" onclick="InserisciRiga();" class="btn btn-primary" value="Inserisci lavorazione" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed" id="tblDettaglio"></table>
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tblDettaglio').on('click', 'a', function () {
+            $(this).closest('tr').remove();
+        })
+    });
+
+    function InserisciRiga() {
+
+        var difficolta = $("#dllDifficolta").find("option:selected").text();
+        var colore = $("#ddlColore").find("option:selected").text();
+
+        var attrezzi = $('#txtAttrezzi').val();
+        var colle = $('#txtColle').val();
+        var attesa = $('#txtAttesa').val();
+
+        var messaggio = '';
+        var esito = true;
+        if (difficolta == null || difficolta == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la difficoltà" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="17%">' + difficolta + '</td>';
+        tr += '<td width="17%">' + attrezzi + '</td>';
+        tr += '<td width="17%">' + colle + '</td>';
+        tr += '<td width="9%">' + attesa + '</td>';
+        tr += '<td width="17%">' + colore + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
+
+        $("#dllDifficolta").val('').trigger('change');
+        $("#ddlColore").val('').trigger('change');
+        $("#txtAttrezzi").val('');
+        $("#txtColle").val('');
+        $("#txtAttesa").val('');
+    }
+
+    function GetTabellaDettaglio() {
+
+        var rowCount = $('table#tblDettaglio tr:last').index() + 1;
+        var messaggio = '';
+
+        var data = [];
+        var trs = $('#tblDettaglio > tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
+
+            if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
+            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
+
+            var tdDifficolta = $(tr).find('td')[0];
+            var difficolta = $(tdDifficolta).text().trim();
+
+            var tdAttrezzi = $(tr).find('td')[1];
+            var attrezzi = $(tdAttrezzi).text().trim();
+
+            var tdColle = $(tr).find('td')[2];
+            var colle = $(tdColle).text().trim();
+
+            var tdAttesa = $(tr).find('td')[3];
+            var attesa = $(tdAttesa).text().trim();
+
+            var tdColore = $(tr).find('td')[4];
+            var colore = $(tdColore).text().trim();
+
+
+            var dettaglio = {
+                'Difficolta': difficolta, 'Attrezzi': attrezzi, 'Colle': colle, 'Attesa': attesa, 'Colore': colore
+            };
+            data.push(dettaglio);
+        }
+
+        var dettagli = JSON.stringify(data);
+
+        return dettagli;
+
+    }
+
+</script>

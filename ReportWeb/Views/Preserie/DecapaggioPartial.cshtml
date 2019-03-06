@@ -1,0 +1,105 @@
+﻿@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
+
+<div class="row">
+    <div class="col-sm-2"><label>Lavorazione</label>@Html.DropDownList("dllLavorazione", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Tipo</label>@Html.DropDownList("ddlTipologia", new SelectList(ViewData["Tipologia"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Interno</label>@Html.DropDownList("dllInterno", new SelectList(ViewData["Interno"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Programma</label>@Html.TextBox("txtProgramma", "", new { @maxlength = "30", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"><input type="button" onclick="InserisciRiga();" class="btn btn-primary" value="Inserisci lavorazione" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed" id="tblDettaglio"></table>
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tblDettaglio').on('click', 'a', function () {
+            $(this).closest('tr').remove();
+        })
+    });
+
+    function InserisciRiga() {
+
+        var lavorazione = $("#dllLavorazione").find("option:selected").text();
+        var tipologia = $("#ddlTipologia").find("option:selected").text();
+
+        var interno = $('#dllInterno').find("option:selected").text();
+        var programma = $('#txtProgramma').val();
+
+        var messaggio = '';
+        var esito = true;
+        if (lavorazione == null || lavorazione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la lavorazione" + "</br>";
+        }
+
+        if (tipologia == null || tipologia == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la tipologia" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="17%">' + lavorazione + '</td>';
+        tr += '<td width="9%">' + tipologia + '</td>';
+        tr += '<td width="9%">' + interno + '</td>';
+        tr += '<td width="17%">' + programma + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
+
+        $("#dllLavorazione").val('').trigger('change');
+        $("#ddlTipologia").val('').trigger('change');
+        $("#dllInterno").val('').trigger('change');
+        $("#txtProgramma").val('');
+    }
+
+    function GetTabellaDettaglio() {
+
+        var rowCount = $('table#tblDettaglio tr:last').index() + 1;
+        var messaggio = '';
+
+        var data = [];
+        var trs = $('#tblDettaglio > tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
+
+            if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
+            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
+
+            var tdLavorazione = $(tr).find('td')[0];
+            var lavorazione = $(tdLavorazione).text().trim();
+
+            var tdTipologia = $(tr).find('td')[1];
+            var tipologia = $(tdTipologia).text().trim();
+
+            var tdInterno = $(tr).find('td')[2];
+            var interno = $(tdInterno).text().trim();
+
+            var tdProgramma = $(tr).find('td')[3];
+            var programma = $(tdProgramma).text().trim();
+
+            var dettaglio = {
+                'Lavorazione': lavorazione, 'Tipologia': tipologia, 'Interno': interno, 'Programma': programma
+            };
+            data.push(dettaglio);
+        }
+
+        var dettagli = JSON.stringify(data);
+
+        return dettagli;
+
+    }
+
+</script>

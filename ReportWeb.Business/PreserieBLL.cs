@@ -376,7 +376,7 @@ namespace ReportWeb.Business
                 bPreserie.FillUSR_PRD_RESOURCESF(ds);
                 model.Add(new RWListItem(string.Empty, string.Empty));
 
-                foreach (PreserieDS.USR_PRD_RESOURCESFRow macchina in ds.USR_PRD_RESOURCESF.Where(x => x.IDRESOURCE != "0000000019" && x.CODICECLIFO == Reparto).OrderBy(x => x.CODRESOURCEF))
+                foreach (PreserieDS.USR_PRD_RESOURCESFRow macchina in ds.USR_PRD_RESOURCESF.Where(x => x.IDRESOURCE != "0000000019" && !x.IsCODICECLIFONull() && x.CODICECLIFO.Trim() == Reparto).OrderBy(x => x.CODRESOURCEF))
                     model.Add(new RWListItem(macchina.CODRESOURCEF, macchina.IDRESOURCEF));
 
                 return model;
@@ -503,9 +503,18 @@ namespace ReportWeb.Business
                         }
                     case Reparti.Vibratura:
                         {
-                            VibraturaJson[] dettagli = JSonSerializer.Deserialize<VibraturaJson[]>(Dettagli);
-                            InserisciDettaglioVibratura(ds, dettagli, idDettaglio, bPreserie);
-                            break;
+                            if (IDTABFAS == "0000000060") //decapaggio
+                            {
+                                DecapaggioJson[] dettagli = JSonSerializer.Deserialize<DecapaggioJson[]>(Dettagli);
+                                InserisciDettaglioDecapaggio(ds, dettagli, idDettaglio, bPreserie);
+                                break;
+                            }
+                            else
+                            {
+                                VibraturaJson[] dettagli = JSonSerializer.Deserialize<VibraturaJson[]>(Dettagli);
+                                InserisciDettaglioVibratura(ds, dettagli, idDettaglio, bPreserie);
+                                break;
+                            }
                         }
                     case Reparti.Modelleria:
                         {
@@ -527,16 +536,21 @@ namespace ReportWeb.Business
                         }
                     case Reparti.Riprese:
                         {
-                            RipreseJson[] dettagli = JSonSerializer.Deserialize<RipreseJson[]>(Dettagli);
-                            InserisciDettaglioRiprese(ds, dettagli, idDettaglio, bPreserie);
-                            break;
+                            if (IDTABFAS == "0000000146")//laser
+                            {
+                                LaseraturaJson[] dettagli = JSonSerializer.Deserialize<LaseraturaJson[]>(Dettagli);
+                                InserisciDettaglioLaseratura(ds, dettagli, idDettaglio, bPreserie);
+                                break;
+
+                            }
+                            else
+                            {
+                                RipreseJson[] dettagli = JSonSerializer.Deserialize<RipreseJson[]>(Dettagli);
+                                InserisciDettaglioRiprese(ds, dettagli, idDettaglio, bPreserie);
+                                break;
+                            }
                         }
-                    case Reparti.laser:
-                        {
-                            LaseraturaJson[] dettagli = JSonSerializer.Deserialize<LaseraturaJson[]>(Dettagli);
-                            InserisciDettaglioLaseratura(ds, dettagli, idDettaglio, bPreserie);
-                            break;
-                        }
+
                     case Reparti.Verniciatura:
                         {
                             VerniciaturaJson[] dettagli = JSonSerializer.Deserialize<VerniciaturaJson[]>(Dettagli);
@@ -549,11 +563,54 @@ namespace ReportWeb.Business
                             InserisciDettaglioGalvanica(ds, dettagli, idDettaglio, bPreserie);
                             break;
                         }
+                    case Reparti.Smaltatura:
+                        {
+                            SmaltaturaJson[] dettagli = JSonSerializer.Deserialize<SmaltaturaJson[]>(Dettagli);
+                            InserisciDettaglioSmaltatura(ds, dettagli, idDettaglio, bPreserie);
+                            break;
+                        }
+                    case Reparti.Stampaggio:
+                        {
+                            StampaggioJson[] dettagli = JSonSerializer.Deserialize<StampaggioJson[]>(Dettagli);
+                            InserisciDettaglioStampaggio(ds, dettagli, idDettaglio, bPreserie);
+                            break;
+                        }
+                    case Reparti.Saldatura:
+                        {
+                            SaldaturaJson[] dettagli = JSonSerializer.Deserialize<SaldaturaJson[]>(Dettagli);
+                            InserisciDettaglioSaldatura(ds, dettagli, idDettaglio, bPreserie);
+                            break;
+                        }
+                    case Reparti.Montaggio:
+                        {
+                            MontaggioJson[] dettagli = JSonSerializer.Deserialize<MontaggioJson[]>(Dettagli);
+                            InserisciDettaglioMontaggio(ds, dettagli, idDettaglio, bPreserie);
+                            break;
+                        }
+                        //case Reparti.Scopertura:
+                        //    {
+                        //        ScoperturaJson[] dettagli = JSonSerializer.Deserialize<ScoperturaJson[]>(Dettagli);
+                        //        InserisciDettaglioScopertura(ds, dettagli, idDettaglio, bPreserie);
+                        //        break;
+                        //    }
                 }
 
                 bPreserie.UpdateRW_PR(ds.RW_PR_DETTAGLIO.TableName, ds);
                 bPreserie.UpdateRW_PR(ds.RW_PR_PULIMENTATURA.TableName, ds);
                 bPreserie.UpdateRW_PR(ds.RW_PR_VIBRATURA.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_MODELLERIA.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_PRESSOFUSIONE.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_TORNITURA.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_RIPRESE.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_LASER.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_VERNICIATURA.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_GALVANICA.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_DECAPAGGIO.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_SMALTATURA.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_SCOPERTURA.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_STAMPAGGIO.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_SALDATURA.TableName, ds);
+                bPreserie.UpdateRW_PR(ds.RW_PR_MONTAGGIO.TableName, ds);
 
             }
         }
@@ -603,6 +660,32 @@ namespace ReportWeb.Business
             }
         }
 
+        private void InserisciDettaglioScopertura(PreserieDS ds, ScoperturaJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
+        {
+            int sequenza = 1;
+            foreach (ScoperturaJson dettaglio in dettagli)
+            {
+                long idElemento = bPreserie.GetID();
+                PreserieDS.RW_PR_SCOPERTURARow sco = ds.RW_PR_SCOPERTURA.NewRW_PR_SCOPERTURARow();
+                sco.IDELEMENTO = idElemento;
+                sco.IDDETTAGLIO = IDDETTAGLIO;
+                sco.SEQUENZA = sequenza;
+                sequenza++;
+                if (string.IsNullOrEmpty(dettaglio.Passaggi))
+                    sco.PASSAGGI = dettaglio.Passaggi;
+
+                if (string.IsNullOrEmpty(dettaglio.Lavorazione))
+                    sco.VIBRATURA = dettaglio.Lavorazione;
+                sco.MATERIALE = dettaglio.Materiale;
+                sco.ADDITIVI = dettaglio.Additivi;
+                sco.PEZZI = dettaglio.Pezzi;
+                sco.TEMPO = dettaglio.Tempo;
+                if (string.IsNullOrEmpty(dettaglio.Vibratore))
+                    sco.VIBRATORE = dettaglio.Vibratore;
+
+                ds.RW_PR_SCOPERTURA.AddRW_PR_SCOPERTURARow(sco);
+            }
+        }
         private void InserisciDettaglioModelleria(PreserieDS ds, ModelleriaJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
         {
             int sequenza = 1;
@@ -704,10 +787,10 @@ namespace ReportWeb.Business
                 rip.PEZZITELAIO = dettaglio.PezziTelaio;
 
                 if (string.IsNullOrEmpty(dettaglio.Durata))
-                    rip.DURATA= dettaglio.Durata;
+                    rip.DURATA = dettaglio.Durata;
 
                 if (string.IsNullOrEmpty(dettaglio.Ricetta))
-                    rip.VERNICIATURA= dettaglio.Ricetta;
+                    rip.VERNICIATURA = dettaglio.Ricetta;
 
                 ds.RW_PR_VERNICIATURA.AddRW_PR_VERNICIATURARow(rip);
             }
@@ -726,14 +809,156 @@ namespace ReportWeb.Business
                 sequenza++;
 
                 gal.TELAIO = dettaglio.Telaio;
-                gal.LEGATURA = dettaglio.Legatura;
+
+                if (string.IsNullOrEmpty(dettaglio.Legatura))
+                    gal.LEGATURA = dettaglio.Legatura;
+
                 gal.PEZZIFILO = dettaglio.PezziFilo;
+
                 gal.FILOTELAIO = dettaglio.FiliTealio;
 
-                if (string.IsNullOrEmpty(dettaglio.Spessore))
-                    gal.SPESSORI= dettaglio.Spessore;
-
                 ds.RW_PR_GALVANICA.AddRW_PR_GALVANICARow(gal);
+            }
+        }
+
+        private void InserisciDettaglioDecapaggio(PreserieDS ds, DecapaggioJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
+        {
+            int sequenza = 1;
+            foreach (DecapaggioJson dettaglio in dettagli)
+            {
+                long idElemento = bPreserie.GetID();
+                PreserieDS.RW_PR_DECAPAGGIORow deca = ds.RW_PR_DECAPAGGIO.NewRW_PR_DECAPAGGIORow();
+                deca.IDELEMENTO = idElemento;
+                deca.IDDETTAGLIO = IDDETTAGLIO;
+                deca.SEQUENZA = sequenza;
+                sequenza++;
+
+                if (string.IsNullOrEmpty(dettaglio.Tipologia))
+                    deca.TIPOLOGIA = dettaglio.Tipologia;
+
+                if (string.IsNullOrEmpty(dettaglio.Lavorazione))
+                    deca.LAVORAZIONE = dettaglio.Lavorazione;
+
+                if (string.IsNullOrEmpty(dettaglio.Interno))
+                    deca.INTERNO = dettaglio.Interno;
+
+                if (string.IsNullOrEmpty(dettaglio.Programma))
+                    deca.PROGRAMMA = dettaglio.Programma;
+
+                ds.RW_PR_DECAPAGGIO.AddRW_PR_DECAPAGGIORow(deca);
+            }
+        }
+
+        private void InserisciDettaglioSmaltatura(PreserieDS ds, SmaltaturaJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
+        {
+            int sequenza = 1;
+            foreach (SmaltaturaJson dettaglio in dettagli)
+            {
+                long idElemento = bPreserie.GetID();
+                PreserieDS.RW_PR_SMALTATURARow sma = ds.RW_PR_SMALTATURA.NewRW_PR_SMALTATURARow();
+                sma.IDELEMENTO = idElemento;
+                sma.IDDETTAGLIO = IDDETTAGLIO;
+                sma.SEQUENZA = sequenza;
+                sequenza++;
+
+                if (string.IsNullOrEmpty(dettaglio.Piazzatura))
+                    sma.PIAZZATURA = dettaglio.Piazzatura;
+
+                if (string.IsNullOrEmpty(dettaglio.Smalto))
+                    sma.SMALTO = dettaglio.Smalto;
+
+                if (string.IsNullOrEmpty(dettaglio.Codice))
+                    sma.CODICE = dettaglio.Codice;
+
+                ds.RW_PR_SMALTATURA.AddRW_PR_SMALTATURARow(sma);
+            }
+        }
+
+        private void InserisciDettaglioStampaggio(PreserieDS ds, StampaggioJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
+        {
+            int sequenza = 1;
+            foreach (StampaggioJson dettaglio in dettagli)
+            {
+                long idElemento = bPreserie.GetID();
+                PreserieDS.RW_PR_STAMPAGGIORow sta = ds.RW_PR_STAMPAGGIO.NewRW_PR_STAMPAGGIORow();
+                sta.IDELEMENTO = idElemento;
+                sta.IDDETTAGLIO = IDDETTAGLIO;
+                sta.SEQUENZA = sequenza;
+                sequenza++;
+
+                if (string.IsNullOrEmpty(dettaglio.TipoMateriale))
+                    sta.TIPOMATERIALE = dettaglio.TipoMateriale;
+
+                if (string.IsNullOrEmpty(dettaglio.Materiale))
+                    sta.MATERIALE = dettaglio.Materiale;
+
+                sta.LUNGHEZZA = dettaglio.Lunghezza;
+                sta.LARGHEZZA = dettaglio.Larghezza;
+                sta.ALTEZZA = dettaglio.Altezza;
+
+                if (string.IsNullOrEmpty(dettaglio.Stampo))
+                    sta.STAMPO = dettaglio.Stampo;
+
+                sta.IMPRONTE = dettaglio.Impronte;
+                sta.BATTUREORARIE = dettaglio.Battute;
+                sta.TRANCIATURE = dettaglio.Tranciature;
+                sta.TRANIATURA1 = dettaglio.Trancia1;
+                sta.TRANIATURA2 = dettaglio.Trancia2;
+
+                if (string.IsNullOrEmpty(dettaglio.Certificato))
+                    sta.CERTIFICATO = dettaglio.Certificato;
+
+
+                ds.RW_PR_STAMPAGGIO.AddRW_PR_STAMPAGGIORow(sta);
+            }
+        }
+
+        private void InserisciDettaglioSaldatura(PreserieDS ds, SaldaturaJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
+        {
+            int sequenza = 1;
+            foreach (SaldaturaJson dettaglio in dettagli)
+            {
+                long idElemento = bPreserie.GetID();
+                PreserieDS.RW_PR_SALDATURARow sal = ds.RW_PR_SALDATURA.NewRW_PR_SALDATURARow();
+                sal.IDELEMENTO = idElemento;
+                sal.IDDETTAGLIO = IDDETTAGLIO;
+                sal.SEQUENZA = sequenza;
+                sequenza++;
+
+                if (string.IsNullOrEmpty(dettaglio.Piazzatura))
+                    sal.PIAZZATURA = dettaglio.Piazzatura;
+
+                ds.RW_PR_SALDATURA.AddRW_PR_SALDATURARow(sal);
+            }
+        }
+
+        private void InserisciDettaglioMontaggio(PreserieDS ds, MontaggioJson[] dettagli, long IDDETTAGLIO, PreserieBusiness bPreserie)
+        {
+            int sequenza = 1;
+            foreach (MontaggioJson dettaglio in dettagli)
+            {
+                long idElemento = bPreserie.GetID();
+                PreserieDS.RW_PR_MONTAGGIORow mon = ds.RW_PR_MONTAGGIO.NewRW_PR_MONTAGGIORow();
+                mon.IDELEMENTO = idElemento;
+                mon.IDDETTAGLIO = IDDETTAGLIO;
+                mon.SEQUENZA = sequenza;
+                sequenza++;
+
+                if (string.IsNullOrEmpty(dettaglio.Attrezzi))
+                    mon.ATTREZZI = dettaglio.Attrezzi;
+
+                if (string.IsNullOrEmpty(dettaglio.Colle))
+                    mon.COLLE = dettaglio.Colle;
+
+                if (string.IsNullOrEmpty(dettaglio.Attesa))
+                    mon.ATTESA = dettaglio.Attesa;
+
+                if (string.IsNullOrEmpty(dettaglio.Colore))
+                    mon.COLORE = dettaglio.Colore;
+
+                mon.DIFFICOLTA = dettaglio.Difficolta;
+
+                ds.RW_PR_MONTAGGIO.AddRW_PR_MONTAGGIORow(mon);
             }
         }
 

@@ -1,0 +1,162 @@
+﻿@using ReportWeb.Models.Preserie
+@using ReportWeb.Models
+
+<div class="row">
+    <div class="col-sm-1"><label>Tipo materiale</label>@Html.DropDownList("dllTipoMateriale", new SelectList(ViewData["MetalloBase"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Materiali</label>@Html.DropDownList("ddlMateriali", new SelectList(ViewData["Materiali"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Lunghezza</label>@Html.TextBox("txtLunghezza", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Larghezza</label>@Html.TextBox("txtLarghezza", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Altezza</label>@Html.TextBox("txtAltezza", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Stampo</label>@Html.TextBox("txtStampo", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Impronte</label>@Html.DropDownList("dllImpronte", new SelectList(ViewData["Impronte"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>BattuteOrarie</label>@Html.TextBox("txtBattuteOrarie", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Tranciature</label>@Html.DropDownList("ddlTranciature", new SelectList(ViewData["Tranciature"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Pezzi per trancia 1</label>@Html.TextBox("txtPezziTrancia1", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Pezzi per trancia 2</label>@Html.TextBox("txtPezziTrancia2", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Certificato</label>@Html.TextBox("txtCertificato", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"><input type="button" onclick="InserisciRiga();" class="btn btn-primary" value="Inserisci lavorazione" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed" id="tblDettaglio"></table>
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $('#tblDettaglio').on('click', 'a', function () {
+            $(this).closest('tr').remove();
+        })
+    });
+
+    function InserisciRiga() {
+
+        var tipoMateriale = $("#dllTipoMateriale").find("option:selected").text();
+        var materiale = $("#ddlMateriali").find("option:selected").text();
+
+        var lunghezza = $('#txtLunghezza').val();
+        var larghezza = $('#txtLarghezza').val();
+        var altezza = $('#txtAltezza').val();
+        var stampo = $('#txtStampo').val();
+        var impronte = $("#ddlImpronte").find("option:selected").text();
+        var battute = $('#txtBattuteOrarie').val();
+        var tranciature = $("#ddlTranciature").find("option:selected").text();
+        var trancia1 = $('#txtPezziTrancia1').val();
+        var trancia2 = $('#txtPezziTrancia2').val();
+        var certificato = $('#txtCertificato').val();
+
+        var messaggio = '';
+        var esito = true;
+        if (tipoMateriale == null || tipoMateriale == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la tipo lavorazione" + "</br>";
+        }
+
+        if (materiale == null || materiale == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il materiale" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="9%">' + tipoMateriale + '</td>';
+        tr += '<td width="9%">' + materiale + '</td>';
+        tr += '<td width="9%">' + lunghezza + '</td>';
+        tr += '<td width="9%">' + larghezza + '</td>';
+        tr += '<td width="9%">' + altezza + '</td>';
+        tr += '<td width="9%">' + stampo + '</td>';
+        tr += '<td width="9%">' + impronte + '</td>';
+        tr += '<td width="9%">' + battute + '</td>';
+        tr += '<td width="9%">' + tranciature + '</td>';
+        tr += '<td width="9%">' + trancia1 + '</td>';
+        tr += '<td width="9%">' + trancia2 + '</td>';
+        tr += '<td width="9%">' + certificato + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
+
+        $("#dllTipoMateriale").val('').trigger('change');
+        $("#ddlMateriali").val('').trigger('change');
+        $("#dllImpronte").val('').trigger('change');
+        $("#ddlTranciature").val('').trigger('change');
+        $("#txtLunghezza").val('');
+        $("#txtLarghezza").val('');
+        $("#txtAltezza").val('');
+        $("#txtStampo").val('');
+        $("#txtBattuteOrarie").val('');
+        $("#txtPezziTrancia1").val('');
+        $("#txtPezziTrancia2").val('');
+        $("#txtCertificato").val('');
+    }
+
+    function GetTabellaDettaglio() {
+
+        var rowCount = $('table#tblDettaglio tr:last').index() + 1;
+        var messaggio = '';
+
+        var data = [];
+        var trs = $('#tblDettaglio > tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var IDDETTAGLIO = $('.hdIDDETTAGLIO', tr).val();
+
+            if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
+            if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
+
+            var tdTipoMateriale = $(tr).find('td')[0];
+            var tipoMateriale = $(tdTipoMateriale).text().trim();
+
+            var tdMateriale = $(tr).find('td')[1];
+            var materiale = $(tdMateriale).text().trim();
+
+            var tdLunghezza = $(tr).find('td')[2];
+            var lunghezza = $(tdLunghezza).text().trim();
+
+            var tdLarghezza = $(tr).find('td')[3];
+            var larghezza = $(tdLarghezza).text().trim();
+
+            var tdAltezza = $(tr).find('td')[4];
+            var altezza = $(tdAltezza).text().trim();
+
+            var tdStampo = $(tr).find('td')[5];
+            var stampo = $(tdStampo).text().trim();
+
+            var tdImpronte = $(tr).find('td')[6];
+            var impronte = $(tdImpronte).text().trim();
+
+            var tdBattute = $(tr).find('td')[7];
+            var battute = $(tdBattute).text().trim();
+
+            var tdTranciature = $(tr).find('td')[8];
+            var tranciature = $(tdTranciature).text().trim();
+
+            var tdTrancia1 = $(tr).find('td')[9];
+            var trancia1 = $(tdTrancia1 ).text().trim();
+
+            var tdTrancia2 = $(tr).find('td')[10];
+            var trancia2 = $(tdTrancia2).text().trim();
+
+            var tdCertificato = $(tr).find('td')[11];
+            var certificato = $(tdTranciature).text().trim();
+
+            var dettaglio = {
+                'TipoMateriale': tipoMateriale, 'Materiale': materiale, 'Lunghezza': lunghezza, 'Larghezza': larghezza, 'Altezza': altezza, 'Stampo': stampo, 'Impronte': Impronte,
+                'Battute': battute, 'Tranciature': tdTranciature, 'Trancia1': trancia1, 'Trancia2': trancia2, 'Certificato': certificato
+            };
+            data.push(dettaglio);
+        }
+
+        var dettagli = JSON.stringify(data);
+
+        return dettagli;
+
+    }
+
+</script>
