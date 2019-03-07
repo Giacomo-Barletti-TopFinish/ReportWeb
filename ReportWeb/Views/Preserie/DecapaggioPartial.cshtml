@@ -1,5 +1,6 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
+@model List<DecapaggioJson>
 
 <div class="row">
     <div class="col-sm-2"><label>Lavorazione</label>@Html.DropDownList("dllLavorazione", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
@@ -23,10 +24,17 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+        debugger;
+          @foreach(DecapaggioJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.Lavorazione', '@elemento.Tipologia', '@elemento.Interno', '@elemento.Programma');
+        </text>
+    }
     });
 
     function InserisciRiga() {
-
+        
         var lavorazione = $("#dllLavorazione").find("option:selected").text();
         var tipologia = $("#ddlTipologia").find("option:selected").text();
 
@@ -48,6 +56,15 @@
         $('#lblMessage').html(messaggio);
         if (!esito) return;
 
+        InsertTR(lavorazione, tipologia, interno, programma);
+
+        $("#dllLavorazione").val('').trigger('change');
+        $("#ddlTipologia").val('').trigger('change');
+        $("#dllInterno").val('').trigger('change');
+        $("#txtProgramma").val('');
+    }
+
+    function InsertTR(lavorazione, tipologia, interno, programma) {
         var tr = '<tr>';
         tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
         tr += '<td width="17%">' + lavorazione + '</td>';
@@ -57,11 +74,6 @@
         tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
         tr += '<\tr>';
         $('#tblDettaglio').append(tr);
-
-        $("#dllLavorazione").val('').trigger('change');
-        $("#ddlTipologia").val('').trigger('change');
-        $("#dllInterno").val('').trigger('change');
-        $("#txtProgramma").val('');
     }
 
     function GetTabellaDettaglio() {

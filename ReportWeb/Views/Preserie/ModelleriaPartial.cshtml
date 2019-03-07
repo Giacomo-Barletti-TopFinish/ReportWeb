@@ -1,5 +1,6 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
+@model List<ModelleriaJson>
 
 <div class="row">
     <div class="col-sm-2"><label>Lavorazione</label>@Html.DropDownList("dllLavorazione", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
@@ -25,6 +26,13 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+
+          @foreach(ModelleriaJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.Lavorazione', '@elemento.Attrezzaggio', '@elemento.Materiale', '@elemento.Programma', '@elemento.Macchina', '@elemento.Utensili');
+        </text>
+    }
     });
 
     function InserisciRiga() {
@@ -52,17 +60,7 @@
         $('#lblMessage').html(messaggio);
         if (!esito) return;
 
-        var tr = '<tr>';
-        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
-        tr += '<td width="17%">' + lavorazione + '</td>';
-        tr += '<td width="9%">' + attrezzaggio + '</td>';
-        tr += '<td width="9%">' + metalloBase + '</td>';
-        tr += '<td width="17%">' + programma + '</td>';
-        tr += '<td width="17%">' + macchina + '</td>';
-        tr += '<td width="17%">' + tempo + '</td>';
-        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
-        tr += '<\tr>';
-        $('#tblDettaglio').append(tr);
+        InsertTR(lavorazione, attrezzaggio, metalloBase, programma, macchina, utensili);
 
         $("#dllLavorazione").val('').trigger('change');
         $("#dllAttrezzaggio").val('').trigger('change');
@@ -70,6 +68,20 @@
         $("#dllMacchine").val('').trigger('change');
         $("#txtProgramma").val('');
         $("#txtUtensili").val('');
+    }
+
+    function InsertTR(lavorazione, attrezzaggio, metalloBase, programma, macchina, utensili) {
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="17%">' + lavorazione + '</td>';
+        tr += '<td width="9%">' + attrezzaggio + '</td>';
+        tr += '<td width="9%">' + metalloBase + '</td>';
+        tr += '<td width="17%">' + programma + '</td>';
+        tr += '<td width="17%">' + macchina + '</td>';
+        tr += '<td width="17%">' + utensili + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
     }
 
     function GetTabellaDettaglio() {
@@ -105,7 +117,7 @@
             var utensili = $(tdUtensili).text().trim();
 
             var dettaglio = {
-                'Lavorazione': lavorazione, 'Attrezzaggio': attrezzaggio, 'Materiale': materiale, 'Programma': Programma, 'Macchine': macchine, 'Utensili': utensili
+                'Lavorazione': lavorazione, 'Attrezzaggio': attrezzaggio, 'Materiale': materiale, 'Programma': programma, 'Macchine': macchine, 'Utensili': utensili
             };
             data.push(dettaglio);
         }

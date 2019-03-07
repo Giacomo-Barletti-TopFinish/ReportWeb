@@ -67,7 +67,7 @@ namespace ReportWeb.Controllers
             string Nota, string Dettagli, string IDPRDMOVFASE, string Barcode, string IdLancioD, string IdMagazz, string IDTABFAS)
         {
             PreserieBLL bll = new PreserieBLL();
-            bll.SalvaDettagli(IDDettaglio,RepartoCodice, Pezzi, Packaging, Peso,
+            bll.SalvaDettagli(IDDettaglio, RepartoCodice, Pezzi, Packaging, Peso,
              Nota, Dettagli, IDPRDMOVFASE, Barcode, IdLancioD, IdMagazz, IDTABFAS, ConnectedUser);
             return null;
         }
@@ -89,7 +89,8 @@ namespace ReportWeb.Controllers
                         List<RWListItem> Automatico = CreaListaAutomaticoManuale(); ;
                         ViewData.Add("Automatico", Automatico);
 
-                        return PartialView("PulimentaturaPartial");
+                        List<PulimentaturaJson> model = bll.FillRW_PR_PULIMENTATURA(Barcode);
+                        return PartialView("PulimentaturaPartial", model);
 
                     }
                 case Reparti.Vibratura:
@@ -105,7 +106,8 @@ namespace ReportWeb.Controllers
                             List<RWListItem> Tipologia = CreaListaTipoDecapaggio();
                             ViewData.Add("Tipologia", Tipologia);
 
-                            return PartialView("DecapaggioPartial");
+                            List<DecapaggioJson> model = bll.FillRW_PR_DECAPAGGIO(Barcode);
+                            return PartialView("DecapaggioPartial", model);
                         }
                         else
                         {
@@ -140,7 +142,8 @@ namespace ReportWeb.Controllers
                         List<RWListItem> Macchine = bll.CaricaListaMacchine(RepartoCodice);
                         ViewData.Add("Macchine", Macchine);
 
-                        return PartialView("ModelleriaPartial");
+                        List<ModelleriaJson> model = bll.FillRW_PR_MODELLERIA(Barcode);
+                        return PartialView("ModelleriaPartial",model);
                     }
 
                 case Reparti.Pressofusione:
