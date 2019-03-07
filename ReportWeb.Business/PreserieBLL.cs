@@ -375,6 +375,48 @@ namespace ReportWeb.Business
             }
         }
 
+        public List<PressofusioneJson> FillRW_PR_PRESSOFUSIONE(string barcode)
+        {
+            List<PressofusioneJson> model = new List<PressofusioneJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_PRESSOFUSIONE, barcode);
+                foreach (PreserieDS.RW_PR_PRESSOFUSIONERow vib in ds.RW_PR_PRESSOFUSIONE)
+                {
+                    PressofusioneJson m = new PressofusioneJson();
+                    m.Batture = vib.BATTUTE;
+                    m.CodiceStampo = vib.IsSTAMPONull() ? string.Empty : vib.STAMPO;
+                    m.Impronte = vib.IsIMPRONTENull() ? 0 : vib.IMPRONTE;
+                    m.Materiale = vib.IsMATERIALENull() ? string.Empty : vib.MATERIALE;
+                    m.TipoStampo = vib.TIPOSTAMPO;
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
+        public List<TornituraJson> FillRW_PR_TORNITURA(string barcode)
+        {
+            List<TornituraJson> model = new List<TornituraJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_TORNITURA, barcode);
+                foreach (PreserieDS.RW_PR_TORNITURARow vib in ds.RW_PR_TORNITURA)
+                {
+                    TornituraJson m = new TornituraJson();
+                    m.Diametro = vib.DIAMETRO;
+                    m.Macchina = vib.IsMACCHINANull() ? string.Empty : vib.MACCHINA;
+                    m.Materiale = vib.IsMATERIALENull() ? string.Empty : vib.MATERIALE;
+                    m.Utensile = vib.IsUTENSILINull() ? string.Empty : vib.UTENSILI;
+
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
         public List<PulimentaturaJson> FillRW_PR_PULIMENTATURA(string barcode)
         {
             List<PulimentaturaJson> model = new List<PulimentaturaJson>();

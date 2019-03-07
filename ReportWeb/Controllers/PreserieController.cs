@@ -141,9 +141,8 @@ namespace ReportWeb.Controllers
 
                         List<RWListItem> Macchine = bll.CaricaListaMacchine(RepartoCodice);
                         ViewData.Add("Macchine", Macchine);
-
                         List<ModelleriaJson> model = bll.FillRW_PR_MODELLERIA(Barcode);
-                        return PartialView("ModelleriaPartial",model);
+                        return PartialView("ModelleriaPartial", model);
                     }
 
                 case Reparti.Pressofusione:
@@ -154,7 +153,8 @@ namespace ReportWeb.Controllers
                         List<RWListItem> Materiale = bll.CaricaListaMateriali();
                         ViewData.Add("Materiali", Materiale);
 
-                        return PartialView("PressofusionePartial");
+                        List<PressofusioneJson> model = bll.FillRW_PR_PRESSOFUSIONE(Barcode);
+                        return PartialView("PressofusionePartial", model);
                     }
 
                 case Reparti.Tornitura:
@@ -165,7 +165,8 @@ namespace ReportWeb.Controllers
                         List<RWListItem> Materiale = bll.CaricaListaMateriali();
                         ViewData.Add("Materiali", Materiale);
 
-                        return PartialView("TornituraPartial");
+                        List<TornituraJson> model = bll.FillRW_PR_TORNITURA(Barcode);
+                        return PartialView("TornituraPartial",model);
                     }
 
                 case Reparti.Riprese:
