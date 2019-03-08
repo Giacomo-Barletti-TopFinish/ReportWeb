@@ -1,5 +1,6 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
+@model List<MontaggioJson>
 
 <div class="row">
     <div class="col-sm-2"><label>Difficolta</label>@Html.DropDownList("dllDifficolta", new SelectList(ViewData["Difficolta"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
@@ -24,6 +25,13 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+
+                      @foreach(MontaggioJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.Difficolta','@elemento.Attrezzi','@elemento.Colle','@elemento.Attesa','@elemento.Colore');
+        </text>
+    }
     });
 
     function InserisciRiga() {
@@ -45,6 +53,16 @@
         $('#lblMessage').html(messaggio);
         if (!esito) return;
 
+        InsertTR(difficolta, attrezzi, colle, attesa, colore);
+
+        $("#dllDifficolta").val('').trigger('change');
+        $("#ddlColore").val('').trigger('change');
+        $("#txtAttrezzi").val('');
+        $("#txtColle").val('');
+        $("#txtAttesa").val('');
+    }
+
+    function InsertTR(difficolta,attrezzi,colle,attesa,colore) {
         var tr = '<tr>';
         tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
         tr += '<td width="17%">' + difficolta + '</td>';
@@ -55,12 +73,6 @@
         tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
         tr += '<\tr>';
         $('#tblDettaglio').append(tr);
-
-        $("#dllDifficolta").val('').trigger('change');
-        $("#ddlColore").val('').trigger('change');
-        $("#txtAttrezzi").val('');
-        $("#txtColle").val('');
-        $("#txtAttesa").val('');
     }
 
     function GetTabellaDettaglio() {

@@ -417,6 +417,190 @@ namespace ReportWeb.Business
             }
         }
 
+        public List<LaseraturaJson> FillRW_PR_LASER(string barcode)
+        {
+            List<LaseraturaJson> model = new List<LaseraturaJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_LASER, barcode);
+                foreach (PreserieDS.RW_PR_LASERRow vib in ds.RW_PR_LASER)
+                {
+                    LaseraturaJson m = new LaseraturaJson();
+
+                    m.Laser = vib.IsMACCHINANull() ? string.Empty : vib.MACCHINA;
+                    m.Magazzino = vib.IsMAGAZZINONull() ? string.Empty : vib.MAGAZZINO;
+                    m.Parametri = vib.IsPARAMETRINull() ? string.Empty : vib.PARAMETRI;
+                    m.Piazzatura = vib.PIAZZATURA;
+                    m.TipoLaseratura = vib.TIPO;
+
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
+        public List<RipreseJson> FillRW_PR_RIPRESE(string barcode)
+        {
+            List<RipreseJson> model = new List<RipreseJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_RIPRESE, barcode);
+                foreach (PreserieDS.RW_PR_RIPRESERow vib in ds.RW_PR_RIPRESE)
+                {
+                    RipreseJson m = new RipreseJson();
+
+                    m.Lavorazione = vib.LAVORAZIONE;
+                    m.Materiali = vib.IsMATERIALENull() ? string.Empty : vib.MATERIALE;
+
+                    m.Piazzatura = vib.PIAZZATURA;
+                    m.Utensili = vib.IsUTENSILINull() ? string.Empty : vib.UTENSILI;
+                    m.PezziOrari = vib.IsPEZZIORARINull() ? 0 : vib.PEZZIORARI;
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
+        public List<VerniciaturaJson> FillRW_PR_VERNICIATURA(string barcode)
+        {
+            List<VerniciaturaJson> model = new List<VerniciaturaJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_VERNICIATURA, barcode);
+                foreach (PreserieDS.RW_PR_VERNICIATURARow vib in ds.RW_PR_VERNICIATURA)
+                {
+                    VerniciaturaJson m = new VerniciaturaJson();
+
+                    m.Durata = vib.IsDURATANull() ? string.Empty : vib.DURATA;
+                    m.PezziTelaio = vib.PEZZITELAIO;
+                    m.Ricetta = vib.VERNICIATURA;
+                    m.Telaio = vib.TELAIO;
+
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
+        public List<GalvanicaJson> FillRW_PR_GALVANICA(string barcode)
+        {
+            List<GalvanicaJson> model = new List<GalvanicaJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_GALVANICA, barcode);
+                foreach (PreserieDS.RW_PR_GALVANICARow vib in ds.RW_PR_GALVANICA)
+                {
+                    GalvanicaJson m = new GalvanicaJson();
+
+                    m.FiliTealio = vib.FILOTELAIO;
+                    m.Legatura = vib.LEGATURA;
+                    m.PezziFilo = vib.PEZZIFILO;
+                    m.Spessore = vib.IsSPESSORINull() ? string.Empty : vib.SPESSORI;
+                    m.Telaio = vib.TELAIO;
+
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
+        public List<SmaltaturaJson> FillRW_PR_SMALTATURA(string barcode)
+        {
+            List<SmaltaturaJson> model = new List<SmaltaturaJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_SMALTATURA, barcode);
+                foreach (PreserieDS.RW_PR_SMALTATURARow vib in ds.RW_PR_SMALTATURA)
+                {
+                    SmaltaturaJson m = new SmaltaturaJson();
+
+                    m.Codice = vib.CODICE;
+                    m.Piazzatura = vib.PIAZZATURA;
+                    m.Smalto = vib.SMALTO;
+
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
+        public List<StampaggioJson> FillRW_PR_STAMPAGGIO(string barcode)
+        {
+            List<StampaggioJson> model = new List<StampaggioJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_STAMPAGGIO, barcode);
+                foreach (PreserieDS.RW_PR_STAMPAGGIORow vib in ds.RW_PR_STAMPAGGIO)
+                {
+                    StampaggioJson m = new StampaggioJson();
+
+                    m.Altezza = vib.IsALTEZZANull() ? 0 : vib.ALTEZZA;
+                    m.Battute = vib.IsBATTUREORARIENull() ? 0 : vib.BATTUREORARIE;
+                    m.Certificato = vib.IsCERTIFICATONull() ? string.Empty : vib.CERTIFICATO;
+                    m.Impronte = vib.IMPRONTE;
+                    m.Larghezza = vib.IsLARGHEZZANull() ? 0 : vib.LARGHEZZA;
+                    m.Lunghezza = vib.IsLUNGHEZZANull() ? 0 : vib.LUNGHEZZA;
+                    m.Materiale = vib.IsMATERIALENull() ? string.Empty : vib.MATERIALE;
+                    m.Stampo = vib.STAMPO;
+                    m.TipoMateriale = vib.IsTIPOMATERIALENull() ? string.Empty : vib.TIPOMATERIALE;
+                    m.Trancia1 = vib.IsTRANIATURA1Null() ? 0 : vib.TRANIATURA1;
+                    m.Trancia2 = vib.IsTRANIATURA2Null() ? 0 : vib.TRANIATURA2;
+                    m.Tranciature = vib.IsTRANCIATURENull() ? 0 : vib.TRANCIATURE;
+
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
+        public List<SaldaturaJson> FillRW_PR_SALDATURA(string barcode)
+        {
+            List<SaldaturaJson> model = new List<SaldaturaJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_SALDATURA, barcode);
+                foreach (PreserieDS.RW_PR_SALDATURARow vib in ds.RW_PR_SALDATURA)
+                {
+                    SaldaturaJson m = new SaldaturaJson();
+
+                    m.Piazzatura = vib.PIAZZATURA;
+
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
+        public List<MontaggioJson> FillRW_PR_MONTAGGIO(string barcode)
+        {
+            List<MontaggioJson> model = new List<MontaggioJson>();
+            PreserieDS ds = new PreserieDS();
+            using (PreserieBusiness bPreserie = new PreserieBusiness())
+            {
+                bPreserie.FillDettaglioReparto(ds, ds.RW_PR_MONTAGGIO, barcode);
+                foreach (PreserieDS.RW_PR_MONTAGGIORow vib in ds.RW_PR_MONTAGGIO)
+                {
+                    MontaggioJson m = new MontaggioJson();
+
+                    m.Attesa = vib.IsATTESANull() ? string.Empty : vib.ATTESA;
+                    m.Attrezzi = vib.IsATTREZZINull() ? string.Empty : vib.ATTREZZI;
+                    m.Colle = vib.IsCOLLENull() ? string.Empty : vib.COLLE;
+                    m.Colore = vib.IsCOLORENull() ? string.Empty : vib.COLORE;
+                    m.Difficolta = vib.IsDIFFICOLTANull() ? 0 : vib.DIFFICOLTA;
+
+                    model.Add(m);
+                }
+                return model;
+            }
+        }
+
         public List<PulimentaturaJson> FillRW_PR_PULIMENTATURA(string barcode)
         {
             List<PulimentaturaJson> model = new List<PulimentaturaJson>();
@@ -941,6 +1125,8 @@ namespace ReportWeb.Business
 
                 if (!string.IsNullOrEmpty(dettaglio.Materiali))
                     rip.MATERIALE = dettaglio.Materiali;
+
+                rip.PEZZIORARI = dettaglio.PezziOrari;
 
                 ds.RW_PR_RIPRESE.AddRW_PR_RIPRESERow(rip);
             }

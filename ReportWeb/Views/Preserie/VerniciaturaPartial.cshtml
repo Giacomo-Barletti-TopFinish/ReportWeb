@@ -1,14 +1,11 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
-
+@model List<VerniciaturaJson>
 <div class="row">
-    <div class="col-sm-2"><label>Lavorazione</label>@Html.DropDownList("dllLavorazione", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Tipo</label>@Html.DropDownList("ddlAcquaSecco", new SelectList(ViewData["AcquaSecco"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Materiale</label>@Html.DropDownList("dllMateriale", new SelectList(ViewData["Materiali"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-2"><label>Additivi</label>@Html.TextBox("txtAdditivi", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-2"><label>Vibratore</label>@Html.DropDownList("ddlVibratori", new SelectList(ViewData["Vibratori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-2"><label>Pezzi per vibratore</label>@Html.TextBox("txtPezziVibratore", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Tempo</label>@Html.TextBox("txtTempo", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Telaio</label>@Html.TextBox("txtTelaio", "", new { @maxlength = "30", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Pezzi telaio</label>@Html.TextBox("txtPezziTelaio", "", new { @maxlength = "5", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
+    <div class="col-sm-2"><label>Durata</label>@Html.TextBox("txtDurata", "", new { @maxlength = "25", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Verniciatura</label>@Html.TextBox("txtVerniciatura", "", new { @maxlength = "100", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
 </div>
 
 <div class="row">
@@ -26,54 +23,55 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+                  @foreach(VerniciaturaJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.Telaio', '@elemento.PezziTelaio', '@elemento.Durata', '@elemento.Ricetta');
+        </text>
+    }
+
     });
 
     function InserisciRiga() {
 
-        var lavorazione = $("#dllLavorazione").find("option:selected").text();
-        var acquaSecco = $("#ddlAcquaSecco").find("option:selected").text();
-
-        var materiale = $('#dllMateriale').find("option:selected").text();
-        var vibratore = $('#ddlVibratori').find("option:selected").text();
-        var additivi = $('#txtAdditivi').val();
-        var pezzi = $('#txtPezziVibratore').val();
-        var tempo = $('#txtTempo').val();
+        var telaio = $('#txtTelaio').val();
+        var pezzi = $('#txtPezziTelaio').val();
+        var durata = $('#txtDurata').val();
+        var verniciatura = $('#txtVerniciatura').val();
 
         var messaggio = '';
         var esito = true;
-        if (lavorazione == null || lavorazione == '') {
+        if (telaio == null || telaio == '') {
             esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la lavorazione" + "</br>";
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il telaio" + "</br>";
         }
 
-        if (acquaSecco == null || acquaSecco == '') {
+        if (pezzi == null || pezzi == '') {
             esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare se ad acqua o a secco" + "</br>";
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare i pezzi orari" + "</br>";
         }
 
         $('#lblMessage').html(messaggio);
         if (!esito) return;
 
+        InsertTR(telaio, pezzi, durata, verniciatura);
+
+        $("#txtTelaio").val('');
+        $("#txtPezziTelaio").val('');
+        $("#txtDurata").val('');
+        $("#txtVerniciatura").val('');
+    }
+
+    function InsertTR(telaio, pezzi,durata,verniciatura) {
         var tr = '<tr>';
         tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
-        tr += '<td width="17%">' + lavorazione + '</td>';
-        tr += '<td width="9%">' + acquaSecco + '</td>';
-        tr += '<td width="9%">' + materiale + '</td>';
-        tr += '<td width="17%">' + additivi + '</td>';
-        tr += '<td width="17%">' + vibratore + '</td>';
-        tr += '<td width="17%">' + pezzi + '</td>';
-        tr += '<td width="9%">' + tempo + '</td>';
+        tr += '<td width="17%">' + telaio + '</td>';
+        tr += '<td width="9%">' + pezzi + '</td>';
+        tr += '<td width="17%">' + durata + '</td>';
+        tr += '<td width="17%">' + verniciatura + '</td>';
         tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
         tr += '<\tr>';
         $('#tblDettaglio').append(tr);
-
-        $("#dllLavorazione").val('').trigger('change');
-        $("#ddlAcquaSecco").val('').trigger('change');
-        $("#dllMateriale").val('').trigger('change');
-        $("#ddlVibratori").val('').trigger('change');
-        $("#txtAdditivi").val('');
-        $("#txtPezziVibratore").val('');
-        $("#txtTempo").val('');
     }
 
     function GetTabellaDettaglio() {
@@ -90,29 +88,20 @@
             if (IDDETTAGLIO == undefined) IDDETTAGLIO = -1;
             if (IDDETTAGLIO == '') IDDETTAGLIO = -1;
 
-            var tdLavorazione = $(tr).find('td')[0];
-            var lavorazione = $(tdLavorazione).text().trim();
+            var tdTelaio = $(tr).find('td')[0];
+            var telaio = $(tdTelaio).text().trim();
 
-            var tdAcquaSecco = $(tr).find('td')[1];
-            var acquaSecco = $(tdAcquaSecco).text().trim();
-
-            var tdMateriale = $(tr).find('td')[2];
-            var materiale = $(tdMateriale).text().trim();
-
-            var tdVibratore = $(tr).find('td')[3];
-            var vibratore = $(tdVibratore).text().trim();
-
-            var tdAdditivi = $(tr).find('td')[4];
-            var additivi = $(tdAdditivi).text().trim();
-
-            var tdPezzi = $(tr).find('td')[5];
+            var tdPezzi = $(tr).find('td')[1];
             var pezzi = $(tdPezzi).text().trim();
 
-            var tdTempo = $(tr).find('td')[6];
-            var tempo = $(tdTempo).text().trim();
+            var tdDurata = $(tr).find('td')[2];
+            var durata = $(tdDurata).text().trim();
+
+            var tdVerniciatura = $(tr).find('td')[3];
+            var verniciatura = $(tdVerniciatura).text().trim();
 
             var dettaglio = {
-                'Lavorazione': lavorazione, 'AcquaSecco': acquaSecco, 'Materiale': materiale, 'Vibratore': vibratore, 'Additivi': additivi, 'Pezzi': pezzi, 'Tempo': tempo
+                'Telaio': telaio, 'PezziTelaio': pezzi, 'Durata': durata, 'Ricetta': verniciatura
             };
             data.push(dettaglio);
         }

@@ -1,9 +1,10 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
+@model List<RipreseJson>
 
 <div class="row">
     <div class="col-sm-2"><label>Lavorazione</label>@Html.DropDownList("dllLavorazione", new SelectList(ViewData["Lavorazioni"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-2"><label>Pezzi orari</label>@Html.TextBox("txtPezziOrari", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Pezzi orari</label>@Html.TextBox("txtPezziOrari", "", new { @maxlength = "5", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
     <div class="col-sm-1"><label>Piazzatura</label>@Html.DropDownList("ddlPiazzatura", new SelectList(ViewData["Piazzatura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-2"><label>Utensili</label>@Html.TextBox("txtUtensili", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-3"><label>Materiali</label>@Html.TextBox("txtMateriali", "", new { @maxlength = "250", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
@@ -24,6 +25,13 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+
+          @foreach(RipreseJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.Lavorazione', '@elemento.PezziOrari', '@elemento.Piazzatura', '@elemento.Utensili', '@elemento.Materiali');
+        </text>
+    }
     });
 
     function InserisciRiga() {
@@ -45,16 +53,7 @@
         $('#lblMessage').html(messaggio);
         if (!esito) return;
 
-        var tr = '<tr>';
-        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
-        tr += '<td width="17%">' + lavorazione + '</td>';
-        tr += '<td width="17%">' + pezziOrari + '</td>';
-        tr += '<td width="9%">' + piazzatura + '</td>';
-        tr += '<td width="17%">' + utensili + '</td>';
-        tr += '<td width="25%">' + materiali + '</td>';
-        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
-        tr += '<\tr>';
-        $('#tblDettaglio').append(tr);
+        InsertTR(lavorazione, pezziOrari, piazzatura, utensili, materiali);
 
         $("#dllLavorazione").val('').trigger('change');
         $("#ddlPiazzatura").val('').trigger('change');
@@ -63,6 +62,18 @@
         $("#txtMateriali").val('');
     }
 
+    function InsertTR(lavorazione, pezziOrari, piazzatura, utensili, materiali) {
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="17%">' + lavorazione + '</td>';
+        tr += '<td width="9%">' + pezziOrari + '</td>';
+        tr += '<td width="9%">' + piazzatura + '</td>';
+        tr += '<td width="17%">' + utensili + '</td>';
+        tr += '<td width="25%">' + materiali + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
+    }
     function GetTabellaDettaglio() {
 
         var rowCount = $('table#tblDettaglio tr:last').index() + 1;

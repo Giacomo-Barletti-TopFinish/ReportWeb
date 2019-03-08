@@ -166,7 +166,7 @@ namespace ReportWeb.Controllers
                         ViewData.Add("Materiali", Materiale);
 
                         List<TornituraJson> model = bll.FillRW_PR_TORNITURA(Barcode);
-                        return PartialView("TornituraPartial",model);
+                        return PartialView("TornituraPartial", model);
                     }
 
                 case Reparti.Riprese:
@@ -182,7 +182,8 @@ namespace ReportWeb.Controllers
                             List<RWListItem> Magazzino = CreaListaSiNo();
                             ViewData.Add("Magazzino", Magazzino);
 
-                            return PartialView("LaserPartial");
+                            List<LaseraturaJson> model = bll.FillRW_PR_LASER(Barcode);
+                            return PartialView("LaserPartial", model);
                         }
                         else
                         {
@@ -192,20 +193,21 @@ namespace ReportWeb.Controllers
                             List<RWListItem> Piazzatura = CreaListaSiNo();
                             ViewData.Add("Piazzatura", Piazzatura);
 
-                            return PartialView("RipresePartial");
+                            List<RipreseJson> model = bll.FillRW_PR_RIPRESE(Barcode);
+                            return PartialView("RipresePartial", model);
                         }
                     }
 
                 case Reparti.Verniciatura:
                     {
-
-                        return PartialView("VerniciaturaPartial");
+                        List<VerniciaturaJson> model = bll.FillRW_PR_VERNICIATURA(Barcode);
+                        return PartialView("VerniciaturaPartial", model);
                     }
 
                 case Reparti.GalvanicaAuto:
                     {
-
-                        return PartialView("GalvanicaPartial");
+                        List<GalvanicaJson> model = bll.FillRW_PR_GALVANICA(Barcode);
+                        return PartialView("GalvanicaPartial", model);
                     }
 
 
@@ -214,7 +216,8 @@ namespace ReportWeb.Controllers
                         List<RWListItem> Piazzatura = CreaListaSiNo();
                         ViewData.Add("Piazzatura", Piazzatura);
 
-                        return PartialView("SmaltaturaPartial");
+                        List<SmaltaturaJson> model = bll.FillRW_PR_SMALTATURA(Barcode);
+                        return PartialView("SmaltaturaPartial", model);
                     }
                 //case Reparti.Scopertura:
                 //    {
@@ -237,20 +240,22 @@ namespace ReportWeb.Controllers
                         List<RWListItem> Materiali = CaricaListaMaterialiStampaggio();
                         ViewData.Add("Materiali", Materiali);
 
-                        List<RWListItem> Impronte = CaricaListaMaterialiStampaggio();
+                        List<RWListItem> Impronte = CaricaListaImpronteStampo();
                         ViewData.Add("Impronte", Impronte);
 
                         List<RWListItem> Tranciature = CaricaListaTranciature();
                         ViewData.Add("Tranciature", Tranciature);
 
-                        return PartialView("StampaggioPartial");
+                        List<StampaggioJson> model = bll.FillRW_PR_STAMPAGGIO(Barcode);
+                        return PartialView("StampaggioPartial", model);
                     }
                 case Reparti.Saldatura:
                     {
                         List<RWListItem> Piazzatura = CreaListaSiNo();
                         ViewData.Add("Piazzatura", Piazzatura);
 
-                        return PartialView("SaldaturaPartial");
+                        List<SaldaturaJson> model = bll.FillRW_PR_SALDATURA(Barcode);
+                        return PartialView("SaldaturaPartial", model);
                     }
                 case Reparti.Montaggio:
                     {
@@ -260,7 +265,8 @@ namespace ReportWeb.Controllers
                         List<RWListItem> Colori = CaricaListaColori();
                         ViewData.Add("Colori", Colori);
 
-                        return PartialView("MontaggioPartial");
+                        List<MontaggioJson> model = bll.FillRW_PR_MONTAGGIO(Barcode);
+                        return PartialView("MontaggioPartial", model);
                     }
                 default: return null;
             }

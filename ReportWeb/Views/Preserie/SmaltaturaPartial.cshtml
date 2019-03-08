@@ -1,8 +1,9 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
+@model List<SmaltaturaJson>
 
 <div class="row">
-    <div class="col-sm-2"><label>Piazzatura</label>@Html.DropDownList("dllPiazzatura", new SelectList(ViewData["Piazzatura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Piazzatura</label>@Html.DropDownList("dllPiazzatura", new SelectList(ViewData["Piazzatura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-2"><label>Smalto</label>@Html.TextBox("txtSmalto", "", new { @maxlength = "30", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-2"><label>Codice</label>@Html.TextBox("txtCodice", "", new { @maxlength = "30", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
 </div>
@@ -22,6 +23,15 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+
+                    @foreach(SmaltaturaJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.Piazzatura', '@elemento.Smalto', '@elemento.Codice');
+
+        </text>
+    }
+
     });
 
     function InserisciRiga() {
@@ -42,18 +52,22 @@
         $('#lblMessage').html(messaggio);
         if (!esito) return;
 
-        var tr = '<tr>';
-        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
-        tr += '<td width="17%">' + piazzatura + '</td>';
-        tr += '<td width="17%">' + smalto + '</td>';
-        tr += '<td width="17%">' + codice+ '</td>';
-        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
-        tr += '<\tr>';
-        $('#tblDettaglio').append(tr);
+        InsertTR(piazzatura, smalto, codice);
 
         $("#dllPiazzatura").val('').trigger('change');
         $("#txtSmalto").val('');
         $("#txtCodice").val('');
+    }
+
+    function InsertTR(piazzatura,smalto,codice) {
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="9%">' + piazzatura + '</td>';
+        tr += '<td width="17%">' + smalto + '</td>';
+        tr += '<td width="17%">' + codice + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
     }
 
     function GetTabellaDettaglio() {

@@ -1,8 +1,9 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
+@model List<SaldaturaJson>
 
 <div class="row">
-    <div class="col-sm-2"><label>Piazzatura</label>@Html.TextBox("txtPiazzatura", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-2"><label>Piazzatura</label>@Html.DropDownList("ddlPiazzatura", new SelectList(ViewData["Piazzatura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
 </div>
 
 <div class="row">
@@ -20,12 +21,19 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+
+                    @foreach(SaldaturaJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.Piazzatura');
+        </text>
+    }
+
     });
 
     function InserisciRiga() {
 
-        var piazzatura = $('#txtPiazzatura').val();
-
+        var piazzatura = $("#ddlPiazzatura").find("option:selected").text();
         var messaggio = '';
         var esito = true;
         if (piazzatura == null || piazzatura == '') {
@@ -36,14 +44,18 @@
         $('#lblMessage').html(messaggio);
         if (!esito) return;
 
+        InsertTR(piazzatura);
+
+        $("#txtPiazzatura").val('');
+    }
+
+    function InsertTR(piazzatura) {
         var tr = '<tr>';
         tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
         tr += '<td width="17%">' + piazzatura + '</td>';
         tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
         tr += '<\tr>';
         $('#tblDettaglio').append(tr);
-
-        $("#txtPiazzatura").val('');
     }
 
     function GetTabellaDettaglio() {

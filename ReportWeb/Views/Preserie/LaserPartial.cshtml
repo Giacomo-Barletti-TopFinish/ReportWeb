@@ -1,8 +1,9 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
+@model List<LaseraturaJson>
 
 <div class="row">
-    <div class="col-sm-2"><label>Tipo laseratura</label>@Html.DropDownList("ddlTipoLaseratura", new SelectList(ViewData["TipoLaseratura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Tipo laseratura</label>@Html.DropDownList("ddlTipoLaseratura", new SelectList(ViewData["TipoLaseratura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-2"><label>Parametri</label>@Html.TextBox("txtParametri", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-1"><label>Piazzatura</label>@Html.DropDownList("ddlPiazzatura", new SelectList(ViewData["Piazzatura"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-1"><label>Magazzino</label>@Html.DropDownList("ddlMagazzino", new SelectList(ViewData["Magazzino"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
@@ -24,6 +25,16 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+
+         @foreach(LaseraturaJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.TipoLaseratura', '@elemento.Parametri','@elemento.Piazzatura', '@elemento.Magazzino', '@elemento.Laser');
+
+        </text>
+    }
+        InsertTR(tipoLaseratura, parametri, piazzatura, magazzino, laser);
+
     });
 
     function InserisciRiga() {
@@ -50,9 +61,19 @@
         $('#lblMessage').html(messaggio);
         if (!esito) return;
 
+        InsertTR(tipoLaseratura, parametri, piazzatura, magazzino, laser);
+
+        $("#ddlTipoLaseratura").val('').trigger('change');
+        $("#ddlPiazzatura").val('').trigger('change');
+        $("#ddlMagazzino").val('').trigger('change');
+        $("#txtParametri").val('');
+        $("#txtLaser").val('');
+    }
+
+    function InsertTR(tipoLaseratura, parametri, piazzatura, magazzino, laser) {
         var tr = '<tr>';
         tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
-        tr += '<td width="17%">' + tipoLaseratura + '</td>';
+        tr += '<td width="9%">' + tipoLaseratura + '</td>';
         tr += '<td width="17%">' + parametri + '</td>';
         tr += '<td width="9%">' + piazzatura + '</td>';
         tr += '<td width="9%">' + magazzino + '</td>';
@@ -60,12 +81,6 @@
         tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
         tr += '<\tr>';
         $('#tblDettaglio').append(tr);
-
-        $("#ddlTipoLaseratura").val('').trigger('change');
-        $("#ddlPiazzatura").val('').trigger('change');
-        $("#ddlMagazzino").val('').trigger('change');
-        $("#txtParametri").val('');
-        $("#txtLaser").val('');
     }
 
     function GetTabellaDettaglio() {

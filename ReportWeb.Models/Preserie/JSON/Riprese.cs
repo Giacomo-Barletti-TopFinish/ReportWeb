@@ -14,7 +14,7 @@ namespace ReportWeb.Models.Preserie.JSON
         public string Lavorazione { get; set; }
 
         [DataMember(Name = "PezziOrari")]
-        public string PezziOrari { get; set; }
+        public decimal PezziOrari { get; set; }
 
         [DataMember(Name = "Piazzatura")]
         public string Piazzatura { get; set; }

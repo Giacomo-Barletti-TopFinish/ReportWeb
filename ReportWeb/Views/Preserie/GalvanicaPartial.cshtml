@@ -1,5 +1,6 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON  
 @using ReportWeb.Models
+@model List<GalvanicaJson>
 
 <div class="row">
     <div class="col-sm-2"><label>Tipo legatura</label>@Html.TextBox("txtLegatura", "", new { @maxlength = "30", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
@@ -24,6 +25,14 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+
+                    @foreach(GalvanicaJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.Legatura', '@elemento.Telaio', '@elemento.PezziFilo', '@elemento.FiliTealio', '@elemento.Spessore');
+        </text>
+    }
+
     });
 
     function InserisciRiga() {
@@ -31,30 +40,33 @@
         var legatura = $('#txtLegatura').val();
         var telaio = $('#txtTelaio').val();
         var pezziFilo= $('#txtPezziFilo').val();
-        var FiliTelaio = $('#txtFiloTelaio').val();
+        var filiTelaio = $('#txtFiloTelaio').val();
         var spessore = $('#txtSpessore').val();
 
         var messaggio = '';
 
         $('#lblMessage').html(messaggio);
-        if (!esito) return;
-
-        var tr = '<tr>';
-        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
-        tr += '<td width="17%">' + legatura + '</td>';
-        tr += '<td width="17%">' + telaio + '</td>';
-        tr += '<td width="17%">' + pezziFilo + '</td>';
-        tr += '<td width="17%">' + FiliTelaio + '</td>';
-        tr += '<td width="17%">' + spessore + '</td>';
-        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
-        tr += '<\tr>';
-        $('#tblDettaglio').append(tr);
+     
+        InsertTR(legatura, telaio, pezziFilo, filiTelaio, spessore);
 
         $("#txtLegatura").val('');
         $("#txtTelaio").val('');
         $("#txtPezziFilo").val('');
         $("#txtFiloTelaio").val('');
         $("#txtSpessore").val('');
+    }
+
+    function InsertTR(legatura, telaio, pezziFilo, filiTelaio, spessore) {
+        var tr = '<tr>';
+        tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
+        tr += '<td width="17%">' + legatura + '</td>';
+        tr += '<td width="17%">' + telaio + '</td>';
+        tr += '<td width="17%">' + pezziFilo + '</td>';
+        tr += '<td width="17%">' + filiTelaio + '</td>';
+        tr += '<td width="17%">' + spessore + '</td>';
+        tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += '<\tr>';
+        $('#tblDettaglio').append(tr);
     }
 
     function GetTabellaDettaglio() {

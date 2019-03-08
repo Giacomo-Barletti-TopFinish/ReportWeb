@@ -1,18 +1,19 @@
-﻿@using ReportWeb.Models.Preserie
+﻿@using ReportWeb.Models.Preserie.JSON
 @using ReportWeb.Models
+@model List<StampaggioJson>
 
 <div class="row">
     <div class="col-sm-1"><label>Tipo materiale</label>@Html.DropDownList("dllTipoMateriale", new SelectList(ViewData["MetalloBase"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
     <div class="col-sm-1"><label>Materiali</label>@Html.DropDownList("ddlMateriali", new SelectList(ViewData["Materiali"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Lunghezza</label>@Html.TextBox("txtLunghezza", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Larghezza</label>@Html.TextBox("txtLarghezza", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Altezza</label>@Html.TextBox("txtAltezza", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Lunghezza</label>@Html.TextBox("txtLunghezza", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
+    <div class="col-sm-1"><label>Larghezza</label>@Html.TextBox("txtLarghezza", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
+    <div class="col-sm-1"><label>Altezza</label>@Html.TextBox("txtAltezza", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
     <div class="col-sm-1"><label>Stampo</label>@Html.TextBox("txtStampo", "", new { @maxlength = "10", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Impronte</label>@Html.DropDownList("dllImpronte", new SelectList(ViewData["Impronte"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>BattuteOrarie</label>@Html.TextBox("txtBattuteOrarie", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Impronte</label>@Html.DropDownList("ddlImpronte", new SelectList(ViewData["Impronte"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>BattuteOrarie</label>@Html.TextBox("txtBattuteOrarie", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
     <div class="col-sm-1"><label>Tranciature</label>@Html.DropDownList("ddlTranciature", new SelectList(ViewData["Tranciature"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Pezzi per trancia 1</label>@Html.TextBox("txtPezziTrancia1", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-    <div class="col-sm-1"><label>Pezzi per trancia 2</label>@Html.TextBox("txtPezziTrancia2", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+    <div class="col-sm-1"><label>Pezzi per trancia 1</label>@Html.TextBox("txtPezziTrancia1", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
+    <div class="col-sm-1"><label>Pezzi per trancia 2</label>@Html.TextBox("txtPezziTrancia2", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</div>
     <div class="col-sm-1"><label>Certificato</label>@Html.TextBox("txtCertificato", "", new { @maxlength = "50", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
 </div>
 
@@ -31,6 +32,14 @@
         $('#tblDettaglio').on('click', 'a', function () {
             $(this).closest('tr').remove();
         })
+
+         @foreach(StampaggioJson elemento in Model)
+        {
+            <text>
+        InsertTR('@elemento.TipoMateriale', '@elemento.Materiale', '@elemento.Lunghezza', '@elemento.Larghezza', '@elemento.Altezza', '@elemento.Stampo', '@elemento.Impronte', '@elemento.Battute', '@elemento.Tranciature', '@elemento.Trancia1','@elemento.Trancia2', '@elemento.Certificato');
+
+        </text>
+    }
     });
 
     function InserisciRiga() {
@@ -64,6 +73,23 @@
         $('#lblMessage').html(messaggio);
         if (!esito) return;
 
+        InsertTR(tipoMateriale, materiale, lunghezza, larghezza, altezza, stampo, impronte, battute, tranciature, trancia1, trancia2, certificato);
+
+        $("#dllTipoMateriale").val('').trigger('change');
+        $("#ddlMateriali").val('').trigger('change');
+        $("#dllImpronte").val('').trigger('change');
+        $("#ddlTranciature").val('').trigger('change');
+        $("#txtLunghezza").val('');
+        $("#txtLarghezza").val('');
+        $("#txtAltezza").val('');
+        $("#txtStampo").val('');
+        $("#txtBattuteOrarie").val('');
+        $("#txtPezziTrancia1").val('');
+        $("#txtPezziTrancia2").val('');
+        $("#txtCertificato").val('');
+    }
+
+    function InsertTR(tipoMateriale, materiale, lunghezza, larghezza, altezza, stampo, impronte, battute, tranciature, trancia1, trancia2, certificato) {
         var tr = '<tr>';
         tr += '<input type="hidden" value =""  class="hdIDDETTAGLIO" />';
         tr += '<td width="9%">' + tipoMateriale + '</td>';
@@ -81,21 +107,7 @@
         tr += '<td ><a title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>';
         tr += '<\tr>';
         $('#tblDettaglio').append(tr);
-
-        $("#dllTipoMateriale").val('').trigger('change');
-        $("#ddlMateriali").val('').trigger('change');
-        $("#dllImpronte").val('').trigger('change');
-        $("#ddlTranciature").val('').trigger('change');
-        $("#txtLunghezza").val('');
-        $("#txtLarghezza").val('');
-        $("#txtAltezza").val('');
-        $("#txtStampo").val('');
-        $("#txtBattuteOrarie").val('');
-        $("#txtPezziTrancia1").val('');
-        $("#txtPezziTrancia2").val('');
-        $("#txtCertificato").val('');
     }
-
     function GetTabellaDettaglio() {
 
         var rowCount = $('table#tblDettaglio tr:last').index() + 1;
@@ -144,11 +156,11 @@
             var trancia2 = $(tdTrancia2).text().trim();
 
             var tdCertificato = $(tr).find('td')[11];
-            var certificato = $(tdTranciature).text().trim();
+            var certificato = $(tdCertificato).text().trim();
 
             var dettaglio = {
-                'TipoMateriale': tipoMateriale, 'Materiale': materiale, 'Lunghezza': lunghezza, 'Larghezza': larghezza, 'Altezza': altezza, 'Stampo': stampo, 'Impronte': Impronte,
-                'Battute': battute, 'Tranciature': tdTranciature, 'Trancia1': trancia1, 'Trancia2': trancia2, 'Certificato': certificato
+                'TipoMateriale': tipoMateriale, 'Materiale': materiale, 'Lunghezza': lunghezza, 'Larghezza': larghezza, 'Altezza': altezza, 'Stampo': stampo, 'Impronte': impronte,
+                'Battute': battute, 'Tranciature': tranciature, 'Trancia1': trancia1, 'Trancia2': trancia2, 'Certificato': certificato
             };
             data.push(dettaglio);
         }
