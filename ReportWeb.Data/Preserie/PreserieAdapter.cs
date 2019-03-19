@@ -294,7 +294,27 @@ namespace ReportWeb.Data
             }
         }
 
-        public void FillDettaglioReparto(PreserieDS ds,DataTable dt, string barcode)
+        public void CaricaDettagliPreserie(string tabella, PreserieDS ds, string IDLANCIOD)
+        {
+            string query = @"SELECT * FROM {0} SPEC
+                                INNER JOIN RW_PR_DETTAGLIO DET ON DET.IDDETTAGLIO = SPEC.IDDETTAGLIO
+                                INNER JOIN USR_PRD_MOVFASI MF ON MF.IDPRDMOVFASE = DET.IDPRDMOVFASE
+                                INNER JOIN USR_PRD_FASI FA ON FA.IDPRDFASE = MF.IDPRDFASE 
+                                WHERE FA.IDLANCIOD = $P<IDLANCIOD1>";
+
+            query = string.Format(query, tabella);
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD1", DbType.String, IDLANCIOD);
+            DataTable dt = ds.Tables[tabella];
+            if (dt == null) return;
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(dt);
+            }
+        }
+
+        public void FillDettaglioReparto(PreserieDS ds, DataTable dt, string barcode)
         {
             string query = @"SELECT VI.* FROM {0} VI
                                 INNER JOIN RW_PR_DETTAGLIO DT ON DT.IDDETTAGLIO = VI.IDDETTAGLIO

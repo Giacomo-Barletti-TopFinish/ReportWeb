@@ -91,7 +91,12 @@ else
                                         if (!string.IsNullOrEmpty(dettaglio.NotaInserimento))
                                         {
                                             <tr>
-                                                <td style="font-size:11px" colspan="6">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                                <td style="font-size:11px" colspan="5">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                                <td colspan="1">
+                                                    @if (dettaglio.SCARTODEFINITIVO)
+                                                    {<label class="text-red">Scarto definitivo</label>
+                                                    }
+                                                </td>
                                             </tr>
                                         }
                                         if (!string.IsNullOrEmpty(dettaglio.NotaAddebito))

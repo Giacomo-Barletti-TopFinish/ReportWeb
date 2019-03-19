@@ -57,6 +57,21 @@ namespace ReportWeb.Business
                 bPreserie.FillRW_PR_DETTAGLIOByLancio(IDLANCIOD, ds);
                 bPreserie.FillTABFAS(ds);
                 bPreserie.FillCLIFO(ds);
+                bPreserie.CaricaDettagliPreserie("RW_PR_PULIMENTATURA", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_VIBRATURA", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_MODELLERIA", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_PRESSOFUSIONE", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_TORNITURA", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_RIPRESE", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_LASER", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_VERNICIATURA", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_GALVANICA", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_DECAPAGGIO", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_SMALTATURA", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_SCOPERTURA", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_STAMPAGGIO", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_SALDATURA", ds, IDLANCIOD);
+                bPreserie.CaricaDettagliPreserie("RW_PR_MONTAGGIO", ds, IDLANCIOD);
 
                 if (ds.USR_PRD_LANCIOD.Count == 0)
                     return null;
@@ -109,7 +124,7 @@ namespace ReportWeb.Business
             commessa.NomeCommessa = lanciod.IsNOMECOMMESSANull() ? string.Empty : lanciod.NOMECOMMESSA;
             commessa.Riferimento = lanciod.IsRIFERIMENTONull() ? string.Empty : lanciod.RIFERIMENTO;
             commessa.Lavorazioni = new List<Lavorazione>();
-            int sequenzaLavorazione = 1;
+            int sequenzaLavorazione = 0;
             PreserieDS.USR_PRD_FASIRow faseRoot = ds.USR_PRD_FASI.Where(x => x.IDLANCIOD == lanciod.IDLANCIOD && x.ROOTSN == 1).FirstOrDefault();
             if (faseRoot != null)
             {
@@ -118,25 +133,42 @@ namespace ReportWeb.Business
                 commessa.Lavorazioni.Add(lavorazioneRoot);
 
                 List<PreserieDS.USR_PRD_FASIRow> faseFiglie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseRoot.IDPRDFASE).ToList();
-                EspandiAlberoFasi(faseFiglie, ds, sequenzaLavorazione.ToString(), commessa);
+                EspandiAlberoFasi(faseFiglie, ds, string.Empty, sequenzaLavorazione, commessa);
 
             }
 
             return commessa;
         }
 
-        private void EspandiAlberoFasi(List<PreserieDS.USR_PRD_FASIRow> faseFiglie, PreserieDS ds, string radice, Commessa commessa)
+        private void EspandiAlberoFasi(List<PreserieDS.USR_PRD_FASIRow> faseFiglie, PreserieDS ds, string radice, int contatore, Commessa commessa)
         {
+            string nuovaRadice = radice;
             int sequenzaLavorazione = 1;
-            foreach (PreserieDS.USR_PRD_FASIRow faseFiglia in faseFiglie)
+            if (faseFiglie.Count == 0) return;
+            if (faseFiglie.Count == 1)
             {
-                string nuovaRadice = string.Format("{0}.{1}", radice, sequenzaLavorazione);
-                Lavorazione lavorazione = CreaLavorazione(faseFiglia, nuovaRadice, ds);
+                sequenzaLavorazione = contatore;
+                string sequenza = string.IsNullOrEmpty(nuovaRadice) ? sequenzaLavorazione.ToString() : string.Format("{0}.{1}", nuovaRadice, sequenzaLavorazione.ToString());
+                Lavorazione lavorazione = CreaLavorazione(faseFiglie[0], sequenza, ds);
                 sequenzaLavorazione++;
                 commessa.Lavorazioni.Add(lavorazione);
-                List<PreserieDS.USR_PRD_FASIRow> figlie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseFiglia.IDPRDFASE).ToList();
-                EspandiAlberoFasi(figlie, ds, nuovaRadice, commessa);
+                List<PreserieDS.USR_PRD_FASIRow> figlie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseFiglie[0].IDPRDFASE).ToList();
+                EspandiAlberoFasi(figlie, ds, nuovaRadice, sequenzaLavorazione, commessa);
             }
+            if (faseFiglie.Count > 1)
+            {
+                nuovaRadice = string.IsNullOrEmpty(radice) ? contatore.ToString() : string.Format("{0}.{1}", radice, contatore);
+                foreach (PreserieDS.USR_PRD_FASIRow faseFiglia in faseFiglie)
+                {
+                    string sequenza = string.IsNullOrEmpty(nuovaRadice) ? sequenzaLavorazione.ToString() : string.Format("{0}.{1}", nuovaRadice, sequenzaLavorazione.ToString());
+                    Lavorazione lavorazione = CreaLavorazione(faseFiglia, sequenza, ds);
+                    sequenzaLavorazione++;
+                    commessa.Lavorazioni.Add(lavorazione);
+                    List<PreserieDS.USR_PRD_FASIRow> figlie = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == faseFiglia.IDPRDFASE).ToList();
+                    EspandiAlberoFasi(figlie, ds, sequenza, 1, commessa);
+                }
+            }
+
         }
 
         private Lavorazione CreaLavorazione(PreserieDS.USR_PRD_FASIRow fase, string sequenza, PreserieDS ds)
@@ -159,6 +191,12 @@ namespace ReportWeb.Business
 
             lavorazione.Offset = fase.OFFSETTIME;
             lavorazione.Leadtime = fase.LEADTIME;
+
+            PreserieDS.TABFASRow tabfas = ds.TABFAS.Where(x => x.IDTABFAS == fase.IDTABFAS).FirstOrDefault();
+            if (tabfas != null)
+                lavorazione.FaseODL = string.Format("{0} - {1}", tabfas.CODICEFASE, tabfas.DESTABFAS);
+            else
+                lavorazione.FaseODL = string.Empty;
 
             PreserieDS.USR_PRD_MOVFASIRow movFase = ds.USR_PRD_MOVFASI.Where(x => x.IDPRDFASE == fase.IDPRDFASE).FirstOrDefault();
 
@@ -323,12 +361,31 @@ namespace ReportWeb.Business
                 bPreserie.FillUSR_PDM_FILES(ds, odl.IDMAGAZZ);
                 model.ImageUrl = creaUrlImage(rvlImageSite, odl.IDMAGAZZ, ds);
 
-                model.Dettaglio = CreaListaDettaglio(Barcode, ds);
+                Dettaglio elementoDettaglio = CreaListaDettaglio(Barcode, ds);
+                model.Dettaglio = elementoDettaglio;
 
+              //  model.FasiLavoroInserite = CreaListaFasiLavoroInserite(ds, elementoDettaglio);
                 return model;
             }
         }
 
+        public List<string> CreaListaFasiLavoroInserite(PreserieDS ds, Dettaglio elementoDettaglio)
+        {
+            List<string> fasiLavoro = new List<string>();
+
+            if (elementoDettaglio != null)
+            {
+
+                if (ds.RW_PR_DECAPAGGIO.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                {
+                    foreach (PreserieDS.RW_PR_DECAPAGGIORow elemento in ds.RW_PR_DECAPAGGIO.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                    {
+                    //    string.Format("{0}: {1}",)
+                    }
+                }
+            }
+            return fasiLavoro;
+        }
 
         public List<VibraturaJson> FillRW_PR_VIBRATURA(string barcode)
         {

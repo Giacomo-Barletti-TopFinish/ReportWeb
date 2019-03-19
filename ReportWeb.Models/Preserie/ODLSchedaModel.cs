@@ -30,5 +30,6 @@ namespace ReportWeb.Models.Preserie
         public string IdMagazz { get; set; }
         public string IdTabFas { get; set; }
         public Dettaglio Dettaglio { get; set; }
+        public List<FaseLavoroInserita> FasiLavoroInserite { get; set; }
     }
 }

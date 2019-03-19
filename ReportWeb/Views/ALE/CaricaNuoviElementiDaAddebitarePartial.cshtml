@@ -60,7 +60,7 @@ else
                                     <td style="font-size:12px" width="6%">@a.QuantitaDifettosi</td>
                                     <td style="font-size:12px" width="6%">@a.QuantitaInseriti</td>
                                     <td style="font-size:12px" width="7%">@Html.TextBox("txtQuantita", a.QuantitaInseriti, new { @maxlength = "8", @class = "form-control input-sm rwqta", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,0)" })</td>
-                                    <td style="font-size:12px" width="18%">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm rwtxt", @style = "height: 21px;" })</td>
+                                    <td style="font-size:12px" width="18%">@Html.TextBox("txtNota", "", new { @maxlength = "250", @class = "form-control input-sm rwtxt", @style = "height: 21px;" })</td>
                                     <td></td>
                                 </tr>
                                 <tr>

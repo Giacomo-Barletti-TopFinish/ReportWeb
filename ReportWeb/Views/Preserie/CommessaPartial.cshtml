@@ -28,36 +28,19 @@
     <tbody>
         @foreach (Lavorazione lavorazione in Model.Lavorazioni)
         {
-            <tr>
-                <td>@lavorazione.Sequenza</td>
-                <td>@lavorazione.Reparto<input type="hidden" value="@lavorazione.IDPRDFASE" class="hdIDPRDFASE"></td>
-                <td>Quantita</td>
-                <td>@lavorazione.Quantita</td>
-                <td>Quantita terminata</td>
-                <td>@lavorazione.QuantitaTerminata</td>
-                <td>Quantita da terminare</td>
-                <td>@lavorazione.QuantitaDaTerminare</td>
-                <td>Data inizio</td>
-                <td>@lavorazione.DataInizio</td>
-                <td>Data fine</td>
-                <td>@lavorazione.DataFine</td>
-            </tr>
+        <tr>
+            <td>@lavorazione.Sequenza</td>
+            <td>@lavorazione.Reparto<input type="hidden" value="@lavorazione.IDPRDFASE" class="hdIDPRDFASE"></td>
+            <td>@lavorazione.FaseODL</td>
+            @if (lavorazione.Odl != null)
+            {
+            <td>@lavorazione.Odl.NUMMOVFASE<input type="hidden" value="@lavorazione.Odl.IDPRDMOVFASE" class="hdIDPRDMOVFASE"></td>
+            <td>@lavorazione.Odl.Barcode</td>
+            }
+
+        </tr>
             if (lavorazione.Odl != null)
             {
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>@lavorazione.Odl.NUMMOVFASE<input type="hidden" value="@lavorazione.Odl.IDPRDMOVFASE" class="hdIDPRDMOVFASE"></td>
-                    <td>Barcode</td>
-                    <td>@lavorazione.Odl.Barcode</td>
-                    <td>Quantita</td>
-                    <td>@lavorazione.Odl.Quantita</td>
-                    <td>Quantita terminata</td>
-                    <td>@lavorazione.Odl.QuantitaTerminata</td>
-                    <td>Quantita da terminare</td>
-                    <td>@lavorazione.Odl.QuantitaDaTerminare</td>
-                    <td></td>
-                </tr>
                 if (lavorazione.Dettagli != null && lavorazione.Dettagli.Count>0)
                 {
                     foreach (Dettaglio d in lavorazione.Dettagli)
@@ -70,8 +53,8 @@
                             <td><b>@d.Fase</b></td>
                             <td>Pezzi orari</td>
                             <td>@d.PezziOra</td>
-                            <td>Lavorante</td>
-                            <td>@d.Lavorante</td>
+                            <td>Reparto</td>
+                            <td>@d.Reparto</td>
                             <td colspan="3">@d.Nota</td>
                         </tr>
                     }

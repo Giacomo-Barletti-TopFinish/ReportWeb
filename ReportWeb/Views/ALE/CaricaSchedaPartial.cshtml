@@ -82,7 +82,7 @@
                         <label>Lavorante esterno</label>
                         @Html.DropDownListFor(model => model.RepartoCodice, new SelectList(Model.LavorantiEsterni, "Value", "Text", Model.RepartoCodice), new { @class = "form-control input-sm select2", @id = "ddlLavoranti" })
                     </div>
-                    <div class="col-sm-7"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+                    <div class="col-sm-7"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "250", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
                     <div class="col-sm-1">
                         <label>Scarto definitivo</label>
                         <input type="checkbox" id="CHKDEFINITIVO" />

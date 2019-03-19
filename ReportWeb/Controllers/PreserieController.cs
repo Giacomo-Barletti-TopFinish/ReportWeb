@@ -27,8 +27,9 @@ namespace ReportWeb.Controllers
 
             if (commesse.Count == 1)
             {
-                Commessa commessa = bll.CaricaCommessa(commesse[0].IDLANCIOD);
-                return PartialView("CommessaPartial", commessa);
+                return CaricaCommessa(commesse[0].IDLANCIOD);
+                //Commessa commessa = bll.CaricaCommessa(commesse[0].IDLANCIOD);
+                //return PartialView("CommessaPartial", commessa);
             }
             return PartialView("GrigliaCommessePartial", commesse);
         }

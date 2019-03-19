@@ -370,6 +370,27 @@ namespace ReportWeb.Data
 
         }
 
+        public void FillRW_ALE_FASI_DA_ES_DIBA(ALEDS ds, List<string> IDMAGAZZ)
+        {
+            if (IDMAGAZZ.Count == 0) return;
+
+            string selezione = ConvertToStringForInCondition(IDMAGAZZ.Distinct().ToList());
+            string select = @"    SELECT distinct es.idprodottofinito,tf.destabfas ||'('||ma.modello||')' fase, es.sequenza, idpadre, idarticolo ,la.costouni
+                                      FROM ES_DIBA es
+                                      inner join gruppo.tabfas tf on tf.idtabfas = es.idfase
+                                      inner join gruppo.magazz ma on ma.idmagazz=idarticolo
+                                      left join usr_lis_acq la on la.idmagazz = ma.idmagazz and la.idtipolistino = '0000000005'
+                                      where es.idprodottofinito in (select distinct idprodottofinito from es_diba where idpadre in ({0}))
+                                order by idprodottofinito, es.sequenza";
+
+            select = string.Format(select, selezione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_ALE_FASI_DA_ES_DIBA);
+            }
+
+        }
         public void InsertRW_ALE_DETTAGLIO(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, bool Mancante, string Nota, bool scartoDefinitivo, string UIDUSER)
         {
 
@@ -394,6 +415,8 @@ namespace ReportWeb.Data
                 cmd.ExecuteNonQuery();
             }
         }
+
+
 
         public void FillRW_ALE_DETTAGLIOByBarcode(ALEDS ds, string Barcode)
         {
@@ -511,6 +534,34 @@ namespace ReportWeb.Data
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.TABFAS);
+            }
+        }
+
+        public string GetIdMagazzFromIdDettaglio(decimal iddettaglio)
+        {
+            string select = @"select ct.idmagazz from rw_ale_dettaglio de
+                                inner join usr_checkq_t ct on ct.idcheckqt = de.idcheckqt
+                                where de.idaledettaglio = $P{DETTAGLIO}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("DETTAGLIO", DbType.Decimal, iddettaglio);
+
+
+            using (DbCommand cmd = BuildCommand(select, ps))
+            {
+                object o = cmd.ExecuteScalar();
+                return (o == null) ? string.Empty : (string)o;
+            }
+
+        }
+        public void FillRW_ALE_COSTO_MAGAZZ(ALEDS ds)
+        {
+            string select = @"SELECT * FROM RW_ALE_COSTO_MAGAZZ";
+
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_ALE_COSTO_MAGAZZ);
             }
         }
 

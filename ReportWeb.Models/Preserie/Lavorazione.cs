@@ -23,6 +23,8 @@ namespace ReportWeb.Models.Preserie
         public decimal Leadtime;
         public List<Dettaglio> Dettagli;
         public ODL Odl;
+
+        public string FaseODL;
     }
 
     public class ODL

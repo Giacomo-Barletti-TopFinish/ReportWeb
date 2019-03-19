@@ -59,10 +59,9 @@ else
                                                 Lavorante
                                             </th>
                                             <th style="font-size:12px" width="5%">
-                                                Quantita
                                             </th>
                                             <th style="font-size:12px" width="12%">
-                                                Costi
+                                                Quantita
                                             </th>
                                             <th style="font-size:12px" width="5%">
                                                 Costo
@@ -89,14 +88,24 @@ else
                                             <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.Modello, dettaglio.ModelloDescrizione) </td>
                                             <td style="font-size:12px">@string.Format("{0} - {1}", dettaglio.TipoDifetto, dettaglio.Difetto) </td>
                                             <td style="font-size:12px">@dettaglio.LavoranteDescrizione</td>
+                                            <td colspan="1">
+                                                @if (dettaglio.SCARTODEFINITIVO)
+                                                {<label class="text-red">Scarto definitivo</label>
+                                                }
+                                            </td>
                                             <td style="font-size:12px" id="tdQuantita_@dettaglio.IdAleDettaglio">@dettaglio.QuantitaAddebitata</td>
-                                            <td style="font-size:12px">@Html.Partial("ValorizzazioneDettaglioCostiPartial", dettaglio)</td>
                                             <td style="font-size:12px">@Html.TextBox("txtCosto_" + dettaglio.IdAleDettaglio.ToString(), "", new { @maxlength = "8", @class = "form-control input-sm RWCosto", @style = "height: 21px;", @readonly = true })</td>
                                             <td style="font-size:12px">@Html.TextBox("txtCostoTotale_" + dettaglio.IdAleDettaglio.ToString(), "", new { @maxlength = "8", @class = "form-control input-sm RWCosto", @style = "height: 21px;", @readonly = true })</td>
                                             <td style="font-size:12px">@Html.TextBox("txtPrezzo", "", new { @maxlength = "8", @class = "form-control input-sm RWPrezzo", @style = "height: 21px;", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,8,2)" })</td>
                                             <td style="font-size:12px">@Html.TextBox("txtValore", string.Empty, new { @class = "form-control input-sm RWValore", @style = "height: 21px;", @readonly = true }) </td>
-                                            <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
+                                            <td style="font-size:12px">@Html.TextBox("txtNota", "", new { @maxlength = "250", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
                                         </tr>
+
+                                        <tr class="RWTRDettaglio" valign="top">
+                                            <td style="font-size:12px" colspan="3" id="tdQuantita_@dettaglio.IdAleDettaglio">@dettaglio.QuantitaAddebitata</td>
+                                            <td style="font-size:12px" colspan="6">@Html.Partial("ValorizzazioneDettaglioCostiPartial", dettaglio)</td>
+                                        </tr>
+
                                         if (!string.IsNullOrEmpty(dettaglio.NotaInserimento))
                                         {
                                             <tr>
@@ -107,6 +116,7 @@ else
                                         {
                                             <tr>
                                                 <td style="font-size:12px" colspan="8">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
+
                                             </tr>
                                         }
                                         <tr><td colspan="9"><hr /></td></tr>
@@ -135,10 +145,10 @@ else
     {
         $(".RWPrezzo").change(function ()
         {
-            
+
             var trPrezzo = $(this).closest('tr');
             var tds = trPrezzo.find('td');
-            var quantita = $(tds[4]).text();
+            var quantita = $(tds[5]).text();
             prezzo = $(this).val();
             var prezzoValue = parseFloat(prezzo);
             var valore = prezzoValue * quantita;
@@ -159,7 +169,7 @@ else
 
     function CalcolaTotale(trPrezzo)
     {
-        
+
         var table = $(trPrezzo).parent();
         var trs = $(table).find('tr');
         var trTotali = $('.RWTotali', table);
@@ -323,12 +333,11 @@ else
 
         var txtCostoTotale = $(nomeCostoTotale);
         $(txtCostoTotale).val(totale.toFixed(2));
-
-        
+      
         var costoTotaleQuantita = $(nomeCostoTotaleQuantita);
         var trPrezzo = $(txtCostoTotale).closest('tr');
         var tds = trPrezzo.find('td');
-        var quantita = $(tds[4]).text();
+        var quantita = $(tds[5]).text();
         var totaleCosto = quantita * totale;
         $(costoTotaleQuantita).val(totaleCosto.toFixed(2));
     }

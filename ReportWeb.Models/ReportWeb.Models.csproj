@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ALE\AddebitoModel.cs" />
     <Compile Include="ALE\ALEStatoRichiesta.cs" />
+    <Compile Include="ALE\FaseCosto.cs" />
     <Compile Include="ALE\GruppiModel.cs" />
     <Compile Include="ALE\InserimentoModel.cs" />
     <Compile Include="GalvanicaConsuntivoModel.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Preserie\Articolo.cs" />
     <Compile Include="Preserie\Commessa.cs" />
     <Compile Include="Preserie\Dettaglio.cs" />
+    <Compile Include="Preserie\FaseLavoroInserita.cs" />
     <Compile Include="Preserie\JSON\Modelleria.cs" />
     <Compile Include="Preserie\JSON\Saldatura.cs" />
     <Compile Include="Preserie\JSON\Pressofusione.cs" />

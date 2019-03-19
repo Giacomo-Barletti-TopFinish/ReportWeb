@@ -112,10 +112,16 @@ else
                                             <td style="font-size:11px">@(dettaglio.Prezzo * dettaglio.QuantitaAddebitata)</td>
                                         </tr>
                                         <tr valign="top">
-                                            <td style="font-size:11px" colspan="4">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                            <td style="font-size:11px" colspan="3">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
+                                            <td colspan="1">
+                                                @if (dettaglio.SCARTODEFINITIVO)
+                                                {<label class="text-red">Scarto definitivo</label>
+                                                }
+                                            </td>
                                         </tr>
                                         <tr valign="top">
                                             <td style="font-size:11px" colspan="4">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
+
                                         </tr>
                                         <tr valign="top">
                                             <td style="font-size:11px" colspan="4">@string.Format("Nota valorizzazione: {0}", dettaglio.NotaValorizzazione)</td>

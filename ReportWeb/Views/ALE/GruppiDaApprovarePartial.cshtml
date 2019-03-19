@@ -118,7 +118,12 @@ else
                                         </tr>
                                         <tr valign="top">
                                             <td style="font-size:11px" colspan="3">@string.Format("Nota inserimento: {0}", dettaglio.NotaInserimento)</td>
-                                            <td style="font-size:11px" colspan="2">@string.Format("Verificato da: {0}", dettaglio.UidUserInserimento)</td>
+                                            <td style="font-size:11px" colspan="1">@string.Format("Verificato da: {0}", dettaglio.UidUserInserimento)</td>
+                                            <td colspan="1">
+                                                @if (dettaglio.SCARTODEFINITIVO)
+                                                {<label class="text-red">Scarto definitivo</label>
+                                                }
+                                            </td>
                                         </tr>
                                         <tr valign="top">
                                             <td style="font-size:11px" colspan="4">@string.Format("Nota addebito: {0}", dettaglio.NotaAddebito)</td>
@@ -127,7 +132,7 @@ else
                                             <td style="font-size:11px" colspan="4">@string.Format("Nota valorizzazione: {0}", dettaglio.NotaValorizzazione)</td>
                                         </tr>
                                         <tr valign="top">
-                                            <td style="font-size:11px" colspan="1" align="right"><label>Nota approvazione</label></td><td style="font-size:11px" colspan="3">@Html.TextBox("txtNotaApprovazione", "", new { @maxlength = "100", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
+                                            <td style="font-size:11px" colspan="1" align="right"><label>Nota approvazione</label></td><td style="font-size:11px" colspan="3">@Html.TextBox("txtNotaApprovazione", "", new { @maxlength = "250", @class = "form-control input-sm RWNota", @style = "height: 21px;" })</td>
                                         </tr>
 
                                                                     }

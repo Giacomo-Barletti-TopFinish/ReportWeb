@@ -64,6 +64,10 @@ namespace ReportWeb.Entities {
         
         private RW_ALE_DETTAGLIODataTable tableRW_ALE_DETTAGLIO;
         
+        private RW_ALE_COSTO_MAGAZZDataTable tableRW_ALE_COSTO_MAGAZZ;
+        
+        private RW_ALE_FASI_DA_ES_DIBADataTable tableRW_ALE_FASI_DA_ES_DIBA;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -151,6 +155,12 @@ namespace ReportWeb.Entities {
                 }
                 if ((ds.Tables["RW_ALE_DETTAGLIO"] != null)) {
                     base.Tables.Add(new RW_ALE_DETTAGLIODataTable(ds.Tables["RW_ALE_DETTAGLIO"]));
+                }
+                if ((ds.Tables["RW_ALE_COSTO_MAGAZZ"] != null)) {
+                    base.Tables.Add(new RW_ALE_COSTO_MAGAZZDataTable(ds.Tables["RW_ALE_COSTO_MAGAZZ"]));
+                }
+                if ((ds.Tables["RW_ALE_FASI_DA_ES_DIBA"] != null)) {
+                    base.Tables.Add(new RW_ALE_FASI_DA_ES_DIBADataTable(ds.Tables["RW_ALE_FASI_DA_ES_DIBA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -372,6 +382,26 @@ namespace ReportWeb.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public RW_ALE_COSTO_MAGAZZDataTable RW_ALE_COSTO_MAGAZZ {
+            get {
+                return this.tableRW_ALE_COSTO_MAGAZZ;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public RW_ALE_FASI_DA_ES_DIBADataTable RW_ALE_FASI_DA_ES_DIBA {
+            get {
+                return this.tableRW_ALE_FASI_DA_ES_DIBA;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -496,6 +526,12 @@ namespace ReportWeb.Entities {
                 }
                 if ((ds.Tables["RW_ALE_DETTAGLIO"] != null)) {
                     base.Tables.Add(new RW_ALE_DETTAGLIODataTable(ds.Tables["RW_ALE_DETTAGLIO"]));
+                }
+                if ((ds.Tables["RW_ALE_COSTO_MAGAZZ"] != null)) {
+                    base.Tables.Add(new RW_ALE_COSTO_MAGAZZDataTable(ds.Tables["RW_ALE_COSTO_MAGAZZ"]));
+                }
+                if ((ds.Tables["RW_ALE_FASI_DA_ES_DIBA"] != null)) {
+                    base.Tables.Add(new RW_ALE_FASI_DA_ES_DIBADataTable(ds.Tables["RW_ALE_FASI_DA_ES_DIBA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -650,6 +686,18 @@ namespace ReportWeb.Entities {
                     this.tableRW_ALE_DETTAGLIO.InitVars();
                 }
             }
+            this.tableRW_ALE_COSTO_MAGAZZ = ((RW_ALE_COSTO_MAGAZZDataTable)(base.Tables["RW_ALE_COSTO_MAGAZZ"]));
+            if ((initTable == true)) {
+                if ((this.tableRW_ALE_COSTO_MAGAZZ != null)) {
+                    this.tableRW_ALE_COSTO_MAGAZZ.InitVars();
+                }
+            }
+            this.tableRW_ALE_FASI_DA_ES_DIBA = ((RW_ALE_FASI_DA_ES_DIBADataTable)(base.Tables["RW_ALE_FASI_DA_ES_DIBA"]));
+            if ((initTable == true)) {
+                if ((this.tableRW_ALE_FASI_DA_ES_DIBA != null)) {
+                    this.tableRW_ALE_FASI_DA_ES_DIBA.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -700,6 +748,10 @@ namespace ReportWeb.Entities {
             base.Tables.Add(this.tableRW_ALE_DETT_COSTO);
             this.tableRW_ALE_DETTAGLIO = new RW_ALE_DETTAGLIODataTable();
             base.Tables.Add(this.tableRW_ALE_DETTAGLIO);
+            this.tableRW_ALE_COSTO_MAGAZZ = new RW_ALE_COSTO_MAGAZZDataTable();
+            base.Tables.Add(this.tableRW_ALE_COSTO_MAGAZZ);
+            this.tableRW_ALE_FASI_DA_ES_DIBA = new RW_ALE_FASI_DA_ES_DIBADataTable();
+            base.Tables.Add(this.tableRW_ALE_FASI_DA_ES_DIBA);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -824,6 +876,18 @@ namespace ReportWeb.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeRW_ALE_COSTO_MAGAZZ() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeRW_ALE_FASI_DA_ES_DIBA() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -936,6 +1000,12 @@ namespace ReportWeb.Entities {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void RW_ALE_DETTAGLIORowChangeEventHandler(object sender, RW_ALE_DETTAGLIORowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void RW_ALE_COSTO_MAGAZZRowChangeEventHandler(object sender, RW_ALE_COSTO_MAGAZZRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void RW_ALE_FASI_DA_ES_DIBARowChangeEventHandler(object sender, RW_ALE_FASI_DA_ES_DIBARowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -16987,10 +17057,10 @@ namespace ReportWeb.Entities {
                 this.columnIDCHECKQT.MaxLength = 25;
                 this.columnQUANTITADIFETTOSI.AllowDBNull = false;
                 this.columnQUANTITAINSERITA.AllowDBNull = false;
-                this.columnNOTAINSERIMENTO.MaxLength = 100;
-                this.columnNOTAADDEBITO.MaxLength = 100;
-                this.columnNOTAVALORIZZAZIONE.MaxLength = 100;
-                this.columnNOTAAPPROVAZIONE.MaxLength = 100;
+                this.columnNOTAINSERIMENTO.MaxLength = 250;
+                this.columnNOTAADDEBITO.MaxLength = 250;
+                this.columnNOTAVALORIZZAZIONE.MaxLength = 250;
+                this.columnNOTAAPPROVAZIONE.MaxLength = 250;
                 this.columnLAVORANTE.AllowDBNull = false;
                 this.columnLAVORANTE.MaxLength = 10;
                 this.columnSTATO.AllowDBNull = false;
@@ -17088,6 +17158,621 @@ namespace ReportWeb.Entities {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "RW_ALE_DETTAGLIODataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class RW_ALE_COSTO_MAGAZZDataTable : global::System.Data.TypedTableBase<RW_ALE_COSTO_MAGAZZRow> {
+            
+            private global::System.Data.DataColumn columnIDALEDETCOSTOMA;
+            
+            private global::System.Data.DataColumn columnIDMAGAZZ;
+            
+            private global::System.Data.DataColumn columnFASE;
+            
+            private global::System.Data.DataColumn columnCOSTO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_COSTO_MAGAZZDataTable() {
+                this.TableName = "RW_ALE_COSTO_MAGAZZ";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal RW_ALE_COSTO_MAGAZZDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected RW_ALE_COSTO_MAGAZZDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDALEDETCOSTOMAColumn {
+                get {
+                    return this.columnIDALEDETCOSTOMA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDMAGAZZColumn {
+                get {
+                    return this.columnIDMAGAZZ;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn FASEColumn {
+                get {
+                    return this.columnFASE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn COSTOColumn {
+                get {
+                    return this.columnCOSTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_COSTO_MAGAZZRow this[int index] {
+                get {
+                    return ((RW_ALE_COSTO_MAGAZZRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_ALE_COSTO_MAGAZZRowChangeEventHandler RW_ALE_COSTO_MAGAZZRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_ALE_COSTO_MAGAZZRowChangeEventHandler RW_ALE_COSTO_MAGAZZRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_ALE_COSTO_MAGAZZRowChangeEventHandler RW_ALE_COSTO_MAGAZZRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_ALE_COSTO_MAGAZZRowChangeEventHandler RW_ALE_COSTO_MAGAZZRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddRW_ALE_COSTO_MAGAZZRow(RW_ALE_COSTO_MAGAZZRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_COSTO_MAGAZZRow AddRW_ALE_COSTO_MAGAZZRow(decimal IDALEDETCOSTOMA, string IDMAGAZZ, string FASE, decimal COSTO) {
+                RW_ALE_COSTO_MAGAZZRow rowRW_ALE_COSTO_MAGAZZRow = ((RW_ALE_COSTO_MAGAZZRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDALEDETCOSTOMA,
+                        IDMAGAZZ,
+                        FASE,
+                        COSTO};
+                rowRW_ALE_COSTO_MAGAZZRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRW_ALE_COSTO_MAGAZZRow);
+                return rowRW_ALE_COSTO_MAGAZZRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                RW_ALE_COSTO_MAGAZZDataTable cln = ((RW_ALE_COSTO_MAGAZZDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new RW_ALE_COSTO_MAGAZZDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDALEDETCOSTOMA = base.Columns["IDALEDETCOSTOMA"];
+                this.columnIDMAGAZZ = base.Columns["IDMAGAZZ"];
+                this.columnFASE = base.Columns["FASE"];
+                this.columnCOSTO = base.Columns["COSTO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDALEDETCOSTOMA = new global::System.Data.DataColumn("IDALEDETCOSTOMA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDALEDETCOSTOMA);
+                this.columnIDMAGAZZ = new global::System.Data.DataColumn("IDMAGAZZ", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDMAGAZZ);
+                this.columnFASE = new global::System.Data.DataColumn("FASE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFASE);
+                this.columnCOSTO = new global::System.Data.DataColumn("COSTO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOSTO);
+                this.columnIDMAGAZZ.AllowDBNull = false;
+                this.columnIDMAGAZZ.MaxLength = 10;
+                this.columnFASE.AllowDBNull = false;
+                this.columnFASE.MaxLength = 50;
+                this.columnCOSTO.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_COSTO_MAGAZZRow NewRW_ALE_COSTO_MAGAZZRow() {
+                return ((RW_ALE_COSTO_MAGAZZRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new RW_ALE_COSTO_MAGAZZRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(RW_ALE_COSTO_MAGAZZRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.RW_ALE_COSTO_MAGAZZRowChanged != null)) {
+                    this.RW_ALE_COSTO_MAGAZZRowChanged(this, new RW_ALE_COSTO_MAGAZZRowChangeEvent(((RW_ALE_COSTO_MAGAZZRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.RW_ALE_COSTO_MAGAZZRowChanging != null)) {
+                    this.RW_ALE_COSTO_MAGAZZRowChanging(this, new RW_ALE_COSTO_MAGAZZRowChangeEvent(((RW_ALE_COSTO_MAGAZZRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.RW_ALE_COSTO_MAGAZZRowDeleted != null)) {
+                    this.RW_ALE_COSTO_MAGAZZRowDeleted(this, new RW_ALE_COSTO_MAGAZZRowChangeEvent(((RW_ALE_COSTO_MAGAZZRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.RW_ALE_COSTO_MAGAZZRowDeleting != null)) {
+                    this.RW_ALE_COSTO_MAGAZZRowDeleting(this, new RW_ALE_COSTO_MAGAZZRowChangeEvent(((RW_ALE_COSTO_MAGAZZRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveRW_ALE_COSTO_MAGAZZRow(RW_ALE_COSTO_MAGAZZRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ALEDS ds = new ALEDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "RW_ALE_COSTO_MAGAZZDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class RW_ALE_FASI_DA_ES_DIBADataTable : global::System.Data.TypedTableBase<RW_ALE_FASI_DA_ES_DIBARow> {
+            
+            private global::System.Data.DataColumn columnIDPRODOTTOFINITO;
+            
+            private global::System.Data.DataColumn columnFASE;
+            
+            private global::System.Data.DataColumn columnSEQUENZA;
+            
+            private global::System.Data.DataColumn columnIDPADRE;
+            
+            private global::System.Data.DataColumn columnIDARTICOLO;
+            
+            private global::System.Data.DataColumn columnCOSTOUNI;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_FASI_DA_ES_DIBADataTable() {
+                this.TableName = "RW_ALE_FASI_DA_ES_DIBA";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal RW_ALE_FASI_DA_ES_DIBADataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected RW_ALE_FASI_DA_ES_DIBADataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDPRODOTTOFINITOColumn {
+                get {
+                    return this.columnIDPRODOTTOFINITO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn FASEColumn {
+                get {
+                    return this.columnFASE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn SEQUENZAColumn {
+                get {
+                    return this.columnSEQUENZA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDPADREColumn {
+                get {
+                    return this.columnIDPADRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDARTICOLOColumn {
+                get {
+                    return this.columnIDARTICOLO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn COSTOUNIColumn {
+                get {
+                    return this.columnCOSTOUNI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_FASI_DA_ES_DIBARow this[int index] {
+                get {
+                    return ((RW_ALE_FASI_DA_ES_DIBARow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_ALE_FASI_DA_ES_DIBARowChangeEventHandler RW_ALE_FASI_DA_ES_DIBARowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_ALE_FASI_DA_ES_DIBARowChangeEventHandler RW_ALE_FASI_DA_ES_DIBARowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_ALE_FASI_DA_ES_DIBARowChangeEventHandler RW_ALE_FASI_DA_ES_DIBARowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_ALE_FASI_DA_ES_DIBARowChangeEventHandler RW_ALE_FASI_DA_ES_DIBARowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddRW_ALE_FASI_DA_ES_DIBARow(RW_ALE_FASI_DA_ES_DIBARow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_FASI_DA_ES_DIBARow AddRW_ALE_FASI_DA_ES_DIBARow(string IDPRODOTTOFINITO, string FASE, decimal SEQUENZA, string IDPADRE, string IDARTICOLO, decimal COSTOUNI) {
+                RW_ALE_FASI_DA_ES_DIBARow rowRW_ALE_FASI_DA_ES_DIBARow = ((RW_ALE_FASI_DA_ES_DIBARow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDPRODOTTOFINITO,
+                        FASE,
+                        SEQUENZA,
+                        IDPADRE,
+                        IDARTICOLO,
+                        COSTOUNI};
+                rowRW_ALE_FASI_DA_ES_DIBARow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRW_ALE_FASI_DA_ES_DIBARow);
+                return rowRW_ALE_FASI_DA_ES_DIBARow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                RW_ALE_FASI_DA_ES_DIBADataTable cln = ((RW_ALE_FASI_DA_ES_DIBADataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new RW_ALE_FASI_DA_ES_DIBADataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDPRODOTTOFINITO = base.Columns["IDPRODOTTOFINITO"];
+                this.columnFASE = base.Columns["FASE"];
+                this.columnSEQUENZA = base.Columns["SEQUENZA"];
+                this.columnIDPADRE = base.Columns["IDPADRE"];
+                this.columnIDARTICOLO = base.Columns["IDARTICOLO"];
+                this.columnCOSTOUNI = base.Columns["COSTOUNI"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDPRODOTTOFINITO = new global::System.Data.DataColumn("IDPRODOTTOFINITO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDPRODOTTOFINITO);
+                this.columnFASE = new global::System.Data.DataColumn("FASE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFASE);
+                this.columnSEQUENZA = new global::System.Data.DataColumn("SEQUENZA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEQUENZA);
+                this.columnIDPADRE = new global::System.Data.DataColumn("IDPADRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDPADRE);
+                this.columnIDARTICOLO = new global::System.Data.DataColumn("IDARTICOLO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDARTICOLO);
+                this.columnCOSTOUNI = new global::System.Data.DataColumn("COSTOUNI", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOSTOUNI);
+                this.columnIDPRODOTTOFINITO.MaxLength = 10;
+                this.columnFASE.MaxLength = 82;
+                this.columnIDPADRE.MaxLength = 10;
+                this.columnIDARTICOLO.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_FASI_DA_ES_DIBARow NewRW_ALE_FASI_DA_ES_DIBARow() {
+                return ((RW_ALE_FASI_DA_ES_DIBARow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new RW_ALE_FASI_DA_ES_DIBARow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(RW_ALE_FASI_DA_ES_DIBARow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.RW_ALE_FASI_DA_ES_DIBARowChanged != null)) {
+                    this.RW_ALE_FASI_DA_ES_DIBARowChanged(this, new RW_ALE_FASI_DA_ES_DIBARowChangeEvent(((RW_ALE_FASI_DA_ES_DIBARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.RW_ALE_FASI_DA_ES_DIBARowChanging != null)) {
+                    this.RW_ALE_FASI_DA_ES_DIBARowChanging(this, new RW_ALE_FASI_DA_ES_DIBARowChangeEvent(((RW_ALE_FASI_DA_ES_DIBARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.RW_ALE_FASI_DA_ES_DIBARowDeleted != null)) {
+                    this.RW_ALE_FASI_DA_ES_DIBARowDeleted(this, new RW_ALE_FASI_DA_ES_DIBARowChangeEvent(((RW_ALE_FASI_DA_ES_DIBARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.RW_ALE_FASI_DA_ES_DIBARowDeleting != null)) {
+                    this.RW_ALE_FASI_DA_ES_DIBARowDeleting(this, new RW_ALE_FASI_DA_ES_DIBARowChangeEvent(((RW_ALE_FASI_DA_ES_DIBARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveRW_ALE_FASI_DA_ES_DIBARow(RW_ALE_FASI_DA_ES_DIBARow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ALEDS ds = new ALEDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "RW_ALE_FASI_DA_ES_DIBADataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -33177,6 +33862,266 @@ namespace ReportWeb.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class RW_ALE_COSTO_MAGAZZRow : global::System.Data.DataRow {
+            
+            private RW_ALE_COSTO_MAGAZZDataTable tableRW_ALE_COSTO_MAGAZZ;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal RW_ALE_COSTO_MAGAZZRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableRW_ALE_COSTO_MAGAZZ = ((RW_ALE_COSTO_MAGAZZDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDALEDETCOSTOMA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_ALE_COSTO_MAGAZZ.IDALEDETCOSTOMAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDALEDETCOSTOMA\' in table \'RW_ALE_COSTO_MAGAZZ\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_COSTO_MAGAZZ.IDALEDETCOSTOMAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDMAGAZZ {
+                get {
+                    return ((string)(this[this.tableRW_ALE_COSTO_MAGAZZ.IDMAGAZZColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_COSTO_MAGAZZ.IDMAGAZZColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string FASE {
+                get {
+                    return ((string)(this[this.tableRW_ALE_COSTO_MAGAZZ.FASEColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_COSTO_MAGAZZ.FASEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal COSTO {
+                get {
+                    return ((decimal)(this[this.tableRW_ALE_COSTO_MAGAZZ.COSTOColumn]));
+                }
+                set {
+                    this[this.tableRW_ALE_COSTO_MAGAZZ.COSTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDALEDETCOSTOMANull() {
+                return this.IsNull(this.tableRW_ALE_COSTO_MAGAZZ.IDALEDETCOSTOMAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDALEDETCOSTOMANull() {
+                this[this.tableRW_ALE_COSTO_MAGAZZ.IDALEDETCOSTOMAColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class RW_ALE_FASI_DA_ES_DIBARow : global::System.Data.DataRow {
+            
+            private RW_ALE_FASI_DA_ES_DIBADataTable tableRW_ALE_FASI_DA_ES_DIBA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal RW_ALE_FASI_DA_ES_DIBARow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableRW_ALE_FASI_DA_ES_DIBA = ((RW_ALE_FASI_DA_ES_DIBADataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDPRODOTTOFINITO {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_FASI_DA_ES_DIBA.IDPRODOTTOFINITOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDPRODOTTOFINITO\' in table \'RW_ALE_FASI_DA_ES_DIBA\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_FASI_DA_ES_DIBA.IDPRODOTTOFINITOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string FASE {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_FASI_DA_ES_DIBA.FASEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FASE\' in table \'RW_ALE_FASI_DA_ES_DIBA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_FASI_DA_ES_DIBA.FASEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal SEQUENZA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_ALE_FASI_DA_ES_DIBA.SEQUENZAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SEQUENZA\' in table \'RW_ALE_FASI_DA_ES_DIBA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_FASI_DA_ES_DIBA.SEQUENZAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDPADRE {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_FASI_DA_ES_DIBA.IDPADREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDPADRE\' in table \'RW_ALE_FASI_DA_ES_DIBA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_FASI_DA_ES_DIBA.IDPADREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDARTICOLO {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_ALE_FASI_DA_ES_DIBA.IDARTICOLOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDARTICOLO\' in table \'RW_ALE_FASI_DA_ES_DIBA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_FASI_DA_ES_DIBA.IDARTICOLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal COSTOUNI {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_ALE_FASI_DA_ES_DIBA.COSTOUNIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COSTOUNI\' in table \'RW_ALE_FASI_DA_ES_DIBA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_ALE_FASI_DA_ES_DIBA.COSTOUNIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDPRODOTTOFINITONull() {
+                return this.IsNull(this.tableRW_ALE_FASI_DA_ES_DIBA.IDPRODOTTOFINITOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDPRODOTTOFINITONull() {
+                this[this.tableRW_ALE_FASI_DA_ES_DIBA.IDPRODOTTOFINITOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsFASENull() {
+                return this.IsNull(this.tableRW_ALE_FASI_DA_ES_DIBA.FASEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetFASENull() {
+                this[this.tableRW_ALE_FASI_DA_ES_DIBA.FASEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsSEQUENZANull() {
+                return this.IsNull(this.tableRW_ALE_FASI_DA_ES_DIBA.SEQUENZAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetSEQUENZANull() {
+                this[this.tableRW_ALE_FASI_DA_ES_DIBA.SEQUENZAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDPADRENull() {
+                return this.IsNull(this.tableRW_ALE_FASI_DA_ES_DIBA.IDPADREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDPADRENull() {
+                this[this.tableRW_ALE_FASI_DA_ES_DIBA.IDPADREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDARTICOLONull() {
+                return this.IsNull(this.tableRW_ALE_FASI_DA_ES_DIBA.IDARTICOLOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDARTICOLONull() {
+                this[this.tableRW_ALE_FASI_DA_ES_DIBA.IDARTICOLOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCOSTOUNINull() {
+                return this.IsNull(this.tableRW_ALE_FASI_DA_ES_DIBA.COSTOUNIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCOSTOUNINull() {
+                this[this.tableRW_ALE_FASI_DA_ES_DIBA.COSTOUNIColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -33842,6 +34787,74 @@ namespace ReportWeb.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public RW_ALE_DETTAGLIORow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class RW_ALE_COSTO_MAGAZZRowChangeEvent : global::System.EventArgs {
+            
+            private RW_ALE_COSTO_MAGAZZRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_COSTO_MAGAZZRowChangeEvent(RW_ALE_COSTO_MAGAZZRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_COSTO_MAGAZZRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class RW_ALE_FASI_DA_ES_DIBARowChangeEvent : global::System.EventArgs {
+            
+            private RW_ALE_FASI_DA_ES_DIBARow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_FASI_DA_ES_DIBARowChangeEvent(RW_ALE_FASI_DA_ES_DIBARow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_ALE_FASI_DA_ES_DIBARow Row {
                 get {
                     return this.eventRow;
                 }

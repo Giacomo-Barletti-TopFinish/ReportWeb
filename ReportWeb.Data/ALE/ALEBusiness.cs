@@ -93,6 +93,27 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext]
+        public void FillRW_ALE_FASI_DA_ES_DIBA(ALEDS ds, List<string> IDMAGAZZ)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_FASI_DA_ES_DIBA(ds, IDMAGAZZ);
+        }
+
+        [DataContext]
+        public void FillRW_ALE_COSTO_MAGAZZ(ALEDS ds)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_COSTO_MAGAZZ(ds);
+        }
+
+        [DataContext]
+        public string GetIdMagazzFromIdDettaglio(decimal iddettaglio)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            return a.GetIdMagazzFromIdDettaglio(iddettaglio);
+        }
+
+        [DataContext]
         public void FillRW_ALE_DETT_COSTO(ALEDS ds, List<decimal> IDALEDETTAGLIO)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
@@ -142,7 +163,7 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext(true)]
-        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER, bool Mancante,bool scartoDefinitivo)
+        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, string UIDUSER, bool Mancante, bool scartoDefinitivo)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.InsertRW_ALE_DETTAGLIO(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Mancante, Nota, scartoDefinitivo, UIDUSER);
@@ -167,7 +188,7 @@ namespace ReportWeb.Data.ALE
         {
             Int32 id = (int)GetID();
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
-            a.InsertRW_ALE_GRUPPO(id, NotaAddebito, Lavorante, UIDUSER,Rilavorazione);
+            a.InsertRW_ALE_GRUPPO(id, NotaAddebito, Lavorante, UIDUSER, Rilavorazione);
             return id;
         }
 
@@ -204,6 +225,12 @@ namespace ReportWeb.Data.ALE
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.UpdateALEDSTable(ds.RW_ALE_DETT_COSTO.TableName, ds);
         }
+        [DataContext(true)]
+        public void UpdateRW_ALE_COSTO_MAGAZZ(ALEDS ds)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.UpdateALEDSTable(ds.RW_ALE_COSTO_MAGAZZ.TableName, ds);
+        }
         [DataContext]
         public void FillRW_ALE_GRUPPO(ALEDS ds, bool Aperto)
         {
@@ -229,7 +256,7 @@ namespace ReportWeb.Data.ALE
         public void FillRW_ALE_DETTAGLIO(ALEDS ds, string dataInizio, string dataFine, bool SoloMancante)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
-            a.FillRW_ALE_DETTAGLIO(ds, dataInizio,dataFine,SoloMancante);
+            a.FillRW_ALE_DETTAGLIO(ds, dataInizio, dataFine, SoloMancante);
         }
 
         [DataContext]

@@ -398,42 +398,58 @@ namespace ReportWeb.Business
             m.UrlImage = creaUrlImage(rvlImageSite, CHECKQ_T.IDMAGAZZ, ds);
 
             m.Costi = new List<CostiAddebitiModel>();
-            foreach (ALEDS.RW_ALE_DETT_COSTORow costo in ds.RW_ALE_DETT_COSTO.Where(x => x.IDALEDETTAGLIO == riga.IDALEDETTAGLIO))
+            List<ALEDS.RW_ALE_DETT_COSTORow> costiAssegnati = ds.RW_ALE_DETT_COSTO.Where(x => x.IDALEDETTAGLIO == riga.IDALEDETTAGLIO).ToList();
+            if (costiAssegnati.Count > 0)
             {
-                CostiAddebitiModel cm = new CostiAddebitiModel()
+                foreach (ALEDS.RW_ALE_DETT_COSTORow costo in costiAssegnati)
                 {
-                    CostoFase = costo.COSTO,
-                    Fase = costo.FASE,
-                    IdAleDettaglio = costo.IDALEDETTAGLIO,
-                    IdAleDettCosto = costo.IDALEDETCOSTO
-                };
-                m.Costi.Add(cm);
-            }
-
-            m.ListaFasi = new List<string>();
-            if (MovFase != null && !MovFase.IsIDPRDFASENull())
-            {
-                string IDPRDFASE = MovFase.IDPRDFASE;
-                ALEDS.USR_PRD_FASIRow fase = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == IDPRDFASE).FirstOrDefault();
-                ALEDS.USR_PRD_FASIRow figlia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == fase.IDPRDFASE).FirstOrDefault();
-                while (figlia != null)
-                {
-                    string descrizioneFase = string.Empty;
-                    if (!figlia.IsIDTABFASNull())
+                    CostiAddebitiModel cm = new CostiAddebitiModel()
                     {
-                        ALEDS.TABFASRow tf = ds.TABFAS.Where(x => x.IDTABFAS == figlia.IDTABFAS).FirstOrDefault();
-                        if (tf != null)
-                        {
-                            descrizioneFase = tf.CODICEFASE;
-                        }
-                    }
-                    m.ListaFasi.Add(descrizioneFase);
-                    figlia = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == figlia.IDPRDFASE).FirstOrDefault();
+                        CostoFase = costo.COSTO,
+                        Fase = costo.FASE,
+                        IdAleDettaglio = costo.IDALEDETTAGLIO,
+                        IdAleDettCosto = costo.IDALEDETCOSTO
+                    };
+                    m.Costi.Add(cm);
                 }
 
             }
+            //else
+            //{
+            //    List<ALEDS.RW_ALE_COSTO_MAGAZZRow> costiModello = ds.RW_ALE_COSTO_MAGAZZ.Where(x => x.IDMAGAZZ == modello.IDMAGAZZ).ToList();
+            //    foreach (ALEDS.RW_ALE_COSTO_MAGAZZRow costo in costiModello)
+            //    {
+            //        CostiAddebitiModel cm = new CostiAddebitiModel()
+            //        {
+            //            CostoFase = costo.COSTO,
+            //            Fase = costo.FASE,
+            //            IdAleDettaglio = -1,
+            //            IdAleDettCosto = -1
+            //        };
+            //        m.Costi.Add(cm);
+            //    }
+            //}
+
+            m.ListaFasi = CreaListaFasiPerValorizzazioneCosto(ds, modello.IDMAGAZZ);
 
             return m;
+        }
+
+        private List<FaseCosto> CreaListaFasiPerValorizzazioneCosto(ALEDS ds, string idmagazz)
+        {
+            List<FaseCosto> fasi = new List<FaseCosto>();
+
+            List<ALEDS.RW_ALE_COSTO_MAGAZZRow> costiModello = ds.RW_ALE_COSTO_MAGAZZ.Where(x => x.IDMAGAZZ == idmagazz).ToList();
+            fasi = (from fff in costiModello select new FaseCosto(fff.FASE, fff.COSTO.ToString())).ToList();
+
+            if (fasi.Count > 0) return fasi;
+
+            ALEDS.RW_ALE_FASI_DA_ES_DIBARow fasePadre = ds.RW_ALE_FASI_DA_ES_DIBA.Where(x => x.IDPADRE == idmagazz).FirstOrDefault();
+            if (fasePadre == null) return fasi;
+            List<ALEDS.RW_ALE_FASI_DA_ES_DIBARow> fasiFiglie = ds.RW_ALE_FASI_DA_ES_DIBA.Where(x => x.IDPRODOTTOFINITO == fasePadre.IDPRODOTTOFINITO && x.SEQUENZA >= fasePadre.SEQUENZA).OrderBy(x => x.SEQUENZA).ToList();
+
+            fasi = (from fff in fasiFiglie select new FaseCosto(fff.FASE, fff.IsCOSTOUNINull() ? "0" : fff.COSTOUNI.ToString().Replace(',','.'))).ToList();
+            return fasi.Distinct().ToList();
         }
 
         public bool VerificaBarcodeCaricato(string Barcode)
@@ -647,7 +663,8 @@ namespace ReportWeb.Business
                 bALE.FillMAGAZZ(ds, IDMAGAZZ);
                 bALE.FillUSR_PDM_FILES(ds, IDMAGAZZ);
                 bALE.FillTABFAS(ds);
-
+                bALE.FillRW_ALE_FASI_DA_ES_DIBA(ds, IDMAGAZZ);
+                bALE.FillRW_ALE_COSTO_MAGAZZ(ds);
                 List<string> IDPRDMOVFASE = ds.USR_PRD_MOVFASI.Select(x => x.IDPRDMOVFASE).Distinct().ToList();
                 bALE.FillUSR_PRD_FASI(ds, IDPRDMOVFASE);
 
@@ -789,7 +806,7 @@ namespace ReportWeb.Business
                             dettaglio.SetPREZZONull();
                         dettaglio.STATO = ALEStatoDettaglio.VALORIZZATO;
                         dettaglio.NOTAVALORIZZAZIONE = val.Nota;
-
+                        string idmagazz = bALE.GetIdMagazzFromIdDettaglio(dettaglio.IDALEDETTAGLIO);
                         foreach (CostoFaseJson costoFase in val.CostiFase)
                         {
                             ALEDS.RW_ALE_DETT_COSTORow dettCosto = ds.RW_ALE_DETT_COSTO.NewRW_ALE_DETT_COSTORow();
@@ -803,6 +820,18 @@ namespace ReportWeb.Business
                             dettCosto.UIDUSER = UIDUSER;
                             ds.RW_ALE_DETT_COSTO.AddRW_ALE_DETT_COSTORow(dettCosto);
                         }
+
+                        foreach (CostoFaseJson costoFase in val.CostiFase)
+                        {
+                            ALEDS.RW_ALE_COSTO_MAGAZZRow costoMagazz = ds.RW_ALE_COSTO_MAGAZZ.NewRW_ALE_COSTO_MAGAZZRow();
+                            costoMagazz.IDMAGAZZ = idmagazz;
+                            costoMagazz.FASE = costoFase.Fase;
+                            if (costoFase.Costo.HasValue)
+                                costoMagazz.COSTO = costoFase.Costo.Value;
+                            else
+                                costoMagazz.COSTO = 0;
+                            ds.RW_ALE_COSTO_MAGAZZ.AddRW_ALE_COSTO_MAGAZZRow(costoMagazz);
+                        }
                     }
                 }
                 ALEDS.RW_ALE_GRUPPORow gruppo = ds.RW_ALE_GRUPPO.Where(x => x.IDALEGRUPPO == idGruppo).FirstOrDefault();
@@ -814,6 +843,7 @@ namespace ReportWeb.Business
                 }
                 bALE.UpdateRW_ALE_DETTAGLIO(ds);
                 bALE.UpdateRW_ALE_DETT_COSTO(ds);
+                bALE.UpdateRW_ALE_COSTO_MAGAZZ(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
 
 
