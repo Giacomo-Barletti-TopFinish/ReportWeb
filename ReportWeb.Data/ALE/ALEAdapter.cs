@@ -375,11 +375,11 @@ namespace ReportWeb.Data
             if (IDMAGAZZ.Count == 0) return;
 
             string selezione = ConvertToStringForInCondition(IDMAGAZZ.Distinct().ToList());
-            string select = @"    SELECT distinct es.idprodottofinito,tf.destabfas ||'('||ma.modello||')' fase, es.sequenza, idpadre, idarticolo ,la.costouni
-                                      FROM ES_DIBA es
+            string select = @"    SELECT distinct es.idprodottofinito,tf.destabfas ||'('||ma.modello||')' fase, es.sequenza, idpadre, idarticolo ,
+                                        (select max(costouni) from usr_lis_acq where idmagazz = ma.idmagazz and idtipolistino = '0000000005')as costouni
+                                        FROM ES_DIBA es
                                       inner join gruppo.tabfas tf on tf.idtabfas = es.idfase
                                       inner join gruppo.magazz ma on ma.idmagazz=idarticolo
-                                      left join usr_lis_acq la on la.idmagazz = ma.idmagazz and la.idtipolistino = '0000000005'
                                       where es.idprodottofinito in (select distinct idprodottofinito from es_diba where idpadre in ({0}))
                                 order by idprodottofinito, es.sequenza";
 

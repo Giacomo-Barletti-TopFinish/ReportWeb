@@ -440,7 +440,7 @@ namespace ReportWeb.Business
             List<FaseCosto> fasi = new List<FaseCosto>();
 
             List<ALEDS.RW_ALE_COSTO_MAGAZZRow> costiModello = ds.RW_ALE_COSTO_MAGAZZ.Where(x => x.IDMAGAZZ == idmagazz).ToList();
-            fasi = (from fff in costiModello select new FaseCosto(fff.FASE, fff.COSTO.ToString())).ToList();
+            fasi = (from fff in costiModello select new FaseCosto(fff.FASE, fff.COSTO.ToString().Replace(',', '.'))).ToList();
 
             if (fasi.Count > 0) return fasi;
 
@@ -846,7 +846,6 @@ namespace ReportWeb.Business
                 bALE.UpdateRW_ALE_COSTO_MAGAZZ(ds);
                 bALE.UpdateRW_ALE_GRUPPO(ds);
 
-
                 MailDispatcherBLL bllMD = new MailDispatcherBLL();
                 string oggetto = "ALE - NUOVO GRUPPO DA APPROVARE:" + IDALEGRUPPO.ToString();
                 StringBuilder sb = new StringBuilder();
@@ -854,7 +853,6 @@ namespace ReportWeb.Business
 
                 decimal IDMAIL = bllMD.CreaEmail("ALE - APPROVAZIONE", oggetto, sb.ToString());
                 bllMD.SottomettiEmail(IDMAIL);
-
             }
         }
 
