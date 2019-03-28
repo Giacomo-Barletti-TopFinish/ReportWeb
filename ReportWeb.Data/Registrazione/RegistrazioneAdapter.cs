@@ -27,7 +27,18 @@ namespace ReportWeb.Data.Registrazione
             {
                 da.Fill(ds.RW_REGISTRAZIONE);
             }
-        }      
+        }
+
+        public void FillRW_REGISTRAZIONECompleta(RegistrazioneDS ds)
+        {
+
+            string query = @"SELECT * FROM RW_REGISTRAZIONE ";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.RW_REGISTRAZIONE);
+            }
+        }
 
         public void UpdateRegistrazioneDS(string tablename, RegistrazioneDS ds)
         {

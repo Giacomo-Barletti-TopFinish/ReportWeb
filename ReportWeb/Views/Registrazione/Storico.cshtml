@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Storico";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table>
+    <tr>
+        <td>
+            <img height="100px" src="~/Content/Image/logo_Metal-Plus_bn.jpg" />
+        </td>
+        <td><h2>Registrazione - Storico</h2></td>
+        <td>
+            <img height="100px" src="~/Content/Image/logo_TOP-FINISH_BN.jpg" />
+        </td>
+    </tr>
+</table>
+
+
+<div class="box" style="padding-left:10px">
+    <div class="box-body form-group-sm">
+
+
+        <div class="row">
+            <div class="col-md-1">Data inizio</div>
+            <div class="col-sm-1">
+                <input id="txtGiornoInizio" type="date" name="txtGiornoInizio">
+            </div>
+            <div class="col-md-1">Data fine</div>
+            <div class="col-sm-1">
+                <input id="txtGiornoFine" type="date" name="txtGiornoFine">
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-sm-1">
+                <input type="button" style="width:200px" onclick="Ricerca();" class="btn btn-primary" value="Ricerca" />
+            </div>
+
+        </div>
+    </div>
+</div>
+<label class="text-red input-sm" id="lblMessage2"></label>
+<div id="divRisultati"></div>
+<script language="javascript" type="text/javascript">
+
+     $(function ()
+    {
+        var iso = new Date().toISOString();
+        iso = iso.split('T')[0] + 'T00:00'
+         $('#txtGiornoInizio').val(iso);
+         $('#txtGiornoFine').val(iso);
+    });
+
+    function Ricerca()
+    {
+        
+        $('#lblMessage2').html('');
+
+        var esegui = true;
+        var messaggio = '';
+        var dtInizio = $('#txtGiornoInizio').val();
+        if (dtInizio == null || dtInizio == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "La data di inizio" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        var dtFine = $('#txtGiornoFine').val();
+        if (dtFine == null || dtFine == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "La data di fine" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
+
+        if (!esegui) {
+            $('#lblMessage2').html(messaggio);
+            return;
+        }
+ var url = '@Url.Action("CaricaStorico", "Registrazione")';
+        $.ajax({
+            url: url,
+            data: {
+                Inizio: dtInizio,
+                Fine: dtFine,
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                debugger;
+                $('#divRisultati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });    }
+
+
+</script>

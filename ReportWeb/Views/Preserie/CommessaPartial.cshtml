@@ -28,36 +28,33 @@
     <tbody>
         @foreach (Lavorazione lavorazione in Model.Lavorazioni)
         {
-        <tr>
-            <td>@lavorazione.Sequenza</td>
-            <td>@lavorazione.Reparto<input type="hidden" value="@lavorazione.IDPRDFASE" class="hdIDPRDFASE"></td>
-            <td>@lavorazione.FaseODL</td>
-            @if (lavorazione.Odl != null)
-            {
-            <td>@lavorazione.Odl.NUMMOVFASE<input type="hidden" value="@lavorazione.Odl.IDPRDMOVFASE" class="hdIDPRDMOVFASE"></td>
-            <td>@lavorazione.Odl.Barcode</td>
-            }
+            <tr>
+                <td>@lavorazione.Sequenza</td>
+                <td>@lavorazione.Reparto<input type="hidden" value="@lavorazione.IDPRDFASE" class="hdIDPRDFASE"></td>
+                <td>@lavorazione.FaseODL</td>
+                @if (lavorazione.Odl != null)
+                {
+                    <td>@lavorazione.Odl.NUMMOVFASE<input type="hidden" value="@lavorazione.Odl.IDPRDMOVFASE" class="hdIDPRDMOVFASE"></td>
+                    <td>@lavorazione.Odl.Barcode</td>
+                }
 
-        </tr>
+            </tr>
             if (lavorazione.Odl != null)
             {
-                if (lavorazione.Dettagli != null && lavorazione.Dettagli.Count>0)
+                if (lavorazione.Dettagli != null)
                 {
-                    foreach (Dettaglio d in lavorazione.Dettagli)
-                    {
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><b>Fase</b></td>
-                            <td><b>@d.Fase</b></td>
-                            <td>Pezzi orari</td>
-                            <td>@d.PezziOra</td>
-                            <td>Reparto</td>
-                            <td>@d.Reparto</td>
-                            <td colspan="3">@d.Nota</td>
-                        </tr>
-                    }
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>Fase</b></td>
+                        <td><b>@lavorazione.Dettagli.Fase</b></td>
+                        <td>Pezzi orari</td>
+                        <td>@lavorazione.Dettagli.PezziOra</td>
+                        <td>Reparto</td>
+                        <td>@lavorazione.Dettagli.Reparto</td>
+                        <td colspan="3">@lavorazione.Dettagli.Nota</td>
+                    </tr>
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="2"><input type="button" onclick="ModificaDati('@lavorazione.Odl.Barcode');" class="btn btn-primary" value="Modifica" /></td>
@@ -74,7 +71,7 @@
     $(function () {
     });
 
-    function ModificaDati(barcode) {        
+    function ModificaDati(barcode) {
         var url = '@Url.Action("ModificaDati", "Preserie")';
         url = url + '?barcode=' + barcode;
         window.open(url);

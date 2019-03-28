@@ -96,6 +96,7 @@
     <Compile Include="RvlDocumenti\BolleVenditaModel.cs" />
     <Compile Include="RvlDocumenti\PrdMovFasiModel.cs" />
     <Compile Include="RWListItem.cs" />
+    <Compile Include="StoricoRegistrazioneModel.cs" />
     <Compile Include="TokenModel.cs" />
     <Compile Include="VerniciaturaConsuntivoModel.cs" />
     <Compile Include="VerniciaturaReportModel.cs" />

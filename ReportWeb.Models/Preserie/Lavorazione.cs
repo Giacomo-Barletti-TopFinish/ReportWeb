@@ -21,7 +21,8 @@ namespace ReportWeb.Models.Preserie
         public string DataFine;
         public decimal Offset;
         public decimal Leadtime;
-        public List<Dettaglio> Dettagli;
+        public Dettaglio Dettagli;
+        public List<FaseLavoroInserita> FasiLavoroInserite { get; set; }
         public ODL Odl;
 
         public string FaseODL;

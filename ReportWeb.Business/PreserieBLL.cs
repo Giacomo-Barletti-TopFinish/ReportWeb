@@ -205,7 +205,8 @@ namespace ReportWeb.Business
                 lavorazione.Odl = CreaOdl(movFase);
                 if (!movFase.IsBARCODENull())
                 {
-                    //    lavorazione.Dettagli = CreaListaDettaglio(movFase.BARCODE, ds);
+                    lavorazione.Dettagli = CreaListaDettaglio(movFase.BARCODE, ds);
+                    lavorazione.FasiLavoroInserite = CreaListaFasiLavoroInserite(ds, lavorazione.Dettagli);
                 }
 
             }
@@ -364,14 +365,14 @@ namespace ReportWeb.Business
                 Dettaglio elementoDettaglio = CreaListaDettaglio(Barcode, ds);
                 model.Dettaglio = elementoDettaglio;
 
-              //  model.FasiLavoroInserite = CreaListaFasiLavoroInserite(ds, elementoDettaglio);
+                model.FasiLavoroInserite = CreaListaFasiLavoroInserite(ds, elementoDettaglio);
                 return model;
             }
         }
 
-        public List<string> CreaListaFasiLavoroInserite(PreserieDS ds, Dettaglio elementoDettaglio)
+        public List<FaseLavoroInserita> CreaListaFasiLavoroInserite(PreserieDS ds, Dettaglio elementoDettaglio)
         {
-            List<string> fasiLavoro = new List<string>();
+            List<FaseLavoroInserita> fasiLavoro = new List<FaseLavoroInserita>();
 
             if (elementoDettaglio != null)
             {
@@ -380,7 +381,14 @@ namespace ReportWeb.Business
                 {
                     foreach (PreserieDS.RW_PR_DECAPAGGIORow elemento in ds.RW_PR_DECAPAGGIO.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
                     {
-                    //    string.Format("{0}: {1}",)
+                        FaseLavoroInserita fli = new FaseLavoroInserita();
+                        fli.Costo = string.Empty;
+                        fli.idElemento = elemento.IDELEMENTO;
+
+                        fli.FaseInserita.Add(new Tuple<string, string>("Tipologia", elemento.TIPOLOGIA));
+                        fli.FaseInserita.Add(new Tuple<string, string>("Programma", elemento.PROGRAMMA));
+                        fli.FaseInserita.Add(new Tuple<string, string>("Interno", elemento.INTERNO));
+                        fli.FaseInserita.Add(new Tuple<string, string>("Lavorazione", elemento.LAVORAZIONE));
                     }
                 }
             }

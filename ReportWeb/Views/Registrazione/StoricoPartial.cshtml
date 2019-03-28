@@ -1,0 +1,29 @@
+﻿@using ReportWeb.Models
+@model List<StoricoRegistrazioneModel>
+
+<table class="table table-condensed">
+    <tr>
+        <td width="11%">Nome</td>
+        <td width="11%">Azienda</td>
+        <td width="11%">Referente</td>
+        <td width="11%">Documento</td>
+        <td width="11%">Ingesso</td>
+        <td width="11%">Uscita</td>
+        <td width="11%">Tessera</td>
+        <td></td>
+    </th>
+    @foreach (StoricoRegistrazioneModel elemento in Model)
+    {
+        <tr>
+            <td width="11%">@elemento.nome</td>
+            <td width="11%">@elemento.azienda</td>
+            <td width="11%">@elemento.referente</td>
+            <td width="11%">@elemento.documento</td>
+            <td width="11%">@elemento.ingesso</td>
+            <td width="11%">@elemento.uscita</td>
+            <td width="11%">@elemento.tessera</td>
+            <td></td>
+        </tr>
+    }
+
+</table>

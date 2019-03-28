@@ -113,17 +113,10 @@
         }
 
         var tipo = $('#txtTipo').val();
-        if (tipo == null || tipo == '')
-        {
-            messaggio += MESSAGGIO_PUNTINO + " " + "Tipo documento" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-            esegui = false;
-        }
+        if (tipo = null) tipo = '';
 
         var numero = $('#txtNumero').val();
-        if (numero == null || numero == '') {
-            messaggio += MESSAGGIO_PUNTINO + " " + "Numero documento" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-            esegui = false;
-        }
+        if (numero == null) numero == '';
 
         var referente = $('#txtReferente').val();
         if (referente == null || referente == '') {

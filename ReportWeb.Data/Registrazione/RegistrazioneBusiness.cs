@@ -23,7 +23,12 @@ namespace ReportWeb.Data.Registrazione
             a.FillRW_REGISTRAZIONE(ds);
         }
 
-
+        [DataContext]
+        public void FillRW_REGISTRAZIONECompleta(RegistrazioneDS ds)
+        {
+            RegistrazioneAdapter a = new RegistrazioneAdapter(DbConnection, DbTransaction);
+            a.FillRW_REGISTRAZIONECompleta(ds);
+        }
 
         [DataContext(true)]
         public void UpdateRW_REGISTRAZIONE(RegistrazioneDS ds)

@@ -48,5 +48,17 @@ namespace ReportWeb.Controllers
             return Content(esito ? string.Empty : messaggio);
 
         }
+
+        public ActionResult Storico()
+        {
+            return View();
+        }
+
+        public ActionResult CaricaStorico(string Inizio, string Fine)
+        {
+            RegistrazioneBLL bll = new RegistrazioneBLL();
+            List<StoricoRegistrazioneModel> risultati = bll.CaricaStorico(Inizio, Fine);
+            return PartialView("StoricoPartial", risultati);
+        }
     }
 }

@@ -10,6 +10,6 @@ namespace ReportWeb.Models.Preserie
     {
         public string Costo { get; set; }
         public decimal idElemento { get; set; }
-        public StringBuilder FaseInserita { get; set; }
+        public List<Tuple<string,string>> FaseInserita { get; set; }
     }
 }

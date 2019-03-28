@@ -53,6 +53,46 @@ namespace ReportWeb.Business
 
         }
 
+        public List<StoricoRegistrazioneModel> CaricaStorico(string Inizio, string Fine)
+        {
+            List<StoricoRegistrazioneModel> risultati = new List<StoricoRegistrazioneModel>();
+            RegistrazioneDS ds = new RegistrazioneDS();
+            using (RegistrazioneBusiness bRegistrazione = new RegistrazioneBusiness())
+            {
+                bRegistrazione.FillRW_REGISTRAZIONECompleta(ds);
+            }
+
+            DateTime dtInizio = DateTime.Parse(Inizio);
+            DateTime dtFine = DateTime.Parse(Fine);
+
+            List<RegistrazioneDS.RW_REGISTRAZIONERow> storico = ds.RW_REGISTRAZIONE.Where(x => x.INGRESSO >= dtInizio && x.INGRESSO <= dtFine).ToList();
+            foreach (RegistrazioneDS.RW_REGISTRAZIONERow st in storico.OrderBy(x=>x.IDREGISTRAZIONE))
+            {
+                string nome = string.Format("{0} {1}", st.NOME, st.COGNOME);
+                string azienda = st.IsAZIENDANull() ? string.Empty : st.AZIENDA;
+                string doc = string.Format("{0} {1}", st.TIPODOCUMENTO, st.IsDOCUMENTONull() ? string.Empty : st.DOCUMENTO);
+                string tessera = st.IsTESSERANull() ? string.Empty : st.TESSERA.ToString();
+                string referente = st.REFERENTE;
+                string ingresso = string.Format("{0} {1}",st.INGRESSO.ToShortDateString(),st.INGRESSO.ToShortTimeString());
+                string uscita = string.Format("{0} {1}", st.IsUSCITANull() ? string.Empty : st.INGRESSO.ToShortDateString(),
+                    st.IsUSCITANull() ? string.Empty : st.USCITA.ToShortTimeString());
+
+
+                StoricoRegistrazioneModel elemento = new StoricoRegistrazioneModel();
+                elemento.nome = nome;
+                elemento.azienda = azienda;
+                elemento.documento = doc;
+                elemento.tessera = tessera;
+                elemento.referente = referente;
+                elemento.ingesso = ingresso;
+                elemento.uscita = uscita;
+                risultati.Add(elemento);
+
+            }
+            return risultati;
+
+        }
+
         public bool RegistraIngresso(string Cognome, string Nome, string Azienda, string Tipo, string Numero, string Referente, Decimal Tessera, string Ditta, out string messaggio)
         {
             messaggio = string.Empty;

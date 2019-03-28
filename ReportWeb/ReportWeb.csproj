@@ -488,6 +488,8 @@
     <Content Include="Views\Preserie\StampaggioPartial.cshtml" />
     <Content Include="Views\Preserie\MontaggioPartial.cshtml" />
     <Content Include="Views\Preserie\SaldaturaPartial.cshtml" />
+    <Content Include="Views\Registrazione\Storico.cshtml" />
+    <Content Include="Views\Registrazione\StoricoPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
