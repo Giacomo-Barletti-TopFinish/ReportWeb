@@ -36,6 +36,11 @@
                 {
                     <td>@lavorazione.Odl.NUMMOVFASE<input type="hidden" value="@lavorazione.Odl.IDPRDMOVFASE" class="hdIDPRDMOVFASE"></td>
                     <td>@lavorazione.Odl.Barcode</td>
+                    <td colspan="7"></td>
+                }
+                else
+                {
+                    <td colspan="9"></td>
                 }
 
             </tr>
@@ -45,16 +50,49 @@
                 {
                     <tr>
                         <td></td>
-                        <td></td>
-                        <td></td>
                         <td><b>Fase</b></td>
                         <td><b>@lavorazione.Dettagli.Fase</b></td>
                         <td>Pezzi orari</td>
                         <td>@lavorazione.Dettagli.PezziOra</td>
                         <td>Reparto</td>
                         <td>@lavorazione.Dettagli.Reparto</td>
-                        <td colspan="3">@lavorazione.Dettagli.Nota</td>
+                        <td colspan="5">@lavorazione.Dettagli.Nota</td>
                     </tr>
+                    foreach (FaseLavoroInserita faseLavoro in lavorazione.FasiLavoroInserite)
+                    {
+                        int numeroElementiRiga = 4;
+                        int aux = faseLavoro.FaseInserita.Count() / numeroElementiRiga;
+                        int indice = 0;
+                        for (int i = 0; i < aux + 1; i++)
+                        {
+                    <tr>
+                        <td></td>
+                        @if (i == 0)
+                        {
+                            <td style="color:red">Lavorazione</td>
+                            <td style="color:red">@faseLavoro.Lavorazione</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                            <td></td>
+                        }
+                        @for (int j = 0; j < numeroElementiRiga; j++)
+                        {
+                            if (indice < faseLavoro.FaseInserita.Count())
+                            {
+                                <td><b>@faseLavoro.FaseInserita[indice].Item1</b></td>
+                                <td>@faseLavoro.FaseInserita[indice].Item2</td>
+                            }
+                            indice++;
+                        }
+                        <td></td>
+
+                    </tr>
+                        }
+                    <tr>
+                    </tr>
+                    }
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="2"><input type="button" onclick="ModificaDati('@lavorazione.Odl.Barcode');" class="btn btn-primary" value="Modifica" /></td>

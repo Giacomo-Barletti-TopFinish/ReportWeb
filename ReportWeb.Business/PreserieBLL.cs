@@ -194,7 +194,7 @@ namespace ReportWeb.Business
 
             PreserieDS.TABFASRow tabfas = ds.TABFAS.Where(x => x.IDTABFAS == fase.IDTABFAS).FirstOrDefault();
             if (tabfas != null)
-                lavorazione.FaseODL = string.Format("{0} - {1}", tabfas.CODICEFASE, tabfas.DESTABFAS);
+                lavorazione.FaseODL = string.Format("{0} - {1}", tabfas.CODICEFASE.Trim(), tabfas.DESTABFAS.Trim());
             else
                 lavorazione.FaseODL = string.Empty;
 
@@ -264,7 +264,7 @@ namespace ReportWeb.Business
                     if (clifo != null)
                     {
                         d.Reparto = clifo.RAGIONESOC.Trim();
-                        d.IdReparto = clifo.CODICE;
+                        d.IdReparto = clifo.CODICE.Trim();
                     }
                 }
 
@@ -376,21 +376,343 @@ namespace ReportWeb.Business
 
             if (elementoDettaglio != null)
             {
-
-                if (ds.RW_PR_DECAPAGGIO.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                switch (elementoDettaglio.IdReparto)
                 {
-                    foreach (PreserieDS.RW_PR_DECAPAGGIORow elemento in ds.RW_PR_DECAPAGGIO.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
-                    {
-                        FaseLavoroInserita fli = new FaseLavoroInserita();
-                        fli.Costo = string.Empty;
-                        fli.idElemento = elemento.IDELEMENTO;
+                    case Reparti.Pulimentatura:
+                        {
 
-                        fli.FaseInserita.Add(new Tuple<string, string>("Tipologia", elemento.TIPOLOGIA));
-                        fli.FaseInserita.Add(new Tuple<string, string>("Programma", elemento.PROGRAMMA));
-                        fli.FaseInserita.Add(new Tuple<string, string>("Interno", elemento.INTERNO));
-                        fli.FaseInserita.Add(new Tuple<string, string>("Lavorazione", elemento.LAVORAZIONE));
-                    }
+                            if (ds.RW_PR_PULIMENTATURA.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_PULIMENTATURARow elemento in ds.RW_PR_PULIMENTATURA.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = elemento.LAVORAZIONE;
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Automatico", elemento.AUTOMATICO));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Spazzole", elemento.SPAZZOLE));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Paste", elemento.PASTE));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Parte lavorata", elemento.PARTA_LAVORATA));
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
+                    case Reparti.Vibratura:
+                        {
+                            if (elementoDettaglio.idFase == "0000000060") //decapaggio
+                            {
+                                if (ds.RW_PR_DECAPAGGIO.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                                {
+                                    foreach (PreserieDS.RW_PR_DECAPAGGIORow elemento in ds.RW_PR_DECAPAGGIO.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                    {
+                                        FaseLavoroInserita fli = new FaseLavoroInserita();
+                                        fli.Costo = string.Empty;
+                                        fli.idElemento = elemento.IDELEMENTO;
+                                        fli.FaseInserita = new List<Tuple<string, string>>();
+
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Tipologia", elemento.TIPOLOGIA));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Programma", elemento.PROGRAMMA));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Interno", elemento.INTERNO));
+                                        fli.Lavorazione = elemento.LAVORAZIONE;
+                                        fasiLavoro.Add(fli);
+
+                                    }
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                if (ds.RW_PR_VIBRATURA.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                                {
+                                    foreach (PreserieDS.RW_PR_VIBRATURARow elemento in ds.RW_PR_VIBRATURA.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                    {
+                                        FaseLavoroInserita fli = new FaseLavoroInserita();
+                                        fli.Costo = string.Empty;
+                                        fli.idElemento = elemento.IDELEMENTO;
+                                        fli.FaseInserita = new List<Tuple<string, string>>();
+                                        fli.Lavorazione = elemento.LAVORAZIONE;
+
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Tipologia", elemento.TIPOLOGIA));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Tempo", elemento.IsTEMPONull() ? string.Empty : elemento.TEMPO));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Materiale", elemento.IsMATERIALENull() ? string.Empty : elemento.MATERIALE));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Additivi", elemento.IsADDITIVINull() ? string.Empty : elemento.ADDITIVI));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Max pezzi", elemento.IsMAXPEZZINull() ? string.Empty : elemento.MAXPEZZI.ToString()));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Vibratore", elemento.IsVIBRATORENull() ? string.Empty : elemento.VIBRATORE));
+                                        fasiLavoro.Add(fli);
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    case Reparti.Modelleria:
+                        {
+                            if (ds.RW_PR_MODELLERIA.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_MODELLERIARow elemento in ds.RW_PR_MODELLERIA.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = elemento.LAVORAZIONE;
+
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Materiale", elemento.IsMATERIALENull() ? string.Empty : elemento.MATERIALE));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Programma", elemento.IsPROGRAMMANull() ? string.Empty : elemento.PROGRAMMA));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Utensili", elemento.IsUTENSILINull() ? string.Empty : elemento.UTENSILI));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Attrezzaggio", elemento.IsATTREZZAGGIONull() ? string.Empty : elemento.ATTREZZAGGIO));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Macchina", elemento.IsMACCHINANull() ? string.Empty : elemento.MACCHINA));
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
+                    case Reparti.Pressofusione:
+                        {
+                            if (ds.RW_PR_PRESSOFUSIONE.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_PRESSOFUSIONERow elemento in ds.RW_PR_PRESSOFUSIONE.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = "Pressofusione";
+
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Tipo stampo", elemento.TIPOSTAMPO));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Stampo", elemento.IsSTAMPONull() ? string.Empty : elemento.STAMPO));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Battute", elemento.BATTUTE.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Materiale", elemento.IsMATERIALENull() ? string.Empty : elemento.MATERIALE));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Impronte", elemento.IsIMPRONTENull() ? string.Empty : elemento.IMPRONTE.ToString()));
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
+                    case Reparti.Tornitura:
+                        {
+                            if (ds.RW_PR_TORNITURA.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_TORNITURARow elemento in ds.RW_PR_TORNITURA.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = "Tornitura";
+
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Macchina", elemento.IsMACCHINANull() ? string.Empty : elemento.MACCHINA));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Diametro", elemento.DIAMETRO.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Utensili", elemento.IsUTENSILINull() ? string.Empty : elemento.UTENSILI));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Materiale", elemento.IsMATERIALENull() ? string.Empty : elemento.MATERIALE));
+
+
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
+                    case Reparti.Riprese:
+                        {
+                            if (elementoDettaglio.idFase == "0000000146")//laser
+                            {
+                                if (ds.RW_PR_LASER.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                                {
+                                    foreach (PreserieDS.RW_PR_LASERRow elemento in ds.RW_PR_LASER.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                    {
+                                        FaseLavoroInserita fli = new FaseLavoroInserita();
+                                        fli.Costo = string.Empty;
+                                        fli.idElemento = elemento.IDELEMENTO;
+                                        fli.FaseInserita = new List<Tuple<string, string>>();
+                                        fli.Lavorazione = "Laser";
+
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Tipo", elemento.TIPO));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Piazzatura", elemento.PIAZZATURA));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Parametri", elemento.IsPARAMETRINull() ? string.Empty : elemento.PARAMETRI));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Magazzino", elemento.IsMAGAZZINONull() ? string.Empty : elemento.MAGAZZINO));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Macchina", elemento.IsMACCHINANull() ? string.Empty : elemento.MACCHINA));
+
+                                        fasiLavoro.Add(fli);
+                                    }
+                                }
+                                break;
+
+                            }
+                            else
+                            {
+                                if (ds.RW_PR_RIPRESE.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                                {
+                                    foreach (PreserieDS.RW_PR_RIPRESERow elemento in ds.RW_PR_RIPRESE.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                    {
+                                        FaseLavoroInserita fli = new FaseLavoroInserita();
+                                        fli.Costo = string.Empty;
+                                        fli.idElemento = elemento.IDELEMENTO;
+                                        fli.FaseInserita = new List<Tuple<string, string>>();
+                                        fli.Lavorazione = elemento.LAVORAZIONE;
+
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Piazzatura", elemento.PIAZZATURA));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Utensili", elemento.IsUTENSILINull() ? string.Empty : elemento.UTENSILI));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Materiale", elemento.IsMATERIALENull() ? string.Empty : elemento.MATERIALE));
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Pezzi orari", elemento.IsPEZZIORARINull() ? string.Empty : elemento.PEZZIORARI.ToString()));
+
+                                        fasiLavoro.Add(fli);
+                                    }
+                                }
+                                break;
+                            }
+                        }
+
+                    case Reparti.Verniciatura:
+                        {
+                            if (ds.RW_PR_VERNICIATURA.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_VERNICIATURARow elemento in ds.RW_PR_VERNICIATURA.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = "Verniciatura";
+
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Telaio", elemento.TELAIO));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Pezzi telaio", elemento.PEZZITELAIO.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Durata", elemento.IsDURATANull() ? string.Empty : elemento.DURATA));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Verniciatura", elemento.IsVERNICIATURANull() ? string.Empty : elemento.VERNICIATURA));
+
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
+                    case Reparti.GalvanicaAuto:
+                        {
+                            if (ds.RW_PR_GALVANICA.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_GALVANICARow elemento in ds.RW_PR_GALVANICA.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = "Galvanica";
+
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Telaio", elemento.TELAIO));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Legatura", elemento.LEGATURA));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Pezzi filo", elemento.PEZZIFILO.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Fili telaio", elemento.FILOTELAIO.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Spessori", elemento.IsSPESSORINull() ? string.Empty : elemento.SPESSORI));
+
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
+                    case Reparti.Smaltatura:
+                        {
+                            if (ds.RW_PR_SMALTATURA.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_SMALTATURARow elemento in ds.RW_PR_SMALTATURA.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = "Smaltatura";
+
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Smalto", elemento.SMALTO));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Codice", elemento.CODICE));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Piazzatura", elemento.PIAZZATURA));
+
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
+                    case Reparti.Stampaggio:
+                        {
+                            if (ds.RW_PR_STAMPAGGIO.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_STAMPAGGIORow elemento in ds.RW_PR_STAMPAGGIO.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = "Stampaggio";
+
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Stampo", elemento.STAMPO));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Impronte", elemento.IMPRONTE.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Materiale", elemento.IsMATERIALENull() ? string.Empty : elemento.MATERIALE));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Tipo materiale", elemento.IsTIPOMATERIALENull() ? string.Empty : elemento.TIPOMATERIALE));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Lunghezza", elemento.IsLUNGHEZZANull() ? string.Empty : elemento.LUNGHEZZA.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Larghezza", elemento.IsLARGHEZZANull() ? string.Empty : elemento.LARGHEZZA.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Altezza", elemento.IsALTEZZANull() ? string.Empty : elemento.ALTEZZA.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Battute orarie", elemento.IsBATTUREORARIENull() ? string.Empty : elemento.BATTUREORARIE.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Certificato", elemento.IsCERTIFICATONull() ? string.Empty : elemento.CERTIFICATO));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Tranciature", elemento.IsTRANCIATURENull() ? string.Empty : elemento.TRANCIATURE.ToString()));
+                                    if (!elemento.IsTRANIATURA1Null())
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Tranciatura 1", elemento.TRANIATURA1.ToString()));
+                                    if (!elemento.IsTRANIATURA2Null())
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Tranciatura 2", elemento.TRANIATURA2.ToString()));
+                                    if (!elemento.IsTRANIATURA3Null())
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Tranciatura 3", elemento.TRANIATURA3.ToString()));
+                                    if (!elemento.IsTRANIATURA4Null())
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Tranciatura 4", elemento.TRANIATURA4.ToString()));
+                                    if (!elemento.IsTRANIATURA5Null())
+                                        fli.FaseInserita.Add(new Tuple<string, string>("Tranciatura 5", elemento.TRANIATURA5.ToString()));
+
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
+                    case Reparti.Saldatura:
+                        {
+                            if (ds.RW_PR_SALDATURA.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_SALDATURARow elemento in ds.RW_PR_SALDATURA.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = "Saldatura";
+
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Pezzi", elemento.IsPEZZINull() ? string.Empty : elemento.PEZZI.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Piazzatura", elemento.PIAZZATURA));
+
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
+                    case Reparti.Montaggio:
+                        {
+                            if (ds.RW_PR_MONTAGGIO.Any(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO))
+                            {
+                                foreach (PreserieDS.RW_PR_MONTAGGIORow elemento in ds.RW_PR_MONTAGGIO.Where(x => x.IDDETTAGLIO == elementoDettaglio.IDDETTAGLIO).OrderBy(x => x.SEQUENZA))
+                                {
+                                    FaseLavoroInserita fli = new FaseLavoroInserita();
+                                    fli.Costo = string.Empty;
+                                    fli.idElemento = elemento.IDELEMENTO;
+                                    fli.FaseInserita = new List<Tuple<string, string>>();
+                                    fli.Lavorazione = "Montaggio";
+
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Pezzi", elemento.IsPEZZINull() ? string.Empty : elemento.PEZZI.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Attrezzi", elemento.IsATTREZZINull() ? string.Empty : elemento.ATTREZZI));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Colle", elemento.IsCOLLENull() ? string.Empty : elemento.COLLE));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Attesa", elemento.IsATTESANull() ? string.Empty : elemento.ATTESA));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Difficolta", elemento.IsDIFFICOLTANull() ? string.Empty : elemento.DIFFICOLTA.ToString()));
+                                    fli.FaseInserita.Add(new Tuple<string, string>("Colore", elemento.IsCOLORENull() ? string.Empty : elemento.COLORE.ToString()));
+
+                                    fasiLavoro.Add(fli);
+                                }
+                            }
+                            break;
+                        }
                 }
+
             }
             return fasiLavoro;
         }
