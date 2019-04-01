@@ -1565,6 +1565,9 @@ namespace ReportWeb.Business
 
                 gal.FILOTELAIO = dettaglio.FiliTealio;
 
+                if (!string.IsNullOrEmpty(dettaglio.Spessore))
+                    gal.SPESSORI = dettaglio.Spessore;
+
                 ds.RW_PR_GALVANICA.AddRW_PR_GALVANICARow(gal);
             }
         }
