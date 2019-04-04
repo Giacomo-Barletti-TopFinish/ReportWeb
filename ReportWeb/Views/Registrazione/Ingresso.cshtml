@@ -101,7 +101,10 @@
         }
 
         var azienda = $('#txtAzienda').val();
-        if (azienda == null) azienda = '';
+        if (azienda == null || azienda == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Azienda " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esegui = false;
+        }
 
         var ditta = $('#txtDitta').val();
         if (ditta == null) ditta = '';

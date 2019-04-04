@@ -64,16 +64,17 @@ namespace ReportWeb.Business
 
             DateTime dtInizio = DateTime.Parse(Inizio);
             DateTime dtFine = DateTime.Parse(Fine);
+            dtFine = dtFine.AddDays(1).AddSeconds(-1);
 
             List<RegistrazioneDS.RW_REGISTRAZIONERow> storico = ds.RW_REGISTRAZIONE.Where(x => x.INGRESSO >= dtInizio && x.INGRESSO <= dtFine).ToList();
-            foreach (RegistrazioneDS.RW_REGISTRAZIONERow st in storico.OrderBy(x=>x.IDREGISTRAZIONE))
+            foreach (RegistrazioneDS.RW_REGISTRAZIONERow st in storico.OrderBy(x => x.IDREGISTRAZIONE))
             {
                 string nome = string.Format("{0} {1}", st.NOME, st.COGNOME);
                 string azienda = st.IsAZIENDANull() ? string.Empty : st.AZIENDA;
-                string doc = string.Format("{0} {1}", st.TIPODOCUMENTO, st.IsDOCUMENTONull() ? string.Empty : st.DOCUMENTO);
+                string doc = string.Format("{0} {1}", st.IsTIPODOCUMENTONull() ? string.Empty : st.TIPODOCUMENTO, st.IsDOCUMENTONull() ? string.Empty : st.DOCUMENTO);
                 string tessera = st.IsTESSERANull() ? string.Empty : st.TESSERA.ToString();
                 string referente = st.REFERENTE;
-                string ingresso = string.Format("{0} {1}",st.INGRESSO.ToShortDateString(),st.INGRESSO.ToShortTimeString());
+                string ingresso = string.Format("{0} {1}", st.INGRESSO.ToShortDateString(), st.INGRESSO.ToShortTimeString());
                 string uscita = string.Format("{0} {1}", st.IsUSCITANull() ? string.Empty : st.INGRESSO.ToShortDateString(),
                     st.IsUSCITANull() ? string.Empty : st.USCITA.ToShortTimeString());
 
