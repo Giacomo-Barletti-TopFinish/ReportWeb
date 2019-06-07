@@ -156,6 +156,7 @@
     <Compile Include="Controllers\RegistrazioneController.cs" />
     <Compile Include="Controllers\RilevazioniController.cs" />
     <Compile Include="Controllers\RvlDocumentiController.cs" />
+    <Compile Include="Controllers\TrasferimentiController.cs" />
     <Compile Include="Controllers\TVController.cs" />
     <Compile Include="Controllers\VerniciaturaController.cs" />
     <Compile Include="Exceptions.cs" />
@@ -490,6 +491,8 @@
     <Content Include="Views\Preserie\SaldaturaPartial.cshtml" />
     <Content Include="Views\Registrazione\Storico.cshtml" />
     <Content Include="Views\Registrazione\StoricoPartial.cshtml" />
+    <Content Include="Views\Trasferimenti\Index.cshtml" />
+    <Content Include="Views\Trasferimenti\TrasferimentiPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

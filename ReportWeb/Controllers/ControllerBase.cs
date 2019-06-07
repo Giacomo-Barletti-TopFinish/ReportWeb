@@ -106,6 +106,7 @@ namespace ReportWeb.Controllers
                 case "MailDispatcher":
                 case "RvlDocumenti":
                 case "Preserie":
+                case "Trasferimenti":
                 case "ALE":
                     HttpCookie coockie = filterContext.RequestContext.HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
                     if (coockie == null)

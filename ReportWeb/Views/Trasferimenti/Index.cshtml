@@ -1,0 +1,97 @@
+﻿@using ReportWeb.Models
+@{
+    ViewBag.Title = "Trasferimenti";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Trasferimenti</h2>
+    <div class="row">
+        <div class="col-sm-1">Data inizio</div>
+        <div class="col-sm-1">Data fine</div>
+        <div class="col-sm-3">Operatore invio</div>
+        <div class="col-sm-3">Operatore ricezione</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"><input type="date" id="txtDataInizio" /></div>
+        <div class="col-sm-1"><input type="date" id="txtDataFine" /></div>
+        <div class="col-sm-3">@Html.DropDownList("ddlOperatoreInvio", new SelectList(ViewData["operatori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-3">@Html.DropDownList("ddlOperatoreRicezione", new SelectList(ViewData["operatori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-1"><input type="button" onclick="Estrai();" class="btn btn-primary" value="Estrai dati" /></div>
+    </div>
+</div>
+<label class="text-red" id="lblMessage"></label>
+<div style="overflow-y:auto; overflow-x:hidden; height:750px; padding-left:10px">
+    <div id="divRisultati"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $('#ddlOperatoreInvio').select2();
+        $('#ddlOperatoreRicezione').select2();
+
+        var iso = new Date().toISOString();
+        iso = iso.split('T')[0];//+ 'T00:00'
+        $('#txtDataInizio').val(iso);
+        $('#txtDataFine').val(iso);
+
+    });
+
+    function Estrai()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var dataInizio = $('#txtDataInizio').val();
+        if (dataInizio == null || dataInizio == '')
+        {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la data di inizio" + "</br>";
+            esegui = false;
+        }
+
+        var dataFine = $('#txtDataFine').val();
+        if (dataFine == null || dataFine == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la data di fine" + "</br>";
+            esegui = false;
+        }
+
+        var operatoreInvio = $('#ddlOperatoreInvio').val();
+        if (operatoreInvio == null) operatoreInvio = '';
+
+        var operatoreRicezione = $('#ddlOperatoreRicezione').val();
+        if (operatoreRicezione == null) operatoreRicezione = '';
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("EstraiDati", "Trasferimenti")';
+        $.ajax({
+            url: url,
+            data: {
+                DataInizio: dataInizio,
+                DataFine: dataFine,
+                OperatoreInvio: operatoreInvio,
+                OperatoreRicezione: operatoreRicezione
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    
+</script>

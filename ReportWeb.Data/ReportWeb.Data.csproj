@@ -77,6 +77,8 @@
     <Compile Include="RvlDocumenti\RvlDocumentiBusiness.cs" />
     <Compile Include="SecurityAdapter.cs" />
     <Compile Include="SecurityBusiness.cs" />
+    <Compile Include="Trasferimenti\TrasferimentiAdapter.cs" />
+    <Compile Include="Trasferimenti\TrasferimentiBusiness.cs" />
     <Compile Include="Verniciatura\VerniciaturaAdapter.cs" />
     <Compile Include="Verniciatura\VerniciaturaBusiness.cs" />
   </ItemGroup>

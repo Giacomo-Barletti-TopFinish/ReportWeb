@@ -52,6 +52,7 @@
     <Compile Include="RilevazioneBLL.cs" />
     <Compile Include="RvlDocumentiBLL.cs" />
     <Compile Include="SecurityBLL.cs" />
+    <Compile Include="TrasferimentiBLL.cs" />
     <Compile Include="VerniciaturaBLL.cs" />
   </ItemGroup>
   <ItemGroup>

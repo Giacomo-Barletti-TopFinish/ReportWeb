@@ -98,6 +98,7 @@
     <Compile Include="RWListItem.cs" />
     <Compile Include="StoricoRegistrazioneModel.cs" />
     <Compile Include="TokenModel.cs" />
+    <Compile Include="TrasferimentoModel.cs" />
     <Compile Include="VerniciaturaConsuntivoModel.cs" />
     <Compile Include="VerniciaturaReportModel.cs" />
   </ItemGroup>
