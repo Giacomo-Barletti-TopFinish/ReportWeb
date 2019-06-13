@@ -15,7 +15,7 @@
   <xs:element name="TrasferimentiDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TrasferimentiDS" msprop:Generator_UserDSName="TrasferimentiDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="USR_PRD_RESOURCESF" msprop:Generator_TableClassName="USR_PRD_RESOURCESFDataTable" msprop:Generator_TableVarName="tableUSR_PRD_RESOURCESF" msprop:Generator_RowChangedName="USR_PRD_RESOURCESFRowChanged" msprop:Generator_TablePropName="USR_PRD_RESOURCESF" msprop:Generator_RowDeletingName="USR_PRD_RESOURCESFRowDeleting" msprop:Generator_RowChangingName="USR_PRD_RESOURCESFRowChanging" msprop:Generator_RowEvHandlerName="USR_PRD_RESOURCESFRowChangeEventHandler" msprop:Generator_RowDeletedName="USR_PRD_RESOURCESFRowDeleted" msprop:Generator_RowClassName="USR_PRD_RESOURCESFRow" msprop:Generator_UserTableName="USR_PRD_RESOURCESF" msprop:Generator_RowEvArgName="USR_PRD_RESOURCESFRowChangeEvent">
+        <xs:element name="USR_PRD_RESOURCESF" msprop:Generator_TableClassName="USR_PRD_RESOURCESFDataTable" msprop:Generator_TableVarName="tableUSR_PRD_RESOURCESF" msprop:Generator_TablePropName="USR_PRD_RESOURCESF" msprop:Generator_RowDeletingName="USR_PRD_RESOURCESFRowDeleting" msprop:Generator_RowChangingName="USR_PRD_RESOURCESFRowChanging" msprop:Generator_RowEvHandlerName="USR_PRD_RESOURCESFRowChangeEventHandler" msprop:Generator_RowDeletedName="USR_PRD_RESOURCESFRowDeleted" msprop:Generator_UserTableName="USR_PRD_RESOURCESF" msprop:Generator_RowChangedName="USR_PRD_RESOURCESFRowChanged" msprop:Generator_RowEvArgName="USR_PRD_RESOURCESFRowChangeEvent" msprop:Generator_RowClassName="USR_PRD_RESOURCESFRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDRESOURCEF" msprop:Generator_ColumnVarNameInTable="columnIDRESOURCEF" msprop:Generator_ColumnPropNameInRow="IDRESOURCEF" msprop:Generator_ColumnPropNameInTable="IDRESOURCEFColumn" msprop:Generator_UserColumnName="IDRESOURCEF">
@@ -93,7 +93,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="AP_GRIGLIA" msprop:Generator_TableClassName="AP_GRIGLIADataTable" msprop:Generator_TableVarName="tableAP_GRIGLIA" msprop:Generator_TablePropName="AP_GRIGLIA" msprop:Generator_RowDeletingName="AP_GRIGLIARowDeleting" msprop:Generator_RowChangingName="AP_GRIGLIARowChanging" msprop:Generator_RowEvHandlerName="AP_GRIGLIARowChangeEventHandler" msprop:Generator_RowDeletedName="AP_GRIGLIARowDeleted" msprop:Generator_UserTableName="AP_GRIGLIA" msprop:Generator_RowChangedName="AP_GRIGLIARowChanged" msprop:Generator_RowEvArgName="AP_GRIGLIARowChangeEvent" msprop:Generator_RowClassName="AP_GRIGLIARow">
+        <xs:element name="AP_GRIGLIA" msprop:Generator_TableClassName="AP_GRIGLIADataTable" msprop:Generator_TableVarName="tableAP_GRIGLIA" msprop:Generator_RowChangedName="AP_GRIGLIARowChanged" msprop:Generator_TablePropName="AP_GRIGLIA" msprop:Generator_RowDeletingName="AP_GRIGLIARowDeleting" msprop:Generator_RowChangingName="AP_GRIGLIARowChanging" msprop:Generator_RowEvHandlerName="AP_GRIGLIARowChangeEventHandler" msprop:Generator_RowDeletedName="AP_GRIGLIARowDeleted" msprop:Generator_RowClassName="AP_GRIGLIARow" msprop:Generator_UserTableName="AP_GRIGLIA" msprop:Generator_RowEvArgName="AP_GRIGLIARowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="DATA_PARTENZA" msprop:Generator_ColumnVarNameInTable="columnDATA_PARTENZA" msprop:Generator_ColumnPropNameInRow="DATA_PARTENZA" msprop:Generator_ColumnPropNameInTable="DATA_PARTENZAColumn" msprop:Generator_UserColumnName="DATA_PARTENZA" type="xs:dateTime" />
@@ -112,7 +112,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="NUMMOVFASE" msprop:Generator_ColumnVarNameInTable="columnNUMMOVFASE" msprop:Generator_ColumnPropNameInRow="NUMMOVFASE" msprop:Generator_ColumnPropNameInTable="NUMMOVFASEColumn" msprop:Generator_UserColumnName="NUMMOVFASE">
+              <xs:element name="NUMMOVFASE" msprop:Generator_ColumnVarNameInTable="columnNUMMOVFASE" msprop:Generator_ColumnPropNameInRow="NUMMOVFASE" msprop:Generator_ColumnPropNameInTable="NUMMOVFASEColumn" msprop:Generator_UserColumnName="NUMMOVFASE" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="25" />

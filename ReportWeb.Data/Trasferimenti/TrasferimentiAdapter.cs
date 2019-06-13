@@ -31,13 +31,16 @@ namespace ReportWeb.Data.Trasferimenti
 
         public void FillAP_GRIGLIA(TrasferimentiDS ds, DateTime dal, DateTime al, string barcodePartenza, string barcodeArrivo)
         {
-            string select = @"select tr.data_partenza,rp.codresourcef operatore_partenza,tr.data_arrivo,ra.codresourcef operatore_arrivo,td.nummovfase,td.reparto,ma.modello
+            string select = @"select tr.data_partenza,rp.codresourcef operatore_partenza,tr.data_arrivo,ra.codresourcef operatore_arrivo,td.nummovfase,td.reparto,
+                                nvl(ma.modello,nvl(matra.modello,'')) modello
                                 from ap_ttrasferimenti tr
                                 inner join ap_dtrasferimenti td on td.idtrasferimento = tr.idtrasferimento
-                                inner join usr_prd_movfasi mf on mf.barcode = td.barcode_odl
-                                inner join gruppo.magazz ma on ma.idmagazz = mf.idmagazz
+                                left join usr_prd_movfasi mf on mf.barcode = td.barcode_odl
+                                left join gruppo.magazz ma on ma.idmagazz = mf.idmagazz
+                                left join usr_trasf_rich tra on tra.barcode = td.barcode_odl
+                                left join gruppo.magazz matra on matra.idmagazz = tra.idmagazz
                                 inner join gruppo.USR_PRD_RESOURCESF rp on rp.barcode=tr.barcode_partenza
-                                inner join gruppo.USR_PRD_RESOURCESF ra on ra.barcode=tr.barcode_arrivo
+                                left join gruppo.USR_PRD_RESOURCESF ra on ra.barcode=tr.barcode_arrivo
                               WHERE ((data_partenza >= to_date('{0}','DD/MM/YYYY HH24:MI:SS') AND data_partenza <= to_date('{1}','DD/MM/YYYY HH24:MI:SS'))
                                     OR ( data_arrivo >= to_date('{2}','DD/MM/YYYY HH24:MI:SS') AND data_arrivo <= to_date('{3}','DD/MM/YYYY HH24:MI:SS')))";
 

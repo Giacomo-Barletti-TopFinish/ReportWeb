@@ -1045,7 +1045,6 @@ namespace ReportWeb.Entities {
                 this.columnDATA_PARTENZA.AllowDBNull = false;
                 this.columnOPERATORE_PARTENZA.MaxLength = 100;
                 this.columnOPERATORE_ARRIVO.MaxLength = 100;
-                this.columnNUMMOVFASE.AllowDBNull = false;
                 this.columnNUMMOVFASE.MaxLength = 25;
                 this.columnREPARTO.AllowDBNull = false;
                 this.columnREPARTO.MaxLength = 10;
@@ -1637,7 +1636,12 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string NUMMOVFASE {
                 get {
-                    return ((string)(this[this.tableAP_GRIGLIA.NUMMOVFASEColumn]));
+                    try {
+                        return ((string)(this[this.tableAP_GRIGLIA.NUMMOVFASEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NUMMOVFASE\' in table \'AP_GRIGLIA\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableAP_GRIGLIA.NUMMOVFASEColumn] = value;
@@ -1700,6 +1704,18 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetOPERATORE_ARRIVONull() {
                 this[this.tableAP_GRIGLIA.OPERATORE_ARRIVOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsNUMMOVFASENull() {
+                return this.IsNull(this.tableAP_GRIGLIA.NUMMOVFASEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetNUMMOVFASENull() {
+                this[this.tableAP_GRIGLIA.NUMMOVFASEColumn] = global::System.Convert.DBNull;
             }
         }
         
