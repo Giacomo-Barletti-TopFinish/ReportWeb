@@ -448,7 +448,7 @@ namespace ReportWeb.Business
             if (fasePadre == null) return fasi;
             List<ALEDS.RW_ALE_FASI_DA_ES_DIBARow> fasiFiglie = ds.RW_ALE_FASI_DA_ES_DIBA.Where(x => x.IDPRODOTTOFINITO == fasePadre.IDPRODOTTOFINITO && x.SEQUENZA >= fasePadre.SEQUENZA).OrderBy(x => x.SEQUENZA).ToList();
 
-            fasi = (from fff in fasiFiglie select new FaseCosto(fff.FASE, fff.IsCOSTOUNINull() ? "0" : fff.COSTOUNI.ToString().Replace(',','.'))).ToList();
+            fasi = (from fff in fasiFiglie select new FaseCosto(fff.FASE, fff.IsCOSTOUNINull() ? "0" : fff.COSTOUNI.ToString().Replace(',', '.'))).ToList();
             return fasi.Distinct().ToList();
         }
 
@@ -811,7 +811,7 @@ namespace ReportWeb.Business
                         {
                             ALEDS.RW_ALE_DETT_COSTORow dettCosto = ds.RW_ALE_DETT_COSTO.NewRW_ALE_DETT_COSTORow();
                             dettCosto.IDALEDETTAGLIO = dettaglio.IDALEDETTAGLIO;
-                            dettCosto.FASE = costoFase.Fase;
+                            dettCosto.FASE = (costoFase.Fase.Length > 50) ? costoFase.Fase.Substring(0, 50) : costoFase.Fase;
                             if (costoFase.Costo.HasValue)
                                 dettCosto.COSTO = costoFase.Costo.Value;
                             else
@@ -825,7 +825,7 @@ namespace ReportWeb.Business
                         {
                             ALEDS.RW_ALE_COSTO_MAGAZZRow costoMagazz = ds.RW_ALE_COSTO_MAGAZZ.NewRW_ALE_COSTO_MAGAZZRow();
                             costoMagazz.IDMAGAZZ = idmagazz;
-                            costoMagazz.FASE = costoFase.Fase;
+                            costoMagazz.FASE = (costoFase.Fase.Length > 50) ? costoFase.Fase.Substring(0, 50) : costoFase.Fase;
                             if (costoFase.Costo.HasValue)
                                 costoMagazz.COSTO = costoFase.Costo.Value;
                             else

@@ -152,6 +152,7 @@
     <Compile Include="Controllers\MailDispatcherController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PreserieController.cs" />
+    <Compile Include="Controllers\PreziosiController.cs" />
     <Compile Include="Controllers\PVDController.cs" />
     <Compile Include="Controllers\RegistrazioneController.cs" />
     <Compile Include="Controllers\RilevazioniController.cs" />
@@ -493,6 +494,11 @@
     <Content Include="Views\Registrazione\StoricoPartial.cshtml" />
     <Content Include="Views\Trasferimenti\Index.cshtml" />
     <Content Include="Views\Trasferimenti\TrasferimentiPartial.cshtml" />
+    <Content Include="Views\Preziosi\INSERIMENTOCASSAFORTEA.cshtml" />
+    <Content Include="Views\Preziosi\INSERIMENTOCASSAFORTEB.cshtml" />
+    <Content Include="Views\Preziosi\MOVIMENTI.cshtml" />
+    <Content Include="Views\Preziosi\SaldiCassefortiPartial.cshtml" />
+    <Content Include="Views\Preziosi\CaricaMovimentiPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

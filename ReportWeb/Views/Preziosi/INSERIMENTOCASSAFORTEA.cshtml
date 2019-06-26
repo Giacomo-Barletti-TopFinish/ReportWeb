@@ -1,0 +1,223 @@
+﻿@using ReportWeb.Models
+@{
+    ViewBag.Title = "Preziosi - Cassaforte A";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>Cassaforte A</h2>
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Scegli il prezioso su cui operare</label><br />
+                    @Html.DropDownList("ddlPreziosi", new SelectList(ViewData["preziosi"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Saldo iniziale cassaforte A gr.</label><br />
+                    <input type="text" id="txtSaldoInizialeCassaforteA" readonly="readonly" />
+                </div>
+                <div class="col-md-3">
+                    <label>Saldo iniziale cassaforte B gr.</label><br />
+                    <input type="text" id="txtSaldoInizialeCassaforteB" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Quantita da muovere gr.</label><br />
+                    <input type="number" id="txtQuantita" />
+                </div>
+                <div class="col-md-2">
+                    <label>Tipo operazione</label><br />
+                    @Html.DropDownList("ddlOperazione", new SelectList(ViewData["dareAvere"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Saldo finale cassaforte A gr.</label><br />
+                    <input type="text" id="txtSaldoFinaleCassaforteA" readonly="readonly" />
+                </div>
+                <div class="col-md-3">
+                    <label>Saldo finale cassaforte B gr.</label><br />
+                    <input type="text" id="txtSaldoFinaleCassaforteB" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Causale</label><br />
+                    <input type="text" id="txtCausale" maxlength="50" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input type="button" onclick="Salva();" class="btn btn-primary" value="Inserisci movimento" />
+            <label class="text-red input-sm" id="lblMessage"></label>
+        </div>
+    </div>
+    <label class="text-red input-sm" id="lblMessage"></label>
+</div>
+<div class="col-sm-12">
+    <div id="divGriglia"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+
+        $("#ddlPreziosi").change(function () {
+            $('#txtQuantita').val('');
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            if (selectedValue != '' && selectedValue  !='-1')
+                GetSaldoMateriale(selectedValue);
+        });
+
+        $("#ddlOperazione").change(function () {
+
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            if (selectedValue != '' && selectedValue != '-1')
+                ImpostaPagina(selectedValue);
+        });
+
+        $("#txtQuantita").change(function () {
+            var selectedText = $('#ddlOperazione').find("option:selected").text();
+            var selectedValue = $('#ddlOperazione').val();
+            if (selectedValue != '' && selectedValue != '-1')
+                ImpostaPagina(selectedValue);        });
+    });
+
+    function Salva() {
+        if (VerificaDatiPerSalvataggio())
+            ConfirmPopup("Vuoi confermare l'operazione ?",EseguiSalvataggio)
+    }
+
+    function EseguiSalvataggio() {
+        var operazione = $('#ddlOperazione').val();
+        var quantita = $("#txtQuantita").val();
+        var idPrezioso = $('#ddlPreziosi').val();
+        var causale = $('#txtCausale').val();
+
+         var url = '@Url.Action("SalvaMovimentoPreziosoCassaforteA", "Preziosi")';
+        $.ajax({
+            url: url,
+            data: { IdPrezioso: idPrezioso,Operazione:operazione,Quantita :quantita,Causale:causale },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                debugger;
+                if (data != 'True') {
+                    $('#lblMessage').html("Errore durante il salvataggio");
+                }
+                else {
+                    $('#lblMessage').html("Operazione terminata con successo");
+                    PulisciSelezione();
+                }
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function PulisciSelezione() {
+        $('#ddlOperazione').val('');
+        $("#txtQuantita").val('');
+        $('#ddlPreziosi').val('');
+        $('#txtCausale').val('');
+        $('#txtSaldoInizialeCassaforteA').val('')
+        $('#txtSaldoFinaleCassaforteA').val('');
+        $('#txtSaldoInizialeCassaforteB').val('');
+        $('#txtSaldoFinaleCassaforteB').val('');
+    }
+
+    function VerificaDatiPerSalvataggio() {
+        var messaggio = '';
+        var esito = true;
+        var selectedValue = $('#ddlOperazione').val();
+        if (selectedValue == '' || selectedValue == '-1') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "indicare l'operazione" + "</br>";
+            esito = false;
+        }
+
+        var txtquantita = $("#txtQuantita").val();
+        if (txtquantita == '' ) {
+            messaggio += MESSAGGIO_PUNTINO + " " + "indicare la quantità" + "</br>";
+            esito = false;
+        }
+
+        selectedValue = $('#ddlPreziosi').val();
+        if (selectedValue == '' || selectedValue == '-1') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "indicare il materiale prezioso" + "</br>";
+            esito = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+        return esito;
+    }
+
+    function ImpostaPagina(operazione) {
+
+        var quantita = parseFloat( $('#txtQuantita').val());
+        if (operazione == 'V') {
+            $('#txtSaldoFinaleCassaforteB').val($('#txtSaldoInizialeCassaforteB').val());
+
+            var saldoInizialeA = parseFloat($('#txtSaldoInizialeCassaforteA').val());
+            var saldoA = saldoInizialeA + quantita;
+            $('#txtSaldoFinaleCassaforteA').val(saldoA);
+        }
+        else {
+            var saldoInizialeB = parseFloat($('#txtSaldoInizialeCassaforteB').val());
+            var saldoInizialeA = parseFloat($('#txtSaldoInizialeCassaforteA').val());
+
+            if (quantita > saldoInizialeA) {
+                $('#lblMessage').html('Quantità superiore al saldo');
+                $('#txtQuantita').val('');
+                return;
+            }
+            var saldoB = saldoInizialeB + quantita;
+            $('#txtSaldoFinaleCassaforteB').val(saldoB);
+            var saldoA = saldoInizialeA - quantita;
+            if (saldoA < 0) {
+                $('#lblMessage').html('Errore. Saldo inferiore a zero');
+                $('#txtQuantita').val('');
+                return;
+            }
+            $('#txtSaldoFinaleCassaforteA').val(saldoA);
+        }
+
+    }
+
+    function GetSaldoMateriale(IdPrezioso)
+    {
+        var url = '@Url.Action("GetSaldoMateriale", "Preziosi")';
+        $.ajax({
+            url: url,
+            data: { IdPrezioso: IdPrezioso },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#txtSaldoInizialeCassaforteA').val(data.Item1);
+                $('#txtSaldoInizialeCassaforteB').val(data.Item2);
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

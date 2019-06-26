@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PreziosiDS" targetNamespace="http://tempuri.org/PreziosiDS.xsd" xmlns:mstns="http://tempuri.org/PreziosiDS.xsd" xmlns="http://tempuri.org/PreziosiDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.ReportWeb.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PreziosiDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PreziosiDS" msprop:Generator_UserDSName="PreziosiDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RW_MOVIMENTI_PREZIOSI" msprop:Generator_TableClassName="RW_MOVIMENTI_PREZIOSIDataTable" msprop:Generator_TableVarName="tableRW_MOVIMENTI_PREZIOSI" msprop:Generator_TablePropName="RW_MOVIMENTI_PREZIOSI" msprop:Generator_RowDeletingName="RW_MOVIMENTI_PREZIOSIRowDeleting" msprop:Generator_RowChangingName="RW_MOVIMENTI_PREZIOSIRowChanging" msprop:Generator_RowEvHandlerName="RW_MOVIMENTI_PREZIOSIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_MOVIMENTI_PREZIOSIRowDeleted" msprop:Generator_UserTableName="RW_MOVIMENTI_PREZIOSI" msprop:Generator_RowChangedName="RW_MOVIMENTI_PREZIOSIRowChanged" msprop:Generator_RowEvArgName="RW_MOVIMENTI_PREZIOSIRowChangeEvent" msprop:Generator_RowClassName="RW_MOVIMENTI_PREZIOSIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDMOVIMENTI" msprop:Generator_ColumnVarNameInTable="columnIDMOVIMENTI" msprop:Generator_ColumnPropNameInRow="IDMOVIMENTI" msprop:Generator_ColumnPropNameInTable="IDMOVIMENTIColumn" msprop:Generator_UserColumnName="IDMOVIMENTI" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CASSAFORTE" msprop:Generator_ColumnVarNameInTable="columnCASSAFORTE" msprop:Generator_ColumnPropNameInRow="CASSAFORTE" msprop:Generator_ColumnPropNameInTable="CASSAFORTEColumn" msprop:Generator_UserColumnName="CASSAFORTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDPREZIOSO" msprop:Generator_ColumnVarNameInTable="columnIDPREZIOSO" msprop:Generator_ColumnPropNameInRow="IDPREZIOSO" msprop:Generator_ColumnPropNameInTable="IDPREZIOSOColumn" msprop:Generator_UserColumnName="IDPREZIOSO" type="xs:decimal" />
+              <xs:element name="QUANTITA" msprop:Generator_ColumnVarNameInTable="columnQUANTITA" msprop:Generator_ColumnPropNameInRow="QUANTITA" msprop:Generator_ColumnPropNameInTable="QUANTITAColumn" msprop:Generator_UserColumnName="QUANTITA" type="xs:decimal" />
+              <xs:element name="SALDOINIZIALE" msprop:Generator_ColumnVarNameInTable="columnSALDOINIZIALE" msprop:Generator_ColumnPropNameInRow="SALDOINIZIALE" msprop:Generator_ColumnPropNameInTable="SALDOINIZIALEColumn" msprop:Generator_UserColumnName="SALDOINIZIALE" type="xs:decimal" />
+              <xs:element name="SALDOFINALE" msprop:Generator_ColumnVarNameInTable="columnSALDOFINALE" msprop:Generator_ColumnPropNameInRow="SALDOFINALE" msprop:Generator_ColumnPropNameInTable="SALDOFINALEColumn" msprop:Generator_UserColumnName="SALDOFINALE" type="xs:decimal" />
+              <xs:element name="NOTA" msprop:Generator_ColumnVarNameInTable="columnNOTA" msprop:Generator_ColumnPropNameInRow="NOTA" msprop:Generator_ColumnPropNameInTable="NOTAColumn" msprop:Generator_UserColumnName="NOTA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATA" msprop:Generator_ColumnVarNameInTable="columnDATA" msprop:Generator_ColumnPropNameInRow="DATA" msprop:Generator_ColumnPropNameInTable="DATAColumn" msprop:Generator_UserColumnName="DATA" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RW_PREZIOSI" msprop:Generator_TableClassName="RW_PREZIOSIDataTable" msprop:Generator_TableVarName="tableRW_PREZIOSI" msprop:Generator_TablePropName="RW_PREZIOSI" msprop:Generator_RowDeletingName="RW_PREZIOSIRowDeleting" msprop:Generator_RowChangingName="RW_PREZIOSIRowChanging" msprop:Generator_RowEvHandlerName="RW_PREZIOSIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_PREZIOSIRowDeleted" msprop:Generator_UserTableName="RW_PREZIOSI" msprop:Generator_RowChangedName="RW_PREZIOSIRowChanged" msprop:Generator_RowEvArgName="RW_PREZIOSIRowChangeEvent" msprop:Generator_RowClassName="RW_PREZIOSIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDPREZIOSO" msprop:Generator_ColumnVarNameInTable="columnIDPREZIOSO" msprop:Generator_ColumnPropNameInRow="IDPREZIOSO" msprop:Generator_ColumnPropNameInTable="IDPREZIOSOColumn" msprop:Generator_UserColumnName="IDPREZIOSO" type="xs:decimal" />
+              <xs:element name="MATERIALE" msprop:Generator_ColumnVarNameInTable="columnMATERIALE" msprop:Generator_ColumnPropNameInRow="MATERIALE" msprop:Generator_ColumnPropNameInTable="MATERIALEColumn" msprop:Generator_UserColumnName="MATERIALE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

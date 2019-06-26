@@ -163,7 +163,7 @@ namespace ReportWeb.Controllers
                         List<RWListItem> Macchine = bll.CaricaListaMacchine(RepartoCodice);
                         ViewData.Add("Macchine", Macchine);
 
-                        List<RWListItem> Materiale = bll.CaricaListaMateriali();
+                        List<RWListItem> Materiale = bll.CaricaListaMetalliBase();
                         ViewData.Add("Materiali", Materiale);
 
                         List<TornituraJson> model = bll.FillRW_PR_TORNITURA(Barcode);

@@ -1,0 +1,114 @@
+﻿@using ReportWeb.Models
+@{
+    ViewBag.Title = "Preziosi - Movimenti";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>Saldi e Movimenti Casseforti</h2>
+    <div class="box-body form-group-sm">
+        <div id="divSaldi">
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-body form-group-sm">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Ricerca movimenti dal</label><br />
+                    <input type="date" id="dtInizio" />
+                </div>
+                <div class="col-md-2">
+                    <label>al</label><br />
+                    <input type="date" id="dtFine" />
+                </div>
+                <div class="col-md-2">
+                    <input type="button" onclick="CaricaMovimenti();" class="btn btn-primary" value="Trova" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="box-body form-group-sm">
+        <label class="text-red input-sm" id="lblMessage"></label>
+        <div id="divMovimenti">
+        </div>
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+
+
+        var fine = CreaStringaData();
+        var inizio = CreaStringaData();
+
+        $('#dtInizio').val(inizio);
+        $('#dtFine').val(fine);
+        CaricaNuoviElementiDaAddebitare();
+    });
+
+     function CaricaNuoviElementiDaAddebitare()
+    {
+
+        var url = '@Url.Action("CaricaSaldiCasseforti", "Preziosi")';
+        $.ajax({
+            url: url,
+            data: {},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divSaldi').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function CreaStringaData() {
+        let now = new Date();
+
+        let day = ("0" + now.getDate()).slice(-2);
+        let month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+
+        let today = now.getFullYear() + "-" + (month) + "-"+(day) ;
+
+        return today;
+    }
+
+    function CaricaMovimenti()
+    {
+        var inizio = $('#dtInizio').val();
+        var fine = $('#dtFine').val();
+
+        if (inizio == '' || inizio == null) {
+            lblMessage.html("Specificare la data di inizio e di fine");
+        }
+        if (fine == '' || fine == null) {
+            lblMessage.html("Specificare la data di inizio e di fine");
+        }
+
+        var url = '@Url.Action("CaricaMovimenti", "Preziosi")';
+        $.ajax({
+            url: url,
+            data: {DataInizio:inizio,DataFine:fine},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divMovimenti').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

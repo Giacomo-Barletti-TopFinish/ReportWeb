@@ -70,6 +70,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PreserieDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="PreziosiDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PreziosiDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -173,6 +178,17 @@
     </None>
     <None Include="PreserieDS.xss">
       <DependentUpon>PreserieDS.xsd</DependentUpon>
+    </None>
+    <None Include="PreziosiDS.xsc">
+      <DependentUpon>PreziosiDS.xsd</DependentUpon>
+    </None>
+    <None Include="PreziosiDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PreziosiDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PreziosiDS.xss">
+      <DependentUpon>PreziosiDS.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

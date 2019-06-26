@@ -85,6 +85,8 @@
     <Compile Include="Preserie\JSON\Pulimentatura.cs" />
     <Compile Include="Preserie\Lavorazione.cs" />
     <Compile Include="Preserie\ODLSchedaModel.cs" />
+    <Compile Include="Preziosi\Movimenti.cs" />
+    <Compile Include="Preziosi\SaldoCasseforti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PVDConsuntivoModel.cs" />
     <Compile Include="PVDReportModel.cs" />

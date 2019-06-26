@@ -1,0 +1,24 @@
+﻿@using ReportWeb.Models.Preziosi
+@model List<SaldoCasseforti>
+
+<table class="table table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th width="15%">Materiale</th>
+            <th width="15%">Cassaforte A</th>
+            <th width="15%">Cassaforte B</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (SaldoCasseforti s in Model)
+        {
+            <tr>
+                <td>@s.Materiale</td>
+                <td>@s.SaldoA</td>
+                <td>@s.SaldoB</td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
