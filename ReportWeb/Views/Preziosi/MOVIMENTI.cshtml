@@ -21,6 +21,10 @@
                     <input type="date" id="dtFine" />
                 </div>
                 <div class="col-md-2">
+                    <label>Scegli il prezioso su cui operare</label><br />
+                    @Html.DropDownList("ddlPreziosi", new SelectList(ViewData["preziosi"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+                </div>
+                <div class="col-md-2">
                     <input type="button" onclick="CaricaMovimenti();" class="btn btn-primary" value="Trova" />
                 </div>
 
@@ -93,10 +97,12 @@
             lblMessage.html("Specificare la data di inizio e di fine");
         }
 
+        var idPrezioso = $('#ddlPreziosi').val();
+
         var url = '@Url.Action("CaricaMovimenti", "Preziosi")';
         $.ajax({
             url: url,
-            data: {DataInizio:inizio,DataFine:fine},
+            data: { DataInizio: inizio, DataFine: fine, IdPrezioso: idPrezioso},
             cache: false,
             type: "POST",
             success: function (data)

@@ -79,10 +79,10 @@ namespace ReportWeb.Controllers
             return PartialView("SaldiCassefortiPartial", saldi);
         }
 
-        public ActionResult CaricaMovimenti(string DataInizio, string DataFine)
+        public ActionResult CaricaMovimenti(string DataInizio, string DataFine, int IdPrezioso)
         {
             PreziosiBLL bll = new PreziosiBLL();
-            List<Movimenti> movimenti = bll.CaricaMovimenti(DataInizio, DataFine);
+            List<Movimenti> movimenti = bll.CaricaMovimenti(DataInizio, DataFine,IdPrezioso);
 
             return PartialView("CaricaMovimentiPartial", movimenti);
         }

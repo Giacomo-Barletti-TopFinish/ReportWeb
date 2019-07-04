@@ -45,7 +45,7 @@ namespace ReportWeb.Business
             }
         }
 
-        public List<Movimenti> CaricaMovimenti(string DataInizio, string DataFine)
+        public List<Movimenti> CaricaMovimenti(string DataInizio, string DataFine, int IdPrezioso)
         {
             DateTime inizio;
             DateTime fine;
@@ -60,6 +60,9 @@ namespace ReportWeb.Business
                     bPreziosi.FillRW_MOVIMENTI_PREZIOSI(ds);
                     bPreziosi.FillRW_PREZIOSI(ds);
                     List<PreziosiDS.RW_MOVIMENTI_PREZIOSIRow> movimentiFiltrato = ds.RW_MOVIMENTI_PREZIOSI.Where(x => x.DATA >= inizio && x.DATA <= fine).ToList();
+                    if (IdPrezioso > 0)
+                        movimentiFiltrato = movimentiFiltrato.Where(x => x.IDPREZIOSO == IdPrezioso).ToList();
+
                     foreach (PreziosiDS.RW_MOVIMENTI_PREZIOSIRow mov in movimentiFiltrato.OrderBy(x => x.DATA))
                     {
                         string materiale = ds.RW_PREZIOSI.Where(x => x.IDPREZIOSO == mov.IDPREZIOSO).Select(x => x.MATERIALE.Trim()).FirstOrDefault();
