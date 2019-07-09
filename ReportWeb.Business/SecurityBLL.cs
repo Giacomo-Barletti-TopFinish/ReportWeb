@@ -145,6 +145,13 @@ namespace ReportWeb.BLL
             {
                 bSecurity.FillUserMenu(UIDUSER, ds);
 
+                if (idMenu == null)
+                {
+                    foreach (SecurityDS.RW_USER_MENURow row in ds.RW_USER_MENU.ToList())
+                        row.Delete();
+                    bSecurity.SalvaMenuUtente(ds);
+                    return;
+                }
 
                 foreach (SecurityDS.RW_USER_MENURow row in ds.RW_USER_MENU.Where(x => !idMenu.Contains((int)x.IDMENU)).ToList())
                     row.Delete();

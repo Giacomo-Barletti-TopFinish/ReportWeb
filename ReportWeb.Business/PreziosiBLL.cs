@@ -119,9 +119,11 @@ namespace ReportWeb.Business
                 PreziosiDS ds = new PreziosiDS();
                 using (PreziosiBusiness bPreziosi = new PreziosiBusiness())
                 {
+                    bPreziosi.FillRW_PREZIOSI(ds);
                     bPreziosi.FillRW_MOVIMENTI_PREZIOSI(ds);
                     decimal saldoA = GetUltimoSaldo(IdPrezioso, "A", ds);
                     decimal saldoB = GetUltimoSaldo(IdPrezioso, "B", ds);
+                    string prezioso = ds.RW_PREZIOSI.Where(x => x.IDPREZIOSO == IdPrezioso).Select(x => x.MATERIALE).FirstOrDefault();
 
                     if (Operazione == "P")
                     {
@@ -152,6 +154,8 @@ namespace ReportWeb.Business
                         ds.RW_MOVIMENTI_PREZIOSI.AddRW_MOVIMENTI_PREZIOSIRow(movimentoB);
 
                         bPreziosi.UpdatePreziosiDS(ds.RW_MOVIMENTI_PREZIOSI.TableName, ds);
+                        InviaMailCassaforteA(-1 * Quantita, Causale, ConnectedUser, prezioso, saldoA, nuovoSaldoA);
+                        InviaMailCassaforteB(Quantita, Causale, ConnectedUser, prezioso, saldoB, nuovoSaldoB);
                     }
                     else
                     {
@@ -168,6 +172,7 @@ namespace ReportWeb.Business
                         ds.RW_MOVIMENTI_PREZIOSI.AddRW_MOVIMENTI_PREZIOSIRow(movimentoA);
 
                         bPreziosi.UpdatePreziosiDS(ds.RW_MOVIMENTI_PREZIOSI.TableName, ds);
+                        InviaMailCassaforteA(Quantita, Causale, ConnectedUser, prezioso, saldoA, nuovoSaldoA);
                     }
                 }
                 return true;
@@ -179,6 +184,46 @@ namespace ReportWeb.Business
 
         }
 
+        private void InviaMailCassaforteA(decimal Quantita, string Causale, string ConnectedUser, string prezioso, decimal saldoIniziale, decimal saldoFinale)
+        {
+            Decimal IDMAIL = 0;
+            MailDispatcherBLL bllMD = new MailDispatcherBLL();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("MOVIMENTO SULLA CASSAFORTE A");
+            sb.AppendLine(string.Empty);
+            sb.AppendLine(string.Format("Operazione: {0}", Quantita < 0 ? "Prelievo" : "Versamento"));
+            sb.AppendLine(string.Format("Quantità: {0}", Math.Abs(Quantita)));
+            sb.AppendLine(string.Format("Nota: {0}", Causale));
+            sb.AppendLine(string.Format("Operatore: {0}", ConnectedUser));
+            sb.AppendLine(string.Format("Saldo iniziale: {0}", saldoIniziale));
+            sb.AppendLine(string.Format("Saldo finale: {0}", saldoFinale));
+
+            string oggetto = "PREZIONI - NUOVO MOVIMENTO";
+            IDMAIL = bllMD.CreaEmail("PREZIOSI - CASSAFORTE A", oggetto, sb.ToString());
+
+            bllMD.SottomettiEmail(IDMAIL);
+        }
+
+        private void InviaMailCassaforteB(decimal Quantita, string Causale, string ConnectedUser, string prezioso, decimal saldoIniziale, decimal saldoFinale)
+        {
+            Decimal IDMAIL = 0;
+            MailDispatcherBLL bllMD = new MailDispatcherBLL();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("MOVIMENTO SULLA CASSAFORTE B");
+            sb.AppendLine(string.Empty);
+            sb.AppendLine(string.Format("Operazione: {0}", Quantita < 0 ? "Prelievo" : "Versamento"));
+            sb.AppendLine(string.Format("Quantità: {0}", Math.Abs(Quantita)));
+            sb.AppendLine(string.Format("Nota: {0}", Causale));
+            sb.AppendLine(string.Format("Operatore: {0}", ConnectedUser));
+            sb.AppendLine(string.Format("Saldo iniziale: {0}", saldoIniziale));
+            sb.AppendLine(string.Format("Saldo finale: {0}", saldoFinale));
+
+            string oggetto = "PREZIONI - NUOVO MOVIMENTO";
+            IDMAIL = bllMD.CreaEmail("PREZIOSI - CASSAFORTE B", oggetto, sb.ToString());
+
+            bllMD.SottomettiEmail(IDMAIL);
+        }
+
         public bool SalvaMovimentoPreziosoCassaforteB(int IdPrezioso, string Operazione, decimal Quantita, string Causale, string ConnectedUser)
         {
             try
@@ -187,15 +232,17 @@ namespace ReportWeb.Business
                 using (PreziosiBusiness bPreziosi = new PreziosiBusiness())
                 {
                     bPreziosi.FillRW_MOVIMENTI_PREZIOSI(ds);
+                    bPreziosi.FillRW_PREZIOSI(ds);
+
                     decimal saldoA = GetUltimoSaldo(IdPrezioso, "A", ds);
                     decimal saldoB = GetUltimoSaldo(IdPrezioso, "B", ds);
+                    string prezioso = ds.RW_PREZIOSI.Where(x => x.IDPREZIOSO == IdPrezioso).Select(x => x.MATERIALE).FirstOrDefault();
 
                     if (Operazione == "P")
                     {
 
                         if (saldoB < Quantita) return false;
-                        decimal nuovoSaldoA = saldoA - Quantita;
-                        decimal nuovoSaldoB = saldoB + Quantita;
+                        decimal nuovoSaldoB = saldoB - Quantita;
 
                         PreziosiDS.RW_MOVIMENTI_PREZIOSIRow movimentoB = ds.RW_MOVIMENTI_PREZIOSI.NewRW_MOVIMENTI_PREZIOSIRow();
                         movimentoB.CASSAFORTE = "B";
@@ -209,6 +256,8 @@ namespace ReportWeb.Business
                         ds.RW_MOVIMENTI_PREZIOSI.AddRW_MOVIMENTI_PREZIOSIRow(movimentoB);
 
                         bPreziosi.UpdatePreziosiDS(ds.RW_MOVIMENTI_PREZIOSI.TableName, ds);
+                        InviaMailCassaforteB(-1 * Quantita, Causale, ConnectedUser, prezioso,saldoB,nuovoSaldoB);
+
                     }
                 }
                 return true;
