@@ -189,8 +189,9 @@ namespace ReportWeb.Business
             Decimal IDMAIL = 0;
             MailDispatcherBLL bllMD = new MailDispatcherBLL();
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("MOVIMENTO SULLA CASSAFORTE A");
+            sb.AppendLine("MOVIMENTO SULLA CASSAFORTE GRANDE");
             sb.AppendLine(string.Empty);
+            sb.AppendLine(string.Format("Prezioso: {0}", prezioso));
             sb.AppendLine(string.Format("Operazione: {0}", Quantita < 0 ? "Prelievo" : "Versamento"));
             sb.AppendLine(string.Format("Quantità: {0}", Math.Abs(Quantita)));
             sb.AppendLine(string.Format("Nota: {0}", Causale));
@@ -198,7 +199,7 @@ namespace ReportWeb.Business
             sb.AppendLine(string.Format("Saldo iniziale: {0}", saldoIniziale));
             sb.AppendLine(string.Format("Saldo finale: {0}", saldoFinale));
 
-            string oggetto = "PREZIONI - NUOVO MOVIMENTO";
+            string oggetto = "PREZIOSI - NUOVO MOVIMENTO";
             IDMAIL = bllMD.CreaEmail("PREZIOSI - CASSAFORTE A", oggetto, sb.ToString());
 
             bllMD.SottomettiEmail(IDMAIL);
@@ -209,8 +210,9 @@ namespace ReportWeb.Business
             Decimal IDMAIL = 0;
             MailDispatcherBLL bllMD = new MailDispatcherBLL();
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("MOVIMENTO SULLA CASSAFORTE B");
+            sb.AppendLine("MOVIMENTO SULLA CASSAFORTE PICCOLA");
             sb.AppendLine(string.Empty);
+            sb.AppendLine(string.Format("Prezioso: {0}", prezioso));
             sb.AppendLine(string.Format("Operazione: {0}", Quantita < 0 ? "Prelievo" : "Versamento"));
             sb.AppendLine(string.Format("Quantità: {0}", Math.Abs(Quantita)));
             sb.AppendLine(string.Format("Nota: {0}", Causale));
@@ -218,7 +220,7 @@ namespace ReportWeb.Business
             sb.AppendLine(string.Format("Saldo iniziale: {0}", saldoIniziale));
             sb.AppendLine(string.Format("Saldo finale: {0}", saldoFinale));
 
-            string oggetto = "PREZIONI - NUOVO MOVIMENTO";
+            string oggetto = "PREZIOSI - NUOVO MOVIMENTO";
             IDMAIL = bllMD.CreaEmail("PREZIOSI - CASSAFORTE B", oggetto, sb.ToString());
 
             bllMD.SottomettiEmail(IDMAIL);
