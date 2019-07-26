@@ -1,6 +1,8 @@
 ﻿using ReportWeb.Business;
+using ReportWeb.Common.Helpers;
 using ReportWeb.Models;
 using ReportWeb.Models.Preziosi;
+using ReportWeb.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,9 +84,21 @@ namespace ReportWeb.Controllers
         public ActionResult CaricaMovimenti(string DataInizio, string DataFine, int IdPrezioso)
         {
             PreziosiBLL bll = new PreziosiBLL();
-            List<Movimenti> movimenti = bll.CaricaMovimenti(DataInizio, DataFine,IdPrezioso);
+            List<Movimenti> movimenti = bll.CaricaMovimenti(DataInizio, DataFine, IdPrezioso);
 
             return PartialView("CaricaMovimentiPartial", movimenti);
+        }
+
+        public ActionResult ReportPDF(string DataInizio, string DataFine, int IdPrezioso)
+        {
+            PreziosiBLL bll = new PreziosiBLL();
+            List<Movimenti> movimenti = bll.CaricaMovimenti(DataInizio, DataFine, IdPrezioso);
+            List<RWListItem> preziosi = bll.CreaListaPreziosi();
+            List<SaldoCasseforti> saldi = bll.GetSaldiCompleti();
+            PDFHelper pdfHelper = new PDFHelper();
+            byte[] fileContents = pdfHelper.EstraiMovimentiPreziosi(movimenti,saldi, DataInizio, DataFine);
+
+            return File(fileContents, "application/pdf", "Report.pdf");
         }
     }
 }

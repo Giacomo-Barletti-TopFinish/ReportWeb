@@ -27,13 +27,16 @@
                 <div class="col-md-2">
                     <input type="button" onclick="CaricaMovimenti();" class="btn btn-primary" value="Trova" />
                 </div>
+                <div class="col-md-2">
+                    <input type="button" onclick="Report();" class="btn btn-primary" value="Report PDF" />
+                </div>
 
             </div>
         </div>
     </div>
     <div class="box-body form-group-sm">
         <label class="text-red input-sm" id="lblMessage"></label>
-        <div id="divMovimenti">
+        <div id="divMovimenti" style="overflow-y:auto; overflow-x:hidden; height:420px">
         </div>
     </div>
 </div>
@@ -116,5 +119,29 @@
                 document.close();
             }
         });
+    }
+
+     function Report()
+    {
+         var inizio = $('#dtInizio').val();
+         var fine = $('#dtFine').val();
+
+         if (inizio == '' || inizio == null) {
+             lblMessage.html("Specificare la data di inizio e di fine");
+         }
+         if (fine == '' || fine == null) {
+             lblMessage.html("Specificare la data di inizio e di fine");
+         }
+
+         var idPrezioso = $('#ddlPreziosi').val();
+
+        var url = '@Url.Action("ReportPDF", "Preziosi")';
+         url = url + '?DataInizio=' + inizio;
+         url = url + '&DataFine=' + fine;
+         url = url + '&IdPrezioso=' + idPrezioso;
+
+        var win = window.open(url, '_blank');
+        win.document.title = "Report Prezioso";
+        win.focus();
     }
 </script>

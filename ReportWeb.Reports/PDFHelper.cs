@@ -4,6 +4,7 @@ using MigraDoc.Rendering;
 using ReportWeb.Common.Helpers;
 using ReportWeb.Models;
 using ReportWeb.Models.ALE;
+using ReportWeb.Models.Preziosi;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -78,6 +79,50 @@ namespace ReportWeb.Reports
             paragraph.Format.SpaceAfter = "1cm";
 
             CreaTabellaGalvanica(report);
+
+            byte[] fileContents = EstraiByteDaDocumento();
+            return fileContents;
+        }
+
+        public byte[] EstraiMovimentiPreziosi(List<Movimenti> movimenti, List<SaldoCasseforti> saldi, string dataInizio, string dataFine)
+        {
+            InizializzaDocumento("Movimenti prezioso", "Movimenti", "MetalWeb");
+
+            _document.DefaultPageSetup.Orientation = Orientation.Landscape;
+            _document.DefaultPageSetup.RightMargin = 20;
+            _document.DefaultPageSetup.LeftMargin = 20;
+            _document.AddSection();
+            _document.LastSection.AddParagraph("Movimenti prezioso", "Heading2");
+
+            Paragraph paragraph = _document.LastSection.AddParagraph();
+            paragraph.AddText("Movimenti dal ");
+            paragraph.AddFormattedText(dataInizio, TextFormat.Bold);
+            paragraph.AddText(" al ");
+            paragraph.AddFormattedText(dataFine, TextFormat.Bold);
+            paragraph.AddText(". ");
+            paragraph.AddLineBreak();
+            paragraph.AddLineBreak();
+
+            paragraph = _document.LastSection.AddParagraph();
+            paragraph.AddText("MOVIMENTI CASSAFORTE GRANDE");
+            paragraph.AddLineBreak();
+            CreaTabellaMovimentiCassaforte(movimenti, "A");
+            paragraph.Format.SpaceAfter = "1cm";
+
+            paragraph = _document.LastSection.AddParagraph();
+            paragraph.AddLineBreak();
+            paragraph.AddText("MOVIMENTI CASSAFORTE PICCOLA");
+            paragraph.AddLineBreak();
+            paragraph.AddLineBreak();
+            CreaTabellaMovimentiCassaforte(movimenti, "B");
+            paragraph.Format.SpaceAfter = "1cm";
+
+            paragraph = _document.LastSection.AddParagraph();
+            paragraph.AddLineBreak();
+            paragraph.AddText("SALDI");
+            paragraph.AddLineBreak();
+            paragraph.AddLineBreak();
+            CreaTabellaSaldiPrezioso(saldi);
 
             byte[] fileContents = EstraiByteDaDocumento();
             return fileContents;
@@ -206,6 +251,109 @@ namespace ReportWeb.Reports
             style.ParagraphFormat.Font.Color = Colors.Blue;
         }
 
+        private void CreaTabellaMovimentiCassaforte(List<Movimenti> movimenti, string cassaforte)
+        {
+            //12 colonne
+            Table table = new Table();
+            table.Borders.Width = 0.75;
+
+            Column column = table.AddColumn(Unit.FromCentimeter(2));
+            column.Format.Alignment = ParagraphAlignment.Center;
+
+            table.AddColumn(Unit.FromCentimeter(5));
+            table.AddColumn(Unit.FromCentimeter(2.5));
+            table.AddColumn(Unit.FromCentimeter(2.5));
+
+            table.AddColumn(Unit.FromCentimeter(3));
+
+            table.AddColumn(Unit.FromCentimeter(8));
+
+            table.Rows.Height = 10;
+            table.TopPadding = 5;
+            table.BottomPadding = 5;
+
+            Row row = table.AddRow();
+            row.Shading.Color = Colors.PaleGoldenrod;
+            Cell cell = row.Cells[0];
+            cell.AddParagraph("Giorno");
+            cell = row.Cells[1];
+            cell.AddParagraph("Materiale");
+            cell = row.Cells[2];
+            cell.AddParagraph("Dare (gr.)");
+            cell = row.Cells[3];
+            cell.AddParagraph("Avere");
+            cell = row.Cells[4];
+            cell.AddParagraph("Utente");
+            cell = row.Cells[5];
+            cell.AddParagraph("Causale");
+
+            foreach (Movimenti movimento in movimenti.Where(x => x.Cassaforte == cassaforte))
+            {
+                row = table.AddRow();
+
+                cell = row.Cells[0];
+                cell.AddParagraph(movimento.Giorno.ToShortDateString());
+                cell.VerticalAlignment = VerticalAlignment.Center;
+                cell = row.Cells[1];
+                cell.AddParagraph(movimento.Materiale);
+                cell = row.Cells[2];
+                cell.AddParagraph(movimento.Dare);
+                cell = row.Cells[3];
+                cell.AddParagraph(movimento.Avere);
+                cell = row.Cells[4];
+                cell.AddParagraph(movimento.Utente);
+                cell = row.Cells[5];
+                cell.AddParagraph(movimento.Causale);
+
+            }
+
+
+            table.SetEdge(0, 0, table.Columns.Count, table.Rows.Count, Edge.Box, BorderStyle.Single, 1.5, Colors.Black);
+
+            _document.LastSection.Add(table);
+        }
+        private void CreaTabellaSaldiPrezioso(List<SaldoCasseforti> saldi)
+        {
+            //12 colonne
+            Table table = new Table();
+            table.Borders.Width = 0.75;
+
+            Column column = table.AddColumn(Unit.FromCentimeter(6));
+            table.AddColumn(Unit.FromCentimeter(2.5));
+            table.AddColumn(Unit.FromCentimeter(2.5));
+
+            table.Rows.Height = 10;
+            table.TopPadding = 5;
+            table.BottomPadding = 5;
+
+            Row row = table.AddRow();
+            row.Shading.Color = Colors.PaleGoldenrod;
+            Cell cell = row.Cells[0];
+            cell.AddParagraph("Materiale");
+            cell = row.Cells[1];
+            cell.AddParagraph("Cassaforte Grande");
+            cell = row.Cells[2];
+            cell.AddParagraph("Cassaforte Piccola");
+
+            foreach (SaldoCasseforti saldo in saldi)
+            {
+                row = table.AddRow();
+
+                cell = row.Cells[0];
+                cell.AddParagraph(saldo.Materiale);
+                cell.VerticalAlignment = VerticalAlignment.Center;
+                cell = row.Cells[1];
+                cell.AddParagraph(saldo.SaldoA);
+                cell = row.Cells[2];
+                cell.AddParagraph(saldo.SaldoB);
+
+            }
+
+
+            table.SetEdge(0, 0, table.Columns.Count, table.Rows.Count, Edge.Box, BorderStyle.Single, 1.5, Colors.Black);
+
+            _document.LastSection.Add(table);
+        }
         private void InizializzaDocumento(string Titolo, string Soggetto, string Autore)
         {
             _document = new Document();
@@ -394,7 +542,7 @@ namespace ReportWeb.Reports
             foreach (AddebitoModel mancante in report.Addebiti)
             {
                 row = table.AddRow();
-                
+
                 cell = row.Cells[0];
                 cell.AddParagraph(mancante.DataInserimento.ToShortDateString());
                 cell.VerticalAlignment = VerticalAlignment.Top;
