@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReportWeb.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,28 @@ namespace ReportWeb.Common
         public const string Tornitura = "TORN";
         public const string PVD = "PVD";
         public const string Smaltatura = "02694";
+
+        public static List<RWListItem> CreaListaReparti()
+        {
+            List<RWListItem> lista = new List<RWListItem>();
+            lista.Add(new RWListItem(LeggiEtichetta(Confezionamento), Confezionamento));
+            lista.Add(new RWListItem(LeggiEtichetta(Modelleria), Modelleria));
+            lista.Add(new RWListItem(LeggiEtichetta(ControlloQualitaPost1), ControlloQualitaPost1));
+            lista.Add(new RWListItem(LeggiEtichetta(Pressofusione), Pressofusione));
+            lista.Add(new RWListItem(LeggiEtichetta(Slegatura), Slegatura));
+            lista.Add(new RWListItem(LeggiEtichetta(Stampaggio), Stampaggio));
+            lista.Add(new RWListItem(LeggiEtichetta(Saldatura), Saldatura));
+            lista.Add(new RWListItem(LeggiEtichetta(Piegafilo), Piegafilo));
+            lista.Add(new RWListItem(LeggiEtichetta(Pulimentatura), Pulimentatura));
+            lista.Add(new RWListItem(LeggiEtichetta(Tranciatura), Tranciatura));
+            lista.Add(new RWListItem(LeggiEtichetta(Verniciatura), Verniciatura));
+            lista.Add(new RWListItem(LeggiEtichetta(GalvanicaAuto), GalvanicaAuto));
+            lista.Add(new RWListItem(LeggiEtichetta(Legatura), Legatura));
+            lista.Add(new RWListItem(LeggiEtichetta(PVD), PVD));
+            lista.Add(new RWListItem(LeggiEtichetta(Tornitura), Tornitura));
+
+            return lista;
+        }
 
         public static string LeggiEtichetta(string Reparto)
         {
