@@ -1,0 +1,60 @@
+﻿@using ReportWeb.Models
+@model List<VideoRepartoModel>
+
+<div class="row">
+    <div class="col-sm-10">        
+        <table class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th width="20%">Video</th>
+                    <th width="20%">Reparto</th>
+                    <th width="15%">Data Inizio</th>
+                    <th width="15%">Data Fine</th>
+                    <th width="5%"></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (VideoRepartoModel m in Model)
+                {
+                    <tr>
+                        <td>@m.Video</td>
+                        <td>@m.Reparto</td>
+                        <td>@m.DataInizio.ToString("dd/MM/yyyy")</td>
+                        <td>@m.DataFine.ToString("dd/MM/yyyy")</td>
+                        <td><input type="button"  onclick="Cancella(@m.IDVIDEOREPARTO);" class="btn-primary" value="Cancella" /></td>                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>    
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+    });
+
+    function Cancella(IDVIDEOREPARTO)
+    {
+        var url = '@Url.Action("CancellaVideoReparto", "Video")';
+        $.ajax({
+            url: url,
+            data: {IDVIDEOREPARTO: IDVIDEOREPARTO},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+              GrigliaVideoRepartoPartial();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close;
+            }
+        });
+    }
+
+
+</script>
+

@@ -1,0 +1,32 @@
+﻿@using ReportWeb.Models;
+
+<div class="row">
+    <div class="col-md-2">
+        <label>Video</label><br />
+        @Html.DropDownList("ddlVideo", new SelectList(ViewData["video"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+    </div>
+
+    <div class="col-md-2">
+        <label>Reparto</label><br />
+        @Html.DropDownList("ddlReparto", new SelectList(ViewData["reparti"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+    </div>
+
+    <div class="col-md-2">
+        <label>Data Inizio</label><br />
+        <input type="date" id="dtInizio" />
+    </div>
+    <div class="col-md-2">
+        <label>Data Fine</label><br />
+        <input type="date" id="dtFine" />
+    </div>
+    <div class="col-sm-2">
+        <input type="button" onclick="AssociaVideo();" class="btn btn-primary" value="Aggiungi" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <label class="text-red input-sm" id="lbkMessage">
+
+        </label>
+    </div>
+</div>

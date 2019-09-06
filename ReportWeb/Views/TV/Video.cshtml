@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Video";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Report Web</title>
+</head>
+<body class="body-content">
+    <div class="row">
+        <div class="col-md-12">
+            <video muted="true"
+                   autoplay="autoplay"
+                   style="right: 0; bottom: 0; min-width: 100%; min-height: 100%;" 
+                   
+                   loop="loop" 
+                   type="video/mp4"
+                   
+
+                   controls>
+                <source src="@Url.Content(ViewData["video"].ToString())" type="video/mp4" ;>
+            </video>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+

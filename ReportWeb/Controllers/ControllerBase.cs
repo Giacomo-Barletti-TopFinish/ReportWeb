@@ -108,6 +108,7 @@ namespace ReportWeb.Controllers
                 case "Preserie":
                 case "Trasferimenti":
                 case "Preziosi":
+                case "Video":
                 case "ALE":
                     HttpCookie coockie = filterContext.RequestContext.HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
                     if (coockie == null)

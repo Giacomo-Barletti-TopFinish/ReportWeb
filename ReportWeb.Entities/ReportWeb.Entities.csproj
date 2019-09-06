@@ -49,6 +49,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ALEDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="VideoDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VideoDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GalvanicaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,6 +140,17 @@
       <DependentUpon>ALEDS.xsd</DependentUpon>
     </None>
     <None Include="app.config" />
+    <None Include="VideoDS.xsc">
+      <DependentUpon>VideoDS.xsd</DependentUpon>
+    </None>
+    <None Include="VideoDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VideoDS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="VideoDS.xss">
+      <DependentUpon>VideoDS.xsd</DependentUpon>
+    </None>
     <None Include="GalvanicaDS.xsc">
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
     </None>

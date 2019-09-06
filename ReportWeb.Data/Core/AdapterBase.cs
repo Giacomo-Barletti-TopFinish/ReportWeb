@@ -28,7 +28,7 @@ namespace ReportWeb.Data.Core
                 public DbType DbType { get; set; }
                 public OracleDbType? OracleDbType { get; set; }
                 public object Value { get; set; }
-                public ParameterDirection Direction { get; set; } = ParameterDirection.Input;
+                public ParameterDirection Direction { get; set; }
             }
 
             private Dictionary<string, ParamInfo> _params = new Dictionary<string, ParamInfo>();

@@ -55,6 +55,7 @@
     <Compile Include="SecurityBLL.cs" />
     <Compile Include="TrasferimentiBLL.cs" />
     <Compile Include="VerniciaturaBLL.cs" />
+    <Compile Include="VideoBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReportWeb.Common\ReportWeb.Common.csproj">

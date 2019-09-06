@@ -1,0 +1,151 @@
+﻿@using ReportWeb.Models;
+
+@{
+    ViewBag.Title = "Video - Attiva Video";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>Attiva Video</h2>
+    @using (Html.BeginForm("AttivaVideo", "Video", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <label for="file">Upload Image:</label>
+         <br><br>
+        <input type="file" class="custom-file-input" name="file" id="file" />
+        <br><br>
+        <input type="submit" class="btn btn-primary" value="Upload Image" />
+        <br><br>
+        @ViewBag.Message 
+    }
+    <div class="content-top">
+        <h2>Attiva Video</h2>
+        <div class="box-body form-group-sm">
+            <div id="divAssociaVideo">
+            </div>
+        </div>
+        <div class="box-body form-group-sm">
+            <div id="divGrigliaVideo">
+            </div>
+        </div>
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        CaricaAssociaVideoPartial();
+        GrigliaVideoRepartoPartial();
+    });
+
+    function CaricaAssociaVideoPartial() {
+        var url = '@Url.Action("CaricaAssociaVideoPartial", "Video")';
+        $.ajax({
+            url: url,
+            data: {},
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                $('#divAssociaVideo').html(data).show();
+            },
+            error: function (response) {
+                document.open();
+                document.write(response.responseText);
+                document.close;
+            }
+        });
+    }
+
+    function AssociaVideo() {
+        var messaggio = '';
+        var esito = true;        
+        var video = $('#ddlVideo').val();
+        if (video == '' || video == '-1') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "selezionare un video" + "</br>";
+            esito = false;
+        }
+
+        var reparto = $('#ddlReparto').val();
+        if (reparto == '' || reparto == '-1') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "selezionare un reparto" + "</br>";
+            esito = false;
+        }
+
+        var dtInizio = $('#dtInizio').val();
+        if (dtInizio == null || dtInizio == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Data Inizio" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esito = false;
+        }
+
+        var dtFine = $('#dtFine').val();
+        if (dtFine == null || dtFine == '') {
+            messaggio += MESSAGGIO_PUNTINO + " " + "Data Fine" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            esito = false;
+        }
+
+        var dtInizio = $('#dtInizio').val();
+        var dtFine = $('#dtFine').val();
+        if ((dtFine != null && dtFine != '') && (dtInizio != null && dtInizio != '') && (dtFine < dtInizio)) {
+            messaggio += MESSAGGIO_PUNTINO + " " + "la data fine non può essere maggiore della data inizio" + "</br>";
+            esito = false;
+        }
+
+        $('#lblMessage').html(messaggio);
+
+        if (!esito)
+            return;
+
+        if (esito) {
+            var url = '@Url.Action("AssociaVideoReparto", "Video")';
+            $.ajax({
+                url: url,
+                data: { Video: video, Reparto: reparto, DataInizio: dtInizio, DataFine: dtFine },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    if (data != 'True') {
+                        $('#lblMessage').html("Errore durante il salvataggio");
+                    }
+                    else {
+                        $('#lblMessage').html("Operazione terminata con successo");
+                        PulisciSelezione();
+                        GrigliaVideoRepartoPartial();
+                    }
+                },
+                error: function (response) {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            })
+        }
+
+
+        return esito;
+    }
+
+    function PulisciSelezione() {
+        $('#ddlVideo').val('');
+        $("#ddlReparto").val('');
+        $('#dtInizio').val('');
+        $('#dtFine').val('');        
+    }
+
+    function GrigliaVideoRepartoPartial() {
+        var url = '@Url.Action("GrigliaVideoRepartoPartial", "Video")';
+        $.ajax({
+            url: url,
+            data: {},
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                $('#divGrigliaVideo').html(data).show();
+            },
+            error: function (response) {
+                document.open();
+                document.write(response.responseText);
+                document.close;
+            }
+        });
+    }
+   
+</script>
+
+
+

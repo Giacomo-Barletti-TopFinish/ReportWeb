@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReportWeb.Common;
+using ReportWeb.Business;
 
 namespace ReportWeb.Controllers
 {
@@ -55,6 +56,18 @@ namespace ReportWeb.Controllers
 
             ViewData.Add("TimeoutChangePage", ShortTimeoutChangePage);
             return View(model);
+        }
+
+        public ActionResult Video(string Reparto)
+        {
+            if (string.IsNullOrEmpty(Reparto))  return RedirectToAction("Index", "TV");
+            VideoBLL bll = new VideoBLL();            
+            string Path = bll.LeggiVideo(Reparto);
+            //Path = Server.MapPath(Path);
+
+            ViewData.Add("video", Path);
+            
+            return View();
         }
     }
 }

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="VideoDS" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Provider=OraOLEDB.Oracle.1;Data Source=&quot;(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.30.0.2)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=PDBRVL)))&quot;;Persist Security Info=True;Password=ITUSERPWD;User ID=ITUSER" IsAppSettingsProperty="false" Modifier="Assembly" Name="OraOLEDB.Oracle.(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.30.0.2)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=PDBRVL)))" Provider="System.Data.OleDb" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="VideoDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="VideoDS" msprop:Generator_UserDSName="VideoDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RW_VIDEO" msprop:Generator_TableClassName="RW_VIDEODataTable" msprop:Generator_TableVarName="tableRW_VIDEO" msprop:Generator_RowChangedName="RW_VIDEORowChanged" msprop:Generator_TablePropName="RW_VIDEO" msprop:Generator_RowDeletingName="RW_VIDEORowDeleting" msprop:Generator_RowChangingName="RW_VIDEORowChanging" msprop:Generator_RowEvHandlerName="RW_VIDEORowChangeEventHandler" msprop:Generator_RowDeletedName="RW_VIDEORowDeleted" msprop:Generator_RowClassName="RW_VIDEORow" msprop:Generator_UserTableName="RW_VIDEO" msprop:Generator_RowEvArgName="RW_VIDEORowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDVIDEO" msprop:Generator_ColumnVarNameInTable="columnIDVIDEO" msprop:Generator_ColumnPropNameInRow="IDVIDEO" msprop:Generator_ColumnPropNameInTable="IDVIDEOColumn" msprop:Generator_UserColumnName="IDVIDEO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NOMEVIDEO" msprop:Generator_ColumnVarNameInTable="columnNOMEVIDEO" msprop:Generator_ColumnPropNameInRow="NOMEVIDEO" msprop:Generator_ColumnPropNameInTable="NOMEVIDEOColumn" msprop:Generator_UserColumnName="NOMEVIDEO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PATHVIDEO" msprop:Generator_ColumnVarNameInTable="columnPATHVIDEO" msprop:Generator_ColumnPropNameInRow="PATHVIDEO" msprop:Generator_ColumnPropNameInTable="PATHVIDEOColumn" msprop:Generator_UserColumnName="PATHVIDEO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAINSERIMENTO" msprop:Generator_ColumnVarNameInTable="columnDATAINSERIMENTO" msprop:Generator_ColumnPropNameInRow="DATAINSERIMENTO" msprop:Generator_ColumnPropNameInTable="DATAINSERIMENTOColumn" msprop:Generator_UserColumnName="DATAINSERIMENTO" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RW_VIDEO_REPARTI" msprop:Generator_TableClassName="RW_VIDEO_REPARTIDataTable" msprop:Generator_TableVarName="tableRW_VIDEO_REPARTI" msprop:Generator_RowChangedName="RW_VIDEO_REPARTIRowChanged" msprop:Generator_TablePropName="RW_VIDEO_REPARTI" msprop:Generator_RowDeletingName="RW_VIDEO_REPARTIRowDeleting" msprop:Generator_RowChangingName="RW_VIDEO_REPARTIRowChanging" msprop:Generator_RowEvHandlerName="RW_VIDEO_REPARTIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_VIDEO_REPARTIRowDeleted" msprop:Generator_RowClassName="RW_VIDEO_REPARTIRow" msprop:Generator_UserTableName="RW_VIDEO_REPARTI" msprop:Generator_RowEvArgName="RW_VIDEO_REPARTIRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDVIDEOREPARTO" msprop:Generator_ColumnVarNameInTable="columnIDVIDEOREPARTO" msprop:Generator_ColumnPropNameInRow="IDVIDEOREPARTO" msprop:Generator_ColumnPropNameInTable="IDVIDEOREPARTOColumn" msprop:Generator_UserColumnName="IDVIDEOREPARTO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDVIDEO" msprop:Generator_ColumnVarNameInTable="columnIDVIDEO" msprop:Generator_ColumnPropNameInRow="IDVIDEO" msprop:Generator_ColumnPropNameInTable="IDVIDEOColumn" msprop:Generator_UserColumnName="IDVIDEO" type="xs:decimal" />
+              <xs:element name="REPARTO" msprop:Generator_ColumnVarNameInTable="columnREPARTO" msprop:Generator_ColumnPropNameInRow="REPARTO" msprop:Generator_ColumnPropNameInTable="REPARTOColumn" msprop:Generator_UserColumnName="REPARTO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAINSERIMENTO" msprop:Generator_ColumnVarNameInTable="columnDATAINSERIMENTO" msprop:Generator_ColumnPropNameInRow="DATAINSERIMENTO" msprop:Generator_ColumnPropNameInTable="DATAINSERIMENTOColumn" msprop:Generator_UserColumnName="DATAINSERIMENTO" type="xs:dateTime" />
+              <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAINIZIO" msprop:Generator_ColumnVarNameInTable="columnDATAINIZIO" msprop:Generator_ColumnPropNameInRow="DATAINIZIO" msprop:Generator_ColumnPropNameInTable="DATAINIZIOColumn" msprop:Generator_UserColumnName="DATAINIZIO" type="xs:dateTime" />
+              <xs:element name="DATAFINE" msprop:Generator_ColumnVarNameInTable="columnDATAFINE" msprop:Generator_ColumnPropNameInRow="DATAFINE" msprop:Generator_ColumnPropNameInTable="DATAFINEColumn" msprop:Generator_UserColumnName="DATAFINE" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -83,6 +83,8 @@
     <Compile Include="Trasferimenti\TrasferimentiBusiness.cs" />
     <Compile Include="Verniciatura\VerniciaturaAdapter.cs" />
     <Compile Include="Verniciatura\VerniciaturaBusiness.cs" />
+    <Compile Include="Video\VideoAdapter.cs" />
+    <Compile Include="Video\VideoBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReportWeb.Common\ReportWeb.Common.csproj">
