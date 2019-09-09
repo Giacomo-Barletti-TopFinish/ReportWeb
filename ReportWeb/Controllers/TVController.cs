@@ -21,6 +21,7 @@ namespace ReportWeb.Controllers
         public ActionResult Reparto(string Reparto)
         {
 
+            Reparto = Reparto.ToUpper();
             if (string.IsNullOrEmpty(Reparto)) RedirectToAction("Index", "Home");
             ViewData.Add("Reparto", Reparto);
             List<ODLApertiModel> model = ODLHelper.FillODLAperti(Reparto);
@@ -47,6 +48,7 @@ namespace ReportWeb.Controllers
 
         public ActionResult Quadranti(string Reparto)
         {
+            Reparto = Reparto.ToUpper();
             if (string.IsNullOrEmpty(Reparto)) RedirectToAction("Index", "Home");
             ViewData.Add("Reparto", Reparto);
             QuadrantiModel model = ODLHelper.GetDatiPerQuadranti(Reparto);
@@ -60,10 +62,12 @@ namespace ReportWeb.Controllers
 
         public ActionResult Video(string Reparto)
         {
+            Reparto = Reparto.ToUpper();
             if (string.IsNullOrEmpty(Reparto))  return RedirectToAction("Index", "TV");
             VideoBLL bll = new VideoBLL();            
             string Path = bll.LeggiVideo(Reparto);
             //Path = Server.MapPath(Path);
+            if(string.IsNullOrEmpty(Path)) return RedirectToAction("Index", "TV");
 
             ViewData.Add("video", Path);
             

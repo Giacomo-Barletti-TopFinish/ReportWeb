@@ -53,6 +53,7 @@ namespace ReportWeb.Common
             lista.Add(new RWListItem(LeggiEtichetta(Legatura), Legatura));
             lista.Add(new RWListItem(LeggiEtichetta(PVD), PVD));
             lista.Add(new RWListItem(LeggiEtichetta(Tornitura), Tornitura));
+            lista.Add(new RWListItem(LeggiEtichetta(Vibratura), Vibratura));
 
             return lista;
         }

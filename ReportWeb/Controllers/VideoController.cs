@@ -22,7 +22,7 @@ namespace ReportWeb.Controllers
 
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult AttivaVideo(HttpPostedFileBase file)
         {
@@ -33,14 +33,24 @@ namespace ReportWeb.Controllers
                 try
                 {
                     string Path_Default_Folder = "~/Video";
-                   
-                    string path = Path.Combine(Server.MapPath(Path_Default_Folder), Path.GetFileName(file.FileName));
+
+                    string filename = file.FileName;
+                    if (filename.Length > 25)
+                    {
+                        string newFilename = Path.GetFileNameWithoutExtension(filename).Replace(Path.GetExtension(filename), string.Empty);
+                        if (newFilename.Length > 25 - Path.GetExtension(filename).Length)
+                        {
+                            newFilename = newFilename.Substring(0, 25 - Path.GetExtension(filename).Length);
+                            filename = newFilename + Path.GetExtension(filename);
+                        }
+                    }
+                    string path = Path.Combine(Server.MapPath(Path_Default_Folder), Path.GetFileName(filename));
                     file.SaveAs(path);
 
                     VideoBLL bll = new VideoBLL();
 
-                    if (bll.SalvaVideoNelDatabase(file.FileName, ConnectedUser))
-                    {                        
+                    if (bll.SalvaVideoNelDatabase(filename, ConnectedUser))
+                    {
                         ViewBag.Message = "File caricato con successo";
                     }
                 }
@@ -53,7 +63,7 @@ namespace ReportWeb.Controllers
             {
                 ViewBag.Message = "Occorre specificare un file";
             }
-            
+
             return View();
         }
 
@@ -87,7 +97,7 @@ namespace ReportWeb.Controllers
             if (esito)
             {
                 VideoBLL bll = new VideoBLL();
-                esito = bll.SalvaAssociazioneVideoReparto(Video, Reparto, DataInizio, DataFine, ConnectedUser);               
+                esito = bll.SalvaAssociazioneVideoReparto(Video, Reparto, DataInizio, DataFine, ConnectedUser);
             }
 
             return Content(esito.ToString());
@@ -97,7 +107,7 @@ namespace ReportWeb.Controllers
         public ActionResult GrigliaVideoRepartoPartial()
         {
             VideoBLL bll = new VideoBLL();
-            List<VideoRepartoModel> model = bll.CreaListaVideoRepartoModel();            
+            List<VideoRepartoModel> model = bll.CreaListaVideoRepartoModel();
 
             return PartialView("GrigliaVideoRepartoPartial", model);
         }

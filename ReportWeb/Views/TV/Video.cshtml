@@ -2,31 +2,35 @@
     ViewBag.Title = "Video";
 }
 
+<style>
+    .videosize {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+    }
+</style>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Report Web</title>
+    <meta http-equiv="refresh" content="1200">
 </head>
 <body class="body-content">
     <div class="row">
         <div class="col-md-12">
-            <video muted="true"
+            <video class="hidden-xs hidden-sm hidden-md hidden-custom videosize embed-responsive-item"
+                   muted="true"
                    autoplay="autoplay"
-                   style="right: 0; bottom: 0; min-width: 100%; min-height: 100%;" 
-                   
-                   loop="loop" 
+                   style="right: 0; bottom: 0; min-width: 100%; min-height: 100%;"
+                   loop="loop"
                    type="video/mp4"
-                   
-
-                   controls>
+                   controls="controls">
                 <source src="@Url.Content(ViewData["video"].ToString())" type="video/mp4" ;>
             </video>
         </div>
     </div>
 </body>
 </html>
-
-
-
-
-
