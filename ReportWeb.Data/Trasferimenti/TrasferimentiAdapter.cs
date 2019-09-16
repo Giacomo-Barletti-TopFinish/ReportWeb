@@ -32,7 +32,7 @@ namespace ReportWeb.Data.Trasferimenti
         public void FillAP_GRIGLIA(TrasferimentiDS ds, DateTime dal, DateTime al, string barcodePartenza, string barcodeArrivo)
         {
             string select = @"select tr.data_partenza,rp.codresourcef operatore_partenza,tr.data_arrivo,ra.codresourcef operatore_arrivo,td.nummovfase,td.reparto,
-                                nvl(ma.modello,nvl(matra.modello,'')) modello
+                                nvl(ma.modello,nvl(matra.modello,'***')) modello
                                 from ap_ttrasferimenti tr
                                 inner join ap_dtrasferimenti td on td.idtrasferimento = tr.idtrasferimento
                                 left join usr_prd_movfasi mf on mf.barcode = td.barcode_odl
