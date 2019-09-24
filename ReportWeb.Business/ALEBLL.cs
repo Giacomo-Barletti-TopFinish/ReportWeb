@@ -448,7 +448,16 @@ namespace ReportWeb.Business
             if (fasePadre == null) return fasi;
             List<ALEDS.RW_ALE_FASI_DA_ES_DIBARow> fasiFiglie = ds.RW_ALE_FASI_DA_ES_DIBA.Where(x => x.IDPRODOTTOFINITO == fasePadre.IDPRODOTTOFINITO && x.SEQUENZA >= fasePadre.SEQUENZA).OrderBy(x => x.SEQUENZA).ToList();
 
-            fasi = (from fff in fasiFiglie select new FaseCosto(fff.FASE, fff.IsCOSTOUNINull() ? "0" : fff.COSTOUNI.ToString().Replace(',', '.'))).ToList();
+            ALEDS.RW_ALE_FASI_DA_ES_DIBARow faseFiglia = fasiFiglie.Where(x => x.IDPADRE == idmagazz).FirstOrDefault();
+
+            while (faseFiglia!=null)
+            {
+                fasi.Add(new FaseCosto(faseFiglia.FASE, faseFiglia.IsCOSTOUNINull() ? "0" : faseFiglia.COSTOUNI.ToString().Replace(',', '.')));
+                faseFiglia = fasiFiglie.Where(x => x.IDPADRE == faseFiglia.IDARTICOLO).FirstOrDefault();
+                // manca il caso di montaggio
+            }
+
+//            fasi = (from fff in fasiFiglie select new FaseCosto(fff.FASE, fff.IsCOSTOUNINull() ? "0" : fff.COSTOUNI.ToString().Replace(',', '.'))).ToList();
             return fasi.Distinct().ToList();
         }
 
