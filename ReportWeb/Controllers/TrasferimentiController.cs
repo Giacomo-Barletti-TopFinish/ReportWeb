@@ -21,10 +21,10 @@ namespace ReportWeb.Controllers
             return View();
         }
 
-        public ActionResult EstraiDati(string DataInizio, string DataFine, string OperatoreInvio, string OperatoreRicezione)
+        public ActionResult EstraiDati(string DataInizio, string DataFine, string OperatoreInvio, string OperatoreRicezione, string ODL)
         {
             TrasferimentiBLL bll = new TrasferimentiBLL();
-            List<TrasferimentoModel> model = bll.EstraiTrasferimenti(DataInizio, DataFine, OperatoreInvio, OperatoreRicezione);
+            List<TrasferimentoModel> model = bll.EstraiTrasferimenti(DataInizio, DataFine, OperatoreInvio, OperatoreRicezione, ODL.ToUpper());
             return PartialView("TrasferimentiPartial", model);
         }
     }

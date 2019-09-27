@@ -26,7 +26,7 @@ namespace ReportWeb.Business
             return model;
         }
 
-        public List<TrasferimentoModel> EstraiTrasferimenti(string DataInizio, string DataFine, string OperatoreInvio, string OperatoreRicezione)
+        public List<TrasferimentoModel> EstraiTrasferimenti(string DataInizio, string DataFine, string OperatoreInvio, string OperatoreRicezione, string ODL)
         {
             DateTime dtInizio = DateTime.Parse(DataInizio);
             DateTime dtFine = DateTime.Parse(DataFine);
@@ -37,7 +37,11 @@ namespace ReportWeb.Business
                 TrasferimentiDS ds = new TrasferimentiDS();
                 bTrasferimenti.FillAP_GRIGLIA(ds, dtInizio, dtFine, OperatoreInvio, OperatoreRicezione);
 
-                foreach (TrasferimentiDS.AP_GRIGLIARow trasferimento in ds.AP_GRIGLIA.OrderBy(x => x.DATA_PARTENZA))
+                List<TrasferimentiDS.AP_GRIGLIARow> elementi = ds.AP_GRIGLIA.OrderBy(x => x.DATA_PARTENZA).ToList();
+                if (!string.IsNullOrEmpty(ODL))
+                    elementi = elementi.Where(X => X.NUMMOVFASE.Contains(ODL)).ToList();
+
+                foreach (TrasferimentiDS.AP_GRIGLIARow trasferimento in elementi)
                 {
                     string dtArrivo = string.Empty;
                     if (!trasferimento.IsDATA_ARRIVONull())

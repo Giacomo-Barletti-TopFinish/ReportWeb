@@ -9,14 +9,16 @@
     <div class="row">
         <div class="col-sm-1">Data inizio</div>
         <div class="col-sm-1">Data fine</div>
-        <div class="col-sm-3">Operatore invio</div>
-        <div class="col-sm-3">Operatore ricezione</div>
+        <div class="col-sm-2">Operatore invio</div>
+        <div class="col-sm-2">Operatore ricezione</div>
+        <div class="col-sm-2">ODL</div>
     </div>
     <div class="row">
         <div class="col-sm-1"><input type="date" id="txtDataInizio" /></div>
         <div class="col-sm-1"><input type="date" id="txtDataFine" /></div>
-        <div class="col-sm-3">@Html.DropDownList("ddlOperatoreInvio", new SelectList(ViewData["operatori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-        <div class="col-sm-3">@Html.DropDownList("ddlOperatoreRicezione", new SelectList(ViewData["operatori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-2">@Html.DropDownList("ddlOperatoreInvio", new SelectList(ViewData["operatori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-2">@Html.DropDownList("ddlOperatoreRicezione", new SelectList(ViewData["operatori"] as List<RWListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })</div>
+        <div class="col-sm-2"><input id="txtODL" /></div>
         <div class="col-sm-1"><input type="button" onclick="Estrai();" class="btn btn-primary" value="Estrai dati" /></div>
     </div>
 </div>
@@ -56,6 +58,9 @@
             esegui = false;
         }
 
+        var odl = $('#txtODL').val();
+        if (odl == null) odl = '';
+
         var operatoreInvio = $('#ddlOperatoreInvio').val();
         if (operatoreInvio == null) operatoreInvio = '';
 
@@ -75,7 +80,8 @@
                 DataInizio: dataInizio,
                 DataFine: dataFine,
                 OperatoreInvio: operatoreInvio,
-                OperatoreRicezione: operatoreRicezione
+                OperatoreRicezione: operatoreRicezione,
+                ODL: odl
             },
             cache: false,
             type: "POST",
@@ -93,5 +99,5 @@
         });
     }
 
-    
+
 </script>
