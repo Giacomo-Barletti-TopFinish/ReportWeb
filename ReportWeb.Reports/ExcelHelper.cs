@@ -399,7 +399,7 @@ namespace ReportWeb.Reports
                             Min = 3,
                             Max = 3,
                             Width = 15,
-                            CustomWidth = true                        
+                            CustomWidth = true
                         });
 
                 worksheetPart.Worksheet.AppendChild(columns);
@@ -432,6 +432,110 @@ namespace ReportWeb.Reports
                         ConstructCell(elemento.Modello, CellValues.String, 1),
                         ConstructCell(elemento.Descrizione, CellValues.String, 1),
                         ConstructCell(elemento.Giacenza, CellValues.String, 1));
+
+                    sheetData.AppendChild(row);
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+
+            return content;
+        }
+
+        public byte[] CreaExcelCampionario(List<MagazzinoCampionarioModel> giacenze)
+        {
+            byte[] content;
+            MemoryStream ms = new MemoryStream();
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                // Setting up columns
+                Columns columns = new Columns(
+                     new Column
+                     {
+                         Min = 1,
+                         Max = 1,
+                         Width = 20,
+                         CustomWidth = true
+                     },
+                        new Column
+                        {
+                            Min = 2,
+                            Max = 2,
+                            Width = 20,
+                            CustomWidth = false
+                        },
+                        new Column
+                        {
+                            Min = 3,
+                            Max = 3,
+                            Width = 15,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 4,
+                            Max = 4,
+                            Width = 15,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 5,
+                            Max = 5,
+                            Width = 80,
+                            CustomWidth = true
+                        });
+
+                worksheetPart.Worksheet.AppendChild(columns);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Campionario" };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                // Constructing header
+                Row row = new Row();
+
+                row.Append(
+                    ConstructCell("Codice", CellValues.String, 2),
+                    ConstructCell("Finitura", CellValues.String, 2),
+                    ConstructCell("Piano", CellValues.String, 2),
+                    ConstructCell("Posizione", CellValues.String, 2),
+                    ConstructCell("Descrizione", CellValues.String, 2));
+
+                sheetData.AppendChild(row);
+
+                foreach (MagazzinoCampionarioModel elemento in giacenze)
+                {
+                    row = new Row();
+
+                    row.Append(
+                        ConstructCell(elemento.Codice, CellValues.String, 1),
+                        ConstructCell(elemento.Finitura, CellValues.String, 1),
+                        ConstructCell(elemento.Piano, CellValues.String, 1),
+                        ConstructCell(elemento.Posizione, CellValues.String, 1),
+                        ConstructCell(elemento.Descrizione, CellValues.String, 1));
 
                     sheetData.AppendChild(row);
                 }

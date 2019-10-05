@@ -34,6 +34,44 @@ namespace ReportWeb.Business
             return model;
         }
 
+        public List<MagazzinoCampionarioModel> TrovaCampionario(string Codice, string Finitura)
+        {
+            List<MagazzinoCampionarioModel> model = new List<MagazzinoCampionarioModel>();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                MagazzinoDS ds = new MagazzinoDS();
+                bMagazzino.FillRW_MAGAZZINO_CAMPIONI(ds);
+
+                List<MagazzinoDS.RW_MAGAZZINO_CAMPIONIRow> elementi = ds.RW_MAGAZZINO_CAMPIONI.ToList();
+                if (!string.IsNullOrEmpty(Codice))
+                {
+                    elementi = elementi.Where(x => x.CODICE.Contains(Codice)).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(Finitura))
+                {
+                    elementi = elementi.Where(x => !x.IsFINITURANull() && x.FINITURA.Contains(Finitura)).ToList();
+                }
+
+                foreach (MagazzinoDS.RW_MAGAZZINO_CAMPIONIRow articolo in elementi)
+                {
+                    MagazzinoCampionarioModel m = new MagazzinoCampionarioModel()
+                    {
+                        Descrizione = articolo.IsDESCRIZIONENull() ? string.Empty : articolo.DESCRIZIONE,
+                        Codice = articolo.CODICE,
+                        Finitura = articolo.IsFINITURANull() ? string.Empty : articolo.FINITURA,
+                        Piano = articolo.PIANO,
+                        Posizione = articolo.POSIZIONE,
+                        IDMAGAZCAMP = articolo.IDMAGAZCAMP
+                    };
+
+                    model.Add(m);
+                }
+            }
+
+            return model;
+
+        }
         public List<ModelloGiacenzaModel> CaricaGiacenze()
         {
             List<ModelloGiacenzaModel> model = new List<ModelloGiacenzaModel>();
@@ -240,6 +278,43 @@ namespace ReportWeb.Business
                 }
             }
             return model;
+        }
+
+        public void SalvaCampioni(string Id, string Codice, string Finitura, string Piano, string Posizione, string Descrizione, string User)
+        {
+            MagazzinoDS ds = new MagazzinoDS();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                bMagazzino.FillRW_MAGAZZINO_CAMPIONI(ds);
+                MagazzinoDS.RW_MAGAZZINO_CAMPIONIRow elemento = null;
+                if (string.IsNullOrEmpty(Id))
+                {
+                    elemento = ds.RW_MAGAZZINO_CAMPIONI.NewRW_MAGAZZINO_CAMPIONIRow();
+                    elemento.CODICE = Codice;
+                    elemento.FINITURA = Finitura;
+                    elemento.PIANO = Piano;
+                    elemento.POSIZIONE = Posizione;
+                    elemento.DESCRIZIONE = Descrizione;
+                    elemento.UTENTE = User;
+                    elemento.DATAINSERIMENTO = DateTime.Now;
+                    ds.RW_MAGAZZINO_CAMPIONI.AddRW_MAGAZZINO_CAMPIONIRow(elemento);
+                }
+                else
+                {
+                    decimal id = decimal.Parse(Id);
+                    elemento = ds.RW_MAGAZZINO_CAMPIONI.Where(x => x.IDMAGAZCAMP == id).FirstOrDefault();
+                    if (elemento == null)
+                        throw new ArgumentException(string.Format("IDMAGAZCAMP non trovato il valore {0} impossibile salvare", Id));
+                    elemento.CODICE = Codice;
+                    elemento.FINITURA = Finitura;
+                    elemento.PIANO = Piano;
+                    elemento.POSIZIONE = Posizione;
+                    elemento.DESCRIZIONE = Descrizione;
+                    elemento.UTENTE = User;
+                    elemento.DATAINSERIMENTO = DateTime.Now;
+                }
+                bMagazzino.UpdateRW_MAGAZZINO_CAMPIONI(ds);
+            }
         }
     }
 }

@@ -1,0 +1,207 @@
+﻿@using ReportWeb.Models.Magazzino
+@model List<ModelloGiacenzaModel>
+@{
+    ViewBag.Title = "Movimento Campionario";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>Movimento - Campionario</h2>
+</div>
+<div>
+    <div><h4>Giacenze esistenti</h4></div>
+    <div class="row">
+        <div class="col-sm-2">
+            <label>Codice</label>
+        </div>
+        <div class="col-sm-2">
+            <label>Finitura</label>
+        </div>
+        <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input type="text" id="txtCodice" />
+        </div>
+        <div class="col-sm-2">
+            <input type="text" id="txtFinitura" />
+        </div>
+    </div>
+</div>
+<label class="text-red" id="lblMessage"></label>
+<div style="overflow-y:auto; overflow-x:hidden; height:300px; padding-left:10px">
+    <div class="row" id="divRisultati"></div>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+        <label>Codice</label>
+    </div>
+    <div class="col-sm-2">
+        <label>Finitura</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Piano</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Posizione</label>
+    </div>
+    <div class="col-sm-2">
+        <label>Descrizione</label>
+    </div>
+    <div class="col-sm-1"><input type="button" onclick="Salva();" class="btn btn-primary" value="Salva" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+        <input style="width:80px" type="hidden" id="txtIDSelezionato" readonly />
+    </div>
+    <div class="col-sm-2">
+        <input type="text" id="txtCodiceSelezionato" maxlength="20" />
+    </div>
+    <div class="col-sm-2">
+        <input type="text" id="txtFinituraSelezionato" maxlength="20" />
+    </div>
+    <div class="col-sm-1">
+        <input style="width:80px" type="text" id="txtPianoSelezionato" maxlength="10" />
+    </div>
+    <div class="col-sm-1">
+        <input style="width:80px" type="text" id="txtPosizioneSelezionato" maxlength="10" />
+    </div>
+    <div class="col-sm-2">
+        <input type="text" id="txtDescrizioneSelezionato" maxlength="256" />
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+
+    });
+    function Trova()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var codice = $('#txtCodice').val();
+        var finitura = $('#txtFinitura').val();
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("TrovaCampioni", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Codice: codice,
+                Finitura: finitura
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+                $('#tblCampionario').on('click', 'tr', function () {
+
+                    var tds = $(this).find('td');
+                    var Id = $(tds[0]).text();
+                    var codice = $(tds[1]).text();
+                    var finitura = $(tds[2]).text();
+                    var piano = $(tds[3]).text();
+                    var posizione = $(tds[4]).text();
+                    var descrizione = $(tds[5]).text();
+
+                    $('#txtIDSelezionato').val(Id);
+                    $('#txtCodiceSelezionato').val(codice);
+                    $('#txtFinituraSelezionato').val(finitura);
+                    $('#txtPianoSelezionato').val(piano);
+                    $('#txtPosizioneSelezionato').val(posizione);
+                    $('#txtDescrizioneSelezionato').val(descrizione);
+                });
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+ function Salva()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var ID = $('#txtIDSelezionato').val();
+        var codice = $('#txtCodiceSelezionato').val();
+        var finitura = $('#txtFinituraSelezionato').val();
+        var piano = $('#txtPianoSelezionato').val();
+        var posizione = $('#txtPosizioneSelezionato').val();
+        var descrizione = $('#txtDescrizioneSelezionato').val();
+
+        if (codice == null || codice == '')
+        {
+            esegui = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Inserire il codice" + "</br>";
+        }
+
+        if (finitura == null || finitura == '') {
+            esegui = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Inserire la finitura" + "</br>";
+        }
+
+        if (piano == null || piano == '') {
+            esegui = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il piano" + "</br>";
+        }
+
+        if (posizione == null || posizione == '') {
+            esegui = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare la posizione" + "</br>";
+        }
+
+        if (descrizione == null || descrizione == '') {
+            esegui = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Inserire la descrizione" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("SalvaCampioni", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Id:ID,
+                Codice: codice,
+                Finitura: finitura,
+                Piano: piano,
+                Posizione: posizione,
+                Descrizione: descrizione
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#txtIDSelezionato').val('');
+                $('#txtCodiceSelezionato').val('');
+                $('#txtFinituraSelezionato').val('');
+                $('#txtPianoSelezionato').val('');
+                $('#txtPosizioneSelezionato').val('');
+                $('#txtDescrizioneSelezionato').val('');
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }</script>

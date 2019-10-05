@@ -102,5 +102,44 @@ namespace ReportWeb.Controllers
 
             return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "GiacenzeMagazzini.xlsx");
         }
+
+        public ActionResult ReportCampionario()
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(string.Empty, string.Empty);
+            ExcelHelper excel = new ExcelHelper();
+            byte[] fileContents = excel.CreaExcelCampionario(model);
+
+            return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Campionario.xlsx");
+        }
+
+        public ActionResult CAMPIONARIO()
+        {
+            VerificaAbilitazioneUtenteConUscita(52);
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<ModelloGiacenzaModel> model = bll.CaricaGiacenze();
+            return View(model);
+        }
+
+        public ActionResult MOVIMENTOCAMPIONARIO()
+        {
+            VerificaAbilitazioneUtenteConUscita(53);
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<ModelloGiacenzaModel> model = bll.CaricaGiacenze();
+            return View(model);
+        }
+        public ActionResult TrovaCampioni(string Codice, string Finitura)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper());
+            return PartialView("GrigliaMagazzinoCampioniPartial", model);
+        }
+        public ActionResult SalvaCampioni(string Id, string Codice, string Finitura, string Piano, string Posizione, string Descrizione)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            bll.SalvaCampioni(Id.ToUpper(), Codice.ToUpper(), Finitura.ToUpper(), Piano.ToUpper(), Posizione.ToUpper(), Descrizione.ToUpper(), ConnectedUser);
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper());
+            return PartialView("GrigliaMagazzinoCampioniPartial", model);
+        }
     }
 }

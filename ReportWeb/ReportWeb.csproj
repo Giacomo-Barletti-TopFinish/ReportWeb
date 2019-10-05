@@ -508,6 +508,9 @@
     <Content Include="Views\Video\AssociaVideoRepartiPartial.cshtml" />
     <Content Include="Views\Video\GrigliaVideoRepartoPartial.cshtml" />
     <Content Include="Views\TV\Video.cshtml" />
+    <Content Include="Views\Magazzino\CAMPIONARIO.cshtml" />
+    <Content Include="Views\Magazzino\MOVIMENTOCAMPIONARIO.cshtml" />
+    <Content Include="Views\Magazzino\GrigliaMagazzinoCampioniPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,6 +27,13 @@ namespace ReportWeb.Data.Magazzino
         }
 
         [DataContext]
+        public void FillRW_MAGAZZINO_CAMPIONI(MagazzinoDS ds)
+        {
+            MagazzinoAdapter a = new MagazzinoAdapter(DbConnection, DbTransaction);
+            a.FillRW_MAGAZZINO_CAMPIONI(ds);
+        }
+
+        [DataContext]
         public void FillMAGAZZ(MagazzinoDS ds, List<string> filtro)
         {
             MagazzinoAdapter a = new MagazzinoAdapter(DbConnection, DbTransaction);
@@ -45,6 +52,13 @@ namespace ReportWeb.Data.Magazzino
         {
             MagazzinoAdapter a = new MagazzinoAdapter(DbConnection, DbTransaction);
             a.UpdateMagazzinoDSTable(ds.MONITOR_APPROVVIGIONAMENTO.TableName, ds);
+        }
+
+        [DataContext(true)]
+        public void UpdateRW_MAGAZZINO_CAMPIONI(MagazzinoDS ds)
+        {
+            MagazzinoAdapter a = new MagazzinoAdapter(DbConnection, DbTransaction);
+            a.UpdateMagazzinoDSTable(ds.RW_MAGAZZINO_CAMPIONI.TableName, ds);
         }
 
         [DataContext]
