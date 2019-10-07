@@ -316,5 +316,24 @@ namespace ReportWeb.Business
                 bMagazzino.UpdateRW_MAGAZZINO_CAMPIONI(ds);
             }
         }
+
+        public void CancellaCampioni(string Id, string Codice, string Finitura)
+        {
+            MagazzinoDS ds = new MagazzinoDS();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                bMagazzino.FillRW_MAGAZZINO_CAMPIONI(ds);
+                MagazzinoDS.RW_MAGAZZINO_CAMPIONIRow elemento = null;
+                if (!string.IsNullOrEmpty(Id))
+                {
+                    decimal id = decimal.Parse(Id);
+                    elemento = ds.RW_MAGAZZINO_CAMPIONI.Where(x => x.IDMAGAZCAMP == id).FirstOrDefault();
+                    if (elemento == null)
+                        throw new ArgumentException(string.Format("IDMAGAZCAMP non trovato il valore {0} impossibile salvare", Id));
+                    elemento.Delete();
+                }
+                bMagazzino.UpdateRW_MAGAZZINO_CAMPIONI(ds);
+            }
+        }
     }
 }

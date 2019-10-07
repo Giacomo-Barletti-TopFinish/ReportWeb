@@ -141,5 +141,13 @@ namespace ReportWeb.Controllers
             List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper());
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
         }
+
+        public ActionResult CancellaCampioni(string Id, string Codice, string Finitura)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            bll.CancellaCampioni(Id.ToUpper(), Codice.ToUpper(), Finitura.ToUpper());
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper());
+            return PartialView("GrigliaMagazzinoCampioniPartial", model);
+        }
     }
 }

@@ -50,6 +50,7 @@
         <label>Descrizione</label>
     </div>
     <div class="col-sm-1"><input type="button" onclick="Salva();" class="btn btn-primary" value="Salva" /></div>
+    <div class="col-sm-1"><input type="button" onclick="Cancella();" class="btn btn-primary" value="Cancella" /></div>
 </div>
 <div class="row">
     <div class="col-sm-1">
@@ -102,25 +103,7 @@
             type: "POST",
             success: function (data)
             {
-                $('#divRisultati').html(data).show();
-                $('#tblCampionario').on('click', 'tr', function () {
-
-                    var tds = $(this).find('td');
-                    var Id = $(tds[0]).text();
-                    var codice = $(tds[1]).text();
-                    var finitura = $(tds[2]).text();
-                    var piano = $(tds[3]).text();
-                    var posizione = $(tds[4]).text();
-                    var descrizione = $(tds[5]).text();
-
-                    $('#txtIDSelezionato').val(Id);
-                    $('#txtCodiceSelezionato').val(codice);
-                    $('#txtFinituraSelezionato').val(finitura);
-                    $('#txtPianoSelezionato').val(piano);
-                    $('#txtPosizioneSelezionato').val(posizione);
-                    $('#txtDescrizioneSelezionato').val(descrizione);
-                });
-
+                CreaGrigliaRisultati(data);
             },
             error: function (response)
             {
@@ -128,6 +111,27 @@
                 document.write(response.responseText);
                 document.close();
             }
+        });
+    }
+
+    function CreaGrigliaRisultati(data) {
+        $('#divRisultati').html(data).show();
+        $('#tblCampionario').on('click', 'tr', function () {
+
+            var tds = $(this).find('td');
+            var Id = $(tds[0]).text();
+            var codice = $(tds[1]).text();
+            var finitura = $(tds[2]).text();
+            var piano = $(tds[3]).text();
+            var posizione = $(tds[4]).text();
+            var descrizione = $(tds[5]).text();
+
+            $('#txtIDSelezionato').val(Id);
+            $('#txtCodiceSelezionato').val(codice);
+            $('#txtFinituraSelezionato').val(finitura);
+            $('#txtPianoSelezionato').val(piano);
+            $('#txtPosizioneSelezionato').val(posizione);
+            $('#txtDescrizioneSelezionato').val(descrizione);
         });
     }
 
@@ -189,6 +193,7 @@
             type: "POST",
             success: function (data)
             {
+                CreaGrigliaRisultati(data);
                 $('#txtIDSelezionato').val('');
                 $('#txtCodiceSelezionato').val('');
                 $('#txtFinituraSelezionato').val('');
@@ -204,4 +209,72 @@
                 document.close();
             }
         });
-    }</script>
+    }
+
+ function Cancella()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var ID = $('#txtIDSelezionato').val();
+        var codice = $('#txtCodiceSelezionato').val();
+        var finitura = $('#txtFinituraSelezionato').val();
+        var piano = $('#txtPianoSelezionato').val();
+        var posizione = $('#txtPosizioneSelezionato').val();
+        var descrizione = $('#txtDescrizioneSelezionato').val();
+
+         if (ID == null || ID == '')
+         {
+             esegui = false;
+             messaggio += MESSAGGIO_PUNTINO + " " + "Inserire il codice ID" + "</br>";
+         }
+
+
+        if (codice == null || codice == '')
+        {
+            esegui = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Inserire il codice" + "</br>";
+        }
+
+        if (finitura == null || finitura == '') {
+            esegui = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Inserire la finitura" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("CancellaCampioni", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Id:ID,
+                Codice: codice,
+                Finitura: finitura
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CreaGrigliaRisultati(data);
+                $('#txtIDSelezionato').val('');
+                $('#txtCodiceSelezionato').val('');
+                $('#txtFinituraSelezionato').val('');
+                $('#txtPianoSelezionato').val('');
+                $('#txtPosizioneSelezionato').val('');
+                $('#txtDescrizioneSelezionato').val('');
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+
+</script>
