@@ -511,6 +511,8 @@
     <Content Include="Views\Magazzino\CAMPIONARIO.cshtml" />
     <Content Include="Views\Magazzino\MOVIMENTOCAMPIONARIO.cshtml" />
     <Content Include="Views\Magazzino\GrigliaMagazzinoCampioniPartial.cshtml" />
+    <Content Include="Views\ALE\FattureRitardate.cshtml" />
+    <Content Include="Views\ALE\FattureRitardatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

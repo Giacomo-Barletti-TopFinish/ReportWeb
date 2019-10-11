@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ALE\AddebitoModel.cs" />
     <Compile Include="ALE\ALEStatoRichiesta.cs" />
+    <Compile Include="ALE\FatturaRitardataModel.cs" />
     <Compile Include="ALE\FaseCosto.cs" />
     <Compile Include="ALE\GruppiModel.cs" />
     <Compile Include="ALE\InserimentoModel.cs" />

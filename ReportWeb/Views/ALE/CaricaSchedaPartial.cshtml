@@ -83,12 +83,20 @@
                         @Html.DropDownListFor(model => model.RepartoCodice, new SelectList(Model.LavorantiEsterni, "Value", "Text", Model.RepartoCodice), new { @class = "form-control input-sm select2", @id = "ddlLavoranti" })
                     </div>
                     <div class="col-sm-7"><label>Nota</label>@Html.TextBox("txtNota", "", new { @maxlength = "250", @class = "form-control input-sm ", @style = "height: 21px;" })</div>
-                    <div class="col-sm-1">
+                 </div> 
+                <div class="col-sm-12 row">
+                    <div class="col-sm-2">
                         <label>Scarto definitivo</label>
                         <input type="checkbox" id="CHKDEFINITIVO" />
                     </div>
+                    <div class="col-sm-2 col-sm-offset-2">
+                        <label>Riparazione Gratutita</label>
+                        <input type="checkbox" id="CHECKGRATUTITA" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" hidden="hidden" id="hfODL" value=@Model.ODL />
+                    </div>
                 </div>
-               
 
                 <div class="col-sm-12 row">
                     <input type="button" onclick="Salva();" class="btn btn-primary" value="Inserisci" />
@@ -107,6 +115,26 @@
         $('#ddlLavoranti').select2();
         $('#ddlLavoranti').val('@Model.RepartoCodice');
         $('#txtQuantita').val('@Model.Quantita');
+
+
+        $("#CHKDEFINITIVO").on('click', function ()
+        {
+            var ischecked = $("#CHKDEFINITIVO").is(":checked");
+            if (ischecked)
+            {
+                $('#CHECKGRATUTITA').prop('checked', false);
+            }
+            
+        });
+
+        $("#CHECKGRATUTITA").on('click', function () {
+            var ischecked = $("#CHECKGRATUTITA").is(":checked");
+            if (ischecked)
+            {
+                $('#CHKDEFINITIVO').prop('checked', false);
+            }
+
+        });
 
     });
 

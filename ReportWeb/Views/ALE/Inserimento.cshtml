@@ -96,7 +96,9 @@
         $('#lblMessage').html(messaggio);
         if(!esito) return;
 
-        var checked = $('#CHKDEFINITIVO').prop('checked');
+        var checked_DEF = $('#CHKDEFINITIVO').prop('checked');
+        var checked_GRA = $('#CHECKGRATUTITA').prop('checked');
+        var ODL = $('#hfODL').val();
 
         var url = '@Url.Action("SalvaInserimento", "ALE")';
         $.ajax({
@@ -109,7 +111,9 @@
                 Inseriti:inseriti,
                 Lavorante:lavorante,
                 Nota: nota,
-                ScartoDefinitivo: checked
+                ScartoDefinitivo: checked_DEF,
+                RiparazioneGratuita: checked_GRA,
+                ODL: ODL
             },
             cache: false,
             type: "POST",

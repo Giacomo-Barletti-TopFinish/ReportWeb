@@ -129,6 +129,112 @@ namespace ReportWeb.Reports
             return content;
         }
 
+        public byte[] CreaExcelFattureRitardate(FattureRitardateModel FattureRitardate)
+        {
+            byte[] content;
+            MemoryStream ms = new MemoryStream();
+            //string filename = @"c:\temp\mancanti.xlsx";
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                // Setting up columns
+                Columns columns = new Columns(
+                        new Column
+                        {
+                            Min = 1,
+                            Max = 1,
+                            Width = 40,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 2,
+                            Max = 2,
+                            Width = 20,
+                            CustomWidth = false
+                        },
+                        new Column
+                        {
+                            Min = 3,
+                            Max = 3,
+                            Width = 20,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 4,
+                            Max = 4,
+                            Width = 20,
+                            CustomWidth = false
+                        },
+                        new Column
+                        {
+                            Min = 5,
+                            Max = 5,
+                            Width = 20,
+                            CustomWidth = true
+                        });
+
+                worksheetPart.Worksheet.AppendChild(columns);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Fatture Ritardate" };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                // Constructing header
+                Row row = new Row();
+
+                row.Append(
+                    ConstructCell("ODL", CellValues.String, 2),
+                    ConstructCell("Data Creazione", CellValues.String, 2),
+                    ConstructCell("Utente Inserimento", CellValues.String, 2),
+                    ConstructCell("Lavorante", CellValues.String, 2),
+                    ConstructCell("Data Scadenza", CellValues.String, 2));
+
+                // Insert the header row to the Sheet Data
+                sheetData.AppendChild(row);
+
+                foreach (FatturaRitardataModel FatturaRitardata in FattureRitardate.FattureRitardate)
+                {
+                    row = new Row();
+
+                    row.Append(
+                        ConstructCell(FatturaRitardata.ODL, CellValues.String, 1),
+                        ConstructCell(FatturaRitardata.DATA_CREAZIONE.ToShortDateString(), CellValues.String, 1),
+                        ConstructCell(FatturaRitardata.UIDUSER_INSERIMENTO, CellValues.String, 1),
+                        ConstructCell(FatturaRitardata.LAVORANTE, CellValues.String, 1),
+                        ConstructCell(FatturaRitardata.DATA_SCADENZA.ToShortDateString(), CellValues.String, 1));
+
+                    sheetData.AppendChild(row);
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+
+            return content;
+        }
+
         private Cell ConstructCell(string value, CellValues dataType, uint styleIndex = 0)
         {
             return new Cell()

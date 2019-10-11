@@ -417,6 +417,51 @@ namespace ReportWeb.Data
         }
 
 
+        public void InsertRW_ALE_RIPGRATUITA(string Azienda, string ODL, string UIDUSER, int EstensioneFattura, bool Nascondi)
+        {
+
+            string insert = @"INSERT INTO RW_ALE_RIPGRATUITA (ODL, DATA_CREAZIONE, UIDUSER_INSERIMENTO, LAVORANTE, DATA_SCADENZA, NASCONDI) VALUES
+                                            ($P<ODL>,$P<NOW>,$P<UIDUSER>,$P<LAVORANTE>,$P<DATA_SCADENZA>,$P{NASCONDI})";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("ODL", DbType.String, ODL);
+            ps.AddParam("NOW", DbType.DateTime, DateTime.Now);
+            ps.AddParam("UIDUSER", DbType.String, UIDUSER);            
+            ps.AddParam("LAVORANTE", DbType.String, Azienda);
+            ps.AddParam("DATA_SCADENZA", DbType.DateTime, DateTime.Now.AddDays(EstensioneFattura));            
+            ps.AddParam("NASCONDI", DbType.String, Nascondi ? "S" : "N");
+
+            using (DbCommand cmd = BuildCommand(insert, ps))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public void FillRW_ALE_RIPGRATUITA(ALEDS ds, string DataInizio, string DataFine)
+        {
+            string select = @"SELECT * FROM RW_ALE_RIPGRATUITA WHERE DATA_SCADENZA >= to_date('{0}','YYYY/MM/DD') AND DATA_SCADENZA <= to_date('{1}','YYYY/MM/DD') ";
+
+            string dtInizio = DataInizio;
+            string dtFine = DataFine;
+            select = string.Format(select, dtInizio, dtFine);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_ALE_RIPGRATUITA);
+            }
+        }
+        public void NascondiRiga(ALEDS ds, string IDRIPGRATUITA)
+        {
+
+            string insert = @"UPDATE RW_ALE_RIPGRATUITA SET NASCONDI = 'S' WHERE IDRIPGRATUITA = $P<IDRIPGRATUITA>";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDRIPGRATUITA", DbType.String, IDRIPGRATUITA);            
+
+            using (DbCommand cmd = BuildCommand(insert, ps))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
 
         public void FillRW_ALE_DETTAGLIOByBarcode(ALEDS ds, string Barcode)
         {

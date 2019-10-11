@@ -1,0 +1,66 @@
+﻿@using ReportWeb.Models
+@using ReportWeb.Models.ALE
+@model  FattureRitardateModel
+
+<div class="row">
+    <div class="col-sm-10">        
+        <table class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th width="20%">ODL</th>
+                    <th width="15%">Data Creazione</th>
+                    <th width="20%">Lavorante</th>
+                    <th width="15%">Utente Inserimento</th>
+                    <th width="15%">Data Scadenza</th>
+                    <th width="5%"></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (FatturaRitardataModel m in Model.FattureRitardate)
+                {
+                    <tr>
+                        <td>@m.ODL.</td>                        
+                        <td>@m.DATA_CREAZIONE.ToString("dd/MM/yyyy")</td>
+                        <td>@m.LAVORANTE</td>
+                        <td>@m.UIDUSER_INSERIMENTO</td>
+                        <td>@m.DATA_SCADENZA.ToString("dd/MM/yyyy")</td>
+                        <td><input type="button"  onclick="NascondiRiga(@m.IDRIPGRATUITA);" class="btn-primary" value="Nascondi Riga" /></td>                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row">         
+            <div class="col-sm-2"><input type="button" onclick="Excel();" class="btn btn-primary" value="Report Excel" /></div>
+        </div>
+    </div>    
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+    });
+
+   function NascondiRiga(IDRIPGRATUITA) {
+       var url = '@Url.Action("NascondiRiga", "ALE")';
+       var datainizio = $('#dtInizio').val();
+       var datafine = $('#dtFine').val();
+
+        $.ajax({
+            url: url,
+            data: { IDRIPGRATUITA: IDRIPGRATUITA, DataInizio: datainizio, DataFine: datafine },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                $('#divRisultatiRicerca').html(data).show();
+            },
+            error: function (response) {
+                document.open();
+                document.write(response.responseText);
+                document.close;
+            }
+        });
+    }
+
+
+</script>
+

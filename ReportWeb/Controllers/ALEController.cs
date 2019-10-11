@@ -52,6 +52,21 @@ namespace ReportWeb.Controllers
             return View();
         }
 
+        public ActionResult FattureRitardate()
+        {
+            VerificaAbilitazioneUtenteConUscita(50);
+            return View();
+        }
+
+        public ActionResult TrovaFattureRitardate(string DataInizio, string DataFine)
+        {
+            ALEBLL bll = new ALEBLL(RvlImageSite);
+            FattureRitardateModel model = bll.LeggiFattureRitardate(DataInizio, DataFine, true);
+
+            return PartialView("FattureRitardatePartial", model);
+            
+        }
+
         public ActionResult TrovaMancanti(string DataInizio, string DataFine)
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
@@ -84,6 +99,26 @@ namespace ReportWeb.Controllers
 
         }
 
+        public ActionResult EsportaExcel(string DataInizio, string DataFine)
+        {
+            ALEBLL bll = new ALEBLL(RvlImageSite);
+            FattureRitardateModel model = bll.LeggiFattureRitardate(DataInizio, DataFine, true);
+
+            ExcelHelper excel = new ExcelHelper();
+            byte[] fileContents = excel.CreaExcelFattureRitardate(model);
+
+            return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "FattureRitardate.xlsx");
+        }
+
+        public ActionResult NascondiRiga(string IDRIPGRATUITA, string DataInizio, string DataFine)
+        {
+            ALEBLL bll = new ALEBLL(RvlImageSite);
+            bll.NascondiRiga(IDRIPGRATUITA);
+            FattureRitardateModel model = bll.LeggiFattureRitardate(DataInizio, DataFine, true);
+            return PartialView("FattureRitardatePartial", model);            
+
+        }
+
         public ActionResult CaricaScheda(string Barcode)
         {
             ALEBLL bll = new ALEBLL(RvlImageSite);
@@ -93,10 +128,13 @@ namespace ReportWeb.Controllers
             return PartialView("CaricaSchedaPartial", model);
         }
 
-        public ActionResult SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, bool ScartoDefinitivo)
+        public ActionResult SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, 
+                                             bool ScartoDefinitivo, bool RiparazioneGratuita, string ODL)
         {
+            int EstensioneFattura = ReportWeb.Properties.Settings.Default.FatturaRitardata;
             ALEBLL bll = new ALEBLL(RvlImageSite);
-            bll.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, ScartoDefinitivo, ConnectedUser);
+            bll.SalvaInserimento(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Nota, ScartoDefinitivo,
+                                 RiparazioneGratuita, ODL, EstensioneFattura, ConnectedUser);
 
             return null;
         }

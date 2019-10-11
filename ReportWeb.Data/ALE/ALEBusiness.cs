@@ -79,6 +79,20 @@ namespace ReportWeb.Data.ALE
         }
 
         [DataContext]
+        public void FillRW_ALE_RIPGRATUITA(ALEDS ds, string DataInizio, string DataFine)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.FillRW_ALE_RIPGRATUITA(ds, DataInizio, DataFine);
+        }
+
+        [DataContext]
+        public void NascondiRiga(ALEDS ds, string IDRIPGRATUITA)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.NascondiRiga(ds, IDRIPGRATUITA);
+        }
+
+        [DataContext]
         public void FillCLIFO(ALEDS ds, string Codice)
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
@@ -167,6 +181,13 @@ namespace ReportWeb.Data.ALE
         {
             ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
             a.InsertRW_ALE_DETTAGLIO(Azienda, Barcode, IDCHECKQT, Difettosi, Inseriti, Lavorante, Mancante, Nota, scartoDefinitivo, UIDUSER);
+        }
+
+        [DataContext(true)]
+        public void SalvaInserimentoRW_ALE_RIPGRATUITA(string Azienda, string ODL, string UIDUSER, int EstensioneFattura, bool Nascondi)
+        {
+            ALEAdapter a = new ALEAdapter(DbConnection, DbTransaction);
+            a.InsertRW_ALE_RIPGRATUITA(Azienda, ODL, UIDUSER, EstensioneFattura, Nascondi);
         }
 
         [DataContext]

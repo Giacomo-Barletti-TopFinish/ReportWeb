@@ -178,12 +178,20 @@ namespace ReportWeb.Business
 
         }
 
-        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, bool scartoDefinitivo, string UIDUSER)
+        public void SalvaInserimento(string Azienda, string Barcode, string IDCHECKQT, int Difettosi, int Inseriti, string Lavorante, string Nota, bool scartoDefinitivo,
+                                     bool RiparazioneGratuita, string ODL, int EstensioneFattura, string UIDUSER)
         {
             using (ALEBusiness bALE = new ALEBusiness())
             {
                 ALEDS ds = new ALEDS();
                 bool mancante = VerificaSeMancanti(IDCHECKQT);
+
+                if (RiparazioneGratuita)
+                {
+                    bALE.SalvaInserimentoRW_ALE_RIPGRATUITA(Azienda, ODL, UIDUSER, EstensioneFattura, false);
+                    return;
+                }
+
                 if (!mancante)
                 {
                     bALE.FillCLIFO(ds);
@@ -333,6 +341,60 @@ namespace ReportWeb.Business
             return model;
         }
 
+        public FattureRitardateModel LeggiFattureRitardate(string DataInizio, string DataFine, bool SoloVisibili)
+        {
+            FattureRitardateModel model = new FattureRitardateModel();
+            model.FattureRitardate = new List<FatturaRitardataModel>();
+
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.FillRW_ALE_RIPGRATUITA(ds, DataInizio, DataFine);
+
+                if (SoloVisibili)
+                {
+                    foreach (ALEDS.RW_ALE_RIPGRATUITARow riga in ds.RW_ALE_RIPGRATUITA.Where(x => x.NASCONDI != "S").ToList())
+                    {
+                        FatturaRitardataModel m = CreaFatturaRitardataModel(ds, riga);
+                        model.FattureRitardate.Add(m);
+                    }
+                }
+                else
+                {
+                    foreach (ALEDS.RW_ALE_RIPGRATUITARow riga in ds.RW_ALE_RIPGRATUITA)
+                    {
+                        FatturaRitardataModel m = CreaFatturaRitardataModel(ds, riga);
+                        model.FattureRitardate.Add(m);
+                    }
+                }
+
+            }
+            return model;
+        }
+
+        public void NascondiRiga(string IDRIPGRATUITA)
+        {
+            using (ALEBusiness bALE = new ALEBusiness())
+            {
+                ALEDS ds = new ALEDS();
+                bALE.NascondiRiga(ds, IDRIPGRATUITA);
+            }
+        }
+
+        private FatturaRitardataModel CreaFatturaRitardataModel(ALEDS ds, ALEDS.RW_ALE_RIPGRATUITARow riga)
+        {
+            FatturaRitardataModel m = new FatturaRitardataModel();
+            m.IDRIPGRATUITA = riga.IDRIPGRATUITA;
+            m.ODL = riga.IsODLNull() ? string.Empty : riga.ODL;
+            m.DATA_CREAZIONE = riga.DATA_CREAZIONE;
+            m.UIDUSER_INSERIMENTO = riga.UIDUSER_INSERIMENTO;
+            m.LAVORANTE = riga.LAVORANTE;
+            m.DATA_SCADENZA = riga.DATA_SCADENZA;
+            m.NASCONDI = riga.NASCONDI;
+
+            return m;
+        }
+
         private AddebitoModel CreaAddebitoModel(ALEDS ds, ALEDS.RW_ALE_DETTAGLIORow riga)
         {
             ALEDS.USR_CHECKQ_TRow CHECKQ_T = ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == riga.IDCHECKQT).FirstOrDefault();
@@ -450,14 +512,14 @@ namespace ReportWeb.Business
 
             ALEDS.RW_ALE_FASI_DA_ES_DIBARow faseFiglia = fasiFiglie.Where(x => x.IDPADRE == idmagazz).FirstOrDefault();
 
-            while (faseFiglia!=null)
+            while (faseFiglia != null)
             {
                 fasi.Add(new FaseCosto(faseFiglia.FASE, faseFiglia.IsCOSTOUNINull() ? "0" : faseFiglia.COSTOUNI.ToString().Replace(',', '.')));
                 faseFiglia = fasiFiglie.Where(x => x.IDPADRE == faseFiglia.IDARTICOLO).FirstOrDefault();
                 // manca il caso di montaggio
             }
 
-//            fasi = (from fff in fasiFiglie select new FaseCosto(fff.FASE, fff.IsCOSTOUNINull() ? "0" : fff.COSTOUNI.ToString().Replace(',', '.'))).ToList();
+            //            fasi = (from fff in fasiFiglie select new FaseCosto(fff.FASE, fff.IsCOSTOUNINull() ? "0" : fff.COSTOUNI.ToString().Replace(',', '.'))).ToList();
             return fasi.Distinct().ToList();
         }
 
