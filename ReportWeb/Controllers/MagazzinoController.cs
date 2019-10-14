@@ -113,6 +113,16 @@ namespace ReportWeb.Controllers
             return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Campionario.xlsx");
         }
 
+        public ActionResult ReportPosizioneCampionario()
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(string.Empty, string.Empty);
+            ExcelHelper excel = new ExcelHelper();
+            byte[] fileContents = excel.CreaExcelPosizioneCampionario(model);
+
+            return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "PosizioneCampionario.xlsx");
+        }
+
         public ActionResult CAMPIONARIO()
         {
             VerificaAbilitazioneUtenteConUscita(52);
@@ -128,11 +138,33 @@ namespace ReportWeb.Controllers
             List<ModelloGiacenzaModel> model = bll.CaricaGiacenze();
             return View(model);
         }
+
+        public ActionResult POSIZIONECAMPIONI()
+        {
+            VerificaAbilitazioneUtenteConUscita(54);
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<ModelloGiacenzaModel> model = bll.CaricaGiacenze();
+            return View(model);
+        }
+
+        public ActionResult MOVIMENTOPOSIZIONECAMPIONARIO()
+        {
+            VerificaAbilitazioneUtenteConUscita(55);
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<ModelloGiacenzaModel> model = bll.CaricaGiacenze();
+            return View(model);
+        }
         public ActionResult TrovaCampioni(string Codice, string Finitura)
         {
             MagazzinoBLL bll = new MagazzinoBLL();
             List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper());
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
+        }
+        public ActionResult TrovaPosizioneCampioni(string Seriale, string Cliente)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(Seriale.ToUpper(), Cliente.ToUpper());
+            return PartialView("GrigliaPosizioneCampioniPartial", model);
         }
         public ActionResult SalvaCampioni(string Id, string Codice, string Finitura, string Piano, string Posizione, string Descrizione)
         {
@@ -148,6 +180,22 @@ namespace ReportWeb.Controllers
             bll.CancellaCampioni(Id.ToUpper(), Codice.ToUpper(), Finitura.ToUpper());
             List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper());
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
+        }
+
+        public ActionResult SalvaPosizioneCampioni(string Id, string Campione, string Posizione, string Seriale, string Cliente)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            bll.SalvaPosizioneCampioni(Id.ToUpper(), Campione.ToUpper(), Posizione.ToUpper(), Seriale.ToUpper(), Cliente.ToUpper(), ConnectedUser);
+            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(Seriale.ToUpper(), Cliente.ToUpper());
+            return PartialView("GrigliaPosizioneCampioniPartial", model);
+        }
+
+        public ActionResult CancellaPosizioneCampioni(string Id, string Seriale, string Cliente)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            bll.CancellaPosizioneCampioni(Id.ToUpper(), Seriale.ToUpper(), Cliente.ToUpper());
+            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(Seriale.ToUpper(), Cliente.ToUpper());
+            return PartialView("GrigliaPosizioneCampioniPartial", model);
         }
     }
 }

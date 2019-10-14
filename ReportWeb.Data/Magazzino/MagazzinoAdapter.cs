@@ -37,6 +37,15 @@ namespace ReportWeb.Data.Magazzino
             }
         }
 
+        public void FillRW_POSIZIONE_CAMPIONI(MagazzinoDS ds)
+        {
+            string select = @"SELECT * FROM RW_POSIZIONE_CAMPIONI ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_POSIZIONE_CAMPIONI);
+            }
+        }
         public void FillMONITOR_APPROVVIGIONAMENTO(MagazzinoDS ds)
         {
             string select = @"SELECT * FROM MONITOR_APPROVVIGIONAMENTO ";

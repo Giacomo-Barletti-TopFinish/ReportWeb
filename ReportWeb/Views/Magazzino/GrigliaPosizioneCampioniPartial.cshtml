@@ -1,0 +1,37 @@
+﻿
+@using ReportWeb.Models.Magazzino
+@model  List<PosizioneCampionarioModel>
+
+
+
+@if (Model.Count == 0)
+{
+    <h3 class="text-red">Nessun elemento trovato</h3>
+}
+else
+{
+    <table class="table table-condensed" id="tblCampionario">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Campione</th>
+                <th>Posizione</th>
+                <th>Seriale</th>
+                <th>Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (PosizioneCampionarioModel elemento in Model)
+            {
+                <tr>
+                    <td>@elemento.IDPOSIZCAMP</td>
+                    <td>@elemento.Campione</td>
+                    <td>@elemento.Posizione</td>
+                    <td>@elemento.Seriale</td>
+                    <td>@elemento.Cliente</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

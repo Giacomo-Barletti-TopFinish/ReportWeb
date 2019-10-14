@@ -1,0 +1,87 @@
+﻿@using ReportWeb.Models.Magazzino
+@{
+    ViewBag.Title = "Posizione Campioni";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>Posizione - Campioni</h2>
+</div>
+<div>
+    <div><h4>Posizioni esistenti</h4></div>
+    <div class="row">
+        <div class="col-sm-2">
+            <label>Seriale</label>
+        </div>
+        <div class="col-sm-2">
+            <label>Cliente</label>
+        </div>
+        <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
+        <div class="col-sm-1"><input type="button" onclick="Esporta();" class="btn btn-primary" value="Esporta Excel" /></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input type="text" id="txtSeriale" />
+        </div>
+        <div class="col-sm-2">
+            <input type="text" id="txtCliente" />
+        </div>
+    </div>
+</div>
+<label class="text-red" id="lblMessage"></label>
+<div style="overflow-y:auto; overflow-x:hidden; height:600px; padding-left:10px">
+    <div class="row" id="divRisultati"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        Trova();
+    });
+
+    function Trova()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var seriale = $('#txtSeriale').val();
+        var cliente = $('#txtCliente').val();
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("TrovaPosizioneCampioni", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Seriale: seriale,
+                Cliente: cliente
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+     function Esporta()
+     {
+
+        var url = '@Url.Action("ReportPosizioneCampionario", "Magazzino")';
+
+        var win = window.open(url, '_blank');
+        win.document.title = "Report";
+        win.focus();
+    }
+</script>

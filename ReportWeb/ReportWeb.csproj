@@ -513,6 +513,9 @@
     <Content Include="Views\Magazzino\GrigliaMagazzinoCampioniPartial.cshtml" />
     <Content Include="Views\ALE\FattureRitardate.cshtml" />
     <Content Include="Views\ALE\FattureRitardatePartial.cshtml" />
+    <Content Include="Views\Magazzino\POSIZIONECAMPIONI.cshtml" />
+    <Content Include="Views\Magazzino\MOVIMENTOPOSIZIONECAMPIONARIO.cshtml" />
+    <Content Include="Views\Magazzino\GrigliaPosizioneCampioniPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

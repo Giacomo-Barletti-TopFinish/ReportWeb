@@ -72,6 +72,44 @@ namespace ReportWeb.Business
             return model;
 
         }
+        public List<PosizioneCampionarioModel> TrovaPosizioneCampionario(string Seriale, string Cliente)
+        {
+            List<PosizioneCampionarioModel> model = new List<PosizioneCampionarioModel>();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                MagazzinoDS ds = new MagazzinoDS();
+                bMagazzino.FillRW_POSIZIONE_CAMPIONI(ds);
+
+                List<MagazzinoDS.RW_POSIZIONE_CAMPIONIRow> elementi = ds.RW_POSIZIONE_CAMPIONI.ToList();
+                if (!string.IsNullOrEmpty(Seriale))
+                {
+                    elementi = elementi.Where(x => x.SERIALE.Contains(Seriale)).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(Cliente))
+                {
+                    elementi = elementi.Where(x => !x.IsCLIENTENull() && x.CLIENTE.Contains(Cliente)).ToList();
+                }
+
+                foreach (MagazzinoDS.RW_POSIZIONE_CAMPIONIRow posizione in elementi)
+                {
+                    PosizioneCampionarioModel m = new PosizioneCampionarioModel()
+                    {
+
+                        Campione = posizione.CAMPIONE,
+                        Cliente = posizione.IsCLIENTENull() ? string.Empty : posizione.CLIENTE,
+                        Seriale = posizione.SERIALE,
+                        Posizione=posizione.POSIZIONE.Trim(),
+                        IDPOSIZCAMP = posizione.IDPOSIZCAMP
+                    };
+
+                    model.Add(m);
+                }
+            }
+
+            return model;
+
+        }
         public List<ModelloGiacenzaModel> CaricaGiacenze()
         {
             List<ModelloGiacenzaModel> model = new List<ModelloGiacenzaModel>();
@@ -317,6 +355,40 @@ namespace ReportWeb.Business
             }
         }
 
+        public void SalvaPosizioneCampioni(string Id, string Campione, string Posizione, string Seriale, string Cliente, string User)
+        {
+            MagazzinoDS ds = new MagazzinoDS();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                bMagazzino.FillRW_POSIZIONE_CAMPIONI(ds);
+                MagazzinoDS.RW_POSIZIONE_CAMPIONIRow elemento = null;
+                if (string.IsNullOrEmpty(Id))
+                {
+                    elemento = ds.RW_POSIZIONE_CAMPIONI.NewRW_POSIZIONE_CAMPIONIRow();
+                    elemento.CAMPIONE = Campione;
+                    elemento.POSIZIONE = Posizione;
+                    elemento.SERIALE = Seriale;
+                    elemento.CLIENTE = Cliente;
+                    elemento.UTENTE = User;
+                    elemento.DATAINSERIMENTO = DateTime.Now;
+                    ds.RW_POSIZIONE_CAMPIONI.AddRW_POSIZIONE_CAMPIONIRow(elemento);
+                }
+                else
+                {
+                    decimal id = decimal.Parse(Id);
+                    elemento = ds.RW_POSIZIONE_CAMPIONI.Where(x => x.IDPOSIZCAMP == id).FirstOrDefault();
+                    if (elemento == null)
+                        throw new ArgumentException(string.Format("IDPOSIZCAMP non trovato il valore {0} impossibile salvare", Id));
+                    elemento.CAMPIONE = Campione;
+                    elemento.POSIZIONE = Posizione;
+                    elemento.SERIALE = Seriale;
+                    elemento.CLIENTE = Cliente;
+                    elemento.UTENTE = User;
+                    elemento.DATAINSERIMENTO = DateTime.Now;
+                }
+                bMagazzino.UpdateRW_POSIZIONE_CAMPIONI(ds);
+            }
+        }
         public void CancellaCampioni(string Id, string Codice, string Finitura)
         {
             MagazzinoDS ds = new MagazzinoDS();
@@ -333,6 +405,25 @@ namespace ReportWeb.Business
                     elemento.Delete();
                 }
                 bMagazzino.UpdateRW_MAGAZZINO_CAMPIONI(ds);
+            }
+        }
+
+        public void CancellaPosizioneCampioni(string Id, string Seriale, string Cliente)
+        {
+            MagazzinoDS ds = new MagazzinoDS();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                bMagazzino.FillRW_POSIZIONE_CAMPIONI(ds);
+                MagazzinoDS.RW_POSIZIONE_CAMPIONIRow elemento = null;
+                if (!string.IsNullOrEmpty(Id))
+                {
+                    decimal id = decimal.Parse(Id);
+                    elemento = ds.RW_POSIZIONE_CAMPIONI.Where(x => x.IDPOSIZCAMP == id).FirstOrDefault();
+                    if (elemento == null)
+                        throw new ArgumentException(string.Format("IDPOSIZCAMP non trovato il valore {0} impossibile salvare", Id));
+                    elemento.Delete();
+                }
+                bMagazzino.UpdateRW_POSIZIONE_CAMPIONI(ds);
             }
         }
     }

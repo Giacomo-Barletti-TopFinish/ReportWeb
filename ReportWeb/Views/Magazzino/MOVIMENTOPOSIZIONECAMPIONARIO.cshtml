@@ -1,0 +1,261 @@
+﻿@using ReportWeb.Models.Magazzino
+@{
+    ViewBag.Title = "Movimento Posizine Campionario";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>Movimento - Posizione Campionario</h2>
+</div>
+<div>
+    <div><h4>Posizioni esistenti</h4></div>
+    <div class="row">
+        <div class="col-sm-2">
+            <label>Seriale</label>
+        </div>
+        <div class="col-sm-2">
+            <label>Cliente</label>
+        </div>
+        <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input type="text" id="txtSeriale" />
+        </div>
+        <div class="col-sm-2">
+            <input type="text" id="txtCliente" />
+        </div>
+    </div>
+</div>
+<label class="text-red" id="lblMessage"></label>
+<div style="overflow-y:auto; overflow-x:hidden; height:300px; padding-left:10px">
+    <div class="row" id="divRisultati"></div>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+        <label>Campione</label>
+    </div>
+    <div class="col-sm-2">
+        <label>Posizione</label>
+    </div>
+    <div class="col-sm-3">
+        <label>Seriale</label>
+    </div>
+    <div class="col-sm-2">
+        <label>Cliente</label>
+    </div>
+    <div class="col-sm-1"><input type="button" onclick="Salva();" class="btn btn-primary" value="Salva" /></div>
+    <div class="col-sm-1"><input type="button" onclick="Cancella();" class="btn btn-primary" value="Cancella" /></div>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+        <input style="width:80px" type="hidden" id="txtIDSelezionato" readonly />
+    </div>
+    <div class="col-sm-2">
+        <input type="text" id="txtCampioneSelezionato" maxlength="35" />
+    </div>
+    <div class="col-sm-2">
+        <input type="text" id="txtPosizioneSelezionato" maxlength="25" />
+    </div>
+    <div class="col-sm-3">
+        <input style="width:80px" type="text" id="txtSerialeSelezionato" maxlength="150" />
+    </div>
+    <div class="col-sm-2">
+        <input style="width:80px" type="text" id="txtClienteSelezionato" maxlength="60" />
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+
+    });
+    function Trova()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var seriale = $('#txtSeriale').val();
+        var cliente = $('#txtCliente').val();
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("TrovaPosizioneCampioni", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Seriale: seriale,
+                Cliente: cliente
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CreaGrigliaRisultati(data);
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function CreaGrigliaRisultati(data) {
+        $('#divRisultati').html(data).show();
+        $('#tblCampionario').on('click', 'tr', function () {
+
+            var tds = $(this).find('td');
+            var Id = $(tds[0]).text();
+            var campione = $(tds[1]).text();
+            var posizione = $(tds[2]).text();
+            var seriale = $(tds[3]).text();
+            var cliente = $(tds[4]).text();
+
+            $('#txtIDSelezionato').val(Id);
+            $('#txtCampioneSelezionato').val(campione);
+            $('#txtPosizioneSelezionato').val(posizione);
+            $('#txtSerialeSelezionato').val(seriale);
+            $('#txtClienteSelezionato').val(cliente);
+        });
+    }
+
+ function Salva()
+    {
+        var esegui = true;
+        var messaggio = '';
+        var ID = $('#txtIDSelezionato').val();
+        var campione = $('#txtCampioneSelezionato').val();
+        var posizione = $('#txtPosizioneSelezionato').val();
+        var seriale = $('#txtSerialeSelezionato').val();
+        var cliente = $('#txtClienteSelezionato').val();
+
+     if (campione == null || campione == '')
+        {
+            esegui = false;
+         messaggio += MESSAGGIO_PUNTINO + " " + "Inserire il campione" + "</br>";
+        }
+
+     if (posizione == null || posizione == '') {
+            esegui = false;
+         messaggio += MESSAGGIO_PUNTINO + " " + "Inserire la posizione" + "</br>";
+        }
+
+     if (seriale == null || seriale == '') {
+            esegui = false;
+         messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il seriale" + "</br>";
+        }
+
+     if (cliente == null || cliente == '') {
+            esegui = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Indicare il cliente" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("SalvaPosizioneCampioni", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Id: ID,
+                Campione: campione,
+                Posizione: posizione,
+                Seriale: seriale,
+                Cliente: cliente
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CreaGrigliaRisultati(data);
+                $('#txtIDSelezionato').val('');
+                $('#txtCampioneSelezionato').val('');
+                $('#txtPosizioneSelezionato').val('');
+                $('#txtSerialeSelezionato').val('');
+                $('#txtClienteSelezionato').val('');
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+ function Cancella()
+    {
+        var esegui = true;
+        var messaggio = '';
+         var ID = $('#txtIDSelezionato').val();
+         var campione = $('#txtCampioneSelezionato').val();
+         var posizione = $('#txtPosizioneSelezionato').val();
+         var seriale = $('#txtSerialeSelezionato').val();
+         var cliente = $('#txtClienteSelezionato').val();
+
+         if (ID == null || ID == '')
+         {
+             esegui = false;
+             messaggio += MESSAGGIO_PUNTINO + " " + "Inserire il codice ID" + "</br>";
+         }
+
+
+     if (seriale == null || seriale == '')
+        {
+            esegui = false;
+         messaggio += MESSAGGIO_PUNTINO + " " + "Inserire il seriale" + "</br>";
+        }
+
+     if (cliente == null || cliente == '') {
+            esegui = false;
+         messaggio += MESSAGGIO_PUNTINO + " " + "Inserire il cliente " + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("CancellaPosizioneCampioni", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Id:ID,
+                Seriale: seriale,
+                Cliente: cliente
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CreaGrigliaRisultati(data);
+                $('#txtIDSelezionato').val('');
+                $('#txtCampioneSelezionato').val('');
+                $('#txtPosizioneSelezionato').val('');
+                $('#txtSerialeSelezionato').val('');
+                $('#txtClienteSelezionato').val('');
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+
+</script>
