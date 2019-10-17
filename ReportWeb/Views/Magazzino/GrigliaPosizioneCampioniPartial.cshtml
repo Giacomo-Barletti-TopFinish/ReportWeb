@@ -16,6 +16,7 @@ else
                 <th>Id</th>
                 <th>Campione</th>
                 <th>Posizione</th>
+                <th>Progressivo</th>
                 <th>Seriale</th>
                 <th>Cliente</th>
             </tr>
@@ -23,13 +24,14 @@ else
         <tbody>
             @foreach (PosizioneCampionarioModel elemento in Model)
             {
-                <tr>
-                    <td>@elemento.IDPOSIZCAMP</td>
-                    <td>@elemento.Campione</td>
-                    <td>@elemento.Posizione</td>
-                    <td>@elemento.Seriale</td>
-                    <td>@elemento.Cliente</td>
-                </tr>
+            <tr>
+                <td>@elemento.IDPOSIZCAMP</td>
+                <td>@elemento.Campione</td>
+                <td>@elemento.Posizione</td>
+                <td>@elemento.Progressivo</td>
+                <td>@elemento.Seriale</td>
+                <td>@elemento.Cliente</td>
+            </tr>
             }
         </tbody>
     </table>

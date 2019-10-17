@@ -15,6 +15,9 @@
         <div class="col-sm-2">
             <label>Cliente</label>
         </div>
+        <div class="col-sm-2">
+            <label>Posizione</label>
+        </div>
         <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
         <div class="col-sm-1"><input type="button" onclick="Esporta();" class="btn btn-primary" value="Esporta Excel" /></div>
     </div>
@@ -24,6 +27,9 @@
         </div>
         <div class="col-sm-2">
             <input type="text" id="txtCliente" />
+        </div>
+        <div class="col-sm-2">
+            <input type="text" id="txtPosizione" />
         </div>
     </div>
 </div>
@@ -45,6 +51,7 @@
         var messaggio = '';
         var seriale = $('#txtSeriale').val();
         var cliente = $('#txtCliente').val();
+        var posizione = $('#txtPosizione').val();
 
         $('#lblMessage').html(messaggio);
         if (!esegui)
@@ -57,7 +64,8 @@
             url: url,
             data: {
                 Seriale: seriale,
-                Cliente: cliente
+                Cliente: cliente,
+                Posizione:posizione
             },
             cache: false,
             type: "POST",

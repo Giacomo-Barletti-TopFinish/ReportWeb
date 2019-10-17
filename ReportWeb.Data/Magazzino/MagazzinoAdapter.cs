@@ -39,7 +39,7 @@ namespace ReportWeb.Data.Magazzino
 
         public void FillRW_POSIZIONE_CAMPIONI(MagazzinoDS ds)
         {
-            string select = @"SELECT * FROM RW_POSIZIONE_CAMPIONI ";
+            string select = @"SELECT * FROM RW_POSIZIONE_CAMPIONI order by posizione, progressivo";
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {

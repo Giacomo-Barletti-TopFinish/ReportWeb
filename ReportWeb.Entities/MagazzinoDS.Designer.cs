@@ -3692,6 +3692,8 @@ namespace ReportWeb.Entities {
             
             private global::System.Data.DataColumn columnDATAINSERIMENTO;
             
+            private global::System.Data.DataColumn columnPROGRESSIVO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public RW_POSIZIONE_CAMPIONIDataTable() {
@@ -3783,6 +3785,14 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PROGRESSIVOColumn {
+                get {
+                    return this.columnPROGRESSIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3818,7 +3828,7 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RW_POSIZIONE_CAMPIONIRow AddRW_POSIZIONE_CAMPIONIRow(decimal IDPOSIZCAMP, string CAMPIONE, string POSIZIONE, string SERIALE, string CLIENTE, string UTENTE, System.DateTime DATAINSERIMENTO) {
+            public RW_POSIZIONE_CAMPIONIRow AddRW_POSIZIONE_CAMPIONIRow(decimal IDPOSIZCAMP, string CAMPIONE, string POSIZIONE, string SERIALE, string CLIENTE, string UTENTE, System.DateTime DATAINSERIMENTO, decimal PROGRESSIVO) {
                 RW_POSIZIONE_CAMPIONIRow rowRW_POSIZIONE_CAMPIONIRow = ((RW_POSIZIONE_CAMPIONIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDPOSIZCAMP,
@@ -3827,7 +3837,8 @@ namespace ReportWeb.Entities {
                         SERIALE,
                         CLIENTE,
                         UTENTE,
-                        DATAINSERIMENTO};
+                        DATAINSERIMENTO,
+                        PROGRESSIVO};
                 rowRW_POSIZIONE_CAMPIONIRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRW_POSIZIONE_CAMPIONIRow);
                 return rowRW_POSIZIONE_CAMPIONIRow;
@@ -3857,6 +3868,7 @@ namespace ReportWeb.Entities {
                 this.columnCLIENTE = base.Columns["CLIENTE"];
                 this.columnUTENTE = base.Columns["UTENTE"];
                 this.columnDATAINSERIMENTO = base.Columns["DATAINSERIMENTO"];
+                this.columnPROGRESSIVO = base.Columns["PROGRESSIVO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3876,6 +3888,8 @@ namespace ReportWeb.Entities {
                 base.Columns.Add(this.columnUTENTE);
                 this.columnDATAINSERIMENTO = new global::System.Data.DataColumn("DATAINSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATAINSERIMENTO);
+                this.columnPROGRESSIVO = new global::System.Data.DataColumn("PROGRESSIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPROGRESSIVO);
                 this.columnCAMPIONE.AllowDBNull = false;
                 this.columnCAMPIONE.MaxLength = 35;
                 this.columnPOSIZIONE.AllowDBNull = false;
@@ -7105,6 +7119,22 @@ namespace ReportWeb.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal PROGRESSIVO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_POSIZIONE_CAMPIONI.PROGRESSIVOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PROGRESSIVO\' in table \'RW_POSIZIONE_CAMPIONI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_POSIZIONE_CAMPIONI.PROGRESSIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDPOSIZCAMPNull() {
                 return this.IsNull(this.tableRW_POSIZIONE_CAMPIONI.IDPOSIZCAMPColumn);
             }
@@ -7125,6 +7155,18 @@ namespace ReportWeb.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCLIENTENull() {
                 this[this.tableRW_POSIZIONE_CAMPIONI.CLIENTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPROGRESSIVONull() {
+                return this.IsNull(this.tableRW_POSIZIONE_CAMPIONI.PROGRESSIVOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPROGRESSIVONull() {
+                this[this.tableRW_POSIZIONE_CAMPIONI.PROGRESSIVOColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -34,7 +34,7 @@ namespace ReportWeb.Business
             return model;
         }
 
-        public List<MagazzinoCampionarioModel> TrovaCampionario(string Codice, string Finitura)
+        public List<MagazzinoCampionarioModel> TrovaCampionario(string Codice, string Finitura, string Piano)
         {
             List<MagazzinoCampionarioModel> model = new List<MagazzinoCampionarioModel>();
             using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
@@ -51,6 +51,11 @@ namespace ReportWeb.Business
                 if (!string.IsNullOrEmpty(Finitura))
                 {
                     elementi = elementi.Where(x => !x.IsFINITURANull() && x.FINITURA.Contains(Finitura)).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(Piano))
+                {
+                    elementi = elementi.Where(x => x.PIANO.Contains(Piano)).ToList();
                 }
 
                 foreach (MagazzinoDS.RW_MAGAZZINO_CAMPIONIRow articolo in elementi)
@@ -72,7 +77,7 @@ namespace ReportWeb.Business
             return model;
 
         }
-        public List<PosizioneCampionarioModel> TrovaPosizioneCampionario(string Seriale, string Cliente)
+        public List<PosizioneCampionarioModel> TrovaPosizioneCampionario(string Seriale, string Cliente, string Posizione)
         {
             List<PosizioneCampionarioModel> model = new List<PosizioneCampionarioModel>();
             using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
@@ -91,6 +96,11 @@ namespace ReportWeb.Business
                     elementi = elementi.Where(x => !x.IsCLIENTENull() && x.CLIENTE.Contains(Cliente)).ToList();
                 }
 
+                if (!string.IsNullOrEmpty(Posizione))
+                {
+                    elementi = elementi.Where(x => x.POSIZIONE.Contains(Posizione)).ToList();
+                }
+
                 foreach (MagazzinoDS.RW_POSIZIONE_CAMPIONIRow posizione in elementi)
                 {
                     PosizioneCampionarioModel m = new PosizioneCampionarioModel()
@@ -99,7 +109,8 @@ namespace ReportWeb.Business
                         Campione = posizione.CAMPIONE,
                         Cliente = posizione.IsCLIENTENull() ? string.Empty : posizione.CLIENTE,
                         Seriale = posizione.SERIALE,
-                        Posizione=posizione.POSIZIONE.Trim(),
+                        Posizione = posizione.POSIZIONE.Trim(),
+                        Progressivo = posizione.IsPROGRESSIVONull()?-1:posizione.PROGRESSIVO,
                         IDPOSIZCAMP = posizione.IDPOSIZCAMP
                     };
 
@@ -355,7 +366,7 @@ namespace ReportWeb.Business
             }
         }
 
-        public void SalvaPosizioneCampioni(string Id, string Campione, string Posizione, string Seriale, string Cliente, string User)
+        public void SalvaPosizioneCampioni(string Id, string Campione, string Posizione, decimal Progressivo, string Seriale, string Cliente, string User)
         {
             MagazzinoDS ds = new MagazzinoDS();
             using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
@@ -367,6 +378,7 @@ namespace ReportWeb.Business
                     elemento = ds.RW_POSIZIONE_CAMPIONI.NewRW_POSIZIONE_CAMPIONIRow();
                     elemento.CAMPIONE = Campione;
                     elemento.POSIZIONE = Posizione;
+                    elemento.PROGRESSIVO = Progressivo;
                     elemento.SERIALE = Seriale;
                     elemento.CLIENTE = Cliente;
                     elemento.UTENTE = User;
@@ -381,6 +393,7 @@ namespace ReportWeb.Business
                         throw new ArgumentException(string.Format("IDPOSIZCAMP non trovato il valore {0} impossibile salvare", Id));
                     elemento.CAMPIONE = Campione;
                     elemento.POSIZIONE = Posizione;
+                    elemento.PROGRESSIVO = Progressivo;
                     elemento.SERIALE = Seriale;
                     elemento.CLIENTE = Cliente;
                     elemento.UTENTE = User;

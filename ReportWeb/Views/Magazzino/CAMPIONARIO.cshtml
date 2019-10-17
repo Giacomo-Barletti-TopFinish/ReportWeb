@@ -7,7 +7,7 @@
 <div class="content-top">
     <h2>Magazzino - Campionario</h2>
 </div>
-<div >
+<div>
     <div><h4>Giacenze esistenti</h4></div>
     <div class="row">
         <div class="col-sm-2">
@@ -16,15 +16,21 @@
         <div class="col-sm-2">
             <label>Finitura</label>
         </div>
+        <div class="col-sm-2">
+            <label>Piano</label>
+        </div>
         <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
         <div class="col-sm-1"><input type="button" onclick="Esporta();" class="btn btn-primary" value="Esporta Excel" /></div>
     </div>
     <div class="row">
         <div class="col-sm-2">
-           <input type="text" id="txtCodice" />
+            <input type="text" id="txtCodice" />
         </div>
         <div class="col-sm-2">
             <input type="text" id="txtFinitura" />
+        </div>
+        <div class="col-sm-2">
+            <input type="text" id="txtPiano" />
         </div>
     </div>
 </div>
@@ -46,6 +52,7 @@
         var messaggio = '';
         var codice = $('#txtCodice').val();
         var finitura = $('#txtFinitura').val();
+        var piano = $('#txtPiano').val();
 
         $('#lblMessage').html(messaggio);
         if (!esegui)
@@ -58,7 +65,8 @@
             url: url,
             data: {
                 Codice: codice,
-                Finitura: finitura
+                Finitura: finitura,
+                Piano:piano
             },
             cache: false,
             type: "POST",
@@ -78,9 +86,9 @@
 
      function Esporta()
      {
-         
+
         var url = '@Url.Action("ReportCampionario", "Magazzino")';
-       
+
         var win = window.open(url, '_blank');
         win.document.title = "Report";
         win.focus();

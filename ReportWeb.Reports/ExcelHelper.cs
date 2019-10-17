@@ -694,13 +694,20 @@ namespace ReportWeb.Reports
                         {
                             Min = 3,
                             Max = 3,
-                            Width = 70,
-                            CustomWidth = true
+                            Width = 20,
+                            CustomWidth = false
                         },
                         new Column
                         {
                             Min = 4,
                             Max = 4,
+                            Width = 70,
+                            CustomWidth = true
+                        },
+                        new Column
+                        {
+                            Min = 5,
+                            Max = 5,
                             Width = 15,
                             CustomWidth = true
                         });
@@ -723,6 +730,7 @@ namespace ReportWeb.Reports
                 row.Append(
                     ConstructCell("Campione", CellValues.String, 2),
                     ConstructCell("Posizione", CellValues.String, 2),
+                    ConstructCell("Progressivo", CellValues.String, 2),
                     ConstructCell("Seriale", CellValues.String, 2),
                     ConstructCell("Cliente", CellValues.String, 2));
 
@@ -735,6 +743,7 @@ namespace ReportWeb.Reports
                     row.Append(
                         ConstructCell(elemento.Campione, CellValues.String, 1),
                         ConstructCell(elemento.Posizione, CellValues.String, 1),
+                        ConstructCell(elemento.Progressivo.ToString(), CellValues.String, 1),
                         ConstructCell(elemento.Seriale, CellValues.String, 1),
                         ConstructCell(elemento.Cliente, CellValues.String, 1));
 

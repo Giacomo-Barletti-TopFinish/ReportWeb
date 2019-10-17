@@ -15,6 +15,9 @@
         <div class="col-sm-2">
             <label>Cliente</label>
         </div>
+        <div class="col-sm-2">
+            <label>Posizione</label>
+        </div>
         <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
     </div>
     <div class="row">
@@ -23,6 +26,9 @@
         </div>
         <div class="col-sm-2">
             <input type="text" id="txtCliente" />
+        </div>
+        <div class="col-sm-2">
+            <input type="text" id="txtPosizione" />
         </div>
     </div>
 </div>
@@ -39,7 +45,10 @@
     <div class="col-sm-2">
         <label>Posizione</label>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-1">
+        <label>Progressivo</label>
+    </div>
+    <div class="col-sm-2">
         <label>Seriale</label>
     </div>
     <div class="col-sm-2">
@@ -58,11 +67,14 @@
     <div class="col-sm-2">
         <input type="text" id="txtPosizioneSelezionato" maxlength="25" />
     </div>
-    <div class="col-sm-3">
-        <input style="width:80px" type="text" id="txtSerialeSelezionato" maxlength="150" />
+    <div class="col-sm-1">
+        <input style="width:80px" type="number" id="txtProgressivoSelezionato" maxlength="8" />
     </div>
     <div class="col-sm-2">
-        <input style="width:80px" type="text" id="txtClienteSelezionato" maxlength="60" />
+        <input style="width:100%" type="text" id="txtSerialeSelezionato" maxlength="150" />
+    </div>
+    <div class="col-sm-2">
+        <input style="width:100%" type="text" id="txtClienteSelezionato" maxlength="60" />
     </div>
 </div>
 
@@ -78,6 +90,7 @@
         var messaggio = '';
         var seriale = $('#txtSeriale').val();
         var cliente = $('#txtCliente').val();
+        var posizione = $('#txtPosizione').val();
 
         $('#lblMessage').html(messaggio);
         if (!esegui)
@@ -90,7 +103,8 @@
             url: url,
             data: {
                 Seriale: seriale,
-                Cliente: cliente
+                Cliente: cliente,
+                Posizione:posizione
             },
             cache: false,
             type: "POST",
@@ -115,12 +129,14 @@
             var Id = $(tds[0]).text();
             var campione = $(tds[1]).text();
             var posizione = $(tds[2]).text();
-            var seriale = $(tds[3]).text();
-            var cliente = $(tds[4]).text();
+            var progressivo = $(tds[3]).text();
+            var seriale = $(tds[4]).text();
+            var cliente = $(tds[5]).text();
 
             $('#txtIDSelezionato').val(Id);
             $('#txtCampioneSelezionato').val(campione);
             $('#txtPosizioneSelezionato').val(posizione);
+            $('#txtProgressivoSelezionato').val(progressivo);
             $('#txtSerialeSelezionato').val(seriale);
             $('#txtClienteSelezionato').val(cliente);
         });
@@ -133,6 +149,7 @@
         var ID = $('#txtIDSelezionato').val();
         var campione = $('#txtCampioneSelezionato').val();
         var posizione = $('#txtPosizioneSelezionato').val();
+     var progressivo = $('#txtProgressivoSelezionato').val();
         var seriale = $('#txtSerialeSelezionato').val();
         var cliente = $('#txtClienteSelezionato').val();
 
@@ -146,6 +163,11 @@
             esegui = false;
          messaggio += MESSAGGIO_PUNTINO + " " + "Inserire la posizione" + "</br>";
         }
+
+     if (progressivo == null || progressivo == '') {
+         esegui = false;
+         messaggio += MESSAGGIO_PUNTINO + " " + "Inserire il progressivo" + "</br>";
+     }
 
      if (seriale == null || seriale == '') {
             esegui = false;
@@ -170,6 +192,7 @@
                 Id: ID,
                 Campione: campione,
                 Posizione: posizione,
+                Progressivo: progressivo,
                 Seriale: seriale,
                 Cliente: cliente
             },
@@ -181,6 +204,7 @@
                 $('#txtIDSelezionato').val('');
                 $('#txtCampioneSelezionato').val('');
                 $('#txtPosizioneSelezionato').val('');
+                $('#txtProgressivoSelezionato').val('');
                 $('#txtSerialeSelezionato').val('');
                 $('#txtClienteSelezionato').val('');
 

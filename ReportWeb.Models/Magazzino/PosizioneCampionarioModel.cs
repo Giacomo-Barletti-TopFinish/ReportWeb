@@ -11,6 +11,7 @@ namespace ReportWeb.Models.Magazzino
         public string Campione { get; set; }
         public string Posizione { get; set; }
         public string Seriale { get; set; }
+        public decimal Progressivo { get; set; }
         public string Cliente{ get; set; }
         public decimal IDPOSIZCAMP { get; set; }
 

@@ -11,7 +11,7 @@
     <Shape ID="DesignTable:MONITOR_APPROVVIGIONAMENTO" ZOrder="4" X="127" Y="311" Height="86" Width="277" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="130" />
     <Shape ID="DesignTable:MAGAZZINIESTERNI" ZOrder="3" X="706" Y="504" Height="304" Width="185" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
     <Shape ID="DesignTable:RW_MAGAZZINO_CAMPIONI" ZOrder="2" X="1389" Y="324" Height="181" Width="235" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="177" />
-    <Shape ID="DesignTable:RW_POSIZIONE_CAMPIONI" ZOrder="1" X="368" Y="506" Height="162" Width="224" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="206" />
+    <Shape ID="DesignTable:RW_POSIZIONE_CAMPIONI" ZOrder="1" X="437" Y="509" Height="181" Width="224" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="177" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

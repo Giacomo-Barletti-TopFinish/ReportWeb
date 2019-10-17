@@ -106,7 +106,7 @@ namespace ReportWeb.Controllers
         public ActionResult ReportCampionario()
         {
             MagazzinoBLL bll = new MagazzinoBLL();
-            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(string.Empty, string.Empty);
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(string.Empty, string.Empty, string.Empty);
             ExcelHelper excel = new ExcelHelper();
             byte[] fileContents = excel.CreaExcelCampionario(model);
 
@@ -116,7 +116,7 @@ namespace ReportWeb.Controllers
         public ActionResult ReportPosizioneCampionario()
         {
             MagazzinoBLL bll = new MagazzinoBLL();
-            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(string.Empty, string.Empty);
+            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(string.Empty, string.Empty, string.Empty);
             ExcelHelper excel = new ExcelHelper();
             byte[] fileContents = excel.CreaExcelPosizioneCampionario(model);
 
@@ -154,23 +154,23 @@ namespace ReportWeb.Controllers
             List<ModelloGiacenzaModel> model = bll.CaricaGiacenze();
             return View(model);
         }
-        public ActionResult TrovaCampioni(string Codice, string Finitura)
+        public ActionResult TrovaCampioni(string Codice, string Finitura, string Piano)
         {
             MagazzinoBLL bll = new MagazzinoBLL();
-            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper());
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper(), Piano.ToUpper());
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
         }
-        public ActionResult TrovaPosizioneCampioni(string Seriale, string Cliente)
+        public ActionResult TrovaPosizioneCampioni(string Seriale, string Cliente, string Posizione)
         {
             MagazzinoBLL bll = new MagazzinoBLL();
-            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(Seriale.ToUpper(), Cliente.ToUpper());
+            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(Seriale.ToUpper(), Cliente.ToUpper(), Posizione.ToUpper());
             return PartialView("GrigliaPosizioneCampioniPartial", model);
         }
         public ActionResult SalvaCampioni(string Id, string Codice, string Finitura, string Piano, string Posizione, string Descrizione)
         {
             MagazzinoBLL bll = new MagazzinoBLL();
             bll.SalvaCampioni(Id.ToUpper(), Codice.ToUpper(), Finitura.ToUpper(), Piano.ToUpper(), Posizione.ToUpper(), Descrizione.ToUpper(), ConnectedUser);
-            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper());
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper(), Piano.ToUpper());
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
         }
 
@@ -178,15 +178,15 @@ namespace ReportWeb.Controllers
         {
             MagazzinoBLL bll = new MagazzinoBLL();
             bll.CancellaCampioni(Id.ToUpper(), Codice.ToUpper(), Finitura.ToUpper());
-            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper());
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper(), string.Empty);
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
         }
 
-        public ActionResult SalvaPosizioneCampioni(string Id, string Campione, string Posizione, string Seriale, string Cliente)
+        public ActionResult SalvaPosizioneCampioni(string Id, string Campione, string Posizione, decimal Progressivo, string Seriale, string Cliente)
         {
             MagazzinoBLL bll = new MagazzinoBLL();
-            bll.SalvaPosizioneCampioni(Id.ToUpper(), Campione.ToUpper(), Posizione.ToUpper(), Seriale.ToUpper(), Cliente.ToUpper(), ConnectedUser);
-            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(Seriale.ToUpper(), Cliente.ToUpper());
+            bll.SalvaPosizioneCampioni(Id.ToUpper(), Campione.ToUpper(), Posizione.ToUpper(), Progressivo, Seriale.ToUpper(), Cliente.ToUpper(), ConnectedUser);
+            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(Seriale.ToUpper(), Cliente.ToUpper(), Posizione.ToUpper());
             return PartialView("GrigliaPosizioneCampioniPartial", model);
         }
 
@@ -194,7 +194,7 @@ namespace ReportWeb.Controllers
         {
             MagazzinoBLL bll = new MagazzinoBLL();
             bll.CancellaPosizioneCampioni(Id.ToUpper(), Seriale.ToUpper(), Cliente.ToUpper());
-            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(Seriale.ToUpper(), Cliente.ToUpper());
+            List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(Seriale.ToUpper(), Cliente.ToUpper(), string.Empty);
             return PartialView("GrigliaPosizioneCampioniPartial", model);
         }
     }
