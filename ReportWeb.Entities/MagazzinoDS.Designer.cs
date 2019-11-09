@@ -3535,7 +3535,7 @@ namespace ReportWeb.Entities {
                 this.columnDATAINSERIMENTO = new global::System.Data.DataColumn("DATAINSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATAINSERIMENTO);
                 this.columnCODICE.AllowDBNull = false;
-                this.columnCODICE.MaxLength = 20;
+                this.columnCODICE.MaxLength = 30;
                 this.columnFINITURA.MaxLength = 20;
                 this.columnPIANO.AllowDBNull = false;
                 this.columnPIANO.MaxLength = 10;

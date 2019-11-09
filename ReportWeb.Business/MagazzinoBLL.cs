@@ -77,7 +77,7 @@ namespace ReportWeb.Business
             return model;
 
         }
-        public List<PosizioneCampionarioModel> TrovaPosizioneCampionario(string Seriale, string Cliente, string Posizione)
+        public List<PosizioneCampionarioModel> TrovaPosizioneCampionario(string Campione, string Seriale, string Posizione, string Cliente)
         {
             List<PosizioneCampionarioModel> model = new List<PosizioneCampionarioModel>();
             using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
@@ -86,9 +86,9 @@ namespace ReportWeb.Business
                 bMagazzino.FillRW_POSIZIONE_CAMPIONI(ds);
 
                 List<MagazzinoDS.RW_POSIZIONE_CAMPIONIRow> elementi = ds.RW_POSIZIONE_CAMPIONI.ToList();
-                if (!string.IsNullOrEmpty(Seriale))
+                if (!string.IsNullOrEmpty(Campione))
                 {
-                    elementi = elementi.Where(x => x.SERIALE.Contains(Seriale)).ToList();
+                    elementi = elementi.Where(x => x.CAMPIONE.Contains(Campione)).ToList();
                 }
 
                 if (!string.IsNullOrEmpty(Cliente))
@@ -101,6 +101,11 @@ namespace ReportWeb.Business
                     elementi = elementi.Where(x => x.POSIZIONE.Contains(Posizione)).ToList();
                 }
 
+                if (!string.IsNullOrEmpty(Seriale))
+                {
+                    elementi = elementi.Where(x => x.SERIALE.Contains(Seriale)).ToList();
+                }
+
                 foreach (MagazzinoDS.RW_POSIZIONE_CAMPIONIRow posizione in elementi)
                 {
                     PosizioneCampionarioModel m = new PosizioneCampionarioModel()
@@ -110,7 +115,7 @@ namespace ReportWeb.Business
                         Cliente = posizione.IsCLIENTENull() ? string.Empty : posizione.CLIENTE,
                         Seriale = posizione.SERIALE,
                         Posizione = posizione.POSIZIONE.Trim(),
-                        Progressivo = posizione.IsPROGRESSIVONull()?-1:posizione.PROGRESSIVO,
+                        Progressivo = posizione.IsPROGRESSIVONull() ? -1 : posizione.PROGRESSIVO,
                         IDPOSIZCAMP = posizione.IDPOSIZCAMP
                     };
 

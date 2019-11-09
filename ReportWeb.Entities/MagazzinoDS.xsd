@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.ReportWeb.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.ReportWeb.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString1 (Settings)" PropertyReference="ApplicationSettings.ReportWeb.Entities.Properties.Settings.GlobalReference.Default.ConnectionString1" Provider="System.Data.OracleClient" />
         </Connections>
         <Tables />
@@ -15,7 +15,7 @@
   <xs:element name="MagazzinoDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MagazzinoDS" msprop:Generator_UserDSName="MagazzinoDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="MONITOR_GIACENZA" msprop:Generator_TableClassName="MONITOR_GIACENZADataTable" msprop:Generator_TableVarName="tableMONITOR_GIACENZA" msprop:Generator_TablePropName="MONITOR_GIACENZA" msprop:Generator_RowDeletingName="MONITOR_GIACENZARowDeleting" msprop:Generator_RowChangingName="MONITOR_GIACENZARowChanging" msprop:Generator_RowEvHandlerName="MONITOR_GIACENZARowChangeEventHandler" msprop:Generator_RowDeletedName="MONITOR_GIACENZARowDeleted" msprop:Generator_UserTableName="MONITOR_GIACENZA" msprop:Generator_RowChangedName="MONITOR_GIACENZARowChanged" msprop:Generator_RowEvArgName="MONITOR_GIACENZARowChangeEvent" msprop:Generator_RowClassName="MONITOR_GIACENZARow">
+        <xs:element name="MONITOR_GIACENZA" msprop:Generator_TableClassName="MONITOR_GIACENZADataTable" msprop:Generator_TableVarName="tableMONITOR_GIACENZA" msprop:Generator_RowChangedName="MONITOR_GIACENZARowChanged" msprop:Generator_TablePropName="MONITOR_GIACENZA" msprop:Generator_RowDeletingName="MONITOR_GIACENZARowDeleting" msprop:Generator_RowChangingName="MONITOR_GIACENZARowChanging" msprop:Generator_RowEvHandlerName="MONITOR_GIACENZARowChangeEventHandler" msprop:Generator_RowDeletedName="MONITOR_GIACENZARowDeleted" msprop:Generator_RowClassName="MONITOR_GIACENZARow" msprop:Generator_UserTableName="MONITOR_GIACENZA" msprop:Generator_RowEvArgName="MONITOR_GIACENZARowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
@@ -29,7 +29,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MAGAZZ" msprop:Generator_TableClassName="MAGAZZDataTable" msprop:Generator_TableVarName="tableMAGAZZ" msprop:Generator_TablePropName="MAGAZZ" msprop:Generator_RowDeletingName="MAGAZZRowDeleting" msprop:Generator_RowChangingName="MAGAZZRowChanging" msprop:Generator_RowEvHandlerName="MAGAZZRowChangeEventHandler" msprop:Generator_RowDeletedName="MAGAZZRowDeleted" msprop:Generator_UserTableName="MAGAZZ" msprop:Generator_RowChangedName="MAGAZZRowChanged" msprop:Generator_RowEvArgName="MAGAZZRowChangeEvent" msprop:Generator_RowClassName="MAGAZZRow">
+        <xs:element name="MAGAZZ" msprop:Generator_TableClassName="MAGAZZDataTable" msprop:Generator_TableVarName="tableMAGAZZ" msprop:Generator_RowChangedName="MAGAZZRowChanged" msprop:Generator_TablePropName="MAGAZZ" msprop:Generator_RowDeletingName="MAGAZZRowDeleting" msprop:Generator_RowChangingName="MAGAZZRowChanging" msprop:Generator_RowEvHandlerName="MAGAZZRowChangeEventHandler" msprop:Generator_RowDeletedName="MAGAZZRowDeleted" msprop:Generator_RowClassName="MAGAZZRow" msprop:Generator_UserTableName="MAGAZZ" msprop:Generator_RowEvArgName="MAGAZZRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
@@ -514,7 +514,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MONITOR_APPROVVIGIONAMENTO" msprop:Generator_TableClassName="MONITOR_APPROVVIGIONAMENTODataTable" msprop:Generator_TableVarName="tableMONITOR_APPROVVIGIONAMENTO" msprop:Generator_RowChangedName="MONITOR_APPROVVIGIONAMENTORowChanged" msprop:Generator_TablePropName="MONITOR_APPROVVIGIONAMENTO" msprop:Generator_RowDeletingName="MONITOR_APPROVVIGIONAMENTORowDeleting" msprop:Generator_RowChangingName="MONITOR_APPROVVIGIONAMENTORowChanging" msprop:Generator_RowEvHandlerName="MONITOR_APPROVVIGIONAMENTORowChangeEventHandler" msprop:Generator_RowDeletedName="MONITOR_APPROVVIGIONAMENTORowDeleted" msprop:Generator_RowClassName="MONITOR_APPROVVIGIONAMENTORow" msprop:Generator_UserTableName="MONITOR_APPROVVIGIONAMENTO" msprop:Generator_RowEvArgName="MONITOR_APPROVVIGIONAMENTORowChangeEvent">
+        <xs:element name="MONITOR_APPROVVIGIONAMENTO" msprop:Generator_TableClassName="MONITOR_APPROVVIGIONAMENTODataTable" msprop:Generator_TableVarName="tableMONITOR_APPROVVIGIONAMENTO" msprop:Generator_TablePropName="MONITOR_APPROVVIGIONAMENTO" msprop:Generator_RowDeletingName="MONITOR_APPROVVIGIONAMENTORowDeleting" msprop:Generator_RowChangingName="MONITOR_APPROVVIGIONAMENTORowChanging" msprop:Generator_RowEvHandlerName="MONITOR_APPROVVIGIONAMENTORowChangeEventHandler" msprop:Generator_RowDeletedName="MONITOR_APPROVVIGIONAMENTORowDeleted" msprop:Generator_UserTableName="MONITOR_APPROVVIGIONAMENTO" msprop:Generator_RowChangedName="MONITOR_APPROVVIGIONAMENTORowChanged" msprop:Generator_RowEvArgName="MONITOR_APPROVVIGIONAMENTORowChangeEvent" msprop:Generator_RowClassName="MONITOR_APPROVVIGIONAMENTORow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
@@ -535,7 +535,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MAGAZZINIESTERNI" msprop:Generator_TableClassName="MAGAZZINIESTERNIDataTable" msprop:Generator_TableVarName="tableMAGAZZINIESTERNI" msprop:Generator_RowChangedName="MAGAZZINIESTERNIRowChanged" msprop:Generator_TablePropName="MAGAZZINIESTERNI" msprop:Generator_RowDeletingName="MAGAZZINIESTERNIRowDeleting" msprop:Generator_RowChangingName="MAGAZZINIESTERNIRowChanging" msprop:Generator_RowEvHandlerName="MAGAZZINIESTERNIRowChangeEventHandler" msprop:Generator_RowDeletedName="MAGAZZINIESTERNIRowDeleted" msprop:Generator_RowClassName="MAGAZZINIESTERNIRow" msprop:Generator_UserTableName="MAGAZZINIESTERNI" msprop:Generator_RowEvArgName="MAGAZZINIESTERNIRowChangeEvent">
+        <xs:element name="MAGAZZINIESTERNI" msprop:Generator_TableClassName="MAGAZZINIESTERNIDataTable" msprop:Generator_TableVarName="tableMAGAZZINIESTERNI" msprop:Generator_TablePropName="MAGAZZINIESTERNI" msprop:Generator_RowDeletingName="MAGAZZINIESTERNIRowDeleting" msprop:Generator_RowChangingName="MAGAZZINIESTERNIRowChanging" msprop:Generator_RowEvHandlerName="MAGAZZINIESTERNIRowChangeEventHandler" msprop:Generator_RowDeletedName="MAGAZZINIESTERNIRowDeleted" msprop:Generator_UserTableName="MAGAZZINIESTERNI" msprop:Generator_RowChangedName="MAGAZZINIESTERNIRowChanged" msprop:Generator_RowEvArgName="MAGAZZINIESTERNIRowChangeEvent" msprop:Generator_RowClassName="MAGAZZINIESTERNIRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="AZIENDA" msprop:Generator_ColumnVarNameInTable="columnAZIENDA" msprop:Generator_ColumnPropNameInRow="AZIENDA" msprop:Generator_ColumnPropNameInTable="AZIENDAColumn" msprop:Generator_UserColumnName="AZIENDA" minOccurs="0">
@@ -610,14 +610,14 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="RW_MAGAZZINO_CAMPIONI" msprop:Generator_TableClassName="RW_MAGAZZINO_CAMPIONIDataTable" msprop:Generator_TableVarName="tableRW_MAGAZZINO_CAMPIONI" msprop:Generator_TablePropName="RW_MAGAZZINO_CAMPIONI" msprop:Generator_RowDeletingName="RW_MAGAZZINO_CAMPIONIRowDeleting" msprop:Generator_RowChangingName="RW_MAGAZZINO_CAMPIONIRowChanging" msprop:Generator_RowEvHandlerName="RW_MAGAZZINO_CAMPIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_MAGAZZINO_CAMPIONIRowDeleted" msprop:Generator_UserTableName="RW_MAGAZZINO_CAMPIONI" msprop:Generator_RowChangedName="RW_MAGAZZINO_CAMPIONIRowChanged" msprop:Generator_RowEvArgName="RW_MAGAZZINO_CAMPIONIRowChangeEvent" msprop:Generator_RowClassName="RW_MAGAZZINO_CAMPIONIRow">
+        <xs:element name="RW_MAGAZZINO_CAMPIONI" msprop:Generator_TableClassName="RW_MAGAZZINO_CAMPIONIDataTable" msprop:Generator_TableVarName="tableRW_MAGAZZINO_CAMPIONI" msprop:Generator_RowChangedName="RW_MAGAZZINO_CAMPIONIRowChanged" msprop:Generator_TablePropName="RW_MAGAZZINO_CAMPIONI" msprop:Generator_RowDeletingName="RW_MAGAZZINO_CAMPIONIRowDeleting" msprop:Generator_RowChangingName="RW_MAGAZZINO_CAMPIONIRowChanging" msprop:Generator_RowEvHandlerName="RW_MAGAZZINO_CAMPIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_MAGAZZINO_CAMPIONIRowDeleted" msprop:Generator_RowClassName="RW_MAGAZZINO_CAMPIONIRow" msprop:Generator_UserTableName="RW_MAGAZZINO_CAMPIONI" msprop:Generator_RowEvArgName="RW_MAGAZZINO_CAMPIONIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMAGAZCAMP" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZCAMP" msprop:Generator_ColumnPropNameInRow="IDMAGAZCAMP" msprop:Generator_ColumnPropNameInTable="IDMAGAZCAMPColumn" msprop:Generator_UserColumnName="IDMAGAZCAMP" type="xs:decimal" minOccurs="0" />
               <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="20" />
+                    <xs:maxLength value="30" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -660,7 +660,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="RW_POSIZIONE_CAMPIONI" msprop:Generator_TableClassName="RW_POSIZIONE_CAMPIONIDataTable" msprop:Generator_TableVarName="tableRW_POSIZIONE_CAMPIONI" msprop:Generator_TablePropName="RW_POSIZIONE_CAMPIONI" msprop:Generator_RowDeletingName="RW_POSIZIONE_CAMPIONIRowDeleting" msprop:Generator_RowChangingName="RW_POSIZIONE_CAMPIONIRowChanging" msprop:Generator_RowEvHandlerName="RW_POSIZIONE_CAMPIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_POSIZIONE_CAMPIONIRowDeleted" msprop:Generator_UserTableName="RW_POSIZIONE_CAMPIONI" msprop:Generator_RowChangedName="RW_POSIZIONE_CAMPIONIRowChanged" msprop:Generator_RowEvArgName="RW_POSIZIONE_CAMPIONIRowChangeEvent" msprop:Generator_RowClassName="RW_POSIZIONE_CAMPIONIRow">
+        <xs:element name="RW_POSIZIONE_CAMPIONI" msprop:Generator_TableClassName="RW_POSIZIONE_CAMPIONIDataTable" msprop:Generator_TableVarName="tableRW_POSIZIONE_CAMPIONI" msprop:Generator_RowChangedName="RW_POSIZIONE_CAMPIONIRowChanged" msprop:Generator_TablePropName="RW_POSIZIONE_CAMPIONI" msprop:Generator_RowDeletingName="RW_POSIZIONE_CAMPIONIRowDeleting" msprop:Generator_RowChangingName="RW_POSIZIONE_CAMPIONIRowChanging" msprop:Generator_RowEvHandlerName="RW_POSIZIONE_CAMPIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_POSIZIONE_CAMPIONIRowDeleted" msprop:Generator_RowClassName="RW_POSIZIONE_CAMPIONIRow" msprop:Generator_UserTableName="RW_POSIZIONE_CAMPIONI" msprop:Generator_RowEvArgName="RW_POSIZIONE_CAMPIONIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDPOSIZCAMP" msprop:Generator_ColumnVarNameInTable="columnIDPOSIZCAMP" msprop:Generator_ColumnPropNameInRow="IDPOSIZCAMP" msprop:Generator_ColumnPropNameInTable="IDPOSIZCAMPColumn" msprop:Generator_UserColumnName="IDPOSIZCAMP" type="xs:decimal" minOccurs="0" />

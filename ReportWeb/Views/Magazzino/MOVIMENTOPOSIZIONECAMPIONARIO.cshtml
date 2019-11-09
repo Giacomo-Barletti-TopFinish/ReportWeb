@@ -10,25 +10,31 @@
     <div><h4>Posizioni esistenti</h4></div>
     <div class="row">
         <div class="col-sm-2">
+            <label>Campione</label>
+        </div>
+        <div class="col-sm-2">
+            <label>Posizione</label>
+        </div>
+        <div class="col-sm-2">
             <label>Seriale</label>
         </div>
         <div class="col-sm-2">
             <label>Cliente</label>
         </div>
-        <div class="col-sm-2">
-            <label>Posizione</label>
-        </div>
         <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
     </div>
     <div class="row">
+        <div class="col-sm-2">
+            <input type="text" id="txtCampione" />
+        </div>
+        <div class="col-sm-2">
+            <input type="text" id="txtPosizione" />
+        </div>
         <div class="col-sm-2">
             <input type="text" id="txtSeriale" />
         </div>
         <div class="col-sm-2">
             <input type="text" id="txtCliente" />
-        </div>
-        <div class="col-sm-2">
-            <input type="text" id="txtPosizione" />
         </div>
     </div>
 </div>
@@ -84,13 +90,15 @@
     {
 
     });
-    function Trova()
+
+        function Trova()
     {
         var esegui = true;
         var messaggio = '';
         var seriale = $('#txtSeriale').val();
         var cliente = $('#txtCliente').val();
         var posizione = $('#txtPosizione').val();
+        var campione = $('#txtCampione').val();
 
         $('#lblMessage').html(messaggio);
         if (!esegui)
@@ -104,13 +112,15 @@
             data: {
                 Seriale: seriale,
                 Cliente: cliente,
-                Posizione:posizione
+                Posizione: posizione,
+                Campione: campione
             },
             cache: false,
             type: "POST",
             success: function (data)
             {
-                CreaGrigliaRisultati(data);
+                $('#divRisultati').html(data).show();
+
             },
             error: function (response)
             {
