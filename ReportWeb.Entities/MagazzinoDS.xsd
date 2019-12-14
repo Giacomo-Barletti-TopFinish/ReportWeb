@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.ReportWeb.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.ReportWeb.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString1 (Settings)" PropertyReference="ApplicationSettings.ReportWeb.Entities.Properties.Settings.GlobalReference.Default.ConnectionString1" Provider="System.Data.OracleClient" />
         </Connections>
         <Tables />
@@ -701,6 +701,74 @@
               </xs:element>
               <xs:element name="DATAINSERIMENTO" msprop:Generator_ColumnVarNameInTable="columnDATAINSERIMENTO" msprop:Generator_ColumnPropNameInRow="DATAINSERIMENTO" msprop:Generator_ColumnPropNameInTable="DATAINSERIMENTOColumn" msprop:Generator_UserColumnName="DATAINSERIMENTO" type="xs:dateTime" />
               <xs:element name="PROGRESSIVO" msprop:Generator_ColumnVarNameInTable="columnPROGRESSIVO" msprop:Generator_ColumnPropNameInRow="PROGRESSIVO" msprop:Generator_ColumnPropNameInTable="PROGRESSIVOColumn" msprop:Generator_UserColumnName="PROGRESSIVO" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RW_MAGAZZINO_PERNI" msprop:Generator_TableClassName="RW_MAGAZZINO_PERNIDataTable" msprop:Generator_TableVarName="tableRW_MAGAZZINO_PERNI" msprop:Generator_RowChangedName="RW_MAGAZZINO_PERNIRowChanged" msprop:Generator_TablePropName="RW_MAGAZZINO_PERNI" msprop:Generator_RowDeletingName="RW_MAGAZZINO_PERNIRowDeleting" msprop:Generator_RowChangingName="RW_MAGAZZINO_PERNIRowChanging" msprop:Generator_RowEvHandlerName="RW_MAGAZZINO_PERNIRowChangeEventHandler" msprop:Generator_RowDeletedName="RW_MAGAZZINO_PERNIRowDeleted" msprop:Generator_RowClassName="RW_MAGAZZINO_PERNIRow" msprop:Generator_UserTableName="RW_MAGAZZINO_PERNI" msprop:Generator_RowEvArgName="RW_MAGAZZINO_PERNIRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDPOSIZPERNO" msprop:Generator_ColumnVarNameInTable="columnIDPOSIZPERNO" msprop:Generator_ColumnPropNameInRow="IDPOSIZPERNO" msprop:Generator_ColumnPropNameInTable="IDPOSIZPERNOColumn" msprop:Generator_UserColumnName="IDPOSIZPERNO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CLIENTE" msprop:Generator_ColumnVarNameInTable="columnCLIENTE" msprop:Generator_ColumnPropNameInRow="CLIENTE" msprop:Generator_ColumnPropNameInTable="CLIENTEColumn" msprop:Generator_UserColumnName="CLIENTE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POSIZIONE" msprop:Generator_ColumnVarNameInTable="columnPOSIZIONE" msprop:Generator_ColumnPropNameInRow="POSIZIONE" msprop:Generator_ColumnPropNameInTable="POSIZIONEColumn" msprop:Generator_UserColumnName="POSIZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ARTICOLO" msprop:Generator_ColumnVarNameInTable="columnARTICOLO" msprop:Generator_ColumnPropNameInRow="ARTICOLO" msprop:Generator_ColumnPropNameInTable="ARTICOLOColumn" msprop:Generator_UserColumnName="ARTICOLO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INTERNO" msprop:Generator_ColumnVarNameInTable="columnINTERNO" msprop:Generator_ColumnPropNameInRow="INTERNO" msprop:Generator_ColumnPropNameInTable="INTERNOColumn" msprop:Generator_UserColumnName="INTERNO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PROGRESSIVOSTAMPO" msprop:Generator_ColumnVarNameInTable="columnPROGRESSIVOSTAMPO" msprop:Generator_ColumnPropNameInRow="PROGRESSIVOSTAMPO" msprop:Generator_ColumnPropNameInTable="PROGRESSIVOSTAMPOColumn" msprop:Generator_UserColumnName="PROGRESSIVOSTAMPO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMPONENTE" msprop:Generator_ColumnVarNameInTable="columnCOMPONENTE" msprop:Generator_ColumnPropNameInRow="COMPONENTE" msprop:Generator_ColumnPropNameInTable="COMPONENTEColumn" msprop:Generator_UserColumnName="COMPONENTE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DIAMETRO" msprop:Generator_ColumnVarNameInTable="columnDIAMETRO" msprop:Generator_ColumnPropNameInRow="DIAMETRO" msprop:Generator_ColumnPropNameInTable="DIAMETROColumn" msprop:Generator_UserColumnName="DIAMETRO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LUNGHEZZA" msprop:Generator_ColumnVarNameInTable="columnLUNGHEZZA" msprop:Generator_ColumnPropNameInRow="LUNGHEZZA" msprop:Generator_ColumnPropNameInTable="LUNGHEZZAColumn" msprop:Generator_UserColumnName="LUNGHEZZA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="QUANTITA" msprop:Generator_ColumnVarNameInTable="columnQUANTITA" msprop:Generator_ColumnPropNameInRow="QUANTITA" msprop:Generator_ColumnPropNameInTable="QUANTITAColumn" msprop:Generator_UserColumnName="QUANTITA" type="xs:decimal" />
+              <xs:element name="GIACENZAMINIMA" msprop:Generator_ColumnVarNameInTable="columnGIACENZAMINIMA" msprop:Generator_ColumnPropNameInRow="GIACENZAMINIMA" msprop:Generator_ColumnPropNameInTable="GIACENZAMINIMAColumn" msprop:Generator_UserColumnName="GIACENZAMINIMA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAINSERIMENTO" msprop:Generator_ColumnVarNameInTable="columnDATAINSERIMENTO" msprop:Generator_ColumnPropNameInRow="DATAINSERIMENTO" msprop:Generator_ColumnPropNameInTable="DATAINSERIMENTOColumn" msprop:Generator_UserColumnName="DATAINSERIMENTO" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

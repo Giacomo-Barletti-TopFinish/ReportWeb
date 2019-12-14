@@ -197,5 +197,38 @@ namespace ReportWeb.Controllers
             List<PosizioneCampionarioModel> model = bll.TrovaPosizioneCampionario(string.Empty, Seriale.ToUpper(), string.Empty, Cliente.ToUpper());
             return PartialView("GrigliaPosizioneCampioniPartial", model);
         }
+
+        public ActionResult PERNI()
+        {
+            VerificaAbilitazioneUtenteConUscita(56);
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<PernioModel> model = bll.CaricaPerni();
+            return View(model);
+        }
+
+        public ActionResult TrovaPerni(string Articolo, string Cliente, string Posizione, string Componente, decimal Lunghezza, decimal Diametro)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            List<PernioModel> model = bll.TrovaPerni(Articolo.ToUpper(), Cliente.ToUpper(), Posizione.ToUpper(), Componente.ToUpper(), Lunghezza, Diametro);
+            return PartialView("GrigliaPerni", model);
+        }
+
+        public ActionResult SalvaPernio(string Id, string Articolo, string Cliente, string Posizione, string Componente, string Interno, string Stampo, string Descrizione, decimal Diametro, decimal Lunghezza, decimal Quantita, decimal Giacenza)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            bll.SalvaPerno(Id.ToUpper(), Articolo.ToUpper(), Cliente.ToUpper(), Posizione.ToUpper(), Componente.ToUpper(), Interno.ToUpper(), Stampo.ToUpper(), Descrizione.ToUpper(), Diametro, Lunghezza, Quantita, Giacenza, ConnectedUser);
+            List<PernioModel> model = bll.TrovaPerni(string.Empty, Cliente.ToUpper(), Posizione.ToUpper(), string.Empty, -1, -1);
+            return PartialView("GrigliaPerni", model);
+        }
+
+        public ActionResult CancellaPernio(string Id, string Cliente, string Posizione)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            bll.CancellaPernio(Id.ToUpper(), Cliente.ToUpper(), Posizione.ToUpper());
+            List<PernioModel> model = bll.TrovaPerni(string.Empty, Cliente.ToUpper(), Posizione.ToUpper(), string.Empty, -1, -1);
+            return PartialView("GrigliaPerni", model);
+        }
+
+
     }
 }

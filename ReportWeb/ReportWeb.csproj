@@ -516,6 +516,8 @@
     <Content Include="Views\Magazzino\POSIZIONECAMPIONI.cshtml" />
     <Content Include="Views\Magazzino\MOVIMENTOPOSIZIONECAMPIONARIO.cshtml" />
     <Content Include="Views\Magazzino\GrigliaPosizioneCampioniPartial.cshtml" />
+    <Content Include="Views\Magazzino\PERNI.cshtml" />
+    <Content Include="Views\Magazzino\GrigliaPerni.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

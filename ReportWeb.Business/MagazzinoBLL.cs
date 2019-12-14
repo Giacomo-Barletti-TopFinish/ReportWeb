@@ -147,6 +147,44 @@ namespace ReportWeb.Business
             return model;
         }
 
+        public List<PernioModel> CaricaPerni()
+        {
+            List<PernioModel> model = new List<PernioModel>();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                MagazzinoDS ds = new MagazzinoDS();
+                bMagazzino.FillRW_MAGAZZINO_PERNI(ds);
+
+                foreach (MagazzinoDS.RW_MAGAZZINO_PERNIRow perno in ds.RW_MAGAZZINO_PERNI)
+                {
+                    PernioModel m = CreaPernoModel(perno);
+                    model.Add(m);
+                }
+            }
+
+            return model;
+        }
+
+        private PernioModel CreaPernoModel(MagazzinoDS.RW_MAGAZZINO_PERNIRow perno)
+        {
+            PernioModel m = new PernioModel();
+            m.IdPosizPerno = perno.IDPOSIZPERNO;
+            m.Cliente = perno.IsCLIENTENull() ? string.Empty : perno.CLIENTE;
+            m.Posizione = perno.POSIZIONE;
+            m.Articolo = perno.ARTICOLO;
+            m.ProgressivoStampo = perno.IsPROGRESSIVOSTAMPONull() ? string.Empty : perno.PROGRESSIVOSTAMPO;
+            m.CodiceInterno = perno.IsINTERNONull() ? string.Empty : perno.INTERNO;
+            m.Componente = perno.IsCOMPONENTENull() ? string.Empty : perno.COMPONENTE;
+            m.Descrizione = perno.IsDESCRIZIONENull() ? string.Empty : perno.DESCRIZIONE;
+            m.Diametro = perno.IsDIAMETRONull() ? 0 : perno.DIAMETRO;
+            m.Lunghezza = perno.IsLUNGHEZZANull() ? 0 : perno.LUNGHEZZA;
+            m.Quantita = perno.QUANTITA;
+            m.GiacenzaMinima = perno.IsGIACENZAMINIMANull() ? 0 : perno.GIACENZAMINIMA;
+
+
+            return m;
+        }
+
         public void SalvaGiacenze(string giacenze, string Modello)
         {
             GiacenzaMagazzino[] Giacenze = JSonSerializer.Deserialize<GiacenzaMagazzino[]>(giacenze);
@@ -407,6 +445,64 @@ namespace ReportWeb.Business
                 bMagazzino.UpdateRW_POSIZIONE_CAMPIONI(ds);
             }
         }
+
+        public void SalvaPerno(string Id, string Articolo, string Cliente, string Posizione, string Componente, string Interno, string Stampo, string Descrizione, decimal Diametro, decimal Lunghezza, decimal Quantita, decimal Giacenza, string User)
+        {
+            MagazzinoDS ds = new MagazzinoDS();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                bMagazzino.FillRW_MAGAZZINO_PERNI(ds);
+                MagazzinoDS.RW_MAGAZZINO_PERNIRow elemento = null;
+                if (string.IsNullOrEmpty(Id))
+                {
+                    elemento = ds.RW_MAGAZZINO_PERNI.NewRW_MAGAZZINO_PERNIRow();
+                    elemento.CLIENTE = Cliente;
+                    elemento.POSIZIONE = Posizione;
+                    elemento.ARTICOLO = Articolo;
+                    elemento.INTERNO = Interno;
+                    elemento.PROGRESSIVOSTAMPO = Stampo;
+                    elemento.COMPONENTE = Componente;
+                    elemento.DESCRIZIONE = Descrizione;
+                    if (Diametro >= 0)
+                        elemento.DIAMETRO = Diametro;
+                    else
+                        elemento.SetDIAMETRONull();
+                    if (Lunghezza >= 0)
+                        elemento.LUNGHEZZA = Lunghezza;
+                    else
+                        elemento.SetLUNGHEZZANull();
+                    elemento.QUANTITA = Quantita;
+                    if (Giacenza >= 0)
+                        elemento.GIACENZAMINIMA = Giacenza;
+                    else
+                        elemento.SetGIACENZAMINIMANull();
+                    elemento.UTENTE = User;
+                    elemento.DATAINSERIMENTO = DateTime.Now;
+                    ds.RW_MAGAZZINO_PERNI.AddRW_MAGAZZINO_PERNIRow(elemento);
+                }
+                else
+                {
+                    decimal id = decimal.Parse(Id);
+                    elemento = ds.RW_MAGAZZINO_PERNI.Where(x => x.IDPOSIZPERNO == id).FirstOrDefault();
+                    if (elemento == null)
+                        throw new ArgumentException(string.Format("IDPOSIZPERNO non trovato il valore {0} impossibile salvare", Id));
+                    elemento.CLIENTE = Cliente;
+                    elemento.POSIZIONE = Posizione;
+                    elemento.ARTICOLO = Articolo;
+                    elemento.INTERNO = Interno;
+                    elemento.PROGRESSIVOSTAMPO = Stampo;
+                    elemento.COMPONENTE = Componente;
+                    elemento.DESCRIZIONE = Descrizione;
+                    elemento.DIAMETRO = Diametro;
+                    elemento.LUNGHEZZA = Lunghezza;
+                    elemento.QUANTITA = Quantita;
+                    elemento.GIACENZAMINIMA = Giacenza;
+                    elemento.UTENTE = User;
+                    elemento.DATAINSERIMENTO = DateTime.Now;
+                }
+                bMagazzino.UpdateRW_MAGAZZINO_PERNI(ds);
+            }
+        }
         public void CancellaCampioni(string Id, string Codice, string Finitura)
         {
             MagazzinoDS ds = new MagazzinoDS();
@@ -444,5 +540,75 @@ namespace ReportWeb.Business
                 bMagazzino.UpdateRW_POSIZIONE_CAMPIONI(ds);
             }
         }
+
+        public void CancellaPernio(string Id, string Cliente, string Posizione)
+        {
+            MagazzinoDS ds = new MagazzinoDS();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                bMagazzino.FillRW_MAGAZZINO_PERNI(ds);
+                MagazzinoDS.RW_MAGAZZINO_PERNIRow elemento = null;
+                if (!string.IsNullOrEmpty(Id))
+                {
+                    decimal id = decimal.Parse(Id);
+                    elemento = ds.RW_MAGAZZINO_PERNI.Where(x => x.IDPOSIZPERNO == id).FirstOrDefault();
+                    if (elemento == null)
+                        throw new ArgumentException(string.Format("IDPOSIZPERNO non trovato il valore {0} impossibile salvare", Id));
+                    elemento.Delete();
+                }
+                bMagazzino.UpdateRW_MAGAZZINO_PERNI(ds);
+            }
+        }
+
+        public List<PernioModel> TrovaPerni(string Articolo, string Cliente, string Posizione, string Componente, decimal Lunghezza, decimal Diametro)
+        {
+            List<PernioModel> model = new List<PernioModel>();
+            using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
+            {
+                MagazzinoDS ds = new MagazzinoDS();
+                bMagazzino.FillRW_MAGAZZINO_PERNI(ds);
+
+                List<MagazzinoDS.RW_MAGAZZINO_PERNIRow> elementi = ds.RW_MAGAZZINO_PERNI.ToList();
+                if (!string.IsNullOrEmpty(Articolo))
+                {
+                    elementi = elementi.Where(x => x.ARTICOLO.Contains(Articolo)).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(Cliente))
+                {
+                    elementi = elementi.Where(x => !x.IsCLIENTENull() && x.CLIENTE.Contains(Cliente)).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(Posizione))
+                {
+                    elementi = elementi.Where(x => x.POSIZIONE.Contains(Posizione)).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(Componente))
+                {
+                    elementi = elementi.Where(x => x.COMPONENTE.Contains(Componente)).ToList();
+                }
+
+                if (Lunghezza > 0)
+                {
+                    elementi = elementi.Where(x => x.LUNGHEZZA == Lunghezza).ToList();
+                }
+
+                if (Diametro > 0)
+                {
+                    elementi = elementi.Where(x => x.DIAMETRO == Diametro).ToList();
+                }
+
+                foreach (MagazzinoDS.RW_MAGAZZINO_PERNIRow perno in elementi)
+                {
+                    PernioModel m = CreaPernoModel(perno);
+                    model.Add(m);
+                }
+            }
+
+            return model;
+
+        }
+
     }
 }

@@ -36,6 +36,8 @@ namespace ReportWeb.Entities {
         
         private RW_POSIZIONE_CAMPIONIDataTable tableRW_POSIZIONE_CAMPIONI;
         
+        private RW_MAGAZZINO_PERNIDataTable tableRW_MAGAZZINO_PERNI;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -81,6 +83,9 @@ namespace ReportWeb.Entities {
                 }
                 if ((ds.Tables["RW_POSIZIONE_CAMPIONI"] != null)) {
                     base.Tables.Add(new RW_POSIZIONE_CAMPIONIDataTable(ds.Tables["RW_POSIZIONE_CAMPIONI"]));
+                }
+                if ((ds.Tables["RW_MAGAZZINO_PERNI"] != null)) {
+                    base.Tables.Add(new RW_MAGAZZINO_PERNIDataTable(ds.Tables["RW_MAGAZZINO_PERNI"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -157,6 +162,16 @@ namespace ReportWeb.Entities {
         public RW_POSIZIONE_CAMPIONIDataTable RW_POSIZIONE_CAMPIONI {
             get {
                 return this.tableRW_POSIZIONE_CAMPIONI;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public RW_MAGAZZINO_PERNIDataTable RW_MAGAZZINO_PERNI {
+            get {
+                return this.tableRW_MAGAZZINO_PERNI;
             }
         }
         
@@ -245,6 +260,9 @@ namespace ReportWeb.Entities {
                 if ((ds.Tables["RW_POSIZIONE_CAMPIONI"] != null)) {
                     base.Tables.Add(new RW_POSIZIONE_CAMPIONIDataTable(ds.Tables["RW_POSIZIONE_CAMPIONI"]));
                 }
+                if ((ds.Tables["RW_MAGAZZINO_PERNI"] != null)) {
+                    base.Tables.Add(new RW_MAGAZZINO_PERNIDataTable(ds.Tables["RW_MAGAZZINO_PERNI"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -314,6 +332,12 @@ namespace ReportWeb.Entities {
                     this.tableRW_POSIZIONE_CAMPIONI.InitVars();
                 }
             }
+            this.tableRW_MAGAZZINO_PERNI = ((RW_MAGAZZINO_PERNIDataTable)(base.Tables["RW_MAGAZZINO_PERNI"]));
+            if ((initTable == true)) {
+                if ((this.tableRW_MAGAZZINO_PERNI != null)) {
+                    this.tableRW_MAGAZZINO_PERNI.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -336,6 +360,8 @@ namespace ReportWeb.Entities {
             base.Tables.Add(this.tableRW_MAGAZZINO_CAMPIONI);
             this.tableRW_POSIZIONE_CAMPIONI = new RW_POSIZIONE_CAMPIONIDataTable();
             base.Tables.Add(this.tableRW_POSIZIONE_CAMPIONI);
+            this.tableRW_MAGAZZINO_PERNI = new RW_MAGAZZINO_PERNIDataTable();
+            base.Tables.Add(this.tableRW_MAGAZZINO_PERNI);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -371,6 +397,12 @@ namespace ReportWeb.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private bool ShouldSerializeRW_POSIZIONE_CAMPIONI() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeRW_MAGAZZINO_PERNI() {
             return false;
         }
         
@@ -446,6 +478,9 @@ namespace ReportWeb.Entities {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void RW_POSIZIONE_CAMPIONIRowChangeEventHandler(object sender, RW_POSIZIONE_CAMPIONIRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void RW_MAGAZZINO_PERNIRowChangeEventHandler(object sender, RW_MAGAZZINO_PERNIRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -4027,6 +4062,448 @@ namespace ReportWeb.Entities {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class RW_MAGAZZINO_PERNIDataTable : global::System.Data.TypedTableBase<RW_MAGAZZINO_PERNIRow> {
+            
+            private global::System.Data.DataColumn columnIDPOSIZPERNO;
+            
+            private global::System.Data.DataColumn columnCLIENTE;
+            
+            private global::System.Data.DataColumn columnPOSIZIONE;
+            
+            private global::System.Data.DataColumn columnARTICOLO;
+            
+            private global::System.Data.DataColumn columnINTERNO;
+            
+            private global::System.Data.DataColumn columnPROGRESSIVOSTAMPO;
+            
+            private global::System.Data.DataColumn columnCOMPONENTE;
+            
+            private global::System.Data.DataColumn columnDESCRIZIONE;
+            
+            private global::System.Data.DataColumn columnDIAMETRO;
+            
+            private global::System.Data.DataColumn columnLUNGHEZZA;
+            
+            private global::System.Data.DataColumn columnQUANTITA;
+            
+            private global::System.Data.DataColumn columnGIACENZAMINIMA;
+            
+            private global::System.Data.DataColumn columnUTENTE;
+            
+            private global::System.Data.DataColumn columnDATAINSERIMENTO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_MAGAZZINO_PERNIDataTable() {
+                this.TableName = "RW_MAGAZZINO_PERNI";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal RW_MAGAZZINO_PERNIDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected RW_MAGAZZINO_PERNIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDPOSIZPERNOColumn {
+                get {
+                    return this.columnIDPOSIZPERNO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CLIENTEColumn {
+                get {
+                    return this.columnCLIENTE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn POSIZIONEColumn {
+                get {
+                    return this.columnPOSIZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ARTICOLOColumn {
+                get {
+                    return this.columnARTICOLO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn INTERNOColumn {
+                get {
+                    return this.columnINTERNO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PROGRESSIVOSTAMPOColumn {
+                get {
+                    return this.columnPROGRESSIVOSTAMPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn COMPONENTEColumn {
+                get {
+                    return this.columnCOMPONENTE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESCRIZIONEColumn {
+                get {
+                    return this.columnDESCRIZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DIAMETROColumn {
+                get {
+                    return this.columnDIAMETRO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn LUNGHEZZAColumn {
+                get {
+                    return this.columnLUNGHEZZA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn QUANTITAColumn {
+                get {
+                    return this.columnQUANTITA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn GIACENZAMINIMAColumn {
+                get {
+                    return this.columnGIACENZAMINIMA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn UTENTEColumn {
+                get {
+                    return this.columnUTENTE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DATAINSERIMENTOColumn {
+                get {
+                    return this.columnDATAINSERIMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_MAGAZZINO_PERNIRow this[int index] {
+                get {
+                    return ((RW_MAGAZZINO_PERNIRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_MAGAZZINO_PERNIRowChangeEventHandler RW_MAGAZZINO_PERNIRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_MAGAZZINO_PERNIRowChangeEventHandler RW_MAGAZZINO_PERNIRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_MAGAZZINO_PERNIRowChangeEventHandler RW_MAGAZZINO_PERNIRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event RW_MAGAZZINO_PERNIRowChangeEventHandler RW_MAGAZZINO_PERNIRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddRW_MAGAZZINO_PERNIRow(RW_MAGAZZINO_PERNIRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_MAGAZZINO_PERNIRow AddRW_MAGAZZINO_PERNIRow(decimal IDPOSIZPERNO, string CLIENTE, string POSIZIONE, string ARTICOLO, string INTERNO, string PROGRESSIVOSTAMPO, string COMPONENTE, string DESCRIZIONE, decimal DIAMETRO, decimal LUNGHEZZA, decimal QUANTITA, decimal GIACENZAMINIMA, string UTENTE, System.DateTime DATAINSERIMENTO) {
+                RW_MAGAZZINO_PERNIRow rowRW_MAGAZZINO_PERNIRow = ((RW_MAGAZZINO_PERNIRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDPOSIZPERNO,
+                        CLIENTE,
+                        POSIZIONE,
+                        ARTICOLO,
+                        INTERNO,
+                        PROGRESSIVOSTAMPO,
+                        COMPONENTE,
+                        DESCRIZIONE,
+                        DIAMETRO,
+                        LUNGHEZZA,
+                        QUANTITA,
+                        GIACENZAMINIMA,
+                        UTENTE,
+                        DATAINSERIMENTO};
+                rowRW_MAGAZZINO_PERNIRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRW_MAGAZZINO_PERNIRow);
+                return rowRW_MAGAZZINO_PERNIRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                RW_MAGAZZINO_PERNIDataTable cln = ((RW_MAGAZZINO_PERNIDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new RW_MAGAZZINO_PERNIDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDPOSIZPERNO = base.Columns["IDPOSIZPERNO"];
+                this.columnCLIENTE = base.Columns["CLIENTE"];
+                this.columnPOSIZIONE = base.Columns["POSIZIONE"];
+                this.columnARTICOLO = base.Columns["ARTICOLO"];
+                this.columnINTERNO = base.Columns["INTERNO"];
+                this.columnPROGRESSIVOSTAMPO = base.Columns["PROGRESSIVOSTAMPO"];
+                this.columnCOMPONENTE = base.Columns["COMPONENTE"];
+                this.columnDESCRIZIONE = base.Columns["DESCRIZIONE"];
+                this.columnDIAMETRO = base.Columns["DIAMETRO"];
+                this.columnLUNGHEZZA = base.Columns["LUNGHEZZA"];
+                this.columnQUANTITA = base.Columns["QUANTITA"];
+                this.columnGIACENZAMINIMA = base.Columns["GIACENZAMINIMA"];
+                this.columnUTENTE = base.Columns["UTENTE"];
+                this.columnDATAINSERIMENTO = base.Columns["DATAINSERIMENTO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDPOSIZPERNO = new global::System.Data.DataColumn("IDPOSIZPERNO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDPOSIZPERNO);
+                this.columnCLIENTE = new global::System.Data.DataColumn("CLIENTE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCLIENTE);
+                this.columnPOSIZIONE = new global::System.Data.DataColumn("POSIZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPOSIZIONE);
+                this.columnARTICOLO = new global::System.Data.DataColumn("ARTICOLO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnARTICOLO);
+                this.columnINTERNO = new global::System.Data.DataColumn("INTERNO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnINTERNO);
+                this.columnPROGRESSIVOSTAMPO = new global::System.Data.DataColumn("PROGRESSIVOSTAMPO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPROGRESSIVOSTAMPO);
+                this.columnCOMPONENTE = new global::System.Data.DataColumn("COMPONENTE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOMPONENTE);
+                this.columnDESCRIZIONE = new global::System.Data.DataColumn("DESCRIZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESCRIZIONE);
+                this.columnDIAMETRO = new global::System.Data.DataColumn("DIAMETRO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDIAMETRO);
+                this.columnLUNGHEZZA = new global::System.Data.DataColumn("LUNGHEZZA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLUNGHEZZA);
+                this.columnQUANTITA = new global::System.Data.DataColumn("QUANTITA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQUANTITA);
+                this.columnGIACENZAMINIMA = new global::System.Data.DataColumn("GIACENZAMINIMA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGIACENZAMINIMA);
+                this.columnUTENTE = new global::System.Data.DataColumn("UTENTE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUTENTE);
+                this.columnDATAINSERIMENTO = new global::System.Data.DataColumn("DATAINSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATAINSERIMENTO);
+                this.columnCLIENTE.MaxLength = 35;
+                this.columnPOSIZIONE.AllowDBNull = false;
+                this.columnPOSIZIONE.MaxLength = 25;
+                this.columnARTICOLO.AllowDBNull = false;
+                this.columnARTICOLO.MaxLength = 30;
+                this.columnINTERNO.MaxLength = 30;
+                this.columnPROGRESSIVOSTAMPO.MaxLength = 30;
+                this.columnCOMPONENTE.MaxLength = 20;
+                this.columnDESCRIZIONE.MaxLength = 60;
+                this.columnQUANTITA.AllowDBNull = false;
+                this.columnUTENTE.AllowDBNull = false;
+                this.columnUTENTE.MaxLength = 50;
+                this.columnDATAINSERIMENTO.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_MAGAZZINO_PERNIRow NewRW_MAGAZZINO_PERNIRow() {
+                return ((RW_MAGAZZINO_PERNIRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new RW_MAGAZZINO_PERNIRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(RW_MAGAZZINO_PERNIRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.RW_MAGAZZINO_PERNIRowChanged != null)) {
+                    this.RW_MAGAZZINO_PERNIRowChanged(this, new RW_MAGAZZINO_PERNIRowChangeEvent(((RW_MAGAZZINO_PERNIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.RW_MAGAZZINO_PERNIRowChanging != null)) {
+                    this.RW_MAGAZZINO_PERNIRowChanging(this, new RW_MAGAZZINO_PERNIRowChangeEvent(((RW_MAGAZZINO_PERNIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.RW_MAGAZZINO_PERNIRowDeleted != null)) {
+                    this.RW_MAGAZZINO_PERNIRowDeleted(this, new RW_MAGAZZINO_PERNIRowChangeEvent(((RW_MAGAZZINO_PERNIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.RW_MAGAZZINO_PERNIRowDeleting != null)) {
+                    this.RW_MAGAZZINO_PERNIRowDeleting(this, new RW_MAGAZZINO_PERNIRowChangeEvent(((RW_MAGAZZINO_PERNIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveRW_MAGAZZINO_PERNIRow(RW_MAGAZZINO_PERNIRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                MagazzinoDS ds = new MagazzinoDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "RW_MAGAZZINO_PERNIDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class MONITOR_GIACENZARow : global::System.Data.DataRow {
@@ -7171,6 +7648,329 @@ namespace ReportWeb.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class RW_MAGAZZINO_PERNIRow : global::System.Data.DataRow {
+            
+            private RW_MAGAZZINO_PERNIDataTable tableRW_MAGAZZINO_PERNI;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal RW_MAGAZZINO_PERNIRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableRW_MAGAZZINO_PERNI = ((RW_MAGAZZINO_PERNIDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDPOSIZPERNO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_MAGAZZINO_PERNI.IDPOSIZPERNOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDPOSIZPERNO\' in table \'RW_MAGAZZINO_PERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.IDPOSIZPERNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CLIENTE {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_MAGAZZINO_PERNI.CLIENTEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CLIENTE\' in table \'RW_MAGAZZINO_PERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.CLIENTEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string POSIZIONE {
+                get {
+                    return ((string)(this[this.tableRW_MAGAZZINO_PERNI.POSIZIONEColumn]));
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.POSIZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ARTICOLO {
+                get {
+                    return ((string)(this[this.tableRW_MAGAZZINO_PERNI.ARTICOLOColumn]));
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.ARTICOLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string INTERNO {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_MAGAZZINO_PERNI.INTERNOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'INTERNO\' in table \'RW_MAGAZZINO_PERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.INTERNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string PROGRESSIVOSTAMPO {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_MAGAZZINO_PERNI.PROGRESSIVOSTAMPOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PROGRESSIVOSTAMPO\' in table \'RW_MAGAZZINO_PERNI\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.PROGRESSIVOSTAMPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string COMPONENTE {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_MAGAZZINO_PERNI.COMPONENTEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COMPONENTE\' in table \'RW_MAGAZZINO_PERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.COMPONENTEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESCRIZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tableRW_MAGAZZINO_PERNI.DESCRIZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESCRIZIONE\' in table \'RW_MAGAZZINO_PERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.DESCRIZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal DIAMETRO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_MAGAZZINO_PERNI.DIAMETROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DIAMETRO\' in table \'RW_MAGAZZINO_PERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.DIAMETROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal LUNGHEZZA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_MAGAZZINO_PERNI.LUNGHEZZAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LUNGHEZZA\' in table \'RW_MAGAZZINO_PERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.LUNGHEZZAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal QUANTITA {
+                get {
+                    return ((decimal)(this[this.tableRW_MAGAZZINO_PERNI.QUANTITAColumn]));
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.QUANTITAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal GIACENZAMINIMA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableRW_MAGAZZINO_PERNI.GIACENZAMINIMAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GIACENZAMINIMA\' in table \'RW_MAGAZZINO_PERNI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.GIACENZAMINIMAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string UTENTE {
+                get {
+                    return ((string)(this[this.tableRW_MAGAZZINO_PERNI.UTENTEColumn]));
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.UTENTEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATAINSERIMENTO {
+                get {
+                    return ((global::System.DateTime)(this[this.tableRW_MAGAZZINO_PERNI.DATAINSERIMENTOColumn]));
+                }
+                set {
+                    this[this.tableRW_MAGAZZINO_PERNI.DATAINSERIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDPOSIZPERNONull() {
+                return this.IsNull(this.tableRW_MAGAZZINO_PERNI.IDPOSIZPERNOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDPOSIZPERNONull() {
+                this[this.tableRW_MAGAZZINO_PERNI.IDPOSIZPERNOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCLIENTENull() {
+                return this.IsNull(this.tableRW_MAGAZZINO_PERNI.CLIENTEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCLIENTENull() {
+                this[this.tableRW_MAGAZZINO_PERNI.CLIENTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsINTERNONull() {
+                return this.IsNull(this.tableRW_MAGAZZINO_PERNI.INTERNOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetINTERNONull() {
+                this[this.tableRW_MAGAZZINO_PERNI.INTERNOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPROGRESSIVOSTAMPONull() {
+                return this.IsNull(this.tableRW_MAGAZZINO_PERNI.PROGRESSIVOSTAMPOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPROGRESSIVOSTAMPONull() {
+                this[this.tableRW_MAGAZZINO_PERNI.PROGRESSIVOSTAMPOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCOMPONENTENull() {
+                return this.IsNull(this.tableRW_MAGAZZINO_PERNI.COMPONENTEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCOMPONENTENull() {
+                this[this.tableRW_MAGAZZINO_PERNI.COMPONENTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDESCRIZIONENull() {
+                return this.IsNull(this.tableRW_MAGAZZINO_PERNI.DESCRIZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDESCRIZIONENull() {
+                this[this.tableRW_MAGAZZINO_PERNI.DESCRIZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDIAMETRONull() {
+                return this.IsNull(this.tableRW_MAGAZZINO_PERNI.DIAMETROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDIAMETRONull() {
+                this[this.tableRW_MAGAZZINO_PERNI.DIAMETROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsLUNGHEZZANull() {
+                return this.IsNull(this.tableRW_MAGAZZINO_PERNI.LUNGHEZZAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetLUNGHEZZANull() {
+                this[this.tableRW_MAGAZZINO_PERNI.LUNGHEZZAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsGIACENZAMINIMANull() {
+                return this.IsNull(this.tableRW_MAGAZZINO_PERNI.GIACENZAMINIMAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetGIACENZAMINIMANull() {
+                this[this.tableRW_MAGAZZINO_PERNI.GIACENZAMINIMAColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -7360,6 +8160,40 @@ namespace ReportWeb.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public RW_POSIZIONE_CAMPIONIRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class RW_MAGAZZINO_PERNIRowChangeEvent : global::System.EventArgs {
+            
+            private RW_MAGAZZINO_PERNIRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_MAGAZZINO_PERNIRowChangeEvent(RW_MAGAZZINO_PERNIRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public RW_MAGAZZINO_PERNIRow Row {
                 get {
                     return this.eventRow;
                 }

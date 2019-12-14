@@ -27,6 +27,16 @@ namespace ReportWeb.Data.Magazzino
             }
         }
 
+        public void FillRW_MAGAZZINO_PERNI(MagazzinoDS ds)
+        {
+            string select = @"SELECT * FROM RW_MAGAZZINO_PERNI order by articolo";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.RW_MAGAZZINO_PERNI);
+            }
+        }
+
         public void FillRW_MAGAZZINO_CAMPIONI(MagazzinoDS ds)
         {
             string select = @"SELECT * FROM RW_MAGAZZINO_CAMPIONI ";

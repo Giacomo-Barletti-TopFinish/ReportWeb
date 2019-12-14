@@ -58,6 +58,7 @@
     <Compile Include="JSON\GiacenzaMagazzino.cs" />
     <Compile Include="JSON\PreserieDettaglio.cs" />
     <Compile Include="LoginModel.cs" />
+    <Compile Include="Magazzino\PernioModel.cs" />
     <Compile Include="Magazzino\PosizioneCampionarioModel.cs" />
     <Compile Include="Magazzino\MagazzinoCampionarioModel.cs" />
     <Compile Include="Magazzino\MagazzinoLavorantiEsterniModel.cs" />

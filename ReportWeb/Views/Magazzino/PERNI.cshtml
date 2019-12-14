@@ -1,0 +1,375 @@
+﻿@using ReportWeb.Models.Magazzino
+@{
+    ViewBag.Title = "Posizine Perni";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+<div class="content-top">
+    <h2>Posizione Perni</h2>
+</div>
+<div>
+    <div><h4>Posizioni esistenti</h4></div>
+    <div class="row">
+        <div class="col-sm-1">
+            <label>Articolo</label>
+        </div>
+        <div class="col-sm-1">
+            <label>Cliente</label>
+        </div>
+        <div class="col-sm-1">
+            <label>Posizione</label>
+        </div>
+        <div class="col-sm-1">
+            <label>Componente</label>
+        </div>
+        <div class="col-sm-1">
+            <label>Diametro</label>
+        </div>
+        <div class="col-sm-1">
+            <label>Lunghezza</label>
+        </div>
+        <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1">
+            <input type="text" id="txtArticolo" style="width:90%" />
+        </div>
+        <div class="col-sm-1">
+            <input type="text" id="txtCliente" style="width:90%" />
+        </div>
+        <div class="col-sm-1">
+            <input type="text" id="txtPosizione" style="width:90%" />
+        </div>
+        <div class="col-sm-1">
+            <input type="text" id="txtComponente" style="width:90%" />
+        </div>
+        <div class="col-sm-1">
+            <input type="number" step="0.01" id="txtDiametro" style="width:90%" />
+        </div>
+        <div class="col-sm-1">
+            <input type="number" step="0.01" id="txtLunghezza" style="width:90%" />
+        </div>
+    </div>
+</div>
+
+<div style="overflow-y:auto; overflow-x:hidden; height:300px; padding-left:10px">
+    <div class="row" id="divRisultati"></div>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+        <label>Articolo</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Cliente</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Posizione</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Componente</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Codice Interno</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Progressivo Stampo</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Descrizione</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Diametro</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Lunghezza</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Quantità</label>
+    </div>
+    <div class="col-sm-1">
+        <label>Giacenza Minima</label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+        <input type="hidden" id="txtIDSelezionato" />
+        <input style="width:90%" type="text" id="txtArticoloSelezionato" maxlength="30" />
+    </div>
+    <div class="col-sm-1">
+        <input type="text" style="width:90%" id="txtClienteSelezionato" maxlength="35" />
+    </div>
+    <div class="col-sm-1">
+        <input type="text" style="width:90%" id="txtPosizioneSelezionato" maxlength="25" />
+    </div>
+    <div class="col-sm-1">
+        <input type="text" style="width:90%" id="txtComponenteSelezionato" maxlength="20" />
+    </div>
+    <div class="col-sm-1">
+        <input type="text" style="width:90%" id="txtInternoSelezionato" maxlength="30" />
+    </div>
+    <div class="col-sm-1">
+        <input type="text" style="width:90%" id="txtStampoSelezionato" maxlength="30" />
+    </div>
+    <div class="col-sm-1">
+        <input type="text" style="width:90%" id="txtDescrizioneSelezionato" maxlength="60" />
+    </div>
+    <div class="col-sm-1">
+        <input type="number" step="0.01" style="width:90%" id="txtDiametroSelezionato" />
+    </div>
+    <div class="col-sm-1">
+        <input type="number" step="0.01" style="width:90%" id="txtLunghezzaSelezionato" />
+    </div>
+    <div class="col-sm-1">
+        <input type="number" style="width:90%" id="txtQuantitaSelezionato" />
+    </div>
+    <div class="col-sm-1">
+        <input type="number" style="width:90%" id="txtGiacenzaSelezionato" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-1"><input type="button" onclick="Salva();" class="btn btn-primary" value="Salva" /></div>
+    <div class="col-sm-1"><input type="button" onclick="Cancella();" class="btn btn-primary" value="Cancella" /></div>
+</div>
+<label class="text-red" id="lblMessage"></label>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+
+    });
+
+        function Trova()
+    {
+        var articolo = $('#txtArticolo').val();
+        var cliente = $('#txtCliente').val();
+        var posizione = $('#txtPosizione').val();
+        var componente = $('#txtComponente').val();
+        var lunghezza = $('#txtLunghezza').val();
+        var diametro = $('#txtDiametro').val();
+
+        if (lunghezza == null || lunghezza == '') lunghezza = '-1';
+        if (diametro == null || diametro == '') diametro = '-1';
+
+            lunghezza = lunghezza.replace('.', ',');
+            diametro = diametro.replace('.', ',');
+
+
+        var url = '@Url.Action("TrovaPerni", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Articolo: articolo,
+                Cliente: cliente,
+                Posizione: posizione,
+                Componente: componente,
+                Lunghezza: lunghezza,
+                Diametro: diametro
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CreaGrigliaRisultati(data);
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function CreaGrigliaRisultati(data) {
+        $('#divRisultati').html(data).show();
+        $('#tblCampionario').on('click', 'tr', function () {
+            var tds = $(this).find('td');
+            var Id = $(tds[0]).text();
+            var articolo = $(tds[1]).text();
+            var cliente = $(tds[2]).text();
+            var posizione = $(tds[3]).text();
+            var componente = $(tds[4]).text();
+            var interno = $(tds[5]).text();
+            var stampo = $(tds[6]).text();
+            var descrizione = $(tds[7]).text();
+            var diametro = $(tds[8]).text();
+            var lunghezza = $(tds[9]).text();
+            var quantita = $(tds[10]).text();
+            var giacenza = $(tds[11]).text();
+
+            $('#txtIDSelezionato').val(Id);
+            $('#txtArticoloSelezionato').val(articolo);
+            $('#txtClienteSelezionato').val(cliente);
+            $('#txtPosizioneSelezionato').val(posizione);
+            $('#txtComponenteSelezionato').val(componente);
+            $('#txtInternoSelezionato').val(interno);
+            $('#txtStampoSelezionato').val(stampo);
+            $('#txtDescrizioneSelezionato').val(descrizione);
+            $('#txtDiametroSelezionato').val(diametro);
+            $('#txtLunghezzaSelezionato').val(lunghezza);
+            $('#txtQuantitaSelezionato').val(quantita);
+            $('#txtGiacenzaSelezionato').val(giacenza);
+        });
+    }
+
+ function Salva()
+    {
+        var esegui = true;
+        var messaggio = '';
+
+     var id=$('#txtIDSelezionato').val();
+     var articolo = $('#txtArticoloSelezionato').val();
+     var cliente = $('#txtClienteSelezionato').val();
+    var posizione =  $('#txtPosizioneSelezionato').val();
+     var componente = $('#txtComponenteSelezionato').val();
+     var interno = $('#txtInternoSelezionato').val();
+     var stampo = $('#txtStampoSelezionato').val();
+     var descrizione = $('#txtDescrizioneSelezionato').val();
+     var diametro = $('#txtDiametroSelezionato').val();
+     var lunghezza = $('#txtLunghezzaSelezionato').val();
+     var quantita = $('#txtQuantitaSelezionato').val();
+     var giacenza = $('#txtGiacenzaSelezionato').val();
+
+     if (articolo == null || articolo == '')
+        {
+            esegui = false;
+         messaggio += MESSAGGIO_PUNTINO + " " + "Inserire l'articolo" + "</br>";
+        }
+
+     if (posizione == null || posizione == '') {
+            esegui = false;
+         messaggio += MESSAGGIO_PUNTINO + " " + "Inserire la posizione" + "</br>";
+        }
+
+     if (quantita == null || quantita == '') {
+         esegui = false;
+         messaggio += MESSAGGIO_PUNTINO + " " + "Inserire il quantità" + "</br>";
+     }
+
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+     if (lunghezza == null || lunghezza == '') lunghezza = '-1';
+     if (diametro == null || diametro == '') diametro = '-1';
+
+     lunghezza = lunghezza.replace('.', ',');
+     diametro = diametro.replace('.', ',');
+
+     if (giacenza == null || giacenza == '') giacenza = -1;
+
+        var url = '@Url.Action("SalvaPernio", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Id: id,
+                Articolo: articolo,
+                Cliente: cliente,
+                Posizione: posizione,
+                Componente: componente,
+                Interno: interno,
+                Stampo: stampo,
+                Descrizione: descrizione,
+                Diametro: diametro.replace('.', ','),
+                Lunghezza: lunghezza.replace('.', ','),
+                Quantita: quantita,
+                Giacenza: giacenza
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CreaGrigliaRisultati(data);
+                $('#txtIDSelezionato').val('');
+                $('#txtArticoloSelezionato').val('');
+                $('#txtClienteSelezionato').val('');
+                $('#txtPosizioneSelezionato').val('');
+                $('#txtComponenteSelezionato').val('');
+                $('#txtInternoSelezionato').val('');
+                $('#txtStampoSelezionato').val('');
+                $('#txtDescrizioneSelezionato').val('');
+                $('#txtDiametroSelezionato').val('');
+                $('#txtLunghezzaSelezionato').val('');
+                $('#txtQuantitaSelezionato').val('');
+                $('#txtGiacenzaSelezionato').val('');
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+ function Cancella()
+    {
+        var esegui = true;
+        var messaggio = '';
+     var id = $('#txtIDSelezionato').val();
+     var articolo = $('#txtArticoloSelezionato').val();
+     var cliente = $('#txtClienteSelezionato').val();
+     var posizione = $('#txtPosizioneSelezionato').val();
+     var componente = $('#txtComponenteSelezionato').val();
+     var interno = $('#txtInternoSelezionato').val();
+     var stampo = $('#txtStampoSelezionato').val();
+     var descrizione = $('#txtDescrizioneSelezionato').val();
+     var diametro = $('#txtDiametroSelezionato').val();
+     var lunghezza = $('#txtLunghezzaSelezionato').val();
+     var quantita = $('#txtQuantitaSelezionato').val();
+     var giacenza = $('#txtGiacenzaSelezionato').val();
+
+     if (id == null || id == '')
+         {
+             esegui = false;
+         }
+
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("CancellaPernio", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Id: id,
+                Cliente: cliente,
+                Posizione: posizione
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CreaGrigliaRisultati(data);
+                $('#txtIDSelezionato').val('');
+                $('#txtArticoloSelezionato').val('');
+                $('#txtClienteSelezionato').val('');
+                $('#txtPosizioneSelezionato').val('');
+                $('#txtComponenteSelezionato').val('');
+                $('#txtInternoSelezionato').val('');
+                $('#txtStampoSelezionato').val('');
+                $('#txtDescrizioneSelezionato').val('');
+                $('#txtDiametroSelezionato').val('');
+                $('#txtLunghezzaSelezionato').val('');
+                $('#txtQuantitaSelezionato').val('');
+                $('#txtGiacenzaSelezionato').val('');
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+
+</script>
