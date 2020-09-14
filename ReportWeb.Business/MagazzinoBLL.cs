@@ -379,8 +379,8 @@ namespace ReportWeb.Business
             {
                 bMagazzino.FillRW_MAGAZZINO_CAMPIONI(ds);
                 MagazzinoDS.RW_MAGAZZINO_CAMPIONIRow elemento = null;
-                if (string.IsNullOrEmpty(Id))
-                {
+ //               if (string.IsNullOrEmpty(Id))
+ //               {
                     elemento = ds.RW_MAGAZZINO_CAMPIONI.NewRW_MAGAZZINO_CAMPIONIRow();
                     elemento.CODICE = Codice;
                     elemento.FINITURA = Finitura;
@@ -390,21 +390,21 @@ namespace ReportWeb.Business
                     elemento.UTENTE = User;
                     elemento.DATAINSERIMENTO = DateTime.Now;
                     ds.RW_MAGAZZINO_CAMPIONI.AddRW_MAGAZZINO_CAMPIONIRow(elemento);
-                }
-                else
-                {
-                    decimal id = decimal.Parse(Id);
-                    elemento = ds.RW_MAGAZZINO_CAMPIONI.Where(x => x.IDMAGAZCAMP == id).FirstOrDefault();
-                    if (elemento == null)
-                        throw new ArgumentException(string.Format("IDMAGAZCAMP non trovato il valore {0} impossibile salvare", Id));
-                    elemento.CODICE = Codice;
-                    elemento.FINITURA = Finitura;
-                    elemento.PIANO = Piano;
-                    elemento.POSIZIONE = Posizione;
-                    elemento.DESCRIZIONE = Descrizione;
-                    elemento.UTENTE = User;
-                    elemento.DATAINSERIMENTO = DateTime.Now;
-                }
+ //               }
+                //else
+                //{
+                //    decimal id = decimal.Parse(Id);
+                //    elemento = ds.RW_MAGAZZINO_CAMPIONI.Where(x => x.IDMAGAZCAMP == id).FirstOrDefault();
+                //    if (elemento == null)
+                //        throw new ArgumentException(string.Format("IDMAGAZCAMP non trovato il valore {0} impossibile salvare", Id));
+                //    elemento.CODICE = Codice;
+                //    elemento.FINITURA = Finitura;
+                //    elemento.PIANO = Piano;
+                //    elemento.POSIZIONE = Posizione;
+                //    elemento.DESCRIZIONE = Descrizione;
+                //    elemento.UTENTE = User;
+                //    elemento.DATAINSERIMENTO = DateTime.Now;
+                //}
                 bMagazzino.UpdateRW_MAGAZZINO_CAMPIONI(ds);
             }
         }
@@ -416,8 +416,8 @@ namespace ReportWeb.Business
             {
                 bMagazzino.FillRW_POSIZIONE_CAMPIONI(ds);
                 MagazzinoDS.RW_POSIZIONE_CAMPIONIRow elemento = null;
-                if (string.IsNullOrEmpty(Id))
-                {
+   //             if (string.IsNullOrEmpty(Id))
+   //             {
                     elemento = ds.RW_POSIZIONE_CAMPIONI.NewRW_POSIZIONE_CAMPIONIRow();
                     elemento.CAMPIONE = Campione;
                     elemento.POSIZIONE = Posizione;
@@ -427,21 +427,21 @@ namespace ReportWeb.Business
                     elemento.UTENTE = User;
                     elemento.DATAINSERIMENTO = DateTime.Now;
                     ds.RW_POSIZIONE_CAMPIONI.AddRW_POSIZIONE_CAMPIONIRow(elemento);
-                }
-                else
-                {
-                    decimal id = decimal.Parse(Id);
-                    elemento = ds.RW_POSIZIONE_CAMPIONI.Where(x => x.IDPOSIZCAMP == id).FirstOrDefault();
-                    if (elemento == null)
-                        throw new ArgumentException(string.Format("IDPOSIZCAMP non trovato il valore {0} impossibile salvare", Id));
-                    elemento.CAMPIONE = Campione;
-                    elemento.POSIZIONE = Posizione;
-                    elemento.PROGRESSIVO = Progressivo;
-                    elemento.SERIALE = Seriale;
-                    elemento.CLIENTE = Cliente;
-                    elemento.UTENTE = User;
-                    elemento.DATAINSERIMENTO = DateTime.Now;
-                }
+   //             }
+                //else
+                //{
+                //    decimal id = decimal.Parse(Id);
+                //    elemento = ds.RW_POSIZIONE_CAMPIONI.Where(x => x.IDPOSIZCAMP == id).FirstOrDefault();
+                //    if (elemento == null)
+                //        throw new ArgumentException(string.Format("IDPOSIZCAMP non trovato il valore {0} impossibile salvare", Id));
+                //    elemento.CAMPIONE = Campione;
+                //    elemento.POSIZIONE = Posizione;
+                //    elemento.PROGRESSIVO = Progressivo;
+                //    elemento.SERIALE = Seriale;
+                //    elemento.CLIENTE = Cliente;
+                //    elemento.UTENTE = User;
+                //    elemento.DATAINSERIMENTO = DateTime.Now;
+                //}
                 bMagazzino.UpdateRW_POSIZIONE_CAMPIONI(ds);
             }
         }
