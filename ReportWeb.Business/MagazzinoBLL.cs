@@ -34,7 +34,7 @@ namespace ReportWeb.Business
             return model;
         }
 
-        public List<MagazzinoCampionarioModel> TrovaCampionario(string Codice, string Finitura, string Piano)
+        public List<MagazzinoCampionarioModel> TrovaCampionario(string Codice, string Finitura, string Piano, string Descrizione)
         {
             List<MagazzinoCampionarioModel> model = new List<MagazzinoCampionarioModel>();
             using (MagazzinoBusiness bMagazzino = new MagazzinoBusiness())
@@ -57,6 +57,12 @@ namespace ReportWeb.Business
                 {
                     elementi = elementi.Where(x => x.PIANO.Contains(Piano)).ToList();
                 }
+
+                if (!string.IsNullOrEmpty(Descrizione))
+                {
+                    elementi = elementi.Where(x => !x.IsDESCRIZIONENull() && x.DESCRIZIONE.Contains(Descrizione)).ToList();
+                }
+
 
                 foreach (MagazzinoDS.RW_MAGAZZINO_CAMPIONIRow articolo in elementi)
                 {

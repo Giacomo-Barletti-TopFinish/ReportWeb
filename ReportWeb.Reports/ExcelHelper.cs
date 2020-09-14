@@ -182,7 +182,9 @@ namespace ReportWeb.Reports
                             Min = 5,
                             Max = 5,
                             Width = 20,
-                            CustomWidth = true
+                            CustomWidth = true  
+
+
                         });
 
                 worksheetPart.Worksheet.AppendChild(columns);
