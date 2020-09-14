@@ -106,7 +106,7 @@ namespace ReportWeb.Controllers
         public ActionResult ReportCampionario()
         {
             MagazzinoBLL bll = new MagazzinoBLL();
-            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(string.Empty, string.Empty, string.Empty);
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(string.Empty, string.Empty, string.Empty, string.Empty);
             ExcelHelper excel = new ExcelHelper();
             byte[] fileContents = excel.CreaExcelCampionario(model);
 
@@ -154,10 +154,10 @@ namespace ReportWeb.Controllers
             List<ModelloGiacenzaModel> model = bll.CaricaGiacenze();
             return View(model);
         }
-        public ActionResult TrovaCampioni(string Codice, string Finitura, string Piano)
+        public ActionResult TrovaCampioni(string Codice, string Finitura, string Piano, string Descrizione)
         {
             MagazzinoBLL bll = new MagazzinoBLL();
-            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper(), Piano.ToUpper());
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper(), Piano.ToUpper(), Descrizione.ToUpper());
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
         }
         public ActionResult TrovaPosizioneCampioni(string Seriale, string Cliente, string Posizione, string Campione)
@@ -170,7 +170,7 @@ namespace ReportWeb.Controllers
         {
             MagazzinoBLL bll = new MagazzinoBLL();
             bll.SalvaCampioni(Id.ToUpper(), Codice.ToUpper(), Finitura.ToUpper(), Piano.ToUpper(), Posizione.ToUpper(), Descrizione.ToUpper(), ConnectedUser);
-            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper(), Piano.ToUpper());
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper(), Piano.ToUpper(), Descrizione.ToUpper());
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
         }
 
@@ -178,7 +178,7 @@ namespace ReportWeb.Controllers
         {
             MagazzinoBLL bll = new MagazzinoBLL();
             bll.CancellaCampioni(Id.ToUpper(), Codice.ToUpper(), Finitura.ToUpper());
-            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper(), string.Empty);
+            List<MagazzinoCampionarioModel> model = bll.TrovaCampionario(Codice.ToUpper(), Finitura.ToUpper(), string.Empty, string.Empty);
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
         }
 

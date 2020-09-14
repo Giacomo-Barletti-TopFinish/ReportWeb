@@ -19,6 +19,9 @@
         <div class="col-sm-2">
             <label>Piano</label>
         </div>
+        <div class="col-sm-2">
+            <label>Descrizione</label>
+        </div>
         <div class="col-sm-1"><input type="button" onclick="Trova();" class="btn btn-primary" value="Trova" /></div>
     </div>
     <div class="row">
@@ -30,6 +33,9 @@
         </div>
         <div class="col-sm-2">
             <input type="text" id="txtPiano" />
+        </div>
+        <div class="col-sm-2">
+            <input type="text" id="txtDescrizione" />
         </div>
     </div>
 </div>
@@ -92,6 +98,7 @@
         var codice = $('#txtCodice').val();
         var finitura = $('#txtFinitura').val();
         var piano = $('#txtPiano').val();
+        var descrizione = $('#txtDescrizione').val();
 
         $('#lblMessage').html(messaggio);
         if (!esegui)
@@ -105,7 +112,8 @@
             data: {
                 Codice: codice,
                 Finitura: finitura,
-                Piano: piano
+                Piano: piano,
+                Descrizione: descrizione
             },
             cache: false,
             type: "POST",
