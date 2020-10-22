@@ -385,18 +385,18 @@ namespace ReportWeb.Business
             {
                 bMagazzino.FillRW_MAGAZZINO_CAMPIONI(ds);
                 MagazzinoDS.RW_MAGAZZINO_CAMPIONIRow elemento = null;
- //               if (string.IsNullOrEmpty(Id))
- //               {
-                    elemento = ds.RW_MAGAZZINO_CAMPIONI.NewRW_MAGAZZINO_CAMPIONIRow();
-                    elemento.CODICE = Codice;
-                    elemento.FINITURA = Finitura;
-                    elemento.PIANO = Piano;
-                    elemento.POSIZIONE = Posizione;
-                    elemento.DESCRIZIONE = Descrizione;
-                    elemento.UTENTE = User;
-                    elemento.DATAINSERIMENTO = DateTime.Now;
-                    ds.RW_MAGAZZINO_CAMPIONI.AddRW_MAGAZZINO_CAMPIONIRow(elemento);
- //               }
+                //               if (string.IsNullOrEmpty(Id))
+                //               {
+                elemento = ds.RW_MAGAZZINO_CAMPIONI.NewRW_MAGAZZINO_CAMPIONIRow();
+                elemento.CODICE = Codice;
+                elemento.FINITURA = Finitura;
+                elemento.PIANO = Piano;
+                elemento.POSIZIONE = Posizione;
+                elemento.DESCRIZIONE = Descrizione;
+                elemento.UTENTE = User;
+                elemento.DATAINSERIMENTO = DateTime.Now;
+                ds.RW_MAGAZZINO_CAMPIONI.AddRW_MAGAZZINO_CAMPIONIRow(elemento);
+                //               }
                 //else
                 //{
                 //    decimal id = decimal.Parse(Id);
@@ -422,18 +422,18 @@ namespace ReportWeb.Business
             {
                 bMagazzino.FillRW_POSIZIONE_CAMPIONI(ds);
                 MagazzinoDS.RW_POSIZIONE_CAMPIONIRow elemento = null;
-   //             if (string.IsNullOrEmpty(Id))
-   //             {
-                    elemento = ds.RW_POSIZIONE_CAMPIONI.NewRW_POSIZIONE_CAMPIONIRow();
-                    elemento.CAMPIONE = Campione;
-                    elemento.POSIZIONE = Posizione;
-                    elemento.PROGRESSIVO = Progressivo;
-                    elemento.SERIALE = Seriale;
-                    elemento.CLIENTE = Cliente;
-                    elemento.UTENTE = User;
-                    elemento.DATAINSERIMENTO = DateTime.Now;
-                    ds.RW_POSIZIONE_CAMPIONI.AddRW_POSIZIONE_CAMPIONIRow(elemento);
-   //             }
+                //             if (string.IsNullOrEmpty(Id))
+                //             {
+                elemento = ds.RW_POSIZIONE_CAMPIONI.NewRW_POSIZIONE_CAMPIONIRow();
+                elemento.CAMPIONE = Campione;
+                elemento.POSIZIONE = Posizione;
+                elemento.PROGRESSIVO = Progressivo;
+                elemento.SERIALE = Seriale;
+                elemento.CLIENTE = Cliente;
+                elemento.UTENTE = User;
+                elemento.DATAINSERIMENTO = DateTime.Now;
+                ds.RW_POSIZIONE_CAMPIONI.AddRW_POSIZIONE_CAMPIONIRow(elemento);
+                //             }
                 //else
                 //{
                 //    decimal id = decimal.Parse(Id);
@@ -592,7 +592,7 @@ namespace ReportWeb.Business
 
                 if (!string.IsNullOrEmpty(Componente))
                 {
-                    elementi = elementi.Where(x => x.COMPONENTE.Contains(Componente)).ToList();
+                    elementi = elementi.Where(x => !x.IsCOMPONENTENull() && x.COMPONENTE.Contains(Componente)).ToList();
                 }
 
                 if (Lunghezza > 0)
