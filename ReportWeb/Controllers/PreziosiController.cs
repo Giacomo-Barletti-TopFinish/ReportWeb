@@ -89,16 +89,31 @@ namespace ReportWeb.Controllers
             return PartialView("CaricaMovimentiPartial", movimenti);
         }
 
-        public ActionResult ReportPDF(string DataInizio, string DataFine, int IdPrezioso)
+        public ActionResult ReportPDF(string Tipo, string DataInizio, string DataFine, int IdPrezioso)
         {
             PreziosiBLL bll = new PreziosiBLL();
             List<Movimenti> movimenti = bll.CaricaMovimenti(DataInizio, DataFine, IdPrezioso);
             List<RWListItem> preziosi = bll.CreaListaPreziosi();
             List<SaldoCasseforti> saldi = bll.GetSaldiCompleti();
-            PDFHelper pdfHelper = new PDFHelper();
-            byte[] fileContents = pdfHelper.EstraiMovimentiPreziosi(movimenti,saldi, DataInizio, DataFine);
 
-            return File(fileContents, "application/pdf", "Report.pdf");
+            if (Tipo == "PDF")
+            {
+                PDFHelper pdfHelper = new PDFHelper();
+                byte[] fileContents = pdfHelper.EstraiMovimentiPreziosi(movimenti, saldi, DataInizio, DataFine);
+
+                return File(fileContents, "application/pdf", "MovimentiPreziosi.pdf");
+            }
+            if (Tipo == "EXCEL")
+            {
+
+                ExcelHelper excelHelper = new ExcelHelper();
+                byte[] fileContents = excelHelper.EstraiMovimentiPreziosi(movimenti, saldi, DataInizio, DataFine);
+
+                return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MovimentiPreziosi.xlsx");
+            }
+
+            throw new ArgumentException("ERRORE TIPO ESTRAZIONE NON VALIDA");
+
         }
     }
 }

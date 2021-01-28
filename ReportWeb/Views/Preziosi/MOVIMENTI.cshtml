@@ -28,7 +28,10 @@
                     <input type="button" onclick="CaricaMovimenti();" class="btn btn-primary" value="Trova" />
                 </div>
                 <div class="col-md-2">
-                    <input type="button" onclick="Report();" class="btn btn-primary" value="Report PDF" />
+                    <input type="button" onclick="Report('PDF');" class="btn btn-primary" value="Report PDF" />
+                </div>
+                <div class="col-md-2">
+                    <input type="button" onclick="Report('EXCEL');" class="btn btn-primary" value="Report Excel" />
                 </div>
 
             </div>
@@ -121,7 +124,7 @@
         });
     }
 
-     function Report()
+     function Report(tipo)
     {
          var inizio = $('#dtInizio').val();
          var fine = $('#dtFine').val();
@@ -136,7 +139,8 @@
          var idPrezioso = $('#ddlPreziosi').val();
 
         var url = '@Url.Action("ReportPDF", "Preziosi")';
-         url = url + '?DataInizio=' + inizio;
+         url = url + '?Tipo=' + tipo;
+         url = url + '&DataInizio=' + inizio;
          url = url + '&DataFine=' + fine;
          url = url + '&IdPrezioso=' + idPrezioso;
 

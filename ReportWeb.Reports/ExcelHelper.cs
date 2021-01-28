@@ -9,11 +9,166 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using ReportWeb.Models.Magazzino;
+using ReportWeb.Models.Preziosi;
 
 namespace ReportWeb.Reports
 {
     public class ExcelHelper
     {
+        public byte[] EstraiMovimentiPreziosi(List<Movimenti> movimenti, List<SaldoCasseforti> saldi, string dataInizio, string dataFine)
+        {
+            //            StringBuilder sb = new StringBuilder();
+
+            byte[] content;
+            MemoryStream ms = new MemoryStream();
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart wsCassaforteGrande = workbookPart.AddNewPart<WorksheetPart>();
+                wsCassaforteGrande.Worksheet = new Worksheet();
+
+                WorksheetPart wsCassafortePiccola = workbookPart.AddNewPart<WorksheetPart>();
+                wsCassafortePiccola.Worksheet = new Worksheet();
+
+                WorksheetPart wsSaldi = workbookPart.AddNewPart<WorksheetPart>();
+                wsSaldi.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+
+                Columns colonneCassaforteGrande = new Columns();
+                for (int i = 0; i < 6; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 25;
+                    c.CustomWidth = true;
+
+                    colonneCassaforteGrande.Append(c);
+                }
+
+                Columns colonneCassafortePiccola = new Columns();
+                for (int i = 0; i < 6; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 25;
+                    c.CustomWidth = true;
+
+                    colonneCassafortePiccola.Append(c);
+                }
+
+                Columns colonneSaldi = new Columns();
+                for (int i = 0; i < 3; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 25;
+                    c.CustomWidth = true;
+
+                    colonneSaldi.Append(c);
+                }
+
+                wsCassaforteGrande.Worksheet.AppendChild(colonneCassaforteGrande);
+                wsCassafortePiccola.Worksheet.AppendChild(colonneCassafortePiccola);
+                wsSaldi.Worksheet.AppendChild(colonneSaldi);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sCassaforteGrande = new Sheet() { Id = workbookPart.GetIdOfPart(wsCassaforteGrande), SheetId = 1, Name = "Cassaforte grande" };
+                Sheet sCassafortePiccola = new Sheet() { Id = workbookPart.GetIdOfPart(wsCassafortePiccola), SheetId = 2, Name = "Cassaforte piccola" };
+                Sheet sSaldi = new Sheet() { Id = workbookPart.GetIdOfPart(wsSaldi), SheetId = 3, Name = "Saldi" };
+
+                sheets.Append(sCassaforteGrande);
+                sheets.Append(sCassafortePiccola);
+                sheets.Append(sSaldi);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetDataCassaforteGrande = wsCassaforteGrande.Worksheet.AppendChild(new SheetData());
+                SheetData sheetDataCassafortePiccola = wsCassafortePiccola.Worksheet.AppendChild(new SheetData());
+                SheetData sheetDataSaldi = wsSaldi.Worksheet.AppendChild(new SheetData());
+
+
+                Row rowHeaderGrande = new Row();
+                rowHeaderGrande.Append(ConstructCell("Giorno", CellValues.String, 2));
+                rowHeaderGrande.Append(ConstructCell("Materiale", CellValues.String, 2));
+                rowHeaderGrande.Append(ConstructCell("Dare (gr.)", CellValues.String, 2));
+                rowHeaderGrande.Append(ConstructCell("Avere", CellValues.String, 2));
+                rowHeaderGrande.Append(ConstructCell("Utente", CellValues.String, 2));
+                rowHeaderGrande.Append(ConstructCell("Causale", CellValues.String, 2));
+                sheetDataCassaforteGrande.AppendChild(rowHeaderGrande);
+
+                Row rowHeaderPiccola = new Row();
+                rowHeaderPiccola.Append(ConstructCell("Giorno", CellValues.String, 2));
+                rowHeaderPiccola.Append(ConstructCell("Materiale", CellValues.String, 2));
+                rowHeaderPiccola.Append(ConstructCell("Dare (gr.)", CellValues.String, 2));
+                rowHeaderPiccola.Append(ConstructCell("Avere", CellValues.String, 2));
+                rowHeaderPiccola.Append(ConstructCell("Utente", CellValues.String, 2));
+                rowHeaderPiccola.Append(ConstructCell("Causale", CellValues.String, 2));
+                sheetDataCassafortePiccola.AppendChild(rowHeaderPiccola);
+
+                Row rowHeaderSaldi = new Row();
+                rowHeaderSaldi.Append(ConstructCell("Materiale", CellValues.String, 2));
+                rowHeaderSaldi.Append(ConstructCell("Cassaforte grande", CellValues.String, 2));
+                rowHeaderSaldi.Append(ConstructCell("Cassaforte piccola", CellValues.String, 2));
+                sheetDataSaldi.AppendChild(rowHeaderSaldi);
+
+                foreach (Movimenti movimento in movimenti.Where(x => x.Cassaforte == "A"))//grande
+                {
+                    Row rowCassaforte = new Row();
+                    rowCassaforte.Append(ConstructCell(movimento.Giorno.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Materiale, CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Dare, CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Avere, CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Utente, CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Causale, CellValues.String, 1));
+                    sheetDataCassaforteGrande.AppendChild(rowCassaforte);
+                }
+
+                foreach (Movimenti movimento in movimenti.Where(x => x.Cassaforte == "B"))//piccola
+                {
+                    Row rowCassaforte = new Row();
+                    rowCassaforte.Append(ConstructCell(movimento.Giorno.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Materiale, CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Dare, CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Avere, CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Utente, CellValues.String, 1));
+                    rowCassaforte.Append(ConstructCell(movimento.Causale, CellValues.String, 1));
+                    sheetDataCassafortePiccola.AppendChild(rowCassaforte);
+                }
+
+                foreach (SaldoCasseforti saldo in saldi)
+                {
+
+                    Row rowSaldo = new Row();
+                    rowSaldo.Append(ConstructCell(saldo.Materiale, CellValues.String, 1));
+                    rowSaldo.Append(ConstructCell(saldo.SaldoA, CellValues.String, 1));
+                    rowSaldo.Append(ConstructCell(saldo.SaldoB, CellValues.String, 1));
+                    sheetDataSaldi.AppendChild(rowSaldo);
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+            return content;
+        }
+
         public byte[] CreaExcelMancanti(AddebitiModel Addebiti)
         {
             byte[] content;
@@ -182,7 +337,7 @@ namespace ReportWeb.Reports
                             Min = 5,
                             Max = 5,
                             Width = 20,
-                            CustomWidth = true  
+                            CustomWidth = true
 
 
                         });
