@@ -59,17 +59,19 @@ namespace ReportWeb.Controllers
             return dareAvere;
         }
 
-        public ActionResult SalvaMovimentoPreziosoCassaforteA(int IdPrezioso, string Operazione, decimal Quantita, string Causale)
+        public ActionResult SalvaMovimentoPreziosoCassaforteA(int IdPrezioso, string Operazione, string Quantita, string Causale)
         {
+            decimal quantita = decimal.Parse(Quantita, System.Globalization.CultureInfo.InvariantCulture);
             PreziosiBLL bll = new PreziosiBLL();
-            bool esito = bll.SalvaMovimentoPreziosoCassaforteA(IdPrezioso, Operazione, Quantita, Causale, ConnectedUser);
+            bool esito = bll.SalvaMovimentoPreziosoCassaforteA(IdPrezioso, Operazione, quantita, Causale, ConnectedUser);
             return Content(esito.ToString());
         }
 
-        public ActionResult SalvaMovimentoPreziosoCassaforteB(int IdPrezioso, string Operazione, decimal Quantita, string Causale)
+        public ActionResult SalvaMovimentoPreziosoCassaforteB(int IdPrezioso, string Operazione, string Quantita, string Causale)
         {
+            decimal quantita = decimal.Parse(Quantita, System.Globalization.CultureInfo.InvariantCulture);
             PreziosiBLL bll = new PreziosiBLL();
-            bool esito = bll.SalvaMovimentoPreziosoCassaforteB(IdPrezioso, Operazione, Quantita, Causale, ConnectedUser);
+            bool esito = bll.SalvaMovimentoPreziosoCassaforteB(IdPrezioso, Operazione, quantita, Causale, ConnectedUser);
             return Content(esito.ToString());
         }
 

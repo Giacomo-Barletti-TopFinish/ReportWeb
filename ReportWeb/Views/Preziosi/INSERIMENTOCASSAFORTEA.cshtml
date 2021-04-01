@@ -104,7 +104,7 @@
         var idPrezioso = $('#ddlPreziosi').val();
         var causale = $('#txtCausale').val();
 
-         var url = '@Url.Action("SalvaMovimentoPreziosoCassaforteA", "Preziosi")';
+        var url = '@Url.Action("SalvaMovimentoPreziosoCassaforteA", "Preziosi")';
         $.ajax({
             url: url,
             data: { IdPrezioso: idPrezioso,Operazione:operazione,Quantita :quantita,Causale:causale },

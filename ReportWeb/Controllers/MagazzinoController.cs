@@ -182,6 +182,12 @@ namespace ReportWeb.Controllers
             return PartialView("GrigliaMagazzinoCampioniPartial", model);
         }
 
+        public ActionResult CancellaPianoCampioni(string Piano)
+        {
+            MagazzinoBLL bll = new MagazzinoBLL();
+            bll.CancellaPianoCampioni(Piano.ToUpper());
+            return Content("Piano cancellato con successo");
+        }
         public ActionResult SalvaPosizioneCampioni(string Id, string Campione, string Posizione, decimal Progressivo, string Seriale, string Cliente)
         {
             MagazzinoBLL bll = new MagazzinoBLL();

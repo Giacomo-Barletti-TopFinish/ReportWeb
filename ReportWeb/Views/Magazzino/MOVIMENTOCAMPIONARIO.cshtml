@@ -84,6 +84,15 @@
         <input type="text" id="txtDescrizioneSelezionato" maxlength="256" />
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-1">
+        <label>Piano da cancellare</label>
+    </div>
+    <div class="col-sm-1">
+        <input style="width:80px" type="text" id="txtPianoDaCancellare" maxlength="10" />
+    </div>
+    <div class="col-sm-1"><input type="button" onclick="CancellaPiano();" class="btn btn-primary" value="Cancella piano" /></div>
+</div>
 
 
 <script language="javascript" type="text/javascript">
@@ -292,5 +301,49 @@
         });
     }
 
+     function CancellaPiano()
+     {
+        var esegui = true;
+        var messaggio = '';
+         var piano = $('#txtPianoDaCancellare').val();
 
+         if (piano == null || piano == '') {
+            esegui = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Nessun piano selezionato" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esegui)
+        {
+            return;
+        }
+
+        var url = '@Url.Action("CancellaPianoCampioni", "Magazzino")';
+        $.ajax({
+            url: url,
+            data: {
+                Piano: piano
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                CreaGrigliaRisultati(data);
+                $('#txtIDSelezionato').val('');
+                $('#txtCodiceSelezionato').val('');
+                $('#txtFinituraSelezionato').val('');
+                $('#txtPianoSelezionato').val('');
+                $('#txtPosizioneSelezionato').val('');
+                $('#txtDescrizioneSelezionato').val('');
+                $('#txtPianoDaCancellare').val('');
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
 </script>
